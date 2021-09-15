@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "enderscape:block/polished_scrap_brick_slab"
+    },
+    "type=double": {
+      "model": "enderscape:block/polished_scrap_bricks"
+    },
+    "type=top": {
+      "model": "enderscape:block/polished_scrap_brick_slab_top"
+    }
+  }
+}

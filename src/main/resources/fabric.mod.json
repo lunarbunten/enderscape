@@ -1,0 +1,43 @@
+{
+    "schemaVersion": 1,
+    "id": "enderscape",
+	"version": "${version}",
+    "name": "Enderscape",
+    "description": "Enderscape is a Minecraft mod that adds to The End dimension and it's content.",
+    "authors": [
+        "bunten"
+    ],
+    "contributors": [],
+    "contact": {
+        "homepage": "https://buntennn.github.io/",
+        "sources": "https://github.com/buntennn/enderscape-mod"
+    },
+    "license": "MIT",
+    "icon": "assets/enderscape/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "net.enderscape.Enderscape"
+        ],
+        "client": [
+            "net.enderscape.client.EnderscapeClient"
+        ]
+    },
+    "mixins": [
+        "enderscape.mixins.json",
+        "enderscape.client.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.11.6",
+        "fabric": ">=0.36.1",
+        "minecraft": "1.17.x",
+        "java": ">=16"
+    },
+    "suggests": {
+        "modmenu": "*"
+    },
+    "conflicts": {
+        "betterend": "*"
+    },
+    "accessWidener": "enderscape.accesswidener"
+}

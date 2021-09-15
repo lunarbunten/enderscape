@@ -1,0 +1,9 @@
+{
+    "replace": false,
+    "values": [
+        "enderscape:celestial_stem",
+        "enderscape:celestial_hyphae",
+        "enderscape:stripped_celestial_stem",
+        "enderscape:stripped_celestial_hyphae"
+    ]
+}

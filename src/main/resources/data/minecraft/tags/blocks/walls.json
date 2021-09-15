@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values": [
+		"enderscape:shadow_quartz_block_wall",
+		"enderscape:smooth_shadow_quartz_wall",
+		"enderscape:shadow_quartz_brick_wall",
+		"enderscape:polished_scrap_wall",
+		"enderscape:polished_scrap_brick_wall"
+	]
+}

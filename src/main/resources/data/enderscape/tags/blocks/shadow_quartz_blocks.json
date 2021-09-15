@@ -1,0 +1,19 @@
+{
+    "replace": false,
+    "values": [
+        "enderscape:shadow_quartz_block",
+        "enderscape:shadow_quartz_block_stairs",
+        "enderscape:shadow_quartz_block_slab",
+        "enderscape:shadow_quartz_block_wall",
+        "enderscape:smooth_shadow_quartz",
+        "enderscape:smooth_shadow_quartz_stairs",
+        "enderscape:smooth_shadow_quartz_slab",
+        "enderscape:smooth_shadow_quartz_wall",
+        "enderscape:shadow_quartz_bricks",
+        "enderscape:shadow_quartz_brick_stairs",
+        "enderscape:shadow_quartz_brick_slab",
+        "enderscape:shadow_quartz_brick_wall",
+        "enderscape:chiseled_shadow_quartz",
+        "enderscape:shadow_quartz_pillar"
+    ]
+}

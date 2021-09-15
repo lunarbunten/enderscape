@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "enderscape:block/polished_scrap_bricks",
+    "top": "enderscape:block/polished_scrap_bricks",
+    "side": "enderscape:block/polished_scrap_bricks"
+  }
+}

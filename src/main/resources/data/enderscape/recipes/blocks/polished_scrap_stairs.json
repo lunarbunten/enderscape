@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "enderscape:polished_scrap"
+    }
+  },
+  "result": {
+    "item": "enderscape:polished_scrap_stairs",
+    "count": 4
+  }
+}

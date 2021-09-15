@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+      "recipes": [
+          "enderscape:blocks/shadow_quartz_block"
+      ]
+  },
+  "criteria": {
+      "has_item": {
+          "trigger": "minecraft:inventory_changed",
+          "conditions": {
+              "items": [
+                  {
+                      "items": [
+                          "enderscape:shadow_quartz"
+                      ]
+                  }
+              ]
+          }
+      },
+      "has_recipe": {
+          "trigger": "minecraft:recipe_unlocked",
+          "conditions": {
+              "recipe": "enderscape:blocks/shadow_quartz_block"
+          }
+      }
+  },
+  "requirements": [
+      [
+          "has_item",
+          "has_recipe"
+      ]
+  ]
+}

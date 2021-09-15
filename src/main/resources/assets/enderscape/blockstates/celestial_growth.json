@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"part=top": [
+			{
+				"model": "enderscape:block/celestial_growth_top"
+			}
+		],
+		"part=middle": [
+			{
+				"model": "enderscape:block/celestial_growth_middle"
+			}
+		],
+		"part=bottom": [
+			{
+				"model": "enderscape:block/celestial_growth_bottom"
+			}
+		]
+	}
+}

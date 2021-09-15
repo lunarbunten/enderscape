@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "enderscape:shadow_quartz_block_slab"
+    }
+  },
+  "result": {
+    "item": "enderscape:chiseled_shadow_quartz"
+  }
+}

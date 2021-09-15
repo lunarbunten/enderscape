@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "enderscape:drift_jelly_bottle"
+    },
+    {
+      "item": "enderscape:drift_jelly_bottle"
+    },
+    {
+      "item": "enderscape:drift_jelly_bottle"
+    },
+    {
+      "item": "enderscape:drift_jelly_bottle"
+    }
+  ],
+  "result": {
+    "item": "enderscape:drift_jelly_block"
+  }
+}

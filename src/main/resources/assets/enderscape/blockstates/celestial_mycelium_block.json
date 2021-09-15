@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "enderscape:block/celestial_mycelium_block"
+      },
+      {
+        "model": "enderscape:block/celestial_mycelium_block",
+        "y": 90
+      },
+      {
+        "model": "enderscape:block/celestial_mycelium_block",
+        "y": 180
+      },
+      {
+        "model": "enderscape:block/celestial_mycelium_block",
+        "y": 270
+      }
+    ]
+  }
+}

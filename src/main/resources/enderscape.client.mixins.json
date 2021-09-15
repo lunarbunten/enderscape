@@ -1,0 +1,14 @@
+{
+    "required": true,
+    "package": "net.enderscape.client.mixin",
+    "compatabilityLevel": "JAVA_16",
+    "client": [
+        "ArmorFeatureRendererMixin",
+        "MinecraftClientMixin",
+        "SkyPropertiesMixin",
+        "TexturedRenderLayersMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "enderscape:shadow_quartz_block"
+  },
+  "result": "enderscape:shadow_quartz_block_slab",
+  "count": 2
+}

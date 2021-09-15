@@ -1,0 +1,21 @@
+{
+    "required": true,
+    "package": "net.enderscape.mixin",
+    "compatabilityLevel": "JAVA_16",
+    "mixins": [
+        "BlockEntityTypeMixin",
+        "BlockMixin",
+        "DefaultBiomeCreatorMixin",
+        "EndPortalBlockMixin",
+        "ItemMixin",
+        "PlayerEntityMixin",
+        "ProtectionEnchantmentMixin",
+        "SpawnRestrictionMixin",
+        "TridentEntityMixin",
+        "UnbreakingEnchantmentMixin"
+    ],
+    "server": [],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

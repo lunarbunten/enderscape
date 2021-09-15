@@ -1,0 +1,13 @@
+{
+	"replace": false,
+	"values": [
+		"enderscape:nebulite_block",
+		"#enderscape:end_mycelium_blocks",
+		"#enderscape:end_ores",
+		"#enderscape:end_stone_blocks",
+		"#enderscape:end_stone_brick_blocks",
+		"#enderscape:purpur_blocks",
+		"#enderscape:scrap_blocks",
+		"#enderscape:shadow_quartz_blocks"
+	]
+}

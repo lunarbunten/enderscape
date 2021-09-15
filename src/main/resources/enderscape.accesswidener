@@ -1,0 +1,11 @@
+accessWidener	v1	named
+
+accessible method net/minecraft/recipe/BrewingRecipeRegistry registerPotionRecipe (Lnet/minecraft/potion/Potion;Lnet/minecraft/item/Item;Lnet/minecraft/potion/Potion;)V
+
+accessible method net/minecraft/item/MusicDiscItem <init> (ILnet/minecraft/sound/SoundEvent;Lnet/minecraft/item/Item$Settings;)V
+accessible method net/minecraft/block/WoodenButtonBlock <init> (Lnet/minecraft/block/AbstractBlock$Settings;)V
+accessible method net/minecraft/block/PressurePlateBlock <init> (Lnet/minecraft/block/PressurePlateBlock$ActivationRule;Lnet/minecraft/block/AbstractBlock$Settings;)V
+accessible method net/minecraft/block/StairsBlock <init> (Lnet/minecraft/block/BlockState;Lnet/minecraft/block/AbstractBlock$Settings;)V
+accessible method net/minecraft/util/SignType register (Lnet/minecraft/util/SignType;)Lnet/minecraft/util/SignType;
+
+accessible field net/minecraft/client/MinecraftClient currentFps I

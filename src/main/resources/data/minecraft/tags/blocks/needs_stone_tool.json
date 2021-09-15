@@ -1,0 +1,8 @@
+{
+	"replace": false,
+	"values": [
+		"enderscape:shadow_quartz_ore",
+		"#enderscape:scrap_blocks",
+		"#enderscape:shadow_quartz_blocks"
+	]
+}
