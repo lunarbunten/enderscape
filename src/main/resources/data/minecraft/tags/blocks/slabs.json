@@ -4,8 +4,6 @@
         "enderscape:celestial_slab",
         "enderscape:shadow_quartz_block_slab",
         "enderscape:smooth_shadow_quartz_slab",
-        "enderscape:shadow_quartz_brick_slab",
-        "enderscape:polished_scrap_slab",
-        "enderscape:polished_scrap_brick_slab"
+        "enderscape:shadow_quartz_brick_slab"
     ]
 }
