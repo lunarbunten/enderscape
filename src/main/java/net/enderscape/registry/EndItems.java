@@ -23,7 +23,6 @@ public class EndItems {
     public static final Tag<Item> DRIFTER_FOOD = register("drifter_food");
     public static final Tag<Item> RUBBLEMITE_FOOD = register("rubblemite_food");
     
-    public static final Item ANCIENT_SCRAP = register("ancient_scrap", new Item(new FabricItemSettings().group(Enderscape.GROUP)));
     public static final Item DRIFT_BOOTS = register("drift_boots", new DriftBootsItem(new FabricItemSettings().group(Enderscape.GROUP)));
     public static final Item DRIFT_JELLY_BOTTLE = register("drift_jelly_bottle", new DriftJellyBottleItem(new FabricItemSettings().group(Enderscape.GROUP).recipeRemainder(Items.GLASS_BOTTLE)));
     public static final Item FLANGER_BERRY = register("flanger_berry", new FlangerBerryItem(new FabricItemSettings().group(Enderscape.GROUP)));
