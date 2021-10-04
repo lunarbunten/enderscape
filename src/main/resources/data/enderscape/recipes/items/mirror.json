@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "GEG",
+    "AEA",
     "CCC",
     " C "
   ],
@@ -12,8 +12,8 @@
     "C": {
       "item": "minecraft:copper_ingot"
     },
-    "G": {
-      "item": "minecraft:glass"
+    "A": {
+      "item": "minecraft:amethyst_shard"
     }
   },
   "result": {

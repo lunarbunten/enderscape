@@ -17,7 +17,6 @@ public abstract class SpawnRestrictionMixin {
     static {
         register(EndEntities.DRIFTER, SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DrifterEntity::canSpawn);
         register(EndEntities.DRIFTLET, SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DriftletEntity::canSpawn);
-        register(EndEntities.MOTU, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
         register(EndEntities.RUBBLEMITE, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
     }
 

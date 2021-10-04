@@ -27,7 +27,6 @@ public class EndBlocks {
     public static final Tag<Block> END_STONE_BRICK_BLOCKS = register("end_stone_brick_blocks");
     public static final Tag<Block> GROWTH_PLANTABLE_BLOCKS = register("growth_plantable_blocks");
     public static final Tag<Block> PURPUR_BLOCKS = register("purpur_blocks");
-    public static final Tag<Block> SCRAP_BLOCKS = register("scrap_blocks");
     public static final Tag<Block> SHADOW_QUARTZ_BLOCKS = register("shadow_quartz_blocks");
 
     public static final Block CELESTIAL_MYCELIUM_BLOCK = new EndMyceliumBlock(FabricBlockSettings.of(Material.STONE, MapColor.TERRACOTTA_YELLOW).requiresTool().strength(3, 9).sounds(EndSounds.EYLIUM).ticksRandomly());
@@ -58,20 +57,6 @@ public class EndBlocks {
 
     public static final Block CHISELED_SHADOW_QUARTZ = new Block(FabricBlockSettings.copy(SHADOW_QUARTZ_BLOCK));
     public static final Block SHADOW_QUARTZ_PILLAR = new PillarBlock(FabricBlockSettings.copy(SHADOW_QUARTZ_BLOCK));
-
-    public static final Block ANCIENT_SCRAP_BLOCK = new Block(FabricBlockSettings.of(Material.STONE, MapColor.TERRACOTTA_BLUE).requiresTool().strength(4).sounds(EndSounds.SCRAP));
-
-    public static final Block POLISHED_SCRAP = new Block(FabricBlockSettings.of(Material.STONE, MapColor.TERRACOTTA_BLUE).requiresTool().strength(2).sounds(EndSounds.SCRAP));
-    public static final Block POLISHED_SCRAP_STAIRS = new StairsBlock(POLISHED_SCRAP.getDefaultState(), FabricBlockSettings.copy(POLISHED_SCRAP).requiresTool());
-    public static final Block POLISHED_SCRAP_SLAB = new SlabBlock(FabricBlockSettings.copy(POLISHED_SCRAP).requiresTool());
-    public static final Block POLISHED_SCRAP_WALL = new WallBlock(FabricBlockSettings.copy(POLISHED_SCRAP).requiresTool());
-
-    public static final Block POLISHED_SCRAP_BRICKS = new Block(FabricBlockSettings.copy(POLISHED_SCRAP));
-    public static final Block POLISHED_SCRAP_BRICK_STAIRS = new StairsBlock(POLISHED_SCRAP_BRICKS.getDefaultState(), FabricBlockSettings.copy(POLISHED_SCRAP_BRICKS).requiresTool());
-    public static final Block POLISHED_SCRAP_BRICK_SLAB = new SlabBlock(FabricBlockSettings.copy(POLISHED_SCRAP_BRICKS).requiresTool());
-    public static final Block POLISHED_SCRAP_BRICK_WALL = new WallBlock(FabricBlockSettings.copy(POLISHED_SCRAP_BRICKS).requiresTool());
-
-    public static final Block POLISHED_SCRAP_PILLAR = new PillarBlock(FabricBlockSettings.copy(POLISHED_SCRAP).requiresTool());
 
     public static final Block CELESTIAL_FUNGUS = new EndFungusBlock(FungusType.CELESTIAL, FabricBlockSettings.of(Material.PLANT, MapColor.TERRACOTTA_YELLOW).noCollision().breakInstantly().sounds(BlockSoundGroup.FUNGUS));
 
@@ -163,20 +148,6 @@ public class EndBlocks {
 
         register("chiseled_shadow_quartz", CHISELED_SHADOW_QUARTZ, true);
         register("shadow_quartz_pillar", SHADOW_QUARTZ_PILLAR, true);
-
-        register("ancient_scrap_block", ANCIENT_SCRAP_BLOCK, true);
-
-        register("polished_scrap", POLISHED_SCRAP, true);
-        register("polished_scrap_stairs", POLISHED_SCRAP_STAIRS, true);
-        register("polished_scrap_slab", POLISHED_SCRAP_SLAB, true);
-        register("polished_scrap_wall", POLISHED_SCRAP_WALL, true);
-
-        register("polished_scrap_bricks", POLISHED_SCRAP_BRICKS, true);
-        register("polished_scrap_brick_stairs", POLISHED_SCRAP_BRICK_STAIRS, true);
-        register("polished_scrap_brick_slab", POLISHED_SCRAP_BRICK_SLAB, true);
-        register("polished_scrap_brick_wall", POLISHED_SCRAP_BRICK_WALL, true);
-
-        register("polished_scrap_pillar", POLISHED_SCRAP_PILLAR, true);
     }
 
     private static void registerWoods() {

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "enderscape:polished_scrap"
-  },
-  "result": "enderscape:polished_scrap_wall",
-  "count": 1
-}

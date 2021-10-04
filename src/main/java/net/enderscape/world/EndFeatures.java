@@ -17,8 +17,6 @@ public abstract class EndFeatures {
     public static final Feature<SingleStateFeatureConfig> GROWTH = register("growth", new GrowthFeature(SingleStateFeatureConfig.CODEC));
     public static final Feature<DefaultFeatureConfig> MURUSHROOM = register("murushroom", new MurushroomFeature(DefaultFeatureConfig.CODEC));
 
-    public static final Feature<DefaultFeatureConfig> SCRAP_PILLARS = register("scrap_pillars", new ScrapPillarsFeature(DefaultFeatureConfig.CODEC));
-
     public static final Feature<SingleStateFeatureConfig> SCATTERED_ORE = register("scattered_ore", new ScatteredOreFeature(SingleStateFeatureConfig.CODEC));
     public static final Feature<SingleStateFeatureConfig> VOID_FACING_ORE = register("void_facing_ore", new VoidOreFeature(SingleStateFeatureConfig.CODEC));
 

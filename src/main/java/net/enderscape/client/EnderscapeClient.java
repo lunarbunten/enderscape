@@ -5,8 +5,6 @@ import net.enderscape.entity.drifter.DrifterModel;
 import net.enderscape.entity.drifter.DrifterRenderer;
 import net.enderscape.entity.driftlet.DriftletModel;
 import net.enderscape.entity.driftlet.DriftletRenderer;
-import net.enderscape.entity.motu.MotuModel;
-import net.enderscape.entity.motu.MotuRenderer;
 import net.enderscape.entity.rubblemite.RubblemiteModel;
 import net.enderscape.entity.rubblemite.RubblemiteRenderer;
 import net.enderscape.interfaces.LayerMapped;
@@ -29,7 +27,6 @@ public class EnderscapeClient implements ClientModInitializer {
 
     public static final EntityModelLayer DRIFTER = register(EndEntities.DRIFTER);
     public static final EntityModelLayer DRIFTLET = register(EndEntities.DRIFTLET);
-    public static final EntityModelLayer MOTU = register(EndEntities.MOTU);
     public static final EntityModelLayer RUBBLEMITE = register(EndEntities.RUBBLEMITE);
 
     private static EntityModelLayer register(EntityType<?> type) {
@@ -42,12 +39,10 @@ public class EnderscapeClient implements ClientModInitializer {
 
         EntityRendererRegistry.register(EndEntities.DRIFTER, DrifterRenderer::new);
         EntityRendererRegistry.register(EndEntities.DRIFTLET, DriftletRenderer::new);
-        EntityRendererRegistry.register(EndEntities.MOTU, MotuRenderer::new);
         EntityRendererRegistry.register(EndEntities.RUBBLEMITE, RubblemiteRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(DRIFTER, DrifterModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(DRIFTLET, DriftletModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(MOTU, MotuModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(RUBBLEMITE, RubblemiteModel::getTexturedModelData);
 
         for (Block block : Registry.BLOCK) {

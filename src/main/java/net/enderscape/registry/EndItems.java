@@ -35,7 +35,6 @@ public class EndItems {
     public static final Item HEAL = register("healing", new HealingItem(new FabricItemSettings().group(Enderscape.GROUP).maxCount(1)));
     public static final Item MUSIC_DISC_GLARE = register("music_disc_glare", new MusicDiscItem(0, EndSounds.MUSIC_GLARE, new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(Enderscape.GROUP)));
     public static final Item DRIFTER_SPAWN_EGG = register("drifter_spawn_egg", new SpawnEggItem(EndEntities.DRIFTER, 0xE97FFF, 0x7755A0, (new FabricItemSettings()).group(Enderscape.GROUP)));
-    public static final Item MOTU_SPAWN_EGG = register("motu_spawn_egg", new SpawnEggItem(EndEntities.MOTU, 0x4E4766, 0x0E1425, (new FabricItemSettings()).group(Enderscape.GROUP)));
     public static final Item RUBBLEMITE_SPAWN_EGG = register("rubblemite_spawn_egg", new SpawnEggItem(EndEntities.RUBBLEMITE, 0xF2FDBE, 0xC1B687, (new FabricItemSettings()).group(Enderscape.GROUP)));
 
     private static Tag<Item> register(String name) {
