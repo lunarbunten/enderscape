@@ -110,15 +110,6 @@ public class Enderscape implements ModInitializer {
                     BoneMealItem.createParticles(world, pos, 15);
                 }
                 return ActionResult.SUCCESS;
-            } else if (state.isOf(Blocks.CAULDRON) && stack.isOf(EndItems.NEBULITE)) {
-                if (!world.isClient()) {
-                    world.setBlockState(pos, EndBlocks.NEBULITE_CAULDRON.getDefaultState(), 3);
-                    world.playSound(null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, EndSounds.BLOCK_NEBULITE_CAULDRON_FILL, SoundCategory.BLOCKS, 0.6F, 1);
-                    if (!mob.getAbilities().creativeMode) {
-                        stack.decrement(1);
-                    }
-                }
-                return ActionResult.SUCCESS;
             }
 
             return ActionResult.PASS;

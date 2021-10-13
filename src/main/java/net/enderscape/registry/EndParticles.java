@@ -4,7 +4,6 @@ import net.enderscape.Enderscape;
 import net.enderscape.client.particles.DragonEmberParticle;
 import net.enderscape.client.particles.DrippingJellyParticle;
 import net.enderscape.client.particles.EndSporesParticle;
-import net.enderscape.client.particles.SparkleParticle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
@@ -17,7 +16,6 @@ public class EndParticles {
     public static final DefaultParticleType CELESTIAL_SPORES = register("celestial_spores");
     public static final DefaultParticleType DRAGON_EMBER = register("dragon_ember");
     public static final DefaultParticleType DRIPPING_JELLY = register("dripping_jelly");
-    public static final DefaultParticleType SPARKLE = register("sparkle");
 
     private static DefaultParticleType register(String name) {
         return Registry.register(Registry.PARTICLE_TYPE, Enderscape.id(name), FabricParticleTypes.simple(false));
@@ -28,6 +26,5 @@ public class EndParticles {
         ParticleFactoryRegistry.getInstance().register(CELESTIAL_SPORES, EndSporesParticle.DefaultFactory::new);
         ParticleFactoryRegistry.getInstance().register(DRAGON_EMBER, DragonEmberParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(DRIPPING_JELLY, DrippingJellyParticle.DefaultFactory::new);
-        ParticleFactoryRegistry.getInstance().register(SPARKLE, SparkleParticle.DefaultFactory::new);
     }
 }

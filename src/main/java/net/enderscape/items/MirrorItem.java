@@ -142,7 +142,7 @@ public class MirrorItem extends Item implements SendsMessage, Vanishable {
 
     @Override
     public boolean isItemBarVisible(ItemStack stack) {
-        return isLinked(stack);
+        return true;
     }
 
     @Override
@@ -254,19 +254,15 @@ public class MirrorItem extends Item implements SendsMessage, Vanishable {
             Util.playSound(world, pos, EndSounds.ITEM_MIRROR_LINK, SoundCategory.PLAYERS, 1, 1);
             return ActionResult.SUCCESS;
         } else if (state.isOf(EndBlocks.NEBULITE_CAULDRON) && !manager.isCoolingDown(this)) {
-            if (isLinked(stack)) {
-                if (getCharge(stack) < getMaxCharge(stack)) {
-                    manager.set(this, 5);
-                    addCharge(stack, 1);
-                    NebuliteCauldronBlock.reduceLevel(world, pos, state);
-                    Util.playSound(mob, EndSounds.BLOCK_NEBULITE_CAULDRON_DIP, 0.6F, EndMath.nextFloat(mob.getRandom(), 0.9F, 1.1F));
-                    return ActionResult.SUCCESS;
-                } else {
-                    fail("full_charge", mob);
-                    return ActionResult.SUCCESS;
-                }
+            if (getCharge(stack) < getMaxCharge(stack)) {
+                manager.set(this, 5);
+                addCharge(stack, 1);
+                NebuliteCauldronBlock.reduceLevel(world, pos, state);
+                Util.playSound(mob, EndSounds.BLOCK_NEBULITE_CAULDRON_DIP, 0.6F, EndMath.nextFloat(mob.getRandom(), 0.9F, 1.1F));
+                return ActionResult.SUCCESS;
             } else {
-                return ActionResult.PASS;
+                fail("full_charge", mob);
+                return ActionResult.SUCCESS;
             }
         } else {
             return super.useOnBlock(ctx);
