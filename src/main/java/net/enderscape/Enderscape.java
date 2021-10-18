@@ -123,12 +123,14 @@ public class Enderscape implements ModInitializer {
                     if (stack.isIn(EndItems.DRIFTER_FOOD) && !mob.isDrippingJelly()) {
                         mob.heal(4);
                         mob.playSound(mob.getEatSound(stack), EndMath.nextFloat(mob.getRandom(), 0.3F, 0.6F), 1);
-                        if (!player.getAbilities().creativeMode) {
-                            stack.decrement(1);
-                        }
-                        if (mob.getRandom().nextInt(5) == 0) {
-                            if (!mob.isDrippingJelly()) {
-                                mob.setDrippingJelly(true);
+                        if (!world.isClient()) {
+                            if (!player.getAbilities().creativeMode) {
+                                stack.decrement(1);
+                            }
+                            if (mob.getRandom().nextInt(5) == 0) {
+                                if (!mob.isDrippingJelly()) {
+                                    mob.setDrippingJelly(true);
+                                }
                             }
                         }
                         if (world.isClient()) {
@@ -136,18 +138,20 @@ public class Enderscape implements ModInitializer {
                                 world.addParticle(ParticleTypes.HEART, mob.getParticleX(0.6), mob.getRandomBodyY() + 0.5D, mob.getParticleZ(0.6), 0, 0, 0);
                             }
                         }
-                        return ActionResult.SUCCESS;
+                        return ActionResult.success(world.isClient());
                     } else if (item == Items.GLASS_BOTTLE && mob.isDrippingJelly()) {
                         player.playSound(EndSounds.ENTITY_DRIFTER_MILK, 0.5F, 1);
-                        if (!player.getAbilities().creativeMode) {
-                            stack.decrement(1);
+                        if (!world.isClient()) {
+                            if (!player.getAbilities().creativeMode) {
+                                stack.decrement(1);
+                            }
+                            ItemStack jelly = new ItemStack(EndItems.DRIFT_JELLY_BOTTLE);
+                            if (!player.getInventory().insertStack(jelly)) {
+                                player.dropItem(jelly, false);
+                            }
+                            mob.setDrippingJelly(false);
                         }
-                        ItemStack jelly = new ItemStack(EndItems.DRIFT_JELLY_BOTTLE);
-                        if (!player.getInventory().insertStack(jelly)) {
-                            player.dropItem(jelly, false);
-                        }
-                        mob.setDrippingJelly(false);
-                        return ActionResult.SUCCESS;
+                        return ActionResult.success(world.isClient());
                     }
                 }
             }
