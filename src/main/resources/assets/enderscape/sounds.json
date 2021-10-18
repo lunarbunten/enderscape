@@ -1486,11 +1486,6 @@
 				"name": "minecraft:music/game/end/end",
 				"weight": 1,
 				"stream": true
-			},
-			{
-				"name": "enderscape:music/detritus",
-				"weight": 20,
-				"stream": true
 			}
 		]
 	},
