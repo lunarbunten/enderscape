@@ -85,12 +85,6 @@ public class EndSounds {
     public static final SoundEvent BLOCK_PURPUR_HIT = register("block.purpur.hit");
     public static final SoundEvent BLOCK_PURPUR_FALL = register("block.purpur.fall");
 
-    public static final SoundEvent BLOCK_SCRAP_BREAK = register("block.scrap.break");
-    public static final SoundEvent BLOCK_SCRAP_STEP = register("block.scrap.step");
-    public static final SoundEvent BLOCK_SCRAP_PLACE = register("block.scrap.place");
-    public static final SoundEvent BLOCK_SCRAP_HIT = register("block.scrap.hit");
-    public static final SoundEvent BLOCK_SCRAP_FALL = register("block.scrap.fall");
-
     public static final SoundEvent BLOCK_SHADOW_QUARTZ_BREAK = register("block.shadow_quartz.break");
     public static final SoundEvent BLOCK_SHADOW_QUARTZ_STEP = register("block.shadow_quartz.step");
     public static final SoundEvent BLOCK_SHADOW_QUARTZ_PLACE = register("block.shadow_quartz.place");
@@ -121,14 +115,6 @@ public class EndSounds {
     public static final SoundEvent ENTITY_DRIFTLET_AMBIENT = register("entity.driftlet.ambient");
     public static final SoundEvent ENTITY_DRIFTLET_DEATH = register("entity.driftlet.death");
     public static final SoundEvent ENTITY_DRIFTLET_HURT = register("entity.driftlet.hurt");
-
-    public static final SoundEvent ENTITY_MOTU_AMBIENT = register("entity.motu.ambient");
-    public static final SoundEvent ENTITY_MOTU_DEATH = register("entity.motu.death");
-    public static final SoundEvent ENTITY_MOTU_HURT = register("entity.motu.hurt");
-    public static final SoundEvent ENTITY_MOTU_LASER_DIE = register("entity.motu.laser.die");
-    public static final SoundEvent ENTITY_MOTU_LASER_HIT = register("entity.motu.laser.hit");
-    public static final SoundEvent ENTITY_MOTU_SHOOT = register("entity.motu.shoot");
-    public static final SoundEvent ENTITY_MOTU_STEP = register("entity.motu.step");
 
     public static final SoundEvent ENTITY_RUBBLEMITE_AMBIENT = register("entity.rubblemite.ambient");
     public static final SoundEvent ENTITY_RUBBLEMITE_DEATH = register("entity.rubblemite.death");
@@ -170,7 +156,6 @@ public class EndSounds {
     public static final BlockSoundGroup NEBULITE_BLOCK = new BlockSoundGroup(1.2F, 1.3F, SoundEvents.BLOCK_NETHERITE_BLOCK_BREAK, SoundEvents.BLOCK_NETHERITE_BLOCK_STEP, SoundEvents.BLOCK_NETHERITE_BLOCK_PLACE, SoundEvents.BLOCK_NETHERITE_BLOCK_HIT, SoundEvents.BLOCK_NETHERITE_BLOCK_FALL);
     public static final BlockSoundGroup NEBULITE_ORE = new BlockSoundGroup(1.2F, 1.3F, BLOCK_NEBULITE_ORE_BREAK, BLOCK_NEBULITE_ORE_STEP, BLOCK_NEBULITE_ORE_PLACE, BLOCK_NEBULITE_ORE_HIT, BLOCK_NEBULITE_ORE_FALL);
     public static final BlockSoundGroup PURPUR = new BlockSoundGroup(0.7F, 1.1F, BLOCK_PURPUR_BREAK, BLOCK_PURPUR_STEP, BLOCK_PURPUR_PLACE, BLOCK_PURPUR_HIT, BLOCK_PURPUR_FALL);
-    public static final BlockSoundGroup SCRAP = new BlockSoundGroup(1, 1.4F, BLOCK_SCRAP_BREAK, BLOCK_SCRAP_STEP, BLOCK_SCRAP_PLACE, BLOCK_SCRAP_HIT, BLOCK_SCRAP_FALL);
     public static final BlockSoundGroup SHADOW_QUARTZ = new BlockSoundGroup(1.1F, 1.2F, BLOCK_SHADOW_QUARTZ_BREAK, BLOCK_SHADOW_QUARTZ_STEP, BLOCK_SHADOW_QUARTZ_PLACE, BLOCK_SHADOW_QUARTZ_HIT, BLOCK_SHADOW_QUARTZ_FALL);
     public static final BlockSoundGroup SHULKER = new BlockSoundGroup(1, 1.3F, BLOCK_SHULKER_BREAK, BLOCK_SHULKER_STEP, BLOCK_SHULKER_PLACE, BLOCK_SHULKER_HIT, BLOCK_SHULKER_FALL);
     public static final BlockSoundGroup STEM = new BlockSoundGroup(1, 1.2F, BLOCK_STEM_BREAK, BLOCK_STEM_STEP, BLOCK_STEM_PLACE, BLOCK_STEM_HIT, BLOCK_STEM_FALL);
