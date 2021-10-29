@@ -58,6 +58,11 @@ public class EndBlocks {
     public static final Block CHISELED_SHADOW_QUARTZ = new Block(FabricBlockSettings.copy(SHADOW_QUARTZ_BLOCK));
     public static final Block SHADOW_QUARTZ_PILLAR = new PillarBlock(FabricBlockSettings.copy(SHADOW_QUARTZ_BLOCK));
 
+    public static final Block SHADOWSTEEL = new Block(FabricBlockSettings.copy(Blocks.BEDROCK));
+    public static final Block CHISELED_SHADOWSTEEL = new Block(FabricBlockSettings.copy(SHADOWSTEEL));
+    public static final Block SHADOWSTEEL_PILLAR = new PillarBlock(FabricBlockSettings.copy(SHADOWSTEEL));
+    public static final Block SMALL_SHADOWSTEEL_PILLAR = new PillarBlock(FabricBlockSettings.copy(SHADOWSTEEL).nonOpaque());
+
     public static final Block CELESTIAL_FUNGUS = new EndFungusBlock(FungusType.CELESTIAL, FabricBlockSettings.of(Material.PLANT, MapColor.TERRACOTTA_YELLOW).noCollision().breakInstantly().sounds(BlockSoundGroup.FUNGUS));
 
     private static final SignType CELESTIAL_TYPE = SignType.register(new EndSignType("celestial"));
@@ -172,11 +177,18 @@ public class EndBlocks {
 
         register("celestial_sign", new SignItem(new FabricItemSettings().group(Enderscape.GROUP), CELESTIAL_SIGN, CELESTIAL_WALL_SIGN));
     }
+    private static void registerUnbreakables() {
+        register("shadowsteel_block", SHADOWSTEEL, false);
+        register("chiseled_shadowsteel", CHISELED_SHADOWSTEEL, false);
+        register("shadowsteel_pillar", SHADOWSTEEL_PILLAR, false);
+        register("small_shadowsteel_pillar", SMALL_SHADOWSTEEL_PILLAR, false);
+    }
 
     public static void init() {
         registerPlantlife();
         registerWoods();
         registerStones();
+        registerUnbreakables();
 
         register("drift_jelly_block", DRIFT_JELLY_BLOCK, true);
     }
