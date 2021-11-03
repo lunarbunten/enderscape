@@ -2,7 +2,6 @@
 	"replace": false,
 	"values": [
 		"enderscape:flanger_berry_vine",
-		"#enderscape:celestial_stems",
-		"#enderscape:chorus_blocks"
+		"#enderscape:celestial_stems"
 	]
 }

@@ -20,14 +20,15 @@ import net.minecraft.world.BlockView;
 public class EndBlocks {
 
     public static final Tag<Block> CELESTIAL_STEMS = register("celestial_stems");
-    public static final Tag<Block> CHORUS_BLOCKS = register("chorus_blocks");
+    public static final Tag<Block> CHORUS_SOUND_BLOCKS = register("chorus_sound_blocks");
     public static final Tag<Block> END_MYCELIUM_BLOCKS = register("end_mycelium_blocks");
     public static final Tag<Block> END_ORES = register("end_ores");
-    public static final Tag<Block> END_STONE_BLOCKS = register("end_stone_blocks");
-    public static final Tag<Block> END_STONE_BRICK_BLOCKS = register("end_stone_brick_blocks");
+    public static final Tag<Block> END_STONE_SOUND_BLOCKS = register("end_stone_sound_blocks");
+    public static final Tag<Block> END_STONE_BRICK_SOUND_BLOCKS = register("end_stone_brick_sound_blocks");
     public static final Tag<Block> GROWTH_PLANTABLE_BLOCKS = register("growth_plantable_blocks");
-    public static final Tag<Block> PURPUR_BLOCKS = register("purpur_blocks");
+    public static final Tag<Block> PURPUR_SOUND_BLOCKS = register("purpur_sound_blocks");
     public static final Tag<Block> SHADOW_QUARTZ_BLOCKS = register("shadow_quartz_blocks");
+    public static final Tag<Block> SHULKER_SOUND_BLOCKS = register("shulker_sound_blocks");
 
     public static final Block CELESTIAL_MYCELIUM_BLOCK = new EndMyceliumBlock(FabricBlockSettings.of(Material.STONE, MapColor.TERRACOTTA_YELLOW).requiresTool().strength(3, 9).sounds(EndSounds.EYLIUM).ticksRandomly());
 
