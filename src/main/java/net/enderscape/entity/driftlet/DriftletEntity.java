@@ -42,7 +42,6 @@ public class DriftletEntity extends PassiveEntity {
 
     protected void initGoals() {
         goalSelector.add(3, new TemptGoal(this, 1.25D, Ingredient.fromTag(EndItems.DRIFTER_FOOD), false));
-        goalSelector.add(4, new FollowTargetGoal<>(this, DrifterEntity.class, true));
         goalSelector.add(4, new FleeEntityGoal<>(this, RubblemiteEntity.class, 8, 2.2D, 2.2D));
         goalSelector.add(4, new FleeEntityGoal<>(this, SlimeEntity.class, 8, 2.2D, 2.2D));
         goalSelector.add(6, new DrifterWanderGoal(this));

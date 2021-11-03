@@ -7,7 +7,7 @@ import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
@@ -49,7 +49,7 @@ public class RubblemiteEntity extends HostileEntity {
         goalSelector.add(6, new WanderAroundFarGoal(this, 0.6D));
         goalSelector.add(7, new LookAroundGoal(this));
         targetSelector.add(1, (new RevengeGoal(this)).setGroupRevenge());
-        targetSelector.add(2, new FollowTargetGoal<>(this, PlayerEntity.class, true));
+        targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     protected void initDataTracker() {
