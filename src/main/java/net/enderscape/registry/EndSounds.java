@@ -13,9 +13,7 @@ public class EndSounds {
 
     public static final SoundEvent AMBIENT_CELESTIAL_ADDITIONS = register("ambient.celestial.additions");
     public static final SoundEvent AMBIENT_CELESTIAL_LOOP = register("ambient.celestial.loop");
-
-    public static final SoundEvent AMBIENT_CORRUPTION_ADDITIONS = register("ambient.corruption.additions");
-    public static final SoundEvent AMBIENT_CORRUPTION_LOOP = register("ambient.corruption.loop");
+    public static final SoundEvent AMBIENT_CELESTIAL_MOOD = register("ambient.celestial.mood");
 
     public static final SoundEvent AMBIENT_END_ADDITIONS = register("ambient.end.additions");
     public static final SoundEvent AMBIENT_END_LOOP = register("ambient.end.loop");
@@ -138,7 +136,6 @@ public class EndSounds {
     // Music
 
     public static final SoundEvent MUSIC_CELESTIAL = register("music.celestial");
-    public static final SoundEvent MUSIC_CORRUPTION = register("music.corruption");
     public static final SoundEvent MUSIC_ELYTRA = register("music.elytra");
     public static final SoundEvent MUSIC_END = register("music.end");
     public static final SoundEvent MUSIC_GLARE = register("music.glare");

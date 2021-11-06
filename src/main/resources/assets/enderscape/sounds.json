@@ -4,44 +4,74 @@
 			{
 				"name": "enderscape:ambient/plains/additions/bug1",
 				"volume": 0.24,
-				"weight": 50
+				"weight": 75
 			},
 			{
 				"name": "enderscape:ambient/plains/additions/bug2",
 				"volume": 0.24,
-				"weight": 50
+				"weight": 75
 			},
 			{
 				"name": "enderscape:ambient/plains/additions/crack1",
 				"volume": 0.24,
-				"weight": 100
+				"weight": 67
 			},
 			{
 				"name": "enderscape:ambient/plains/additions/crack2",
 				"volume": 0.24,
-				"weight": 100
+				"weight": 67
 			},
 			{
 				"name": "enderscape:ambient/plains/additions/crack3",
 				"volume": 0.24,
-				"weight": 100
+				"weight": 67
 			},
 			{
 				"name": "enderscape:ambient/plains/additions/crack4",
 				"volume": 0.24,
-				"weight": 100
+				"weight": 67
+			},
+			{
+				"name": "enderscape:ambient/end/additions/chorus1",
+				"volume": 0.24,
+				"weight": 50
+			},
+			{
+				"name": "enderscape:ambient/end/additions/chorus2",
+				"volume": 0.24,
+				"weight": 50
+			},
+			{
+				"name": "enderscape:ambient/end/additions/chorus3",
+				"volume": 0.24,
+				"weight": 50
+			},
+			{
+				"name": "enderscape:ambient/end/additions/chorus4",
+				"volume": 0.24,
+				"weight": 50
+			},
+			{
+				"name": "enderscape:ambient/end/additions/warp1",
+				"volume": 0.24,
+				"weight": 35
+			},
+			{
+				"name": "enderscape:ambient/end/additions/warp2",
+				"volume": 0.24,
+				"weight": 35
 			},
 			{
 				"name": "enderscape:ambient/end/additions/ring1",
 				"volume": 0.24,
-				"pitch": 0.2,
-				"weight": 10
+				"pitch": 0.18,
+				"weight": 20
 			},
 			{
 				"name": "enderscape:ambient/end/additions/ring2",
 				"volume": 0.24,
-				"pitch": 0.8,
-				"weight": 10
+				"pitch": 0.3,
+				"weight": 20
 			},
 			{
 				"name": "enderscape:ambient/end/additions/another_world",
@@ -56,78 +86,20 @@
 			{
 				"name": "enderscape:ambient/plains/loop",
 				"stream": true,
-				"volume": 0.7
+				"volume": 0.8
 			}
 		]
 	},
-	"ambient.corruption.additions": {
+	"ambient.celestial.mood": {
 		"sounds": [
 			{
-				"name": "enderscape:ambient/plains/additions/bug1",
-				"volume": 0.24,
-				"weight": 50
-			},
-			{
-				"name": "enderscape:ambient/plains/additions/bug2",
-				"volume": 0.24,
-				"weight": 50
-			},
-			{
-				"name": "enderscape:ambient/plains/additions/crack1",
-				"volume": 0.24,
-				"weight": 100
-			},
-			{
-				"name": "enderscape:ambient/plains/additions/crack2",
-				"volume": 0.24,
-				"weight": 100
-			},
-			{
-				"name": "enderscape:ambient/plains/additions/crack3",
-				"volume": 0.24,
-				"weight": 100
-			},
-			{
-				"name": "enderscape:ambient/plains/additions/crack4",
-				"volume": 0.24,
-				"weight": 100
-			},
-			{
-				"name": "enderscape:ambient/end/additions/ring1",
-				"volume": 0.24,
-				"pitch": 0.2,
-				"weight": 10
-			},
-			{
-				"name": "enderscape:ambient/end/additions/ring2",
-				"volume": 0.24,
-				"pitch": 0.8,
-				"weight": 10
-			},
-			{
-				"name": "enderscape:ambient/end/additions/another_world",
-				"volume": 0.24,
-				"pitch": 0.8,
-				"weight": 1
-			}
-		]
-	},
-	"ambient.corruption.loop": {
-		"sounds": [
-			{
-				"name": "enderscape:ambient/plains/loop",
-				"stream": true,
-				"volume": 0.7
+				"name": "minecraft:ambient.warped_forest.mood",
+				"type": "event"
 			}
 		]
 	},
 	"ambient.end.additions": {
 		"sounds": [
-			{
-				"name": "enderscape:ambient/end/additions/chorus1",
-				"volume": 0.24,
-				"weight": 100
-			},
 			{
 				"name": "enderscape:ambient/end/additions/chorus1",
 				"volume": 0.24,
@@ -1401,15 +1373,6 @@
 			{
 				"name": "enderscape:music/elysium",
 				"weight": 20,
-				"stream": true
-			}
-		]
-	},
-	"music.corruption": {
-		"sounds": [
-			{
-				"name": "minecraft:music/game/end/end",
-				"weight": 1,
 				"stream": true
 			}
 		]
