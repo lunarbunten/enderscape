@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"NNN",
+		"D D",
+		"D D"
+	],
+	"key": {
+		"D": {
+			"item": "enderscape:drift_jelly_bottle"
+		},
+		"N": {
+			"item": "enderscape:nebulite"
+		}
+	},
+	"result": {
+		"item": "enderscape:drift_leggings"
+	}
+}

@@ -1,0 +1,35 @@
+{
+    "parent": "enderscape:nebulite_liquid",
+    "display": {
+        "icon": {
+            "item": "enderscape:mirror"
+        },
+        "title": {
+            "translate": "advancement.enderscape.mirror_teleport.title"
+        },
+        "description": {
+            "translate": "advancement.enderscape.mirror_teleport.description"
+        },
+        "frame": "goal",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "mirror_teleport": {
+            "trigger": "enderscape:mirror_teleport",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "enderscape:mirror"
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "mirror_teleport"
+        ]
+    ]
+}

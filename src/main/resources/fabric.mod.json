@@ -1,31 +1,39 @@
 {
     "schemaVersion": 1,
     "id": "enderscape",
-    "version": "0.1.2",
+    "version": "${version}",
     "name": "Enderscape",
-    "description": "Enderscape is a Minecraft mod that adds to The End dimension and it's content.",
+    "description": "A mod that adds new content to The End dimension, such as biomes, mobs, ores, and more.\nThe focus is to add features that aren't unfitting for the vanilla game while enhancing the overall experience.",
     "authors": [
-        "bunten",
-        "ArathainFarqoe"
+        "bunten (Primary developer)"
     ],
     "contributors": [
-        "FourTimesCold",
-        "BerryTanooki"
+        "Aigis (3D Logo)",
+        "ArathainFarqoe (Additional programming and art)",
+        "FourTimesCold (Concept art)",
+        "MaakuArc (3D art and concept art)"
     ],
     "contact": {
-        "homepage": "https://www.curseforge.com/minecraft/mc-mods/enderscape",
         "sources": "https://github.com/bunten2005/enderscape",
         "issues": "https://github.com/bunten2005/enderscape/issues"
+    },
+    "custom": {
+        "modmenu": {
+            "links": {
+                "enderscape.curseforge": "https://www.curseforge.com/minecraft/mc-mods/enderscape",
+                "enderscape.modrinth": "https://modrinth.com/mod/enderscape"
+            }
+        }
     },
     "license": "MIT",
     "icon": "assets/enderscape/icon.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-            "net.enderscape.Enderscape"
+            "net.bunten.enderscape.Enderscape"
         ],
         "client": [
-            "net.enderscape.client.EnderscapeClient"
+            "net.bunten.enderscape.client.EnderscapeClient"
         ]
     },
     "mixins": [
@@ -33,16 +41,10 @@
         "enderscape.client.mixins.json"
     ],
     "depends": {
-        "fabricloader": ">=0.11.6",
-        "fabric": ">=0.36.1",
-        "minecraft": "1.17.x",
-        "java": ">=16"
-    },
-    "suggests": {
-        "modmenu": "*"
-    },
-    "conflicts": {
-        "betterend": "*"
+        "minecraft": "1.18.2",
+        "fabricloader": ">=0.13.3",
+        "fabric": ">=0.51.1",
+        "bclib": ">=1.4.4"
     },
     "accessWidener": "enderscape.accesswidener"
 }

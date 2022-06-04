@@ -1,9 +1,6 @@
 {
   "replace": false,
   "values": [
-    "enderscape:chiseled_shadowsteel",
-    "enderscape:shadowsteel_block",
-    "enderscape:shadowsteel_pillar",
-    "enderscape:small_shadowsteel_pillar"
+    "#enderscape:shadow_steel_blocks"
   ]
 }

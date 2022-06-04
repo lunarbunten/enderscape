@@ -31,7 +31,7 @@
                 },
                 {
                     "condition": "minecraft:random_chance_with_looting",
-                    "chance": 0.8,
+                    "chance": 0.6,
                     "looting_multiplier": 0.2
                 }
             ]
@@ -54,7 +54,7 @@
                             "function": "minecraft:looting_enchant",
                             "count": {
                                 "min": 0.0,
-                                "max": 1.0
+                                "max": 2.0
                             }
                         }
                     ],
@@ -67,7 +67,7 @@
                 },
                 {
                     "condition": "minecraft:random_chance_with_looting",
-                    "chance": 0.4,
+                    "chance": 0.8,
                     "looting_multiplier": 0.2
                 }
             ]

@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "cyan_dye",
+	"ingredients": [
+		{
+			"item": "enderscape:bulb_flower"
+		}
+	],
+	"result": {
+		"item": "minecraft:cyan_dye"
+	}
+}

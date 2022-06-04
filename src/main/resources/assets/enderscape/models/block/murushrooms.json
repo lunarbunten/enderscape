@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "enderscape:block/murushrooms",
-		"particle": "enderscape:block/murushrooms"
+		"particle": "enderscape:block/murushroom_cap"
 	},
 	"elements": [
 		{

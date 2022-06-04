@@ -2,7 +2,7 @@
     "parent": "minecraft:recipes/root",
     "rewards": {
         "recipes": [
-            "enderscape:blocks/corrupt_trapdoor"
+            "enderscape:blocks/drift_jelly_block"
         ]
     },
     "criteria": {
@@ -31,4 +31,4 @@
             "has_recipe"
         ]
     ]
-  }
+}

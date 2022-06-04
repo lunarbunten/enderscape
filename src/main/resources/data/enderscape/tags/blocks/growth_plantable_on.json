@@ -1,0 +1,7 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:end_stone",
+        "#enderscape:end_mycelium_blocks"
+    ]
+}

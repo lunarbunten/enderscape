@@ -1,0 +1,9 @@
+{
+    "replace": false,
+    "values": [
+        "enderscape:shadow_steel_block",
+        "enderscape:chiseled_shadow_steel",
+        "enderscape:shadow_steel_pillar",
+        "enderscape:small_shadow_steel_pillar"
+    ]
+}

@@ -1,58 +1,58 @@
 {
     "type": "minecraft:block",
     "pools": [
-        {
-            "rolls": 1.0,
-            "bonus_rolls": 0.0,
-            "entries": [
-                {
-                    "type": "minecraft:alternatives",
-                    "children": [
+      {
+        "bonus_rolls": 0.0,
+        "entries": [
+          {
+            "type": "minecraft:alternatives",
+            "children": [
+              {
+                "type": "minecraft:item",
+                "conditions": [
+                  {
+                    "condition": "minecraft:match_tool",
+                    "predicate": {
+                      "enchantments": [
                         {
-                            "type": "minecraft:item",
-                            "conditions": [
-                                {
-                                    "condition": "minecraft:match_tool",
-                                    "predicate": {
-                                        "enchantments": [
-                                            {
-                                                "enchantment": "minecraft:silk_touch",
-                                                "levels": {
-                                                    "min": 1
-                                                }
-                                            }
-                                        ]
-                                    }
-                                }
-                            ],
-                            "name": "enderscape:shadow_quartz_ore"
-                        },
-                        {
-                            "type": "minecraft:item",
-                            "functions": [
-                                {
-                                    "function": "minecraft:set_count",
-                                    "count": {
-                                        "type": "minecraft:uniform",
-                                        "min": 2.0,
-                                        "max": 3.0
-                                    },
-                                    "add": false
-                                },
-                                {
-                                    "function": "minecraft:apply_bonus",
-                                    "enchantment": "minecraft:fortune",
-                                    "formula": "minecraft:ore_drops"
-                                },
-                                {
-                                    "function": "minecraft:explosion_decay"
-                                }
-                            ],
-                            "name": "enderscape:shadow_quartz"
+                          "enchantment": "minecraft:silk_touch",
+                          "levels": {
+                            "min": 1
+                          }
                         }
-                    ]
-                }
+                      ]
+                    }
+                  }
+                ],
+                "name": "enderscape:shadow_quartz_ore"
+              },
+              {
+                "type": "minecraft:item",
+                "functions": [
+                  {
+                    "add": false,
+                    "count": {
+                      "type": "minecraft:uniform",
+                      "min": 1.0,
+                      "max": 3.0
+                    },
+                    "function": "minecraft:set_count"
+                  },
+                  {
+                    "enchantment": "minecraft:fortune",
+                    "formula": "minecraft:ore_drops",
+                    "function": "minecraft:apply_bonus"
+                  },
+                  {
+                    "function": "minecraft:explosion_decay"
+                  }
+                ],
+                "name": "enderscape:shadow_quartz"
+              }
             ]
-        }
+          }
+        ],
+        "rolls": 1.0
+      }
     ]
-}
+  }

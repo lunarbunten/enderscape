@@ -1,22 +1,25 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AEA",
-    "CCC",
-    " C "
-  ],
-  "key": {
-    "E": {
-      "item": "minecraft:ender_eye"
-    },
-    "C": {
-      "item": "minecraft:copper_ingot"
-    },
-    "A": {
-      "item": "minecraft:amethyst_shard"
-    }
-  },
-  "result": {
-    "item": "enderscape:mirror"
-  }
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AEA",
+		"NCN",
+		" C "
+	],
+	"key": {
+		"E": {
+			"item": "minecraft:ender_eye"
+		},
+		"C": {
+			"item": "minecraft:copper_ingot"
+		},
+		"A": {
+			"item": "minecraft:amethyst_shard"
+		},
+		"N": {
+			"item": "enderscape:nebulite_shards"
+		}
+	},
+	"result": {
+		"item": "enderscape:mirror"
+	}
 }

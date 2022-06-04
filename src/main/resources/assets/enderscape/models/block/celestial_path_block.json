@@ -1,0 +1,24 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"1": "enderscape:block/celestial_path_side",
+		"2": "enderscape:block/celestial_path_top",
+		"3": "block/end_stone",
+		"particle": "enderscape:block/celestial_path_top"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 15, 16],
+			"faces": {
+				"north": {"uv": [0, 1, 16, 16], "texture": "#1", "cullface": "north"},
+				"east": {"uv": [0, 1, 16, 16], "texture": "#1", "cullface": "east"},
+				"south": {"uv": [0, 1, 16, 16], "texture": "#1", "cullface": "south"},
+				"west": {"uv": [0, 1, 16, 16], "texture": "#1", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#3", "cullface": "down"}
+			}
+		}
+	]
+}

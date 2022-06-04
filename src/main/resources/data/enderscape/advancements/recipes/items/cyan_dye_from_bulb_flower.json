@@ -1,0 +1,34 @@
+{
+    "parent": "minecraft:recipes/root",
+    "rewards": {
+        "recipes": [
+            "enderscape:items/cyan_dye_from_bulb_flower"
+        ]
+    },
+    "criteria": {
+        "has_item": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "enderscape:bulb_flower"
+                        ]
+                    }
+                ]
+            }
+        },
+        "has_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+                "recipe": "enderscape:items/cyan_dye_from_bulb_flower"
+            }
+        }
+    },
+    "requirements": [
+        [
+            "has_item",
+            "has_recipe"
+        ]
+    ]
+}
