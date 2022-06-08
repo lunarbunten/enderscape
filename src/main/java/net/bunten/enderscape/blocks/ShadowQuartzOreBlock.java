@@ -1,13 +1,13 @@
 package net.bunten.enderscape.blocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.OreBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 
-public class ShadowQuartzOreBlock extends OreBlock {
+public class ShadowQuartzOreBlock extends Block {
     public ShadowQuartzOreBlock(Settings settings) {
         super(settings);
     }
