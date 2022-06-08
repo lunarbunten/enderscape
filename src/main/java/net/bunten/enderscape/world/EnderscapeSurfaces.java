@@ -2,6 +2,13 @@ package net.bunten.enderscape.world;
 
 import java.util.List;
 
+import org.betterx.bclib.api.v2.levelgen.surface.SurfaceRuleBuilder;
+import org.betterx.bclib.api.v2.levelgen.surface.rules.SwitchRuleSource;
+import org.betterx.bclib.interfaces.NumericProvider;
+import org.betterx.bclib.interfaces.SurfaceMaterialProvider;
+import org.betterx.bclib.mixin.common.SurfaceRulesContextAccessor;
+import org.betterx.bclib.util.MHelper;
+
 import com.mojang.serialization.Codec;
 
 import net.bunten.enderscape.Enderscape;
@@ -12,12 +19,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRule;
-import ru.bclib.api.surface.SurfaceRuleBuilder;
-import ru.bclib.api.surface.rules.SwitchRuleSource;
-import ru.bclib.interfaces.NumericProvider;
-import ru.bclib.interfaces.SurfaceMaterialProvider;
-import ru.bclib.mixin.common.SurfaceRulesContextAccessor;
-import ru.bclib.util.MHelper;
 
 public class EnderscapeSurfaces {
     

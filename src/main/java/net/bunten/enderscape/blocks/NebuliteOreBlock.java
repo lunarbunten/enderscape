@@ -1,7 +1,5 @@
 package net.bunten.enderscape.blocks;
 
-import java.util.Random;
-
 import net.bunten.enderscape.registry.EnderscapeSounds;
 import net.bunten.enderscape.util.MathUtil;
 import net.fabricmc.api.EnvType;
@@ -9,8 +7,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.server.world.ServerWorld;
@@ -21,6 +17,8 @@ import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 public class NebuliteOreBlock extends Block {
@@ -28,13 +26,11 @@ public class NebuliteOreBlock extends Block {
         super(settings);
     }
 
-    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack) {
-        super.onStacksDropped(state, world, pos, stack);
-        if (EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, stack) == 0) {
-            int x = MathUtil.nextInt(world.getRandom(), 6, 12);
-            if (x > 0) {
-                dropExperience(world, pos, x);
-            }
+    @Override
+    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
+        super.onStacksDropped(state, world, pos, stack, dropExperience);
+        if (dropExperience) {
+            dropExperienceWhenMined(world, pos, stack, UniformIntProvider.create(6, 12));
         }
     }
 

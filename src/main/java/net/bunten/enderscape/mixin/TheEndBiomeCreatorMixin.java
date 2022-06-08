@@ -44,7 +44,6 @@ public abstract class TheEndBiomeCreatorMixin {
 
         var biome = new Biome.Builder();
         biome.precipitation(Biome.Precipitation.NONE);
-        biome.category(Biome.Category.THEEND);
         biome.temperature(0.5f);
         biome.downfall(0.5f);
         biome.effects(getEndBiomeEffects());

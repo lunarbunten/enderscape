@@ -1,5 +1,8 @@
 package net.bunten.enderscape.world.biomes;
 
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
+
 import net.bunten.enderscape.registry.EnderscapeEntities;
 import net.bunten.enderscape.registry.EnderscapeMusic;
 import net.bunten.enderscape.registry.EnderscapeParticles;
@@ -7,13 +10,9 @@ import net.bunten.enderscape.registry.EnderscapeSounds;
 import net.bunten.enderscape.world.EnderscapeFeatures;
 import net.bunten.enderscape.world.EnderscapeSurfaces;
 import net.minecraft.entity.EntityType;
-import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.Precipitation;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.EndPlacedFeatures;
-import ru.bclib.api.biomes.BCLBiomeBuilder;
-import ru.bclib.api.biomes.BiomeAPI;
-import ru.bclib.world.biomes.BCLBiome;
 
 public class CelestialPlainsBiome implements EnderscapeBiome, CelestialBiome {
 
@@ -23,7 +22,7 @@ public class CelestialPlainsBiome implements EnderscapeBiome, CelestialBiome {
     }
 
     public static BCLBiome register() {
-        return BiomeAPI.registerEndLandBiome(new CelestialPlainsBiome().getBCLBiome());
+        return new CelestialPlainsBiome().getBCLBiome();
     }
 
     @Override
@@ -38,8 +37,6 @@ public class CelestialPlainsBiome implements EnderscapeBiome, CelestialBiome {
         builder.additions(EnderscapeSounds.AMBIENT_CELESTIAL_PLAINS_ADDITIONS, 0.003F);
         builder.mood(EnderscapeSounds.AMBIENT_CELESTIAL_PLAINS_MOOD, 6000, 8, 2);
         builder.particles(EnderscapeParticles.CELESTIAL_SPORES, 0.015F);
-
-        builder.category(Category.THEEND);
         
         builder.waterColor(0x3F76E4);
         builder.waterFogColor(0x50533);

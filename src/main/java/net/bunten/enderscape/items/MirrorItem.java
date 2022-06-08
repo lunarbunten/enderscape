@@ -31,7 +31,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -39,6 +38,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 
 public class MirrorItem extends Item implements Vanishable {
     private static final int BASE_MAX_ENERGY = 5;
@@ -218,10 +218,10 @@ public class MirrorItem extends Item implements Vanishable {
         if (isLinked(stack)) {
             BlockPos pos = getLodestonePos(stack);
             if (Screen.hasShiftDown()) {
-                tooltip.add(new TranslatableText("item.enderscape.mirror.desc.position", pos.getX(), pos.getY(), pos.getZ()).formatted(Formatting.DARK_GREEN));
-                tooltip.add(new TranslatableText("item.enderscape.mirror.desc.dimension", getLodestoneDimension(stack)).formatted(Formatting.DARK_GREEN));
+                tooltip.add(Text.translatable("item.enderscape.mirror.desc.position", pos.getX(), pos.getY(), pos.getZ()).formatted(Formatting.DARK_GREEN));
+                tooltip.add(Text.translatable("item.enderscape.mirror.desc.dimension", getLodestoneDimension(stack)).formatted(Formatting.DARK_GREEN));
             } else {
-                tooltip.add(new TranslatableText(getTranslationKey() + ".desc.unshifted").formatted(Formatting.GRAY));
+                tooltip.add(Text.translatable(getTranslationKey() + ".desc.unshifted").formatted(Formatting.GRAY));
             }
         }
     }
@@ -240,7 +240,7 @@ public class MirrorItem extends Item implements Vanishable {
      */
     private TypedActionResult<ItemStack> fail(String string, PlayerEntity mob, ItemStack stack) {
         Util.playSound(mob, EnderscapeSounds.ITEM_MIRROR_FAILURE, 0.65F, MathUtil.nextFloat(mob.getRandom(), 0.9F, 1.1F));
-        mob.sendMessage(new TranslatableText("item.enderscape.mirror.message." + string).formatted(Formatting.RED), true);
+        mob.sendMessage(Text.translatable("item.enderscape.mirror.message." + string).formatted(Formatting.RED), true);
         mob.getItemCooldownManager().set(this, 20);
 
         return new TypedActionResult<>(ActionResult.SUCCESS, stack);
@@ -299,6 +299,7 @@ public class MirrorItem extends Item implements Vanishable {
         }
 
         mob.teleport(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, true);
+        world.emitGameEvent(GameEvent.TELEPORT, mob.getPos(), GameEvent.Emitter.of(mob));
 
         Vec3d vec = mob.getPos();
 

@@ -27,6 +27,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 
 public class NebuliteCauldronBlock extends Block {
     public NebuliteCauldronBlock(Settings settings) {
@@ -58,6 +59,7 @@ public class NebuliteCauldronBlock extends Block {
                     mob.stopRiding();
                 }
                 if (!mob.teleport(x2, y2, z2, true)) continue;
+                world.emitGameEvent(GameEvent.TELEPORT, mob.getPos(), GameEvent.Emitter.of(mob));
                 world.playSound(null, x, y, z, EnderscapeSounds.BLOCK_NEBULITE_CAULDRON_TELEPORT, SoundCategory.BLOCKS, 1, 1);
                 mob.playSound(EnderscapeSounds.BLOCK_NEBULITE_CAULDRON_TELEPORT, 1, 1);
                 break;

@@ -1,8 +1,9 @@
 package net.bunten.enderscape.world.biomes;
 
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
+
 import net.bunten.enderscape.Enderscape;
 import net.minecraft.util.Identifier;
-import ru.bclib.world.biomes.BCLBiome;
 
 public interface EnderscapeBiome {
 

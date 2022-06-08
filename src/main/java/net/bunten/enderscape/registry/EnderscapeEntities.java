@@ -1,5 +1,7 @@
 package net.bunten.enderscape.registry;
 
+import org.betterx.bclib.api.v2.spawning.SpawnRuleBuilder;
+
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.entity.drifter.DrifterEntity;
 import net.bunten.enderscape.entity.driftlet.DriftletEntity;
@@ -14,7 +16,6 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap.Type;
-import ru.bclib.api.spawning.SpawnRuleBuilder;
 
 public class EnderscapeEntities {
 

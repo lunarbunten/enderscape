@@ -1,12 +1,11 @@
 package net.bunten.enderscape.world.features.ores;
 
-import java.util.Random;
-
 import com.mojang.serialization.Codec;
 
 import net.bunten.enderscape.util.MathUtil;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.SingleStateFeatureConfig;

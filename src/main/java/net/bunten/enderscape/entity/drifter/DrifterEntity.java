@@ -43,7 +43,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
@@ -247,7 +246,7 @@ public class DrifterEntity extends AbstractDrifterEntity {
         @Override
         public Text getDeathMessage(LivingEntity entity) {
             String string = "death.bounce." + name;
-            return new TranslatableText(string, entity.getDisplayName());
+            return Text.translatable(string, entity.getDisplayName());
         }
     
         @Override

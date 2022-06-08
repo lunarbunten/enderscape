@@ -1,7 +1,5 @@
 package net.bunten.enderscape.blocks;
 
-import java.util.Random;
-
 import net.bunten.enderscape.blocks.properties.EnderscapeProperties;
 import net.bunten.enderscape.blocks.properties.GrowthPart;
 import net.bunten.enderscape.interfaces.LayerMapped;
@@ -18,6 +16,7 @@ import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;

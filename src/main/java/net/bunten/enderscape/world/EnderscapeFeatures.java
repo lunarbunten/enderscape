@@ -1,12 +1,15 @@
 package net.bunten.enderscape.world;
 
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeature;
+import org.betterx.bclib.api.v2.levelgen.features.BCLFeatureBuilder;
+
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.world.features.CelestialIslandFeature;
 import net.bunten.enderscape.world.features.ores.ScatteredOreFeature;
 import net.bunten.enderscape.world.features.ores.VoidOreFeature;
-import net.bunten.enderscape.world.features.vegetation.CelestialVegetationFeature;
 import net.bunten.enderscape.world.features.vegetation.CelestialGrowthFeature;
+import net.bunten.enderscape.world.features.vegetation.CelestialVegetationFeature;
 import net.bunten.enderscape.world.features.vegetation.LargeCelestialFungusFeature;
 import net.bunten.enderscape.world.features.vegetation.MurushroomFeature;
 import net.minecraft.block.BlockState;
@@ -21,8 +24,6 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.PlacedFeatures;
 import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
 import net.minecraft.world.gen.placementmodifier.HeightRangePlacementModifier;
-import ru.bclib.api.features.BCLFeatureBuilder;
-import ru.bclib.world.features.BCLFeature;
 
 public abstract class EnderscapeFeatures {
 
@@ -58,7 +59,7 @@ public abstract class EnderscapeFeatures {
     public static final Feature<DefaultFeatureConfig> CELESTIAL_VEGETATION = register("celestial_vegetation", new CelestialVegetationFeature(DefaultFeatureConfig.CODEC));
 
     public static final BCLFeature BCL_CELESTIAL_ISLAND = BCLFeatureBuilder.start(Enderscape.id("celestial_island"), CELESTIAL_ISLAND)
-    .oncePerChunks(12)
+    .onceEvery(12)
     .squarePlacement()
     .onlyInBiome()
     .modifier(uniform(YOffset.fixed(55), YOffset.fixed(70)))
@@ -84,7 +85,7 @@ public abstract class EnderscapeFeatures {
     public static final BCLFeature BCL_CELESTIAL_VEGETATION = createCelestialVegetation("celestial_vegetation");
 
     public static final BCLFeature BCL_UNCOMMON_CELESTIAL_GROWTH = BCLFeatureBuilder.start(Enderscape.id("uncommon_celestial_growth"), CELESTIAL_GROWTH)
-    .oncePerChunks(12)
+    .onceEvery(12)
     .modifier(PlacedFeatures.EIGHT_ABOVE_AND_BELOW_RANGE)
     .squarePlacement()
     .decoration(VEGETAL_DECORATION)
@@ -98,7 +99,7 @@ public abstract class EnderscapeFeatures {
     .build();
 
     public static final BCLFeature BCL_UNCOMMON_MURUSHROOMS = BCLFeatureBuilder.start(Enderscape.id("uncommon_murushrooms"), MURUSHROOM)
-    .oncePerChunks(3)
+    .onceEvery(3)
     .modifier(uniform(YOffset.aboveBottom(20), YOffset.fixed(50)))
     .squarePlacement()
     .decoration(VEGETAL_DECORATION)
@@ -147,7 +148,7 @@ public abstract class EnderscapeFeatures {
     .build(new SingleStateFeatureConfig(SHADOW_QUARTZ_ORE));
 
     public static final BCLFeature BETTEREND_MURUSHROOMS = BCLFeatureBuilder.start(Enderscape.id("betterend_uncommon_murushrooms"), MURUSHROOM)
-    .oncePerChunks(2)
+    .onceEvery(2)
     .modifier(uniform(YOffset.aboveBottom(50), YOffset.getTop()))
     .squarePlacement()
     .decoration(VEGETAL_DECORATION)

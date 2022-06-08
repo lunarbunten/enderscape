@@ -1,7 +1,5 @@
 package net.bunten.enderscape.blocks;
 
-import java.util.Random;
-
 import net.bunten.enderscape.blocks.properties.EnderscapeProperties;
 import net.bunten.enderscape.blocks.properties.FlangerBerryStage;
 import net.bunten.enderscape.interfaces.LayerMapped;
@@ -25,12 +23,14 @@ import net.minecraft.tag.EntityTypeTags;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.event.GameEvent;
 
 public class FlangerBerryBlock extends Block implements LayerMapped, Fertilizable {
     public static final EnumProperty<FlangerBerryStage> STAGE = EnderscapeProperties.FLANGER_BERRY_STAGE;
@@ -154,6 +154,7 @@ public class FlangerBerryBlock extends Block implements LayerMapped, Fertilizabl
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         if (!isRipe(state)) {
             var group = state.getSoundGroup();
+            world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
             Util.playSound(world, pos, group.getPlaceSound(), SoundCategory.BLOCKS, 1, group.getPitch() * 0.8F);
             setBlockState(world, pos, state.cycle(STAGE));
             return;

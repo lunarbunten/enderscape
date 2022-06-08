@@ -1,21 +1,20 @@
 package net.bunten.enderscape.world;
 
+import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
+import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
+
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.EnderscapeEntities;
 import net.bunten.enderscape.world.biomes.CelestialIslandsBiome;
 import net.bunten.enderscape.world.biomes.CelestialPlainsBiome;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
-import ru.bclib.api.biomes.BiomeAPI;
-import ru.bclib.api.tag.NamedCommonBlockTags;
-import ru.bclib.api.tag.TagAPI;
-import ru.bclib.world.biomes.BCLBiome;
 
 public class EnderscapeBiomes {
-    
-    public static final BCLBiome END_HIGHLANDS = BiomeAPI.registerEndLandBiome(new BCLBiome(BiomeKeys.END_HIGHLANDS));
+
+    public static final BCLBiome END_HIGHLANDS = new BCLBiome(BiomeKeys.END_HIGHLANDS.getValue(), BuiltinRegistries.BIOME.get(BiomeKeys.END_HIGHLANDS.getValue()));
 
     public static final BCLBiome CELESTIAL_PLAINS = CelestialPlainsBiome.register();
     public static final BCLBiome CELESTIAL_ISLANDS = CelestialIslandsBiome.register();
@@ -42,6 +41,11 @@ public class EnderscapeBiomes {
     }
 
     public static void init() {
+        BiomeAPI.registerEndLandBiome(END_HIGHLANDS);
+
+        BiomeAPI.registerEndLandBiome(CELESTIAL_PLAINS);
+        BiomeAPI.registerEndVoidBiome(CELESTIAL_ISLANDS);
+
         BiomeAPI.registerEndBiomeModification((id, biome) -> {
 			if (id.getNamespace() != "enderscape" && id != BiomeKeys.THE_END.getValue()) {
                 addGlobalFeatures(biome);
@@ -57,8 +61,5 @@ public class EnderscapeBiomes {
                 addBetterEndAccommodations(biome);
             }
 		});
-
-        TagAPI.addBlockTag(NamedCommonBlockTags.GEN_END_STONES, EnderscapeBlocks.NEBULITE_ORE);
-        TagAPI.addBlockTag(NamedCommonBlockTags.GEN_END_STONES, EnderscapeBlocks.SHADOW_QUARTZ_ORE);
     }
 }

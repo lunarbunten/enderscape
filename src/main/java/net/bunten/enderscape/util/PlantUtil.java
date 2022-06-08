@@ -1,7 +1,5 @@
 package net.bunten.enderscape.util;
 
-import java.util.Random;
-
 import net.bunten.enderscape.blocks.FlangerBerryBlock;
 import net.bunten.enderscape.blocks.FlangerBerryVine;
 import net.bunten.enderscape.blocks.MurushroomsBlock;
@@ -15,6 +13,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 

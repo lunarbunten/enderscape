@@ -5,7 +5,7 @@ import net.bunten.enderscape.items.HealingItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.ComposterBlock;
-import net.minecraft.entity.decoration.painting.PaintingMotive;
+import net.minecraft.entity.decoration.painting.PaintingVariant;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -131,9 +131,9 @@ public class EnderscapeRegistry {
     }
 
     private static void registerFunny() {
-        Registry.register(Registry.PAINTING_MOTIVE, Enderscape.id("big_guy"), new PaintingMotive(64, 64));
-        Registry.register(Registry.PAINTING_MOTIVE, Enderscape.id("cat"), new PaintingMotive(32, 32));
-        Registry.register(Registry.PAINTING_MOTIVE, Enderscape.id("thirsty_guy"), new PaintingMotive(64, 64));
+        Registry.register(Registry.PAINTING_VARIANT, Enderscape.id("big_guy"), new PaintingVariant(64, 64));
+        Registry.register(Registry.PAINTING_VARIANT, Enderscape.id("cat"), new PaintingVariant(32, 32));
+        Registry.register(Registry.PAINTING_VARIANT, Enderscape.id("thirsty_guy"), new PaintingVariant(64, 64));
     }
 
     private static void registerCompostables() {
