@@ -18,6 +18,8 @@ public class VoidOreFeature extends Feature<SingleStateFeatureConfig> {
 
     @Override
     public boolean generate(FeatureContext<SingleStateFeatureConfig> context) {
+        boolean result = false;
+
         SingleStateFeatureConfig config = context.getConfig();
         StructureWorldAccess world = context.getWorld();
         Random random = context.getRandom();
@@ -28,11 +30,13 @@ public class VoidOreFeature extends Feature<SingleStateFeatureConfig> {
         } else {
             for (int i = 0; i < 30; i++) {
                 BlockPos pos2 = MathUtil.random(pos, random, 8, 4, 8);
-                if (world.getBlockState(pos2).isOf(Blocks.END_STONE) && world.isAir(pos.down()) && world.getBlockState(pos2.up()).isOpaque()) {
+                if (world.getBlockState(pos2).isOf(Blocks.END_STONE) && world.isAir(pos2.down()) && world.getBlockState(pos2.up()).isOpaque()) {
                     world.setBlockState(pos2, config.state, 2);
+                    result = true;
                 }
             }
-            return true;
         }
+
+        return result;
     }
 }

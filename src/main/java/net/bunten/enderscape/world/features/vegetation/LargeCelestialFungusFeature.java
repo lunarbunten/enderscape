@@ -26,8 +26,7 @@ public class LargeCelestialFungusFeature extends Feature<DefaultFeatureConfig> {
             return false;
         } else {
             if (world.getBlockState(pos.down()).isIn(EnderscapeBlocks.LARGE_CELESTIAL_FUNGUS_GENERATABLE)) {
-                PlantUtil.generateLargeCelestialFungus(world, random, pos, 16);
-                return true;
+                return PlantUtil.generateLargeCelestialFungus(world, random, pos, 16);
             } else {
                 return false;
             }

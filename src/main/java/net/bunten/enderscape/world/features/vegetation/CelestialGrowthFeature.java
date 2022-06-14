@@ -21,9 +21,7 @@ public class CelestialGrowthFeature extends Feature<DefaultFeatureConfig> {
         StructureWorldAccess world = context.getWorld();
         Random random = context.getRandom();
         BlockPos pos = context.getOrigin();
-        
-        PlantUtil.generateCelestialGrowth(world, random, world.getTopPosition(Type.WORLD_SURFACE_WG, pos), 4, 2, 10);
 
-        return true;
+        return PlantUtil.generateCelestialGrowth(world, random, world.getTopPosition(Type.WORLD_SURFACE_WG, pos), 4, 2, 10);
     }
 }

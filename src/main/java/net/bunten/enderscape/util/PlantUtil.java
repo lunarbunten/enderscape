@@ -47,7 +47,9 @@ public class PlantUtil {
         }
     }
     
-    public static void generateCelestialGrowth(WorldAccess world, Random random, BlockPos pos, int xRange, int yRange, int tries) {
+    public static boolean generateCelestialGrowth(WorldAccess world, Random random, BlockPos pos, int xRange, int yRange, int tries) {
+        boolean result = false;
+
         for (int i = 0; i < tries; i++) {
             BlockPos pos2 = MathUtil.random(pos, random, xRange, yRange, xRange);
             boolean bl = world.getBlockState(pos2.down()).isIn(EnderscapeBlocks.GROWTH_PLANTABLE_OM);
@@ -60,6 +62,8 @@ public class PlantUtil {
                     if (!world.isAir(pos3)) {
                         continue;
                     } else {
+                        result = true;
+
                         GrowthPart growthPart;
                         if (world.getBlockState(pos3.up()).isAir()) {
                             if (g == addedHeight) {
@@ -78,20 +82,28 @@ public class PlantUtil {
                 }
             }
         }
+
+        return result;
     }
 
-    public static void generateCelestialVegetation(WorldAccess world, Random random, BlockPos pos, int xRange, int yRange, int tries) {
+    public static boolean generateCelestialVegetation(WorldAccess world, Random random, BlockPos pos, int xRange, int yRange, int tries) {
+        boolean result = false;
+
         for (int i = 0; i < tries; i++) {
             var pos2 = MathUtil.random(pos, random, xRange, yRange, xRange);
             var state = PROVIDER.getBlockState(random, pos2);
             if (world.isAir(pos2) && state.canPlaceAt(world, pos2)) {
                 world.setBlockState(pos2, state, 2);
+                result = true;
             }
         }
+
+        return result;
     }
 
     public static boolean generateMurushrooms(WorldAccess world, BlockPos pos, Random random, int age, int xRange, int yRange, int tries) {
         int p = 0;
+
         for (int i = 0; i < tries; i++) {
             Direction dir = Direction.random(random);
             BlockPos pos2 = MathUtil.random(pos, random, xRange, yRange, xRange);
@@ -102,30 +114,38 @@ public class PlantUtil {
                 p++;
             }
         }
+
         return p > 0;
     }
 
-    public static void generateLargeCelestialFungus(WorldAccess world, Random random, BlockPos pos, int tries) {
+    public static boolean generateLargeCelestialFungus(WorldAccess world, Random random, BlockPos pos, int tries) {
         for (int i = 0; i < tries; i++) {
             int height = LargeCelestialFungusGenerator.getHeight(random);
             if (LargeCelestialFungusGenerator.isEnoughAir(world, pos, height)) {
                 LargeCelestialFungusGenerator.generate(world, random, pos, height);
-                break;
+                return true;
             }
         }
+
+        return false;
     }
 
-    public static void generateLargeMurushroom(WorldAccess world, Random random, BlockPos pos, int size) {
+    public static boolean generateLargeMurushroom(WorldAccess world, Random random, BlockPos pos, int size) {
+        boolean result = false;
+
         for (int x = -size + 1; x < size; x++) {
             for (int z = -size + 1; z < size; z++) {
                 if (Math.sqrt(x * x + z * z) <= size * 0.8) {
                     var pos2 = pos.add(x, 0, z);
                     if (world.getBlockState(pos2).getMaterial().isReplaceable()) {
                         world.setBlockState(pos2, MURUSHROOM_CAP, 2);
+                        result = true;
                     }
                 }
             }
         }
+
+        return result;
     }
 
     protected class LargeCelestialFungusGenerator {
