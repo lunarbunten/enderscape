@@ -110,7 +110,8 @@ public class FlangerBerryVine extends Block implements LayerMapped, Fertilizable
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         var above = getBlockState(world, pos.up());
-        return above.isOf(this) || above.isIn(EnderscapeBlocks.FLANGER_BERRY_VINE_SUPPORT_BLOCKS) && above.isSideSolidFullSquare(world, pos, Direction.UP);
+        boolean isSupport = above.isIn(EnderscapeBlocks.FLANGER_BERRY_VINE_SUPPORT_BLOCKS) && above.isSideSolidFullSquare(world, pos, Direction.UP);
+        return world.isAir(pos) && (above.isOf(this) || isSupport);
     }
 
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
