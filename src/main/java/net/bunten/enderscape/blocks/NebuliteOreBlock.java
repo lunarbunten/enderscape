@@ -4,12 +4,10 @@ import net.bunten.enderscape.registry.EnderscapeSounds;
 import net.bunten.enderscape.util.MathUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.OreBlock;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.item.ItemStack;
 import net.minecraft.particle.DustParticleEffect;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -21,17 +19,9 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
-public class NebuliteOreBlock extends Block {
+public class NebuliteOreBlock extends OreBlock {
     public NebuliteOreBlock(Settings settings) {
-        super(settings);
-    }
-
-    @Override
-    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
-        super.onStacksDropped(state, world, pos, stack, dropExperience);
-        if (dropExperience) {
-            dropExperienceWhenMined(world, pos, stack, UniformIntProvider.create(6, 12));
-        }
+        super(settings, UniformIntProvider.create(6, 12));
     }
 
     @Environment(EnvType.CLIENT)
