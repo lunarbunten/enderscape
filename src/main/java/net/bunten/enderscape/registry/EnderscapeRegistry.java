@@ -157,7 +157,6 @@ public class EnderscapeRegistry {
 
     private static void registerDispenserBehavior() {
         DispenserBlock.registerBehavior(EnderscapeItems.NEBULITE, new NebuliteDispenserBehavior());
-        // DispenserBlock.registerBehavior(Items.GLASS_BOTTLE, new DriftJellyDispenserBehavior());
     }
 
     public static void init() {
