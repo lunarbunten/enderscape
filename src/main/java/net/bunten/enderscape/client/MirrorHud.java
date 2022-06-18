@@ -159,10 +159,14 @@ public class MirrorHud extends DrawableHelper {
                 outlineAlpha = MathUtil.lerp(0.3F * speedModifier, outlineAlpha, 0);
             }
 
-            if (displayUI && outlineAlpha < 0.3F) {
-                float sin = (MathHelper.sin(highlightDisplayTicks * 0.25F) * 0.2F) + 0.5F;
-                sin = MathHelper.clamp(sin, 0.5F, 1);
-                highlightAlpha = MathUtil.lerp(0.5F * speedModifier, highlightAlpha, sin);
+            if (displayUI) {
+                if (!displayOutline) {
+                    float sin = (MathHelper.sin(highlightDisplayTicks * 0.25F) * 0.2F) + 0.5F;
+                    sin = MathHelper.clamp(sin, 0.5F, 1);
+                    highlightAlpha = MathUtil.lerp(0.5F * speedModifier, highlightAlpha, sin);
+                } else {
+                    highlightAlpha = 0;
+                }
             } else {
                 highlightAlpha = MathUtil.lerp(0.3F * speedModifier, highlightAlpha, 0);
             }
