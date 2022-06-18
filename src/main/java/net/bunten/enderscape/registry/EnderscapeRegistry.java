@@ -1,10 +1,13 @@
 package net.bunten.enderscape.registry;
 
+
 import net.bunten.enderscape.Enderscape;
+import net.bunten.enderscape.blocks.NebuliteDispenserBehavior;
 import net.bunten.enderscape.items.HealingItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.ComposterBlock;
+import net.minecraft.block.DispenserBlock;
 import net.minecraft.entity.decoration.painting.PaintingVariant;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -151,6 +154,12 @@ public class EnderscapeRegistry {
         registerCompostableItem(0.85F, EnderscapeBlocks.CELESTIAL_CAP);
     }
 
+
+    private static void registerDispenserBehavior() {
+        DispenserBlock.registerBehavior(EnderscapeItems.NEBULITE, new NebuliteDispenserBehavior());
+        // DispenserBlock.registerBehavior(Items.GLASS_BOTTLE, new DriftJellyDispenserBehavior());
+    }
+
     public static void init() {
 
         register("drifter_spawn_egg", EnderscapeItems.DRIFTER_SPAWN_EGG);
@@ -173,5 +182,7 @@ public class EnderscapeRegistry {
 
         registerCompostables();
         registerFunny();
+
+        registerDispenserBehavior();
     }
 }
