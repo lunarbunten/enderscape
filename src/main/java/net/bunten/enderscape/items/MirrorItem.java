@@ -69,9 +69,9 @@ public class MirrorItem extends Item implements Vanishable {
         if (MirrorUtil.isLinked(stack)) {
             BlockPos pos = MirrorUtil.getPos(stack);
             if (Screen.hasShiftDown()) {
-                var dimension = Text.translatable(MirrorUtil.getDimension(stack).getValue().toTranslationKey());
+                var dimensionID = Text.translatable("dimension." + MirrorUtil.getDimension(stack).getValue().toTranslationKey());
                 tooltip.add(Text.translatable("item.enderscape.mirror.desc.position", pos.getX(), pos.getY(), pos.getZ()).formatted(Formatting.DARK_GREEN));
-                tooltip.add(Text.translatable("item.enderscape.mirror.desc.dimension", dimension).formatted(Formatting.DARK_GREEN));
+                tooltip.add(Text.translatable("item.enderscape.mirror.desc.dimension", dimensionID).formatted(Formatting.DARK_GREEN));
             } else {
                 tooltip.add(Text.translatable(getTranslationKey() + ".desc.unshifted").formatted(Formatting.GRAY));
             }
