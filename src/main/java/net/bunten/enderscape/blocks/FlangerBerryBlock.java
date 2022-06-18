@@ -11,6 +11,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.FallingBlock;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.block.TransparentBlock;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
@@ -32,7 +33,7 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
 
-public class FlangerBerryBlock extends Block implements LayerMapped, Fertilizable {
+public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, Fertilizable {
     public static final EnumProperty<FlangerBerryStage> STAGE = EnderscapeProperties.FLANGER_BERRY_STAGE;
     private static final Block VINE = EnderscapeBlocks.FLANGER_BERRY_VINE;
 
