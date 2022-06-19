@@ -42,6 +42,15 @@ public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, 
         setDefaultState(getState(FlangerBerryStage.RIPE));
     }
 
+    @Override
+    public boolean isSideInvisible(BlockState state, BlockState stateFrom, Direction direction) {
+        if (stateFrom.isOf(this)) {
+            return isRipe(stateFrom) ? true : false;
+        } else {
+            return super.isSideInvisible(state, stateFrom, direction);
+        }
+    }
+
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(STAGE);
     }
