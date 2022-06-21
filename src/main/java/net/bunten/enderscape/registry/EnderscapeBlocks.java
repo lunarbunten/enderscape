@@ -84,7 +84,7 @@ public class EnderscapeBlocks {
     public static final Block POTTED_CELESTIAL_FUNGUS = new EnderscapeFlowerPotBlock(CELESTIAL_FUNGUS, FabricBlockSettings.copy(Blocks.POTTED_ACACIA_SAPLING));
 
     public static final Block FLANGER_BERRY_VINE = new FlangerBerryVine(FabricBlockSettings.of(Material.PLANT, MapColor.TERRACOTTA_YELLOW).ticksRandomly().noCollision().sounds(EnderscapeSounds.FLANGER_BERRY_VINE).strength(0.2F));
-    public static final Block FLANGER_BERRY_BLOCK = new FlangerBerryBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MapColor.BRIGHT_TEAL).ticksRandomly().sounds(BlockSoundGroup.NETHER_SPROUTS).strength(0.3F).nonOpaque());
+    public static final Block FLANGER_BERRY_BLOCK = new FlangerBerryBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MapColor.BRIGHT_TEAL).ticksRandomly().strength(0.3F).nonOpaque());
 
     // Nebulite
 
@@ -94,7 +94,7 @@ public class EnderscapeBlocks {
 
     // Shadow Quartz
 
-    public static final Block SHADOW_QUARTZ_ORE = new ShadowQuartzOreBlock(FabricBlockSettings.of(Material.STONE, MapColor.PALE_YELLOW).requiresTool().strength(3).sounds(EnderscapeSounds.END_STONE));
+    public static final Block SHADOW_QUARTZ_ORE = new ShadowQuartzOreBlock(FabricBlockSettings.of(Material.STONE, MapColor.PALE_YELLOW).requiresTool().strength(3).sounds(EnderscapeSounds.SHADOW_QUARTZ_ORE));
 
     public static final Block SHADOW_QUARTZ_BLOCK = new Block(FabricBlockSettings.of(Material.STONE, MapColor.TERRACOTTA_BLUE).requiresTool().strength(3).sounds(EnderscapeSounds.SHADOW_QUARTZ));
     public static final Block SHADOW_QUARTZ_BLOCK_STAIRS = new StairsBlock(SHADOW_QUARTZ_BLOCK.getDefaultState(), FabricBlockSettings.copy(SHADOW_QUARTZ_BLOCK).requiresTool());

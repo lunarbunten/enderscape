@@ -792,6 +792,114 @@
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},
+	"block.flanger_berry_block.break": {
+		"sounds": [
+			{
+				"name": "enderscape:block/flanger_berry_block/break1",
+				"volume": 0.4,
+				"pitch": 1.2
+			},
+			{
+				"name": "enderscape:block/flanger_berry_block/break2",
+				"volume": 0.4,
+				"pitch": 1.2
+			},
+			{
+				"name": "enderscape:block/flanger_berry_block/break3",
+				"volume": 0.4,
+				"pitch": 1.2
+			},
+			{
+				"name": "enderscape:block/flanger_berry_block/break4",
+				"volume": 0.4,
+				"pitch": 1.2
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.flanger_berry_block.fall": {
+		"sounds": [
+			{
+				"name": "enderscape:block/flanger_berry_block/step1",
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/flanger_berry_block/step2",
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/flanger_berry_block/step3",
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/flanger_berry_block/step4",
+				"volume": 0.8
+			}
+		]
+	},
+	"block.flanger_berry_block.hit": {
+		"sounds": [
+			{
+				"name": "enderscape:block/flanger_berry_block/step1",
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/flanger_berry_block/step2",
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/flanger_berry_block/step3",
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/flanger_berry_block/step4",
+				"volume": 0.8
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.flanger_berry_block.place": {
+		"sounds": [
+			{
+				"name": "enderscape:block/flanger_berry_block/place1",
+				"volume": 0.9
+			},
+			{
+				"name": "enderscape:block/flanger_berry_block/place2",
+				"volume": 0.9
+			},
+			{
+				"name": "enderscape:block/flanger_berry_block/place3",
+				"volume": 0.9
+			},
+			{
+				"name": "enderscape:block/flanger_berry_block/place4",
+				"volume": 0.9
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.flanger_berry_block.step": {
+		"sounds": [
+			{
+				"name": "enderscape:block/flanger_berry_block/step1",
+				"volume": 0.65
+			},
+			{
+				"name": "enderscape:block/flanger_berry_block/step2",
+				"volume": 0.65
+			},
+			{
+				"name": "enderscape:block/flanger_berry_block/step3",
+				"volume": 0.65
+			},
+			{
+				"name": "enderscape:block/flanger_berry_block/step4",
+				"volume": 0.65
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
 	"block.flanger_berry_vine.break": {
 		"sounds": [
 			"block/cave_vines/break1",
@@ -832,6 +940,55 @@
 		"subtitle": "subtitles.block.generic.place"
 	},
 	"block.flanger_berry_vine.step": {
+		"sounds": [
+			"block/vine/climb1",
+			"block/vine/climb2",
+			"block/vine/climb3",
+			"block/vine/climb4",
+			"block/vine/climb5"
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.flanger_flower.break": {
+		"sounds": [
+			"block/cave_vines/break1",
+			"block/cave_vines/break2",
+			"block/cave_vines/break3",
+			"block/cave_vines/break4",
+			"block/cave_vines/break5"
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.flanger_flower.fall": {
+		"sounds": [
+			"block/vine/climb1",
+			"block/vine/climb2",
+			"block/vine/climb3",
+			"block/vine/climb4",
+			"block/vine/climb5"
+		]
+	},
+	"block.flanger_flower.hit": {
+		"sounds": [
+			"block/cave_vines/break1",
+			"block/cave_vines/break2",
+			"block/cave_vines/break3",
+			"block/cave_vines/break4",
+			"block/cave_vines/break5"
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.flanger_flower.place": {
+		"sounds": [
+			"block/cave_vines/break1",
+			"block/cave_vines/break2",
+			"block/cave_vines/break3",
+			"block/cave_vines/break4",
+			"block/cave_vines/break5"
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.flanger_flower.step": {
 		"sounds": [
 			"block/vine/climb1",
 			"block/vine/climb2",
@@ -1068,28 +1225,28 @@
 	},
 	"block.nebulite_ore.fall": {
 		"sounds": [
-			"enderscape:block/end_stone/break1",
-			"enderscape:block/end_stone/break2",
-			"enderscape:block/end_stone/break3",
-			"enderscape:block/end_stone/break4"
+			"enderscape:block/nebulite_ore/break1",
+			"enderscape:block/nebulite_ore/break2",
+			"enderscape:block/nebulite_ore/break3",
+			"enderscape:block/nebulite_ore/break4"
 		]
 	},
 	"block.nebulite_ore.hit": {
 		"sounds": [
 			{
-				"name": "enderscape:block/end_stone/step1",
+				"name": "enderscape:block/nebulite_ore/step1",
 				"volume": 0.5
 			},
 			{
-				"name": "enderscape:block/end_stone/step2",
+				"name": "enderscape:block/nebulite_ore/step2",
 				"volume": 0.5
 			},
 			{
-				"name": "enderscape:block/end_stone/step3",
+				"name": "enderscape:block/nebulite_ore/step3",
 				"volume": 0.5
 			},
 			{
-				"name": "enderscape:block/end_stone/step4",
+				"name": "enderscape:block/nebulite_ore/step4",
 				"volume": 0.5
 			}
 		],
@@ -1097,30 +1254,30 @@
 	},
 	"block.nebulite_ore.place": {
 		"sounds": [
-			"enderscape:block/end_stone/break1",
-			"enderscape:block/end_stone/break2",
-			"enderscape:block/end_stone/break3",
-			"enderscape:block/end_stone/break4"
+			"enderscape:block/nebulite_ore/place1",
+			"enderscape:block/nebulite_ore/place2",
+			"enderscape:block/nebulite_ore/place3",
+			"enderscape:block/nebulite_ore/place4"
 		],
 		"subtitle": "subtitles.block.generic.place"
 	},
 	"block.nebulite_ore.step": {
 		"sounds": [
 			{
-				"name": "enderscape:block/end_stone/step1",
-				"volume": 0.5
+				"name": "enderscape:block/nebulite_ore/step1",
+				"volume": 0.6
 			},
 			{
-				"name": "enderscape:block/end_stone/step2",
-				"volume": 0.5
+				"name": "enderscape:block/nebulite_ore/step2",
+				"volume": 0.6
 			},
 			{
-				"name": "enderscape:block/end_stone/step3",
-				"volume": 0.5
+				"name": "enderscape:block/nebulite_ore/step3",
+				"volume": 0.6
 			},
 			{
-				"name": "enderscape:block/end_stone/step4",
-				"volume": 0.5
+				"name": "enderscape:block/nebulite_ore/step4",
+				"volume": 0.6
 			}
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
@@ -1329,6 +1486,74 @@
 				"name": "enderscape:block/shadow_quartz/step4",
 				"pitch": 1.3,
 				"volume": 0.5
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.shadow_quartz_ore.break": {
+		"sounds": [
+			"enderscape:block/shadow_quartz_ore/break1",
+			"enderscape:block/shadow_quartz_ore/break2",
+			"enderscape:block/shadow_quartz_ore/break3",
+			"enderscape:block/shadow_quartz_ore/break4"
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.shadow_quartz_ore.fall": {
+		"sounds": [
+			"enderscape:block/shadow_quartz_ore/break1",
+			"enderscape:block/shadow_quartz_ore/break2",
+			"enderscape:block/shadow_quartz_ore/break3",
+			"enderscape:block/shadow_quartz_ore/break4"
+		]
+	},
+	"block.shadow_quartz_ore.hit": {
+		"sounds": [
+			{
+				"name": "enderscape:block/shadow_quartz_ore/step1",
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/shadow_quartz_ore/step2",
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/shadow_quartz_ore/step3",
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/shadow_quartz_ore/step4",
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.shadow_quartz_ore.place": {
+		"sounds": [
+			"enderscape:block/shadow_quartz_ore/break1",
+			"enderscape:block/shadow_quartz_ore/break2",
+			"enderscape:block/shadow_quartz_ore/break3",
+			"enderscape:block/shadow_quartz_ore/break4"
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.shadow_quartz_ore.step": {
+		"sounds": [
+			{
+				"name": "enderscape:block/shadow_quartz_ore/step1",
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/shadow_quartz_ore/step2",
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/shadow_quartz_ore/step3",
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/shadow_quartz_ore/step4",
+				"volume": 0.6
 			}
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
