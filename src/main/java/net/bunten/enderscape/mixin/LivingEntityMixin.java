@@ -34,8 +34,8 @@ public abstract class LivingEntityMixin extends Entity {
             double z = vel.z;
 
             x /= 0.91F + 0.05F;
-            y += 0.03F;
             z /= 0.91F + 0.05F;
+            y += mob.hasStatusEffect(StatusEffects.SLOW_FALLING) ? (y > 0 ? 0.03F : 0) : 0.03F;
 
             mob.setVelocity(x, y, z);
         }
@@ -70,9 +70,6 @@ public abstract class LivingEntityMixin extends Entity {
             return true;
         }
         if (mob.isInsideWaterOrBubbleColumn()) {
-            return true;
-        }
-        if (mob.hasStatusEffect(StatusEffects.SLOW_FALLING)) {
             return true;
         }
         if (mob.hasStatusEffect(StatusEffects.LEVITATION)) {
