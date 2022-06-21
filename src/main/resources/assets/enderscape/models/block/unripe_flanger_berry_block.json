@@ -6,7 +6,7 @@
 		"0": "enderscape:block/unripe_flanger_berry_block",
 		"1": "enderscape:block/unripe_flanger_berry_block_top",
 		"2": "enderscape:block/unripe_flanger_berry_block_bottom",
-		"particle": "enderscape:block/unripe_flanger_berry_block"
+		"particle": "enderscape:block/unripe_flanger_berry_block_particle"
 	},
 	"elements": [
 		{
