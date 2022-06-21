@@ -19,7 +19,6 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
@@ -96,7 +95,7 @@ public class FlangerBerryVine extends Block implements LayerMapped, Fertilizable
             return Blocks.AIR.getDefaultState();
         } else {
             var age = state.get(AGE);
-            var down = getBlockState(world, pos.down());
+            var down = world.getBlockState(pos.down());
 
             if (down.isOf(BERRY)) {
                 return getVineState(true, age);
@@ -109,7 +108,7 @@ public class FlangerBerryVine extends Block implements LayerMapped, Fertilizable
     }
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        var above = getBlockState(world, pos.up());
+        var above = world.getBlockState(pos.up());
         boolean isSupport = above.isIn(EnderscapeBlocks.FLANGER_BERRY_VINE_SUPPORT_BLOCKS) && above.isSideSolidFullSquare(world, pos, Direction.UP);
         return world.getFluidState(pos).isEmpty() && (above.isOf(this) || isSupport);
     }
@@ -142,11 +141,9 @@ public class FlangerBerryVine extends Block implements LayerMapped, Fertilizable
                 if (state2.get(AGE) == MAX_AGE) {
                     if (down.isAir()) {
                         world.setBlockState(pos, getVineState(true, MAX_AGE));
-        
-                        BlockSoundGroup group = BERRY.getDefaultState().getSoundGroup();
-                        Util.playSound(world, pos.down(), group.getPlaceSound(), SoundCategory.BLOCKS, 1, group.getPitch() * 0.8F);
-
-                        setBlockState(world, pos.down(), BERRY.getDefaultState().with(FlangerBerryBlock.STAGE, FlangerBerryStage.FLOWER));
+                        BlockState flowerState = BERRY.getDefaultState().with(FlangerBerryBlock.STAGE, FlangerBerryStage.FLOWER);
+                        world.setBlockState(pos.down(), flowerState, NOTIFY_ALL);
+                        Util.playPlaceSound(world, pos, flowerState.getSoundGroup());
                         break; 
                     }
                 } else {
@@ -188,13 +185,5 @@ public class FlangerBerryVine extends Block implements LayerMapped, Fertilizable
     @Override
     public LayerType getLayerType() {
         return LayerType.CUTOUT;
-    }
-
-    private BlockState getBlockState(WorldView world, BlockPos pos) {
-        return world.getBlockState(pos);
-    }
-
-    private void setBlockState(World world, BlockPos pos, BlockState state) {
-        world.setBlockState(pos, state, NOTIFY_ALL);
     }
 }

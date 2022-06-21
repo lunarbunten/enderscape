@@ -4,6 +4,7 @@ import net.bunten.enderscape.blocks.properties.EnderscapeProperties;
 import net.bunten.enderscape.blocks.properties.FlangerBerryStage;
 import net.bunten.enderscape.interfaces.LayerMapped;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
+import net.bunten.enderscape.registry.EnderscapeSounds;
 import net.bunten.enderscape.util.Util;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -17,7 +18,7 @@ import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.tag.EntityTypeTags;
@@ -39,7 +40,7 @@ public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, 
 
     public FlangerBerryBlock(Settings settings) {
         super(settings);
-        setDefaultState(getState(FlangerBerryStage.RIPE));
+        setDefaultState(getDefaultState().with(STAGE, FlangerBerryStage.RIPE));
     }
 
     @Override
@@ -51,16 +52,21 @@ public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, 
         }
     }
 
+    @Override
+    public BlockSoundGroup getSoundGroup(BlockState state) {
+        return switch (state.get(STAGE)) {
+            case FLOWER -> EnderscapeSounds.FLANGER_FLOWER;
+            case UNRIPE -> EnderscapeSounds.FLANGER_BERRY_BLOCK;
+            default -> EnderscapeSounds.FLANGER_BERRY_BLOCK;
+        };
+    }
+
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(STAGE);
     }
 
     private boolean isFlower(BlockState state) {
         return state.get(STAGE) == FlangerBerryStage.FLOWER;
-    }
-
-    private boolean isUnripe(BlockState state) {
-        return state.get(STAGE) == FlangerBerryStage.UNRIPE;
     }
 
     private boolean isRipe(BlockState state) {
@@ -79,8 +85,6 @@ public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, 
             default -> VoxelShapes.fullCube();
         };
     }
-
-    // Falling block related code
 
     /**
      * Gets the amount of time in ticks this block will wait before attempting to start falling.
@@ -112,8 +116,9 @@ public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, 
         world.createAndScheduleBlockTick(pos, this, getFallDelay());
         if (!canPlaceAt(state, world, pos)) {
             return Blocks.AIR.getDefaultState();
+        } else {
+            return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
         }
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override
@@ -124,7 +129,7 @@ public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, 
     }
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return isRipe(state) ? true : getBlockState(world, pos.up()).isOf(VINE);
+        return isRipe(state) ? true : world.getBlockState(pos.up()).isOf(VINE);
     }
 
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
@@ -163,10 +168,10 @@ public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         if (!isRipe(state)) {
-            var group = state.getSoundGroup();
+            BlockState cycleStage = state.cycle(STAGE);
+            world.setBlockState(pos, cycleStage, NOTIFY_ALL);
+            Util.playPlaceSound(world, pos, cycleStage.getSoundGroup());
             world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, pos);
-            Util.playSound(world, pos, group.getPlaceSound(), SoundCategory.BLOCKS, 1, group.getPitch() * 0.8F);
-            setBlockState(world, pos, state.cycle(STAGE));
             return;
         }
     }
@@ -190,18 +195,5 @@ public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, 
 
     public PistonBehavior getPistonBehavior(BlockState state) {
         return PistonBehavior.DESTROY;
-    }
-
-
-    private BlockState getState(FlangerBerryStage value) {
-        return getDefaultState().with(STAGE, value);
-    }
-
-    private BlockState getBlockState(WorldView world, BlockPos pos) {
-        return world.getBlockState(pos);
-    }
-
-    private void setBlockState(World world, BlockPos pos, BlockState state) {
-        world.setBlockState(pos, state, NOTIFY_ALL);
     }
 }
