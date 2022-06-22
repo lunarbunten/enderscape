@@ -8,9 +8,12 @@
 		"BlockMixin",
 		"DispenserBehaviorMixin",
 		"EndCrystalItemMixin",
+		"FungusBlockMixin",
 		"ItemMixin",
 		"LivingEntityMixin",
 		"PlayerEntityMixin",
+		"RootsBlockMixin",
+		"SproutsBlockMixin",
 		"TheEndBiomeCreatorMixin",
 		"TridentEntityMixin"
 	],
