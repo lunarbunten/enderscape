@@ -29,12 +29,6 @@ public class EnderscapeSounds {
     public static final SoundEvent BLOCK_CHORUS_HIT = register("block.chorus.hit");
     public static final SoundEvent BLOCK_CHORUS_FALL = register("block.chorus.fall");
 
-    public static final SoundEvent BLOCK_DEEP_FUNGUS_BREAK = register("block.deep_fungus.break");
-    public static final SoundEvent BLOCK_DEEP_FUNGUS_STEP = register("block.deep_fungus.step");
-    public static final SoundEvent BLOCK_DEEP_FUNGUS_PLACE = register("block.deep_fungus.place");
-    public static final SoundEvent BLOCK_DEEP_FUNGUS_HIT = register("block.deep_fungus.hit");
-    public static final SoundEvent BLOCK_DEEP_FUNGUS_FALL = register("block.deep_fungus.fall");
-
     public static final SoundEvent BLOCK_DRIFT_JELLY_BOUNCE = register("block.drift_jelly.bounce");
 
     public static final SoundEvent BLOCK_END_PORTAL_AMBIENT = register("block.end_portal.ambient");
@@ -76,6 +70,18 @@ public class EnderscapeSounds {
     public static final SoundEvent BLOCK_FLANGER_FLOWER_PLACE = register("block.flanger_flower.place");
     public static final SoundEvent BLOCK_FLANGER_FLOWER_HIT = register("block.flanger_flower.hit");
     public static final SoundEvent BLOCK_FLANGER_FLOWER_FALL = register("block.flanger_flower.fall");
+
+    public static final SoundEvent BLOCK_FUNGUS_BREAK = register("block.fungus.break");
+    public static final SoundEvent BLOCK_FUNGUS_STEP = register("block.fungus.step");
+    public static final SoundEvent BLOCK_FUNGUS_PLACE = register("block.fungus.place");
+    public static final SoundEvent BLOCK_FUNGUS_HIT = register("block.fungus.hit");
+    public static final SoundEvent BLOCK_FUNGUS_FALL = register("block.fungus.fall");
+
+    public static final SoundEvent BLOCK_FUNGUS_CAP_BREAK = register("block.fungus_cap.break");
+    public static final SoundEvent BLOCK_FUNGUS_CAP_STEP = register("block.fungus_cap.step");
+    public static final SoundEvent BLOCK_FUNGUS_CAP_PLACE = register("block.fungus_cap.place");
+    public static final SoundEvent BLOCK_FUNGUS_CAP_HIT = register("block.fungus_cap.hit");
+    public static final SoundEvent BLOCK_FUNGUS_CAP_FALL = register("block.fungus_cap.fall");
 
     public static final SoundEvent BLOCK_GROWTH_BREAK = register("block.growth.break");
     public static final SoundEvent BLOCK_GROWTH_STEP = register("block.growth.step");
@@ -179,13 +185,14 @@ public class EnderscapeSounds {
     // Sound Groups
 
     public static final BlockSoundGroup CHORUS = new BlockSoundGroup(1, 1.15F, BLOCK_CHORUS_BREAK, BLOCK_CHORUS_STEP, BLOCK_CHORUS_PLACE, BLOCK_CHORUS_HIT, BLOCK_CHORUS_FALL);
-    public static final BlockSoundGroup DEEP_FUNGUS = new BlockSoundGroup(0.8F, 1.2F, BLOCK_DEEP_FUNGUS_BREAK, BLOCK_DEEP_FUNGUS_STEP, BLOCK_DEEP_FUNGUS_PLACE, BLOCK_DEEP_FUNGUS_HIT, BLOCK_DEEP_FUNGUS_FALL);
     public static final BlockSoundGroup END_STONE = new BlockSoundGroup(1, 1.3F, BLOCK_END_STONE_BREAK, BLOCK_END_STONE_STEP, BLOCK_END_STONE_PLACE, BLOCK_END_STONE_HIT, BLOCK_END_STONE_FALL);
     public static final BlockSoundGroup END_STONE_BRICKS = new BlockSoundGroup(1, 1, BLOCK_END_STONE_BRICKS_BREAK, BLOCK_END_STONE_BRICKS_STEP, BLOCK_END_STONE_BRICKS_PLACE, BLOCK_END_STONE_BRICKS_HIT, BLOCK_END_STONE_BRICKS_FALL);
     public static final BlockSoundGroup EYLIUM = new BlockSoundGroup(1, 1.1F, BLOCK_EYLIUM_BREAK, BLOCK_EYLIUM_STEP, BLOCK_EYLIUM_PLACE, BLOCK_EYLIUM_HIT, BLOCK_EYLIUM_FALL);
     public static final BlockSoundGroup FLANGER_BERRY_BLOCK = new BlockSoundGroup(1, 1.2F, BLOCK_FLANGER_BERRY_BLOCK_BREAK, BLOCK_FLANGER_BERRY_BLOCK_STEP, BLOCK_FLANGER_BERRY_BLOCK_PLACE, BLOCK_FLANGER_BERRY_BLOCK_HIT, BLOCK_FLANGER_BERRY_BLOCK_FALL);
     public static final BlockSoundGroup FLANGER_BERRY_VINE = new BlockSoundGroup(1, 0.9F, BLOCK_FLANGER_BERRY_VINE_BREAK, BLOCK_FLANGER_BERRY_VINE_STEP, BLOCK_FLANGER_BERRY_VINE_PLACE, BLOCK_FLANGER_BERRY_VINE_HIT, BLOCK_FLANGER_BERRY_VINE_FALL);
     public static final BlockSoundGroup FLANGER_FLOWER = new BlockSoundGroup(1, 0.9F, BLOCK_FLANGER_FLOWER_BREAK, BLOCK_FLANGER_FLOWER_STEP, BLOCK_FLANGER_FLOWER_PLACE, BLOCK_FLANGER_FLOWER_HIT, BLOCK_FLANGER_FLOWER_FALL);
+    public static final BlockSoundGroup FUNGUS = new BlockSoundGroup(1, 1.2F, BLOCK_FUNGUS_BREAK, BLOCK_FUNGUS_STEP, BLOCK_FUNGUS_PLACE, BLOCK_FUNGUS_HIT, BLOCK_FUNGUS_FALL);
+    public static final BlockSoundGroup FUNGUS_CAP = new BlockSoundGroup(0.8F, 1.2F, BLOCK_FUNGUS_CAP_BREAK, BLOCK_FUNGUS_CAP_STEP, BLOCK_FUNGUS_CAP_PLACE, BLOCK_FUNGUS_CAP_HIT, BLOCK_FUNGUS_CAP_FALL);
     public static final BlockSoundGroup GROWTH = new BlockSoundGroup(0.5F, 1, BLOCK_GROWTH_BREAK, BLOCK_GROWTH_STEP, BLOCK_GROWTH_PLACE, BLOCK_GROWTH_HIT, BLOCK_GROWTH_FALL);
     public static final BlockSoundGroup NEBULITE_BLOCK = new BlockSoundGroup(1, 1.23F, BLOCK_NEBULITE_BLOCK_BREAK, BLOCK_NEBULITE_BLOCK_STEP, BLOCK_NEBULITE_BLOCK_PLACE, BLOCK_NEBULITE_BLOCK_HIT, BLOCK_NEBULITE_BLOCK_FALL);
     public static final BlockSoundGroup NEBULITE_ORE = new BlockSoundGroup(1.2F, 1.3F, BLOCK_NEBULITE_ORE_BREAK, BLOCK_NEBULITE_ORE_STEP, BLOCK_NEBULITE_ORE_PLACE, BLOCK_NEBULITE_ORE_HIT, BLOCK_NEBULITE_ORE_FALL);

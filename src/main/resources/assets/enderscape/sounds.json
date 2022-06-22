@@ -379,60 +379,6 @@
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},
-	"block.deep_fungus.break": {
-		"sounds": [
-			"enderscape:block/deep_fungus/break1",
-			"enderscape:block/deep_fungus/break2",
-			"enderscape:block/deep_fungus/break3",
-			"enderscape:block/deep_fungus/break4",
-			"enderscape:block/deep_fungus/break5",
-			"enderscape:block/deep_fungus/break6"
-		],
-		"subtitle": "subtitles.block.generic.break"
-	},
-	"block.deep_fungus.fall": {
-		"sounds": [
-			"enderscape:block/deep_fungus/break1",
-			"enderscape:block/deep_fungus/break2",
-			"enderscape:block/deep_fungus/break3",
-			"enderscape:block/deep_fungus/break4",
-			"enderscape:block/deep_fungus/break5",
-			"enderscape:block/deep_fungus/break6"
-		]
-	},
-	"block.deep_fungus.hit": {
-		"sounds": [
-			"enderscape:block/deep_fungus/break1",
-			"enderscape:block/deep_fungus/break2",
-			"enderscape:block/deep_fungus/break3",
-			"enderscape:block/deep_fungus/break4",
-			"enderscape:block/deep_fungus/break5",
-			"enderscape:block/deep_fungus/break6"
-		],
-		"subtitle": "subtitles.block.generic.hit"
-	},
-	"block.deep_fungus.place": {
-		"sounds": [
-			"enderscape:block/deep_fungus/break1",
-			"enderscape:block/deep_fungus/break2",
-			"enderscape:block/deep_fungus/break3",
-			"enderscape:block/deep_fungus/break4",
-			"enderscape:block/deep_fungus/break5",
-			"enderscape:block/deep_fungus/break6"
-		],
-		"subtitle": "subtitles.block.generic.place"
-	},
-	"block.deep_fungus.step": {
-		"sounds": [
-			"enderscape:block/deep_fungus/step1",
-			"enderscape:block/deep_fungus/step2",
-			"enderscape:block/deep_fungus/step3",
-			"enderscape:block/deep_fungus/step4",
-			"enderscape:block/deep_fungus/step5",
-			"enderscape:block/deep_fungus/step6"
-		],
-		"subtitle": "subtitles.block.generic.footsteps"
-	},
 	"block.drift_jelly.bounce": {
 		"sounds": [
 			{
@@ -796,23 +742,23 @@
 		"sounds": [
 			{
 				"name": "enderscape:block/flanger_berry_block/break1",
-				"volume": 0.4,
-				"pitch": 1.2
+				"pitch": 1.2,
+				"volume": 0.4
 			},
 			{
 				"name": "enderscape:block/flanger_berry_block/break2",
-				"volume": 0.4,
-				"pitch": 1.2
+				"pitch": 1.2,
+				"volume": 0.4
 			},
 			{
 				"name": "enderscape:block/flanger_berry_block/break3",
-				"volume": 0.4,
-				"pitch": 1.2
+				"pitch": 1.2,
+				"volume": 0.4
 			},
 			{
 				"name": "enderscape:block/flanger_berry_block/break4",
-				"volume": 0.4,
-				"pitch": 1.2
+				"pitch": 1.2,
+				"volume": 0.4
 			}
 		],
 		"subtitle": "subtitles.block.generic.break"
@@ -995,6 +941,292 @@
 			"block/vine/climb3",
 			"block/vine/climb4",
 			"block/vine/climb5"
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.fungus.break": {
+		"sounds": [
+			{
+				"name": "enderscape:block/fungus/place1",
+				"pitch": 1.1,
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus/place2",
+				"pitch": 1.1,
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus/place3",
+				"pitch": 1.1,
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus/place4",
+				"pitch": 1.1,
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus/place5",
+				"pitch": 1.1,
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus/place6",
+				"pitch": 1.1,
+				"volume": 0.5
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.fungus.fall": {
+		"sounds": []
+	},
+	"block.fungus.hit": {
+		"sounds": [],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.fungus.place": {
+		"sounds": [
+			{
+				"name": "enderscape:block/fungus/place1",
+				"pitch": 1.1,
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus/place2",
+				"pitch": 1.1,
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus/place3",
+				"pitch": 1.1,
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus/place4",
+				"pitch": 1.1,
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus/place5",
+				"pitch": 1.1,
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus/place6",
+				"pitch": 1.1,
+				"volume": 0.5
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.fungus.step": {
+		"sounds": [
+			{
+				"name": "item/plant/netherwart1",
+				"pitch": 0.9,
+				"volume": 0.9
+			},
+			{
+				"name": "item/plant/netherwart1",
+				"pitch": 1.12,
+				"volume": 0.9
+			},
+			{
+				"name": "item/plant/netherwart2",
+				"pitch": 0.9,
+				"volume": 0.9
+			},
+			{
+				"name": "item/plant/netherwart2",
+				"pitch": 1.12,
+				"volume": 0.9
+			},
+			{
+				"name": "item/plant/netherwart3",
+				"pitch": 0.9,
+				"volume": 0.9
+			},
+			{
+				"name": "item/plant/netherwart3",
+				"pitch": 1.12,
+				"volume": 0.9
+			},
+			{
+				"name": "item/plant/netherwart4",
+				"pitch": 0.9,
+				"volume": 0.9
+			},
+			{
+				"name": "item/plant/netherwart4",
+				"pitch": 1.12,
+				"volume": 0.9
+			},
+			{
+				"name": "item/plant/netherwart5",
+				"pitch": 0.9,
+				"volume": 0.9
+			},
+			{
+				"name": "item/plant/netherwart5",
+				"pitch": 1.12,
+				"volume": 0.9
+			},
+			{
+				"name": "item/plant/netherwart6",
+				"pitch": 0.9,
+				"volume": 0.9
+			},
+			{
+				"name": "item/plant/netherwart6",
+				"pitch": 1.12,
+				"volume": 0.9
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.fungus_cap.break": {
+		"sounds": [
+			{
+				"name": "enderscape:block/fungus_cap/break1",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/fungus_cap/break2",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/fungus_cap/break3",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/fungus_cap/break4",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/fungus_cap/break5",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/fungus_cap/break6",
+				"pitch": 1.1,
+				"volume": 0.8
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.fungus_cap.fall": {
+		"sounds": [
+			{
+				"name": "enderscape:block/fungus_cap/break1",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/fungus_cap/break2",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/fungus_cap/break3",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/fungus_cap/break4",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/fungus_cap/break5",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/fungus_cap/break6",
+				"pitch": 1.1,
+				"volume": 0.8
+			}
+		]
+	},
+	"block.fungus_cap.hit": {
+		"sounds": [
+			{
+				"name": "enderscape:block/fungus_cap/step1",
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus_cap/step2",
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus_cap/step3",
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus_cap/step4",
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus_cap/step5",
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus_cap/step6",
+				"volume": 0.5
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.fungus_cap.place": {
+		"sounds": [
+			{
+				"name": "enderscape:block/fungus_cap/break1",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/fungus_cap/break2",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/fungus_cap/break3",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/fungus_cap/break4",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/fungus_cap/break5",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/fungus_cap/break6",
+				"pitch": 1.1,
+				"volume": 0.8
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.fungus_cap.step": {
+		"sounds": [
+			"enderscape:block/fungus_cap/step1",
+			"enderscape:block/fungus_cap/step2",
+			"enderscape:block/fungus_cap/step3",
+			"enderscape:block/fungus_cap/step4",
+			"enderscape:block/fungus_cap/step5",
+			"enderscape:block/fungus_cap/step6"
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},

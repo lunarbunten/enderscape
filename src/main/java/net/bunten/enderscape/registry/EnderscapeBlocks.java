@@ -9,11 +9,11 @@ import net.bunten.enderscape.blocks.CelestialMyceliumBlock;
 import net.bunten.enderscape.blocks.CelestialPathBlock;
 import net.bunten.enderscape.blocks.DriftJellyBlock;
 import net.bunten.enderscape.blocks.EnderscapeDoor;
+import net.bunten.enderscape.blocks.EnderscapeFlowerPotBlock;
 import net.bunten.enderscape.blocks.EnderscapeSignBlock;
 import net.bunten.enderscape.blocks.EnderscapeSignType;
 import net.bunten.enderscape.blocks.EnderscapeTrapdoor;
 import net.bunten.enderscape.blocks.EnderscapeWallSignBlock;
-import net.bunten.enderscape.blocks.EnderscapeFlowerPotBlock;
 import net.bunten.enderscape.blocks.FlangerBerryBlock;
 import net.bunten.enderscape.blocks.FlangerBerryVine;
 import net.bunten.enderscape.blocks.MurushroomsBlock;
@@ -74,10 +74,10 @@ public class EnderscapeBlocks {
 
     public static final Block CELESTIAL_GROWTH = new CelestialGrowthBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MapColor.TERRACOTTA_YELLOW).noCollision().breakInstantly().sounds(EnderscapeSounds.GROWTH).nonOpaque());
     public static final Block BULB_FLOWER = new BulbFlowerBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MapColor.DARK_AQUA).noCollision().breakInstantly().sounds(EnderscapeSounds.GROWTH).nonOpaque().luminance(8));
-    public static final Block CELESTIAL_FUNGUS = new CelestialFungusBlock(FabricBlockSettings.of(Material.PLANT, MapColor.TERRACOTTA_YELLOW).noCollision().breakInstantly().sounds(BlockSoundGroup.FUNGUS));
+    public static final Block CELESTIAL_FUNGUS = new CelestialFungusBlock(FabricBlockSettings.of(Material.PLANT, MapColor.TERRACOTTA_YELLOW).noCollision().breakInstantly().sounds(EnderscapeSounds.FUNGUS));
 
-    public static final Block MURUSHROOMS = new MurushroomsBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MapColor.TERRACOTTA_CYAN).noCollision().breakInstantly().sounds(BlockSoundGroup.FUNGUS).nonOpaque());
-    public static final Block MURUSHROOM_CAP = new MushroomCapBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC, MapColor.TERRACOTTA_CYAN).strength(1).sounds(EnderscapeSounds.DEEP_FUNGUS));
+    public static final Block MURUSHROOMS = new MurushroomsBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MapColor.TERRACOTTA_CYAN).noCollision().breakInstantly().sounds(EnderscapeSounds.FUNGUS).nonOpaque());
+    public static final Block MURUSHROOM_CAP = new MushroomCapBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC, MapColor.TERRACOTTA_CYAN).strength(1).sounds(EnderscapeSounds.FUNGUS_CAP));
 
     public static final Block POTTED_BULB_FLOWER = new EnderscapeFlowerPotBlock(BULB_FLOWER, FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque().luminance(8));
     public static final Block POTTED_CELESTIAL_GROWTH = new EnderscapeFlowerPotBlock(CELESTIAL_GROWTH, FabricBlockSettings.copy(Blocks.POTTED_ACACIA_SAPLING));
@@ -127,7 +127,7 @@ public class EnderscapeBlocks {
     public static final Block STRIPPED_CELESTIAL_STEM = new PillarBlock(FabricBlockSettings.copy(CELESTIAL_STEM));
     public static final Block CELESTIAL_HYPHAE = new PillarBlock(FabricBlockSettings.copy(CELESTIAL_STEM));
     public static final Block STRIPPED_CELESTIAL_HYPHAE = new PillarBlock(FabricBlockSettings.copy(CELESTIAL_STEM));
-    public static final Block CELESTIAL_CAP = new MushroomCapBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC, MapColor.TERRACOTTA_YELLOW).strength(1).sounds(EnderscapeSounds.DEEP_FUNGUS));
+    public static final Block CELESTIAL_CAP = new MushroomCapBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC, MapColor.TERRACOTTA_YELLOW).strength(1).sounds(EnderscapeSounds.FUNGUS_CAP));
     public static final Block CELESTIAL_PLANKS = new Block(FabricBlockSettings.of(Material.WOOD, MapColor.ORANGE).strength(2, 3).sounds(BlockSoundGroup.WOOD));
     public static final Block CELESTIAL_STAIRS = new StairsBlock(CELESTIAL_PLANKS.getDefaultState(), FabricBlockSettings.copy(CELESTIAL_PLANKS));
     public static final Block CELESTIAL_SLAB = new SlabBlock(FabricBlockSettings.copy(CELESTIAL_PLANKS).requiresTool());
