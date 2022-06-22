@@ -396,6 +396,55 @@
 		],
 		"subtitle": "subtitles.drifter.bounce"
 	},
+	"block.drift_jelly.break": {
+		"sounds": [
+			"block/honeyblock/break1",
+			"block/honeyblock/break2",
+			"block/honeyblock/break3",
+			"block/honeyblock/break4",
+			"block/honeyblock/break5"
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.drift_jelly.fall": {
+		"sounds": [
+			"block/honeyblock/step1",
+			"block/honeyblock/step2",
+			"block/honeyblock/step3",
+			"block/honeyblock/step4",
+			"block/honeyblock/step5"
+		]
+	},
+	"block.drift_jelly.hit": {
+		"sounds": [
+			"block/honeyblock/step1",
+			"block/honeyblock/step2",
+			"block/honeyblock/step3",
+			"block/honeyblock/step4",
+			"block/honeyblock/step5"
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.drift_jelly.place": {
+		"sounds": [
+			"block/honeyblock/break1",
+			"block/honeyblock/break2",
+			"block/honeyblock/break3",
+			"block/honeyblock/break4",
+			"block/honeyblock/break5"
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.drift_jelly.step": {
+		"sounds": [
+			"block/honeyblock/step1",
+			"block/honeyblock/step2",
+			"block/honeyblock/step3",
+			"block/honeyblock/step4",
+			"block/honeyblock/step5"
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
 	"block.end_portal.ambient": {
 		"sounds": [
 			"enderscape:block/end_portal/ambient"

@@ -143,7 +143,7 @@ public class EnderscapeBlocks {
     // Etc
 
     public static final Block BULB_LANTERN = new BulbLanternBlock(FabricBlockSettings.copy(Blocks.LANTERN));
-    public static final Block DRIFT_JELLY_BLOCK = new DriftJellyBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MapColor.BRIGHT_TEAL).breakInstantly().sounds(BlockSoundGroup.HONEY).nonOpaque());
+    public static final Block DRIFT_JELLY_BLOCK = new DriftJellyBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MapColor.BRIGHT_TEAL).breakInstantly().sounds(EnderscapeSounds.DRIFT_JELLY).nonOpaque());
 
     private static TagKey<Block> register(String name) {
         return TagKey.of(Registry.BLOCK_KEY, Enderscape.id(name));

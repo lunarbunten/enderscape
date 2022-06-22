@@ -30,6 +30,11 @@ public class EnderscapeSounds {
     public static final SoundEvent BLOCK_CHORUS_FALL = register("block.chorus.fall");
 
     public static final SoundEvent BLOCK_DRIFT_JELLY_BOUNCE = register("block.drift_jelly.bounce");
+    public static final SoundEvent BLOCK_DRIFT_JELLY_BREAK = register("block.drift_jelly.break");
+    public static final SoundEvent BLOCK_DRIFT_JELLY_STEP = register("block.drift_jelly.step");
+    public static final SoundEvent BLOCK_DRIFT_JELLY_PLACE = register("block.drift_jelly.place");
+    public static final SoundEvent BLOCK_DRIFT_JELLY_HIT = register("block.drift_jelly.hit");
+    public static final SoundEvent BLOCK_DRIFT_JELLY_FALL = register("block.drift_jelly.fall");
 
     public static final SoundEvent BLOCK_END_PORTAL_AMBIENT = register("block.end_portal.ambient");
 
@@ -185,6 +190,7 @@ public class EnderscapeSounds {
     // Sound Groups
 
     public static final BlockSoundGroup CHORUS = new BlockSoundGroup(1, 1.15F, BLOCK_CHORUS_BREAK, BLOCK_CHORUS_STEP, BLOCK_CHORUS_PLACE, BLOCK_CHORUS_HIT, BLOCK_CHORUS_FALL);
+    public static final BlockSoundGroup DRIFT_JELLY = new BlockSoundGroup(1, 1, BLOCK_DRIFT_JELLY_BREAK, BLOCK_DRIFT_JELLY_STEP, BLOCK_DRIFT_JELLY_PLACE, BLOCK_DRIFT_JELLY_HIT, BLOCK_DRIFT_JELLY_FALL);
     public static final BlockSoundGroup END_STONE = new BlockSoundGroup(1, 1.3F, BLOCK_END_STONE_BREAK, BLOCK_END_STONE_STEP, BLOCK_END_STONE_PLACE, BLOCK_END_STONE_HIT, BLOCK_END_STONE_FALL);
     public static final BlockSoundGroup END_STONE_BRICKS = new BlockSoundGroup(1, 1, BLOCK_END_STONE_BRICKS_BREAK, BLOCK_END_STONE_BRICKS_STEP, BLOCK_END_STONE_BRICKS_PLACE, BLOCK_END_STONE_BRICKS_HIT, BLOCK_END_STONE_BRICKS_FALL);
     public static final BlockSoundGroup EYLIUM = new BlockSoundGroup(1, 1.1F, BLOCK_EYLIUM_BREAK, BLOCK_EYLIUM_STEP, BLOCK_EYLIUM_PLACE, BLOCK_EYLIUM_HIT, BLOCK_EYLIUM_FALL);
