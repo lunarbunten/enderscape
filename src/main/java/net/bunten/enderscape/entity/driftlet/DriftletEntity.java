@@ -22,10 +22,14 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class DriftletEntity extends AbstractDrifterEntity {
@@ -75,11 +79,35 @@ public class DriftletEntity extends AbstractDrifterEntity {
         setGrowthAge(nbt.getInt("Age"));
     }
 
+    private int getTicksUntilGrowth() {
+        return Math.max(0, MAX_GROWTH_AGE - growthAge);
+    }
+
     private void setGrowthAge(int value) {
         growthAge = value;
         if (growthAge >= MAX_GROWTH_AGE && world.isSpaceEmpty(getBoundingBox().expand(1))) {
             growUp();
         }
+    }
+
+    private void increaseAge(int seconds) {
+        setGrowthAge(growthAge + seconds * 20);
+    }
+
+    @Override
+    public ActionResult interactMob(PlayerEntity player, Hand hand) {
+        ItemStack stack = player.getStackInHand(hand);
+        return stack.isOf(EnderscapeItems.FLANGER_BERRY) ? eatFlangerBerry(player, stack) : super.interactMob(player, hand);
+    }
+
+    private ActionResult eatFlangerBerry(PlayerEntity player, ItemStack stack) {
+        if (!player.getAbilities().creativeMode) stack.decrement(1);
+
+        increaseAge(PassiveEntity.toGrowUpAge(getTicksUntilGrowth()));
+        world.addParticle(ParticleTypes.HAPPY_VILLAGER, getParticleX(1), getRandomBodyY() + 0.5, getParticleZ(1), 0, 0, 0);
+        playSound(getEatSound(stack), getSoundVolume(), getSoundPitch());
+
+        return ActionResult.success(world.isClient());
     }
 
     private void growUp() {
@@ -125,6 +153,11 @@ public class DriftletEntity extends AbstractDrifterEntity {
 
     protected SoundEvent getDeathSound() {
         return EnderscapeSounds.ENTITY_DRIFTLET_DEATH;
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return false;
     }
 
     @Override

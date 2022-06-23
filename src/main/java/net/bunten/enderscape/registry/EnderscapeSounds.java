@@ -155,6 +155,7 @@ public class EnderscapeSounds {
 
     public static final SoundEvent ENTITY_DRIFTLET_AMBIENT = register("entity.driftlet.ambient");
     public static final SoundEvent ENTITY_DRIFTLET_DEATH = register("entity.driftlet.death");
+    public static final SoundEvent ENTITY_DRIFTLET_EAT = register("entity.driftlet.eat");
     public static final SoundEvent ENTITY_DRIFTLET_HURT = register("entity.driftlet.hurt");
 
     public static final SoundEvent ENTITY_RUBBLEMITE_AMBIENT = register("entity.rubblemite.ambient");

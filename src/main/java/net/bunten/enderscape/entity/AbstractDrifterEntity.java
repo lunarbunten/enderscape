@@ -110,8 +110,7 @@ public abstract class AbstractDrifterEntity extends AnimalEntity {
     }
 
     protected void eat(PlayerEntity player, Hand hand, ItemStack stack) {
-        var pitch = isBaby() ? 1.5F : 1;
-        world.playSoundFromEntity(null, this, EnderscapeSounds.ENTITY_DRIFTER_EAT, getSoundCategory(), 1, pitch);
+        world.playSoundFromEntity(null, this, getEatSound(stack), getSoundCategory(), getSoundVolume(), getSoundPitch());
         super.eat(player, hand, stack);
     }
     
@@ -153,7 +152,7 @@ public abstract class AbstractDrifterEntity extends AnimalEntity {
 
     @Override
     public SoundEvent getEatSound(ItemStack stack) {
-        return EnderscapeSounds.ENTITY_DRIFTER_EAT;
+        return isBaby() ? EnderscapeSounds.ENTITY_DRIFTLET_EAT : EnderscapeSounds.ENTITY_DRIFTER_EAT;
     }
 
     public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource source) {

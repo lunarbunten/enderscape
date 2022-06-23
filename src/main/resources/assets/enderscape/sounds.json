@@ -2120,6 +2120,23 @@
 		],
 		"subtitle": "subtitles.driftlet.death"
 	},
+	"entity.driftlet.eat": {
+		"sounds": [
+			{
+				"name": "enderscape:entity/drifter/eat1",
+				"pitch": 1.5
+			},
+			{
+				"name": "enderscape:entity/drifter/eat2",
+				"pitch": 1.5
+			},
+			{
+				"name": "enderscape:entity/drifter/eat3",
+				"pitch": 1.5
+			}
+		],
+		"subtitle": "subtitles.drifter.ambient"
+	},
 	"entity.driftlet.hurt": {
 		"sounds": [
 			"enderscape:entity/driftlet/hurt1",
