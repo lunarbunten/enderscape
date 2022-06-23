@@ -997,32 +997,32 @@
 		"sounds": [
 			{
 				"name": "enderscape:block/fungus/place1",
-				"pitch": 1.1,
+				"pitch": 1,
 				"volume": 0.5
 			},
 			{
 				"name": "enderscape:block/fungus/place2",
-				"pitch": 1.1,
+				"pitch": 1,
 				"volume": 0.5
 			},
 			{
 				"name": "enderscape:block/fungus/place3",
-				"pitch": 1.1,
+				"pitch": 1,
 				"volume": 0.5
 			},
 			{
 				"name": "enderscape:block/fungus/place4",
-				"pitch": 1.1,
+				"pitch": 1,
 				"volume": 0.5
 			},
 			{
 				"name": "enderscape:block/fungus/place5",
-				"pitch": 1.1,
+				"pitch": 1,
 				"volume": 0.5
 			},
 			{
 				"name": "enderscape:block/fungus/place6",
-				"pitch": 1.1,
+				"pitch": 1,
 				"volume": 0.5
 			}
 		],
@@ -1039,32 +1039,32 @@
 		"sounds": [
 			{
 				"name": "enderscape:block/fungus/place1",
-				"pitch": 1.1,
+				"pitch": 1,
 				"volume": 0.5
 			},
 			{
 				"name": "enderscape:block/fungus/place2",
-				"pitch": 1.1,
+				"pitch": 1,
 				"volume": 0.5
 			},
 			{
 				"name": "enderscape:block/fungus/place3",
-				"pitch": 1.1,
+				"pitch": 1,
 				"volume": 0.5
 			},
 			{
 				"name": "enderscape:block/fungus/place4",
-				"pitch": 1.1,
+				"pitch": 1,
 				"volume": 0.5
 			},
 			{
 				"name": "enderscape:block/fungus/place5",
-				"pitch": 1.1,
+				"pitch": 1,
 				"volume": 0.5
 			},
 			{
 				"name": "enderscape:block/fungus/place6",
-				"pitch": 1.1,
+				"pitch": 1,
 				"volume": 0.5
 			}
 		],
