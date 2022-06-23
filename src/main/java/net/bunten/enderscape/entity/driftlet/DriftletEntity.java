@@ -112,7 +112,6 @@ public class DriftletEntity extends AbstractDrifterEntity {
         if (world instanceof ServerWorld server) {
             DrifterEntity mob = EnderscapeEntities.DRIFTER.create(world);
             
-            mob.setVelocity(getVelocity());
             mob.refreshPositionAndAngles(getX(), getY(), getZ(), getYaw(), getPitch());
             mob.initialize(server, world.getLocalDifficulty(mob.getBlockPos()), SpawnReason.CONVERSION, null, null);
             mob.setAiDisabled(isAiDisabled());
@@ -122,14 +121,8 @@ public class DriftletEntity extends AbstractDrifterEntity {
                 mob.setCustomNameVisible(isCustomNameVisible());
             }
 
-            if (isLeashed()) {
-                detachLeash(true, false);
-                mob.attachLeash(mob.getHoldingEntity(), true);
-            }
-
-            if (hasVehicle()) {
-                mob.startRiding(getVehicle());
-            }
+            if (isLeashed()) detachLeash(true, true);
+            if (hasVehicle()) mob.startRiding(getVehicle());
 
             mob.setPersistent();
             server.spawnEntityAndPassengers(mob);
