@@ -43,11 +43,9 @@ public class BulbFlowerBlock extends PlantBlock implements LayerMapped, Fertiliz
     }
 
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        for (int i = 0; i < 16; i++) {
-            var range = MathUtil.nextInt(random, 3, 10);
-            var tries = MathUtil.nextInt(random, 1, 3);
-            
-            PlantUtil.generateCelestialVegetation(world, random, pos, range, 3, tries);
-        }
+        var range = MathUtil.nextInt(random, 3, 10);
+        var tries = MathUtil.nextInt(random, 3, 8);
+        
+        PlantUtil.generateCelestialVegetation(world, random, pos, range, 3, tries);
     }
 }

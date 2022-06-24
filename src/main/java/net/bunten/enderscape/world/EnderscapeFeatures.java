@@ -75,7 +75,7 @@ public abstract class EnderscapeFeatures {
     .build();
 
     public static final BCLFeature BCL_CELESTIAL_GROWTH = BCLFeatureBuilder.start(Enderscape.id("celestial_growth"), CELESTIAL_GROWTH)
-    .count(6)
+    .countLayers(8)
     .squarePlacement()
     .onlyInBiome()
     .modifier(PlacedFeatures.EIGHT_ABOVE_AND_BELOW_RANGE)
@@ -85,6 +85,7 @@ public abstract class EnderscapeFeatures {
     public static final BCLFeature BCL_CELESTIAL_VEGETATION = createCelestialVegetation("celestial_vegetation");
 
     public static final BCLFeature BCL_UNCOMMON_CELESTIAL_GROWTH = BCLFeatureBuilder.start(Enderscape.id("uncommon_celestial_growth"), CELESTIAL_GROWTH)
+    .countLayers(4)
     .onceEvery(12)
     .modifier(PlacedFeatures.EIGHT_ABOVE_AND_BELOW_RANGE)
     .squarePlacement()
@@ -92,7 +93,7 @@ public abstract class EnderscapeFeatures {
     .build();
 
     public static final BCLFeature BCL_MURUSHROOMS = BCLFeatureBuilder.start(Enderscape.id("murushrooms"), MURUSHROOM)
-    .count(1)
+    .countLayers(1)
     .modifier(uniform(YOffset.aboveBottom(20), YOffset.fixed(50)))
     .squarePlacement()
     .decoration(VEGETAL_DECORATION)
@@ -170,7 +171,7 @@ public abstract class EnderscapeFeatures {
 		BCLFeatureBuilder<?, ?> builder = BCLFeatureBuilder.start(Enderscape.id(name), CELESTIAL_VEGETATION);
         
         builder.decoration(VEGETAL_DECORATION);
-        builder.count(8);
+        builder.countLayers(8);
         builder.squarePlacement();
         builder.onlyInBiome();
         builder.modifier(PlacedFeatures.EIGHT_ABOVE_AND_BELOW_RANGE);

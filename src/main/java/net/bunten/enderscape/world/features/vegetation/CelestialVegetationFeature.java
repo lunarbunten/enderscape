@@ -21,6 +21,6 @@ public class CelestialVegetationFeature extends Feature<DefaultFeatureConfig> {
         BlockPos pos = context.getOrigin();
         StructureWorldAccess world = context.getWorld();
 
-        return PlantUtil.generateCelestialVegetation(world, random, pos, 16, 3, 32);
+        return PlantUtil.generateCelestialVegetation(world, random, pos, 16, 3, 8);
     }
 }

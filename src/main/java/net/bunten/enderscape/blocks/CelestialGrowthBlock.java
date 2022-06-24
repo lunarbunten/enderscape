@@ -21,7 +21,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
 
 public class CelestialGrowthBlock extends PlantBlock implements LayerMapped, Fertilizable {
     public static final EnumProperty<GrowthPart> GROWTH_PART = EnderscapeProperties.GROWTH_PART;
@@ -29,10 +28,6 @@ public class CelestialGrowthBlock extends PlantBlock implements LayerMapped, Fer
     public CelestialGrowthBlock(Settings settings) {
         super(settings);
         setDefaultState(getPartState(GrowthPart.TOP));
-    }
-
-    private BlockState getBlockState(WorldView world, BlockPos pos) {
-        return world.getBlockState(pos);
     }
 
     private BlockState getPartState(GrowthPart value) {
@@ -51,21 +46,21 @@ public class CelestialGrowthBlock extends PlantBlock implements LayerMapped, Fer
         }
     }
 
+    @Override
+    public boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
+        return floor.isIn(EnderscapeBlocks.GROWTH_PLANTABLE_OM) || floor.isOf(this);
+    }
+
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
         if (state.canPlaceAt(world, pos)) {
-            if (getBlockState(world, pos.down()).isOf(this)) {
-                return getPartState(getBlockState(world, pos.up()).isAir() ? GrowthPart.TOP : GrowthPart.MIDDLE);
+            if (world.getBlockState(pos.down()).isOf(this)) {
+                return getPartState(world.getBlockState(pos.up()).isAir() ? GrowthPart.TOP : GrowthPart.MIDDLE);
             } else {
-                return getPartState(getBlockState(world, pos.up()).isOf(this) ? GrowthPart.BOTTOM : GrowthPart.TOP);
+                return getPartState(world.getBlockState(pos.up()).isOf(this) ? GrowthPart.BOTTOM : GrowthPart.TOP);
             }
         } else {
             return Blocks.AIR.getDefaultState();
         }
-    }
-
-    @Override
-    public boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.isIn(EnderscapeBlocks.GROWTH_PLANTABLE_OM) || floor.isOf(this);
     }
 
     @Override
@@ -86,7 +81,7 @@ public class CelestialGrowthBlock extends PlantBlock implements LayerMapped, Fer
             world.setBlockState(pos.up(), state.with(GROWTH_PART, GrowthPart.TOP));
             world.setBlockState(pos, state.with(GROWTH_PART, GrowthPart.MIDDLE));
         } else {
-            PlantUtil.generateCelestialGrowth(world, random, pos, 6, 4, 32);
+            PlantUtil.generateCelestialGrowth(world, random, pos, 6, 4, 8);
         }
     }
 }

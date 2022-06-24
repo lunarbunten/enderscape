@@ -27,7 +27,7 @@ public class PlantUtil {
     private static final BlockState MURUSHROOMS = EnderscapeBlocks.MURUSHROOMS.getDefaultState();
     private static final BlockState MURUSHROOM_CAP = EnderscapeBlocks.MURUSHROOM_CAP.getDefaultState();
 
-    private static final WeightedBlockStateProvider PROVIDER = new WeightedBlockStateProvider(new DataPool.Builder<BlockState>().add(CELESTIAL_FUNGUS, 6).add(BULB_FLOWER, 1));
+    private static final WeightedBlockStateProvider PROVIDER = new WeightedBlockStateProvider(new DataPool.Builder<BlockState>().add(CELESTIAL_FUNGUS, 4).add(BULB_FLOWER, 1));
 
     public static void generateCelestialMycelium(WorldAccess world, BlockPos pos, int xRange, int yRange, float chance) {
         xRange /= 2;
@@ -48,26 +48,34 @@ public class PlantUtil {
         }
     }
     
-    public static boolean generateCelestialGrowth(WorldAccess world, Random random, BlockPos pos, int xRange, int yRange, int tries) {
+    public static boolean generateCelestialGrowth(WorldAccess world, Random random, BlockPos origin, int xRange, int yRange, int tries) {
         boolean result = false;
 
         for (int i = 0; i < tries; i++) {
-            BlockPos pos2 = MathUtil.random(pos, random, xRange, yRange, xRange);
-            boolean bl = world.getBlockState(pos2.down()).isIn(EnderscapeBlocks.GROWTH_PLANTABLE_OM);
+            BlockPos pos = MathUtil.random(origin, random, xRange, yRange, xRange);
             
-            if (world.isAir(pos2) && bl) {
-                int addedHeight = random.nextBoolean() ? MathUtil.nextInt(random, 0, 2) : 0;
+            // Tries to find acceptable area to generate
+            for (int u = -yRange; u < yRange; u++) {
+                var pos2 = pos.up(u);
 
-                for (int g = 0; g <= addedHeight; g++) {
-                    BlockPos pos3 = pos2.up(g);
-                    if (!world.isAir(pos3)) {
-                        continue;
-                    } else {
-                        result = true;
+                if (world.getBlockState(pos2).isAir() && world.getBlockState(pos2.down()).isIn(EnderscapeBlocks.GROWTH_PLANTABLE_OM)) {
+                    pos = pos2;
+                    break;
+                } else {
+                    continue;
+                }
+            }
 
+            // Actual generation
+            if (world.getBlockState(pos).isAir() && world.getBlockState(pos.down()).isIn(EnderscapeBlocks.GROWTH_PLANTABLE_OM)) {
+                int totalHeight = random.nextBoolean() ? MathUtil.nextInt(random, 0, 2) : 0;
+
+                for (int g = 0; g <= totalHeight; g++) {
+                    BlockPos pos2 = pos.up(g);
+                    if (world.isAir(pos2)) {
                         GrowthPart growthPart;
-                        if (world.getBlockState(pos3.up()).isAir()) {
-                            if (g == addedHeight) {
+                        if (world.getBlockState(pos2.up()).isAir()) {
+                            if (g == totalHeight) {
                                 growthPart = GrowthPart.TOP;
                             } else if (g == 0) {
                                 growthPart = GrowthPart.BOTTOM;
@@ -78,23 +86,38 @@ public class PlantUtil {
                             growthPart = GrowthPart.TOP;
                         }
 
-                        world.setBlockState(pos3, CELESTIAL_GROWTH.with(EnderscapeProperties.GROWTH_PART, growthPart), 2);
+                        world.setBlockState(pos2, CELESTIAL_GROWTH.with(EnderscapeProperties.GROWTH_PART, growthPart), 2);
                     }
                 }
+
+                result = true;
             }
         }
 
         return result;
     }
 
-    public static boolean generateCelestialVegetation(WorldAccess world, Random random, BlockPos pos, int xRange, int yRange, int tries) {
+    public static boolean generateCelestialVegetation(WorldAccess world, Random random, BlockPos origin, int xRange, int yRange, int tries) {
         boolean result = false;
 
         for (int i = 0; i < tries; i++) {
-            var pos2 = MathUtil.random(pos, random, xRange, yRange, xRange);
-            var state = PROVIDER.getBlockState(random, pos2);
-            if (world.isAir(pos2) && state.canPlaceAt(world, pos2)) {
-                world.setBlockState(pos2, state, 2);
+            var pos = MathUtil.random(origin, random, xRange, yRange, xRange);
+            var state = PROVIDER.getBlockState(random, pos);
+
+            // Tries to find acceptable area to generate
+            for (int u = -yRange; u < yRange; u++) {
+                var pos2 = pos.up(u);
+        
+                if (world.getBlockState(pos2).isAir() && state.canPlaceAt(world, pos2)) {
+                    pos = pos2;
+                 break;
+                } else {
+                    continue;
+                }
+            }
+
+            if (world.isAir(pos) && state.canPlaceAt(world, pos)) {
+                world.setBlockState(pos, state, 2);
                 result = true;
             }
         }
