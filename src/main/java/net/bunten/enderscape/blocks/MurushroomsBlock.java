@@ -66,7 +66,7 @@ public class MurushroomsBlock extends WallClingingBlock implements Fertilizable 
 
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         var age = state.get(AGE);
-        if (PlantUtil.generateMurushrooms(world, pos, random, age, 4, 4, 300)) {
+        if (PlantUtil.generateMurushrooms(world, pos, random, age, 4, 4, 100)) {
             world.setBlockState(pos, state.cycle(AGE), NOTIFY_ALL);
         }
     }

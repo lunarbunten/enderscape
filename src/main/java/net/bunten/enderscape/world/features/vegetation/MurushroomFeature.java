@@ -25,7 +25,7 @@ public class MurushroomFeature extends Feature<DefaultFeatureConfig> {
         if (!world.isAir(pos)) {
             return false;
         } else {
-            return PlantUtil.generateMurushrooms(world, pos, random, MurushroomsBlock.MAX_AGE, 8, 8, 300);
+            return PlantUtil.generateMurushrooms(world, pos, random, MurushroomsBlock.MAX_AGE, 8, 8, 100);
         }
     }
 }

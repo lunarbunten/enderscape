@@ -13,6 +13,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Direction.Axis;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
@@ -105,16 +106,24 @@ public class PlantUtil {
         int p = 0;
 
         for (int i = 0; i < tries; i++) {
-            Direction dir = Direction.random(random);
             BlockPos pos2 = MathUtil.random(pos, random, xRange, yRange, xRange);
-            BlockPos wall = pos2.offset(dir);
 
-            if (world.isAir(pos2) && world.getBlockState(wall).isOpaqueFullCube(world, wall) && dir.getAxis() != Direction.Axis.Y) {
-                world.setBlockState(pos2, MURUSHROOMS.with(MurushroomsBlock.FACING, dir.getOpposite()).with(MurushroomsBlock.AGE, age), 2);
-                p++;
+            if (world.getBlockState(pos2).isAir()) {
+                for (var dir : Direction.values()) {
+                    if (dir.getAxis() == Axis.Y) continue;
+        
+                    BlockPos wall = pos2.offset(dir);
+    
+                    if (world.getBlockState(wall).isOpaqueFullCube(world, wall)) {
+                        world.setBlockState(pos2, MURUSHROOMS.with(MurushroomsBlock.FACING, dir.getOpposite()).with(MurushroomsBlock.AGE, age), 2);
+                        p++;
+    
+                        break;
+                    }
+                }
             }
         }
-
+        
         return p > 0;
     }
 
