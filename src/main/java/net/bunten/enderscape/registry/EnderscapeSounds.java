@@ -50,6 +50,12 @@ public class EnderscapeSounds {
     public static final SoundEvent BLOCK_END_STONE_BRICKS_HIT = register("block.end_stone_bricks.hit");
     public static final SoundEvent BLOCK_END_STONE_BRICKS_FALL = register("block.end_stone_bricks.fall");
 
+    public static final SoundEvent BLOCK_END_ROD_BREAK = register("block.end_rod.break");
+    public static final SoundEvent BLOCK_END_ROD_STEP = register("block.end_rod.step");
+    public static final SoundEvent BLOCK_END_ROD_PLACE = register("block.end_rod.place");
+    public static final SoundEvent BLOCK_END_ROD_HIT = register("block.end_rod.hit");
+    public static final SoundEvent BLOCK_END_ROD_FALL = register("block.end_rod.fall");
+
     public static final SoundEvent BLOCK_EYLIUM_BREAK = register("block.eylium.break");
     public static final SoundEvent BLOCK_EYLIUM_STEP = register("block.eylium.step");
     public static final SoundEvent BLOCK_EYLIUM_PLACE = register("block.eylium.place");
@@ -194,6 +200,7 @@ public class EnderscapeSounds {
     public static final BlockSoundGroup DRIFT_JELLY = new BlockSoundGroup(1, 1, BLOCK_DRIFT_JELLY_BREAK, BLOCK_DRIFT_JELLY_STEP, BLOCK_DRIFT_JELLY_PLACE, BLOCK_DRIFT_JELLY_HIT, BLOCK_DRIFT_JELLY_FALL);
     public static final BlockSoundGroup END_STONE = new BlockSoundGroup(1, 1.3F, BLOCK_END_STONE_BREAK, BLOCK_END_STONE_STEP, BLOCK_END_STONE_PLACE, BLOCK_END_STONE_HIT, BLOCK_END_STONE_FALL);
     public static final BlockSoundGroup END_STONE_BRICKS = new BlockSoundGroup(1, 1, BLOCK_END_STONE_BRICKS_BREAK, BLOCK_END_STONE_BRICKS_STEP, BLOCK_END_STONE_BRICKS_PLACE, BLOCK_END_STONE_BRICKS_HIT, BLOCK_END_STONE_BRICKS_FALL);
+    public static final BlockSoundGroup END_ROD = new BlockSoundGroup(1, 1.3F, BLOCK_END_ROD_BREAK, BLOCK_END_ROD_STEP, BLOCK_END_ROD_PLACE, BLOCK_END_ROD_HIT, BLOCK_END_ROD_FALL);
     public static final BlockSoundGroup EYLIUM = new BlockSoundGroup(1, 1.1F, BLOCK_EYLIUM_BREAK, BLOCK_EYLIUM_STEP, BLOCK_EYLIUM_PLACE, BLOCK_EYLIUM_HIT, BLOCK_EYLIUM_FALL);
     public static final BlockSoundGroup FLANGER_BERRY_BLOCK = new BlockSoundGroup(1, 1.2F, BLOCK_FLANGER_BERRY_BLOCK_BREAK, BLOCK_FLANGER_BERRY_BLOCK_STEP, BLOCK_FLANGER_BERRY_BLOCK_PLACE, BLOCK_FLANGER_BERRY_BLOCK_HIT, BLOCK_FLANGER_BERRY_BLOCK_FALL);
     public static final BlockSoundGroup FLANGER_BERRY_VINE = new BlockSoundGroup(1, 0.9F, BLOCK_FLANGER_BERRY_VINE_BREAK, BLOCK_FLANGER_BERRY_VINE_STEP, BLOCK_FLANGER_BERRY_VINE_PLACE, BLOCK_FLANGER_BERRY_VINE_HIT, BLOCK_FLANGER_BERRY_VINE_FALL);

@@ -20,16 +20,28 @@ public abstract class BlockMixin extends AbstractBlock {
 
     @Inject(at = @At("HEAD"), method = "getSoundGroup", cancellable = true)
     public void getSoundGroup(BlockState state, CallbackInfoReturnable<BlockSoundGroup> info) {
-        // this sucks and should be changed Thanks
+        
+        if (state.isIn(EnderscapeBlocks.CHORUS_SOUND_BLOCKS)) {
+            info.setReturnValue(EnderscapeSounds.CHORUS);
+        }
+
         if (state.isIn(EnderscapeBlocks.PURPUR_SOUND_BLOCKS)) {
             info.setReturnValue(EnderscapeSounds.PURPUR);
-        } else if (state.isIn(EnderscapeBlocks.CHORUS_SOUND_BLOCKS)) {
-            info.setReturnValue(EnderscapeSounds.CHORUS);
-        } else if (state.isIn(EnderscapeBlocks.END_STONE_SOUND_BLOCKS)) {
+        }
+
+        if (state.isIn(EnderscapeBlocks.END_ROD_SOUND_BLOCKS)) {
+            info.setReturnValue(EnderscapeSounds.END_ROD);
+        }
+
+        if (state.isIn(EnderscapeBlocks.END_STONE_SOUND_BLOCKS)) {
             info.setReturnValue(EnderscapeSounds.END_STONE);
-        } else if (state.isIn(EnderscapeBlocks.END_STONE_BRICK_SOUND_BLOCKS)) {
+        }
+
+        if (state.isIn(EnderscapeBlocks.END_STONE_BRICK_SOUND_BLOCKS)) {
             info.setReturnValue(EnderscapeSounds.END_STONE_BRICKS);
-        } else if (state.isIn(EnderscapeBlocks.SHULKER_SOUND_BLOCKS)) {
+        }
+
+        if (state.isIn(EnderscapeBlocks.SHULKER_SOUND_BLOCKS)) {
             info.setReturnValue(EnderscapeSounds.SHULKER);
         }
     }
