@@ -2,8 +2,8 @@ package net.bunten.enderscape.blocks;
 
 import net.bunten.enderscape.interfaces.LayerMapped;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
-import net.bunten.enderscape.util.PlantUtil;
 import net.bunten.enderscape.util.MathUtil;
+import net.bunten.enderscape.util.PlantUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.block.PlantBlock;
@@ -46,6 +46,6 @@ public class BulbFlowerBlock extends PlantBlock implements LayerMapped, Fertiliz
         var range = MathUtil.nextInt(random, 3, 10);
         var tries = MathUtil.nextInt(random, 3, 8);
         
-        PlantUtil.generateCelestialVegetation(world, random, pos, range, 3, tries);
+        PlantUtil.generateCelestialVegetation(world, random, pos, range, 3, 3, tries);
     }
 }

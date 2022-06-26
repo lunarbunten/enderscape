@@ -73,8 +73,8 @@ public class CelestialIslandFeature extends Feature<DefaultFeatureConfig> {
     }
 
     protected void createFoliage(StructureWorldAccess world, Random random, BlockPos pos, int initialWidth, int initialHeight) {
-        PlantUtil.generateCelestialGrowth(world, random, pos, initialWidth, 2, initialWidth * 3);
-        PlantUtil.generateCelestialVegetation(world, random, pos, initialWidth, 2, initialWidth * 3);
+        PlantUtil.generateCelestialGrowth(world, random, pos, 1, MathUtil.nextInt(random, 1, 2), 0.5F, initialWidth, 2, 2, initialWidth * 3);
+        PlantUtil.generateCelestialVegetation(world, random, pos, initialWidth, 2, 2, initialWidth * 3);
 
         if (random.nextInt(4) == 0) {
             PlantUtil.generateMurushrooms(world, pos.add(0, initialHeight / 2, 0), random, MurushroomsBlock.MAX_AGE, initialWidth, initialHeight, 76);
