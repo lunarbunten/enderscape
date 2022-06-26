@@ -54,9 +54,9 @@ public class CelestialPlainsBiome implements EnderscapeBiome, CelestialBiome {
         builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, EndPlacedFeatures.CHORUS_PLANT);
         
         builder.feature(EnderscapeFeatures.BCL_LARGE_CELESTIAL_FUNGUS);
-        builder.feature(EnderscapeFeatures.BCL_CELESTIAL_VEGETATION);
 
         builder.feature(EnderscapeFeatures.BCL_CELESTIAL_GROWTH);
+        builder.feature(EnderscapeFeatures.BCL_CELESTIAL_VEGETATION);
         builder.feature(EnderscapeFeatures.BCL_UNCOMMON_MURUSHROOMS);
 
         builder.feature(EnderscapeFeatures.BCL_SHADOW_QUARTZ_ORE);

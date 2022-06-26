@@ -45,8 +45,18 @@ public class CelestialIslandsBiome implements EnderscapeBiome, CelestialBiome {
         builder.surface(EnderscapeSurfaces.CELESTIAL_SURFACE);
 
         builder.spawn(EntityType.ENDERMAN, 30, 4, 8);
+
         builder.feature(EnderscapeFeatures.BCL_CELESTIAL_ISLAND);
+
         builder.feature(EnderscapeFeatures.BCL_CELESTIAL_GROWTH);
+        builder.feature(EnderscapeFeatures.BCL_CELESTIAL_VEGETATION);
+        builder.feature(EnderscapeFeatures.BCL_UNCOMMON_MURUSHROOMS);
+
+        builder.feature(EnderscapeFeatures.BCL_SHADOW_QUARTZ_ORE);
+        builder.feature(EnderscapeFeatures.BCL_SCATTERED_SHADOW_QUARTZ_ORE);
+
+        builder.feature(EnderscapeFeatures.BCL_NEBULITE_ORE);
+        builder.feature(EnderscapeFeatures.BCL_VOID_NEBULITE_ORE);
 
         return builder.build();
     }
