@@ -75,7 +75,7 @@ public abstract class EnderscapeFeatures {
     .build();
 
     public static final BCLFeature BCL_CELESTIAL_GROWTH = BCLFeatureBuilder.start(Enderscape.id("celestial_growth"), CELESTIAL_GROWTH)
-    .countLayers(8)
+    .countLayers(10)
     .squarePlacement()
     .onlyInBiome()
     .modifier(PlacedFeatures.EIGHT_ABOVE_AND_BELOW_RANGE)
