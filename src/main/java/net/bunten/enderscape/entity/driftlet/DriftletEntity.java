@@ -22,14 +22,18 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class DriftletEntity extends AbstractDrifterEntity {
-    public static int MAX_GROWTH_AGE = Math.abs(-24000);
+    public static int MAX_GROWTH_AGE = 24000;
     private int growthAge;
     
     public DriftletEntity(EntityType<? extends AbstractDrifterEntity> type, World world) {
@@ -82,11 +86,36 @@ public class DriftletEntity extends AbstractDrifterEntity {
         }
     }
 
+    private void increaseAge(int seconds) {
+        setGrowthAge(growthAge + seconds * 20);
+    }
+
+    private int getTicksUntilGrowth() {
+        return Math.max(0, MAX_GROWTH_AGE - growthAge);
+    }
+
+    public static int toGrowUpAge(int breedingAge) {
+        return (int) ((float) (breedingAge / 20) * 0.1F);
+    }
+
+    @Override
+    public ActionResult interactMob(PlayerEntity player, Hand hand) {
+        ItemStack stack = player.getStackInHand(hand);
+
+        if (stack.isIn(EnderscapeItems.DRIFTER_FOOD)) {
+            eat(player, hand, stack);
+            increaseAge(toGrowUpAge(getTicksUntilGrowth()));
+            world.addParticle(ParticleTypes.HAPPY_VILLAGER, getParticleX(1), getRandomBodyY() + 0.5, getParticleZ(1), 0, 0, 0);
+            return ActionResult.SUCCESS;
+        } else {
+            return super.interactMob(player, hand);
+        }
+    }
+
     private void growUp() {
         if (world instanceof ServerWorld server) {
             DrifterEntity mob = EnderscapeEntities.DRIFTER.create(world);
             
-            mob.setVelocity(getVelocity());
             mob.refreshPositionAndAngles(getX(), getY(), getZ(), getYaw(), getPitch());
             mob.initialize(server, world.getLocalDifficulty(mob.getBlockPos()), SpawnReason.CONVERSION, null, null);
             mob.setAiDisabled(isAiDisabled());
@@ -96,14 +125,8 @@ public class DriftletEntity extends AbstractDrifterEntity {
                 mob.setCustomNameVisible(isCustomNameVisible());
             }
 
-            if (isLeashed()) {
-                detachLeash(true, false);
-                mob.attachLeash(mob.getHoldingEntity(), true);
-            }
-
-            if (hasVehicle()) {
-                mob.startRiding(getVehicle());
-            }
+            if (isLeashed()) detachLeash(true, true);
+            if (hasVehicle()) mob.startRiding(getVehicle());
 
             mob.setPersistent();
             server.spawnEntityAndPassengers(mob);
@@ -125,6 +148,11 @@ public class DriftletEntity extends AbstractDrifterEntity {
 
     protected SoundEvent getDeathSound() {
         return EnderscapeSounds.ENTITY_DRIFTLET_DEATH;
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return false;
     }
 
     @Override

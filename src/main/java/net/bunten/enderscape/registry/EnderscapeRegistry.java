@@ -1,10 +1,13 @@
 package net.bunten.enderscape.registry;
 
+
 import net.bunten.enderscape.Enderscape;
+import net.bunten.enderscape.blocks.NebuliteDispenserBehavior;
 import net.bunten.enderscape.items.HealingItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.ComposterBlock;
+import net.minecraft.block.DispenserBlock;
 import net.minecraft.entity.decoration.painting.PaintingMotive;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -54,7 +57,9 @@ public class EnderscapeRegistry {
         register("celestial_growth", EnderscapeBlocks.CELESTIAL_GROWTH, true, true);
         register("bulb_flower", EnderscapeBlocks.BULB_FLOWER, true, true);
         register("bulb_lantern", EnderscapeBlocks.BULB_LANTERN, true, true);
+        
         register("celestial_fungus", EnderscapeBlocks.CELESTIAL_FUNGUS, true, true);
+        register("celestial_cap", EnderscapeBlocks.CELESTIAL_CAP, true, true);
 
         register("murushrooms", EnderscapeBlocks.MURUSHROOMS, false, false);
         register("murushrooms", EnderscapeItems.MURUSHROOMS);
@@ -106,7 +111,6 @@ public class EnderscapeRegistry {
         register("stripped_celestial_stem", EnderscapeBlocks.STRIPPED_CELESTIAL_STEM, true, true);
         register("celestial_hyphae", EnderscapeBlocks.CELESTIAL_HYPHAE, true, true);
         register("stripped_celestial_hyphae", EnderscapeBlocks.STRIPPED_CELESTIAL_HYPHAE, true, true);
-        register("celestial_cap", EnderscapeBlocks.CELESTIAL_CAP, true, true);
         register("celestial_planks", EnderscapeBlocks.CELESTIAL_PLANKS, true, true);
         register("celestial_stairs", EnderscapeBlocks.CELESTIAL_STAIRS, true, true);
         register("celestial_slab", EnderscapeBlocks.CELESTIAL_SLAB, true, true);
@@ -151,6 +155,11 @@ public class EnderscapeRegistry {
         registerCompostableItem(0.85F, EnderscapeBlocks.CELESTIAL_CAP);
     }
 
+
+    private static void registerDispenserBehavior() {
+        DispenserBlock.registerBehavior(EnderscapeItems.NEBULITE, new NebuliteDispenserBehavior());
+    }
+
     public static void init() {
 
         register("drifter_spawn_egg", EnderscapeItems.DRIFTER_SPAWN_EGG);
@@ -173,5 +182,7 @@ public class EnderscapeRegistry {
 
         registerCompostables();
         registerFunny();
+
+        registerDispenserBehavior();
     }
 }

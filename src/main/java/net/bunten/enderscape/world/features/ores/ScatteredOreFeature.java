@@ -20,6 +20,8 @@ public class ScatteredOreFeature extends Feature<SingleStateFeatureConfig> {
 
     @Override
     public boolean generate(FeatureContext<SingleStateFeatureConfig> context) {
+        boolean result = false;
+        
         SingleStateFeatureConfig config = context.getConfig();
         StructureWorldAccess world = context.getWorld();
         Random random = context.getRandom();
@@ -34,9 +36,11 @@ public class ScatteredOreFeature extends Feature<SingleStateFeatureConfig> {
                 pos2 = pos2.add(MathUtil.nextInt(random, -1, 1), MathUtil.nextInt(random, -1, 1), MathUtil.nextInt(random, -1, 1));
                 if (world.getBlockState(pos2).isOf(Blocks.END_STONE)) {
                     world.setBlockState(pos2, state, 2);
+                    result = true;
                 }
             }
-            return true;
         }
+
+        return result;
     }
 }

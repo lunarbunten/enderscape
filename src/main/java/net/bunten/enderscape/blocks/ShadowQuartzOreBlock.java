@@ -1,26 +1,10 @@
 package net.bunten.enderscape.blocks;
 
-import net.bunten.enderscape.util.MathUtil;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.block.OreBlock;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 
-public class ShadowQuartzOreBlock extends Block {
+public class ShadowQuartzOreBlock extends OreBlock {
     public ShadowQuartzOreBlock(Settings settings) {
-        super(settings);
-    }
-
-    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack) {
-        super.onStacksDropped(state, world, pos, stack);
-        if (EnchantmentHelper.getLevel(Enchantments.SILK_TOUCH, stack) == 0) {
-            int i = MathUtil.nextInt(world.getRandom(), 0, 2);
-            if (i > 0) {
-                dropExperience(world, pos, i);
-            }
-        }
+        super(settings, UniformIntProvider.create(1, 3));
     }
 }

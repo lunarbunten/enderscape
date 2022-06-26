@@ -9,11 +9,11 @@ import net.bunten.enderscape.blocks.CelestialMyceliumBlock;
 import net.bunten.enderscape.blocks.CelestialPathBlock;
 import net.bunten.enderscape.blocks.DriftJellyBlock;
 import net.bunten.enderscape.blocks.EnderscapeDoor;
+import net.bunten.enderscape.blocks.EnderscapeFlowerPotBlock;
 import net.bunten.enderscape.blocks.EnderscapeSignBlock;
 import net.bunten.enderscape.blocks.EnderscapeSignType;
 import net.bunten.enderscape.blocks.EnderscapeTrapdoor;
 import net.bunten.enderscape.blocks.EnderscapeWallSignBlock;
-import net.bunten.enderscape.blocks.EnderscapeFlowerPotBlock;
 import net.bunten.enderscape.blocks.FlangerBerryBlock;
 import net.bunten.enderscape.blocks.FlangerBerryVine;
 import net.bunten.enderscape.blocks.MurushroomsBlock;
@@ -47,23 +47,25 @@ public class EnderscapeBlocks {
 
     public static final TagKey<Block> BULB_FLOWER_PLANTABLE_ON = register("bulb_flower_plantable_on");
     public static final TagKey<Block> CELESTIAL_STEMS = register("celestial_stems");
-    public static final TagKey<Block> CHORUS_SOUND_BLOCKS = register("chorus_sound_blocks");
     public static final TagKey<Block> DRIFTER_ATTRACTING_BLOCKS = register("drifter_attracting_blocks");
     public static final TagKey<Block> END_MYCELIUM_BLOCKS = register("end_mycelium_blocks");
     public static final TagKey<Block> END_ORES = register("end_ores");
-    public static final TagKey<Block> END_STONE_SOUND_BLOCKS = register("end_stone_sound_blocks");
-    public static final TagKey<Block> END_STONE_BRICK_SOUND_BLOCKS = register("end_stone_brick_sound_blocks");
     public static final TagKey<Block> FLANGER_BERRY_VINE_SUPPORT_BLOCKS = register("flanger_berry_vine_support_blocks");
     public static final TagKey<Block> FUNGUS_PLANTABLE_ON = register("fungus_plantable_on");
     public static final TagKey<Block> GROWTH_PLANTABLE_OM = register("growth_plantable_on");
     public static final TagKey<Block> LARGE_CELESTIAL_FUNGUS_GROWABLE_ON = register("large_celestial_fungus_growable_on");
     public static final TagKey<Block> LARGE_CELESTIAL_FUNGUS_GENERATABLE = register("large_celestial_fungus_generatable");
     public static final TagKey<Block> MIRROR_LODESTONE_BLOCKS = register("mirror_lodestone_blocks");
-    public static final TagKey<Block> PURPUR_SOUND_BLOCKS = register("purpur_sound_blocks");
     public static final TagKey<Block> SHADOW_QUARTZ_BLOCKS = register("shadow_quartz_blocks");
     public static final TagKey<Block> SHADOW_STEEL_BLOCKS = register("shadow_steel_blocks");
-    public static final TagKey<Block> SHULKER_SOUND_BLOCKS = register("shulker_sound_blocks");
     public static final TagKey<Block> SUPPORTS_END_CRYSTAL = register("supports_end_crystal");
+
+    public static final TagKey<Block> CHORUS_SOUND_BLOCKS = register("chorus_sound_blocks");
+    public static final TagKey<Block> PURPUR_SOUND_BLOCKS = register("purpur_sound_blocks");
+    public static final TagKey<Block> END_ROD_SOUND_BLOCKS = register("end_rod_sound_blocks");
+    public static final TagKey<Block> END_STONE_SOUND_BLOCKS = register("end_stone_sound_blocks");
+    public static final TagKey<Block> END_STONE_BRICK_SOUND_BLOCKS = register("end_stone_brick_sound_blocks");
+    public static final TagKey<Block> SHULKER_SOUND_BLOCKS = register("shulker_sound_blocks");
 
     private static final SignType CELESTIAL_TYPE = SignType.register(new EnderscapeSignType("celestial"));
 
@@ -74,17 +76,17 @@ public class EnderscapeBlocks {
 
     public static final Block CELESTIAL_GROWTH = new CelestialGrowthBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MapColor.TERRACOTTA_YELLOW).noCollision().breakInstantly().sounds(EnderscapeSounds.GROWTH).nonOpaque());
     public static final Block BULB_FLOWER = new BulbFlowerBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MapColor.DARK_AQUA).noCollision().breakInstantly().sounds(EnderscapeSounds.GROWTH).nonOpaque().luminance(8));
-    public static final Block CELESTIAL_FUNGUS = new CelestialFungusBlock(FabricBlockSettings.of(Material.PLANT, MapColor.TERRACOTTA_YELLOW).noCollision().breakInstantly().sounds(BlockSoundGroup.FUNGUS));
+    public static final Block CELESTIAL_FUNGUS = new CelestialFungusBlock(FabricBlockSettings.of(Material.PLANT, MapColor.TERRACOTTA_YELLOW).noCollision().breakInstantly().sounds(EnderscapeSounds.FUNGUS));
 
-    public static final Block MURUSHROOMS = new MurushroomsBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MapColor.TERRACOTTA_CYAN).noCollision().breakInstantly().sounds(BlockSoundGroup.FUNGUS).nonOpaque());
-    public static final Block MURUSHROOM_CAP = new MushroomCapBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC, MapColor.TERRACOTTA_CYAN).strength(1).sounds(EnderscapeSounds.DEEP_FUNGUS));
+    public static final Block MURUSHROOMS = new MurushroomsBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MapColor.TERRACOTTA_CYAN).noCollision().breakInstantly().sounds(EnderscapeSounds.FUNGUS).nonOpaque());
+    public static final Block MURUSHROOM_CAP = new MushroomCapBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC, MapColor.TERRACOTTA_CYAN).strength(1).sounds(EnderscapeSounds.FUNGUS_CAP));
 
     public static final Block POTTED_BULB_FLOWER = new EnderscapeFlowerPotBlock(BULB_FLOWER, FabricBlockSettings.of(Material.DECORATION).breakInstantly().nonOpaque().luminance(8));
     public static final Block POTTED_CELESTIAL_GROWTH = new EnderscapeFlowerPotBlock(CELESTIAL_GROWTH, FabricBlockSettings.copy(Blocks.POTTED_ACACIA_SAPLING));
     public static final Block POTTED_CELESTIAL_FUNGUS = new EnderscapeFlowerPotBlock(CELESTIAL_FUNGUS, FabricBlockSettings.copy(Blocks.POTTED_ACACIA_SAPLING));
 
     public static final Block FLANGER_BERRY_VINE = new FlangerBerryVine(FabricBlockSettings.of(Material.PLANT, MapColor.TERRACOTTA_YELLOW).ticksRandomly().noCollision().sounds(EnderscapeSounds.FLANGER_BERRY_VINE).strength(0.2F));
-    public static final Block FLANGER_BERRY_BLOCK = new FlangerBerryBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MapColor.BRIGHT_TEAL).ticksRandomly().sounds(BlockSoundGroup.NETHER_SPROUTS).strength(0.3F).nonOpaque());
+    public static final Block FLANGER_BERRY_BLOCK = new FlangerBerryBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MapColor.BRIGHT_TEAL).ticksRandomly().strength(0.3F).nonOpaque());
 
     // Nebulite
 
@@ -94,7 +96,7 @@ public class EnderscapeBlocks {
 
     // Shadow Quartz
 
-    public static final Block SHADOW_QUARTZ_ORE = new ShadowQuartzOreBlock(FabricBlockSettings.of(Material.STONE, MapColor.PALE_YELLOW).requiresTool().strength(3).sounds(EnderscapeSounds.END_STONE));
+    public static final Block SHADOW_QUARTZ_ORE = new ShadowQuartzOreBlock(FabricBlockSettings.of(Material.STONE, MapColor.PALE_YELLOW).requiresTool().strength(3).sounds(EnderscapeSounds.SHADOW_QUARTZ_ORE));
 
     public static final Block SHADOW_QUARTZ_BLOCK = new Block(FabricBlockSettings.of(Material.STONE, MapColor.TERRACOTTA_BLUE).requiresTool().strength(3).sounds(EnderscapeSounds.SHADOW_QUARTZ));
     public static final Block SHADOW_QUARTZ_BLOCK_STAIRS = new StairsBlock(SHADOW_QUARTZ_BLOCK.getDefaultState(), FabricBlockSettings.copy(SHADOW_QUARTZ_BLOCK).requiresTool());
@@ -127,7 +129,7 @@ public class EnderscapeBlocks {
     public static final Block STRIPPED_CELESTIAL_STEM = new PillarBlock(FabricBlockSettings.copy(CELESTIAL_STEM));
     public static final Block CELESTIAL_HYPHAE = new PillarBlock(FabricBlockSettings.copy(CELESTIAL_STEM));
     public static final Block STRIPPED_CELESTIAL_HYPHAE = new PillarBlock(FabricBlockSettings.copy(CELESTIAL_STEM));
-    public static final Block CELESTIAL_CAP = new MushroomCapBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC, MapColor.TERRACOTTA_YELLOW).strength(1).sounds(EnderscapeSounds.DEEP_FUNGUS));
+    public static final Block CELESTIAL_CAP = new MushroomCapBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC, MapColor.TERRACOTTA_YELLOW).strength(1).sounds(EnderscapeSounds.FUNGUS_CAP));
     public static final Block CELESTIAL_PLANKS = new Block(FabricBlockSettings.of(Material.WOOD, MapColor.ORANGE).strength(2, 3).sounds(BlockSoundGroup.WOOD));
     public static final Block CELESTIAL_STAIRS = new StairsBlock(CELESTIAL_PLANKS.getDefaultState(), FabricBlockSettings.copy(CELESTIAL_PLANKS));
     public static final Block CELESTIAL_SLAB = new SlabBlock(FabricBlockSettings.copy(CELESTIAL_PLANKS).requiresTool());
@@ -143,7 +145,7 @@ public class EnderscapeBlocks {
     // Etc
 
     public static final Block BULB_LANTERN = new BulbLanternBlock(FabricBlockSettings.copy(Blocks.LANTERN));
-    public static final Block DRIFT_JELLY_BLOCK = new DriftJellyBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MapColor.BRIGHT_TEAL).breakInstantly().sounds(BlockSoundGroup.HONEY).nonOpaque());
+    public static final Block DRIFT_JELLY_BLOCK = new DriftJellyBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MapColor.BRIGHT_TEAL).breakInstantly().sounds(EnderscapeSounds.DRIFT_JELLY).nonOpaque());
 
     private static TagKey<Block> register(String name) {
         return TagKey.of(Registry.BLOCK_KEY, Enderscape.id(name));

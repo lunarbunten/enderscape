@@ -16,6 +16,7 @@ import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 
 public class NebuliteItem extends Item {
     public NebuliteItem(Settings settings) {
@@ -31,6 +32,7 @@ public class NebuliteItem extends Item {
 
         if (state.isOf(Blocks.CAULDRON)) {
             mob.incrementStat(Stats.FILL_CAULDRON);
+            world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
 
             if (!world.isClient()) {
                 world.setBlockState(pos, EnderscapeBlocks.NEBULITE_CAULDRON.getDefaultState(), 3);
@@ -50,6 +52,7 @@ public class NebuliteItem extends Item {
         
         if (state.isOf(EnderscapeBlocks.NEBULITE_CAULDRON) && NebuliteCauldronBlock.canLevel(world, pos, state)) {
             mob.incrementStat(Stats.FILL_CAULDRON);
+            world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
 
             if (!world.isClient()) {
                 NebuliteCauldronBlock.addLevel(world, pos, state);

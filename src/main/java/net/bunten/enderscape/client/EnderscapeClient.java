@@ -22,8 +22,6 @@ import net.minecraft.util.registry.Registry;
 
 public class EnderscapeClient implements ClientModInitializer {
 
-    private final MirrorHud mirrorHud = new MirrorHud();
-
     public static final EntityModelLayer DRIFTER = register(EnderscapeEntities.DRIFTER);
     public static final EntityModelLayer DRIFTLET = register(EnderscapeEntities.DRIFTLET);
     public static final EntityModelLayer RUBBLEMITE = register(EnderscapeEntities.RUBBLEMITE);
@@ -55,6 +53,6 @@ public class EnderscapeClient implements ClientModInitializer {
         }
 
         EnderscapeParticles.init();
-        MirrorHud.init(mirrorHud);
+        MirrorHud.init();
     }
 }

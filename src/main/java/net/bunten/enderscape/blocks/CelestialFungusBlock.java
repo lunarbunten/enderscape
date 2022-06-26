@@ -48,7 +48,7 @@ public class CelestialFungusBlock extends PlantBlock implements Fertilizable, La
         if (state.get(STAGE) == 0) {
             world.setBlockState(pos, state.cycle(STAGE), 4);
         } else {
-            PlantUtil.generateLargeCelestialFungus(world, random, pos, 16);
+            PlantUtil.generateDefaultLargeCelestialFungus(world, random, pos);
         }
     }
 

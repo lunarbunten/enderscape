@@ -1,6 +1,7 @@
 package net.bunten.enderscape.blocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.util.math.BlockPos;
@@ -11,7 +12,8 @@ public class MushroomCapBlock extends Block {
         super(settings);
     }
 
-    public void onLandedUpon(World world, BlockPos pos, Entity entity, float distance) {
-        entity.handleFallDamage(distance, 0.5F, DamageSource.FALL);
+    @Override
+    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+        entity.handleFallDamage(fallDistance, 0.5F, DamageSource.FALL);
     }
 }

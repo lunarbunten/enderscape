@@ -1,22 +1,6 @@
 {
-	"credit": "Made with Blockbench",
-	"parent": "block/block",
+	"parent": "minecraft:block/cube_all",
 	"textures": {
-		"1": "enderscape:block/nebulite_block",
-		"particle": "enderscape:block/nebulite_block"
-	},
-	"elements": [
-		{
-			"from": [0, 0, 0],
-			"to": [16, 16, 16],
-			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "north"},
-				"east": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "east"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "south"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "west"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "up"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "down"}
-			}
-		}
-	]
+		"all": "enderscape:block/nebulite_block"
+	}
 }

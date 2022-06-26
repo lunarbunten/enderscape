@@ -239,6 +239,10 @@ public class DrifterEntity extends AbstractDrifterEntity {
         return EnderscapeEntities.DRIFTLET.create(world);
     }
 
+    @Override
+    public void setBaby(boolean baby) {
+    }
+
     protected class BounceDamageSource extends DamageSource {
         public BounceDamageSource(String name) {
             super(name);

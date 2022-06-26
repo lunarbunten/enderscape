@@ -4,8 +4,8 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.items.MirrorItem;
 import net.bunten.enderscape.util.MathUtil;
+import net.bunten.enderscape.util.MirrorUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -129,14 +129,14 @@ public class MirrorHud extends DrawableHelper {
 
         if (mob != null) {
             
-            ItemStack stack = MirrorItem.isMirror(mob.getMainHandStack()) ? mob.getMainHandStack() : mob.getOffHandStack();
-            boolean displayUI = MirrorItem.canDisplayUI(stack, mob) && !mob.isSpectator() && mob.getActiveItem().isEmpty();
+            ItemStack stack = MirrorUtil.isMirror(mob.getMainHandStack()) ? mob.getMainHandStack() : mob.getOffHandStack();
+            boolean displayUI = MirrorUtil.canDisplayUI(stack, mob) && !mob.isSpectator() && mob.getActiveItem().isEmpty();
             double speedModifier = mob.getActiveItem().isEmpty() ? 1 : 1.8F;
 
             if (displayUI) {
-                energy = MirrorItem.getEnergyLevel(stack);
-                maxEnergy = MirrorItem.getMaximumEnergy(stack);
-                teleportCost = MirrorItem.getEnergyCost(stack, mob, MirrorItem.getLodestonePos(stack));
+                energy = MirrorUtil.getEnergy(stack);
+                maxEnergy = MirrorUtil.getMaximumEnergy(stack);
+                teleportCost = MirrorUtil.getCost(stack, mob, MirrorUtil.getPos(stack));
 
                 totalAlpha = MathUtil.lerp(0.5F, totalAlpha, 1);
                 heightOffset = MathUtil.lerp(0.5F, heightOffset, -3);
@@ -145,7 +145,7 @@ public class MirrorHud extends DrawableHelper {
                 heightOffset = MathUtil.lerp(0.5F * speedModifier, heightOffset, 0);
             }
 
-            boolean displayOutline = teleportCost > energy || !MirrorItem.isSameDimension(stack, mob);
+            boolean displayOutline = teleportCost > energy || !MirrorUtil.isSameDimension(stack, mob);
 
             if (displayUI) {
                 if (displayOutline) {
@@ -159,10 +159,14 @@ public class MirrorHud extends DrawableHelper {
                 outlineAlpha = MathUtil.lerp(0.3F * speedModifier, outlineAlpha, 0);
             }
 
-            if (displayUI && outlineAlpha < 0.3F) {
-                float sin = (MathHelper.sin(highlightDisplayTicks * 0.25F) * 0.2F) + 0.5F;
-                sin = MathHelper.clamp(sin, 0.5F, 1);
-                highlightAlpha = MathUtil.lerp(0.5F * speedModifier, highlightAlpha, sin);
+            if (displayUI) {
+                if (!displayOutline) {
+                    float sin = (MathHelper.sin(highlightDisplayTicks * 0.25F) * 0.2F) + 0.5F;
+                    sin = MathHelper.clamp(sin, 0.5F, 1);
+                    highlightAlpha = MathUtil.lerp(0.5F * speedModifier, highlightAlpha, sin);
+                } else {
+                    highlightAlpha = 0;
+                }
             } else {
                 highlightAlpha = MathUtil.lerp(0.3F * speedModifier, highlightAlpha, 0);
             }
@@ -181,11 +185,13 @@ public class MirrorHud extends DrawableHelper {
         }
     }
 
-    public static void init(MirrorHud renderer) {
-        HudRenderCallback.EVENT.register(renderer::render);
+    public static void init() {
+        final MirrorHud mirrorHud = new MirrorHud();
+
+        HudRenderCallback.EVENT.register(mirrorHud::render);
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
             if (!client.isPaused()) {
-                renderer.tick();
+                mirrorHud.tick();
             }
         });
     }

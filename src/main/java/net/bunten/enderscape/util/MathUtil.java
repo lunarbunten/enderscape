@@ -1,16 +1,14 @@
 package net.bunten.enderscape.util;
 
+import java.util.Random;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.math.Vec3i;
 
-import java.util.Random;
-
 public class MathUtil extends MathHelper {
-    public static final Random RANDOM = new Random();
-
     public static BlockPos random(BlockPos pos, Random random, int x, int z) {
         return pos.add(nextInt(random, -x, x), 0, nextInt(random, -z, z));
     }

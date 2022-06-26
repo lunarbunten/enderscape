@@ -3,8 +3,8 @@ package net.bunten.enderscape.blocks;
 import net.bunten.enderscape.interfaces.LayerMapped;
 import net.bunten.enderscape.registry.EnderscapeSounds;
 import net.bunten.enderscape.util.MathUtil;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.TransparentBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -14,7 +14,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class DriftJellyBlock extends Block implements LayerMapped {
+public class DriftJellyBlock extends TransparentBlock implements LayerMapped {
     public DriftJellyBlock(Settings settings) {
         super(settings);
     }
