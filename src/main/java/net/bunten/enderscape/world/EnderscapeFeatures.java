@@ -7,6 +7,7 @@ import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.blocks.MurushroomsBlock;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.world.features.CelestialIslandFeature;
+import net.bunten.enderscape.world.features.CelestialIslandFeatureConfig;
 import net.bunten.enderscape.world.features.ores.ScatteredOreFeature;
 import net.bunten.enderscape.world.features.ores.VoidOreFeature;
 import net.bunten.enderscape.world.features.vegetation.CelestialGrowthFeature;
@@ -24,7 +25,6 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.YOffset;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.PlacedFeatures;
@@ -54,7 +54,7 @@ public abstract class EnderscapeFeatures {
     private static final BlockState SHADOW_QUARTZ_ORE = EnderscapeBlocks.SHADOW_QUARTZ_ORE.getDefaultState();
 
     public static final Feature<LargeCelestialFungusFeatureConfig> LARGE_CELESTIAL_FUNGUS = register("large_celestial_fungus", new LargeCelestialFungusFeature(LargeCelestialFungusFeatureConfig.CODEC));
-    public static final Feature<DefaultFeatureConfig> CELESTIAL_ISLAND = register("celestial_island", new CelestialIslandFeature(DefaultFeatureConfig.CODEC));
+    public static final Feature<CelestialIslandFeatureConfig> CELESTIAL_ISLAND = register("celestial_island", new CelestialIslandFeature(CelestialIslandFeatureConfig.CODEC));
 
     public static final Feature<CelestialGrowthFeatureConfig> CELESTIAL_GROWTH = register("celestial_growth", new CelestialGrowthFeature(CelestialGrowthFeatureConfig.CODEC));
     public static final Feature<MurushroomFeatureConfig> MURUSHROOM = register("murushroom", new MurushroomFeature(MurushroomFeatureConfig.CODEC));
@@ -70,7 +70,7 @@ public abstract class EnderscapeFeatures {
     .onlyInBiome()
     .modifier(uniform(YOffset.fixed(55), YOffset.fixed(70)))
     .decoration(RAW_GENERATION)
-    .buildAndRegister();
+    .buildAndRegister(new CelestialIslandFeatureConfig(UniformIntProvider.create(3, 5), UniformIntProvider.create(8, 13), 0.25F));
 
     public static final BCLFeature<?, ?> BCL_LARGE_CELESTIAL_FUNGUS = BCLFeatureBuilder.start(Enderscape.id("large_celestial_fungus"), LARGE_CELESTIAL_FUNGUS)
     .count(68)

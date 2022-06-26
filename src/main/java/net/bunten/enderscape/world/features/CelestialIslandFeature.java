@@ -10,14 +10,14 @@ import net.bunten.enderscape.util.PlantUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
-public class CelestialIslandFeature extends Feature<DefaultFeatureConfig> {
-    public CelestialIslandFeature(Codec<DefaultFeatureConfig> codec) {
+public class CelestialIslandFeature extends Feature<CelestialIslandFeatureConfig> {
+    public CelestialIslandFeature(Codec<CelestialIslandFeatureConfig> codec) {
         super(codec);
     }
 
@@ -25,14 +25,6 @@ public class CelestialIslandFeature extends Feature<DefaultFeatureConfig> {
 
     private final BlockState END_STONE = Blocks.END_STONE.getDefaultState();
     private final BlockState CELESTIAL = EnderscapeBlocks.CELESTIAL_MYCELIUM_BLOCK.getDefaultState();
-
-    protected int getWidth(Random random) {
-        return 3 + random.nextInt(3);
-    }
-
-    protected int getHeight(Random random) {
-        return 8 + random.nextInt(6);
-    }
 
     protected BlockState getTopBlockState(BlockPos pos, Random random) {
         double value =  NOISE.eval(pos.getX() * 0.2, pos.getZ() * 0.2) + (random.nextFloat() * 0.12F) * 4;
@@ -43,10 +35,7 @@ public class CelestialIslandFeature extends Feature<DefaultFeatureConfig> {
         }
     }
 
-    protected void createIsland(StructureWorldAccess world, Random random, BlockPos pos) {
-        int initialWidth = getWidth(random);
-        int initialHeight = getHeight(random);
-
+    protected void createIsland(StructureWorldAccess world, Random random, BlockPos pos, int initialWidth, int initialHeight, float murushroomChance) {
         double width = initialWidth;
         double height = initialHeight;
 
@@ -69,15 +58,15 @@ public class CelestialIslandFeature extends Feature<DefaultFeatureConfig> {
             y--;
         }
 
-        createFoliage(world, random, pos, initialWidth, initialHeight);
+        createFoliage(world, random, pos, initialWidth, initialHeight, murushroomChance);
     }
 
-    protected void createFoliage(StructureWorldAccess world, Random random, BlockPos pos, int initialWidth, int initialHeight) {
-        PlantUtil.generateCelestialGrowth(world, random, pos, 1, MathUtil.nextInt(random, 1, 2), 0.5F, initialWidth, 2, 2, initialWidth * 3);
+    protected void createFoliage(StructureWorldAccess world, Random random, BlockPos pos, int initialWidth, int initialHeight, float murushroomChance) {
+        PlantUtil.generateCelestialGrowth(world, random, pos, UniformIntProvider.create(1, 1), UniformIntProvider.create(1, 2), 0.5F, initialWidth, 2, 2, initialWidth * 2);
         PlantUtil.generateCelestialVegetation(world, random, pos, initialWidth, 2, 2, initialWidth * 3);
 
-        if (random.nextInt(4) == 0) {
-            PlantUtil.generateMurushrooms(world, pos.add(0, initialHeight / 2, 0), random, MurushroomsBlock.MAX_AGE, initialWidth, initialHeight, 76);
+        if (random.nextFloat() <= murushroomChance) {
+            PlantUtil.generateMurushrooms(world, pos.add(0, initialHeight / 2, 0), random, MurushroomsBlock.MAX_AGE, initialWidth, initialHeight, 70);
             for (int i = 0; i < 16; i++) {
                 var xOffset = MathUtil.nextInt(random, -initialWidth, initialWidth);
                 var zOffset = MathUtil.nextInt(random, -initialWidth, initialWidth);
@@ -96,12 +85,18 @@ public class CelestialIslandFeature extends Feature<DefaultFeatureConfig> {
     }
 
     @Override
-    public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
+    public boolean generate(FeatureContext<CelestialIslandFeatureConfig> context) {
+        var config = context.getConfig();
+
         StructureWorldAccess world = context.getWorld();
         Random random = context.getRandom();
         BlockPos pos = context.getOrigin();
 
-        createIsland(world, random, pos);
+        int width = config.getWidth().get(random);
+        int height = config.getHeight().get(random);
+        float murushroomChance = config.getMurushroomChance();
+
+        createIsland(world, random, pos, width, height, murushroomChance);
 
         return true;
     }
