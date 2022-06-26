@@ -6,6 +6,7 @@ import net.bunten.enderscape.registry.EnderscapeSounds;
 import net.bunten.enderscape.world.EnderscapeFeatures;
 import net.bunten.enderscape.world.EnderscapeSurfaces;
 import net.minecraft.entity.EntityType;
+import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.Precipitation;
 import ru.bclib.api.biomes.BCLBiomeBuilder;
 import ru.bclib.world.biomes.BCLBiome;
@@ -24,6 +25,8 @@ public class CelestialIslandsBiome implements EnderscapeBiome, CelestialBiome {
     @Override
     public BCLBiome getBCLBiome() {
         BCLBiomeBuilder builder = BCLBiomeBuilder.start(getIdentifier());
+
+        builder.category(Category.THEEND);
 
         builder.temperature(0.7F);
         builder.precipitation(Precipitation.NONE);

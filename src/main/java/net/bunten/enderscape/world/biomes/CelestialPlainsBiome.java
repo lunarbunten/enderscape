@@ -7,6 +7,7 @@ import net.bunten.enderscape.registry.EnderscapeSounds;
 import net.bunten.enderscape.world.EnderscapeFeatures;
 import net.bunten.enderscape.world.EnderscapeSurfaces;
 import net.minecraft.entity.EntityType;
+import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.Precipitation;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.EndPlacedFeatures;
@@ -27,6 +28,8 @@ public class CelestialPlainsBiome implements EnderscapeBiome, CelestialBiome {
     @Override
     public BCLBiome getBCLBiome() {
         BCLBiomeBuilder builder = BCLBiomeBuilder.start(getIdentifier());
+
+        builder.category(Category.THEEND);
 
         builder.temperature(0.7F);
         builder.precipitation(Precipitation.NONE);
