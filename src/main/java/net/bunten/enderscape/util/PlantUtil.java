@@ -1,6 +1,5 @@
 package net.bunten.enderscape.util;
 
-import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.blocks.FlangerBerryBlock;
 import net.bunten.enderscape.blocks.FlangerBerryVine;
 import net.bunten.enderscape.blocks.MurushroomsBlock;
@@ -259,8 +258,6 @@ public class PlantUtil {
                     generatedVines++;
                 }
             }
-
-            Enderscape.getLogger().info("vines: " + generatedVines);
         }
     
         protected static void generateCap(WorldAccess world, Random random, BlockPos pos, int radius, float stemCapDivision, float percentageForCapDrooping, float excessVineDiscardChance, int vineGenerationTries) {
