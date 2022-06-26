@@ -25,8 +25,8 @@ public class CelestialGrowthFeature extends Feature<CelestialGrowthFeatureConfig
         var horizontalRange = config.getHorizontalRange();
         var verticalRange = config.getHorizontalRange();
         var verticalCheckRange = config.getVerticalCheckRange();
-        var baseHeight = config.getBaseHeight().get(random);
-        var additionalHeight = config.getAdditionalHeight().get(random);
+        var baseHeight = config.getBaseHeight();
+        var additionalHeight = config.getAdditionalHeight();
         var addedHeightChance = config.getAddedHeightChance();
         var tries = config.getTries();
 

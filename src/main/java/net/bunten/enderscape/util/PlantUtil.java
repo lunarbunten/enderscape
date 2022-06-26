@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Direction.Axis;
+import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.WorldAccess;
@@ -50,7 +51,7 @@ public class PlantUtil {
         }
     }
     
-    public static boolean generateCelestialGrowth(WorldAccess world, Random random, BlockPos origin, int baseHeight, int additionalHeight, float addedHeightChance, int horizontalRange, int verticalRange, int verticalCheckRange, int tries) {
+    public static boolean generateCelestialGrowth(WorldAccess world, Random random, BlockPos origin, IntProvider baseHeight, IntProvider additionalHeight, float addedHeightChance, int horizontalRange, int verticalRange, int verticalCheckRange, int tries) {
         boolean result = false;
 
         for (int i = 0; i < tries; i++) {
@@ -70,7 +71,7 @@ public class PlantUtil {
 
             // Actual generation
             if (world.getBlockState(pos).isAir() && world.getBlockState(pos.down()).isIn(EnderscapeBlocks.GROWTH_PLANTABLE_OM)) {
-                int totalHeight = baseHeight + (random.nextFloat() <= addedHeightChance ? additionalHeight : 0);
+                int totalHeight = baseHeight.get(random) + (random.nextFloat() <= addedHeightChance ? additionalHeight.get(random) : 0);
                 Mutable mutable = pos.mutableCopy();
 
                 for (int g = 0; g < totalHeight; g++) {
