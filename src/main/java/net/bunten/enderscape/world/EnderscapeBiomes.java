@@ -38,7 +38,10 @@ public class EnderscapeBiomes {
         BiomeAPI.addBiomeFeature(biome, EnderscapeFeatures.BCL_UNCOMMON_CELESTIAL_GROWTH);
         BiomeAPI.addBiomeFeature(biome, EnderscapeFeatures.BCL_MURUSHROOMS);
 
-        if (midlands) BiomeAPI.addBiomeFeature(biome, GenerationStep.Feature.VEGETAL_DECORATION, EndPlacedFeatures.CHORUS_PLANT);
+        if (midlands) {
+            BiomeAPI.addBiomeFeature(biome, GenerationStep.Feature.SURFACE_STRUCTURES, EndPlacedFeatures.END_GATEWAY_RETURN);
+            BiomeAPI.addBiomeFeature(biome, GenerationStep.Feature.VEGETAL_DECORATION, EndPlacedFeatures.CHORUS_PLANT);
+        }
     }
 
     private static void registerBiomeModifications() {

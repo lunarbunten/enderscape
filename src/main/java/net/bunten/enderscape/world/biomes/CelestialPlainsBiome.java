@@ -51,6 +51,7 @@ public class CelestialPlainsBiome implements EnderscapeBiome, CelestialBiome {
         builder.spawn(EnderscapeEntities.DRIFTLET, 2, 2, 5);
         builder.spawn(EntityType.ENDERMAN, 10, 4, 8);
         
+        builder.feature(GenerationStep.Feature.SURFACE_STRUCTURES, EndPlacedFeatures.END_GATEWAY_RETURN);
         builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, EndPlacedFeatures.CHORUS_PLANT);
         
         builder.feature(EnderscapeFeatures.BCL_LARGE_CELESTIAL_FUNGUS);
