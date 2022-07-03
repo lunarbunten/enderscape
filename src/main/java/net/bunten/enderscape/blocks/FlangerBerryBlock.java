@@ -35,8 +35,8 @@ import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
 
 public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, Fertilizable {
+    
     public static final EnumProperty<FlangerBerryStage> STAGE = EnderscapeProperties.FLANGER_BERRY_STAGE;
-    private static final Block VINE = EnderscapeBlocks.FLANGER_BERRY_VINE;
 
     public FlangerBerryBlock(Settings settings) {
         super(settings);
@@ -96,7 +96,7 @@ public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, 
     protected boolean canFall(World world, BlockState state, BlockPos pos) {
         boolean bl = false;
         if (FallingBlock.canFallThrough(world.getBlockState(pos.down()))) {
-            if (isRipe(state) && world.getBlockState(pos.up()).getBlock() != VINE) {
+            if (isRipe(state) && world.getBlockState(pos.up()).getBlock() != EnderscapeBlocks.FLANGER_BERRY_VINE) {
                 bl = true;
             }
         }
@@ -129,7 +129,7 @@ public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, 
     }
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return isRipe(state) ? true : world.getBlockState(pos.up()).isOf(VINE);
+        return isRipe(state) ? true : world.getBlockState(pos.up()).isOf(EnderscapeBlocks.FLANGER_BERRY_VINE);
     }
 
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
