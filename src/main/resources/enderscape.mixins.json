@@ -3,7 +3,6 @@
 	"package": "net.bunten.enderscape.mixin",
 	"compatabilityLevel": "JAVA_17",
 	"mixins": [
-		"BiomePickerMixin",
 		"BlockEntityTypeMixin",
 		"BlockMixin",
 		"DispenserBehaviorMixin",
