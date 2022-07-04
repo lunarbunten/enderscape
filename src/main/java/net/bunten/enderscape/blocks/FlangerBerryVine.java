@@ -6,11 +6,11 @@ import net.bunten.enderscape.blocks.properties.FlangerBerryStage;
 import net.bunten.enderscape.interfaces.LayerMapped;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.util.MathUtil;
+import net.bunten.enderscape.util.States;
 import net.bunten.enderscape.util.Util;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.ai.pathing.NavigationType;
@@ -90,7 +90,7 @@ public class FlangerBerryVine extends Block implements LayerMapped, Fertilizable
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
         if (!state.canPlaceAt(world, pos)) {
-            return Blocks.AIR.getDefaultState();
+            return States.AIR;
         } else {
             var age = state.get(AGE);
             var down = world.getBlockState(pos.down());

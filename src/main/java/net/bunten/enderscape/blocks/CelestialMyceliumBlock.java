@@ -1,10 +1,9 @@
 package net.bunten.enderscape.blocks;
 
-import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.EnderscapeSounds;
+import net.bunten.enderscape.util.States;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.server.world.ServerWorld;
@@ -48,7 +47,7 @@ public class CelestialMyceliumBlock extends Block {
         if (stack.getItem() instanceof ShovelItem && world.getBlockState(pos.up()).isAir()) {
             world.playSound(player, pos, EnderscapeSounds.BLOCK_EYLIUM_FLATTEN, SoundCategory.BLOCKS, 1, 1);
             if (!world.isClient()) {
-                world.setBlockState(pos, EnderscapeBlocks.CELESTIAL_PATH_BLOCK.getDefaultState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
+                world.setBlockState(pos, States.CELESTIAL_PATH, Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD);
                 if (player != null) {
                     stack.damage(1, player, p -> p.sendToolBreakStatus(hand));
                 }
@@ -60,11 +59,11 @@ public class CelestialMyceliumBlock extends Block {
 
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!canSurvive(state, world, pos)) {
-            world.setBlockState(pos, Blocks.END_STONE.getDefaultState());
+            world.setBlockState(pos, States.END_STONE);
         }
     }
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
-        return shouldBreak(world, pos) ? Blocks.END_STONE.getDefaultState() : super.getStateForNeighborUpdate(state, direction, newState, world, pos, posFrom);
+        return shouldBreak(world, pos) ? States.END_STONE : super.getStateForNeighborUpdate(state, direction, newState, world, pos, posFrom);
     }
 }

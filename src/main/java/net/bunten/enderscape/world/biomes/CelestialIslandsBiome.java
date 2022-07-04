@@ -6,7 +6,7 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import net.bunten.enderscape.registry.EnderscapeMusic;
 import net.bunten.enderscape.registry.EnderscapeParticles;
 import net.bunten.enderscape.registry.EnderscapeSounds;
-import net.bunten.enderscape.world.EnderscapeFeatures;
+import net.bunten.enderscape.world.EnderscapeBCLFeatures;
 import net.bunten.enderscape.world.EnderscapeSurfaces;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome.Precipitation;
@@ -46,17 +46,17 @@ public class CelestialIslandsBiome implements EnderscapeBiome, CelestialBiome {
 
         builder.spawn(EntityType.ENDERMAN, 30, 4, 8);
 
-        builder.feature(EnderscapeFeatures.BCL_CELESTIAL_ISLAND);
+        builder.feature(EnderscapeBCLFeatures.CELESTIAL_ISLAND);
 
-        builder.feature(EnderscapeFeatures.BCL_CELESTIAL_GROWTH);
-        builder.feature(EnderscapeFeatures.BCL_CELESTIAL_VEGETATION);
-        builder.feature(EnderscapeFeatures.BCL_UNCOMMON_MURUSHROOMS);
+        builder.feature(EnderscapeBCLFeatures.CELESTIAL_GROWTH);
+        builder.feature(EnderscapeBCLFeatures.CELESTIAL_VEGETATION);
+        builder.feature(EnderscapeBCLFeatures.UNCOMMON_MURUSHROOMS);
 
-        builder.feature(EnderscapeFeatures.BCL_SHADOW_QUARTZ_ORE);
-        builder.feature(EnderscapeFeatures.BCL_SCATTERED_SHADOW_QUARTZ_ORE);
+        builder.feature(EnderscapeBCLFeatures.SHADOW_QUARTZ_ORE);
+        builder.feature(EnderscapeBCLFeatures.SCATTERED_SHADOW_QUARTZ_ORE);
 
-        builder.feature(EnderscapeFeatures.BCL_NEBULITE_ORE);
-        builder.feature(EnderscapeFeatures.BCL_VOID_NEBULITE_ORE);
+        builder.feature(EnderscapeBCLFeatures.NEBULITE_ORE);
+        builder.feature(EnderscapeBCLFeatures.VOID_NEBULITE_ORE);
 
         return builder.build();
     }

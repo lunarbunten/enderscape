@@ -5,10 +5,10 @@ import net.bunten.enderscape.blocks.properties.FlangerBerryStage;
 import net.bunten.enderscape.interfaces.LayerMapped;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.EnderscapeSounds;
+import net.bunten.enderscape.util.States;
 import net.bunten.enderscape.util.Util;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.FallingBlock;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.block.ShapeContext;
@@ -115,7 +115,7 @@ public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         world.createAndScheduleBlockTick(pos, this, getFallDelay());
         if (!canPlaceAt(state, world, pos)) {
-            return Blocks.AIR.getDefaultState();
+            return States.AIR;
         } else {
             return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
         }

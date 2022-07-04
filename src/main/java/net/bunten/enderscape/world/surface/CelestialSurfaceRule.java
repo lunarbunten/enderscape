@@ -12,10 +12,9 @@ import org.betterx.bclib.util.MHelper;
 import com.mojang.serialization.Codec;
 
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.util.OpenSimplexNoise;
+import net.bunten.enderscape.util.States;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRule;
@@ -26,8 +25,8 @@ public class CelestialSurfaceRule implements SurfaceMaterialProvider {
         return new CelestialSurfaceRule().surface().build();
     }
 
-    private final BlockState END_STONE = Blocks.END_STONE.getDefaultState();
-    private final BlockState CELESTIAL = EnderscapeBlocks.CELESTIAL_MYCELIUM_BLOCK.getDefaultState();
+    private final BlockState END_STONE = States.END_STONE;
+    private final BlockState CELESTIAL = States.CELESTIAL_MYCELIUM;
     
     protected MaterialRule rule(BlockState state) {
         return MaterialRules.block(state);

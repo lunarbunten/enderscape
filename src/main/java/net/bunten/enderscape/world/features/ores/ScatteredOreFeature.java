@@ -2,9 +2,9 @@ package net.bunten.enderscape.world.features.ores;
 
 import com.mojang.serialization.Codec;
 
+import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.util.MathUtil;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
@@ -26,17 +26,14 @@ public class ScatteredOreFeature extends Feature<SingleStateFeatureConfig> {
         Random random = context.getRandom();
         BlockPos pos = context.getOrigin();
 
-        if (!world.isAir(pos)) {
-            return false;
-        } else {
-            BlockState state = config.state;
-            BlockPos pos2 = MathUtil.random(pos, random, 8, 4, 8);
-            for (int i = 0; i < 70; i++) {
-                pos2 = pos2.add(MathUtil.nextInt(random, -1, 1), MathUtil.nextInt(random, -1, 1), MathUtil.nextInt(random, -1, 1));
-                if (world.getBlockState(pos2).isOf(Blocks.END_STONE)) {
-                    world.setBlockState(pos2, state, 2);
-                    result = true;
-                }
+        BlockState state = config.state;
+        BlockPos pos2 = MathUtil.random(pos, random, 8, 4, 8);
+        
+        for (int i = 0; i < 70; i++) {
+            pos2 = pos2.add(MathUtil.nextInt(random, -1, 1), MathUtil.nextInt(random, -1, 1), MathUtil.nextInt(random, -1, 1));
+            if (world.getBlockState(pos2).isIn(EnderscapeBlocks.ORE_REPLACEABLES)) {
+                world.setBlockState(pos2, state, 2);
+                result = true;
             }
         }
 

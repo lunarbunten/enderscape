@@ -7,7 +7,7 @@ import net.bunten.enderscape.registry.EnderscapeEntities;
 import net.bunten.enderscape.registry.EnderscapeMusic;
 import net.bunten.enderscape.registry.EnderscapeParticles;
 import net.bunten.enderscape.registry.EnderscapeSounds;
-import net.bunten.enderscape.world.EnderscapeFeatures;
+import net.bunten.enderscape.world.EnderscapeBCLFeatures;
 import net.bunten.enderscape.world.EnderscapeSurfaces;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome.Precipitation;
@@ -54,17 +54,17 @@ public class CelestialPlainsBiome implements EnderscapeBiome, CelestialBiome {
         builder.feature(GenerationStep.Feature.SURFACE_STRUCTURES, EndPlacedFeatures.END_GATEWAY_RETURN);
         builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, EndPlacedFeatures.CHORUS_PLANT);
         
-        builder.feature(EnderscapeFeatures.BCL_LARGE_CELESTIAL_FUNGUS);
+        builder.feature(EnderscapeBCLFeatures.LARGE_CELESTIAL_FUNGUS);
 
-        builder.feature(EnderscapeFeatures.BCL_CELESTIAL_GROWTH);
-        builder.feature(EnderscapeFeatures.BCL_CELESTIAL_VEGETATION);
-        builder.feature(EnderscapeFeatures.BCL_UNCOMMON_MURUSHROOMS);
+        builder.feature(EnderscapeBCLFeatures.CELESTIAL_GROWTH);
+        builder.feature(EnderscapeBCLFeatures.CELESTIAL_VEGETATION);
+        builder.feature(EnderscapeBCLFeatures.UNCOMMON_MURUSHROOMS);
 
-        builder.feature(EnderscapeFeatures.BCL_SHADOW_QUARTZ_ORE);
-        builder.feature(EnderscapeFeatures.BCL_SCATTERED_SHADOW_QUARTZ_ORE);
+        builder.feature(EnderscapeBCLFeatures.SHADOW_QUARTZ_ORE);
+        builder.feature(EnderscapeBCLFeatures.SCATTERED_SHADOW_QUARTZ_ORE);
 
-        builder.feature(EnderscapeFeatures.BCL_NEBULITE_ORE);
-        builder.feature(EnderscapeFeatures.BCL_VOID_NEBULITE_ORE);
+        builder.feature(EnderscapeBCLFeatures.NEBULITE_ORE);
+        builder.feature(EnderscapeBCLFeatures.VOID_NEBULITE_ORE);
 
         return builder.build();
     }

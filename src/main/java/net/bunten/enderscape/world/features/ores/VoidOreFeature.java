@@ -2,8 +2,8 @@ package net.bunten.enderscape.world.features.ores;
 
 import com.mojang.serialization.Codec;
 
+import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.util.MathUtil;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
@@ -25,15 +25,11 @@ public class VoidOreFeature extends Feature<SingleStateFeatureConfig> {
         Random random = context.getRandom();
         BlockPos pos = context.getOrigin();
 
-        if (!world.isAir(pos)) {
-            return false;
-        } else {
-            for (int i = 0; i < 30; i++) {
-                BlockPos pos2 = MathUtil.random(pos, random, 8, 4, 8);
-                if (world.getBlockState(pos2).isOf(Blocks.END_STONE) && world.isAir(pos2.down()) && world.getBlockState(pos2.up()).isOpaque()) {
-                    world.setBlockState(pos2, config.state, 2);
-                    result = true;
-                }
+        for (int i = 0; i < 30; i++) {
+            BlockPos pos2 = MathUtil.random(pos, random, 8, 4, 8);
+            if (world.getBlockState(pos2).isIn(EnderscapeBlocks.ORE_REPLACEABLES) && world.isAir(pos2.down()) && world.getBlockState(pos2.up()).isOpaque()) {
+                world.setBlockState(pos2, config.state, 2);
+                result = true;
             }
         }
 

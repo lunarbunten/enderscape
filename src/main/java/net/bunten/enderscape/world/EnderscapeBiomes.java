@@ -19,24 +19,23 @@ public class EnderscapeBiomes {
     public static final BCLBiome CELESTIAL_ISLANDS = CelestialIslandsBiome.register();
 
     private static void addGlobalModifications(RegistryEntry<Biome> biome) {
-        BiomeAPI.addBiomeFeature(biome, EnderscapeFeatures.BCL_SHADOW_QUARTZ_ORE);
-        BiomeAPI.addBiomeFeature(biome, EnderscapeFeatures.BCL_SCATTERED_SHADOW_QUARTZ_ORE);
+        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.SHADOW_QUARTZ_ORE);
+        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.SCATTERED_SHADOW_QUARTZ_ORE);
 
-        BiomeAPI.addBiomeFeature(biome, EnderscapeFeatures.BCL_NEBULITE_ORE);
-        BiomeAPI.addBiomeFeature(biome, EnderscapeFeatures.BCL_VOID_NEBULITE_ORE);
+        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.NEBULITE_ORE);
+        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.VOID_NEBULITE_ORE);
     }
 
     private static void addBetterEndModifications(RegistryEntry<Biome> biome) {
-        BiomeAPI.addBiomeFeature(biome, EnderscapeFeatures.BETTEREND_SHADOW_QUARTZ_ORE);
-        BiomeAPI.addBiomeFeature(biome, EnderscapeFeatures.BETTEREND_VOID_NEBULITE_ORE);
-        BiomeAPI.addBiomeFeature(biome, EnderscapeFeatures.BETTEREND_MURUSHROOMS);
+        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.BETTEREND_VOID_NEBULITE_ORE);
+        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.BETTEREND_MURUSHROOMS);
     }
 
     private static void addDefaultEndModifications(RegistryEntry<Biome> biome, boolean midlands) {
         BiomeAPI.addBiomeMobSpawn(biome, EnderscapeEntities.RUBBLEMITE, 2, 2, 4);
 
-        BiomeAPI.addBiomeFeature(biome, EnderscapeFeatures.BCL_UNCOMMON_CELESTIAL_GROWTH);
-        BiomeAPI.addBiomeFeature(biome, EnderscapeFeatures.BCL_MURUSHROOMS);
+        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.UNCOMMON_CELESTIAL_GROWTH);
+        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.MURUSHROOMS);
 
         if (midlands) {
             BiomeAPI.addBiomeFeature(biome, GenerationStep.Feature.SURFACE_STRUCTURES, EndPlacedFeatures.END_GATEWAY_RETURN);
@@ -57,7 +56,7 @@ public class EnderscapeBiomes {
                 if (highlands || midlands) {
                     addDefaultEndModifications(biome, midlands);
                 } else {
-                    BiomeAPI.addBiomeFeature(biome, EnderscapeFeatures.BCL_UNCOMMON_MURUSHROOMS);
+                    BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.UNCOMMON_MURUSHROOMS);
                 }
 			}
 
