@@ -22,10 +22,10 @@ public class CelestialVegetationFeature extends Feature<CelestialVegetationFeatu
         BlockPos pos = context.getOrigin();
         StructureWorldAccess world = context.getWorld();
 
-        var horizontalRange = config.getHorizontalRange();
-        var verticalRange = config.getVerticalRange();
-        var verticalCheckRange = config.getVerticalCheckRange();
-        var tries = config.getTries();
+        var horizontalRange = config.horizontalRange;
+        var verticalRange = config.verticalRange;
+        var verticalCheckRange = config.verticalCheckRange;
+        var tries = config.tries;
 
         return PlantUtil.generateCelestialVegetation(world, random, pos, horizontalRange, verticalRange, verticalCheckRange, tries);
     }

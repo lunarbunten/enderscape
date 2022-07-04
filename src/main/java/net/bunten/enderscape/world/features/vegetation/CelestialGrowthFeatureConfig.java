@@ -17,13 +17,13 @@ public class CelestialGrowthFeatureConfig implements FeatureConfig {
             (Codec.intRange(1, 64).fieldOf("tries")).forGetter(config -> config.tries))
             .apply(instance, CelestialGrowthFeatureConfig::new));
 
-    private final int horizontalRange;
-    private final int verticalRange;
-    private final int verticalCheckRange;
-    private final IntProvider baseHeight;
-    private final IntProvider additionalHeight;
+    public final int horizontalRange;
+    public final int verticalRange;
+    public final int verticalCheckRange;
+    public final IntProvider baseHeight;
+    public final IntProvider additionalHeight;
     public final float addedHeightChance;
-    private final int tries;
+    public final int tries;
 
     public CelestialGrowthFeatureConfig(int horizontalRange, int verticalRange, int verticalCheckRange, IntProvider baseHeight, IntProvider additionalHeight, float addedHeightChance, int tries) {
         this.horizontalRange = horizontalRange;
@@ -33,33 +33,5 @@ public class CelestialGrowthFeatureConfig implements FeatureConfig {
         this.additionalHeight = additionalHeight;
         this.addedHeightChance = addedHeightChance;
         this.tries = tries;
-    }
-
-    public int getHorizontalRange() {
-        return horizontalRange;
-    }
-
-    public int getVerticalRange() {
-        return verticalRange;
-    }
-
-    public int getVerticalCheckRange() {
-        return verticalCheckRange;
-    }
-
-    public IntProvider getBaseHeight() {
-        return baseHeight;
-    }
-
-    public IntProvider getAdditionalHeight() {
-        return additionalHeight;
-    }
-
-    public float getAddedHeightChance() {
-        return addedHeightChance;
-    }
-
-    public int getTries() {
-        return tries;
     }
 }

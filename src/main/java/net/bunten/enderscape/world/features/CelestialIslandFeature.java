@@ -92,9 +92,9 @@ public class CelestialIslandFeature extends Feature<CelestialIslandFeatureConfig
         Random random = context.getRandom();
         BlockPos pos = context.getOrigin();
 
-        int width = config.getWidth().get(random);
-        int height = config.getHeight().get(random);
-        float murushroomChance = config.getMurushroomChance();
+        int width = config.width.get(random);
+        int height = config.height.get(random);
+        float murushroomChance = config.murushroomChance;
 
         createIsland(world, random, pos, width, height, murushroomChance);
 

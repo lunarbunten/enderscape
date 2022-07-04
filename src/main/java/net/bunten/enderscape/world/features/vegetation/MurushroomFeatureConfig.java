@@ -14,31 +14,15 @@ public class MurushroomFeatureConfig implements FeatureConfig {
             (Codec.intRange(1, 512).fieldOf("tries")).forGetter(config -> config.tries))
             .apply(instance, MurushroomFeatureConfig::new));
 
-    private final int horizontalRange;
-    private final int verticalRange;
-    private final int age;
-    private final int tries;
+    public final int horizontalRange;
+    public final int verticalRange;
+    public final int age;
+    public final int tries;
 
     public MurushroomFeatureConfig(int horizontalRange, int verticalRange, int age, int tries) {
         this.horizontalRange = horizontalRange;
         this.verticalRange = verticalRange;
         this.age = age;
         this.tries = tries;
-    }
-
-    public int getHorizontalRange() {
-        return horizontalRange;
-    }
-
-    public int getVerticalRange() {
-        return verticalRange;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public int getTries() {
-        return tries;
     }
 }
