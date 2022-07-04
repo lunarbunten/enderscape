@@ -25,8 +25,8 @@ import net.minecraft.world.gen.placementmodifier.HeightRangePlacementModifier;
 public class EnderscapeBCLFeatures {
 
     private static final GenerationStep.Feature RAW_GENERATION = GenerationStep.Feature.RAW_GENERATION;
-    private static final GenerationStep.Feature VEGETAL_DECORATION = GenerationStep.Feature.VEGETAL_DECORATION;
     private static final GenerationStep.Feature UNDERGROUND_ORES = GenerationStep.Feature.UNDERGROUND_ORES;
+    private static final GenerationStep.Feature VEGETAL_DECORATION = GenerationStep.Feature.VEGETAL_DECORATION;
 
     // Celestial Plains
 
@@ -74,10 +74,10 @@ public class EnderscapeBCLFeatures {
     .buildAndRegister()
     .place()
 
-    .onEveryLayer(1)
+    .onEveryLayer(2)
     .squarePlacement()
     .onlyInBiome()
-    .modifier(uniform(YOffset.aboveBottom(20), YOffset.fixed(50)))
+    .modifier(PlacedFeatures.BOTTOM_TO_TOP_RANGE)
     .decoration(VEGETAL_DECORATION)
 
     .buildAndRegister();
@@ -87,10 +87,10 @@ public class EnderscapeBCLFeatures {
     .buildAndRegister()
     .place()
 
-    .onceEvery(3)
+    .onceEvery(2)
     .squarePlacement()
     .onlyInBiome()
-    .modifier(uniform(YOffset.aboveBottom(20), YOffset.fixed(50)))
+    .modifier(PlacedFeatures.BOTTOM_TO_TOP_RANGE)
     .decoration(VEGETAL_DECORATION)
 
     .buildAndRegister();
@@ -132,7 +132,7 @@ public class EnderscapeBCLFeatures {
 
     .onceEvery(3)
     .squarePlacement()
-    .modifier(uniform(YOffset.aboveBottom(20), YOffset.getTop()))
+    .modifier(PlacedFeatures.BOTTOM_TO_TOP_RANGE)
     .decoration(UNDERGROUND_ORES)
 
     .buildAndRegister();
@@ -144,19 +144,19 @@ public class EnderscapeBCLFeatures {
 
     .onEveryLayer(1)
     .squarePlacement()
-    .modifier(uniform(YOffset.getBottom(), YOffset.getTop()))
+    .modifier(PlacedFeatures.BOTTOM_TO_TOP_RANGE)
     .decoration(UNDERGROUND_ORES)
 
     .buildAndRegister();
 
     public static final BCLFeature<?, ?> NEBULITE_ORE = BCLFeatureBuilder.start(Enderscape.id("nebulite_ore"), Feature.SCATTERED_ORE)
-    .configuration(new OreFeatureConfig(new TagMatchRuleTest(EnderscapeBlocks.ORE_REPLACEABLES), States.NEBULITE_ORE, 2, 0.25F))
+    .configuration(new OreFeatureConfig(new TagMatchRuleTest(EnderscapeBlocks.ORE_REPLACEABLES), States.NEBULITE_ORE, 2, 0.5F))
     .buildAndRegister()
     .place()
 
-    .count(1)
+    .onEveryLayer(1)
     .squarePlacement()
-    .modifier(trapezoid(YOffset.getBottom(), YOffset.fixed(50)))
+    .modifier(PlacedFeatures.BOTTOM_TO_TOP_RANGE)
     .decoration(UNDERGROUND_ORES)
 
     .buildAndRegister();
@@ -168,35 +168,8 @@ public class EnderscapeBCLFeatures {
 
     .count(2)
     .squarePlacement()
-    .modifier(uniform(YOffset.getBottom(), YOffset.fixed(20)))
+    .modifier(PlacedFeatures.BOTTOM_TO_TOP_RANGE)
     .decoration(UNDERGROUND_ORES)
-
-    .buildAndRegister();
-
-    // BetterEnd Features
-
-    public static final BCLFeature<?, ?> BETTEREND_VOID_NEBULITE_ORE = BCLFeatureBuilder.start(Enderscape.id("betterend_void_nebulite_ore"), EnderscapeFeatures.VOID_FACING_ORE)
-    .configuration(new SingleStateFeatureConfig(States.NEBULITE_ORE))
-    .buildAndRegister()
-    .place()
-
-    .onEveryLayer(2)
-    .squarePlacement()
-    .modifier(uniform(YOffset.aboveBottom(20), YOffset.getTop()))
-    .decoration(UNDERGROUND_ORES)
-
-    .buildAndRegister();
-
-    public static final BCLFeature<?, ?> BETTEREND_MURUSHROOMS = BCLFeatureBuilder.start(Enderscape.id("betterend_murushrooms"), EnderscapeFeatures.MURUSHROOM)
-    .configuration(new MurushroomFeatureConfig(8, 8, MurushroomsBlock.MAX_AGE, 100))
-    .buildAndRegister()
-    .place()
-
-    .onceEvery(2)
-    .squarePlacement()
-    .onlyInBiome()
-    .modifier(uniform(YOffset.aboveBottom(50), YOffset.getTop()))
-    .decoration(VEGETAL_DECORATION)
 
     .buildAndRegister();
 

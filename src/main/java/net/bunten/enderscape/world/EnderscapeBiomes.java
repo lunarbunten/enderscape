@@ -3,7 +3,6 @@ package net.bunten.enderscape.world;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
 
-import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.registry.EnderscapeEntities;
 import net.bunten.enderscape.world.biomes.CelestialIslandsBiome;
 import net.bunten.enderscape.world.biomes.CelestialPlainsBiome;
@@ -24,11 +23,6 @@ public class EnderscapeBiomes {
 
         BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.NEBULITE_ORE);
         BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.VOID_NEBULITE_ORE);
-    }
-
-    private static void addBetterEndModifications(RegistryEntry<Biome> biome) {
-        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.BETTEREND_VOID_NEBULITE_ORE);
-        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.BETTEREND_MURUSHROOMS);
     }
 
     private static void addDefaultEndModifications(RegistryEntry<Biome> biome, boolean midlands) {
@@ -59,8 +53,6 @@ public class EnderscapeBiomes {
                     BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.UNCOMMON_MURUSHROOMS);
                 }
 			}
-
-            if (Enderscape.hasBetterEnd()) addBetterEndModifications(biome);
 		});
     }
 
