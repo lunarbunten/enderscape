@@ -49,6 +49,7 @@ public class EnderscapeBlocks {
     public static final TagKey<Block> CELESTIAL_STEMS = register("celestial_stems");
     public static final TagKey<Block> DRIFTER_ATTRACTING_BLOCKS = register("drifter_attracting_blocks");
     public static final TagKey<Block> END_MYCELIUM_BLOCKS = register("end_mycelium_blocks");
+    public static final TagKey<Block> END_ORE_BLOCKS = register("end_ore_blocks");
     public static final TagKey<Block> FLANGER_BERRY_VINE_SUPPORT_BLOCKS = register("flanger_berry_vine_support_blocks");
     public static final TagKey<Block> FUNGUS_PLANTABLE_ON = register("fungus_plantable_on");
     public static final TagKey<Block> GROWTH_PLANTABLE_OM = register("growth_plantable_on");
