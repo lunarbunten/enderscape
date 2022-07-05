@@ -1,36 +1,25 @@
 package net.bunten.enderscape.items;
 
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.ImmutableMultimap.Builder;
-import com.google.common.collect.Multimap;
+import org.betterx.bclib.items.BaseArmorItem;
 
 import net.bunten.enderscape.registry.EnderscapeItems;
 import net.bunten.enderscape.registry.EnderscapeSounds;
-import net.bunten.enderscape.util.UUIDs;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 
-public class DriftLeggingsItem extends ArmorItem {
+public class DriftLeggingsItem extends BaseArmorItem {
     public DriftLeggingsItem(Settings settings) {
         super(Material.DRIFT, EquipmentSlot.LEGS, settings);
-    }
 
-    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
-        Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-
-        builder.put(EntityAttributes.GENERIC_ARMOR, new EntityAttributeModifier(UUIDs.LEGS, "Armor modifier", 4, EntityAttributeModifier.Operation.ADDITION));
-        builder.put(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, new EntityAttributeModifier(UUIDs.LEGS, "Armor toughness", 2, EntityAttributeModifier.Operation.ADDITION));
-        builder.put(EntityAttributes.GENERIC_MOVEMENT_SPEED, new EntityAttributeModifier(UUIDs.LEGS, "Speed modifier", 0.2, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
-
-        return slot == EquipmentSlot.LEGS ? builder.build() : super.getAttributeModifiers(slot);
+        var uuid = ARMOR_MODIFIER_UUID_PER_SLOT[slot.getEntitySlotId()];
+        var modifier = new EntityAttributeModifier(uuid, "Armor speed modifier", 0.2, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
+        addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, modifier);
     }
 
     public enum Material implements ArmorMaterial {
@@ -41,7 +30,7 @@ public class DriftLeggingsItem extends ArmorItem {
         }
 
         public int getProtectionAmount(EquipmentSlot slot) {
-            return 0;
+            return 4;
         }
 
         public int getEnchantability() {
@@ -62,7 +51,7 @@ public class DriftLeggingsItem extends ArmorItem {
         }
 
         public float getToughness() {
-            return 0;
+            return 2;
         }
 
         public float getKnockbackResistance() {
