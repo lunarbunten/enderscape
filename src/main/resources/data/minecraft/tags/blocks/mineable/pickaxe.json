@@ -1,12 +1,12 @@
 {
 	"replace": false,
 	"values": [
-		"enderscape:nebulite_block",
-		"enderscape:celestial_path_block",
-		"enderscape:nebulite_cauldron",
-		"enderscape:bulb_lantern",
 		"#enderscape:end_mycelium_blocks",
-		"#enderscape:end_ores",
-		"#enderscape:shadow_quartz_blocks"
+		"#enderscape:end_ore_blocks",
+		"#enderscape:shadow_quartz_blocks",
+		"enderscape:bulb_lantern",
+		"enderscape:celestial_path_block",
+		"enderscape:nebulite_block",
+		"enderscape:nebulite_cauldron"
 	]
 }
