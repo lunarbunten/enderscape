@@ -67,15 +67,15 @@ public abstract class EnderscapeBCLFeatures {
     .build(new CelestialGrowthFeatureConfig(24, 4, 4, UniformIntProvider.create(1, 1), UniformIntProvider.create(1, 2), 0.5F, 30));
 
     public static final BCLFeature MURUSHROOMS = BCLFeatureBuilder.start(Enderscape.id("murushrooms"), EnderscapeFeatures.MURUSHROOM)
-    .countLayers(1)
-    .modifier(uniform(YOffset.aboveBottom(20), YOffset.fixed(50)))
+    .countLayers(2)
+    .modifier(PlacedFeatures.BOTTOM_TO_TOP_RANGE)
     .squarePlacement()
     .decoration(VEGETAL_DECORATION)
     .build(new MurushroomFeatureConfig(8, 8, MurushroomsBlock.MAX_AGE, 100));
 
     public static final BCLFeature UNCOMMON_MURUSHROOMS = BCLFeatureBuilder.start(Enderscape.id("uncommon_murushrooms"), EnderscapeFeatures.MURUSHROOM)
-    .oncePerChunks(3)
-    .modifier(uniform(YOffset.aboveBottom(20), YOffset.fixed(50)))
+    .oncePerChunks(2)
+    .modifier(PlacedFeatures.BOTTOM_TO_TOP_RANGE)
     .squarePlacement()
     .decoration(VEGETAL_DECORATION)
     .build(new MurushroomFeatureConfig(8, 8, MurushroomsBlock.MAX_AGE, 100));
