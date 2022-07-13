@@ -23,13 +23,13 @@ public class CelestialGrowthFeature extends Feature<CelestialGrowthFeatureConfig
         Random random = context.getRandom();
         BlockPos pos = context.getOrigin();
 
-        var horizontalRange = config.getHorizontalRange();
-        var verticalRange = config.getHorizontalRange();
-        var verticalCheckRange = config.getVerticalCheckRange();
-        var baseHeight = config.getBaseHeight();
-        var additionalHeight = config.getAdditionalHeight();
-        var addedHeightChance = config.getAddedHeightChance();
-        var tries = config.getTries();
+        var horizontalRange = config.horizontalRange;
+        var verticalRange = config.verticalRange;
+        var verticalCheckRange = config.verticalCheckRange;
+        var baseHeight = config.baseHeight;
+        var additionalHeight = config.additionalHeight;
+        var addedHeightChance = config.addedHeightChance;
+        var tries = config.tries;
 
         return PlantUtil.generateCelestialGrowth(world, random, pos, baseHeight, additionalHeight, addedHeightChance, horizontalRange, verticalRange, verticalCheckRange, tries);
     }

@@ -23,10 +23,10 @@ public class MurushroomFeature extends Feature<MurushroomFeatureConfig> {
         Random random = context.getRandom();
         BlockPos pos = context.getOrigin();
 
-        var age = config.getAge();
-        var horizontalRange = config.getHorizontalRange();
-        var verticalRange = config.getVerticalRange();
-        var tries = config.getTries();
+        var age = config.age;
+        var horizontalRange = config.horizontalRange;
+        var verticalRange = config.verticalRange;
+        var tries = config.tries;
 
         if (!world.isAir(pos)) {
             return false;

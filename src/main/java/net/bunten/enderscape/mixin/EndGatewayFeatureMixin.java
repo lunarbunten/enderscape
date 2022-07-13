@@ -1,13 +1,14 @@
 package net.bunten.enderscape.mixin;
 
-import com.mojang.serialization.Codec;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.mojang.serialization.Codec;
+
 import net.bunten.enderscape.registry.EnderscapeBlocks;
+import net.bunten.enderscape.util.States;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.EndGatewayBlockEntity;
@@ -47,13 +48,13 @@ public abstract class EndGatewayFeatureMixin extends Feature<EndGatewayFeatureCo
                     }
                 });
             } else if (flag1) {
-                world.setBlockState(pos2, Blocks.AIR.getDefaultState(), 2);
+                world.setBlockState(pos2, States.AIR, 2);
             } else if (flag3 && flag && flag2) {
                 world.setBlockState(pos2, EnderscapeBlocks.SHADOW_STEEL_BLOCK.getDefaultState(), 2);
             } else if ((flag || flag2) && !flag3) {
                 world.setBlockState(pos2, EnderscapeBlocks.SHADOW_STEEL_BLOCK.getDefaultState(), 2);
             } else {
-                world.setBlockState(pos2, Blocks.AIR.getDefaultState(), 2);
+                world.setBlockState(pos2, States.AIR, 2);
             }
         }
 

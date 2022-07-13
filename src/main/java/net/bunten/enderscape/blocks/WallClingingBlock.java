@@ -2,8 +2,8 @@ package net.bunten.enderscape.blocks;
 
 import org.jetbrains.annotations.Nullable;
 
+import net.bunten.enderscape.util.States;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.util.math.BlockPos;
@@ -48,6 +48,6 @@ public class WallClingingBlock extends HorizontalFacingBlock {
     }
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction dir, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
-        return getDirection(state).getOpposite() == dir && !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, dir, newState, world, pos, posFrom);
+        return getDirection(state).getOpposite() == dir && !state.canPlaceAt(world, pos) ? States.AIR : super.getStateForNeighborUpdate(state, dir, newState, world, pos, posFrom);
     }
 }

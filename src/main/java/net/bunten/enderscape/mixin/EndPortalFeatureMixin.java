@@ -1,7 +1,5 @@
 package net.bunten.enderscape.mixin;
 
-import com.mojang.serialization.Codec;
-
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -9,7 +7,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.mojang.serialization.Codec;
+
 import net.bunten.enderscape.registry.EnderscapeBlocks;
+import net.bunten.enderscape.util.States;
 import net.minecraft.block.Blocks;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
@@ -41,16 +42,16 @@ public abstract class EndPortalFeatureMixin extends Feature<DefaultFeatureConfig
                     if (flag) {
                         setBlockState(world, blockpos.up(), EnderscapeBlocks.SHADOW_STEEL_BLOCK.getDefaultState());
                     } else if (blockpos.getY() < pos.getY()) {
-                        setBlockState(world, blockpos.up(), Blocks.END_STONE.getDefaultState());
+                        setBlockState(world, blockpos.up(), States.END_STONE);
                     }
                 } else if (blockpos.getY() > pos.getY()) {
-                    setBlockState(world, blockpos.up(), Blocks.AIR.getDefaultState());
+                    setBlockState(world, blockpos.up(), States.AIR);
                 } else if (!flag) {
                     setBlockState(world, blockpos.up(), EnderscapeBlocks.SHADOW_STEEL_BLOCK.getDefaultState());
                 } else if (open) {
                     setBlockState(world, blockpos.up(), Blocks.END_PORTAL.getDefaultState());
                 } else {
-                    setBlockState(world, blockpos.up(), Blocks.AIR.getDefaultState());
+                    setBlockState(world, blockpos.up(), States.AIR);
                 }
             }
         }

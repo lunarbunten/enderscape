@@ -13,31 +13,15 @@ public class CelestialVegetationFeatureConfig implements FeatureConfig {
             (Codec.intRange(1, 64).fieldOf("tries")).forGetter(config -> config.tries))
             .apply(instance, CelestialVegetationFeatureConfig::new));
 
-    private final int horizontalRange;
-    private final int verticalRange;
-    private final int verticalCheckRange;
-    private final int tries;
+    public final int horizontalRange;
+    public final int verticalRange;
+    public final int verticalCheckRange;
+    public final int tries;
 
     public CelestialVegetationFeatureConfig(int horizontalRange, int verticalRange, int verticalCheckRange, int tries) {
         this.horizontalRange = horizontalRange;
         this.verticalRange = verticalRange;
         this.verticalCheckRange = verticalCheckRange;
         this.tries = tries;
-    }
-
-    public int getHorizontalRange() {
-        return horizontalRange;
-    }
-
-    public int getVerticalRange() {
-        return verticalRange;
-    }
-
-    public int getVerticalCheckRange() {
-        return verticalCheckRange;
-    }
-
-    public int getTries() {
-        return tries;
     }
 }

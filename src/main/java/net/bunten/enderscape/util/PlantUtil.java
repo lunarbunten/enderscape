@@ -24,19 +24,12 @@ import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
 public class PlantUtil {
 
-    private static final BlockState BULB_FLOWER = EnderscapeBlocks.BULB_FLOWER.getDefaultState();
-    private static final BlockState CELESTIAL_GROWTH = EnderscapeBlocks.CELESTIAL_GROWTH.getDefaultState();
-    private static final BlockState CELESTIAL_FUNGUS = EnderscapeBlocks.CELESTIAL_FUNGUS.getDefaultState();
-    private static final BlockState CELESTIAL_MYCELIUM = EnderscapeBlocks.CELESTIAL_MYCELIUM_BLOCK.getDefaultState();
-    private static final BlockState MURUSHROOMS = EnderscapeBlocks.MURUSHROOMS.getDefaultState();
-    private static final BlockState MURUSHROOM_CAP = EnderscapeBlocks.MURUSHROOM_CAP.getDefaultState();
-
-    private static final WeightedBlockStateProvider PROVIDER = new WeightedBlockStateProvider(new DataPool.Builder<BlockState>().add(CELESTIAL_FUNGUS, 4).add(BULB_FLOWER, 1));
+    private static final WeightedBlockStateProvider PROVIDER = new WeightedBlockStateProvider(new DataPool.Builder<BlockState>().add(States.CELESTIAL_FUNGUS, 4).add(States.BULB_FLOWER, 1));
 
     public static void generateCelestialMycelium(WorldAccess world, BlockPos pos, int horizontalRange, int verticalRange, float chance) {
         horizontalRange /= 2;
 
-        world.setBlockState(pos, CELESTIAL_MYCELIUM, 2);
+        world.setBlockState(pos, States.CELESTIAL_MYCELIUM, 2);
         for (int x = -horizontalRange + 1; x < horizontalRange; x++) {
             for (int y = -verticalRange; y < verticalRange; y++) {
                 for (int z = -horizontalRange + 1; z < horizontalRange; z++) {
@@ -44,7 +37,7 @@ public class PlantUtil {
                     boolean bl = world.getBlockState(pos2.up()).isTranslucent(world, pos2) && world.getBlockState(pos2).isOf(Blocks.END_STONE);
                     if (bl && MathUtil.sqrt(x * x + y * y + z * z) <= horizontalRange) {
                         if (world.getRandom().nextFloat() < chance) {
-                            world.setBlockState(pos2, CELESTIAL_MYCELIUM, 2);
+                            world.setBlockState(pos2, States.CELESTIAL_MYCELIUM, 2);
                         }
                     }
                 }
@@ -90,7 +83,7 @@ public class PlantUtil {
                             growthPart = GrowthPart.TOP;
                         }
 
-                        world.setBlockState(mutable, CELESTIAL_GROWTH.with(EnderscapeProperties.GROWTH_PART, growthPart), 2);
+                        world.setBlockState(mutable, States.CELESTIAL_GROWTH.with(EnderscapeProperties.GROWTH_PART, growthPart), 2);
                         mutable.move(Direction.UP);
                     }
                 }
@@ -143,7 +136,7 @@ public class PlantUtil {
                     BlockPos wall = pos2.offset(dir);
     
                     if (world.getBlockState(wall).isOpaqueFullCube(world, wall)) {
-                        world.setBlockState(pos2, MURUSHROOMS.with(MurushroomsBlock.FACING, dir.getOpposite()).with(MurushroomsBlock.AGE, age), 2);
+                        world.setBlockState(pos2, States.MURUSHROOMS.with(MurushroomsBlock.FACING, dir.getOpposite()).with(MurushroomsBlock.AGE, age), 2);
                         p++;
     
                         break;
@@ -171,7 +164,7 @@ public class PlantUtil {
                 if (Math.sqrt(x * x + z * z) <= size * 0.8) {
                     var pos2 = pos.add(x, 0, z);
                     if (world.getBlockState(pos2).getMaterial().isReplaceable()) {
-                        world.setBlockState(pos2, MURUSHROOM_CAP, 2);
+                        world.setBlockState(pos2, States.MURUSHROOM_CAP, 2);
                         result = true;
                     }
                 }
@@ -182,12 +175,6 @@ public class PlantUtil {
     }
 
     protected class LargeCelestialFungusGenerator {
-
-        private static final BlockState STEM = EnderscapeBlocks.CELESTIAL_STEM.getDefaultState();
-        private static final BlockState CAP = EnderscapeBlocks.CELESTIAL_CAP.getDefaultState();
-    
-        private static final BlockState VINE = EnderscapeBlocks.FLANGER_BERRY_VINE.getDefaultState();
-        private static final BlockState BERRY = EnderscapeBlocks.FLANGER_BERRY_BLOCK.getDefaultState();
 
         protected static void place(WorldAccess world, BlockPos pos, BlockState state) {
             world.setBlockState(pos, state, 2);
@@ -244,13 +231,13 @@ public class PlantUtil {
                     for (int i = 0; i <= length; i++) {
                         if (world.isAir(mutable)) {
                             if (i == length || !world.isAir(mutable.down())) {
-                                BlockState state = BERRY;
+                                BlockState state = States.FLANGER_BERRY;
                                 state = state.with(FlangerBerryBlock.STAGE, Util.getRandom(FlangerBerryStage.values(), random));
                                 place(world, mutable, state);
                                 
                                 break;
                             } else {
-                                place(world, mutable, VINE.with(Properties.ATTACHED, true).with(FlangerBerryVine.AGE, FlangerBerryVine.MAX_AGE));
+                                place(world, mutable, States.FLANGER_VINE.with(Properties.ATTACHED, true).with(FlangerBerryVine.AGE, FlangerBerryVine.MAX_AGE));
                             }
     
                             mutable.move(Direction.DOWN);
@@ -270,7 +257,7 @@ public class PlantUtil {
                     if (distance <= radius) {
                         for (int capOrder = 1; capOrder < radius; capOrder++) {
                             int droopAmount = distance >= radius * percentageForCapDrooping && capOrder == 1 && radius > 3 ? 1 : 0;
-                            place(world, pos.add(x / capOrder, -(2 * capOrder + droopAmount) + 2, z / capOrder), CAP);
+                            place(world, pos.add(x / capOrder, -(2 * capOrder + droopAmount) + 2, z / capOrder), States.CELESTIAL_CAP);
                         }
                     }
                 }
@@ -280,11 +267,11 @@ public class PlantUtil {
         }
     
         public static void generate(WorldAccess world, Random random, BlockPos pos, int height, float capRadiusDivision, float stemCapDivision, float percentageForCapDrooping, float excessVineDiscardChance, int vineGenerationTries) {
-            world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
-            place(world, pos.down(), Blocks.END_STONE.getDefaultState());
+            world.setBlockState(pos, States.AIR, 4);
+            place(world, pos.down(), States.END_STONE);
             generateCap(world, random, pos.up(height), (int) (height / capRadiusDivision), stemCapDivision, percentageForCapDrooping, excessVineDiscardChance, vineGenerationTries);
             for (int a = 0; a < height; a++) {
-                place(world, pos.up(a), STEM);
+                place(world, pos.up(a), States.CELESTIAL_STEM);
             }
         }
     }

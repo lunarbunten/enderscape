@@ -56,10 +56,12 @@ public class Enderscape implements ModInitializer {
     }
 
     private static ImmutableMap<Block, Block> getStrippedMap() {
-        return new Builder<Block, Block>()
-        .put(EnderscapeBlocks.CELESTIAL_STEM, EnderscapeBlocks.STRIPPED_CELESTIAL_STEM)
-        .put(EnderscapeBlocks.CELESTIAL_HYPHAE, EnderscapeBlocks.STRIPPED_CELESTIAL_HYPHAE)
-        .build();
+        var builder = new Builder<Block, Block>();
+
+        builder.put(EnderscapeBlocks.CELESTIAL_STEM, EnderscapeBlocks.STRIPPED_CELESTIAL_STEM);
+        builder.put(EnderscapeBlocks.CELESTIAL_HYPHAE, EnderscapeBlocks.STRIPPED_CELESTIAL_HYPHAE);
+
+        return builder.build();
     }
 
     private void registerEvents() {

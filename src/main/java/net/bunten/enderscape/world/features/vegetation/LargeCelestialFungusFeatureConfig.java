@@ -17,13 +17,13 @@ public class LargeCelestialFungusFeatureConfig implements FeatureConfig {
             (Codec.intRange(1, 64).fieldOf("tries")).forGetter(config -> config.tries))
             .apply(instance, LargeCelestialFungusFeatureConfig::new));
 
-    private final IntProvider height;
-    private final float capRadiusDivision;
-    private final float stemCapDivision;
-    private final float percentageForCapDrooping;
-    private final float excessVineDiscardChance;
-    private final int vineGenerationTries;
-    private final int tries;
+    public final IntProvider height;
+    public final float capRadiusDivision;
+    public final float stemCapDivision;
+    public final float percentageForCapDrooping;
+    public final float excessVineDiscardChance;
+    public final int vineGenerationTries;
+    public final int tries;
 
     public LargeCelestialFungusFeatureConfig(IntProvider height, float capRadiusDivision, float stemCapDivision, float percentageForCapDrooping, float excessVineDiscardChance, int vineGenerationTries, int tries) {
         this.height = height;
@@ -33,33 +33,5 @@ public class LargeCelestialFungusFeatureConfig implements FeatureConfig {
         this.excessVineDiscardChance = excessVineDiscardChance;
         this.vineGenerationTries = vineGenerationTries;
         this.tries = tries;
-    }
-
-    public IntProvider getHeight() {
-        return height;
-    }
-
-    public float getCapRadiusDivision() {
-        return capRadiusDivision;
-    }
-
-    public float getStemCapDivision() {
-        return stemCapDivision;
-    }
-
-    public float getPercentageforCapDrooping() {
-        return percentageForCapDrooping;
-    }
-
-    public float getExcessVineDiscardChance() {
-        return excessVineDiscardChance;
-    }
-
-    public int getVineGenerationTries() {
-        return vineGenerationTries;
-    }
-
-    public int getTries() {
-        return tries;
     }
 }

@@ -49,13 +49,14 @@ public class EnderscapeBlocks {
     public static final TagKey<Block> CELESTIAL_STEMS = register("celestial_stems");
     public static final TagKey<Block> DRIFTER_ATTRACTING_BLOCKS = register("drifter_attracting_blocks");
     public static final TagKey<Block> END_MYCELIUM_BLOCKS = register("end_mycelium_blocks");
-    public static final TagKey<Block> END_ORES = register("end_ores");
+    public static final TagKey<Block> END_ORE_BLOCKS = register("end_ore_blocks");
     public static final TagKey<Block> FLANGER_BERRY_VINE_SUPPORT_BLOCKS = register("flanger_berry_vine_support_blocks");
     public static final TagKey<Block> FUNGUS_PLANTABLE_ON = register("fungus_plantable_on");
     public static final TagKey<Block> GROWTH_PLANTABLE_OM = register("growth_plantable_on");
     public static final TagKey<Block> LARGE_CELESTIAL_FUNGUS_GROWABLE_ON = register("large_celestial_fungus_growable_on");
     public static final TagKey<Block> LARGE_CELESTIAL_FUNGUS_GENERATABLE = register("large_celestial_fungus_generatable");
     public static final TagKey<Block> MIRROR_LODESTONE_BLOCKS = register("mirror_lodestone_blocks");
+    public static final TagKey<Block> ORE_REPLACEABLES = register("ore_replaceables");
     public static final TagKey<Block> SHADOW_QUARTZ_BLOCKS = register("shadow_quartz_blocks");
     public static final TagKey<Block> SHADOW_STEEL_BLOCKS = register("shadow_steel_blocks");
     public static final TagKey<Block> SUPPORTS_END_CRYSTAL = register("supports_end_crystal");

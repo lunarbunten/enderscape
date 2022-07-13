@@ -5,12 +5,11 @@ import java.util.Random;
 import com.mojang.serialization.Codec;
 
 import net.bunten.enderscape.blocks.MurushroomsBlock;
-import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.util.MathUtil;
 import net.bunten.enderscape.util.OpenSimplexNoise;
 import net.bunten.enderscape.util.PlantUtil;
+import net.bunten.enderscape.util.States;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.StructureWorldAccess;
@@ -24,15 +23,12 @@ public class CelestialIslandFeature extends Feature<CelestialIslandFeatureConfig
 
     private final OpenSimplexNoise NOISE = new OpenSimplexNoise(1512);
 
-    private final BlockState END_STONE = Blocks.END_STONE.getDefaultState();
-    private final BlockState CELESTIAL = EnderscapeBlocks.CELESTIAL_MYCELIUM_BLOCK.getDefaultState();
-
     protected BlockState getTopBlockState(BlockPos pos, Random random) {
         double value =  NOISE.eval(pos.getX() * 0.2, pos.getZ() * 0.2) + (random.nextFloat() * 0.12F) * 4;
         if (value > 0.42F) {
-            return END_STONE;
+            return States.END_STONE;
         } else {
-            return CELESTIAL;
+            return States.CELESTIAL_MYCELIUM;
         }
     }
 
@@ -47,7 +43,7 @@ public class CelestialIslandFeature extends Feature<CelestialIslandFeatureConfig
                 for (int z = MathUtil.floor(-width); z <= MathUtil.ceil(width); ++z) {
                     if ((x * x + z * z) <= (width + 1) * (width + 1) && width > 0.35F) {
                         var pos2 = pos.add(x, y, z);
-                        var state = y == 0 ? getTopBlockState(pos2, random) : END_STONE;
+                        var state = y == 0 ? getTopBlockState(pos2, random) : States.END_STONE;
                         setBlockState(world, pos2, state);
                     }
                 }
@@ -93,9 +89,9 @@ public class CelestialIslandFeature extends Feature<CelestialIslandFeatureConfig
         Random random = context.getRandom();
         BlockPos pos = context.getOrigin();
 
-        int width = config.getWidth().get(random);
-        int height = config.getHeight().get(random);
-        float murushroomChance = config.getMurushroomChance();
+        int width = config.width.get(random);
+        int height = config.height.get(random);
+        float murushroomChance = config.murushroomChance;
 
         createIsland(world, random, pos, width, height, murushroomChance);
 

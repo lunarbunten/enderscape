@@ -13,25 +13,13 @@ public class CelestialIslandFeatureConfig implements FeatureConfig {
             (Codec.floatRange(0, 1).fieldOf("murushroomChance")).forGetter(config -> config.murushroomChance))
             .apply(instance, CelestialIslandFeatureConfig::new));
 
-    private final IntProvider width;
-    private final IntProvider height;
-    private final float murushroomChance;
+    public final IntProvider width;
+    public final IntProvider height;
+    public final float murushroomChance;
 
     public CelestialIslandFeatureConfig(IntProvider width, IntProvider height, float murushroomChance) {
         this.width = width;
         this.height = height;
         this.murushroomChance = murushroomChance;
-    }
-
-    public IntProvider getWidth() {
-        return width;
-    }
-
-    public IntProvider getHeight() {
-        return height;
-    }
-
-    public float getMurushroomChance() {
-        return murushroomChance;
     }
 }

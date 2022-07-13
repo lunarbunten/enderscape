@@ -7,9 +7,9 @@ import net.bunten.enderscape.blocks.properties.GrowthPart;
 import net.bunten.enderscape.interfaces.LayerMapped;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.util.PlantUtil;
+import net.bunten.enderscape.util.States;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.block.PlantBlock;
 import net.minecraft.block.ShapeContext;
@@ -61,7 +61,7 @@ public class CelestialGrowthBlock extends PlantBlock implements LayerMapped, Fer
                 return getPartState(world.getBlockState(pos.up()).isOf(this) ? GrowthPart.BOTTOM : GrowthPart.TOP);
             }
         } else {
-            return Blocks.AIR.getDefaultState();
+            return States.AIR;
         }
     }
 

@@ -7,10 +7,10 @@ import net.bunten.enderscape.blocks.properties.FlangerBerryStage;
 import net.bunten.enderscape.interfaces.LayerMapped;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.EnderscapeSounds;
+import net.bunten.enderscape.util.States;
 import net.bunten.enderscape.util.Util;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.FallingBlock;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.block.ShapeContext;
@@ -36,8 +36,8 @@ import net.minecraft.world.WorldView;
 import net.minecraft.world.event.GameEvent;
 
 public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, Fertilizable {
+    
     public static final EnumProperty<FlangerBerryStage> STAGE = EnderscapeProperties.FLANGER_BERRY_STAGE;
-    private static final Block VINE = EnderscapeBlocks.FLANGER_BERRY_VINE;
 
     public FlangerBerryBlock(Settings settings) {
         super(settings);
@@ -97,7 +97,7 @@ public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, 
     protected boolean canFall(World world, BlockState state, BlockPos pos) {
         boolean bl = false;
         if (FallingBlock.canFallThrough(world.getBlockState(pos.down()))) {
-            if (isRipe(state) && world.getBlockState(pos.up()).getBlock() != VINE) {
+            if (isRipe(state) && world.getBlockState(pos.up()).getBlock() != EnderscapeBlocks.FLANGER_BERRY_VINE) {
                 bl = true;
             }
         }
@@ -116,7 +116,7 @@ public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         world.createAndScheduleBlockTick(pos, this, getFallDelay());
         if (!canPlaceAt(state, world, pos)) {
-            return Blocks.AIR.getDefaultState();
+            return States.AIR;
         } else {
             return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
         }
@@ -130,7 +130,7 @@ public class FlangerBerryBlock extends TransparentBlock implements LayerMapped, 
     }
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return isRipe(state) ? true : world.getBlockState(pos.up()).isOf(VINE);
+        return isRipe(state) ? true : world.getBlockState(pos.up()).isOf(EnderscapeBlocks.FLANGER_BERRY_VINE);
     }
 
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {

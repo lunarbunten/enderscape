@@ -24,13 +24,13 @@ public class LargeCelestialFungusFeature extends Feature<LargeCelestialFungusFea
         Random random = context.getRandom();
         BlockPos pos = context.getOrigin();
 
-        var height = config.getHeight().get(random);
-        var capRadiusDivision = config.getCapRadiusDivision();
-        var stemCapDivision = config.getStemCapDivision();
-        var percentageForCapDrooping = config.getPercentageforCapDrooping();
-        var excessVineDiscardChance = config.getExcessVineDiscardChance();
-        var vineGenerationTries = config.getVineGenerationTries();
-        var tries = config.getTries();
+        var height = config.height.get(random);
+        var capRadiusDivision = config.capRadiusDivision;
+        var stemCapDivision = config.stemCapDivision;
+        var percentageForCapDrooping = config.percentageForCapDrooping;
+        var excessVineDiscardChance = config.excessVineDiscardChance;
+        var vineGenerationTries = config.vineGenerationTries;
+        var tries = config.tries;
 
         if (!world.isAir(pos)) {
             return false;

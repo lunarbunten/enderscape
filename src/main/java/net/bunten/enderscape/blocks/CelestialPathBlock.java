@@ -2,10 +2,10 @@ package net.bunten.enderscape.blocks;
 
 import java.util.Random;
 
+import net.bunten.enderscape.util.States;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.FarmlandBlock;
 import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.ShapeContext;
@@ -32,7 +32,7 @@ public class CelestialPathBlock extends Block {
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         if (!this.getDefaultState().canPlaceAt(ctx.getWorld(), ctx.getBlockPos())) {
-            return Block.pushEntitiesUpBeforeBlockChange(this.getDefaultState(), Blocks.DIRT.getDefaultState(), ctx.getWorld(), ctx.getBlockPos());
+            return Block.pushEntitiesUpBeforeBlockChange(getDefaultState(), States.END_STONE, ctx.getWorld(), ctx.getBlockPos());
         }
         return super.getPlacementState(ctx);
     }
@@ -47,7 +47,7 @@ public class CelestialPathBlock extends Block {
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        world.setBlockState(pos, FarmlandBlock.pushEntitiesUpBeforeBlockChange(state, Blocks.END_STONE.getDefaultState(), world, pos));
+        world.setBlockState(pos, FarmlandBlock.pushEntitiesUpBeforeBlockChange(state, States.END_STONE, world, pos));
     }
 
     @Override
