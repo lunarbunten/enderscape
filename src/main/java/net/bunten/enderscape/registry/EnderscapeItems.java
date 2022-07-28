@@ -36,8 +36,8 @@ public class EnderscapeItems {
     public static final Item NEBULITE = new NebuliteItem(new FabricItemSettings().group(Enderscape.ITEM_GROUP));
     public static final Item NEBULITE_SHARDS = new Item(new FabricItemSettings().group(Enderscape.ITEM_GROUP));
     public static final Item SHADOW_QUARTZ = new Item(new FabricItemSettings().group(Enderscape.ITEM_GROUP));
-    public static final Item MUSIC_DISC_BLISS = new MusicDiscItem(0, EnderscapeSounds.MUSIC_DISC_BLISS, new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(Enderscape.ITEM_GROUP));
-    public static final Item MUSIC_DISC_GLARE = new MusicDiscItem(0, EnderscapeSounds.MUSIC_DISC_GLARE, new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(Enderscape.ITEM_GROUP));
+    public static final Item MUSIC_DISC_BLISS = new MusicDiscItem(0, EnderscapeSounds.MUSIC_DISC_BLISS, new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(Enderscape.ITEM_GROUP), 150);
+    public static final Item MUSIC_DISC_GLARE = new MusicDiscItem(0, EnderscapeSounds.MUSIC_DISC_GLARE, new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(Enderscape.ITEM_GROUP), 84);
     public static final Item DRIFTER_SPAWN_EGG = new SpawnEggItem(EnderscapeEntities.DRIFTER, 0xE97FFF, 0x7554A8, (new FabricItemSettings()).group(Enderscape.ITEM_GROUP));
     public static final Item DRIFTLET_SPAWN_EGG = new SpawnEggItem(EnderscapeEntities.DRIFTLET, 0xFFAAF9, 0xE97FFF, (new FabricItemSettings()).group(Enderscape.ITEM_GROUP));
     public static final Item RUBBLEMITE_SPAWN_EGG = new SpawnEggItem(EnderscapeEntities.RUBBLEMITE, 0xF2FDBE, 0xC1B687, (new FabricItemSettings()).group(Enderscape.ITEM_GROUP));

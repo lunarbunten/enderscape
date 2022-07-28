@@ -33,7 +33,7 @@ dependencies {
 
 	modRuntimeOnly "maven.modrinth:lazydfu:0.1.3"
 	modRuntimeOnly "maven.modrinth:fastload:1.19.fabric.1.1.0"
-	modRuntimeOnly "maven.modrinth:modmenu:4.0.0"
+	modRuntimeOnly "maven.modrinth:modmenu:4.0.5"
 }
 
 loom {
