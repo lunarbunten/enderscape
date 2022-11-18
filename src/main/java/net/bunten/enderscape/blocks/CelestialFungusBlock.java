@@ -1,62 +1,58 @@
 package net.bunten.enderscape.blocks;
 
-import net.bunten.enderscape.interfaces.LayerMapped;
+import net.bunten.enderscape.blocks.properties.DirectionProperties;
+import net.bunten.enderscape.blocks.properties.StateProperties;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
+import net.bunten.enderscape.util.BlockUtil;
 import net.bunten.enderscape.util.PlantUtil;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Fertilizable;
-import net.minecraft.block.PlantBlock;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.IntProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class CelestialFungusBlock extends PlantBlock implements Fertilizable, LayerMapped {
-    public static final IntProperty STAGE = Properties.STAGE;
+public class CelestialFungusBlock extends DirectionalPlantBlock implements BonemealableBlock {
+    public static final IntegerProperty STAGE = StateProperties.STAGE;
 
-    public CelestialFungusBlock(Settings settings) {
-        super(settings);
-        setDefaultState(stateManager.getDefaultState().with(STAGE, 0));
+    public CelestialFungusBlock(Properties settings) {
+        super(DirectionProperties.create().up(), settings);
+        registerDefaultState(defaultBlockState().setValue(STAGE, 0));
     }
 
     @Override
-    public boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.isIn(EnderscapeBlocks.FUNGUS_PLANTABLE_ON);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING, STAGE);
     }
 
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext ctx) {
-        return createCuboidShape(4, 0, 4, 12, 9, 12);
+    @Override
+    public boolean canPlantOn(BlockState state, BlockState floor, BlockGetter world, BlockPos pos) {
+        return floor.is(EnderscapeBlocks.PLANTABLE_FUNGUS);
     }
 
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-        return world.getBlockState(pos.down()).isIn(EnderscapeBlocks.LARGE_CELESTIAL_FUNGUS_GROWABLE_ON);
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
+        return BlockUtil.createRotatedShape(4, 0, 4, 12, 9, 12, getFacing(state));
     }
 
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+    public boolean isValidBonemealTarget(BlockGetter world, BlockPos pos, BlockState state, boolean isClient) {
+        return world.getBlockState(pos.below()).is(EnderscapeBlocks.LARGE_CELESTIAL_FUNGUS_GROWABLE_ON);
+    }
+
+    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
         return random.nextFloat() < 0.45;
     }
 
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        if (state.get(STAGE) == 0) {
-            world.setBlockState(pos, state.cycle(STAGE), 4);
+    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
+        if (state.getValue(STAGE) == 0) {
+            world.setBlock(pos, state.cycle(STAGE), 4);
         } else {
             PlantUtil.generateDefaultLargeCelestialFungus(world, random, pos);
         }
-    }
-
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(STAGE);
-    }
-
-    @Override
-    public LayerType getLayerType() {
-        return LayerType.CUTOUT;
     }
 }

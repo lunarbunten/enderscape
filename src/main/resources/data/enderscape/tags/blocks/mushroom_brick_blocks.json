@@ -1,0 +1,13 @@
+{
+	"replace": false,
+	"values": [
+        "enderscape:celestial_bricks",
+        "enderscape:celestial_brick_stairs",
+        "enderscape:celestial_brick_slab",
+        "enderscape:celestial_brick_wall",
+        "enderscape:murushroom_bricks",
+        "enderscape:murushroom_brick_stairs",
+        "enderscape:murushroom_brick_slab",
+        "enderscape:murushroom_brick_wall"
+	]
+}

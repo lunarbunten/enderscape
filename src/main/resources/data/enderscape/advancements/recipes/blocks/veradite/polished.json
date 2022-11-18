@@ -1,0 +1,34 @@
+{
+    "parent": "minecraft:recipes/root",
+    "rewards": {
+        "recipes": [
+            "enderscape:blocks/veradite/polished"
+        ]
+    },
+    "criteria": {
+        "has_item": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "enderscape:veradite"
+                        ]
+                    }
+                ]
+            }
+        },
+        "has_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+                "recipe": "enderscape:blocks/veradite/polished"
+            }
+        }
+    },
+    "requirements": [
+        [
+            "has_item",
+            "has_recipe"
+        ]
+    ]
+}

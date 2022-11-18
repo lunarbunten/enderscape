@@ -1,9 +1,13 @@
 {
     "replace": false,
     "values": [
-        "enderscape:celestial_stairs",
         "enderscape:shadow_quartz_block_stairs",
         "enderscape:smooth_shadow_quartz_stairs",
-        "enderscape:shadow_quartz_brick_stairs"
+        "enderscape:shadow_quartz_brick_stairs",
+        "enderscape:veradite_stairs",
+        "enderscape:polished_veradite_stairs",
+        "enderscape:veradite_brick_stairs",
+        "enderscape:celestial_brick_stairs",
+        "enderscape:murushroom_brick_stairs"
     ]
 }

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bark",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "enderscape:stripped_celestial_stem"
+    }
+  },
+  "result": {
+    "item": "enderscape:stripped_celestial_hyphae",
+    "count": 3
+  }
+}

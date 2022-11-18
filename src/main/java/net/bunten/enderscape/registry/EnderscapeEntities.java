@@ -3,44 +3,52 @@ package net.bunten.enderscape.registry;
 import org.betterx.bclib.api.v2.spawning.SpawnRuleBuilder;
 
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.entity.drifter.DrifterEntity;
-import net.bunten.enderscape.entity.driftlet.DriftletEntity;
-import net.bunten.enderscape.entity.rubblemite.RubblemiteEntity;
+import net.bunten.enderscape.entity.drifter.Drifter;
+import net.bunten.enderscape.entity.driftlet.Driftlet;
+import net.bunten.enderscape.entity.rubblemite.Rubblemite;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EntityType.EntityFactory;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.tag.TagKey;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.Heightmap.Type;
+import net.minecraft.core.Registry;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityType.EntityFactory;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.levelgen.Heightmap.Types;
 
 public class EnderscapeEntities {
 
-    public static final EntityType<DrifterEntity> DRIFTER = register("drifter", DrifterEntity::new, SpawnGroup.CREATURE, 1.9F, 2.9F);
-    public static final EntityType<DriftletEntity> DRIFTLET = register("driftlet", DriftletEntity::new, SpawnGroup.CREATURE, 1, 1.2F);
-    public static final EntityType<RubblemiteEntity> RUBBLEMITE = register("rubblemite", RubblemiteEntity::new, SpawnGroup.MONSTER, 0.6F, 0.4F);
-
     public static final TagKey<EntityType<?>> DRIFTERS = register("drifters");
 
-    private static <T extends MobEntity> EntityType<T> register(String name, EntityFactory<T> entity, SpawnGroup group, float width, float height) {
-        EntityType<T> type = FabricEntityTypeBuilder.<T>create(group, entity).dimensions(EntityDimensions.fixed(width, height)).build();
-        return Registry.register(Registry.ENTITY_TYPE, Enderscape.id(name), type);
+    public static final EntityType<Drifter> DRIFTER = register("drifter", Drifter::new, MobCategory.CREATURE, 1.9F, 2.9F);
+    public static final EntityType<Driftlet> DRIFTLET = register("driftlet", Driftlet::new, MobCategory.CREATURE, 1, 1.2F);
+    public static final EntityType<Rubblemite> RUBBLEMITE = register("rubblemite", Rubblemite::new, MobCategory.MONSTER, 0.6F, 0.4F);
+
+    private static <T extends Entity> EntityType<T> register(String name, EntityType<T> entity) {
+        return Registry.register(Registry.ENTITY_TYPE, Enderscape.id(name), entity);
+    }
+
+    private static <T extends Mob> EntityType<T> register(String name, EntityFactory<T> entity, MobCategory group, float width, float height) {
+        return register(name, begin(name, entity, group, width, height).build());
+    }
+
+    private static <T extends Entity> FabricEntityTypeBuilder<T> begin(String name, EntityFactory<T> entity, MobCategory group, float width, float height) {
+        return FabricEntityTypeBuilder.<T>create(group, entity).dimensions(EntityDimensions.fixed(width, height));
     }
 
     private static TagKey<EntityType<?>> register(String name) {
-        return TagKey.of(Registry.ENTITY_TYPE_KEY, Enderscape.id(name));
+        return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, Enderscape.id(name));
     }
 
-    public static void init() {
-        SpawnRuleBuilder.start(DRIFTER).maxNearby(6, 32).buildOnGround(Type.MOTION_BLOCKING_NO_LEAVES);
-        SpawnRuleBuilder.start(DRIFTLET).maxNearby(6, 32).buildOnGround(Type.MOTION_BLOCKING_NO_LEAVES);
-        SpawnRuleBuilder.start(RUBBLEMITE).notPeaceful().onlyOnValidBlocks().maxNearby(6, 32).buildOnGround(Type.MOTION_BLOCKING_NO_LEAVES);
-        
-        FabricDefaultAttributeRegistry.register(DRIFTER, DrifterEntity.createAttributes());
-        FabricDefaultAttributeRegistry.register(DRIFTLET, DriftletEntity.createAttributes());
-        FabricDefaultAttributeRegistry.register(RUBBLEMITE, RubblemiteEntity.createAttributes());
+    static {
+        SpawnRuleBuilder.start(DRIFTER).maxNearby(6, 32).buildOnGround(Types.MOTION_BLOCKING_NO_LEAVES);
+        SpawnRuleBuilder.start(DRIFTLET).maxNearby(6, 32).buildOnGround(Types.MOTION_BLOCKING_NO_LEAVES);
+        SpawnRuleBuilder.start(RUBBLEMITE).notPeaceful().hostile(1).maxNearby(6, 32).onlyOnValidBlocks().buildOnGround(Types.MOTION_BLOCKING_NO_LEAVES);
+
+        FabricDefaultAttributeRegistry.register(DRIFTER, Drifter.createAttributes());
+        FabricDefaultAttributeRegistry.register(DRIFTLET, Driftlet.createAttributes());
+        FabricDefaultAttributeRegistry.register(RUBBLEMITE, Rubblemite.createAttributes());
     }
 }

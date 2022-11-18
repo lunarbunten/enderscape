@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
-        "enderscape:celestial_button"
+        "enderscape:celestial_button",
+        "enderscape:murushroom_button"
     ]
 }

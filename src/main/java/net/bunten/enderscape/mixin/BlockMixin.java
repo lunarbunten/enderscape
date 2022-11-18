@@ -5,44 +5,29 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.bunten.enderscape.registry.EnderscapeBlocks;
-import net.bunten.enderscape.registry.EnderscapeSounds;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.sound.BlockSoundGroup;
+import net.bunten.enderscape.blocks.SoundTypeModification;
+import net.bunten.enderscape.registry.EnderscapeModifications;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 
+/*
+ *  Block sound modifications
+ */
 @Mixin(Block.class)
-public abstract class BlockMixin extends AbstractBlock {
-    public BlockMixin(Settings settings) {
+public abstract class BlockMixin extends BlockBehaviour {
+    public BlockMixin(Properties settings) {
         super(settings);
     }
 
-    @Inject(at = @At("HEAD"), method = "getSoundGroup", cancellable = true)
-    public void getSoundGroup(BlockState state, CallbackInfoReturnable<BlockSoundGroup> info) {
-        
-        if (state.isIn(EnderscapeBlocks.CHORUS_SOUND_BLOCKS)) {
-            info.setReturnValue(EnderscapeSounds.CHORUS);
-        }
-
-        if (state.isIn(EnderscapeBlocks.PURPUR_SOUND_BLOCKS)) {
-            info.setReturnValue(EnderscapeSounds.PURPUR);
-        }
-
-        if (state.isIn(EnderscapeBlocks.END_ROD_SOUND_BLOCKS)) {
-            info.setReturnValue(EnderscapeSounds.END_ROD);
-        }
-
-        if (state.isIn(EnderscapeBlocks.END_STONE_SOUND_BLOCKS)) {
-            info.setReturnValue(EnderscapeSounds.END_STONE);
-        }
-
-        if (state.isIn(EnderscapeBlocks.END_STONE_BRICK_SOUND_BLOCKS)) {
-            info.setReturnValue(EnderscapeSounds.END_STONE_BRICKS);
-        }
-
-        if (state.isIn(EnderscapeBlocks.SHULKER_SOUND_BLOCKS)) {
-            info.setReturnValue(EnderscapeSounds.SHULKER);
+    @Inject(at = @At("HEAD"), method = "getSoundType", cancellable = true)
+    public void getSoundType(BlockState state, CallbackInfoReturnable<SoundType> info) {
+        ResourceLocation key = Registry.BLOCK.getKey((Block) (Object) this);
+        for (SoundTypeModification modification : EnderscapeModifications.MODIFICATIONS) {
+            if (modification.getBlocks().contains(key.getPath()) && modification.applies()) info.setReturnValue(modification.getSoundType());
         }
     }
 }

@@ -3,12 +3,12 @@ package net.bunten.enderscape.world.features.vegetation;
 import com.mojang.serialization.Codec;
 
 import net.bunten.enderscape.registry.EnderscapeBlocks;
-import net.bunten.enderscape.util.PlantUtil;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.bunten.enderscape.world.generator.LargeCelestialFungusGenerator;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 public class LargeCelestialFungusFeature extends Feature<LargeCelestialFungusFeatureConfig> {
     public LargeCelestialFungusFeature(Codec<LargeCelestialFungusFeatureConfig> codec) {
@@ -16,26 +16,18 @@ public class LargeCelestialFungusFeature extends Feature<LargeCelestialFungusFea
     }
 
     @Override
-    public boolean generate(FeatureContext<LargeCelestialFungusFeatureConfig> context) {
-        var config = context.getConfig();
+    public boolean place(FeaturePlaceContext<LargeCelestialFungusFeatureConfig> context) {
+        var config = context.config();
 
-        StructureWorldAccess world = context.getWorld();
-        Random random = context.getRandom();
-        BlockPos pos = context.getOrigin();
+        WorldGenLevel world = context.level();
+        RandomSource random = context.random();
+        BlockPos pos = context.origin();
 
-        var height = config.height.get(random);
-        var capRadiusDivision = config.capRadiusDivision;
-        var stemCapDivision = config.stemCapDivision;
-        var percentageForCapDrooping = config.percentageForCapDrooping;
-        var excessVineDiscardChance = config.excessVineDiscardChance;
-        var vineGenerationTries = config.vineGenerationTries;
-        var tries = config.tries;
-
-        if (!world.isAir(pos)) {
+        if (!world.isEmptyBlock(pos)) {
             return false;
         } else {
-            if (world.getBlockState(pos.down()).isIn(EnderscapeBlocks.LARGE_CELESTIAL_FUNGUS_GENERATABLE)) {
-                return PlantUtil.generateLargeCelestialFungus(world, random, pos, height, capRadiusDivision, stemCapDivision, percentageForCapDrooping, excessVineDiscardChance, vineGenerationTries, tries);
+            if (world.getBlockState(pos.below()).is(EnderscapeBlocks.LARGE_CELESTIAL_FUNGUS_GENERATABLE)) {
+                return LargeCelestialFungusGenerator.tryGenerate(world, random, pos, config);
             } else {
                 return false;
             }

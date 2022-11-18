@@ -4,19 +4,19 @@ import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.client.EnderscapeClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.entity.EntityRendererFactory.Context;
-import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
-public class DrifterRenderer extends MobEntityRenderer<DrifterEntity, DrifterModel> {
+public class DrifterRenderer extends MobRenderer<Drifter, DrifterModel> {
     public DrifterRenderer(Context context) {
-        super(context, new DrifterModel(context.getPart(EnderscapeClient.DRIFTER)), 1);
+        super(context, new DrifterModel(EnderscapeClient.DRIFTER.bakeLayer(context)), 1);
+        addLayer(new DrifterJellyLayer(this, context.getModelSet()));
     }
 
     @Override
-    public Identifier getTexture(DrifterEntity mob) {
-        String suffix = mob.isDrippingJelly() ? "_jelly.png" : ".png";
-        return Enderscape.id("textures/entity/drifter/drifter" + suffix);
+    public ResourceLocation getTextureLocation(Drifter mob) {
+        return Enderscape.id("textures/entity/drifter/drifter.png");
     }
 }

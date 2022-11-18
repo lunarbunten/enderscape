@@ -1,7 +1,0 @@
-{
-	"parent": "minecraft:block/cube_column_horizontal",
-	"textures": {
-		"end": "enderscape:block/shadow_steel_block",
-		"side": "enderscape:block/shadow_steel_pillar"
-	}
-}

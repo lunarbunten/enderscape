@@ -1,6 +1,7 @@
 {
-  "replace": false,
-  "values": [
-    "enderscape:celestial_fence"
-  ]
+	"replace": false,
+	"values": [
+		"enderscape:celestial_fence",
+		"enderscape:murushroom_fence"
+	]
 }

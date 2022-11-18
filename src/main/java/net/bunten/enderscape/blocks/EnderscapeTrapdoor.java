@@ -1,15 +1,19 @@
 package net.bunten.enderscape.blocks;
 
-import net.bunten.enderscape.interfaces.LayerMapped;
-import net.minecraft.block.TrapdoorBlock;
+import net.bunten.enderscape.interfaces.HasRenderType;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.level.block.TrapDoorBlock;
 
-public class EnderscapeTrapdoor extends TrapdoorBlock implements LayerMapped {
-    public EnderscapeTrapdoor(Settings settings) {
+public class EnderscapeTrapdoor extends TrapDoorBlock implements HasRenderType {
+    public EnderscapeTrapdoor(Properties settings) {
         super(settings);
     }
 
     @Override
-    public LayerType getLayerType() {
-        return LayerType.CUTOUT;
+    @Environment(EnvType.CLIENT)
+    public RenderType getRenderType() {
+        return RenderType.cutout();
     }
 }

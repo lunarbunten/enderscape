@@ -1,74 +1,74 @@
 package net.bunten.enderscape.items;
 
 import net.bunten.enderscape.blocks.NebuliteCauldronBlock;
+import net.bunten.enderscape.criteria.EnderscapeCriteria;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
-import net.bunten.enderscape.registry.EnderscapeCriteria;
 import net.bunten.enderscape.registry.EnderscapeSounds;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.stat.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 
 public class NebuliteItem extends Item {
-    public NebuliteItem(Settings settings) {
+    public NebuliteItem(Properties settings) {
         super(settings);
     }
 
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        World world = context.getWorld();
-        BlockPos pos = context.getBlockPos();
+    public InteractionResult useOn(UseOnContext context) {
+        Level world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
         BlockState state = world.getBlockState(pos);
-        PlayerEntity mob = context.getPlayer();
-        ItemStack stack = context.getStack();
+        Player mob = context.getPlayer();
+        ItemStack stack = context.getItemInHand();
 
-        if (state.isOf(Blocks.CAULDRON)) {
-            mob.incrementStat(Stats.FILL_CAULDRON);
-            world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
+        if (state.is(Blocks.CAULDRON)) {
+            mob.awardStat(Stats.FILL_CAULDRON);
+            world.gameEvent(null, GameEvent.FLUID_PLACE, pos);
 
-            if (!world.isClient()) {
-                world.setBlockState(pos, EnderscapeBlocks.NEBULITE_CAULDRON.getDefaultState(), 3);
-                world.playSound(null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, EnderscapeSounds.BLOCK_NEBULITE_CAULDRON_FILL, SoundCategory.BLOCKS, 0.6F, 1);
+            if (!world.isClientSide()) {
+                world.setBlock(pos, EnderscapeBlocks.NEBULITE_CAULDRON.defaultBlockState(), 3);
+                world.playSound(null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, EnderscapeSounds.NEBULITE_CAULDRON_FILL, SoundSource.BLOCKS, 0.6F, 1);
 
-                if (!mob.getAbilities().creativeMode) {
-                    stack.decrement(1);
+                if (!mob.getAbilities().instabuild) {
+                    stack.shrink(1);
                 }
 
-                if (mob instanceof ServerPlayerEntity server) {
+                if (mob instanceof ServerPlayer server) {
                     EnderscapeCriteria.LIQUIFY_NEBULITE.trigger(server, stack);
                 }
             }
 
-            return ActionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
         
-        if (state.isOf(EnderscapeBlocks.NEBULITE_CAULDRON) && NebuliteCauldronBlock.canLevel(world, pos, state)) {
-            mob.incrementStat(Stats.FILL_CAULDRON);
-            world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
+        if (state.is(EnderscapeBlocks.NEBULITE_CAULDRON) && NebuliteCauldronBlock.canLevel(world, pos, state)) {
+            mob.awardStat(Stats.FILL_CAULDRON);
+            world.gameEvent(null, GameEvent.FLUID_PLACE, pos);
 
-            if (!world.isClient()) {
+            if (!world.isClientSide()) {
                 NebuliteCauldronBlock.addLevel(world, pos, state);
 
-                if (!mob.getAbilities().creativeMode) {
-                    stack.decrement(1);
+                if (!mob.getAbilities().instabuild) {
+                    stack.shrink(1);
                 }
     
-                if (mob instanceof ServerPlayerEntity server) {
+                if (mob instanceof ServerPlayer server) {
                     EnderscapeCriteria.LIQUIFY_NEBULITE.trigger(server, stack);
                 }
             }
 
-            return ActionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
         
-        return ActionResult.PASS;
+        return InteractionResult.PASS;
     }
 }

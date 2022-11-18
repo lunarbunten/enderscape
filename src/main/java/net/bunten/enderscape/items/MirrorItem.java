@@ -2,216 +2,214 @@ package net.bunten.enderscape.items;
 
 import java.util.List;
 
-import net.bunten.enderscape.blocks.NebuliteCauldronBlock;
-import net.bunten.enderscape.registry.EnderscapeBlocks;
-import net.bunten.enderscape.registry.EnderscapeCriteria;
+import net.bunten.enderscape.Enderscape;
+import net.bunten.enderscape.config.Config;
+import net.bunten.enderscape.criteria.EnderscapeCriteria;
+import net.bunten.enderscape.registry.EnderscapeParticles;
 import net.bunten.enderscape.registry.EnderscapeSounds;
 import net.bunten.enderscape.registry.EnderscapeStats;
-import net.bunten.enderscape.util.MathUtil;
-import net.bunten.enderscape.util.MirrorUtil;
-import net.bunten.enderscape.util.Util;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.player.ItemCooldownManager;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.Vanishable;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.stat.Stats;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.GlobalPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
+import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
+import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.Vanishable;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.portal.PortalInfo;
+import net.minecraft.world.phys.Vec3;
 
-public class MirrorItem extends Item implements Vanishable {
-
-    public MirrorItem(Settings settings) {
-        super(settings.maxCount(1));
+public class MirrorItem extends NebuliteChargedItem implements Vanishable {
+    public MirrorItem(Properties settings) {
+        super(settings);
     }
 
     @Override
-    public boolean hasGlint(ItemStack stack) {
-        return MirrorUtil.isLinked(stack) || super.hasGlint(stack);
+    public int getMaximumEnergy(ItemStack stack) {
+        CompoundTag nbt = stack.getTag();
+        int value;
+
+        if (nbt == null) {
+            value = 5;
+        } else {
+            value = nbt.contains(MAX_ENERGY) ? nbt.getInt(MAX_ENERGY) : 5;
+        }
+
+        return Math.max(3, value);
     }
 
     @Override
-    public boolean isItemBarVisible(ItemStack stack) {
-        return MirrorUtil.isLinked(stack) || MirrorUtil.getEnergy(stack) > 0;
+    public int getUseCost(ChargedUsageContext context) {
+        ItemStack stack = context.getStack();
+        LivingEntity user = context.getUser();
+
+        if (user instanceof Player player && player.getAbilities().instabuild) {
+            return 0;
+        } else {
+            if (!MirrorData.isSameDimension(stack, user.getLevel().dimension())) {
+                return getMaximumEnergy(stack) - MirrorData.getLightspeed(stack);
+            } else {
+                return 1 + (MirrorData.roundedHorizontalDistance(user.blockPosition(), MirrorData.pos(stack)) / MirrorData.costIncreaseDistance(stack));
+            }
+        }
     }
 
     @Override
-    public int getItemBarStep(ItemStack stack) {
-        return Math.min(1 + 12 * MirrorUtil.getEnergy(stack) / MirrorUtil.getMaximumEnergy(stack), 13);
+    public int energyPerGem(ItemStack stack) {
+        return 1;
     }
 
     @Override
-    public int getItemBarColor(ItemStack stack) {
-        return 0xFF66FF;
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+        MirrorUsageContext context = new MirrorUsageContext(player.getItemInHand(hand), world, player);
+        for (MirrorCheck check : MirrorCheck.values()) {
+            if (check.fails(context)) return check.getResult(context);
+        }
+        return teleport(context);
+    }
+
+    private InteractionResultHolder<ItemStack> teleport(MirrorUsageContext context) {
+        ItemStack stack = context.getStack();
+        ServerPlayer player = context.getServerPlayer();
+        BlockPos linked = context.getLinkedPos();
+        Vec3 initial = player.position();
+        boolean same = MirrorData.isSameDimension(context);
+
+        removeUseCost(context);
+
+        if (player.isFallFlying()) player.stopFallFlying();
+        if (player.isPassenger()) player.stopRiding();
+        player.fallDistance = 0;
+
+        MirrorPackets.sendPreTeleportPacket(player, !same);
+        context.getUsageServerLevel().sendParticles(EnderscapeParticles.VANISHING_NEBULITE_CLOUD, initial.x, initial.y + 0.5, initial.z, 50, 0.5, 1, 0.5, 0.1);
+
+        ServerLevel world = context.getLinkedLevel();
+        FabricDimensions.teleport(player, world, new PortalInfo(new Vec3(linked.getX() + 0.5, linked.getY() + 1, linked.getZ() + 0.5), Vec3.ZERO, 0, 0));
+        Vec3 after = player.position();
+
+        world.sendParticles(EnderscapeParticles.RISING_NEBULITE_CLOUD, after.x, after.y + 0.5, after.z, 50, 0.5, 1, 0.5, 0.1);
+        world.playSound(null, after.x, after.y, after.z, EnderscapeSounds.MIRROR_TELEPORT, player.getSoundSource(), 0.65F, 1);
+        world.gameEvent(GameEvent.TELEPORT, player.position(), GameEvent.Context.of(player));
+        
+        if (!player.getAbilities().instabuild) player.getCooldowns().addCooldown(this, 100);
+        player.awardStat(Stats.ITEM_USED.get(this));
+        player.awardStat(EnderscapeStats.MIRROR_TELEPORT);
+
+        if (same) {
+            EnderscapeCriteria.MIRROR_TELEPORT_SAME.trigger(player, stack, initial, same);
+        } else {
+            EnderscapeCriteria.MIRROR_TELEPORT_DIFFERENT.trigger(player, stack, initial, same);
+        }
+        
+        EnderscapeCriteria.MIRROR_TELEPORT_ANY.trigger(player, stack, initial, same);
+
+        return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
+    }
+
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        Level world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        BlockState state = world.getBlockState(pos);
+        ItemStack stack = context.getItemInHand();
+
+        if (MirrorData.isLinkable(state)) {
+            MirrorData.writeData(stack, pos, context.getLevel().dimension(), state);
+            world.playSound(null, pos, EnderscapeSounds.MIRROR_LINK, SoundSource.PLAYERS, 1, 1);
+            return InteractionResult.SUCCESS;
+        }
+
+        return super.useOn(context);
+    }
+
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        return MirrorData.isLinked(stack) || super.isFoil(stack);
+    }
+
+    @Override
+    public boolean isBarVisible(ItemStack stack) {
+        return MirrorData.isLinked(stack) || getEnergy(stack) > 0;
+    }
+
+    @Override
+    public Component getName(ItemStack stack) {
+        if (MirrorData.isLinked(stack)) {
+            return Component.translatable(getDescriptionId(stack) + ".linked", MirrorData.linkedBlockName(stack));
+        } else {
+            return super.getName(stack);
+        }
     }
 
     @Environment(EnvType.CLIENT)
-    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext ctx) {
-        if (MirrorUtil.isLinked(stack)) {
-            BlockPos pos = MirrorUtil.getPos(stack);
-            if (Screen.hasShiftDown()) {
-                var dimensionID = Text.translatable("dimension." + MirrorUtil.getDimension(stack).getValue().toTranslationKey());
-                tooltip.add(Text.translatable("item.enderscape.mirror.desc.position", pos.getX(), pos.getY(), pos.getZ()).formatted(Formatting.DARK_GREEN));
-                tooltip.add(Text.translatable("item.enderscape.mirror.desc.dimension", dimensionID).formatted(Formatting.DARK_GREEN));
-            } else {
-                tooltip.add(Text.translatable(getTranslationKey() + ".desc.unshifted").formatted(Formatting.GRAY));
-            }
-        }
+    private MutableComponent getDimensionKey(MirrorUsageContext context) {
+        return Component.translatable(Util.makeDescriptionId("dimension", context.getLinkedDimension().location()));
     }
 
-    /**
-     * Sends the Player a failure message
-     * 
-     * @param string The name of the message to send
-     * @param mob The player to send the message to
-     * @param stack The Mirror item stack
-     */
-    private TypedActionResult<ItemStack> fail(String string, PlayerEntity mob, ItemStack stack) {
-        Util.playSound(mob, EnderscapeSounds.ITEM_MIRROR_FAILURE, 0.65F, MathUtil.nextFloat(mob.getRandom(), 0.9F, 1.1F));
-        mob.sendMessage(Text.translatable("item.enderscape.mirror.message." + string).formatted(Formatting.RED), true);
-        mob.getItemCooldownManager().set(this, 20);
-
-        return new TypedActionResult<>(ActionResult.SUCCESS, stack);
+    @Environment(EnvType.CLIENT)
+    private MutableComponent tooltip(String name, Object... objects) {
+        return Component.translatable("item." + Enderscape.MOD_ID + ".mirror.desc." + name, objects);
     }
 
-    /**
-     * Goes through the checks to try teleporting with the Mirror
-     * 
-     * @param world The player's world
-     * @param mob The player to teleport
-     * @param stack The Mirror item stack
-     */
-    private TypedActionResult<ItemStack> tryTeleport(ServerWorld world, PlayerEntity mob, ItemStack stack) {
-        BlockPos pos = MirrorUtil.getPos(stack);
+    @Override
+    @Environment(EnvType.CLIENT)
+    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flag) {
+        Minecraft client = Minecraft.getInstance();
+        MirrorUsageContext context = new MirrorUsageContext(stack, world, client.player);
+        
+        if (MirrorData.isLinked(stack) && Config.CLIENT.displayMirrorTooltip()) {
+            if (Config.CLIENT.shiftForMirrorInfo() ? Screen.hasShiftDown() : true) {
+                BlockPos player = context.getPlayer().blockPosition();
+                BlockPos linked = MirrorData.pos(stack);
 
-        boolean active = MirrorUtil.isLodestoneActive(stack, world);
-        boolean open = MirrorUtil.isNotObstructed(world, pos);
-        boolean energy = MirrorUtil.hasEnoughEnergy(stack, mob);
+                if (Config.CLIENT.displayMirrorCoordinates()) {
+                    MutableComponent position = tooltip("position.coordinates", linked.getX(), linked.getY(), linked.getZ());
+                    MutableComponent unknown_position = tooltip("position.unknown");
 
-        if (!energy) {
-            return fail("need_energy", mob, stack);  
-        } else {
-            if (!active) {
-                return fail("missing", mob, stack);
-            } else {
-                if (!open) {
-                    return fail("obstructed", mob, stack);
-                } else {
-                    return teleport(world, stack, mob, pos);
+                    tooltip.add(tooltip("position", (MirrorData.isSameDimension(context) ? position : unknown_position)).withStyle(ChatFormatting.DARK_GREEN));
                 }
-            }
-        }
-    }
 
-    /**
-     * Teleport the player to the Lodestone position
-     * 
-     * @param world The player's world
-     * @param mob The player to teleport
-     * @param stack The Mirror item stack
-     * @param pos The Lodestone position
-     */
-    private TypedActionResult<ItemStack> teleport(ServerWorld world, ItemStack stack, PlayerEntity mob, BlockPos pos) {
-        MirrorUtil.removeCost(stack, mob, pos);
-        mob.fallDistance = 0;
-
-        if (mob.isFallFlying()) {
-            mob.stopFallFlying();
-        } else if (mob.hasVehicle()) {
-            mob.stopRiding();
-        }
-
-        mob.teleport(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, true);
-        world.emitGameEvent(GameEvent.TELEPORT, mob.getPos(), GameEvent.Emitter.of(mob));
-
-        Vec3d vec = mob.getPos();
-
-        world.spawnParticles(ParticleTypes.REVERSE_PORTAL, vec.x, vec.y + 0.5, vec.z, 50, 0.5, 1, 0.5, 0.1);
-        Util.playSound(mob, EnderscapeSounds.ITEM_MIRROR_TELEPORT, 0.65F, 1);
-
-        mob.getItemCooldownManager().set(this, 10);
-
-        mob.incrementStat(Stats.USED.getOrCreateStat(this));
-        mob.incrementStat(EnderscapeStats.MIRROR_TELEPORT);
-
-        if (mob instanceof ServerPlayerEntity server) {
-            EnderscapeCriteria.MIRROR_TELEPORT.trigger(server, stack, new Vec3d(pos.getX(), pos.getY(), pos.getZ()));
-        }
-
-        return new TypedActionResult<>(ActionResult.SUCCESS, stack);
-    }
-
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity mob, Hand hand) {
-        ItemStack stack = mob.getStackInHand(hand);
-        if (!world.isClient()) {
-            if (MirrorUtil.isLinked(stack)) {
-                if (MirrorUtil.isSameDimension(stack, mob)) {
-                    return tryTeleport((ServerWorld) world, mob, stack);
-                } else {
-                    return fail("wrong_dimension", mob, stack);
+                if (Config.CLIENT.displayMirrorDistance()) {
+                    int int_distance = MirrorData.roundedHorizontalDistance(player, linked);
+                    MutableComponent value = tooltip("distance.value", int_distance, tooltip("distance.append"));
+                    MutableComponent unknown = tooltip("distance.unknown");
+                    
+                    tooltip.add(tooltip("distance", MirrorData.isSameDimension(context) ? value : unknown).withStyle(ChatFormatting.DARK_GREEN));
                 }
+
+                if (Config.CLIENT.displayMirrorDimension()) {
+                    tooltip.add(tooltip("dimension", getDimensionKey(context)).withStyle(ChatFormatting.DARK_GREEN));
+                }
+
             } else {
-                return fail("unlinked", mob, stack);
+                tooltip.add(tooltip("unshifted").withStyle(ChatFormatting.GRAY));
             }
-        } else {
-            return new TypedActionResult<>(ActionResult.PASS, stack);
         }
     }
 
-    public ActionResult useOnBlock(ItemUsageContext ctx) {
-        PlayerEntity mob = ctx.getPlayer();
-        ItemCooldownManager manager = mob.getItemCooldownManager();
-
-        GlobalPos globalPos = GlobalPos.create(ctx.getWorld().getRegistryKey(), ctx.getBlockPos());
-
-        World world = ctx.getWorld();
-        BlockPos pos = globalPos.getPos();
-        BlockState state = world.getBlockState(pos);
-        ItemStack stack = ctx.getStack();
-
-        if (state.isIn(EnderscapeBlocks.MIRROR_LODESTONE_BLOCKS)) {
-            MirrorUtil.writeGlobalPos(stack.getOrCreateNbt(), globalPos);
-            Util.playSound(world, pos, EnderscapeSounds.ITEM_MIRROR_LINK, SoundCategory.PLAYERS, 1, 1);
-
-            return ActionResult.SUCCESS;
-        }
-
-        if (!manager.isCoolingDown(this)) {
-            if (state.isOf(EnderscapeBlocks.NEBULITE_CAULDRON)) {
-                if (MirrorUtil.getEnergy(stack) < MirrorUtil.getMaximumEnergy(stack)) {
-                    manager.set(this, 5);
-                    MirrorUtil.addEnergy(stack, 1);
-                    NebuliteCauldronBlock.reduceLevel(world, pos, state);
-                    Util.playSound(mob, EnderscapeSounds.BLOCK_NEBULITE_CAULDRON_DIP, 0.6F, MathUtil.nextFloat(mob.getRandom(), 0.9F, 1.1F));
-    
-                    return ActionResult.SUCCESS;
-                } else {
-                    return ActionResult.FAIL;
-                }
-            } else if (state.isOf(Blocks.CAULDRON)) {
-                return ActionResult.FAIL;
-            }
-        }
-
-        return super.useOnBlock(ctx);
+    @Override
+    @Environment(EnvType.CLIENT)
+    public boolean showUI(ItemStack stack, Player player) {
+        return MirrorData.isLinked(stack) && !player.isSpectator() && player.getUseItem().isEmpty();
     }
 }

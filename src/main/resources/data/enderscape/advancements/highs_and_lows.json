@@ -1,0 +1,37 @@
+{
+    "parent": "minecraft:end/elytra",
+    "display": {
+        "icon": {
+            "item": "minecraft:elytra",
+            "nbt": "{Enchantments: [{lvl: 1, id: \"minecraft:unbreaking\"}]}"
+        },
+        "title": {
+            "translate": "advancement.enderscape.highs_and_lows"
+        },
+        "description": {
+            "translate": "advancement.enderscape.highs_and_lows.description"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "highs_and_lows": {
+            "trigger": "enderscape:highs_and_lows",
+            "conditions": {
+                "player": {
+                    "nbt": "{FallFlying:1b}"
+                }
+            }
+        }
+    },
+    "requirements": [
+        [
+            "highs_and_lows"
+        ]
+    ],
+    "rewards": {
+        "experience": 25
+    }
+}

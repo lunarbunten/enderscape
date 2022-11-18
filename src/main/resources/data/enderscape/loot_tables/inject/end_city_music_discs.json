@@ -1,0 +1,50 @@
+{
+    "type": "minecraft:chest",
+    "pools": [
+        {
+            "rolls": 1.0,
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "weight": 1,
+                    "functions": [
+                        {
+                            "function": "minecraft:set_count",
+                            "count": {
+                                "type": "minecraft:uniform",
+                                "min": 0,
+                                "max": 1
+                            },
+                            "add": false
+                        },
+                        {
+                            "chance": 0.4,
+                            "function": "enderscape:chance"
+                        }
+                    ],
+                    "name": "enderscape:music_disc_glare"
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 1,
+                    "functions": [
+                        {
+                            "function": "minecraft:set_count",
+                            "count": {
+                                "type": "minecraft:uniform",
+                                "min": 0,
+                                "max": 1
+                            },
+                            "add": false
+                        },
+                        {
+                            "chance": 0.4,
+                            "function": "enderscape:chance"
+                        }
+                    ],
+                    "name": "enderscape:music_disc_bliss"
+                }
+            ]
+        }
+    ]
+}

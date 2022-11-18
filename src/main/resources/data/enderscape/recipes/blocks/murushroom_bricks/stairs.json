@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"#  ",
+		"## ",
+		"###"
+	],
+	"key": {
+		"#": {
+			"item": "enderscape:murushroom_bricks"
+		}
+	},
+	"result": {
+		"item": "enderscape:murushroom_brick_stairs",
+		"count": 4
+	}
+}

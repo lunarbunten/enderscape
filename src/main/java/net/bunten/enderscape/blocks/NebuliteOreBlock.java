@@ -1,81 +1,42 @@
 package net.bunten.enderscape.blocks;
 
-import net.bunten.enderscape.registry.EnderscapeSounds;
+import net.bunten.enderscape.registry.EnderscapeParticles;
+import net.bunten.enderscape.util.BlockUtil;
 import net.bunten.enderscape.util.MathUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.OreBlock;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.particle.DustParticleEffect;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.Mutable;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
-public class NebuliteOreBlock extends OreBlock {
-    public NebuliteOreBlock(Settings settings) {
-        super(settings, UniformIntProvider.create(6, 12));
+public class NebuliteOreBlock extends DropExperienceBlock {
+    public NebuliteOreBlock(Properties settings) {
+        super(settings, UniformInt.of(6, 12));
     }
 
     @Environment(EnvType.CLIENT)
-    protected boolean isBlockObstructed(World world, BlockPos pos) {
-        int i = 0;
-        for (var dir : Direction.values()) {
-            var pos2 = pos.offset(dir);
-            if (world.getBlockState(pos2).isOpaque()) {
-                i++;
-
-                if (i == 6) return true;
-            }
-        }
-        return false;
-    }
-
-    @Environment(EnvType.CLIENT)
-    protected SoundEvent getAmbientSound(World world, BlockPos cameraPos, BlockPos nebulitePos) {
-        if (isBlockObstructed(world, nebulitePos)) {
-            return EnderscapeSounds.BLOCK_NEBULITE_ORE_AMBIENT_OBSTRUCTED;
-        } else {
-            if (nebulitePos.isWithinDistance(cameraPos, 16)) {
-                return EnderscapeSounds.BLOCK_NEBULITE_ORE_AMBIENT;
-            } else {
-                return EnderscapeSounds.BLOCK_NEBULITE_ORE_AMBIENT_FAR;
-            }
+    public static void makeParticles(int amount, int range, Level world, BlockPos pos, RandomSource random) {
+        for (int i = 0; i < amount; i++) {
+            BlockPos pos2 = BlockUtil.random(pos, random, range, range, range);
+            if (world.getBlockState(pos2).isCollisionShapeFullBlock(world, pos2)) return;
+            float xs = (pos.getX() - pos2.getX()) * 0.06F;
+            float ys = (pos.getY() - pos2.getY()) * 0.06F;
+            float zs = (pos.getZ() - pos2.getZ()) * 0.06F;
+            world.addParticle(EnderscapeParticles.NEBULITE_CLOUD, pos2.getX() + random.nextDouble(), pos2.getY() + random.nextDouble(), pos2.getZ() + random.nextDouble(), xs, ys, zs);
         }
     }
 
-    @Environment(EnvType.CLIENT)
-    protected void tryPlayAmbientSound(BlockState state, World world, BlockPos nebulitePos, Random random) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        BlockPos cameraPos = client.cameraEntity.getBlockPos();
-        
-        float volume = MathUtil.nextFloat(random, 0.9F, 1.1F);
-        float pitch = MathUtil.nextFloat(random, 0.9F, 1.1F);
-
-        world.playSound(cameraPos.getX(), cameraPos.getY(), cameraPos.getZ(), getAmbientSound(world, cameraPos, nebulitePos), SoundCategory.BLOCKS, volume, pitch, false);
+    @Override
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+        NebuliteOrePackets.sendSoundToPlayers(world, pos);
     }
 
     @Environment(EnvType.CLIENT)
-    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        for (int i = 0; i < 5; i++) {
-            Mutable mutable = new Mutable();
-            mutable.set(pos.getX() + MathUtil.nextInt(random, -5, 5), pos.getY() + MathUtil.nextInt(random, -5, 5), pos.getZ()+ MathUtil.nextInt(random, -5, 5));
-            
-            if (!world.getBlockState(mutable).isFullCube(world, mutable)) {
-                var color = new Vec3f(Vec3d.unpackRgb(0xB328D2));
-                world.addParticle(new DustParticleEffect(color, 1), mutable.getX() + random.nextDouble(), mutable.getY() + random.nextDouble(), mutable.getZ() + random.nextDouble(), 0, 0, 0);
-            }
-        }
-
-        if (random.nextInt(30) == 0) {
-            tryPlayAmbientSound(state, world, pos, random);
-        }
+    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
+        makeParticles(MathUtil.nextInt(random, 2, 4), MathUtil.nextInt(random, 8, 12), world, pos, random);
     }
 }

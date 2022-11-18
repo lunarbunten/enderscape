@@ -1,99 +1,146 @@
 {
+	"ambient.barren_depths.additions": {
+		"sounds": [
+			{
+				"name": "enderscape:ambient/default_end/deep1",
+				"volume": 0.4,
+				"weight": 10
+			},
+			{
+				"name": "enderscape:ambient/default_end/deep2",
+				"volume": 0.4,
+				"weight": 10
+			},
+			{
+				"name": "enderscape:ambient/default_end/ring1",
+				"pitch": 0.18,
+				"volume": 1,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/ring1",
+				"pitch": 0.4,
+				"volume": 1,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/ring2",
+				"pitch": 0.3,
+				"volume": 1,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/ring2",
+				"pitch": 0.7,
+				"volume": 1,
+				"weight": 20
+			}
+		]
+	},
+	"ambient.barren_depths.loop": {
+		"sounds": [
+			{
+				"name": "enderscape:ambient.default_end.loop",
+				"pitch": 0.5,
+				"type": "event",
+				"volume": 0.5
+			}
+		]
+	},
+	"ambient.barren_depths.mood": {
+		"sounds": [
+			{
+				"name": "enderscape:ambient.default_end.mood",
+				"type": "event"
+			}
+		]
+	},
+	"ambient.barren_skies.additions": {
+		"sounds": [
+			{
+				"name": "ambient/nether/soulsand_valley/wind1",
+				"volume": 0.3,
+				"weight": 25
+			},
+			{
+				"name": "ambient/nether/soulsand_valley/wind2",
+				"volume": 0.25,
+				"weight": 25
+			},
+			{
+				"name": "ambient/nether/soulsand_valley/wind3",
+				"volume": 0.25,
+				"weight": 25
+			},
+			{
+				"name": "ambient/nether/soulsand_valley/wind4",
+				"volume": 0.3,
+				"weight": 25
+			},
+			{
+				"name": "enderscape:ambient/default_end/ring1",
+				"pitch": 0.18,
+				"volume": 1,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/ring1",
+				"pitch": 0.4,
+				"volume": 1,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/ring2",
+				"pitch": 0.3,
+				"volume": 1,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/ring2",
+				"pitch": 0.7,
+				"volume": 1,
+				"weight": 20
+			}
+		]
+	},
+	"ambient.barren_skies.loop": {
+		"sounds": [
+			{
+				"name": "ambient/nether/soulsand_valley/ambience",
+				"pitch": 0.4,
+				"stream": true,
+				"volume": 0.6
+			}
+		]
+	},
+	"ambient.barren_skies.mood": {
+		"sounds": [
+			{
+				"name": "enderscape:ambient.default_end.mood",
+				"type": "event"
+			}
+		]
+	},
 	"ambient.celestial_islands.additions": {
 		"sounds": [
 			{
-				"name": "enderscape:ambient/celestial_plains/additions/bug1",
-				"volume": 0.24,
-				"weight": 75
-			},
-			{
-				"name": "enderscape:ambient/celestial_plains/additions/bug2",
-				"volume": 0.24,
-				"weight": 75
-			},
-			{
-				"name": "enderscape:ambient/celestial_plains/additions/crack1",
-				"volume": 0.24,
-				"weight": 67
-			},
-			{
-				"name": "enderscape:ambient/celestial_plains/additions/crack2",
-				"volume": 0.24,
-				"weight": 67
-			},
-			{
-				"name": "enderscape:ambient/celestial_plains/additions/crack3",
-				"volume": 0.24,
-				"weight": 67
-			},
-			{
-				"name": "enderscape:ambient/celestial_plains/additions/crack4",
-				"volume": 0.24,
-				"weight": 67
-			},
-			{
-				"name": "enderscape:ambient/normal_end/additions/another_world",
-				"pitch": 0.8,
-				"volume": 0.24,
-				"weight": 1
-			},
-			{
-				"name": "enderscape:ambient/normal_end/additions/chorus1",
-				"volume": 0.24,
-				"weight": 50
-			},
-			{
-				"name": "enderscape:ambient/normal_end/additions/chorus2",
-				"volume": 0.24,
-				"weight": 50
-			},
-			{
-				"name": "enderscape:ambient/normal_end/additions/chorus3",
-				"volume": 0.24,
-				"weight": 50
-			},
-			{
-				"name": "enderscape:ambient/normal_end/additions/chorus4",
-				"volume": 0.24,
-				"weight": 50
-			},
-			{
-				"name": "enderscape:ambient/normal_end/additions/ring1",
-				"pitch": 0.18,
-				"volume": 0.24,
-				"weight": 20
-			},
-			{
-				"name": "enderscape:ambient/normal_end/additions/ring2",
-				"pitch": 0.3,
-				"volume": 0.24,
-				"weight": 20
-			},
-			{
-				"name": "enderscape:ambient/normal_end/additions/warp1",
-				"volume": 0.24,
-				"weight": 35
-			},
-			{
-				"name": "enderscape:ambient/normal_end/additions/warp2",
-				"volume": 0.24,
-				"weight": 35
+				"name": "enderscape:ambient.celestial_plains.additions",
+				"type": "event"
 			}
 		]
 	},
 	"ambient.celestial_islands.loop": {
 		"sounds": [
 			{
-				"name": "enderscape:ambient/celestial_plains/loop",
-				"stream": true,
-				"volume": 0.4
+				"name": "enderscape:ambient.celestial_plains.loop",
+				"type": "event"
 			}
 		]
 	},
 	"ambient.celestial_islands.mood": {
 		"sounds": [
 			{
-				"name": "minecraft:ambient.warped_forest.mood",
+				"name": "enderscape:ambient.celestial_plains.mood",
 				"type": "event"
 			}
 		]
@@ -101,121 +148,188 @@
 	"ambient.celestial_plains.additions": {
 		"sounds": [
 			{
-				"name": "enderscape:ambient/celestial_plains/additions/bug1",
-				"volume": 0.24,
+				"name": "ambient/nether/soulsand_valley/wind1",
+				"pitch": 0.7,
+				"volume": 0.8,
+				"weight": 25
+			},
+			{
+				"name": "ambient/nether/soulsand_valley/wind2",
+				"pitch": 0.7,
+				"volume": 0.8,
+				"weight": 25
+			},
+			{
+				"name": "ambient/nether/soulsand_valley/wind3",
+				"pitch": 0.7,
+				"volume": 0.8,
+				"weight": 25
+			},
+			{
+				"name": "ambient/nether/soulsand_valley/wind4",
+				"pitch": 0.7,
+				"volume": 0.2,
+				"weight": 25
+			},
+			{
+				"name": "enderscape:ambient/celestial_plains/bug_left",
+				"pitch": 1.1,
+				"volume": 0.6,
 				"weight": 75
 			},
 			{
-				"name": "enderscape:ambient/celestial_plains/additions/bug2",
-				"volume": 0.24,
+				"name": "enderscape:ambient/celestial_plains/bug_left",
+				"volume": 0.6,
 				"weight": 75
 			},
 			{
-				"name": "enderscape:ambient/celestial_plains/additions/crack1",
-				"volume": 0.24,
-				"weight": 67
+				"name": "enderscape:ambient/celestial_plains/bug_right",
+				"pitch": 1.1,
+				"volume": 0.6,
+				"weight": 75
 			},
 			{
-				"name": "enderscape:ambient/celestial_plains/additions/crack2",
-				"volume": 0.24,
-				"weight": 67
+				"name": "enderscape:ambient/celestial_plains/bug_right",
+				"volume": 0.6,
+				"weight": 75
 			},
 			{
-				"name": "enderscape:ambient/celestial_plains/additions/crack3",
-				"volume": 0.24,
-				"weight": 67
+				"name": "enderscape:ambient/celestial_plains/crack_left",
+				"pitch": 0.6,
+				"volume": 1.2,
+				"weight": 60
 			},
 			{
-				"name": "enderscape:ambient/celestial_plains/additions/crack4",
-				"volume": 0.24,
-				"weight": 67
+				"name": "enderscape:ambient/celestial_plains/crack_left2",
+				"pitch": 0.6,
+				"volume": 1.2,
+				"weight": 60
 			},
 			{
-				"name": "enderscape:ambient/celestial_plains/additions/drifter1",
-				"volume": 0.14,
+				"name": "enderscape:ambient/celestial_plains/crack_right",
+				"pitch": 0.6,
+				"volume": 1.2,
+				"weight": 60
+			},
+			{
+				"name": "enderscape:ambient/celestial_plains/crack_right2",
+				"pitch": 0.6,
+				"volume": 1.2,
+				"weight": 60
+			},
+			{
+				"name": "enderscape:ambient/celestial_plains/drifter1",
+				"volume": 0.4,
 				"weight": 15
 			},
 			{
-				"name": "enderscape:ambient/celestial_plains/additions/drifter2",
-				"volume": 0.14,
+				"name": "enderscape:ambient/celestial_plains/drifter2",
+				"volume": 0.4,
 				"weight": 15
 			},
 			{
-				"name": "enderscape:ambient/celestial_plains/additions/drifter3",
-				"volume": 0.14,
+				"name": "enderscape:ambient/celestial_plains/drifter3",
+				"volume": 0.4,
 				"weight": 15
 			},
 			{
-				"name": "enderscape:ambient/celestial_plains/additions/drifter4",
-				"volume": 0.14,
+				"name": "enderscape:ambient/celestial_plains/drifter4",
+				"volume": 0.4,
 				"weight": 15
 			},
 			{
-				"name": "enderscape:ambient/celestial_plains/additions/driftlet1",
-				"volume": 0.14,
+				"name": "enderscape:ambient/celestial_plains/driftlet1",
+				"volume": 0.4,
 				"weight": 15
 			},
 			{
-				"name": "enderscape:ambient/celestial_plains/additions/driftlet2",
-				"volume": 0.14,
+				"name": "enderscape:ambient/celestial_plains/driftlet2",
+				"volume": 0.4,
 				"weight": 15
 			},
 			{
-				"name": "enderscape:ambient/celestial_plains/additions/driftlet3",
-				"volume": 0.14,
+				"name": "enderscape:ambient/celestial_plains/driftlet3",
+				"volume": 0.4,
 				"weight": 15
 			},
 			{
-				"name": "enderscape:ambient/celestial_plains/additions/driftlet4",
-				"volume": 0.14,
+				"name": "enderscape:ambient/celestial_plains/driftlet4",
+				"volume": 0.4,
 				"weight": 15
 			},
 			{
-				"name": "enderscape:ambient/normal_end/additions/another_world",
+				"name": "enderscape:ambient/default_end/another_world",
 				"pitch": 0.8,
-				"volume": 0.24,
+				"volume": 0.5,
 				"weight": 1
 			},
 			{
-				"name": "enderscape:ambient/normal_end/additions/chorus1",
-				"volume": 0.24,
+				"name": "enderscape:ambient/default_end/chorus1",
+				"volume": 1,
 				"weight": 50
 			},
 			{
-				"name": "enderscape:ambient/normal_end/additions/chorus2",
-				"volume": 0.24,
+				"name": "enderscape:ambient/default_end/chorus2",
+				"volume": 1,
 				"weight": 50
 			},
 			{
-				"name": "enderscape:ambient/normal_end/additions/chorus3",
-				"volume": 0.24,
+				"name": "enderscape:ambient/default_end/chorus3",
+				"volume": 1,
 				"weight": 50
 			},
 			{
-				"name": "enderscape:ambient/normal_end/additions/chorus4",
-				"volume": 0.24,
+				"name": "enderscape:ambient/default_end/chorus4",
+				"volume": 1,
 				"weight": 50
 			},
 			{
-				"name": "enderscape:ambient/normal_end/additions/ring1",
+				"name": "enderscape:ambient/default_end/ring1",
 				"pitch": 0.18,
-				"volume": 0.24,
+				"volume": 1,
 				"weight": 20
 			},
 			{
-				"name": "enderscape:ambient/normal_end/additions/ring2",
+				"name": "enderscape:ambient/default_end/ring1",
+				"pitch": 0.4,
+				"volume": 1,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/ring2",
 				"pitch": 0.3,
-				"volume": 0.24,
+				"volume": 1,
 				"weight": 20
 			},
 			{
-				"name": "enderscape:ambient/normal_end/additions/warp1",
-				"volume": 0.24,
+				"name": "enderscape:ambient/default_end/ring2",
+				"pitch": 0.7,
+				"volume": 1,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/voices1",
+				"volume": 0.6,
+				"weight": 50
+			},
+			{
+				"name": "enderscape:ambient/default_end/voices2",
+				"volume": 0.4,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/voices3",
+				"volume": 0.5,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/warp1",
+				"volume": 1,
 				"weight": 35
 			},
 			{
-				"name": "enderscape:ambient/normal_end/additions/warp2",
-				"volume": 0.24,
+				"name": "enderscape:ambient/default_end/warp2",
+				"volume": 1,
 				"weight": 35
 			}
 		]
@@ -225,7 +339,7 @@
 			{
 				"name": "enderscape:ambient/celestial_plains/loop",
 				"stream": true,
-				"volume": 0.6
+				"volume": 0.4
 			}
 		]
 	},
@@ -237,66 +351,498 @@
 			}
 		]
 	},
-	"ambient.normal_end.additions": {
+	"ambient.corrupt_depths.additions": {
 		"sounds": [
 			{
-				"name": "enderscape:ambient/normal_end/additions/another_world",
+				"name": "enderscape:ambient/corrupt_depths/agony",
 				"pitch": 0.8,
-				"volume": 0.24,
+				"volume": 0.2,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/corrupt_depths/glitch1",
+				"pitch": 0.4,
+				"volume": 0.1,
+				"weight": 30
+			},
+			{
+				"name": "enderscape:ambient/corrupt_depths/glitch1",
+				"pitch": 0.6,
+				"volume": 0.2,
+				"weight": 30
+			},
+			{
+				"name": "enderscape:ambient/corrupt_depths/glitch2",
+				"pitch": 0.6,
+				"volume": 0.1,
+				"weight": 30
+			},
+			{
+				"name": "enderscape:ambient/corrupt_depths/glitch2",
+				"pitch": 0.8,
+				"volume": 0.2,
+				"weight": 30
+			},
+			{
+				"name": "enderscape:ambient/corrupt_depths/glitch3",
+				"pitch": 0.4,
+				"volume": 0.1,
+				"weight": 30
+			},
+			{
+				"name": "enderscape:ambient/corrupt_depths/glitch3",
+				"pitch": 0.6,
+				"volume": 0.2,
+				"weight": 30
+			},
+			{
+				"name": "enderscape:ambient/corrupt_depths/heartbeat",
+				"pitch": 2,
+				"volume": 0.1,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/corrupt_depths/wave1",
+				"pitch": 0.5,
+				"volume": 0.2,
+				"weight": 16
+			},
+			{
+				"name": "enderscape:ambient/corrupt_depths/wave1",
+				"pitch": 0.8,
+				"volume": 0.3,
+				"weight": 26
+			},
+			{
+				"name": "enderscape:ambient/corrupt_depths/wave2",
+				"pitch": 0.4,
+				"volume": 0.1,
+				"weight": 16
+			},
+			{
+				"name": "enderscape:ambient/corrupt_depths/wave2",
+				"pitch": 0.8,
+				"volume": 0.3,
+				"weight": 24
+			},
+			{
+				"name": "enderscape:ambient/corrupt_depths/wave3",
+				"pitch": 1.3,
+				"volume": 0.1,
+				"weight": 16
+			},
+			{
+				"name": "enderscape:ambient/corrupt_depths/wave3",
+				"volume": 0.2,
+				"weight": 24
+			},
+			{
+				"name": "enderscape:ambient/default_end/another_world",
+				"pitch": 0.8,
+				"volume": 0.5,
 				"weight": 1
 			},
 			{
-				"name": "enderscape:ambient/normal_end/additions/chorus1",
-				"volume": 0.24,
-				"weight": 100
+				"name": "enderscape:ambient/default_end/ring1",
+				"pitch": 0.18,
+				"volume": 1,
+				"weight": 20
 			},
 			{
-				"name": "enderscape:ambient/normal_end/additions/chorus2",
-				"volume": 0.24,
-				"weight": 100
+				"name": "enderscape:ambient/default_end/ring1",
+				"pitch": 0.4,
+				"volume": 1,
+				"weight": 20
 			},
 			{
-				"name": "enderscape:ambient/normal_end/additions/chorus3",
-				"volume": 0.24,
-				"weight": 100
+				"name": "enderscape:ambient/default_end/ring2",
+				"pitch": 0.3,
+				"volume": 1,
+				"weight": 20
 			},
 			{
-				"name": "enderscape:ambient/normal_end/additions/chorus4",
-				"volume": 0.24,
-				"weight": 100
-			},
-			{
-				"name": "enderscape:ambient/normal_end/additions/ring1",
-				"pitch": 0.2,
-				"volume": 0.24,
-				"weight": 10
-			},
-			{
-				"name": "enderscape:ambient/normal_end/additions/ring2",
-				"pitch": 0.2,
-				"volume": 0.24,
-				"weight": 10
-			},
-			{
-				"name": "enderscape:ambient/normal_end/additions/warp1",
-				"volume": 0.24,
-				"weight": 50
-			},
-			{
-				"name": "enderscape:ambient/normal_end/additions/warp2",
-				"volume": 0.24,
-				"weight": 50
+				"name": "enderscape:ambient/default_end/ring2",
+				"pitch": 0.7,
+				"volume": 1,
+				"weight": 20
 			}
 		]
 	},
-	"ambient.normal_end.loop": {
+	"ambient.corrupt_depths.loop": {
 		"sounds": [
 			{
-				"name": "enderscape:ambient/celestial_plains/loop",
+				"name": "enderscape:ambient/corrupt_depths/loop",
 				"stream": true,
-				"volume": 0.2
+				"volume": 0.4
 			}
 		]
+	},
+	"ambient.corrupt_depths.mood": {
+		"sounds": [
+			{
+				"name": "minecraft:ambient.warped_forest.mood",
+				"type": "event"
+			}
+		]
+	},
+	"ambient.default_end.additions": {
+		"sounds": [
+			{
+				"name": "ambient/nether/soulsand_valley/wind1",
+				"pitch": 0.7,
+				"volume": 0.5,
+				"weight": 25
+			},
+			{
+				"name": "ambient/nether/soulsand_valley/wind2",
+				"pitch": 0.7,
+				"volume": 0.5,
+				"weight": 25
+			},
+			{
+				"name": "ambient/nether/soulsand_valley/wind3",
+				"pitch": 0.7,
+				"volume": 0.5,
+				"weight": 25
+			},
+			{
+				"name": "ambient/nether/soulsand_valley/wind4",
+				"pitch": 0.7,
+				"volume": 0.5,
+				"weight": 25
+			},
+			{
+				"name": "enderscape:ambient/default_end/another_world",
+				"pitch": 0.8,
+				"volume": 0.5,
+				"weight": 1
+			},
+			{
+				"name": "enderscape:ambient/default_end/chorus1",
+				"volume": 0.7,
+				"weight": 50
+			},
+			{
+				"name": "enderscape:ambient/default_end/chorus2",
+				"volume": 0.7,
+				"weight": 50
+			},
+			{
+				"name": "enderscape:ambient/default_end/chorus3",
+				"volume": 0.7,
+				"weight": 50
+			},
+			{
+				"name": "enderscape:ambient/default_end/chorus4",
+				"volume": 0.7,
+				"weight": 50
+			},
+			{
+				"name": "enderscape:ambient/default_end/deep1",
+				"volume": 0.4,
+				"weight": 10
+			},
+			{
+				"name": "enderscape:ambient/default_end/deep2",
+				"volume": 0.4,
+				"weight": 10
+			},
+			{
+				"name": "enderscape:ambient/default_end/ring1",
+				"pitch": 0.18,
+				"volume": 1,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/ring1",
+				"pitch": 0.4,
+				"volume": 1,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/ring2",
+				"pitch": 0.3,
+				"volume": 1,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/ring2",
+				"pitch": 0.7,
+				"volume": 1,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/voices1",
+				"volume": 0.4,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/voices2",
+				"volume": 0.4,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/voices3",
+				"volume": 0.4,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:ambient/default_end/warp1",
+				"volume": 1,
+				"weight": 35
+			},
+			{
+				"name": "enderscape:ambient/default_end/warp2",
+				"volume": 1,
+				"weight": 35
+			}
+		]
+	},
+	"ambient.default_end.loop": {
+		"sounds": [
+			{
+				"name": "enderscape:ambient/default_end/loop",
+				"pitch": 0.8,
+				"stream": true,
+				"volume": 0.16
+			}
+		]
+	},
+	"ambient.default_end.mood": {
+		"sounds": []
+	},
+	"ambient.sky_islands.additions": {
+		"sounds": [
+			{
+				"name": "enderscape:ambient.barren_skies.additions",
+				"type": "event"
+			}
+		]
+	},
+	"ambient.sky_islands.loop": {
+		"sounds": [
+			{
+				"name": "enderscape:ambient.barren_skies.loop",
+				"type": "event"
+			}
+		]
+	},
+	"ambient.sky_islands.mood": {
+		"sounds": [
+			{
+				"name": "enderscape:ambient.barren_skies.mood",
+				"type": "event"
+			}
+		]
+	},
+	"block.blinklamp.break": {
+		"sounds": [
+			{
+				"name": "enderscape:block/blinklamp/break1",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/blinklamp/break2",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/blinklamp/break3",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/blinklamp/break4",
+				"pitch": 1.1,
+				"volume": 0.8
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.blinklamp.decrease": {
+		"sounds": [
+			{
+				"name": "enderscape:block/blinklamp/decrease1",
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/blinklamp/decrease2",
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/blinklamp/decrease3",
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/blinklamp/decrease4",
+				"volume": 0.5
+			}
+		]
+	},
+	"block.blinklamp.fall": {
+		"sounds": [
+			{
+				"name": "enderscape:block.blinklamp.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.blinklamp.hit": {
+		"sounds": [
+			{
+				"name": "enderscape:block.blinklamp.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.blinklamp.increase": {
+		"sounds": [
+			{
+				"name": "enderscape:block/blinklamp/increase1",
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/blinklamp/increase2",
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/blinklamp/increase3",
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/blinklamp/increase4",
+				"volume": 0.5
+			}
+		]
+	},
+	"block.blinklamp.place": {
+		"sounds": [
+			{
+				"name": "enderscape:block/blinklamp/place1",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/blinklamp/place2",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/blinklamp/place3",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/blinklamp/place4",
+				"pitch": 1.1,
+				"volume": 0.8
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.blinklamp.step": {
+		"sounds": [
+			{
+				"name": "enderscape:block.shadow_quartz.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.blinklight_vines.blink": {
+		"sounds": [
+			{
+				"name": "block.honey_block.place",
+				"pitch": 1.8,
+				"type": "event",
+				"volume": 0.3
+			}
+		],
+		"subtitle": "subtitles.blinklight_vines.blink"
+	},
+	"block.blinklight_vines.break": {
+		"sounds": [
+			{
+				"name": "enderscape:block.blinklight_vines.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.blinklight_vines.fall": {
+		"sounds": [
+			{
+				"name": "enderscape:block.blinklight_vines.step",
+				"type": "event"
+			}
+		]
+	},
+	"block.blinklight_vines.hit": {
+		"sounds": [
+			{
+				"name": "enderscape:block.blinklight_vines.break",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.blinklight_vines.inbetween": {
+		"sounds": [
+			{
+				"name": "block.honey_block.slide",
+				"pitch": 1.8,
+				"type": "event",
+				"volume": 0.2
+			}
+		],
+		"subtitle": "subtitles.blinklight_vines.blink"
+	},
+	"block.blinklight_vines.place": {
+		"sounds": [
+			{
+				"name": "enderscape:block/blinklight_vines/place1",
+				"pitch": 0.9,
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/blinklight_vines/place2",
+				"pitch": 0.9,
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/blinklight_vines/place3",
+				"pitch": 0.9,
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/blinklight_vines/place4",
+				"pitch": 0.9,
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/blinklight_vines/place5",
+				"pitch": 0.9,
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/blinklight_vines/place6",
+				"pitch": 0.9,
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.blinklight_vines.step": {
+		"sounds": [
+			"block/vine/climb1",
+			"block/vine/climb2",
+			"block/vine/climb3",
+			"block/vine/climb4",
+			"block/vine/climb5"
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
 	},
 	"block.chorus.break": {
 		"sounds": [
@@ -328,33 +874,23 @@
 		"sounds": [
 			{
 				"name": "enderscape:block/chorus/break1",
-				"pitch": 0.9,
-				"volume": 0.5
-			},
-			{
-				"name": "enderscape:block/chorus/break2",
-				"pitch": 0.9,
-				"volume": 0.5
-			},
-			{
-				"name": "enderscape:block/chorus/break3",
-				"pitch": 0.9,
-				"volume": 0.5
-			},
-			{
-				"name": "enderscape:block/chorus/break1",
 				"pitch": 1.1,
-				"volume": 0.5
+				"volume": 0.7
 			},
 			{
 				"name": "enderscape:block/chorus/break2",
 				"pitch": 1.1,
-				"volume": 0.5
+				"volume": 0.7
 			},
 			{
 				"name": "enderscape:block/chorus/break3",
 				"pitch": 1.1,
-				"volume": 0.5
+				"volume": 0.7
+			},
+			{
+				"name": "enderscape:block/chorus/break4",
+				"pitch": 1.1,
+				"volume": 0.7
 			}
 		],
 		"subtitle": "subtitles.block.generic.place"
@@ -387,6 +923,88 @@
 			}
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.chorus_flower.break": {
+		"sounds": [
+			{
+				"name": "enderscape:block.chorus_flower.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.chorus_flower.fall": {
+		"sounds": [
+			{
+				"name": "enderscape:block.chorus.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.chorus_flower.hit": {
+		"sounds": [
+			{
+				"name": "enderscape:block.chorus.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.chorus_flower.place": {
+		"sounds": [
+			{
+				"name": "enderscape:block/chorus_flower/break1",
+				"pitch": 1.1,
+				"volume": 0.7
+			},
+			{
+				"name": "enderscape:block/chorus_flower/break2",
+				"pitch": 1.1,
+				"volume": 0.7
+			},
+			{
+				"name": "enderscape:block/chorus_flower/break3",
+				"pitch": 1.1,
+				"volume": 0.7
+			},
+			{
+				"name": "enderscape:block/chorus_flower/break4",
+				"pitch": 1.1,
+				"volume": 0.7
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.chorus_flower.step": {
+		"sounds": [
+			{
+				"name": "enderscape:block.chorus.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.chorus_flower.hum": {
+		"sounds": [
+			{
+				"name": "enderscape:block/chorus_flower/hum1"
+			},
+			{
+				"name": "enderscape:block/chorus_flower/hum2"
+			},
+			{
+				"name": "enderscape:block/chorus_flower/hum3"
+			},
+			{
+				"name": "enderscape:block/chorus_flower/hum4"
+			},
+			{
+				"name": "enderscape:block/chorus_flower/hum5"
+			},
+			{
+				"name": "enderscape:block/chorus_flower/hum6"
+			}
+		]
 	},
 	"block.drift_jelly.bounce": {
 		"sounds": [
@@ -433,11 +1051,21 @@
 	},
 	"block.drift_jelly.place": {
 		"sounds": [
-			"block/honeyblock/break1",
-			"block/honeyblock/break2",
-			"block/honeyblock/break3",
-			"block/honeyblock/break4",
-			"block/honeyblock/break5"
+			{
+				"name": "enderscape:block/drift_jelly/place1",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/drift_jelly/place2",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/drift_jelly/place3",
+				"pitch": 1.1,
+				"volume": 0.8
+			}
 		],
 		"subtitle": "subtitles.block.generic.place"
 	},
@@ -490,33 +1118,33 @@
 				"volume": 0.6
 			},
 			{
-				"name": "enderscape:block/end_rod/place2",
-				"pitch": 1.1,
-				"volume": 0.6
-			},
-			{
-				"name": "enderscape:block/end_rod/place3",
-				"pitch": 1.1,
-				"volume": 0.6
-			},
-			{
-				"name": "enderscape:block/end_rod/place4",
-				"pitch": 1.1,
-				"volume": 0.6
-			},
-			{
 				"name": "enderscape:block/end_rod/place1",
 				"pitch": 1.2,
 				"volume": 0.6
 			},
 			{
 				"name": "enderscape:block/end_rod/place2",
+				"pitch": 1.1,
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/end_rod/place2",
 				"pitch": 1.2,
 				"volume": 0.6
 			},
 			{
 				"name": "enderscape:block/end_rod/place3",
+				"pitch": 1.1,
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/end_rod/place3",
 				"pitch": 1.2,
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/end_rod/place4",
+				"pitch": 1.1,
 				"volume": 0.6
 			},
 			{
@@ -985,32 +1613,26 @@
 		"sounds": [
 			{
 				"name": "enderscape:block/fungus/place1",
-				"pitch": 1,
 				"volume": 0.5
 			},
 			{
 				"name": "enderscape:block/fungus/place2",
-				"pitch": 1,
 				"volume": 0.5
 			},
 			{
 				"name": "enderscape:block/fungus/place3",
-				"pitch": 1,
 				"volume": 0.5
 			},
 			{
 				"name": "enderscape:block/fungus/place4",
-				"pitch": 1,
 				"volume": 0.5
 			},
 			{
 				"name": "enderscape:block/fungus/place5",
-				"pitch": 1,
 				"volume": 0.5
 			},
 			{
 				"name": "enderscape:block/fungus/place6",
-				"pitch": 1,
 				"volume": 0.5
 			}
 		],
@@ -1081,6 +1703,88 @@
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},
+	"block.fungus_bricks.break": {
+		"sounds": [
+			{
+				"name": "enderscape:block.fungus_bricks.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.fungus_bricks.fall": {
+		"sounds": [
+			{
+				"name": "enderscape:block.fungus_bricks.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.fungus_bricks.hit": {
+		"sounds": [
+			{
+				"name": "enderscape:block.fungus_bricks.step",
+				"type": "event",
+				"volume": 0.5
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.fungus_bricks.place": {
+		"sounds": [
+			{
+				"name": "enderscape:block/fungus_bricks/break1",
+				"pitch": 1.33,
+				"volume": 0.4
+			},
+			{
+				"name": "enderscape:block/fungus_bricks/break2",
+				"pitch": 1.33,
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus_bricks/break3",
+				"pitch": 1.33,
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/fungus_bricks/break4",
+				"pitch": 1.33,
+				"volume": 0.5
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.fungus_bricks.step": {
+		"sounds": [
+			{
+				"name": "enderscape:block/fungus_bricks/step1",
+				"pitch": 1.1,
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/fungus_bricks/step2",
+				"pitch": 1.1,
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/fungus_bricks/step3",
+				"pitch": 1.1,
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/fungus_bricks/step4",
+				"pitch": 1.1,
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/fungus_bricks/step5",
+				"pitch": 1.1,
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
 	"block.fungus_cap.break": {
 		"sounds": [
 			{
@@ -1102,8 +1806,8 @@
 		"sounds": [
 			{
 				"name": "enderscape:block.fungus_cap.step",
-				"volume": 0.5,
-				"type": "event"
+				"type": "event",
+				"volume": 0.5
 			}
 		],
 		"subtitle": "subtitles.block.generic.hit"
@@ -1113,44 +1817,167 @@
 			{
 				"name": "enderscape:block/fungus_cap/break1",
 				"pitch": 1.1,
-				"volume": 0.8
+				"volume": 0.7
 			},
 			{
 				"name": "enderscape:block/fungus_cap/break2",
 				"pitch": 1.1,
-				"volume": 0.8
+				"volume": 0.7
 			},
 			{
 				"name": "enderscape:block/fungus_cap/break3",
 				"pitch": 1.1,
-				"volume": 0.8
+				"volume": 0.7
 			},
 			{
 				"name": "enderscape:block/fungus_cap/break4",
 				"pitch": 1.1,
-				"volume": 0.8
+				"volume": 0.7
 			},
 			{
 				"name": "enderscape:block/fungus_cap/break5",
 				"pitch": 1.1,
-				"volume": 0.8
+				"volume": 0.7
 			},
 			{
 				"name": "enderscape:block/fungus_cap/break6",
 				"pitch": 1.1,
-				"volume": 0.8
+				"volume": 0.7
 			}
 		],
 		"subtitle": "subtitles.block.generic.place"
 	},
 	"block.fungus_cap.step": {
 		"sounds": [
-			"enderscape:block/fungus_cap/step1",
-			"enderscape:block/fungus_cap/step2",
-			"enderscape:block/fungus_cap/step3",
-			"enderscape:block/fungus_cap/step4",
-			"enderscape:block/fungus_cap/step5",
-			"enderscape:block/fungus_cap/step6"
+			{
+				"name": "enderscape:block/fungus_cap/step1",
+				"volume": 0.4
+			},
+			{
+				"name": "enderscape:block/fungus_cap/step2",
+				"volume": 0.4
+			},
+			{
+				"name": "enderscape:block/fungus_cap/step3",
+				"volume": 0.4
+			},
+			{
+				"name": "enderscape:block/fungus_cap/step4",
+				"volume": 0.4
+			},
+			{
+				"name": "enderscape:block/fungus_cap/step5",
+				"volume": 0.4
+			},
+			{
+				"name": "enderscape:block/fungus_cap/step6",
+				"volume": 0.4
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.fungus_wood.break": {
+		"sounds": [
+			{
+				"name": "enderscape:block.fungus_wood.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.fungus_wood.fall": {
+		"sounds": [
+			{
+				"name": "enderscape:block.fungus_wood.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.fungus_wood.hit": {
+		"sounds": [
+			{
+				"name": "enderscape:block.fungus_wood.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.fungus_wood.place": {
+		"sounds": [
+			{
+				"name": "enderscape:block/fungus_wood/place1",
+				"pitch": 1.25,
+				"volume": 0.86
+			},
+			{
+				"name": "enderscape:block/fungus_wood/place1",
+				"pitch": 1.3,
+				"volume": 0.86
+			},
+			{
+				"name": "enderscape:block/fungus_wood/place1",
+				"pitch": 1.35,
+				"volume": 0.86
+			},
+			{
+				"name": "enderscape:block/fungus_wood/place2",
+				"pitch": 1.25,
+				"volume": 0.86
+			},
+			{
+				"name": "enderscape:block/fungus_wood/place2",
+				"pitch": 1.3,
+				"volume": 0.86
+			},
+			{
+				"name": "enderscape:block/fungus_wood/place2",
+				"pitch": 1.35,
+				"volume": 0.86
+			},
+			{
+				"name": "enderscape:block/fungus_wood/place3",
+				"pitch": 1.25,
+				"volume": 0.86
+			},
+			{
+				"name": "enderscape:block/fungus_wood/place3",
+				"pitch": 1.3,
+				"volume": 0.86
+			},
+			{
+				"name": "enderscape:block/fungus_wood/place3",
+				"pitch": 1.35,
+				"volume": 0.86
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.fungus_wood.step": {
+		"sounds": [
+			{
+				"name": "enderscape:block/fungus_wood/step1",
+				"volume": 0.7
+			},
+			{
+				"name": "enderscape:block/fungus_wood/step2",
+				"volume": 0.7
+			},
+			{
+				"name": "enderscape:block/fungus_wood/step3",
+				"volume": 0.7
+			},
+			{
+				"name": "enderscape:block/fungus_wood/step4",
+				"volume": 0.7
+			},
+			{
+				"name": "enderscape:block/fungus_wood/step5",
+				"volume": 0.7
+			},
+			{
+				"name": "enderscape:block/fungus_wood/step6",
+				"volume": 0.7
+			}
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},
@@ -1310,7 +2137,7 @@
 	"block.nebulite_ore.ambient": {
 		"sounds": [
 			{
-				"attenuation_distance": 12,
+				"attenuation_distance": 16,
 				"name": "enderscape:block/nebulite_ore/ambient",
 				"volume": 0.8
 			}
@@ -1320,7 +2147,7 @@
 	"block.nebulite_ore.ambient.far": {
 		"sounds": [
 			{
-				"attenuation_distance": 48,
+				"attenuation_distance": 32,
 				"name": "enderscape:block/nebulite_ore/ambient_far",
 				"pitch": 0.9,
 				"volume": 0.4
@@ -1716,10 +2543,26 @@
 	},
 	"block.stem.place": {
 		"sounds": [
-			"enderscape:block/stem/break1",
-			"enderscape:block/stem/break2",
-			"enderscape:block/stem/break3",
-			"enderscape:block/stem/break4"
+			{
+				"name": "enderscape:block/stem/break1",
+				"pitch": 1.4,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/stem/break2",
+				"pitch": 1.4,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/stem/break3",
+				"pitch": 1.4,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/stem/break4",
+				"pitch": 1.4,
+				"volume": 0.8
+			}
 		],
 		"subtitle": "subtitles.block.generic.place"
 	},
@@ -1727,18 +2570,178 @@
 		"sounds": [
 			{
 				"name": "enderscape:block/stem/step1",
-				"volume": 0.5
+				"volume": 0.7
 			},
 			{
 				"name": "enderscape:block/stem/step2",
-				"volume": 0.5
+				"volume": 0.7
 			},
 			{
 				"name": "enderscape:block/stem/step3",
-				"volume": 0.5
+				"volume": 0.7
 			},
 			{
 				"name": "enderscape:block/stem/step4",
+				"volume": 0.7
+			},
+			{
+				"name": "enderscape:block/stem/step5",
+				"volume": 0.7
+			},
+			{
+				"name": "enderscape:block/stem/step6",
+				"volume": 0.7
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.veradite.break": {
+		"sounds": [
+			{
+				"name": "enderscape:block.veradite.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.veradite.fall": {
+		"sounds": [
+			{
+				"name": "enderscape:block.veradite.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.veradite.hit": {
+		"sounds": [
+			{
+				"name": "enderscape:block.veradite.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.veradite.place": {
+		"sounds": [
+			{
+				"name": "enderscape:block/veradite/break1",
+				"pitch": 0.9,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/veradite/break2",
+				"pitch": 0.9,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/veradite/break3",
+				"pitch": 0.9,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/veradite/break4",
+				"pitch": 0.9,
+				"volume": 0.8
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.veradite.step": {
+		"sounds": [
+			{
+				"name": "enderscape:block/veradite/step1",
+				"pitch": 0.9,
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/veradite/step2",
+				"pitch": 0.9,
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/veradite/step3",
+				"pitch": 0.9,
+				"volume": 0.6
+			},
+			{
+				"name": "enderscape:block/veradite/step4",
+				"pitch": 0.9,
+				"volume": 0.6
+			}
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"block.veradite_bricks.break": {
+		"sounds": [
+			{
+				"name": "enderscape:block.veradite_bricks.place",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.break"
+	},
+	"block.veradite_bricks.fall": {
+		"sounds": [
+			{
+				"name": "enderscape:block.veradite_bricks.place",
+				"type": "event"
+			}
+		]
+	},
+	"block.veradite_bricks.hit": {
+		"sounds": [
+			{
+				"name": "enderscape:block.veradite_bricks.step",
+				"type": "event"
+			}
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	},
+	"block.veradite_bricks.place": {
+		"sounds": [
+			{
+				"name": "enderscape:block/veradite_bricks/break1",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/veradite_bricks/break2",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/veradite_bricks/break3",
+				"pitch": 1.1,
+				"volume": 0.8
+			},
+			{
+				"name": "enderscape:block/veradite_bricks/break4",
+				"pitch": 1.1,
+				"volume": 0.8
+			}
+		],
+		"subtitle": "subtitles.block.generic.place"
+	},
+	"block.veradite_bricks.step": {
+		"sounds": [
+			{
+				"name": "enderscape:block/veradite_bricks/step1",
+				"pitch": 1.3,
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/veradite_bricks/step2",
+				"pitch": 1.3,
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/veradite_bricks/step3",
+				"pitch": 1.3,
+				"volume": 0.5
+			},
+			{
+				"name": "enderscape:block/veradite_bricks/step4",
+				"pitch": 1.3,
 				"volume": 0.5
 			}
 		],
@@ -1867,22 +2870,35 @@
 	},
 	"entity.rubblemite.ambient": {
 		"sounds": [
-			"enderscape:entity/rubblemite/ambient1",
-			"enderscape:entity/rubblemite/ambient2",
-			"enderscape:entity/rubblemite/ambient3",
-			"enderscape:entity/rubblemite/ambient4"
+			{
+				"name": "enderscape:entity/rubblemite/ambient1"
+			},
+			{
+				"name": "enderscape:entity/rubblemite/ambient2"
+			},
+			{
+				"name": "enderscape:entity/rubblemite/ambient3"
+			},
+			{
+				"name": "enderscape:entity/rubblemite/ambient4"
+			}
 		],
 		"subtitle": "subtitles.rubblemite.ambient"
 	},
 	"entity.rubblemite.death": {
 		"sounds": [
-			"enderscape:entity/rubblemite/death"
+			{
+				"name": "enderscape:entity/rubblemite/death"
+			}
 		],
 		"subtitle": "subtitles.rubblemite.death"
 	},
 	"entity.rubblemite.extrude": {
 		"sounds": [
-			"enderscape:entity/rubblemite/extrude1"
+			{
+				"name": "enderscape:entity/rubblemite/extrude",
+				"volume": 0.7
+			}
 		]
 	},
 	"entity.rubblemite.hop": {
@@ -1896,18 +2912,37 @@
 	},
 	"entity.rubblemite.hurt": {
 		"sounds": [
-			"enderscape:entity/rubblemite/hurt1",
-			"enderscape:entity/rubblemite/hurt2"
+			{
+				"name": "enderscape:entity/rubblemite/hurt1"
+			},
+			{
+				"name": "enderscape:entity/rubblemite/hurt2"
+			}
 		],
 		"subtitle": "subtitles.rubblemite.hurt"
 	},
 	"entity.rubblemite.shield": {
 		"sounds": [
-			"entity/shulker/hurt_closed1",
-			"entity/shulker/hurt_closed2",
-			"entity/shulker/hurt_closed3",
-			"entity/shulker/hurt_closed4",
-			"entity/shulker/hurt_closed5"
+			{
+				"name": "enderscape:entity/rubblemite/hurt_closed1",
+				"pitch": 1.1,
+				"volume": 0.9
+			},
+			{
+				"name": "enderscape:entity/rubblemite/hurt_closed2",
+				"pitch": 1.1,
+				"volume": 0.9
+			},
+			{
+				"name": "enderscape:entity/rubblemite/hurt_closed3",
+				"pitch": 1.1,
+				"volume": 0.9
+			},
+			{
+				"name": "enderscape:entity/rubblemite/hurt_closed4",
+				"pitch": 1.1,
+				"volume": 0.9
+			}
 		],
 		"subtitle": "subtitles.rubblemite.shield"
 	},
@@ -2064,10 +3099,61 @@
 		],
 		"subtitle": "subtitles.mirror.teleport"
 	},
-	"music.celestial_islands": {
+	"item.mirror.transdimensional_travel": {
+		"sounds": [
+			{
+				"name": "enderscape:item/mirror/travel1"
+			},
+			{
+				"name": "enderscape:item/mirror/travel2"
+			}
+		]
+	},
+	"item.trident.warp": {
+		"sounds": [
+			{
+				"name": "enderscape:item/trident/warp1",
+				"volume": 0.9
+			},
+			{
+				"name": "enderscape:item/trident/warp2",
+				"volume": 0.9
+			}
+		]
+	},
+	"music.biome.barren_depths": {
+		"sounds": [
+			{
+				"name": "minecraft:music.end",
+				"type": "event"
+			}
+		]
+	},
+	"music.biome.barren_skies": {
+		"sounds": [
+			{
+				"name": "minecraft:music.end",
+				"type": "event"
+			}
+		]
+	},
+	"music.biome.celestial_islands": {
+		"sounds": [
+			{
+				"name": "enderscape:music.celestial_plains",
+				"type": "event"
+			}
+		]
+	},
+	"music.biome.celestial_plains": {
 		"sounds": [
 			{
 				"name": "enderscape:music/elysium",
+				"stream": true,
+				"weight": 20
+			},
+			{
+				"name": "enderscape:music/finality",
 				"stream": true,
 				"weight": 20
 			},
@@ -2077,28 +3163,50 @@
 				"weight": 20
 			},
 			{
-				"name": "minecraft:music/game/end/end",
-				"stream": true,
+				"name": "minecraft:music.end",
+				"type": "event",
 				"weight": 1
 			}
 		]
 	},
-	"music.celestial_plains": {
+	"music.biome.corrupt_depths": {
 		"sounds": [
 			{
-				"name": "enderscape:music/elysium",
+				"name": "enderscape:music/mutagen",
 				"stream": true,
 				"weight": 20
 			},
 			{
-				"name": "enderscape:music/otherworld",
+				"name": "enderscape:music/nebula",
 				"stream": true,
 				"weight": 20
 			},
 			{
-				"name": "minecraft:music/game/end/end",
+				"name": "minecraft:music.end",
+				"type": "event",
+				"weight": 1
+			}
+		]
+	},
+	"music.biome.default_end": {
+		"sounds": [
+			{
+				"name": "enderscape:music/desolation",
 				"stream": true,
 				"weight": 1
+			},
+			{
+				"name": "minecraft:music.end",
+				"type": "event",
+				"weight": 1
+			}
+		]
+	},
+	"music.biome.sky_islands": {
+		"sounds": [
+			{
+				"name": "minecraft:music.end",
+				"type": "event"
 			}
 		]
 	},
@@ -2115,29 +3223,6 @@
 			{
 				"name": "enderscape:music/glare",
 				"stream": true
-			}
-		]
-	},
-	"music.sky": {
-		"sounds": [
-			{
-				"name": "minecraft:music/game/end/end",
-				"stream": true,
-				"weight": 1
-			}
-		]
-	},
-	"music.void": {
-		"sounds": [
-			{
-				"name": "enderscape:music/nebula",
-				"stream": true,
-				"weight": 20
-			},
-			{
-				"name": "minecraft:music/game/end/end",
-				"stream": true,
-				"weight": 1
 			}
 		]
 	}

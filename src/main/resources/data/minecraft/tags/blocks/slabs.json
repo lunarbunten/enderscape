@@ -1,9 +1,13 @@
 {
     "replace": false,
     "values": [
-        "enderscape:celestial_slab",
         "enderscape:shadow_quartz_block_slab",
         "enderscape:smooth_shadow_quartz_slab",
-        "enderscape:shadow_quartz_brick_slab"
+        "enderscape:shadow_quartz_brick_slab",
+        "enderscape:veradite_slab",
+        "enderscape:polished_veradite_slab",
+        "enderscape:veradite_brick_slab",
+        "enderscape:celestial_brick_slab",
+        "enderscape:murushroom_brick_slab"
     ]
 }

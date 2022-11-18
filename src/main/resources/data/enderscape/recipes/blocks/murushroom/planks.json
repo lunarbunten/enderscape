@@ -1,0 +1,13 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "planks",
+	"ingredients": [
+		{
+			"tag": "enderscape:murushroom_stems"
+		}
+	],
+	"result": {
+		"item": "enderscape:murushroom_planks",
+		"count": 4
+	}
+}

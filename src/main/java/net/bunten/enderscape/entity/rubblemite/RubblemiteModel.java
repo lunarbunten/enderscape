@@ -3,11 +3,17 @@ package net.bunten.enderscape.entity.rubblemite;
 import net.bunten.enderscape.util.MathUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.model.SinglePartEntityModel;
+import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 
 @Environment(EnvType.CLIENT)
-public class RubblemiteModel extends SinglePartEntityModel<RubblemiteEntity> {
+public class RubblemiteModel extends HierarchicalModel<Rubblemite> {
     private final ModelPart root;
     private final ModelPart shell;
     private final ModelPart head;
@@ -18,44 +24,40 @@ public class RubblemiteModel extends SinglePartEntityModel<RubblemiteEntity> {
         head = shell.getChild("head");
     }
 
-    public static TexturedModelData getTexturedModelData() {
-        Dilation dilation = Dilation.NONE;
+    public static LayerDefinition createLayer() {
+        CubeDeformation dilation = CubeDeformation.NONE;
 
-        ModelData data = new ModelData();
-        ModelPartData rootData = data.getRoot();
+        MeshDefinition data = new MeshDefinition();
+        PartDefinition rootData = data.getRoot();
 
-        ModelPartData shellData = rootData.addChild("shell", ModelPartBuilder.create().uv(0, 0).cuboid(-4, -6, -4, 8, 6, 8, dilation), ModelTransform.pivot(0, 24, 0));
-        shellData.addChild("head", ModelPartBuilder.create().uv(0, 14).cuboid(-2, -2, -1, 4, 4, 1, dilation), ModelTransform.pivot(0, -2, -4));
+        PartDefinition shellData = rootData.addOrReplaceChild("shell", CubeListBuilder.create().texOffs(0, 0).addBox(-4, -6, -4, 8, 6, 8, dilation), PartPose.offset(0, 24, 0));
+        shellData.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 14).addBox(-2, -2, -1, 4, 4, 1, dilation), PartPose.offset(0, -2, -4));
 
-        return TexturedModelData.of(data, 32, 32);
+        return LayerDefinition.create(data, 32, 32);
     }
 
     @Override
-    public ModelPart getPart() {
+    public ModelPart root() {
         return root;
     }
 
     @Override
-    public void setAngles(RubblemiteEntity mob, float limbSwing, float limbDistance, float age, float headYaw, float headPitch) {
+    public void setupAnim(Rubblemite mob, float limbAngle, float limbDistance, float age, float headYaw, float headPitch) {
+        root().getAllParts().forEach(ModelPart::resetPose);
+
         float strength = 0.05F;
         float speed = 0.3F;
         float speed2 = speed * 2;
 
-        if (mob.isInsideShell()) {
-            shell.pitch = 0;
-            shell.roll = 0;
-            shell.yaw = 0;
-        } else if (mob.isDashing()) {
-            shell.pitch = 0;
-            shell.roll = 0;
-            shell.yaw = age;
+        if (mob.isDashing()) {
+            shell.yRot = age;
         } else {
-            head.pitch = -(MathUtil.sin(age * speed) * strength);
-            head.roll = -(MathUtil.sin(age * speed2) * strength);
+            head.xRot = -(MathUtil.sin(age * speed) * strength);
+            head.zRot = -(MathUtil.sin(age * speed2) * strength);
 
-            shell.pitch = (MathUtil.sin(age * speed + 2) * strength) + ((headPitch * 0.017453292F) / 2);
-            shell.roll = (MathUtil.sin(age * speed2 + 2) * strength);
-            shell.yaw = ((headYaw * 0.017453292F) / 2);
+            shell.xRot = (MathUtil.sin(age * speed + MathUtil.PI) * strength) + ((headPitch * 0.017453292F) / 2);
+            shell.zRot = (MathUtil.sin(age * speed2 + MathUtil.PI) * strength);
+            shell.yRot = ((headYaw * 0.017453292F) / 2);
         }
 
         head.visible = !mob.isInsideShell() && !mob.isDashing();

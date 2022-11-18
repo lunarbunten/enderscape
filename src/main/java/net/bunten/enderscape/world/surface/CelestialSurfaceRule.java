@@ -7,29 +7,25 @@ import org.betterx.bclib.api.v2.levelgen.surface.rules.SwitchRuleSource;
 import org.betterx.bclib.interfaces.NumericProvider;
 import org.betterx.bclib.interfaces.SurfaceMaterialProvider;
 import org.betterx.bclib.mixin.common.SurfaceRulesContextAccessor;
+import org.betterx.bclib.noise.OpenSimplexNoise;
 import org.betterx.bclib.util.MHelper;
 
 import com.mojang.serialization.Codec;
 
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.util.OpenSimplexNoise;
 import net.bunten.enderscape.util.States;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.surfacebuilder.MaterialRules;
-import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRule;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.SurfaceRules.RuleSource;
 
 public class CelestialSurfaceRule implements SurfaceMaterialProvider {
-
-    public static MaterialRule register() {
-        return new CelestialSurfaceRule().surface().build();
-    }
 
     private final BlockState END_STONE = States.END_STONE;
     private final BlockState CELESTIAL = States.CELESTIAL_MYCELIUM;
     
-    protected MaterialRule rule(BlockState state) {
-        return MaterialRules.block(state);
+    protected RuleSource rule(BlockState state) {
+        return SurfaceRules.state(state);
     }
 
     @Override
@@ -57,7 +53,7 @@ public class CelestialSurfaceRule implements SurfaceMaterialProvider {
         SurfaceRuleBuilder builder = SurfaceRuleBuilder.start();
 
         builder = builder.filler(getUnderMaterial());
-        builder.rule(2, MaterialRules.condition(MaterialRules.STONE_DEPTH_FLOOR, new SwitchRuleSource(new SurfaceProvider(), List.of(rule(END_STONE), rule(CELESTIAL)))));
+        builder.rule(2, SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, new SwitchRuleSource(new SurfaceProvider(), List.of(rule(END_STONE), rule(CELESTIAL)))));
 
         return builder;
     }

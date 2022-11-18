@@ -1,0 +1,37 @@
+{
+    "parent": "enderscape:bottle_drift_jelly",
+    "display": {
+        "icon": {
+            "item": "enderscape:drift_leggings"
+        },
+        "title": {
+            "translate": "advancement.enderscape.drift_leggings"
+        },
+        "description": {
+            "translate": "advancement.enderscape.drift_leggings.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "obtain_nebulite": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "enderscape:drift_leggings"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "obtain_nebulite"
+        ]
+    ]
+}

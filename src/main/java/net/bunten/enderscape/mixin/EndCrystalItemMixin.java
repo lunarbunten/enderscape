@@ -8,60 +8,60 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.bunten.enderscape.registry.EnderscapeBlocks;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.boss.dragon.EnderDragonFight;
-import net.minecraft.entity.decoration.EndCrystalEntity;
-import net.minecraft.item.EndCrystalItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
+import net.minecraft.world.item.EndCrystalItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.dimension.end.EndDragonFight;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.AABB;
 
 @Mixin(EndCrystalItem.class)
 public class EndCrystalItemMixin extends Item {
-    public EndCrystalItemMixin(Settings settings) {
+    public EndCrystalItemMixin(Properties settings) {
         super(settings);
     }
 
-    @Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
-    public void use(ItemUsageContext context, CallbackInfoReturnable<ActionResult> info) {
-        World world = context.getWorld();
-        BlockPos pos = context.getBlockPos();
+    @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
+    public void useOn(UseOnContext context, CallbackInfoReturnable<InteractionResult> info) {
+        Level world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
         BlockState state = world.getBlockState(pos);
 
-        if (state.isIn(EnderscapeBlocks.SUPPORTS_END_CRYSTAL) && state.isFullCube(world, pos)) {
-            BlockPos pos2 = pos.up();
-            if (!world.isAir(pos2)) {
-                info.setReturnValue(ActionResult.FAIL);
+        if (state.is(EnderscapeBlocks.SUPPORTS_END_CRYSTAL) && state.isCollisionShapeFullBlock(world, pos)) {
+            BlockPos pos2 = pos.above();
+            if (!world.isEmptyBlock(pos2)) {
+                info.setReturnValue(InteractionResult.FAIL);
             } else {
                 double x = pos2.getX();
                 double y = pos2.getY();
                 double z = pos2.getZ();
-                List<Entity> list = world.getOtherEntities(null, new Box(x, y, z, x + 1, y + 2, z + 1));
+                List<Entity> list = world.getEntities(null, new AABB(x, y, z, x + 1, y + 2, z + 1));
 
                 if (!list.isEmpty()) {
-                    info.setReturnValue(ActionResult.FAIL);
+                    info.setReturnValue(InteractionResult.FAIL);
                 } else {
-                    if (world instanceof ServerWorld) {
-                        EndCrystalEntity crystal = new EndCrystalEntity(world, x + 0.5, y, z + 0.5);
+                    if (world instanceof ServerLevel server) {
+                        EndCrystal crystal = new EndCrystal(world, x + 0.5, y, z + 0.5);
                         crystal.setShowBottom(false);
-                        world.spawnEntity(crystal);
+                        world.addFreshEntity(crystal);
 
-                        world.emitGameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, pos2);
+                        world.gameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, pos2);
 
-                        EnderDragonFight dragonFight = ((ServerWorld)world).getEnderDragonFight();
+                        EndDragonFight dragonFight = server.dragonFight();
                         if (dragonFight != null) {
-                            dragonFight.respawnDragon();
+                            dragonFight.tryRespawn();
                         }
                     }
 
-                    context.getStack().decrement(1);
-                    info.setReturnValue(ActionResult.success(world.isClient()));
+                    context.getItemInHand().shrink(1);
+                    info.setReturnValue(InteractionResult.sidedSuccess(world.isClientSide()));
                 }
             }
         }

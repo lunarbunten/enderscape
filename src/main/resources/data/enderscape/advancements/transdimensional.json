@@ -1,0 +1,36 @@
+{
+    "parent": "enderscape:mirror_teleport",
+    "display": {
+        "icon": {
+            "item": "enderscape:mirror",
+            "nbt": "{Enchantments: [{lvl: 1, id: \"minecraft:unbreaking\"}]}"
+        },
+        "title": {
+            "translate": "advancement.enderscape.transdimensional"
+        },
+        "description": {
+            "translate": "advancement.enderscape.transdimensional.description"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "teleport": {
+            "trigger": "enderscape:mirror_teleport_different",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "enderscape:mirror"
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "teleport"
+        ]
+    ]
+}

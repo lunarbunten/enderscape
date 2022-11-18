@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
-        "enderscape:celestial_pressure_plate"
+        "enderscape:celestial_pressure_plate",
+        "enderscape:murushroom_pressure_plate"
     ]
 }

@@ -1,16 +1,15 @@
 package net.bunten.enderscape.entity.rubblemite;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.pathing.Path;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.util.Hand;
-
 import java.util.EnumSet;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.pathfinder.Path;
 
 public class RubblemiteAttackGoal extends Goal {
-    protected final RubblemiteEntity mob;
+    protected final Rubblemite mob;
     private final double speed;
     private final boolean pauseWhenMobIdle;
     private Path path;
@@ -21,15 +20,15 @@ public class RubblemiteAttackGoal extends Goal {
     private int attackTime;
     private long lastUpdateTime;
 
-    public RubblemiteAttackGoal(RubblemiteEntity mob, double speed, boolean pauseWhenMobIdle) {
+    public RubblemiteAttackGoal(Rubblemite mob, double speed, boolean pauseWhenMobIdle) {
         this.mob = mob;
         this.speed = speed;
         this.pauseWhenMobIdle = pauseWhenMobIdle;
-        setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
+        setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
 
-    public boolean canStart() {
-        long l = mob.world.getTime();
+    public boolean canUse() {
+        long l = mob.level.getGameTime();
         if (l - lastUpdateTime < 20L) {
             return false;
         } else {
@@ -40,55 +39,55 @@ public class RubblemiteAttackGoal extends Goal {
             } else if (!target.isAlive()) {
                 return false;
             } else {
-                path = mob.getNavigation().findPathTo(target, 0);
+                path = mob.getNavigation().createPath(target, 0);
                 if (path != null) {
                     return true;
                 } else {
-                    return getSquaredMaxAttackDistance(target) >= mob.squaredDistanceTo(target.getX(), target.getY(), target.getZ());
+                    return getSquaredMaxAttackDistance(target) >= mob.distanceToSqr(target.getX(), target.getY(), target.getZ());
                 }
             }
         }
     }
 
-    public boolean shouldContinue() {
+    public boolean canContinueToUse() {
         LivingEntity target = mob.getTarget();
         if (target == null) {
             return false;
         } else if (!target.isAlive()) {
             return false;
         } else if (!pauseWhenMobIdle) {
-            return !mob.getNavigation().isIdle();
-        } else if (!mob.isInWalkTargetRange(target.getBlockPos())) {
+            return !mob.getNavigation().isDone();
+        } else if (!mob.isWithinRestriction(target.blockPosition())) {
             return false;
         } else {
-            return !(target instanceof PlayerEntity) || !target.isSpectator() && !((PlayerEntity) target).isCreative();
+            return !(target instanceof Player) || !target.isSpectator() && !((Player) target).isCreative();
         }
     }
 
     public void start() {
-        mob.getNavigation().startMovingAlong(path, speed);
-        mob.setAttacking(true);
+        mob.getNavigation().moveTo(path, speed);
+        mob.setAggressive(true);
         updateCountdownTicks = 0;
         attackTime = 0;
     }
 
     public void stop() {
         LivingEntity target = mob.getTarget();
-        if (!EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.test(target)) {
+        if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(target)) {
             mob.setTarget(null);
         }
 
-        mob.setAttacking(false);
+        mob.setAggressive(false);
         mob.getNavigation().stop();
     }
 
     public void tick() {
         LivingEntity target = mob.getTarget();
-        mob.getLookControl().lookAt(target, 30, 30);
+        mob.getLookControl().setLookAt(target, 30, 30);
         assert target != null;
-        double d = mob.squaredDistanceTo(target.getX(), target.getY(), target.getZ());
+        double d = mob.distanceToSqr(target.getX(), target.getY(), target.getZ());
         updateCountdownTicks = Math.max(updateCountdownTicks - 1, 0);
-        if ((pauseWhenMobIdle || mob.getVisibilityCache().canSee(target)) && updateCountdownTicks <= 0 && (x == 0 && y == 0 && z == 0 || target.squaredDistanceTo(x, y, z) >= 1 || mob.getRandom().nextFloat() < 0.05F)) {
+        if ((pauseWhenMobIdle || mob.getSensing().hasLineOfSight(target)) && updateCountdownTicks <= 0 && (x == 0 && y == 0 && z == 0 || target.distanceToSqr(x, y, z) >= 1 || mob.getRandom().nextFloat() < 0.05F)) {
             x = target.getX();
             y = target.getY();
             z = target.getZ();
@@ -99,7 +98,7 @@ public class RubblemiteAttackGoal extends Goal {
                 updateCountdownTicks += 5;
             }
 
-            if (!mob.getNavigation().startMovingTo(target, speed)) {
+            if (!mob.getNavigation().moveTo(target, speed)) {
                 updateCountdownTicks += 15;
             }
         }
@@ -112,12 +111,12 @@ public class RubblemiteAttackGoal extends Goal {
         double d = getSquaredMaxAttackDistance(target);
         if (squaredDistance <= d && attackTime <= 0) {
             attackTime = 20;
-            mob.swingHand(Hand.MAIN_HAND);
-            mob.tryAttack(target);
+            mob.swing(InteractionHand.MAIN_HAND);
+            mob.doHurtTarget(target);
         }
     }
 
     protected double getSquaredMaxAttackDistance(LivingEntity entity) {
-        return mob.getWidth() * 2 * mob.getWidth() * 2 + entity.getWidth();
+        return mob.getBbWidth() * 2 * mob.getBbWidth() * 2 + entity.getBbWidth();
     }
 }

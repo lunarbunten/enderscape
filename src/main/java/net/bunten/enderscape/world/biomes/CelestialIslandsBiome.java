@@ -3,60 +3,65 @@ package net.bunten.enderscape.world.biomes;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 
-import net.bunten.enderscape.registry.EnderscapeMusic;
 import net.bunten.enderscape.registry.EnderscapeParticles;
-import net.bunten.enderscape.registry.EnderscapeSounds;
-import net.bunten.enderscape.world.EnderscapeBCLFeatures;
-import net.bunten.enderscape.world.EnderscapeSurfaces;
-import net.minecraft.entity.EntityType;
-import net.minecraft.world.biome.Biome.Precipitation;
+import net.bunten.enderscape.world.EnderscapeRuleSources;
+import net.bunten.enderscape.world.placed.CelestialIslandsFeatures;
+import net.bunten.enderscape.world.placed.CelestialPlainsFeatures;
+import net.bunten.enderscape.world.placed.GeneralEndFeatures;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.biome.Biome.Precipitation;
 
-public class CelestialIslandsBiome implements EnderscapeBiome, CelestialBiome {
+public class CelestialIslandsBiome extends EnderscapeBiome {
 
-    @Override
-    public String getName() {
-        return "celestial_islands";
-    }
+    public CelestialIslandsBiome() {
+        super("celestial_islands");
 
-    public static BCLBiome register() {
-        return new CelestialIslandsBiome().getBCLBiome();
+        nebulaColor = 0x896247;
+        nebulaAlpha *= 1.12F;
     }
 
     @Override
     public BCLBiome getBCLBiome() {
-        BCLBiomeBuilder builder = BCLBiomeBuilder.start(getIdentifier());
+        BCLBiomeBuilder builder = createBuilder();
+
+        builder.endVoidBiome();
+        builder.genChance(0.3F);
 
         builder.temperature(0.7F);
         builder.precipitation(Precipitation.NONE);
 
-        builder.music(EnderscapeMusic.CELESTIAL_ISLANDS);
-        builder.loop(EnderscapeSounds.AMBIENT_CELESTIAL_ISLANDS_LOOP);
-        builder.additions(EnderscapeSounds.AMBIENT_CELESTIAL_ISLANDS_ADDITIONS, 0.003F);
-        builder.mood(EnderscapeSounds.AMBIENT_CELESTIAL_ISLANDS_MOOD, 6000, 8, 2);
+        builder.music(createMusic());
+        builder.loop(createLoop());
+        builder.additions(createAdditions(), 0.003F);
+        builder.mood(createMood(), 6000, 8, 2);
         builder.particles(EnderscapeParticles.CELESTIAL_SPORES, 0.001F);
         
-        builder.waterColor(0x3F76E4);
-        builder.waterFogColor(0x50533);
+        builder.waterColor(DEFAULT_WATER_COLOR);
+        builder.waterFogColor(DEFAULT_WATER_FOG_COLOR);
 
-        builder.skyColor(0);
-        builder.fogColor(getFogColor());
-        builder.fogDensity(getFogDensity());
+        builder.skyColor(DEFAULT_SKY_COLOR);
+        builder.fogColor(0x160D0D);
+        builder.fogDensity(1.25F);
 
-        builder.surface(EnderscapeSurfaces.CELESTIAL_SURFACE);
+        builder.surface(EnderscapeRuleSources.CELESTIAL_SURFACE);
 
         builder.spawn(EntityType.ENDERMAN, 30, 4, 8);
 
-        builder.feature(EnderscapeBCLFeatures.CELESTIAL_ISLAND);
+        builder.feature(CelestialIslandsFeatures.ISLAND);
 
-        builder.feature(EnderscapeBCLFeatures.CELESTIAL_GROWTH);
-        builder.feature(EnderscapeBCLFeatures.CELESTIAL_VEGETATION);
-        builder.feature(EnderscapeBCLFeatures.UNCOMMON_MURUSHROOMS);
+        builder.feature(CelestialPlainsFeatures.GROWTH);
+        builder.feature(CelestialPlainsFeatures.FUNGUS);
+        builder.feature(CelestialPlainsFeatures.BULB_FLOWER);
+        builder.feature(CelestialPlainsFeatures.MURUSHROOMS);
 
-        builder.feature(EnderscapeBCLFeatures.SHADOW_QUARTZ_ORE);
-        builder.feature(EnderscapeBCLFeatures.SCATTERED_SHADOW_QUARTZ_ORE);
+        builder.feature(GeneralEndFeatures.VERADITE);
+        builder.feature(GeneralEndFeatures.SCATTERED_VERADITE);
 
-        builder.feature(EnderscapeBCLFeatures.NEBULITE_ORE);
-        builder.feature(EnderscapeBCLFeatures.VOID_NEBULITE_ORE);
+        builder.feature(GeneralEndFeatures.SHADOW_QUARTZ_ORE);
+        builder.feature(GeneralEndFeatures.SCATTERED_SHADOW_QUARTZ_ORE);
+
+        builder.feature(GeneralEndFeatures.NEBULITE_ORE);
+        builder.feature(GeneralEndFeatures.VOID_NEBULITE_ORE);
 
         return builder.build();
     }

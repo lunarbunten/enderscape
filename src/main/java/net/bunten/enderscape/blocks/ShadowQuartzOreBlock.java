@@ -1,10 +1,10 @@
 package net.bunten.enderscape.blocks;
 
-import net.minecraft.block.OreBlock;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.DropExperienceBlock;
 
-public class ShadowQuartzOreBlock extends OreBlock {
-    public ShadowQuartzOreBlock(Settings settings) {
-        super(settings, UniformIntProvider.create(1, 3));
+public class ShadowQuartzOreBlock extends DropExperienceBlock {
+    public ShadowQuartzOreBlock(Properties settings) {
+        super(settings, UniformInt.of(1, 3));
     }
 }

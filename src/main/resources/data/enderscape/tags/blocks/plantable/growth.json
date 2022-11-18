@@ -1,0 +1,9 @@
+{
+    "replace": false,
+    "values": [
+        "#minecraft:mushroom_grow_block",
+        "#minecraft:dirt",
+        "minecraft:farmland",
+        "minecraft:end_stone"
+    ]
+}

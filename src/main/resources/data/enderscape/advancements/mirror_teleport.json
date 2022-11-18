@@ -5,7 +5,7 @@
             "item": "enderscape:mirror"
         },
         "title": {
-            "translate": "advancement.enderscape.mirror_teleport.title"
+            "translate": "advancement.enderscape.mirror_teleport"
         },
         "description": {
             "translate": "advancement.enderscape.mirror_teleport.description"
@@ -16,8 +16,8 @@
         "hidden": false
     },
     "criteria": {
-        "mirror_teleport": {
-            "trigger": "enderscape:mirror_teleport",
+        "teleport": {
+            "trigger": "enderscape:mirror_teleport_any",
             "conditions": {
                 "items": [
                     {
@@ -29,7 +29,7 @@
     },
     "requirements": [
         [
-            "mirror_teleport"
+            "teleport"
         ]
     ]
 }

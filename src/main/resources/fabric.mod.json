@@ -3,15 +3,16 @@
     "id": "enderscape",
     "version": "${version}",
     "name": "Enderscape",
-    "description": "A mod that adds new content to The End dimension, such as biomes, mobs, ores, and more.\nThe focus is to add features that aren't unfitting for the vanilla game while enhancing the overall experience.",
+    "description": "A mod focused on improving The End with new biomes, mobs, and other features.",
     "authors": [
         "bunten (Primary developer)"
     ],
     "contributors": [
-        "Aigis (3D Logo)",
+        "Aigis (Logo art)",
         "ArathainFarqoe (Additional programming and art)",
         "FourTimesCold (Concept art)",
-        "MaakuArc (3D art and concept art)"
+        "MaakuArc (Promotional and concept art)",
+        "Ninni (Additional art and sound design)"
     ],
     "contact": {
         "sources": "https://github.com/lunarbunten/enderscape",
@@ -34,6 +35,9 @@
         ],
         "client": [
             "net.bunten.enderscape.client.EnderscapeClient"
+        ],
+        "mm:early_risers": [
+            "net.bunten.enderscape.asm.EnderscapeASM"
         ]
     },
     "mixins": [
@@ -42,9 +46,9 @@
     ],
     "depends": {
         "minecraft": "~1.19",
-        "fabricloader": ">=0.14.8",
-        "fabric": ">=0.58.5",
-        "bclib": ">=2.0.17"
+        "fabricloader": ">=0.14.9",
+        "fabric": ">=0.60.0",
+        "bclib": ">=2.1.0"
     },
     "accessWidener": "enderscape.accesswidener"
 }

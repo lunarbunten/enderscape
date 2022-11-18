@@ -1,6 +1,7 @@
 {
-  "replace": false,
-  "values": [
-    "enderscape:celestial_stairs"
-  ]
+	"replace": false,
+	"values": [
+		"enderscape:celestial_stairs",
+		"enderscape:murushroom_stairs"
+	]
 }

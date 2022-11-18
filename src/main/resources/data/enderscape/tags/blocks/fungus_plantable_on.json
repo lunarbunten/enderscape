@@ -1,9 +1,0 @@
-{
-    "replace": false,
-    "values": [
-        "#enderscape:end_mycelium_blocks",
-        "#minecraft:mushroom_grow_block",
-        "#minecraft:dirt",
-        "minecraft:farmland"
-    ]
-}

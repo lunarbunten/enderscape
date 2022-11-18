@@ -1,45 +1,44 @@
 package net.bunten.enderscape.items;
 
+import java.util.UUID;
+
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
-import net.bunten.enderscape.util.UUIDs;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.Level;
 
 public class HealingItem extends Item {
-    public HealingItem(Item.Settings settings) {
-        super(settings.maxCount(1));
+    public HealingItem(Item.Properties settings) {
+        super(settings.stacksTo(1).rarity(Rarity.EPIC));
     }
 
-    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
-        Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(UUIDs.ATTACK_DAMAGE, "Attack Damage", 999, EntityAttributeModifier.Operation.ADDITION));
-        return slot == EquipmentSlot.MAINHAND ? builder.build() : super.getAttributeModifiers(slot);
+    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
+        Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF"), "Attack Damage", 999, AttributeModifier.Operation.ADDITION));
+        return slot == EquipmentSlot.MAINHAND ? builder.build() : super.getDefaultAttributeModifiers(slot);
     }
 
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        boolean cooling = user.getItemCooldownManager().isCoolingDown(this);
-        ItemStack stack = user.getStackInHand(hand);
-        if (!cooling) {
-            if (user.isSneaking()) {
-            } else {
-                user.heal(5000);
-                user.getHungerManager().add(5000, 5000);
-                user.getItemCooldownManager().set(this, 5);
-            }
-            return TypedActionResult.success(stack);
-        } else {
-            return TypedActionResult.fail(stack);
+    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
+        ItemStack stack = user.getItemInHand(hand);
+
+        if (!user.getCooldowns().isOnCooldown(this)) {
+            user.heal(5000);
+            user.getFoodData().eat(5000, 5000);
+            user.getCooldowns().addCooldown(this, 5);
+            return InteractionResultHolder.success(stack);
         }
+
+        return InteractionResultHolder.pass(stack);
     }
 }

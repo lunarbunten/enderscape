@@ -1,6 +1,7 @@
 {
-  "replace": false,
-  "values": [
-    "enderscape:celestial_planks"
-  ]
+	"replace": false,
+	"values": [
+		"enderscape:celestial_planks",
+		"enderscape:murushroom_planks"
+	]
 }

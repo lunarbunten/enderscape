@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"key": {
+		"B": {
+			"item": "enderscape:blinklight"
+		},
+		"S": {
+			"item": "enderscape:shadow_quartz"
+		}
+	},
+	"pattern": [
+		"SBS",
+		"BSB",
+		"SBS"
+	],
+	"result": {
+		"item": "enderscape:blinklamp"
+	}
+}

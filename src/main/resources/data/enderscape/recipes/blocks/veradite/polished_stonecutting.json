@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "enderscape:veradite"
+  },
+  "result": "enderscape:polished_veradite",
+  "count": 1
+}

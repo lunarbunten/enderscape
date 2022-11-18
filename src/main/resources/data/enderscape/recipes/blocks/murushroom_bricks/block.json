@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"CG",
+		"GC"
+	],
+	"key": {
+		"C": {
+			"item": "enderscape:murushroom_cap"
+		},
+		"G": {
+			"item": "enderscape:corrupt_growth"
+		}
+	},
+	"result": {
+		"item": "enderscape:murushroom_bricks",
+		"count": 4
+	}
+}

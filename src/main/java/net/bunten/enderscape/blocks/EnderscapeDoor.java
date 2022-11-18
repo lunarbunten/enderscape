@@ -1,15 +1,19 @@
 package net.bunten.enderscape.blocks;
 
-import net.bunten.enderscape.interfaces.LayerMapped;
-import net.minecraft.block.DoorBlock;
+import net.bunten.enderscape.interfaces.HasRenderType;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.level.block.DoorBlock;
 
-public class EnderscapeDoor extends DoorBlock implements LayerMapped {
-    public EnderscapeDoor(Settings settings) {
+public class EnderscapeDoor extends DoorBlock implements HasRenderType {
+    public EnderscapeDoor(Properties settings) {
         super(settings);
     }
 
     @Override
-    public LayerType getLayerType() {
-        return LayerType.CUTOUT;
+    @Environment(EnvType.CLIENT)
+    public RenderType getRenderType() {
+        return RenderType.cutout();
     }
 }

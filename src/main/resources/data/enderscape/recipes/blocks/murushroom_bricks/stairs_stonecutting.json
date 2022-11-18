@@ -1,0 +1,8 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient": {
+		"item": "enderscape:murushroom_bricks"
+	},
+	"result": "enderscape:murushroom_brick_stairs",
+	"count": 1
+}

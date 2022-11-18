@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values": [
+		"enderscape:flanger_berry_vine",
+		"enderscape:blinklight_vines_body",
+		"enderscape:blinklight_vines_head",
+		"#enderscape:celestial_stems",
+		"#enderscape:murushroom_stems"
+	]
+}

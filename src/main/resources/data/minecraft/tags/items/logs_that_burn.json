@@ -1,6 +1,7 @@
 {
-  "replace": false,
-  "values": [
-    "#minecraft:celestial_stems"
-  ]
+	"replace": false,
+	"values": [
+		"#enderscape:celestial_stems",
+		"#enderscape:murushroom_stems"
+	]
 }

@@ -4,24 +4,24 @@ import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.client.EnderscapeClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.entity.EntityRendererFactory.Context;
-import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
-public class DriftletRenderer extends MobEntityRenderer<DriftletEntity, DriftletModel> {
+public class DriftletRenderer extends MobRenderer<Driftlet, DriftletModel> {
     public DriftletRenderer(Context context) {
-        super(context, new DriftletModel(context.getPart(EnderscapeClient.DRIFTLET)), 0.7F);
+        super(context, new DriftletModel(EnderscapeClient.DRIFTLET.bakeLayer(context)), 0.9F);
     }
 
     @Override
-    public Identifier getTexture(DriftletEntity mob) {
+    public ResourceLocation getTextureLocation(Driftlet mob) {
         return Enderscape.id("textures/entity/drifter/driftlet.png");
     }
 
     @Override
-    protected RenderLayer getRenderLayer(DriftletEntity mob, boolean showBody, boolean translucent, boolean showOutline) {
-        return RenderLayer.getEntityTranslucent(getTexture(mob));
+    protected RenderType getRenderType(Driftlet mob, boolean showBody, boolean translucent, boolean showOutline) {
+        return showBody ? RenderType.entityTranslucent(getTextureLocation(mob)) : super.getRenderType(mob, showBody, translucent, showOutline);
     }
 }

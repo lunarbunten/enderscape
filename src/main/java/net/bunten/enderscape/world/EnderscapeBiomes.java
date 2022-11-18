@@ -1,65 +1,70 @@
 package net.bunten.enderscape.world;
 
-import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
-import org.betterx.bclib.api.v2.levelgen.biomes.BiomeAPI;
+import org.betterx.bclib.api.v2.generator.BiomeDecider;
+import org.betterx.bclib.api.v2.levelgen.biomes.InternalBiomeAPI;
 
-import net.bunten.enderscape.registry.EnderscapeEntities;
+import net.bunten.enderscape.Enderscape;
+import net.bunten.enderscape.config.Config;
+import net.bunten.enderscape.world.biomes.BarrenDepthsBiome;
+import net.bunten.enderscape.world.biomes.BarrenSkiesBiome;
 import net.bunten.enderscape.world.biomes.CelestialIslandsBiome;
 import net.bunten.enderscape.world.biomes.CelestialPlainsBiome;
-import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.EndPlacedFeatures;
+import net.bunten.enderscape.world.biomes.CorruptDepthsBiome;
+import net.bunten.enderscape.world.biomes.EnderscapeBiome;
+import net.bunten.enderscape.world.biomes.SkyIslandsBiome;
+import net.bunten.enderscape.world.decider.SkyBiomeDecider;
+import net.bunten.enderscape.world.decider.SubsurfaceBiomeDecider;
+import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
+import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
+import net.minecraft.core.MappedRegistry;
+import net.minecraft.core.Registry;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.biome.Biome;
 
 public class EnderscapeBiomes {
 
-    public static final BCLBiome CELESTIAL_PLAINS = CelestialPlainsBiome.register();
-    public static final BCLBiome CELESTIAL_ISLANDS = CelestialIslandsBiome.register();
+    public static final MappedRegistry<EnderscapeBiome> BIOME_REGISTRY = FabricRegistryBuilder.createSimple(EnderscapeBiome.class, Enderscape.id("enderscape_biome")).attribute(RegistryAttribute.SYNCED).buildAndRegister();
 
-    private static void addGlobalModifications(RegistryEntry<Biome> biome) {
-        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.SHADOW_QUARTZ_ORE);
-        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.SCATTERED_SHADOW_QUARTZ_ORE);
+    public static final TagKey<Biome> MODIFIED_END_AMBIENCE = register("modified_end_ambience");
+    public static final TagKey<Biome> ALL_BIOMES = register("all_biomes");
+    public static final TagKey<Biome> LAND_BIOMES = register("land_biomes");
+    public static final TagKey<Biome> SKY_BIOMES = register("sky_biomes");
+    public static final TagKey<Biome> SUBSURFACE_BIOMES = register("subsurface_biomes");
+    public static final TagKey<Biome> VOID_BIOMES = register("void_biomes");
 
-        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.NEBULITE_ORE);
-        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.VOID_NEBULITE_ORE);
+    public static final EnderscapeBiome CELESTIAL_ISLANDS = new CelestialIslandsBiome();
+    public static final EnderscapeBiome CELESTIAL_PLAINS = new CelestialPlainsBiome();
+    public static final EnderscapeBiome BARREN_DEPTHS = new BarrenDepthsBiome();
+    public static final EnderscapeBiome CORRUPT_DEPTHS = new CorruptDepthsBiome();
+    public static final EnderscapeBiome BARREN_SKIES = new BarrenSkiesBiome();
+    public static final EnderscapeBiome SKY_ISLANDS = new SkyIslandsBiome();
+
+    private static TagKey<Biome> register(String name) {
+        return TagKey.create(Registry.BIOME_REGISTRY, Enderscape.id(name));
     }
 
-    private static void addDefaultEndModifications(RegistryEntry<Biome> biome, boolean midlands) {
-        BiomeAPI.addBiomeMobSpawn(biome, EnderscapeEntities.RUBBLEMITE, 2, 2, 4);
-
-        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.UNCOMMON_CELESTIAL_GROWTH);
-        BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.MURUSHROOMS);
-
-        if (midlands) {
-            BiomeAPI.addBiomeFeature(biome, GenerationStep.Feature.SURFACE_STRUCTURES, EndPlacedFeatures.END_GATEWAY_RETURN);
-            BiomeAPI.addBiomeFeature(biome, GenerationStep.Feature.VEGETAL_DECORATION, EndPlacedFeatures.CHORUS_PLANT);
-        }
+    private static EnderscapeBiome register(EnderscapeBiome biome) {
+        InternalBiomeAPI.registerBuiltinBiome(biome.getBCLBiome());
+        return Registry.register(BIOME_REGISTRY, Enderscape.id("enderscape_" + biome.getName()), biome);
     }
 
-    private static void registerBiomeModifications() {
-        BiomeAPI.registerEndBiomeModification((id, biome) -> {
-            if (id == BiomeKeys.THE_END.getValue()) return;
-
-			if (id.getNamespace() != "enderscape") {
-                addGlobalModifications(biome);
-
-                boolean highlands = id == BiomeKeys.END_HIGHLANDS.getValue();
-                boolean midlands = id == BiomeKeys.END_MIDLANDS.getValue();
-                
-                if (highlands || midlands) {
-                    addDefaultEndModifications(biome, midlands);
-                } else {
-                    BiomeAPI.addBiomeFeature(biome, EnderscapeBCLFeatures.UNCOMMON_MURUSHROOMS);
-                }
-			}
-		});
+    public static int getSubsurfaceBiomeHeight() {
+        return Config.WORLD.getSubsurfaceBiomeHeight();
     }
 
-    public static void init() {
-        BiomeAPI.registerEndLandBiome(CELESTIAL_PLAINS);
-        BiomeAPI.registerEndVoidBiome(CELESTIAL_ISLANDS);
+    public static int getSkyBiomeHeight() {
+        return Config.WORLD.getSkyBiomeHeight();
+    }
 
-        registerBiomeModifications();
+    static {
+        BiomeDecider.registerDecider(Enderscape.id("subsurface_biome_decider"), new SubsurfaceBiomeDecider());
+        BiomeDecider.registerDecider(Enderscape.id("sky_biome_decider"), new SkyBiomeDecider());
+
+        register(CELESTIAL_ISLANDS);
+        register(CELESTIAL_PLAINS);
+        register(BARREN_DEPTHS);
+        register(CORRUPT_DEPTHS);
+        register(BARREN_SKIES);
+        register(SKY_ISLANDS);
     }
 }

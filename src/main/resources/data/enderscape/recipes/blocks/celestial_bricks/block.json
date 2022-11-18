@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"CG",
+		"GC"
+	],
+	"key": {
+		"C": {
+			"item": "enderscape:celestial_cap"
+		},
+		"G": {
+			"item": "enderscape:celestial_growth"
+		}
+	},
+	"result": {
+		"item": "enderscape:celestial_bricks",
+		"count": 4
+	}
+}

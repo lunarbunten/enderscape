@@ -3,54 +3,91 @@ package net.bunten.enderscape.criteria;
 import com.google.gson.JsonObject;
 
 import net.bunten.enderscape.Enderscape;
-import net.minecraft.advancement.criterion.AbstractCriterion;
-import net.minecraft.advancement.criterion.AbstractCriterionConditions;
-import net.minecraft.item.ItemStack;
-import net.minecraft.predicate.entity.*;
-import net.minecraft.predicate.item.ItemPredicate;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
+import net.minecraft.advancements.critereon.DeserializationContext;
+import net.minecraft.advancements.critereon.DistancePredicate;
+import net.minecraft.advancements.critereon.EntityPredicate.Composite;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.LocationPredicate;
+import net.minecraft.advancements.critereon.SerializationContext;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 
-public class MirrorTeleportCriterion extends AbstractCriterion<MirrorTeleportCriterion.Conditions> {
-    private static final Identifier ID = Enderscape.id("mirror_teleport");
+public class MirrorTeleportCriterion extends SimpleCriterionTrigger<MirrorTeleportCriterion.Conditions> {
+    private final TeleportType type;
 
-    public Identifier getId() {
-        return ID;
+    public MirrorTeleportCriterion(TeleportType type) {
+        this.type = type;
     }
 
-    public MirrorTeleportCriterion.Conditions conditionsFromJson(JsonObject object, EntityPredicate.Extended extended, AdvancementEntityPredicateDeserializer deserializer) {
-        ItemPredicate item = ItemPredicate.fromJson(object.get("item"));
-        return new MirrorTeleportCriterion.Conditions(extended, item);
+    @Override
+    public ResourceLocation getId() {
+        return Enderscape.id("mirror_teleport_" + type.getSerializedName());
     }
 
-    public void trigger(ServerPlayerEntity player, ItemStack stack, Vec3d location) {
+    @Override
+    public Conditions createInstance(JsonObject json, Composite player, DeserializationContext context) {
+        return new Conditions(player, ItemPredicate.fromJson(json.get("item")), LocationPredicate.fromJson(json.get("location")), DistancePredicate.fromJson(json.get("distance")));
+    }
+
+    public void trigger(ServerPlayer player, ItemStack stack, Vec3 vec, boolean sameDimension) {
         trigger(player, (conditions) -> {
-            return conditions.matches(player.getWorld(), stack);
+            if (conditions.matches(player.getLevel(), stack, vec, player.position())) {
+                return switch (type) {
+                    case DIFFERENT -> !sameDimension;
+                    case SAME -> sameDimension;
+                    default -> true;
+                };
+            } else {
+                return false;
+            }
         });
     }
 
-    public static class Conditions extends AbstractCriterionConditions {
+    protected class Conditions extends AbstractCriterionTriggerInstance {
         private final ItemPredicate item;
+        private final LocationPredicate location;
+        private final DistancePredicate distance;
 
-        public Conditions(EntityPredicate.Extended player, ItemPredicate item) {
-            super(MirrorTeleportCriterion.ID, player);
+        public Conditions(Composite player, ItemPredicate item, LocationPredicate location, DistancePredicate distance) {
+            super(getId(), player);
             this.item = item;
+            this.location = location;
+            this.distance = distance;
         }
 
-        public static MirrorTeleportCriterion.Conditions distance(DistancePredicate distance) {
-            return new MirrorTeleportCriterion.Conditions(EntityPredicate.Extended.EMPTY, ItemPredicate.ANY);
+        public boolean matches(ServerLevel world, ItemStack stack, Vec3 start, Vec3 end) {
+            return item.matches(stack) && location.matches(world, start.x, start.y, start.z) && distance.matches(start.x, start.y, start.z, end.x, end.y, end.z);
         }
 
-        public boolean matches(ServerWorld world, ItemStack stack) {
-            return item.test(stack);
+        public JsonObject serializeToJson(SerializationContext context) {
+            JsonObject json = super.serializeToJson(context);
+            json.add("item", item.serializeToJson());
+            json.add("location", location.serializeToJson());
+            json.add("distance", distance.serializeToJson());
+            return json;
+        }
+    }
+
+    public static enum TeleportType implements StringRepresentable {
+        ANY("any"),
+        SAME("same"),
+        DIFFERENT("different");
+
+        private final String name;
+
+        private TeleportType(String name) {
+            this.name = name;
         }
 
-        public JsonObject toJson(AdvancementEntityPredicateSerializer serializer) {
-            JsonObject object = super.toJson(serializer);
-            object.add("item", item.toJson());
-            return object;
+        @Override
+        public String getSerializedName() {
+            return name;
         }
     }
 }

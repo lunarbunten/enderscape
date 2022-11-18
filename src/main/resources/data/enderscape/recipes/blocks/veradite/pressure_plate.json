@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"key": {
+		"#": {
+			"item": "enderscape:polished_veradite"
+		}
+	},
+	"pattern": [
+		"##"
+	],
+	"result": {
+		"item": "enderscape:polished_veradite_pressure_plate"
+	}
+}

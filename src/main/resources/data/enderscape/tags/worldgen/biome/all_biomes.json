@@ -1,0 +1,8 @@
+{
+    "values": [
+        "#enderscape:land_biomes",
+        "#enderscape:sky_biomes",
+        "#enderscape:subsurface_biomes",
+        "#enderscape:void_biomes"
+    ]
+}

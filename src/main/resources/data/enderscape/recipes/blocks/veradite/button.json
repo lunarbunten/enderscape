@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "enderscape:polished_veradite"
+		}
+	],
+	"result": {
+		"item": "enderscape:polished_veradite_button"
+	}
+}

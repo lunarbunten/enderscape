@@ -3,56 +3,51 @@ package net.bunten.enderscape.criteria;
 import com.google.gson.JsonObject;
 
 import net.bunten.enderscape.Enderscape;
-import net.minecraft.advancement.criterion.AbstractCriterion;
-import net.minecraft.advancement.criterion.AbstractCriterionConditions;
-import net.minecraft.item.ItemStack;
-import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
-import net.minecraft.predicate.entity.AdvancementEntityPredicateSerializer;
-import net.minecraft.predicate.entity.DistancePredicate;
-import net.minecraft.predicate.entity.EntityPredicate;
-import net.minecraft.predicate.item.ItemPredicate;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
+import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
+import net.minecraft.advancements.critereon.DeserializationContext;
+import net.minecraft.advancements.critereon.EntityPredicate.Composite;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.SerializationContext;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 
-public class LiquifyNebuliteCriterion extends AbstractCriterion<LiquifyNebuliteCriterion.Conditions> {
-    private static final Identifier ID = Enderscape.id("liquify_nebulite");
+public class LiquifyNebuliteCriterion extends SimpleCriterionTrigger<LiquifyNebuliteCriterion.Conditions> {
 
-    public Identifier getId() {
-        return ID;
+    @Override
+    public ResourceLocation getId() {
+        return Enderscape.id("liquify_nebulite");
     }
 
-    public LiquifyNebuliteCriterion.Conditions conditionsFromJson(JsonObject object, EntityPredicate.Extended extended, AdvancementEntityPredicateDeserializer deserializer) {
-        ItemPredicate item = ItemPredicate.fromJson(object.get("item"));
-        return new LiquifyNebuliteCriterion.Conditions(extended, item);
+    @Override
+    public Conditions createInstance(JsonObject json, Composite player, DeserializationContext context) {
+        return new Conditions(player, ItemPredicate.fromJson(json.get("item")));
     }
 
-    public void trigger(ServerPlayerEntity player, ItemStack stack) {
+    public void trigger(ServerPlayer player, ItemStack stack) {
         trigger(player, (conditions) -> {
-            return conditions.matches(player.getWorld(), stack);
+            return conditions.matches(player.getLevel(), stack);
         });
     }
 
-    public static class Conditions extends AbstractCriterionConditions {
+    protected class Conditions extends AbstractCriterionTriggerInstance {
         private final ItemPredicate item;
 
-        public Conditions(EntityPredicate.Extended player, ItemPredicate item) {
-            super(LiquifyNebuliteCriterion.ID, player);
+        public Conditions(Composite player, ItemPredicate item) {
+            super(getId(), player);
             this.item = item;
         }
 
-        public static LiquifyNebuliteCriterion.Conditions distance(DistancePredicate distance) {
-            return new LiquifyNebuliteCriterion.Conditions(EntityPredicate.Extended.EMPTY, ItemPredicate.ANY);
+        public boolean matches(ServerLevel world, ItemStack stack) {
+            return item.matches(stack);
         }
 
-        public boolean matches(ServerWorld world, ItemStack stack) {
-            return item.test(stack);
-        }
-
-        public JsonObject toJson(AdvancementEntityPredicateSerializer serializer) {
-            JsonObject object = super.toJson(serializer);
-            object.add("item", item.toJson());
-            return object;
+        public JsonObject serializeToJson(SerializationContext context) {
+            JsonObject json = super.serializeToJson(context);
+            json.add("item", item.serializeToJson());
+            return json;
         }
     }
 }

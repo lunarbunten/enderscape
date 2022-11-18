@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
-        "enderscape:celestial_slab"
+        "enderscape:celestial_slab",
+        "enderscape:murushroom_slab"
     ]
 }

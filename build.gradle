@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.11-SNAPSHOT'
+	id 'fabric-loom' version '1.0-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -14,6 +14,14 @@ repositories {
 	maven {
 		url 'https://jitpack.io'
 	}
+    maven {
+        name = 'minelp'
+        url = 'https://repo.minelittlepony-mod.com/maven/snapshot'
+    }
+    maven {
+        name = 'minelp-release'
+        url = 'https://repo.minelittlepony-mod.com/maven/release'
+    }
 	maven {
         name = "Modrinth"
         url = "https://api.modrinth.com/maven"
@@ -25,15 +33,19 @@ repositories {
 
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	mappings loom.officialMojangMappings()
 
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "com.github.quiqueck:BCLib:${project.bclib_version}"
 
-	modRuntimeOnly "maven.modrinth:lazydfu:0.1.3"
-	modRuntimeOnly "maven.modrinth:fastload:1.19.fabric.1.1.0"
-	modRuntimeOnly "maven.modrinth:modmenu:4.0.5"
+	include modImplementation("com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}")
+
+	modRuntimeOnly "maven.modrinth:lazydfu:${project.lazydfu_version}"
+	modRuntimeOnly "maven.modrinth:fastload:${project.fastload_version}"
+	modRuntimeOnly "maven.modrinth:modmenu:${project.modmenu_version}"
+	// modRuntimeOnly "maven.modrinth:presence-footsteps:1.6.1"
+	// modRuntimeOnly "com.minelittlepony:kirin:1.11.0"
 }
 
 loom {

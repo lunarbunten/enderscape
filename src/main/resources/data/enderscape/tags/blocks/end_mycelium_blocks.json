@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
-        "enderscape:celestial_mycelium_block"
+        "enderscape:celestial_mycelium_block",
+        "enderscape:corrupt_mycelium_block"
     ]
 }

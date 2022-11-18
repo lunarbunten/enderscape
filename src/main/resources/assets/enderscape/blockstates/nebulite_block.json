@@ -1,7 +1,10 @@
 {
-  "variants": {
-    "": {
-      "model": "enderscape:block/nebulite_block"
-    }
-  }
+	"variants": {
+		"powered=false": {
+			"model": "enderscape:block/nebulite_block"
+		},
+		"powered=true": {
+			"model": "enderscape:block/nebulite_block_powered"
+		}
+	}
 }

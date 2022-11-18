@@ -1,13 +1,19 @@
 {
-    "required": true,
-    "package": "net.bunten.enderscape.client.mixin",
-    "compatabilityLevel": "JAVA_17",
-    "client": [
-        "ArmorFeatureRendererMixin",
-        "MinecraftClientMixin",
-        "TexturedRenderLayersMixin"
-    ],
-    "injectors": {
-        "defaultRequire": 1
-    }
+	"required": true,
+	"package": "net.bunten.enderscape.mixin.client",
+	"compatabilityLevel": "JAVA_17",
+	"client": [
+		"ClientPacketListenerMixin",
+		"FogRendererMixin",
+		"GameRendererMixin",
+		"HumanoidArmorLayerMixin",
+		"LevelRendererMixin",
+		"LightTextureMixin",
+		"MinecraftMixin",
+		"SheetsMixin",
+		"MusicManagerAccess"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
 }

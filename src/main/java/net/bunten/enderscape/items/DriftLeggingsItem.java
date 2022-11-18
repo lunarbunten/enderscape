@@ -6,43 +6,43 @@ import net.bunten.enderscape.registry.EnderscapeItems;
 import net.bunten.enderscape.registry.EnderscapeSounds;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.sound.SoundEvent;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.crafting.Ingredient;
 
 public class DriftLeggingsItem extends BaseArmorItem {
-    public DriftLeggingsItem(Settings settings) {
+    public DriftLeggingsItem(Properties settings) {
         super(Material.DRIFT, EquipmentSlot.LEGS, settings);
 
-        var uuid = ARMOR_MODIFIER_UUID_PER_SLOT[slot.getEntitySlotId()];
-        var modifier = new EntityAttributeModifier(uuid, "Armor speed modifier", 0.2, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
-        addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, modifier);
+        var uuid = ARMOR_MODIFIER_UUID_PER_SLOT[slot.getIndex()];
+        var modifier = new AttributeModifier(uuid, "Armor speed modifier", 0.2, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        addAttributeModifier(Attributes.MOVEMENT_SPEED, modifier);
     }
 
     public enum Material implements ArmorMaterial {
         DRIFT;
 
-        public int getDurability(EquipmentSlot slot) {
+        public int getDurabilityForSlot(EquipmentSlot slot) {
             return 495;
         }
 
-        public int getProtectionAmount(EquipmentSlot slot) {
+        public int getDefenseForSlot(EquipmentSlot slot) {
             return 4;
         }
 
-        public int getEnchantability() {
+        public int getEnchantmentValue() {
             return 20;
         }
 
         public SoundEvent getEquipSound() {
-            return EnderscapeSounds.ITEM_DRIFT_LEGGINGS_EQUIP;
+            return EnderscapeSounds.DRIFT_LEGGINGS_EQUIP;
         }
 
         public Ingredient getRepairIngredient() {
-            return Ingredient.ofItems(EnderscapeItems.NEBULITE);
+            return Ingredient.of(EnderscapeItems.NEBULITE);
         }
 
         @Environment(EnvType.CLIENT)

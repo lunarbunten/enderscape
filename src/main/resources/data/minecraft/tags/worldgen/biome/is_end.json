@@ -1,6 +1,5 @@
 {
-	"values": [
-		"enderscape:celestial_plains",
-		"enderscape:celestial_islands"
-	]
+    "values": [
+        "#enderscape:all_biomes"
+    ]
 }

@@ -4,67 +4,71 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiome;
 import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 
 import net.bunten.enderscape.registry.EnderscapeEntities;
-import net.bunten.enderscape.registry.EnderscapeMusic;
 import net.bunten.enderscape.registry.EnderscapeParticles;
-import net.bunten.enderscape.registry.EnderscapeSounds;
-import net.bunten.enderscape.world.EnderscapeBCLFeatures;
-import net.bunten.enderscape.world.EnderscapeSurfaces;
-import net.minecraft.entity.EntityType;
-import net.minecraft.world.biome.Biome.Precipitation;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.EndPlacedFeatures;
+import net.bunten.enderscape.world.EnderscapeRuleSources;
+import net.bunten.enderscape.world.placed.CelestialPlainsFeatures;
+import net.bunten.enderscape.world.placed.GeneralEndFeatures;
+import net.minecraft.data.worldgen.placement.EndPlacements;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.biome.Biome.Precipitation;
+import net.minecraft.world.level.levelgen.GenerationStep;
 
-public class CelestialPlainsBiome implements EnderscapeBiome, CelestialBiome {
+public class CelestialPlainsBiome extends EnderscapeBiome {
 
-    @Override
-    public String getName() {
-        return "celestial_plains";
-    }
+    public CelestialPlainsBiome() {
+        super("celestial_plains");
 
-    public static BCLBiome register() {
-        return new CelestialPlainsBiome().getBCLBiome();
+        nebulaColor = 0x896247;
+        nebulaAlpha *= 1.25F;
     }
 
     @Override
     public BCLBiome getBCLBiome() {
-        BCLBiomeBuilder builder = BCLBiomeBuilder.start(getIdentifier());
+        BCLBiomeBuilder builder = createBuilder();
+
+        builder.endLandBiome();
+        builder.genChance(0.3F);
 
         builder.temperature(0.7F);
         builder.precipitation(Precipitation.NONE);
         
-        builder.music(EnderscapeMusic.CELESTIAL_PLAINS);
-        builder.loop(EnderscapeSounds.AMBIENT_CELESTIAL_PLAINS_LOOP);
-        builder.additions(EnderscapeSounds.AMBIENT_CELESTIAL_PLAINS_ADDITIONS, 0.003F);
-        builder.mood(EnderscapeSounds.AMBIENT_CELESTIAL_PLAINS_MOOD, 6000, 8, 2);
+        builder.music(createMusic());
+        builder.loop(createLoop());
+        builder.additions(createAdditions(), 0.003F);
+        builder.mood(createMood(), 6000, 8, 2);
         builder.particles(EnderscapeParticles.CELESTIAL_SPORES, 0.015F);
         
-        builder.waterColor(0x3F76E4);
-        builder.waterFogColor(0x50533);
+        builder.waterColor(DEFAULT_WATER_COLOR);
+        builder.waterFogColor(DEFAULT_WATER_FOG_COLOR);
 
-        builder.skyColor(0);
-        builder.fogColor(getFogColor());
-        builder.fogDensity(getFogDensity());
+        builder.skyColor(DEFAULT_SKY_COLOR);
+        builder.fogColor(0x160D0D);
+        builder.fogDensity(1.25F);
 
-        builder.surface(EnderscapeSurfaces.CELESTIAL_SURFACE);
+        builder.surface(EnderscapeRuleSources.CELESTIAL_SURFACE);
 
         builder.spawn(EnderscapeEntities.DRIFTER, 4, 2, 5);
         builder.spawn(EnderscapeEntities.DRIFTLET, 2, 2, 5);
         builder.spawn(EntityType.ENDERMAN, 10, 4, 8);
         
-        builder.feature(GenerationStep.Feature.SURFACE_STRUCTURES, EndPlacedFeatures.END_GATEWAY_RETURN);
-        builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, EndPlacedFeatures.CHORUS_PLANT);
+        builder.feature(GenerationStep.Decoration.SURFACE_STRUCTURES, EndPlacements.END_GATEWAY_RETURN);
+        builder.feature(GenerationStep.Decoration.VEGETAL_DECORATION, EndPlacements.CHORUS_PLANT);
         
-        builder.feature(EnderscapeBCLFeatures.LARGE_CELESTIAL_FUNGUS);
+        builder.feature(CelestialPlainsFeatures.LARGE_FUNGUS);
 
-        builder.feature(EnderscapeBCLFeatures.CELESTIAL_GROWTH);
-        builder.feature(EnderscapeBCLFeatures.CELESTIAL_VEGETATION);
-        builder.feature(EnderscapeBCLFeatures.UNCOMMON_MURUSHROOMS);
+        builder.feature(CelestialPlainsFeatures.GROWTH);
+        builder.feature(CelestialPlainsFeatures.FUNGUS);
+        builder.feature(CelestialPlainsFeatures.BULB_FLOWER);
+        builder.feature(CelestialPlainsFeatures.MURUSHROOMS);
 
-        builder.feature(EnderscapeBCLFeatures.SHADOW_QUARTZ_ORE);
-        builder.feature(EnderscapeBCLFeatures.SCATTERED_SHADOW_QUARTZ_ORE);
+        builder.feature(GeneralEndFeatures.VERADITE);
+        builder.feature(GeneralEndFeatures.SCATTERED_VERADITE);
 
-        builder.feature(EnderscapeBCLFeatures.NEBULITE_ORE);
-        builder.feature(EnderscapeBCLFeatures.VOID_NEBULITE_ORE);
+        builder.feature(GeneralEndFeatures.SHADOW_QUARTZ_ORE);
+        builder.feature(GeneralEndFeatures.SCATTERED_SHADOW_QUARTZ_ORE);
+
+        builder.feature(GeneralEndFeatures.NEBULITE_ORE);
+        builder.feature(GeneralEndFeatures.VOID_NEBULITE_ORE);
 
         return builder.build();
     }

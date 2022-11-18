@@ -5,7 +5,7 @@
             "item": "enderscape:nebulite"
         },
         "title": {
-            "translate": "advancement.enderscape.obtain_nebulite.title"
+            "translate": "advancement.enderscape.obtain_nebulite"
         },
         "description": {
             "translate": "advancement.enderscape.obtain_nebulite.description"

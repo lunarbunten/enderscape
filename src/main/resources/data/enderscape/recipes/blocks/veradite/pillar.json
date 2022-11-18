@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "enderscape:polished_veradite"
+    }
+  },
+  "result": {
+    "item": "enderscape:veradite_pillar",
+    "count": 2
+  }
+}

@@ -1,8 +1,6 @@
 {
 	"replace": false,
 	"values": [
-		"enderscape:celestial_cap",
-		"enderscape:murushroom_cap",
-		"enderscape:flanger_berry_block"
+		"#enderscape:mineable/hoe"
 	]
 }

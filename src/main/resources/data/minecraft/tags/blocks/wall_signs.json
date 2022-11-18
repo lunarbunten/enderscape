@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
-        "enderscape:celestial_wall_sign"
+        "enderscape:celestial_wall_sign",
+        "enderscape:murushroom_wall_sign"
     ]
 }

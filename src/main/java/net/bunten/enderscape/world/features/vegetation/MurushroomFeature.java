@@ -3,11 +3,11 @@ package net.bunten.enderscape.world.features.vegetation;
 import com.mojang.serialization.Codec;
 
 import net.bunten.enderscape.util.PlantUtil;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 public class MurushroomFeature extends Feature<MurushroomFeatureConfig> {
     public MurushroomFeature(Codec<MurushroomFeatureConfig> codec) {
@@ -15,22 +15,17 @@ public class MurushroomFeature extends Feature<MurushroomFeatureConfig> {
     }
 
     @Override
-    public boolean generate(FeatureContext<MurushroomFeatureConfig> context) {
-        var config = context.getConfig();
+    public boolean place(FeaturePlaceContext<MurushroomFeatureConfig> context) {
+        var config = context.config();
 
-        StructureWorldAccess world = context.getWorld();
-        Random random = context.getRandom();
-        BlockPos pos = context.getOrigin();
+        WorldGenLevel world = context.level();
+        RandomSource random = context.random();
+        BlockPos pos = context.origin();
 
-        var age = config.age;
-        var horizontalRange = config.horizontalRange;
-        var verticalRange = config.verticalRange;
-        var tries = config.tries;
-
-        if (!world.isAir(pos)) {
+        if (!world.isEmptyBlock(pos)) {
             return false;
         } else {
-            return PlantUtil.generateMurushrooms(world, pos, random, age, horizontalRange, verticalRange, tries);
+            return PlantUtil.generateMurushrooms(world, pos, random, config);
         }
     }
 }
