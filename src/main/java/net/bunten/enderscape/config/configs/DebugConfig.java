@@ -9,7 +9,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 
-@Environment(EnvType.CLIENT)
 public class DebugConfig extends BasicClientConfig {
     public DebugConfig() {
         super(ConfigKeys.DEBUG);
@@ -55,6 +54,7 @@ public class DebugConfig extends BasicClientConfig {
     }
 
     @Override
+    @Environment(EnvType.CLIENT)
     public boolean showInUI(Minecraft client) {
         return Enderscape.IS_DEBUG;
     }
