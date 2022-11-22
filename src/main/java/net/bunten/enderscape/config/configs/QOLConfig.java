@@ -1,9 +1,9 @@
 package net.bunten.enderscape.config.configs;
 
 import net.bunten.enderscape.config.ConfigKeys;
-import net.bunten.enderscape.config.basic.BasicSyncedConfig;
+import net.bunten.enderscape.config.basic.BasicServerConfig;
 
-public class QOLConfig extends BasicSyncedConfig {
+public class QOLConfig extends BasicServerConfig {
     public QOLConfig() {
         super(ConfigKeys.QOL);
     }

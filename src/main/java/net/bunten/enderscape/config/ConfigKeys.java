@@ -2,7 +2,6 @@ package net.bunten.enderscape.config;
 
 public class ConfigKeys {
     public static final String CLIENT = "client";
-    public static final String SYNCED = "synced";
     public static final String SERVER = "server";
 
     public static final String DEBUG = "debug";
