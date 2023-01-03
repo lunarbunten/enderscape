@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+	"enderscape:potted_celestial_growth",
+	"enderscape:potted_bulb_flower",
+	"enderscape:potted_blinklight",
+	"enderscape:potted_corrupt_growth",
+	"enderscape:potted_celestial_fungus"
+  ]
+}
