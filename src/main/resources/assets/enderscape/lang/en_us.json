@@ -150,6 +150,8 @@
 	"dimension.twilightforest.twilightforest": "The Twilight Forest",
 	"enchantment.enderscape.lightspeed": "Lightspeed",
 	"enchantment.enderscape.transdimensional": "Transdimensional",
+	"enchantment.enderscape.lightspeed.desc": "Increases the distance you can travel",
+	"enchantment.enderscape.transdimensional.desc": "Lets you travel between dimensions instantly",
 	"entity.enderscape.drifter": "Drifter",
 	"entity.enderscape.driftlet": "Driftlet",
 	"entity.enderscape.rubblemite": "Rubblemite",
