@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/flower_pot_cross",
+	"textures": {
+		"plant": "enderscape:block/repulsive_magnia_sprout_potted",
+		"dirt": "enderscape:block/repulsive_magnia"
+	}
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:blaze_rod",
+    "C": "minecraft:popped_chorus_fruit"
+  },
+  "pattern": [
+    " C ",
+    "CBC",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:end_lamp"
+  }
+}

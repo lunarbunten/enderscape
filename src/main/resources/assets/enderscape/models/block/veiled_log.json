@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "enderscape:block/veiled_log_top",
+    "side": "enderscape:block/veiled_log"
+  }
+}

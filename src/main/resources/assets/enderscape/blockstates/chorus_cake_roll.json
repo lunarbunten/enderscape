@@ -1,0 +1,165 @@
+{
+  "variants": {
+    "bites=0,facing=east": [
+      {
+        "model": "enderscape:block/chorus_cake_roll",
+        "y": 90
+      }
+    ],
+    "bites=1,facing=east": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites1",
+        "y": 90
+      }
+    ],
+    "bites=2,facing=east": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites2",
+        "y": 90
+      }
+    ],
+    "bites=3,facing=east": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites3",
+        "y": 90
+      }
+    ],
+    "bites=4,facing=east": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites4",
+        "y": 90
+      }
+    ],
+    "bites=5,facing=east": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites5",
+        "y": 90
+      }
+    ],
+    "bites=6,facing=east": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites6",
+        "y": 90
+      }
+    ],
+    "bites=0,facing=north": [
+      {
+        "model": "enderscape:block/chorus_cake_roll"
+      }
+    ],
+    "bites=1,facing=north": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites1"
+      }
+    ],
+    "bites=2,facing=north": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites2"
+      }
+    ],
+    "bites=3,facing=north": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites3"
+      }
+    ],
+    "bites=4,facing=north": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites4"
+      }
+    ],
+    "bites=5,facing=north": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites5"
+      }
+    ],
+    "bites=6,facing=north": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites6"
+      }
+    ],
+    "bites=0,facing=south": [
+      {
+        "model": "enderscape:block/chorus_cake_roll",
+        "y": 180
+      }
+    ],
+    "bites=1,facing=south": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites1",
+        "y": 180
+      }
+    ],
+    "bites=2,facing=south": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites2",
+        "y": 180
+      }
+    ],
+    "bites=3,facing=south": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites3",
+        "y": 180
+      }
+    ],
+    "bites=4,facing=south": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites4",
+        "y": 180
+      }
+    ],
+    "bites=5,facing=south": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites5",
+        "y": 180
+      }
+    ],
+    "bites=6,facing=south": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites6",
+        "y": 180
+      }
+    ],
+    "bites=0,facing=west": [
+      {
+        "model": "enderscape:block/chorus_cake_roll",
+        "y": 270
+      }
+    ],
+    "bites=1,facing=west": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites1",
+        "y": 270
+      }
+    ],
+    "bites=2,facing=west": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites2",
+        "y": 270
+      }
+    ],
+    "bites=3,facing=west": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites3",
+        "y": 270
+      }
+    ],
+    "bites=4,facing=west": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites4",
+        "y": 270
+      }
+    ],
+    "bites=5,facing=west": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites5",
+        "y": 270
+      }
+    ],
+    "bites=6,facing=west": [
+      {
+        "model": "enderscape:block/chorus_cake_roll_bites6",
+        "y": 270
+      }
+    ]
+  }
+}

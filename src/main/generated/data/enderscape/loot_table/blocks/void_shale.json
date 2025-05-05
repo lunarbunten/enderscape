@@ -1,0 +1,88 @@
+{
+  "type": "minecraft:block",
+  "functions": [
+    {
+      "function": "minecraft:explosion_decay"
+    }
+  ],
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {}
+          }
+        },
+        {
+          "block": "enderscape:void_shale",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "natural": "true"
+          }
+        },
+        {
+          "chance": 0.2,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "enderscape:void_shale"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {}
+          }
+        },
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "block": "enderscape:void_shale",
+            "condition": "minecraft:block_state_property",
+            "properties": {
+              "natural": "true"
+            }
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "enderscape:void_shale"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {}
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "enderscape:void_shale"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

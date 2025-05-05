@@ -1,0 +1,55 @@
+{
+  "type": "enderscape:veiled_tree",
+  "config": {
+    "branch_count": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 4,
+      "min_inclusive": 3
+    },
+    "branch_segments": 3,
+    "leaf_pile_config": {
+      "density": 0.2,
+      "layers": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 2,
+        "min_inclusive": 1
+      },
+      "radius": {
+        "type": "minecraft:uniform",
+        "max_exclusive": 10.0,
+        "min_inclusive": 6.0
+      }
+    },
+    "leaf_radius": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 5,
+      "min_inclusive": 4
+    },
+    "log_height": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 2,
+      "min_inclusive": 1
+    },
+    "vine_config": {
+      "added_height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 6,
+        "min_inclusive": 1
+      },
+      "added_height_chance": 0.15,
+      "base_height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 2,
+        "min_inclusive": 1
+      },
+      "state": {
+        "Name": "enderscape:veiled_vines",
+        "Properties": {
+          "facing": "up",
+          "part": "top"
+        }
+      }
+    },
+    "vine_generation_chance": 0.6
+  }
+}

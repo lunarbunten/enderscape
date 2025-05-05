@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/cross",
+	"textures": {
+		"cross": "enderscape:block/repulsive_magnia_sprout_powered"
+	}
+}

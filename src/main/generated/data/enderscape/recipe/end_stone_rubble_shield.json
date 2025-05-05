@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "rubble_shield",
+  "key": {
+    "#": "minecraft:end_stone",
+    "C": "enderscape:rubble_chitin",
+    "S": "enderscape:shadoline_ingot"
+  },
+  "pattern": [
+    "CSC",
+    "C#C",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:end_stone_rubble_shield"
+  }
+}

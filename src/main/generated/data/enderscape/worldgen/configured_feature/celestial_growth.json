@@ -1,0 +1,23 @@
+{
+  "type": "enderscape:growth",
+  "config": {
+    "added_height": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 3,
+      "min_inclusive": 1
+    },
+    "added_height_chance": 0.125,
+    "base_height": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 2,
+      "min_inclusive": 1
+    },
+    "state": {
+      "Name": "enderscape:celestial_growth",
+      "Properties": {
+        "facing": "up",
+        "part": "top"
+      }
+    }
+  }
+}

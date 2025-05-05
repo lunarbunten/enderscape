@@ -1,0 +1,30 @@
+{
+  "anvil_cost": 8,
+  "description": {
+    "translate": "enchantment.enderscape.lightspeed"
+  },
+  "effects": {
+    "enderscape:mirror_distance_for_cost_increase": {
+      "type": "minecraft:add",
+      "value": {
+        "type": "minecraft:linear",
+        "base": 250.0,
+        "per_level_above_first": 250.0
+      }
+    }
+  },
+  "max_cost": {
+    "base": 50,
+    "per_level_above_first": 0
+  },
+  "max_level": 3,
+  "min_cost": {
+    "base": 20,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "hand"
+  ],
+  "supported_items": "#enderscape:enchantable/mirror",
+  "weight": 1
+}

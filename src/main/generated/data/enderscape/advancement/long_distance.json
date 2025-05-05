@@ -1,0 +1,41 @@
+{
+  "parent": "enderscape:mirror_teleport",
+  "criteria": {
+    "teleported": {
+      "conditions": {
+        "different_dimensions": false,
+        "distance": {
+          "horizontal": {
+            "min": 2000.0
+          }
+        }
+      },
+      "trigger": "enderscape:mirror_teleport"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.enderscape.long_distance.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "components": {
+        "minecraft:enchantment_glint_override": true
+      },
+      "count": 1,
+      "id": "enderscape:mirror"
+    },
+    "title": {
+      "translate": "advancement.enderscape.long_distance"
+    }
+  },
+  "requirements": [
+    [
+      "teleported"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

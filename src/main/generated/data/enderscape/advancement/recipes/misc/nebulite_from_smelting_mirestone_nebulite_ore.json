@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mirestone_nebulite_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:mirestone_nebulite_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:nebulite_from_smelting_mirestone_nebulite_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mirestone_nebulite_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:nebulite_from_smelting_mirestone_nebulite_ore"
+    ]
+  }
+}

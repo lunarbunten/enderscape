@@ -1,15 +1,35 @@
 package net.bunten.enderscape.util;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BlockUtil extends net.minecraft.BlockUtil {
+
+    public static boolean place(LevelAccessor level, BlockPos pos, BlockState state) {
+        if (!isInvulnerable(level.getBlockState(pos), level, pos)) return level.setBlock(pos, state, 2);
+        return false;
+    }
+
+    public static boolean replace(LevelAccessor level, BlockPos pos, BlockState state) {
+        if (canReplace(level.getBlockState(pos), level, pos)) return level.setBlock(pos, state, 2);
+        return false;
+    }
+
+    public static boolean canReplace(BlockState state, BlockGetter level, BlockPos pos) {
+        return !isInvulnerable(state, level, pos) && state.canBeReplaced();
+    }
+
+    public static boolean isInvulnerable(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.getDestroySpeed(level, pos) < 0;
+    }
 
     public static VoxelShape createRotatedShape(double x, double y, double z, double x2, double y2, double z2, Direction direction) {
         double e = 16 - y2;
@@ -23,20 +43,32 @@ public class BlockUtil extends net.minecraft.BlockUtil {
         };
     }
 
-    public static boolean hasTerrainDepth(LevelAccessor world, BlockPos origin, int depth, Direction direction) {
-        MutableBlockPos mutable = origin.mutable();
+    public static BlockPos random(BlockPos pos, RandomSource random, int x, int y, int z) {
+        return pos.offset(Mth.randomBetweenInclusive(random, -x, x), Mth.randomBetweenInclusive(random, -y, y), Mth.randomBetweenInclusive(random, -z, z));
+    }
+
+    public static boolean hasTerrainDepth(LevelAccessor level, BlockPos origin, int depth, Direction direction) {
+        BlockPos.MutableBlockPos mutable = origin.mutable();
 
         while (depth > 0) {
             depth--;
             mutable.move(direction);
 
-            if (!world.getBlockState(mutable).isSolidRender(world, mutable)) return false;
+            if (!level.getBlockState(mutable).isSolidRender()) return false;
         }
 
         return depth == 0;
     }
 
-    public static BlockPos random(BlockPos pos, RandomSource random, int x, int y, int z) {
-        return pos.offset(Mth.randomBetweenInclusive(random, -x, x), Mth.randomBetweenInclusive(random, -y, y), Mth.randomBetweenInclusive(random, -z, z));
+    public static boolean isBlockObstructed(Level level, BlockPos pos) {
+        int i = 0;
+        for (var dir : Direction.values()) {
+            var pos2 = pos.relative(dir);
+            if (level.getBlockState(pos2).canOcclude()) {
+                i++;
+                if (i == 6) return true;
+            }
+        }
+        return false;
     }
 }

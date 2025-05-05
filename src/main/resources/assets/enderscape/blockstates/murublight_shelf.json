@@ -1,0 +1,120 @@
+{
+	"variants": {
+		"facing=east": [
+			{
+				"model": "enderscape:block/murublight_shelf",
+				"x": 90,
+				"y": 90
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_2",
+				"x": 90,
+				"y": 90
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_3",
+				"x": 90,
+				"y": 90
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_4",
+				"x": 90,
+				"y": 90
+			}
+		],
+		"facing=north": [
+			{
+				"model": "enderscape:block/murublight_shelf",
+				"x": 90
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_2",
+				"x": 90
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_3",
+				"x": 90
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_4",
+				"x": 90
+			}
+		],
+		"facing=south": [
+			{
+				"model": "enderscape:block/murublight_shelf",
+				"x": 90,
+				"y": 180
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_2",
+				"x": 90,
+				"y": 180
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_3",
+				"x": 90,
+				"y": 180
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_4",
+				"x": 90,
+				"y": 180
+			}
+		],
+		"facing=west": [
+			{
+				"model": "enderscape:block/murublight_shelf",
+				"x": 90,
+				"y": 270
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_2",
+				"x": 90,
+				"y": 270
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_3",
+				"x": 90,
+				"y": 270
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_4",
+				"x": 90,
+				"y": 270
+			}
+		],
+		"facing=down": [
+			{
+				"model": "enderscape:block/murublight_shelf",
+				"x": 180
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_2",
+				"x": 180
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_3",
+				"x": 180
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_4",
+				"x": 180
+			}
+		],
+		"facing=up": [
+			{
+				"model": "enderscape:block/murublight_shelf"
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_2"
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_3"
+			},
+			{
+				"model": "enderscape:block/murublight_shelf_4"
+			}
+		]
+	}
+}

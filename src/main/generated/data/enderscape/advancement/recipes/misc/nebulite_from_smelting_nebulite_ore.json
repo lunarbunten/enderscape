@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_nebulite_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:nebulite_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:nebulite_from_smelting_nebulite_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_nebulite_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:nebulite_from_smelting_nebulite_ore"
+    ]
+  }
+}

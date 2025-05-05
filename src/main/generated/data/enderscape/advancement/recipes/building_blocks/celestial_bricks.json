@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_celestial_cap": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:celestial_cap"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:celestial_bricks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_celestial_cap"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:celestial_bricks"
+    ]
+  }
+}

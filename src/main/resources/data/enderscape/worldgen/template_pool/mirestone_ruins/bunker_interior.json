@@ -1,0 +1,27 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/bunker/blinklamps",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/bunker/endermite",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 2
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

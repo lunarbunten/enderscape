@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "enderscape:drift_jelly_block",
+    "minecraft:glass_bottle",
+    "minecraft:glass_bottle",
+    "minecraft:glass_bottle",
+    "minecraft:glass_bottle"
+  ],
+  "result": {
+    "count": 4,
+    "id": "enderscape:drift_jelly_bottle"
+  }
+}

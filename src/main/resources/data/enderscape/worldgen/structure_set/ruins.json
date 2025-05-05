@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 95286963,
+    "separation": 8,
+    "spacing": 24
+  },
+  "structures": [
+    {
+      "structure": "enderscape:mirestone_ruins",
+      "weight": 1
+    }
+  ]
+}

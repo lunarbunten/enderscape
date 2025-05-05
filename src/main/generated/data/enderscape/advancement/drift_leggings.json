@@ -1,0 +1,33 @@
+{
+  "parent": "enderscape:bottle_drift_jelly",
+  "criteria": {
+    "obtained": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:drift_leggings"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.enderscape.drift_leggings.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "enderscape:drift_leggings"
+    },
+    "title": {
+      "translate": "advancement.enderscape.drift_leggings"
+    }
+  },
+  "requirements": [
+    [
+      "obtained"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

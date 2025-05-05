@@ -1,0 +1,78 @@
+{
+  "feature": "enderscape:downward_large_murublight_chanterelle",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "below_top": 0
+        },
+        "min_inclusive": {
+          "absolute": 20
+        }
+      }
+    },
+    {
+      "type": "minecraft:count",
+      "count": 8
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": 256
+        },
+        "min_inclusive": {
+          "above_bottom": 0
+        }
+      }
+    },
+    {
+      "type": "minecraft:environment_scan",
+      "allowed_search_condition": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:air"
+      },
+      "direction_of_search": "up",
+      "max_steps": 12,
+      "target_condition": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:has_sturdy_face",
+            "direction": "down"
+          },
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": "enderscape:corrupt_overgrowth"
+          }
+        ]
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:air",
+        "offset": [
+          0,
+          -1,
+          0
+        ]
+      }
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": 0,
+      "y_spread": -1
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

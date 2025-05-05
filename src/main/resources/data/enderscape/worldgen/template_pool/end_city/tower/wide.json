@@ -1,0 +1,239 @@
+{
+	"elements": [
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_1_a",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_1_b",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_1_c",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_1_door",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_2_a",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_2_b",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_2_c",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_2_a_shulker",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 2
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_2_b_shulker",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 2
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_2_c_shulker",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 2
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_bottom_1_a",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_bottom_1_b",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_bottom_2_a",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_bottom_2_b",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/top",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/decoration_1",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/decoration_2",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/decoration_3",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/decoration_4",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/decoration_5",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/decoration_6",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/decoration_7",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_top_1",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_top_2",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_top_3",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/wide/sides_top_4",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 1
+		}
+	],
+	"fallback": "enderscape:end_city/tower/wide_fallback"
+}

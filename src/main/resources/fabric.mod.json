@@ -3,16 +3,21 @@
     "id": "enderscape",
     "version": "${version}",
     "name": "Enderscape",
-    "description": "A mod focused on improving The End with new biomes, mobs, and other features.",
+    "description": "Total overhaul of The End with new generation, biomes, mobs, and other features.",
     "authors": [
-        "bunten (Primary developer)"
+        "lunarbunten",
+        "hivye",
+        "Konci",
+        "Ninni",
+        "Orcinus"
     ],
     "contributors": [
-        "Aigis (Logo art)",
-        "ArathainFarqoe (Additional programming and art)",
-        "FourTimesCold (Concept art)",
-        "MaakuArc (Promotional and concept art)",
-        "Ninni (Additional art and sound design)"
+        "Aigis (previous logo art)",
+        "ArathainFarqoe (additional art)",
+        "dopadream (additional sound design)",
+        "FourTimesCold (additional concept art)",
+        "marleyinbloom (promotional renders and concept art)",
+        "Walls (additional structure design and implementation)"
     ],
     "contact": {
         "sources": "https://github.com/lunarbunten/enderscape",
@@ -30,25 +35,32 @@
     "icon": "assets/enderscape/icon.png",
     "environment": "*",
     "entrypoints": {
+        "fabric-datagen": [
+          "net.bunten.enderscape.datagen.EnderscapeDataGen"
+        ],
         "main": [
             "net.bunten.enderscape.Enderscape"
         ],
         "client": [
             "net.bunten.enderscape.client.EnderscapeClient"
         ],
-        "mm:early_risers": [
-            "net.bunten.enderscape.asm.EnderscapeASM"
+        "modmenu": [
+          "net.bunten.enderscape.client.EnderscapeModMenu"
         ]
     },
     "mixins": [
         "enderscape.mixins.json",
-        "enderscape.client.mixins.json"
+        {
+            "config": "enderscape.client.mixins.json",
+            "environment": "client"
+        }
     ],
     "depends": {
-        "minecraft": "~1.19",
-        "fabricloader": ">=0.14.9",
-        "fabric": ">=0.60.0",
-        "bclib": ">=2.1.0"
+        "minecraft": "1.21.4",
+        "fabricloader": ">=0.16.9",
+        "fabric": ">=0.112.1",
+        "mixson": ">=1.3.1",
+        "yet_another_config_lib_v3": ">=3.6.2"
     },
     "accessWidener": "enderscape.accesswidener"
 }

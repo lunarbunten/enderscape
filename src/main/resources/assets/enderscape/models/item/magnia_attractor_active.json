@@ -1,0 +1,6 @@
+{
+	"parent": "enderscape:item/magnia_attractor_template",
+	"textures": {
+		"layer0": "enderscape:item/magnia_attractor_active"
+	}
+}

@@ -1,0 +1,9 @@
+{
+  "biome": "enderscape:magnia_crags",
+  "fog_end_density": 1.0,
+  "fog_start_density": 1.0,
+  "nebula_alpha": 0.025,
+  "nebula_color": 9874846,
+  "star_alpha": 0.102,
+  "star_color": 9043925
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "#enderscape:murublight_stems"
+  ],
+  "result": {
+    "count": 4,
+    "id": "enderscape:murublight_planks"
+  }
+}

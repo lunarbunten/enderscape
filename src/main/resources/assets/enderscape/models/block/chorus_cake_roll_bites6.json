@@ -1,0 +1,18 @@
+{
+	"parent": "enderscape:block/chorus_cake_roll_template",
+	"elements": [
+		{
+			"from": [4, 0, 13],
+			"to": [12, 7, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 3.5, 14]},
+			"faces": {
+				"north": {"uv": [0, 7.5, 4, 11], "texture": "#0"},
+				"east": {"uv": [8, 0, 9, 3.5], "texture": "#0"},
+				"south": {"uv": [4, 0, 8, 3.5], "texture": "#0"},
+				"west": {"uv": [14, 0, 15, 3.5], "texture": "#0"},
+				"up": {"uv": [6, 3.5, 7, 7.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [14, 3.5, 15, 7.5], "rotation": 90, "texture": "#0", "cullface": "down"}
+			}
+		}
+	]
+}

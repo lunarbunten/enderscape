@@ -1,0 +1,9 @@
+{
+  "biome": "enderscape:corrupt_barrens",
+  "fog_end_density": 1.25,
+  "fog_start_density": 4.0,
+  "nebula_alpha": 0.05,
+  "nebula_color": 5192550,
+  "star_alpha": 0.12,
+  "star_color": 5192550
+}

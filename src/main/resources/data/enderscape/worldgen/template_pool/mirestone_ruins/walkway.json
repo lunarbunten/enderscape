@@ -1,0 +1,77 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/bunker/entrance",
+        "processors": "enderscape:ruins_degradation",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/walkway/end1",
+        "processors": "enderscape:ruins_degradation",
+        "projection": "terrain_matching"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/walkway/end2",
+        "processors": "enderscape:ruins_degradation",
+        "projection": "terrain_matching"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/walkway/straight",
+        "processors": "enderscape:ruins_degradation",
+        "projection": "terrain_matching"
+      },
+      "weight": 6
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/walkway/straight_crumbled1",
+        "processors": "enderscape:ruins_degradation",
+        "projection": "terrain_matching"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/walkway/straight_crumbled2",
+        "processors": "enderscape:ruins_degradation",
+        "projection": "terrain_matching"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/walkway/structure_on_left",
+        "processors": "enderscape:ruins_degradation",
+        "projection": "terrain_matching"
+      },
+      "weight": 9
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/walkway/structure_on_right",
+        "processors": "enderscape:ruins_degradation",
+        "projection": "terrain_matching"
+      },
+      "weight": 9
+    }
+  ],
+  "fallback": "enderscape:mirestone_ruins/walkway_fallback"
+}

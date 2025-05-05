@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "D": "enderscape:dusk_purpur_block",
+    "P": "minecraft:purpur_block"
+  },
+  "pattern": [
+    "DP",
+    "PD"
+  ],
+  "result": {
+    "count": 4,
+    "id": "enderscape:purpur_tiles"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "enderscape:block/shadoline_block_slab"
+    },
+    "type=double": {
+      "model": "enderscape:block/shadoline_block"
+    },
+    "type=top": {
+      "model": "enderscape:block/shadoline_block_slab_top"
+    }
+  }
+}

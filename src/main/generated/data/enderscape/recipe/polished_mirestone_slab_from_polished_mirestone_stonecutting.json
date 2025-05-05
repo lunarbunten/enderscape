@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "enderscape:polished_mirestone",
+  "result": {
+    "count": 2,
+    "id": "enderscape:polished_mirestone_slab"
+  }
+}

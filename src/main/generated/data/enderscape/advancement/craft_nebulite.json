@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:end/enter_end_gateway",
+  "criteria": {
+    "obtained": {
+      "conditions": {
+        "recipe_id": "enderscape:nebulite_from_shards"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.enderscape.obtain_nebulite.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "enderscape:nebulite"
+    },
+    "title": {
+      "translate": "advancement.enderscape.obtain_nebulite"
+    }
+  },
+  "requirements": [
+    [
+      "obtained"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

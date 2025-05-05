@@ -1,0 +1,27 @@
+{
+  "values": [
+    "#enderscape:dusk_purpur_blocks",
+    "#enderscape:end_ore_blocks",
+    "#enderscape:etched_magnia_blocks",
+    "#enderscape:magnia_blocks",
+    "#enderscape:magnia_sprouts",
+    "#enderscape:mirestone_blocks",
+    "#enderscape:chanterelle_brick_blocks",
+    "#enderscape:new_end_stone_blocks",
+    "#enderscape:new_purpur_blocks",
+    "#enderscape:overgrowth_blocks",
+    "#enderscape:purpur_tile_blocks",
+    "#enderscape:shadoline_blocks",
+    "#enderscape:veradite_blocks",
+    "#enderscape:kurodite_blocks",
+    "enderscape:blinklamp",
+    "enderscape:bulb_lantern",
+    "enderscape:celestial_path_block",
+    "enderscape:corrupt_path_block",
+    "enderscape:end_lamp",
+    "enderscape:nebulite_block",
+    "enderscape:raw_shadoline_block",
+    "enderscape:veiled_end_stone",
+    "enderscape:void_shale"
+  ]
+}

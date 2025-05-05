@@ -5,7 +5,7 @@
 		"particle": "enderscape:block/corrupt_path_side",
 		"side": "enderscape:block/corrupt_path_side",
 		"up": "enderscape:block/corrupt_path_top",
-		"down": "block/end_stone"
+		"down": "enderscape:block/mirestone"
 	},
 	"elements": [
 		{

@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/slab",
+	"textures": {
+		"bottom": "enderscape:block/purpur_tiles",
+		"top": "enderscape:block/purpur_tiles",
+		"side": "enderscape:block/purpur_tiles"
+	}
+}

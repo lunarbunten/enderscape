@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "enderscape:polished_kurodite"
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:polished_kurodite_button"
+  }
+}

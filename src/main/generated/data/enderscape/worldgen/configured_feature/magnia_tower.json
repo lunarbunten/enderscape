@@ -1,0 +1,18 @@
+{
+  "type": "enderscape:magnia_tower",
+  "config": {
+    "floor_replacement_radius": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 8.0,
+      "min_inclusive": 6.0
+    },
+    "pillar_height": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 18,
+      "min_inclusive": 12
+    },
+    "ring_radius": 7,
+    "sphere_radius": 3,
+    "sprout_placement_chance": 0.06
+  }
+}

@@ -1,55 +1,54 @@
 plugins {
-	id 'fabric-loom' version '1.0-SNAPSHOT'
+	id 'fabric-loom' version '1.10-SNAPSHOT'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
+base {
+	archivesName = project.archives_base_name
+}
+
 repositories {
-	maven {
-		url 'https://jitpack.io'
+	exclusiveContent {
+		forRepository {
+			maven {
+				url 'https://jitpack.io'
+			}
+		}
+		filter {
+			includeGroup "com.github.ramixin"
+		}
 	}
-    maven {
-        name = 'minelp'
-        url = 'https://repo.minelittlepony-mod.com/maven/snapshot'
-    }
-    maven {
-        name = 'minelp-release'
-        url = 'https://repo.minelittlepony-mod.com/maven/release'
-    }
 	maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
-        content {
-            includeGroup "maven.modrinth"
-        }
-    }
+		name = 'TerraformersMC'
+		url = 'https://maven.terraformersmc.com/'
+	}
+	maven {
+		name 'Xander Maven'
+		url 'https://maven.isxander.dev/releases'
+	}
+}
+
+loom {
+	accessWidenerPath = file("src/main/resources/enderscape.accesswidener")
+}
+
+fabricApi {
+	configureDataGeneration()
 }
 
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings loom.officialMojangMappings()
-
+	mappings loom.officialMojangMappings();
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation "com.github.quiqueck:BCLib:${project.bclib_version}"
 
-	include modImplementation("com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}")
-
-	modRuntimeOnly "maven.modrinth:lazydfu:${project.lazydfu_version}"
-	modRuntimeOnly "maven.modrinth:fastload:${project.fastload_version}"
-	modRuntimeOnly "maven.modrinth:modmenu:${project.modmenu_version}"
-	// modRuntimeOnly "maven.modrinth:presence-footsteps:1.6.1"
-	// modRuntimeOnly "com.minelittlepony:kirin:1.11.0"
-}
-
-loom {
-    accessWidenerPath = file("src/main/resources/enderscape.accesswidener")
+	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+	modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
+	modImplementation "com.github.ramixin:mixson-fabric:${project.mixson_version}"
+	include "com.github.ramixin:mixson-fabric:${project.mixson_version}"
 }
 
 processResources {
@@ -61,25 +60,30 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {
 	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 jar {
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
+		rename { "${it}_${project.base.archivesName.get()}"}
 	}
 }
 
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
+		create("mavenJava", MavenPublication) {
+			artifactId = project.archives_base_name
 			from components.java
 		}
 	}
+
 	repositories {
 	}
 }

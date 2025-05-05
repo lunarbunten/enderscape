@@ -1,0 +1,184 @@
+
+{
+  "type":"interpolated",
+  "argument":
+  {
+  "type": "minecraft:mul",
+  "argument1": {
+    "type": "spline",
+    "spline": {
+      "coordinate": "enderscape:center",
+      "points": [
+        {
+          "derivative": 0,
+          "location": 0.0,
+          "value": {
+            "coordinate": "enderscape:main_island_height",
+            "points": [
+              {
+                "derivative": 0,
+                "location": -0.55,
+                "value": 1
+              },
+              {
+                "derivative": 0,
+                "location": -0.11,
+                "value": 5
+              },
+              {
+                "derivative": 0,
+                "location": -0.0,
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "derivative": 0,
+          "location": 0.2,
+          "value": {
+            "coordinate": "enderscape:main_island_height",
+            "points": [
+              {
+                "derivative": 0,
+                "location": -0.45,
+                "value": 1
+              },
+              {
+                "derivative": 0,
+                "location": -0.11,
+                "value": 4
+              },
+              {
+                "derivative": 0,
+                "location": -0.1,
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "derivative": 0,
+          "location": 0.0,
+          "value": {
+            "coordinate": "enderscape:main_island_height",
+            "points": [
+              {
+                "derivative": 0,
+                "location": -0.55,
+                "value": 1
+              },
+              {
+                "derivative": 0,
+                "location": -0.11,
+                "value": 5
+              },
+              {
+                "derivative": 0,
+                "location": 0.1,
+                "value": 3
+              }
+            ]
+          }
+        },
+        {
+          "derivative": 0,
+          "location": 0.1,
+          "value": {
+            "coordinate": "enderscape:main_island_height",
+            "points": [
+              {
+                "derivative": 0,
+                "location": -0.45,
+                "value": 1
+              },
+              {
+                "derivative": 0,
+                "location": -0.11,
+                "value": 3
+              },
+              {
+                "derivative": 0,
+                "location": 0.05,
+                "value": 0.2
+              },
+              {
+                "derivative": 0,
+                "location": 0.1,
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "derivative": 0,
+          "location": 0.13,
+          "value": {
+            "coordinate": "enderscape:main_island_height",
+            "points": [
+              {
+                "derivative": 0,
+                "location": -0.35,
+                "value": 1
+              },
+              {
+                "derivative": 0,
+                "location": -0.11,
+                "value": 3
+              },
+              {
+                "derivative": 0,
+                "location": 0.02,
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "derivative": 0,
+          "location": 0.2,
+          "value": {
+            "coordinate": "enderscape:main_island_height",
+            "points": [
+              {
+                "derivative": 0,
+                "location": -0.15,
+                "value": 0.35
+              },
+              {
+                "derivative": 0,
+                "location": -0.11,
+                "value": 1
+              },
+              {
+                "derivative": 0,
+                "location": -0.1,
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "derivative": 0,
+          "location": 0.23,
+          "value": 0
+        }
+      ]
+    }
+  },
+  "argument2": {
+    "type":"clamp",
+    "input":{
+    "type": "add",
+    "argument1": {
+      "type": "noise",
+      "noise": "enderscape:generic_noise",
+      "xz_scale": 0.5,
+      "y_scale": 0
+    },
+    "argument2": 1.25},
+    "min": 1,
+    "max": 2
+  }
+}
+}

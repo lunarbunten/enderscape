@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "enderscape:block/polished_mirestone_slab"
+    },
+    "type=double": {
+      "model": "enderscape:block/polished_mirestone"
+    },
+    "type=top": {
+      "model": "enderscape:block/polished_mirestone_slab_top"
+    }
+  }
+}

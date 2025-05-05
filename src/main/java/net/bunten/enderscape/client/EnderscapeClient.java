@@ -1,79 +1,59 @@
 package net.bunten.enderscape.client;
 
+import com.google.common.reflect.Reflection;
+import net.bunten.enderscape.client.block.MagniaSproutRenderer;
+import net.bunten.enderscape.client.entity.EndermanStaticSoundInstance;
+import net.bunten.enderscape.client.hud.HudElement;
+import net.bunten.enderscape.client.item.NebuliteToolTooltip;
+import net.bunten.enderscape.client.registry.*;
+import net.bunten.enderscape.item.NebuliteToolComponent;
+import net.bunten.enderscape.registry.EnderscapeBlockEntities;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.sounds.Music;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
-import org.betterx.bclib.integration.modmenu.ModMenu;
-
-import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.blocks.NebuliteOrePackets;
-import net.bunten.enderscape.client.hud.HudElement;
-import net.bunten.enderscape.client.hud.HudElements;
-import net.bunten.enderscape.config.ConfigMenu;
-import net.bunten.enderscape.entity.drifter.Drifter;
-import net.bunten.enderscape.entity.drifter.DrifterModel;
-import net.bunten.enderscape.entity.drifter.DrifterRenderer;
-import net.bunten.enderscape.entity.driftlet.Driftlet;
-import net.bunten.enderscape.entity.driftlet.DriftletModel;
-import net.bunten.enderscape.entity.driftlet.DriftletRenderer;
-import net.bunten.enderscape.entity.rubblemite.Rubblemite;
-import net.bunten.enderscape.entity.rubblemite.RubblemiteModel;
-import net.bunten.enderscape.entity.rubblemite.RubblemiteRenderer;
-import net.bunten.enderscape.interfaces.HasColorProvider;
-import net.bunten.enderscape.interfaces.HasRenderType;
-import net.bunten.enderscape.items.ChargedUsageContext;
-import net.bunten.enderscape.items.MirrorPackets;
-import net.bunten.enderscape.items.NebuliteChargedItem;
-import net.bunten.enderscape.registry.EnderscapeEntities;
-import net.bunten.enderscape.registry.EnderscapeParticles;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.core.Registry;
-import net.minecraft.world.level.Level;
-
+@Environment(EnvType.CLIENT)
 public class EnderscapeClient implements ClientModInitializer {
 
     public static final List<HudElement> HUD_ELEMENTS = new ArrayList<>();
 
-    public static final EntityRenderData<Drifter> DRIFTER = EntityRenderData.create(EnderscapeEntities.DRIFTER, DrifterRenderer::new, DrifterModel::createLayer);
-    public static final EntityRenderData<Driftlet> DRIFTLET = EntityRenderData.create(EnderscapeEntities.DRIFTLET, DriftletRenderer::new, DriftletModel::createLayer);
-    public static final EntityRenderData<Rubblemite> RUBBLEMITE = EntityRenderData.create(EnderscapeEntities.RUBBLEMITE, RubblemiteRenderer::new, RubblemiteModel::createLayer);
+    public static Optional<Music> structureMusic = Optional.empty();
 
-    public static boolean playTransdimensionalSound = false;
+    public static final int MAX_STARE_STICKS = 100;
+    public static int stareTicks;
+
     public static int postMirrorUseTicks;
+
+    @Nullable public static EndermanStaticSoundInstance staticSoundInstance = null;
+
+    public static void register(HudElement element) {
+        Objects.requireNonNull(element);
+        HUD_ELEMENTS.add(element);
+	}
 
     @Override
     public void onInitializeClient() {
-        DimensionRenderingRegistry.registerSkyRenderer(Level.END, new EnderscapeSkybox());
-        ModMenu.addModMenuScreen(Enderscape.MOD_ID, (parent) -> new ConfigMenu(parent));
 
-        NebuliteOrePackets.initReceivers();
-        MirrorPackets.initReceivers();
+        Reflection.initialize(
+                EnderscapeClientNetworking.class,
+                EnderscapeParticleProviders.class,
+                EnderscapeEntityRenderData.class,
+                EnderscapeBlockRenderLayerMap.class,
+                EnderscapeBlockColorProviders.class,
+                EnderscapeHudElements.class
+        );
 
-        EnderscapeParticles.initClient();
-        HudElements.init();
+        BlockEntityRenderers.register(EnderscapeBlockEntities.MAGNIA_SPROUT, MagniaSproutRenderer::new);
 
-        Registry.BLOCK.stream().filter(block -> block instanceof HasRenderType).forEach(block -> {
-            BlockRenderLayerMap.INSTANCE.putBlock(block, HasRenderType.class.cast(block).getRenderType());
-        });
-
-        Registry.BLOCK.stream().filter(block -> block instanceof HasColorProvider).forEach(block -> {
-            ColorProviderRegistry.BLOCK.register(HasColorProvider.class.cast(block).getColorProvider(), block);
-        });
-
-        Registry.ITEM.stream().filter((item) -> item instanceof NebuliteChargedItem).forEach(item -> {
-            ItemProperties.register(item, Enderscape.id("usable"), (stack, level, user, i) -> {
-                return NebuliteChargedItem.canUse(new ChargedUsageContext(stack, level, user)) ? 1 : 0;
-            });
-
-            ItemProperties.register(item, Enderscape.id("energy"), (stack, level, user, i) -> {
-                float energy = NebuliteChargedItem.getEnergy(stack);
-                float max = NebuliteChargedItem.class.cast(stack.getItem()).getMaximumEnergy(stack);
-                return energy / max;
-            });
-        });
+        TooltipComponentCallback.EVENT.register((component) -> component instanceof NebuliteToolComponent tool ? new NebuliteToolTooltip(tool.stack()) : null);
     }
 }

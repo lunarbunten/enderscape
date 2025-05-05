@@ -1,0 +1,8 @@
+{
+  "asset_name": "shadoline",
+  "description": {
+    "color": "#315B4D",
+    "translate": "trim_material.enderscape.shadoline"
+  },
+  "ingredient": "enderscape:shadoline_ingot"
+}

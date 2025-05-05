@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/cross",
+	"ambientocclusion": true,
+	"textures": {
+	  "cross": "enderscape:block/veiled_vines"
+	}
+  }

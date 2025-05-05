@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/slab",
+	"textures": {
+		"bottom": "enderscape:block/mirestone_bricks",
+		"top": "enderscape:block/mirestone_bricks",
+		"side": "enderscape:block/mirestone_bricks"
+	}
+}

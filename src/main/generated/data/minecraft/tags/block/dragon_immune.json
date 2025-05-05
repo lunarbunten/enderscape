@@ -1,0 +1,14 @@
+{
+  "values": [
+    "minecraft:end_stone_bricks",
+    "minecraft:end_stone_brick_stairs",
+    "minecraft:end_stone_brick_slab",
+    "minecraft:end_stone_brick_wall",
+    "#enderscape:end_ore_blocks",
+    "#enderscape:kurodite_blocks",
+    "#enderscape:mirestone_blocks",
+    "#enderscape:new_end_stone_blocks",
+    "#enderscape:shadoline_blocks",
+    "#enderscape:veradite_blocks"
+  ]
+}

@@ -32,3 +32,11 @@ server_run/
 *.jar
 *.ini
 logs/
+/src/main/generated/.cache/
+*.DS_Store
+
+# vye
+*.asd
+
+# bunten
+*.py

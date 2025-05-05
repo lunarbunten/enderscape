@@ -1,0 +1,52 @@
+{
+  "minecraft:small_end_islands": {
+    "r": 234,
+    "g": 247,
+    "b": 52
+  },
+  "minecraft:the_end": {
+    "r": 252,
+    "g": 244,
+    "b": 121
+  },
+  "minecraft:end_midlands": {
+    "r": 143,
+    "g": 154,
+    "b": 69
+  },
+  "enderscape:void_depths": {
+    "r": 22,
+    "g": 21,
+    "b": 26
+  },
+  "enderscape:celestial_grove": {
+    "r": 222,
+    "g": 180,
+    "b": 31
+  },
+  "enderscape:corrupt_barrens": {
+    "r": 50,
+    "g": 34,
+    "b": 83
+  },
+  "enderscape:magnia_crags": {
+    "r": 168,
+    "g": 155,
+    "b": 172
+  },
+  "enderscape:void_skies": {
+    "r": 17,
+    "g": 19,
+    "b": 38
+  },
+  "enderscape:void_sky_islands": {
+    "r": 0,
+    "g": 0,
+    "b": 0
+  },
+  "enderscape:veiled_woodlands": {
+    "r": 82,
+    "g": 190,
+    "b": 128
+  }
+}

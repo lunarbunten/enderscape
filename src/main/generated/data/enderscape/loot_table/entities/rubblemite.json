@@ -1,0 +1,117 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:killed_by_player"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "chance": 0.25,
+              "condition": "minecraft:random_chance"
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.0
+              },
+              "enchantment": "minecraft:looting",
+              "function": "minecraft:enchanted_count_increase"
+            }
+          ],
+          "name": "enderscape:rubble_chitin"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "minecraft:rubblemite",
+                      "variant": "end_stone"
+                    }
+                  }
+                }
+              ],
+              "value": "enderscape:entities/rubblemite/end_stone"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "minecraft:rubblemite",
+                      "variant": "mirestone"
+                    }
+                  }
+                }
+              ],
+              "value": "enderscape:entities/rubblemite/mirestone"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "minecraft:rubblemite",
+                      "variant": "veradite"
+                    }
+                  }
+                }
+              ],
+              "value": "enderscape:entities/rubblemite/veradite"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "minecraft:rubblemite",
+                      "variant": "kurodite"
+                    }
+                  }
+                }
+              ],
+              "value": "enderscape:entities/rubblemite/kurodite"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_music_disc_decay": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:music_disc_decay"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:music_disc_bliss"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_music_disc_decay"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:music_disc_bliss"
+    ]
+  }
+}

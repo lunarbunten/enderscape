@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "minecraft:popped_chorus_fruit",
+    "minecraft:popped_chorus_fruit",
+    "enderscape:shadoline_ingot",
+    "enderscape:shadoline_ingot"
+  ],
+  "result": {
+    "count": 4,
+    "id": "enderscape:dusk_purpur_block"
+  }
+}

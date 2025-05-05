@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_alluring_magnia": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:alluring_magnia"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:etched_alluring_magnia"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_alluring_magnia"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:etched_alluring_magnia"
+    ]
+  }
+}

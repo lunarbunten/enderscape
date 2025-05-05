@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "enderscape:alluring_magnia_sprout",
+        "Properties": {
+          "facing": "up",
+          "overheated": "false",
+          "powered": "false",
+          "waterlogged": "false"
+        }
+      }
+    }
+  }
+}

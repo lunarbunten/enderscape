@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/inner_stairs",
+	"textures": {
+		"bottom": "enderscape:block/cut_shadoline",
+		"top": "enderscape:block/cut_shadoline",
+		"side": "enderscape:block/cut_shadoline"
+	}
+}

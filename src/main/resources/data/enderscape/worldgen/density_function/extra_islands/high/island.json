@@ -1,0 +1,38 @@
+{
+  "type": "interpolated",
+  "argument": 
+  {
+  "type": "minecraft:clamp",
+  "input": {
+    "type": "minecraft:add",
+    "argument1": -0.5,
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:add",
+        "argument1": {
+          "type": "minecraft:y_clamped_gradient",
+          "from_y": 72,
+          "to_y": 136,
+          "from_value": -4,
+          "to_value": 0
+        },
+        "argument2": "enderscape:extra_islands/high/spline"
+      },
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": {
+          "type": "minecraft:y_clamped_gradient",
+          "from_y": 135,
+          "to_y": 190,
+          "from_value": 0,
+          "to_value": -2
+        },
+        "argument2": "enderscape:extra_islands/high/spline"
+      }
+    }
+  },
+  "min": 0,
+  "max": 1
+}
+}

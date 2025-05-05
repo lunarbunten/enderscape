@@ -1,0 +1,9 @@
+{
+  "biome": "enderscape:celestial_grove",
+  "fog_end_density": 1.0,
+  "fog_start_density": 2.0,
+  "nebula_alpha": 0.0575,
+  "nebula_color": 8869443,
+  "star_alpha": 0.168,
+  "star_color": 16754057
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:block_column",
+  "config": {
+    "allowed_placement": {
+      "type": "minecraft:matching_blocks",
+      "blocks": "minecraft:air"
+    },
+    "direction": "down",
+    "layers": [
+      {
+        "height": 1,
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "enderscape:repulsive_magnia_sprout",
+            "Properties": {
+              "facing": "down",
+              "overheated": "false",
+              "powered": "false",
+              "waterlogged": "false"
+            }
+          }
+        }
+      }
+    ],
+    "prioritize_tip": true
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "enderscape:polished_end_stone",
+  "result": {
+    "count": 1,
+    "id": "minecraft:end_stone_bricks"
+  }
+}

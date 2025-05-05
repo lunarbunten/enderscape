@@ -1,0 +1,8 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "jukebox_song.enderscape.decay"
+  },
+  "length_in_seconds": 97.0,
+  "sound_event": "enderscape:music_disc.decay"
+}

@@ -1,0 +1,22 @@
+{
+  "type":"add",
+  "argument1":
+  {
+      "type": "add",
+      "argument1": {
+        "type": "add",
+        "argument1": {
+          "type": "add",
+          "argument1": {
+            "type": "minecraft:add",
+            "argument2": "enderscape:main_island",
+            "argument1": "enderscape:outer_islands"
+          },
+          "argument2": "enderscape:extra_islands/middle_higher/island"
+        },
+        "argument2": "enderscape:extra_islands/middle_lower/island"
+      },
+      "argument2": "enderscape:extra_islands/low/island"
+    },
+    "argument2": "enderscape:extra_islands/high/island"
+  }

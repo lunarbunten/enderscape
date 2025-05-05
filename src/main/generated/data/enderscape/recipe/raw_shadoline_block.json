@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "raw_shadoline_block",
+  "key": {
+    "#": "enderscape:raw_shadoline"
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:raw_shadoline_block"
+  }
+}

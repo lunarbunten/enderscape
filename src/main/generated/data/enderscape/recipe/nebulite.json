@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "nebulite",
+  "ingredients": [
+    "enderscape:nebulite_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "enderscape:nebulite"
+  }
+}

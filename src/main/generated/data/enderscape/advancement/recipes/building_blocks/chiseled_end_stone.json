@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_polished_end_stone_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:polished_end_stone_slab"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:chiseled_end_stone"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_polished_end_stone_slab"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:chiseled_end_stone"
+    ]
+  }
+}

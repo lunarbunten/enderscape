@@ -1,0 +1,23 @@
+{
+  "type": "enderscape:void_shale",
+  "config": {
+    "targets": [
+      {
+        "state": {
+          "Name": "enderscape:void_shale",
+          "Properties": {
+            "cooldown": "false",
+            "iteration": "0",
+            "natural": "true",
+            "stress": "0"
+          }
+        },
+        "target": {
+          "block": "enderscape:mirestone",
+          "predicate_type": "minecraft:block_match"
+        }
+      }
+    ],
+    "terrain_depth": 5
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_polished_mirestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:polished_mirestone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:polished_mirestone_pressure_plate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_polished_mirestone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:polished_mirestone_pressure_plate"
+    ]
+  }
+}

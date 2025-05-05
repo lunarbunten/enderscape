@@ -1,93 +1,59 @@
 package net.bunten.enderscape.criteria;
 
-import com.google.gson.JsonObject;
-
-import net.bunten.enderscape.Enderscape;
-import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
-import net.minecraft.advancements.critereon.DeserializationContext;
-import net.minecraft.advancements.critereon.DistancePredicate;
-import net.minecraft.advancements.critereon.EntityPredicate.Composite;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.LocationPredicate;
-import net.minecraft.advancements.critereon.SerializationContext;
-import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.advancements.critereon.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.GlobalPos;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.Vec3;
+
+import java.util.Optional;
 
 public class MirrorTeleportCriterion extends SimpleCriterionTrigger<MirrorTeleportCriterion.Conditions> {
-    private final TeleportType type;
 
-    public MirrorTeleportCriterion(TeleportType type) {
-        this.type = type;
+    public void trigger(ServerPlayer player, ItemStack stack, GlobalPos prior, GlobalPos latter) {
+        trigger(player, instance -> instance.matches(player.getServer(), stack, prior, latter));
     }
 
     @Override
-    public ResourceLocation getId() {
-        return Enderscape.id("mirror_teleport_" + type.getSerializedName());
+    public Codec<Conditions> codec() {
+        return Conditions.CODEC;
     }
 
-    @Override
-    public Conditions createInstance(JsonObject json, Composite player, DeserializationContext context) {
-        return new Conditions(player, ItemPredicate.fromJson(json.get("item")), LocationPredicate.fromJson(json.get("location")), DistancePredicate.fromJson(json.get("distance")));
-    }
+    public record Conditions(Optional<ContextAwarePredicate> player, Optional<ItemPredicate> item, Optional<LocationPredicate> prior, Optional<LocationPredicate> latter, Optional<DistancePredicate> distance, Optional<Boolean> differentDimensions) implements SimpleCriterionTrigger.SimpleInstance {
+        public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(Conditions::player),
+                ItemPredicate.CODEC.optionalFieldOf("item").forGetter(Conditions::item),
+                LocationPredicate.CODEC.optionalFieldOf("prior").forGetter(Conditions::prior),
+                LocationPredicate.CODEC.optionalFieldOf("latter").forGetter(Conditions::latter),
+                DistancePredicate.CODEC.optionalFieldOf("distance").forGetter(Conditions::distance),
+                Codec.BOOL.optionalFieldOf("different_dimensions").forGetter(Conditions::differentDimensions)
+        ).apply(instance, Conditions::new));
 
-    public void trigger(ServerPlayer player, ItemStack stack, Vec3 vec, boolean sameDimension) {
-        trigger(player, (conditions) -> {
-            if (conditions.matches(player.getLevel(), stack, vec, player.position())) {
-                return switch (type) {
-                    case DIFFERENT -> !sameDimension;
-                    case SAME -> sameDimension;
-                    default -> true;
-                };
-            } else {
-                return false;
+        public boolean matches(MinecraftServer server, ItemStack stack, GlobalPos startGlobalPos, GlobalPos endGlobalPos) {
+            BlockPos start = startGlobalPos.pos();
+            BlockPos end = endGlobalPos.pos();
+
+            if (item.isPresent() && !item.get().test(stack)) return false;
+
+            if (prior.isPresent() && !prior.get().matches(server.getLevel(startGlobalPos.dimension()), start.getX(), start.getY(), start.getZ())) return false;
+            if (latter.isPresent() && !latter.get().matches(server.getLevel(endGlobalPos.dimension()), end.getX(), end.getY(), end.getZ())) return false;
+
+            if (differentDimensions().isPresent()) {
+                if (differentDimensions().get()) {
+                    if (distance.isPresent()) throw new IllegalStateException("Distance predicate rendered invalid by n\"different_dimensionsn\" being n\"truen\"");
+                    return startGlobalPos.dimension() != endGlobalPos.dimension();
+                } else {
+                    if (startGlobalPos.dimension() != endGlobalPos.dimension()) return false;
+                    if (distance().isPresent()) {
+                        return distance.get().matches(start.getX(), start.getY(), start.getZ(), end.getX(), end.getY(), end.getZ());
+                    }
+                }
             }
-        });
-    }
 
-    protected class Conditions extends AbstractCriterionTriggerInstance {
-        private final ItemPredicate item;
-        private final LocationPredicate location;
-        private final DistancePredicate distance;
-
-        public Conditions(Composite player, ItemPredicate item, LocationPredicate location, DistancePredicate distance) {
-            super(getId(), player);
-            this.item = item;
-            this.location = location;
-            this.distance = distance;
-        }
-
-        public boolean matches(ServerLevel world, ItemStack stack, Vec3 start, Vec3 end) {
-            return item.matches(stack) && location.matches(world, start.x, start.y, start.z) && distance.matches(start.x, start.y, start.z, end.x, end.y, end.z);
-        }
-
-        public JsonObject serializeToJson(SerializationContext context) {
-            JsonObject json = super.serializeToJson(context);
-            json.add("item", item.serializeToJson());
-            json.add("location", location.serializeToJson());
-            json.add("distance", distance.serializeToJson());
-            return json;
-        }
-    }
-
-    public static enum TeleportType implements StringRepresentable {
-        ANY("any"),
-        SAME("same"),
-        DIFFERENT("different");
-
-        private final String name;
-
-        private TeleportType(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public String getSerializedName() {
-            return name;
+            return true;
         }
     }
 }

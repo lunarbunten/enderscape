@@ -1,0 +1,167 @@
+{
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_1",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_2",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_3",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_4",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_5",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_6",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_7",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_8",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_9",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_10",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_11",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_12",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_13",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_14",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_15",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_16",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 50,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_17",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/furniture/furniture_suspicious",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      }
+    }
+  ]
+}

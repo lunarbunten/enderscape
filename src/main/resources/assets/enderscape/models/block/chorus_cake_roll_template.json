@@ -1,0 +1,9 @@
+{
+	"parent": "block/block",
+	"ambientocclusion": false,
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "enderscape:block/chorus_cake_roll",
+		"particle": "enderscape:block/chorus_cake_roll_particle"
+	}
+}

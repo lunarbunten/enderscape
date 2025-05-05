@@ -1,0 +1,402 @@
+{
+  "type": "minecraft:the_end",
+  "generator": {
+    "biome_source": {
+      "biomes": [
+        {
+          "biome": "minecraft:the_end",
+          "parameters": {
+            "continentalness": [
+              -1,
+              1
+            ],
+            "depth": [
+              -1,
+              1.2
+            ],
+            "erosion": [
+              0,
+              0.50025
+            ],
+            "temperature": [
+              -1,
+              1
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "offset": 0,
+            "weirdness": [
+              -1,
+              1
+            ]
+          }
+        },
+        {
+          "biome": "minecraft:end_midlands",
+          "parameters": {
+            "continentalness": [
+              -0.55,
+              0.55
+            ],
+            "depth": [
+              -0.3,
+              0.2
+            ],
+            "erosion": [
+              0.50025,
+              2
+            ],
+            "temperature": [
+              -0.3,
+              0.3
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "offset": 0,
+            "weirdness": [
+              -0.05,
+              1
+            ]
+          }
+        },
+        {
+          "biome": "minecraft:end_highlands",
+          "parameters": {
+            "continentalness": [
+              -0.55,
+              0.55
+            ],
+            "depth": [
+              0.2,
+              1.025
+            ],
+            "erosion": [
+              0.50025,
+              2
+            ],
+            "temperature": [
+              -1,
+              0
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "offset": 0,
+            "weirdness": [
+              -0.05,
+              1
+            ]
+          }
+        },
+        {
+          "biome": "enderscape:veiled_woodlands",
+          "parameters": {
+            "continentalness": [
+              -0.55,
+              0.55
+            ],
+            "depth": [
+              -0.4,
+              1.025
+            ],
+            "erosion": [
+              0.50025,
+              2
+            ],
+            "temperature": [
+              -1,
+              -0.3
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "offset": 0,
+            "weirdness": [
+              -0.05,
+              1
+            ]
+          }
+        },
+        {
+          "biome": "enderscape:magnia_crags",
+          "parameters": {
+            "continentalness": [
+              -0.55,
+              0.55
+            ],
+            "depth": [
+              -0.4,
+              1.025
+            ],
+            "erosion": [
+              0.50025,
+              2
+            ],
+            "temperature": [
+              0.3,
+              1
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "offset": 0,
+            "weirdness": [
+              -0.05,
+              1
+            ]
+          }
+        },
+        {
+          "biome": "enderscape:celestial_grove",
+          "parameters": {
+            "continentalness": [
+              -1,
+              -0.55
+            ],
+            "depth": [
+              -0.45,
+              1.025
+            ],
+            "erosion": [
+              0.50025,
+              2
+            ],
+            "temperature": [
+              -1,
+              1
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "offset": 0,
+            "weirdness": [
+              -0.05,
+              1
+            ]
+          }
+        },
+        {
+          "biome": "enderscape:corrupt_barrens",
+          "parameters": {
+            "continentalness": [
+              0.55,
+              1
+            ],
+            "depth": [
+              -0.4,
+              1.025
+            ],
+            "erosion": [
+              0.50025,
+              2
+            ],
+            "temperature": [
+              -1,
+              1
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "offset": 0,
+            "weirdness": [
+              -0.05,
+              1
+            ]
+          }
+        },
+        {
+          "biome": "minecraft:small_end_islands",
+          "parameters": {
+            "continentalness": [
+              -1,
+              1
+            ],
+            "depth": [
+              -0.1,
+              0.05
+            ],
+            "erosion": [
+              -1,
+              2
+            ],
+            "temperature": [
+              -1,
+              1
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "offset": 0,
+            "weirdness": [
+              -1,
+              -0.05
+            ]
+          }
+        },
+        {
+          "biome": "enderscape:void_depths",
+          "parameters": {
+            "continentalness": [
+              -1,
+              1
+            ],
+            "depth": [
+              -1.5,
+              -0.4
+            ],
+            "erosion": [
+              -1,
+              2
+            ],
+            "temperature": [
+              -1,
+              1
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "offset": 0,
+            "weirdness": [
+              -1,
+              1
+            ]
+          }
+        },
+        {
+          "biome": "enderscape:void_skies",
+          "parameters": {
+            "continentalness": [
+              -1,
+              -0.2
+            ],
+            "depth": [
+              1.125,
+              1.225
+            ],
+            "erosion": [
+              -1,
+              2
+            ],
+            "temperature": [
+              -1,
+              1
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "offset": 0,
+            "weirdness": [
+              -1,
+              1
+            ]
+          }
+        },
+        {
+          "biome": "enderscape:void_sky_islands",
+          "parameters": {
+            "continentalness": [
+              -0.2,
+              0
+            ],
+            "depth": [
+              1.125,
+              1.225
+            ],
+            "erosion": [
+              -1,
+              2
+            ],
+            "temperature": [
+              -1,
+              1
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "offset": 0,
+            "weirdness": [
+              -1,
+              1
+            ]
+          }
+        },
+        {
+          "biome": "enderscape:void_skies",
+          "parameters": {
+            "continentalness": [
+              0,
+              0.8
+            ],
+            "depth": [
+              1.125,
+              1.225
+            ],
+            "erosion": [
+              -1,
+              2
+            ],
+            "temperature": [
+              -1,
+              1
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "offset": 0,
+            "weirdness": [
+              -1,
+              1
+            ]
+          }
+        },
+        {
+          "biome": "enderscape:void_sky_islands",
+          "parameters": {
+            "continentalness": [
+              0.8,
+              1
+            ],
+            "depth": [
+              1.125,
+              1.225
+            ],
+            "erosion": [
+              -1,
+              2
+            ],
+            "temperature": [
+              -1,
+              1
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "offset": 0,
+            "weirdness": [
+              -1,
+              1
+            ]
+          }
+        }
+      ],
+      "type": "minecraft:multi_noise"
+    },
+    "settings": "minecraft:end",
+    "type": "minecraft:noise"
+  }
+}

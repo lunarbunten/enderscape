@@ -1,0 +1,17 @@
+{
+  "type": "enderscape:large_murublight_chanterelle",
+  "config": {
+    "cap_radius": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 6,
+      "min_inclusive": 4
+    },
+    "direction": "down",
+    "height": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 30,
+      "min_inclusive": 15
+    },
+    "tries": 32
+  }
+}

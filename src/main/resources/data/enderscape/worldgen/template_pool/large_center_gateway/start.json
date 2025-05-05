@@ -1,0 +1,16 @@
+{
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:large_center_gateway/start",
+        "projection": "rigid",
+        "processors": {
+          "processors": []
+        }
+      }
+    }
+  ]
+}

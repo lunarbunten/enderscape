@@ -1,0 +1,19 @@
+{
+  "type": "enderscape:growth",
+  "config": {
+    "added_height": 0,
+    "added_height_chance": 0.0,
+    "base_height": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 4,
+      "min_inclusive": 3
+    },
+    "state": {
+      "Name": "enderscape:corrupt_growth",
+      "Properties": {
+        "facing": "up",
+        "part": "top"
+      }
+    }
+  }
+}

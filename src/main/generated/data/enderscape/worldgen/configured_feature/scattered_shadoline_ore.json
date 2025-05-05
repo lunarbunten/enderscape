@@ -1,0 +1,36 @@
+{
+  "type": "enderscape:scattered_ore",
+  "config": {
+    "scatter_increase": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 1,
+      "min_inclusive": -1
+    },
+    "size": 1,
+    "targets": [
+      {
+        "state": {
+          "Name": "enderscape:shadoline_ore"
+        },
+        "target": {
+          "block": "minecraft:end_stone",
+          "predicate_type": "minecraft:block_match"
+        }
+      },
+      {
+        "state": {
+          "Name": "enderscape:mirestone_shadoline_ore"
+        },
+        "target": {
+          "block": "enderscape:mirestone",
+          "predicate_type": "minecraft:block_match"
+        }
+      }
+    ],
+    "tries": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 90,
+      "min_inclusive": 70
+    }
+  }
+}

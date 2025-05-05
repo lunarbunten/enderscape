@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:end/enter_end_gateway",
+  "criteria": {
+    "obtained": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:drift_jelly_bottle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.enderscape.bottle_drift_jelly.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "enderscape:drift_jelly_bottle"
+    },
+    "title": {
+      "translate": "advancement.enderscape.bottle_drift_jelly"
+    }
+  },
+  "requirements": [
+    [
+      "obtained"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

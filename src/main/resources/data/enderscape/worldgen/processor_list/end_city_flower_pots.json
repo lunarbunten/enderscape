@@ -1,0 +1,100 @@
+{
+  "processors": [
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "input_predicate": {
+            "block": "minecraft:flower_pot",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.025
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "enderscape:potted_blinklight"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:flower_pot",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.1
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "enderscape:potted_bulb_flower"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:flower_pot",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.2
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "enderscape:potted_celestial_growth"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:flower_pot",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.15
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "enderscape:potted_repulsive_magnia_sprout"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:flower_pot",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.3
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "enderscape:potted_corrupt_growth"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:flower_pot",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.5
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "enderscape:potted_alluring_magnia_sprout"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:flower_pot",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 1
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "enderscape:potted_chorus_sprouts"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "parent": "enderscape:drift_leggings",
+  "criteria": {
+    "bounced": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "flags": {
+                "is_flying": true
+              },
+              "movement": {
+                "speed": {
+                  "min": 40.0
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "enderscape:bounce_on_drifter"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.enderscape.glide_onto_drifter.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:firework_rocket"
+    },
+    "title": {
+      "translate": "advancement.enderscape.glide_onto_drifter"
+    }
+  },
+  "requirements": [
+    [
+      "bounced"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

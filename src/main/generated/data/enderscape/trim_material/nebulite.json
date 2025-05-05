@@ -1,0 +1,8 @@
+{
+  "asset_name": "nebulite",
+  "description": {
+    "color": "#FF66FF",
+    "translate": "trim_material.enderscape.nebulite"
+  },
+  "ingredient": "enderscape:nebulite"
+}

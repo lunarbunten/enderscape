@@ -1,0 +1,40 @@
+{
+  "parent": "minecraft:end/enter_end_gateway",
+  "criteria": {
+    "rustle_bucket": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "enderscape:rustle"
+            }
+          }
+        ],
+        "item": {
+          "items": "minecraft:bucket"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.enderscape.rustle_bucket.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "enderscape:rustle_bucket"
+    },
+    "title": {
+      "translate": "advancement.enderscape.rustle_bucket"
+    }
+  },
+  "requirements": [
+    [
+      "rustle_bucket"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_drift_jelly_bottle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:drift_jelly_bottle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:drift_leggings"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_drift_jelly_bottle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:drift_leggings"
+    ]
+  }
+}

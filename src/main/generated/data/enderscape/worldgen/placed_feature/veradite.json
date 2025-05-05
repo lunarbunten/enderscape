@@ -1,0 +1,27 @@
+{
+  "feature": "enderscape:veradite",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "below_top": 0
+        },
+        "min_inclusive": {
+          "above_bottom": 0
+        }
+      }
+    },
+    {
+      "type": "minecraft:count",
+      "count": 48
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:in_square"
+    }
+  ]
+}

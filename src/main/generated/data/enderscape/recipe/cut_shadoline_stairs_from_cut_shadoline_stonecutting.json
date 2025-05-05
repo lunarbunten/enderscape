@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "enderscape:cut_shadoline",
+  "result": {
+    "count": 1,
+    "id": "enderscape:cut_shadoline_stairs"
+  }
+}

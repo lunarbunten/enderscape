@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "group": "shadoline_ingot",
+  "ingredient": "enderscape:raw_shadoline",
+  "result": {
+    "id": "enderscape:shadoline_ingot"
+  }
+}

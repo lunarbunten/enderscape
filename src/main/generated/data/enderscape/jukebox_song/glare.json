@@ -1,0 +1,8 @@
+{
+  "comparator_output": 10,
+  "description": {
+    "translate": "jukebox_song.enderscape.glare"
+  },
+  "length_in_seconds": 235.0,
+  "sound_event": "enderscape:music_disc.glare"
+}

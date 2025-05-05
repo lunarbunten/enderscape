@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dusk_purpur_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:dusk_purpur_slab"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:chiseled_dusk_purpur"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_dusk_purpur_slab"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:chiseled_dusk_purpur"
+    ]
+  }
+}

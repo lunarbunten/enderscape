@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:end/find_end_city",
+  "criteria": {
+    "unlock_end_vault": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "enderscape:end_vault"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "enderscape:end_city_key"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.enderscape.unlock_end_vault.description"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "enderscape:end_city_key"
+    },
+    "title": {
+      "translate": "advancement.enderscape.unlock_end_vault"
+    }
+  },
+  "requirements": [
+    [
+      "unlock_end_vault"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

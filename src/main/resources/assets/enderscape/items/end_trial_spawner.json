@@ -1,0 +1,6 @@
+{
+    "model": {
+        "type": "minecraft:model",
+        "model": "enderscape:block/end_trial_spawner"
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "enderscape:murublight_bricks",
+  "result": {
+    "count": 2,
+    "id": "enderscape:murublight_brick_slab"
+  }
+}

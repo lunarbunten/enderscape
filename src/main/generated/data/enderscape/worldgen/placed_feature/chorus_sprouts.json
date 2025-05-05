@@ -1,0 +1,46 @@
+{
+  "feature": "enderscape:chorus_sprouts",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "below_top": 0
+        },
+        "min_inclusive": {
+          "above_bottom": 0
+        }
+      }
+    },
+    {
+      "type": "minecraft:count_on_every_layer",
+      "count": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 3,
+        "min_inclusive": 1
+      }
+    },
+    {
+      "type": "minecraft:environment_scan",
+      "allowed_search_condition": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:air"
+      },
+      "direction_of_search": "down",
+      "max_steps": 12,
+      "target_condition": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:end_stone"
+      }
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": 0,
+      "y_spread": 1
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_magnia_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#enderscape:magnia_sprouts"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:magnia_attractor"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_magnia_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:magnia_attractor"
+    ]
+  }
+}

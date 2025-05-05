@@ -1,0 +1,13 @@
+{
+  "asset_id": "enderscape:grape_static",
+  "author": {
+    "color": "gray",
+    "translate": "painting.enderscape.grape_static.author"
+  },
+  "height": 3,
+  "title": {
+    "color": "yellow",
+    "translate": "painting.enderscape.grape_static.title"
+  },
+  "width": 3
+}

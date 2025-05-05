@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "enderscape:celestial_bricks",
+  "result": {
+    "count": 1,
+    "id": "enderscape:celestial_brick_stairs"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "biome": "enderscape:veiled_woodlands",
+  "fog_end_density": 1.0,
+  "fog_start_density": 4.0,
+  "nebula_alpha": 0.035,
+  "nebula_color": 9870250,
+  "star_alpha": 0.12,
+  "star_color": 11834367
+}

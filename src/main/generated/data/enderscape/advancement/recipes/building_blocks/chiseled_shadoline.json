@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cut_shadoline_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:cut_shadoline_slab"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:chiseled_shadoline"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cut_shadoline_slab"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:chiseled_shadoline"
+    ]
+  }
+}

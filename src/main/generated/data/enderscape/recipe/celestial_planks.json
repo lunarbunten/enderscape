@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "#enderscape:celestial_stems"
+  ],
+  "result": {
+    "count": 4,
+    "id": "enderscape:celestial_planks"
+  }
+}

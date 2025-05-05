@@ -1,0 +1,7 @@
+{
+  "parent": "enderscape:item/rubble_shield_using_template",
+	"textures": {
+		"0": "enderscape:item/end_stone_rubble_shield",
+		"particle": "enderscape:item/end_stone_rubble_shield"
+	}
+}

@@ -1,0 +1,54 @@
+{
+  "feature": "enderscape:upward_tall_corrupt_growth",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "below_top": 0
+        },
+        "min_inclusive": {
+          "absolute": 20
+        }
+      }
+    },
+    {
+      "type": "minecraft:count_on_every_layer",
+      "count": 10
+    },
+    {
+      "type": "minecraft:noise_based_count",
+      "noise_factor": 4.0,
+      "noise_offset": -0.36,
+      "noise_to_count_ratio": 16
+    },
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:environment_scan",
+      "allowed_search_condition": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:air"
+      },
+      "direction_of_search": "down",
+      "max_steps": 12,
+      "target_condition": {
+        "type": "minecraft:matching_blocks",
+        "blocks": [
+          "enderscape:mirestone",
+          "enderscape:corrupt_overgrowth"
+        ]
+      }
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": 0,
+      "y_spread": 1
+    }
+  ]
+}

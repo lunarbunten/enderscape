@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/template_vault",
+  "textures": {
+    "bottom": "enderscape:block/end_vault_bottom",
+    "front": "enderscape:block/end_vault_front_off",
+    "side": "enderscape:block/end_vault_side_off",
+    "top": "enderscape:block/end_vault_top"
+  }
+}

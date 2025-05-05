@@ -1,0 +1,14 @@
+{
+    "model": {
+        "type": "minecraft:condition",
+        "on_false": {
+            "type": "minecraft:model",
+            "model": "enderscape:item/kurodite_rubble_shield"
+        },
+        "on_true": {
+            "type": "minecraft:model",
+            "model": "enderscape:item/kurodite_rubble_shield_using"
+        },
+        "property": "minecraft:using_item"
+    }
+}

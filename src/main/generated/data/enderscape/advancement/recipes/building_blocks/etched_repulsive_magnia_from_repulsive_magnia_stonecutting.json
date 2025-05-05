@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_repulsive_magnia": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:repulsive_magnia"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:etched_repulsive_magnia_from_repulsive_magnia_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_repulsive_magnia"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:etched_repulsive_magnia_from_repulsive_magnia_stonecutting"
+    ]
+  }
+}

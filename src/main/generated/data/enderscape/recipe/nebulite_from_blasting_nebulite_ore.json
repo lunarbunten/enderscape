@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "group": "nebulite",
+  "ingredient": "enderscape:nebulite_ore",
+  "result": {
+    "id": "enderscape:nebulite"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "biome": "enderscape:void_depths",
+  "fog_end_density": 2.0,
+  "fog_start_density": 4.0,
+  "nebula_alpha": 0.05,
+  "nebula_color": 2826039,
+  "star_alpha": 0.12,
+  "star_color": 5320537
+}

@@ -1,0 +1,59 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/structure/one_story_corner_house",
+        "processors": "enderscape:ruins_degradation",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/structure/one_story_house",
+        "processors": "enderscape:ruins_degradation",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/structure/one_story_house_tower",
+        "processors": "enderscape:ruins_degradation",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/structure/shrine",
+        "processors": "enderscape:ruins_degradation",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/structure/two_story_house",
+        "processors": "enderscape:ruins_degradation",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/structure/two_story_house_ruined",
+        "processors": "enderscape:ruins_degradation",
+        "projection": "rigid"
+      },
+      "weight": 3
+    }
+  ],
+  "fallback": "enderscape:mirestone_ruins/structure_fallback"
+}

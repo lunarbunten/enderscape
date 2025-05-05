@@ -1,0 +1,23 @@
+{
+	"elements": [
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/middle_upper",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 2
+		},
+		{
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "enderscape:end_city/tower/middle_upper_wide",
+				"projection": "rigid",
+				"processors": "enderscape:end_city_flower_pots"
+			},
+			"weight": 2
+		}
+	],
+	"fallback": "enderscape:end_city/tower/fallback"
+}

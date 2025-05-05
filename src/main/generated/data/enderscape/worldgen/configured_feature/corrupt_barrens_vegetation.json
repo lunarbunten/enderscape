@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "enderscape:murublight_chanterelle",
+            "Properties": {
+              "facing": "up",
+              "stage": "0"
+            }
+          },
+          "weight": 1
+        }
+      ]
+    }
+  }
+}

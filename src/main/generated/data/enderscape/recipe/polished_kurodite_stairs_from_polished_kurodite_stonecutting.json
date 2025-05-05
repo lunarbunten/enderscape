@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "enderscape:polished_kurodite",
+  "result": {
+    "count": 1,
+    "id": "enderscape:polished_kurodite_stairs"
+  }
+}

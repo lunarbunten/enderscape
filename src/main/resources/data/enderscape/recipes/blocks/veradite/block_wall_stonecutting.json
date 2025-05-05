@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "enderscape:veradite"
-  },
-  "result": "enderscape:veradite_wall",
-  "count": 1
-}

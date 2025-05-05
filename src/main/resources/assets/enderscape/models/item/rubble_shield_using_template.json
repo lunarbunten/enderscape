@@ -1,0 +1,23 @@
+{
+  "parent": "enderscape:item/rubble_shield_template",
+  "display": {
+		"thirdperson_righthand": {
+			"rotation": [42, 138, 0],
+			"translation": [3.5, 2.25, -1.75]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [42, 138, 0],
+			"translation": [3.5, 2.25, -1.75]
+		},
+		"firstperson_righthand": {
+			"rotation": [180, 8, 166],
+			"translation": [-3.25, 3, 0],
+			"scale": [0.9, 0.9, 0.9]
+		},
+		"firstperson_lefthand": {
+			"rotation": [180, 8, 166],
+			"translation": [-3.25, 3, 0],
+			"scale": [0.9, 0.9, 0.9]
+		}
+	}
+}

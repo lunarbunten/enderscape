@@ -1,106 +1,113 @@
 package net.bunten.enderscape.entity.rubblemite;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
-import org.jetbrains.annotations.Nullable;
-
-import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.registry.EnderscapeEntities;
-import net.bunten.enderscape.registry.EnderscapeSounds;
-import net.bunten.enderscape.util.MathUtil;
+import com.mojang.serialization.Dynamic;
+import net.bunten.enderscape.entity.ai.EnderscapeMemory;
+import net.bunten.enderscape.registry.EnderscapeEntitySounds;
+import net.bunten.enderscape.registry.tag.EnderscapeBlockTags;
+import net.bunten.enderscape.registry.tag.EnderscapeDamageTypeTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.profiling.Profiler;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.SpawnGroupData;
-import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.NaturalSpawner;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 public class Rubblemite extends Monster {
     private static final String RUBBLEMITE_FLAGS_KEY = "RubblemiteFlags";
-    private static final String REMAINING_SHELL_TIME_KEY = "RemainingShellTime";
-    private static final String TIME_SINCE_SHELL_KEY = "TimeSinceShell"; 
-    private static final String VARIANT_KEY = "Variant";
     
-    private static final int DEFUALT_FLAG = 0;
-    private static final int INSIDE_SHELL_FLAG = 1;
-    private static final int DASHING_FLAG = 2;
+    public static final int DEFAULT_FLAG = 0;
+    public static final int INSIDE_SHELL_FLAG = 1;
+    public static final int DASHING_FLAG = 2;
 
     private static final EntityDataAccessor<Integer> RUBBLEMITE_FLAGS = SynchedEntityData.defineId(Rubblemite.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Rubblemite.class, EntityDataSerializers.INT);
-
-    private int remainingShellTime;
-    private int timeSinceShell;
 
     public Rubblemite(EntityType<? extends Rubblemite> type, Level world) {
         super(type, world);
-        timeSinceShell = 100;
+        setPathfindingMalus(PathType.WATER, -1);
         xpReward = 5;
-        setPathfindingMalus(BlockPathTypes.WATER, -1);
-    }
-
-    protected void registerGoals() {
-        goalSelector.addGoal(3, new DashAtTargetGoal(this));
-        goalSelector.addGoal(4, new RubblemiteAttackGoal(this, 1, false));
-        goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8));
-        goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.6D));
-        goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-        targetSelector.addGoal(1, new HurtByTargetGoal(this, new Class[0]).setAlertOthers(new Class[0]));
-        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-        targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
-    }
-
-    @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType type, @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
-        setVariant(Variant.getVariant(random));
-        return super.finalizeSpawn(world, difficulty, type, groupData, tag);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return createMobAttributes()
-        .add(Attributes.MAX_HEALTH, 6)
-        .add(Attributes.FOLLOW_RANGE, 32)
-        .add(Attributes.MOVEMENT_SPEED, 0.28)
-        .add(Attributes.ATTACK_DAMAGE, 10)
-        .add(Attributes.ARMOR, 15);
+                .add(Attributes.ARMOR, 15)
+                .add(Attributes.ATTACK_DAMAGE, 6)
+                .add(Attributes.MAX_HEALTH, 6)
+                .add(Attributes.MOVEMENT_SPEED, 0.28)
+                .add(Attributes.SAFE_FALL_DISTANCE, 6);
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        entityData.define(RUBBLEMITE_FLAGS, DEFUALT_FLAG);
-        entityData.define(VARIANT, Variant.END_STONE.getId());
+    protected Brain.Provider<Rubblemite> brainProvider() {
+        return Brain.provider(RubblemiteAI.MEMORY_TYPES, RubblemiteAI.SENSOR_TYPES);
+    }
+
+    @Override
+    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
+        return RubblemiteAI.makeBrain(brainProvider().makeBrain(dynamic));
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Brain<Rubblemite> getBrain() {
+        return (Brain<Rubblemite>) super.getBrain();
+    }
+
+    @Override
+    protected void customServerAiStep(ServerLevel serverLevel) {
+        ProfilerFiller profiler = Profiler.get();
+
+        profiler.push("rubblemiteBrain");
+        getBrain().tick(serverLevel, this);
+        profiler.pop();
+
+        profiler.push("rubblemiteActivityUpdate");
+        RubblemiteAI.updateActivity(this);
+        profiler.pop();
+
+        super.customServerAiStep(serverLevel);
+    }
+
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason type, @Nullable SpawnGroupData groupData) {
+        RubblemiteVariant.set(this, RubblemiteVariant.pickForSpawning(random, level.getBiome(blockPosition())));
+        return super.finalizeSpawn(level, difficulty, type, groupData);
+    }
+
+    public static boolean canSpawn(EntityType<Rubblemite> type, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+        return level.getDifficulty() != Difficulty.PEACEFUL && (level.getBlockState(pos.below()).is(EnderscapeBlockTags.RUBBLEMITE_SPAWNABLE_ON) || EntitySpawnReason.isSpawner(reason));
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(RUBBLEMITE_FLAGS, DEFAULT_FLAG);
+        builder.define(RubblemiteVariant.DATA, RubblemiteVariant.END_STONE.getId());
     }
 
     @Override
@@ -108,9 +115,7 @@ public class Rubblemite extends Monster {
         super.addAdditionalSaveData(tag);
 
         tag.putInt(RUBBLEMITE_FLAGS_KEY, getFlags());
-        tag.putInt(REMAINING_SHELL_TIME_KEY, remainingShellTime);
-        tag.putInt(TIME_SINCE_SHELL_KEY, timeSinceShell);
-        tag.putInt(VARIANT_KEY, getVariant().getId());
+        tag.putInt(RubblemiteVariant.KEY, RubblemiteVariant.get(this).getId());
     }
 
     @Override
@@ -118,24 +123,10 @@ public class Rubblemite extends Monster {
         super.readAdditionalSaveData(tag);
 
         setFlags(tag.getInt(RUBBLEMITE_FLAGS_KEY));
-        setRemainingShellTime(tag.getInt(REMAINING_SHELL_TIME_KEY));
-        setTimeSinceShell(tag.getInt(TIME_SINCE_SHELL_KEY));
+        RubblemiteVariant.set(this, RubblemiteVariant.byId(tag.getInt(RubblemiteVariant.KEY)));
     }
 
-    @Override
-    public ResourceLocation getDefaultLootTable() {
-        return Enderscape.id("entities/rubblemite/" + getVariant().name);
-    }
-
-    public Variant getVariant() {
-        return Variant.BY_ID[entityData.get(VARIANT)];
-    }
-
-    private void setVariant(Variant variant) {
-        entityData.set(VARIANT, variant.getId());
-    }
-
-    protected int getFlags() {
+    public int getFlags() {
         return entityData.get(RUBBLEMITE_FLAGS);
     }
 
@@ -144,255 +135,138 @@ public class Rubblemite extends Monster {
     }
 
     public boolean isInsideShell() {
-        return getFlags() == INSIDE_SHELL_FLAG || remainingShellTime > 0 && timeSinceShell < 100;
+        return getFlags() == INSIDE_SHELL_FLAG || brain.hasMemoryValue(EnderscapeMemory.RUBBLEMITE_HIDING_DURATION);
     }
 
     public boolean isDashing() {
-        return getFlags() == DASHING_FLAG;
-    }
-
-    public int setRemainingShellTime(int value) {
-        return remainingShellTime = value;
-    }
-
-    public int setTimeSinceShell(int value) {
-        return timeSinceShell = value;
+        return getFlags() == DASHING_FLAG && !brain.hasMemoryValue(EnderscapeMemory.RUBBLEMITE_DASH_ON_COOLDOWN);
     }
 
     public void enterShell(int value) {
-        setFlags(1);
-        setRemainingShellTime(value);
-        setTimeSinceShell(0);
+        setFlags(INSIDE_SHELL_FLAG);
+        if (value > 0) brain.setMemory(EnderscapeMemory.RUBBLEMITE_HIDING_DURATION, value);
     }
 
     public void exitShell() {
-        setFlags(0);
-        setRemainingShellTime(0);
+        setFlags(DEFAULT_FLAG);
+        brain.eraseMemory(EnderscapeMemory.RUBBLEMITE_HIDING_DURATION);
+        brain.setMemoryWithExpiry(EnderscapeMemory.RUBBLEMITE_HIDING_ON_COOLDOWN, true, 100);
+        brain.setMemoryWithExpiry(EnderscapeMemory.RUBBLEMITE_DASH_ON_COOLDOWN, true, 20);
     }
 
     public boolean canHideInShell() {
-        return !isInsideShell() && timeSinceShell >= 100;
+        return getFlags() == DEFAULT_FLAG && !RubblemiteAI.isShellCoolingDown(this);
     }
 
     public boolean shouldStopDashing() {
-        return isOnGround() || isInWaterOrRain();
+        return onGround() || isInWaterOrRain() || getVehicle() != null;
     }
 
     public void dash() {
-        if (getFlags() == DEFUALT_FLAG) {
-            
-            Vec3 vec = getLookAngle();
-            vec = vec.multiply(1.4, 0, 1.4).add(0, 0.33F, 0);
-            setDeltaMovement(vec);
+        Vec3 vec = getLookAngle();
+        vec = vec.multiply(1.4, 0, 1.4).add(0, 0.33F, 0);
+        setDeltaMovement(vec);
 
-            playSound(EnderscapeSounds.RUBBLEMITE_HOP, 1, 1);
+        playSound(EnderscapeEntitySounds.RUBBLEMITE_HOP, 1, 1);
 
-            if (level instanceof ServerLevel server) {
-                Vec3 pos = position();
-                server.sendParticles(ParticleTypes.POOF, pos.x, pos.y + 0.5, pos.z, 5, 0, 0, 0, 0.1);
+        if (level() instanceof ServerLevel server) {
+            Vec3 pos = position();
+            server.sendParticles(ParticleTypes.POOF, pos.x, pos.y + 0.5, pos.z, 5, 0, 0, 0, 0.1);
+        }
+
+        setFlags(DASHING_FLAG);
+    }
+
+    protected void onDamageBlocked(DamageSource source) {
+        if (source.getDirectEntity() != null) {
+            float knockback = 1;
+
+            if (source.getDirectEntity() instanceof LivingEntity living) {
+                Registry<Enchantment> enchantments = this.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
+                knockback += EnchantmentHelper.getEnchantmentLevel(enchantments.getOrThrow(Enchantments.KNOCKBACK), living);
             }
 
-            setFlags(2);
-        }
-    }
+            double x = source.getDirectEntity().getX() - getX();
+            double z = source.getDirectEntity().getZ() - getZ();
 
-    protected void onDamageBlocked(Entity attacker) {
-        var knockback = 0.5D;
-        if (attacker instanceof LivingEntity mob) {
-            knockback += EnchantmentHelper.getKnockbackBonus(mob) * 0.2; 
-        }
-        knockback(knockback, attacker.getX() - getX(), attacker.getZ() - getZ());
-        playSound(EnderscapeSounds.RUBBLEMITE_SHIELD, 1, 1);
-    }
+            while (x * x + z * z < 1.0E-4) {
+                x = (Math.random() - Math.random()) * 0.01;
+                z = (Math.random() - Math.random()) * 0.01;
+            }
 
-    protected boolean allowsBlockingDamage(DamageSource source, float amount) {
-        return isAlive() && source.getDirectEntity() instanceof LivingEntity;
+            knockback(knockback * 0.5F, x, z);
+        }
+
+        playSound(EnderscapeEntitySounds.RUBBLEMITE_SHIELD, 1, 1);
     }
 
     @Override
-    public boolean hurt(DamageSource source, float amount) {
-        var attacker = source.getDirectEntity();
-        if (allowsBlockingDamage(source, amount)) {
-            if (amount >= 12 && super.hurt(source, amount)) {
+    public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
+        if (isAlive() && source.is(EnderscapeDamageTypeTags.RUBBLEMITES_CAN_BLOCK)) {
+            if (amount >= 12 && super.hurtServer(level, source, amount)) {
                 return true;
             } else {
-                if (isInsideShell()) {
-                    onDamageBlocked(attacker);
-                    return false;
-                } else if (timeSinceShell >= 100) {
-                    enterShell(40);
-                    onDamageBlocked(attacker);
+                if (isDashing() || isInsideShell()) {
+                    onDamageBlocked(source);
                     return false;
                 }
-            }
-
-            if (random.nextInt(1000) == 0) {
-                spawnHorde();
-            }
-        }
- 
-        return super.hurt(source, amount);
-    }
-
-    protected void spawnHorde() {
-        if (getTarget() != null && level instanceof ServerLevel server) {
-            int hordeSize = MathUtil.nextInt(random, 8, 16);
-            for (int i = 0; i < hordeSize; i++) {
-                trySpawnAlly(server);
+                if (canHideInShell() && super.hurtServer(level, source, amount)) {
+                    enterShell(40);
+                    return true;
+                }
             }
         }
-    }
-    
-    protected void trySpawnAlly(ServerLevel server) {
-        var target = getTarget();
-        var type = EnderscapeEntities.RUBBLEMITE;
-        var rubblemite = new Rubblemite(type, level);
 
-        for (int l = 0; l < 50; ++l) {
-            int x = MathUtil.floor(getX()) + MathUtil.nextInt(random, 7, 20) * MathUtil.nextInt(random, -1, 1);
-            int y = MathUtil.floor(getY()) + MathUtil.nextInt(random, 7, 5) * MathUtil.nextInt(random, -1, 1);
-            int z = MathUtil.floor(getZ()) + MathUtil.nextInt(random, 7, 20) * MathUtil.nextInt(random, -1, 1);
-
-            var pos = new BlockPos(x, y, z);
-
-            if (!NaturalSpawner.isSpawnPositionOk(SpawnPlacements.getPlacementType(type), level, pos, type)) {
-                continue;
-            }
-
-            rubblemite.setPos(x, y, z);
-
-            if (level.hasNearbyAlivePlayer(x, y, z, 7) || !level.isUnobstructed(rubblemite) || !level.noCollision(rubblemite) || level.containsAnyLiquid(rubblemite.getBoundingBox())) {
-                continue;
-            }
-
-            rubblemite.setTarget(target);
-            rubblemite.finalizeSpawn(server, level.getCurrentDifficultyAt(rubblemite.blockPosition()), MobSpawnType.REINFORCEMENT, null, null);
-
-            server.addFreshEntityWithPassengers(rubblemite);
-            break;
-        }
+        return super.hurtServer(level, source, amount);
     }
 
     @Override
-    public void aiStep() {
-        if (isAlive()) {
-            if (isInWaterOrRain()) {
-                setRemainingShellTime(40);
-            }
-            
-            if (remainingShellTime > 0) {
-                setFlags(1);
-                timeSinceShell = 0;
-                if (remainingShellTime == 1) {
-                    playSound(EnderscapeSounds.RUBBLEMITE_EXTRUDE, 1, 1);
-                }
-    
-                remainingShellTime--;
-            } else {
-                if (isInsideShell() || shouldStopDashing()) {
-                    setFlags(0);
-                }
-    
-                timeSinceShell++;
-            }
-        } else {
-            setFlags(0);
-            remainingShellTime = 0;
-            timeSinceShell = 0;
-        }
-
-        super.aiStep();
+    public void die(DamageSource source) {
+        super.die(source);
+        enterShell(0);
     }
 
     @Override
     public void travel(Vec3 vec) {
         if (isInsideShell()) {
-            if (getNavigation().getPath() != null) {
-                getNavigation().stop();
-            }
+            if (getNavigation().getPath() != null) getNavigation().stop();
             vec = Vec3.ZERO;
         }
         super.travel(vec);
     }
 
     @Override
-    public boolean doHurtTarget(Entity target) {
-        return isInsideShell() ? false : super.doHurtTarget(target);
+    public void lookAt(Entity entity, float f, float g) {
+        if (isInsideShell() || isDashing()) return;
+        super.lookAt(entity, f, g);
     }
 
     @Override
-    public MobType getMobType() {
-        return MobType.ARTHROPOD;
-    }
-
-    @Override
-    public double getMyRidingOffset() {
-        return 0.1D;
-    }
-
-    @Override
-    protected float getStandingEyeHeight(Pose pose, EntityDimensions dimensions) {
-        return 0.13F;
-    }
-
-    @Override
-    public boolean isSensitiveToWater() {
-        return false;
+    public boolean doHurtTarget(ServerLevel serverLevel, Entity entity) {
+        return !isInsideShell() && super.doHurtTarget(serverLevel, entity);
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return isInsideShell() ? null : EnderscapeSounds.RUBBLEMITE_AMBIENT;
+        return isInsideShell() ? null : EnderscapeEntitySounds.RUBBLEMITE_AMBIENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return EnderscapeSounds.RUBBLEMITE_HURT;
+        return EnderscapeEntitySounds.RUBBLEMITE_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return EnderscapeSounds.RUBBLEMITE_DEATH;
+        return EnderscapeEntitySounds.RUBBLEMITE_DEATH;
     }
 
-    @FunctionalInterface
-    static interface BooleanFunction<T> {
-        boolean get(T value);
+    protected SoundEvent getStepSound() {
+        return EnderscapeEntitySounds.RUBBLEMITE_STEP;
     }
 
-    public static enum Variant {
-        END_STONE(0, "end_stone", (random) -> random.nextFloat() > 0.2F),
-        VERADITE(1, "veradite", (random) -> true);
-
-        public static final Variant[] BY_ID = Arrays.stream(Variant.values()).sorted(Comparator.comparingInt(Variant::getId)).toArray(Variant[]::new);
-        private final int id;
-        private final String name;
-        private final BooleanFunction<RandomSource> function;
-
-        private Variant(int id, String name, BooleanFunction<RandomSource> function) {
-            this.id = id;
-            this.name = name;
-            this.function = function;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public boolean applies(RandomSource random) {
-            return function.get(random);
-        }
-
-        private static Variant getVariant(RandomSource random) {
-            for (Variant var : Variant.values()) {
-                if (var.applies(random)) return var;
-            }
-
-            return Variant.END_STONE;
-        }
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        playSound(getStepSound(), 0.15F, Mth.nextFloat(random, 0.9F, 1.1F));
     }
 }

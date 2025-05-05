@@ -1,0 +1,13 @@
+{
+    "variants": {
+        "type=bottom": {
+            "model": "enderscape:block/kurodite_slab"
+        },
+        "type=double": {
+            "model": "enderscape:block/kurodite"
+        },
+        "type=top": {
+            "model": "enderscape:block/kurodite_slab_top"
+        }
+    }
+}

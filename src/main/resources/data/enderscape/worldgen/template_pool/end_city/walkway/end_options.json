@@ -1,0 +1,131 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/one_floor_furniture",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/one_floor_furniture_stairs",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/one_floor_vault",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/one_floor_vault_2",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/three_floor_into_tower",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/three_floor_into_tower_2",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/three_floor_vault_and_spawners",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/three_floor_vault_and_spawners_2",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/two_floor_furniture",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/two_floor_into_tower",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 4
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/two_floor_vault_and_spawner",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/house/two_floor_vault_into_tower",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 4
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/walkway/ship_archway",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/walkway/unique/arena_corrupt_garden_end",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 3
+    }
+  ],
+  "fallback": "enderscape:end_city/walkway/fallback"
+}

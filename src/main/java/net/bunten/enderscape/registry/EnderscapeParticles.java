@@ -1,49 +1,64 @@
 package net.bunten.enderscape.registry;
 
+import com.mojang.serialization.MapCodec;
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.client.particles.AmbientParticle;
-import net.bunten.enderscape.client.particles.BlinklightSporesParticle;
-import net.bunten.enderscape.client.particles.CelestialSporesParticle;
-import net.bunten.enderscape.client.particles.ChorusPollenParticle;
-import net.bunten.enderscape.client.particles.DrippingJellyParticle;
-import net.bunten.enderscape.client.particles.DrippingSpitParticle;
-import net.bunten.enderscape.client.particles.NebuliteCloudParticle;
-import net.bunten.enderscape.client.particles.RisingNebuliteCloudParticle;
-import net.bunten.enderscape.client.particles.VanishingNebuliteCloudParticle;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.bunten.enderscape.particle.DashJumpShockwaveParticleOptions;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.core.Registry;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+
+import java.util.function.Function;
 
 public class EnderscapeParticles {
 
-    public static final SimpleParticleType AMBIENT_STARS = register("ambient_stars");
-    public static final SimpleParticleType BLINKLIGHT_SPORES = register("blinklight_spores");
-    public static final SimpleParticleType CELESTIAL_SPORES = register("celestial_spores");
-    public static final SimpleParticleType CHORUS_POLLEN = register("chorus_pollen");
-    public static final SimpleParticleType DRIPPING_JELLY = register("dripping_jelly");
-    public static final SimpleParticleType DRIPPING_SPIT = register("dripping_spit");
+    public static final SimpleParticleType ALLURING_MAGNIA = register("alluring_magnia", true);
+    public static final SimpleParticleType BLINKLIGHT_SPORES = register("blinklight_spores", false);
+    public static final SimpleParticleType CELESTIAL_SPORES = register("celestial_spores", false);
+    public static final SimpleParticleType CHORUS_POLLEN = register("chorus_pollen", false);
+    public static final SimpleParticleType CORRUPT_SPORES = register("corrupt_spores", false);
 
-    public static final SimpleParticleType NEBULITE_CLOUD = register("nebulite_cloud");
-    public static final SimpleParticleType RISING_NEBULITE_CLOUD = register("rising_nebulite_cloud");
-    public static final SimpleParticleType VANISHING_NEBULITE_CLOUD = register("vanishing_nebulite_cloud");
+    public static final ParticleType<DashJumpShockwaveParticleOptions> DASH_JUMP_SHOCKWAVE = register(
+            "dash_jump_shockwave", true, type -> DashJumpShockwaveParticleOptions.CODEC, type -> DashJumpShockwaveParticleOptions.STREAM_CODEC
+    );
 
-    private static SimpleParticleType register(String name) {
-        return Registry.register(Registry.PARTICLE_TYPE, Enderscape.id(name), FabricParticleTypes.simple(false));
+    public static final SimpleParticleType DASH_JUMP_SPARKS = register("dash_jump_sparks", true);
+    public static final SimpleParticleType DRIFT_JELLY_DRIPPING = register("drift_jelly_dripping", true);
+    public static final SimpleParticleType ENDER_PEARL = register("ender_pearl", true);
+    public static final SimpleParticleType END_TRIAL_SPAWNER_DETECTION = register("end_trial_spawner_detection", true);
+    public static final SimpleParticleType END_TRIAL_SPAWNER_EXHALE = register("end_trial_spawner_exhale", true);
+    public static final SimpleParticleType END_VAULT_CONNECTION = register("end_vault_connection", true);
+    public static final SimpleParticleType END_PORTAL_STARS = register("end_portal_stars", false);
+    public static final SimpleParticleType MIRROR_TELEPORT_IN = register("mirror_teleport_in", true);
+    public static final SimpleParticleType MIRROR_TELEPORT_OUT = register("mirror_teleport_out", true);
+    public static final SimpleParticleType NEBULITE_ORE = register("nebulite_ore", true);
+    public static final SimpleParticleType REPULSIVE_MAGNIA = register("repulsive_magnia", true);
+    public static final SimpleParticleType RUSTLE_SLEEPING_BUBBLE = register("rustle_sleeping_bubble", true);
+    public static final SimpleParticleType RUSTLE_SLEEPING_BUBBLE_POP = register("rustle_sleeping_bubble_pop", true);
+    public static final SimpleParticleType VEILED_LEAVES = register("veiled_leaves", false);
+    public static final SimpleParticleType VOID_POOF = register("void_poof", true);
+    public static final SimpleParticleType VOID_STARS = register("void_stars", false);
+
+    private static SimpleParticleType register(String name, boolean alwaysSpawn) {
+        return Registry.register(BuiltInRegistries.PARTICLE_TYPE, Enderscape.id(name), FabricParticleTypes.simple(alwaysSpawn));
     }
 
-    @Environment(EnvType.CLIENT)
-    public static void initClient() {
-        ParticleFactoryRegistry.getInstance().register(AMBIENT_STARS, AmbientParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(BLINKLIGHT_SPORES, BlinklightSporesParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(CELESTIAL_SPORES, CelestialSporesParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(CHORUS_POLLEN, ChorusPollenParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(DRIPPING_JELLY, DrippingJellyParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(DRIPPING_SPIT, DrippingSpitParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(NEBULITE_CLOUD, NebuliteCloudParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(RISING_NEBULITE_CLOUD, RisingNebuliteCloudParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(VANISHING_NEBULITE_CLOUD, VanishingNebuliteCloudParticle.Provider::new);
+    private static <T extends ParticleOptions> ParticleType<T> register(String name, boolean overrideLimiter, Function<ParticleType<T>, MapCodec<T>> codecFunction, Function<ParticleType<T>, StreamCodec<? super RegistryFriendlyByteBuf, T>> streamCodecFunction) {
+        return Registry.register(BuiltInRegistries.PARTICLE_TYPE, Enderscape.id(name), new ParticleType<T>(overrideLimiter) {
+
+            @Override
+            public MapCodec<T> codec() {
+                return codecFunction.apply(this);
+            }
+
+            @Override
+            public StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec() {
+                return streamCodecFunction.apply(this);
+            }
+        });
     }
 }

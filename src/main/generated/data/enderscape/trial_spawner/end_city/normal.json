@@ -1,0 +1,34 @@
+{
+  "loot_tables_to_eject": [
+    {
+      "data": "enderscape:end_city/spawner/key",
+      "weight": 2
+    },
+    {
+      "data": "enderscape:end_city/spawner/basic",
+      "weight": 1
+    }
+  ],
+  "simultaneous_mobs": 6.0,
+  "simultaneous_mobs_added_per_player": 3.0,
+  "spawn_potentials": [
+    {
+      "data": {
+        "entity": {
+          "id": "minecraft:endermite"
+        }
+      },
+      "weight": 3
+    },
+    {
+      "data": {
+        "entity": {
+          "id": "enderscape:rubblemite"
+        }
+      },
+      "weight": 1
+    }
+  ],
+  "ticks_between_spawn": 10,
+  "total_mobs": 18.0
+}
