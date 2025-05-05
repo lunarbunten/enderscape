@@ -6,7 +6,7 @@
 
 Enderscape is a total overhaul of the End dimension, featuring **new world generation**, **four new biomes**, **revamped End Cities**, and many other additions that enrich the End- and all that lies beyond.
 
-We've put a lot of care into sound design and ambience, so Enderscape features hundreds of unique sounds for biomes, blocks, items, mobs, as well as an [**expanded soundtrack!**](https://lunarbunten.bandcamp.com/album/enderscape-full-soundtrack) Visuals are also important, so we have revamped End lighting, a revamped skybox, and biome-specific fog.
+We've put a lot of care into sound design and ambience, so Enderscape features hundreds of unique sounds for biomes, blocks, items, mobs, as well as an [**expanded soundtrack!**](https://lunarbunten.bandcamp.com/album/enderscape-2) Visuals are also important, so we have revamped End lighting, a revamped skybox, and biome-specific fog.
 
 ![Atlas](https://i.imgur.com/hjEc744.png)
 
