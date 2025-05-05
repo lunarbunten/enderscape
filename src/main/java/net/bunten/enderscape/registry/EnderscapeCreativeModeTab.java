@@ -3,23 +3,16 @@ package net.bunten.enderscape.registry;
 import net.bunten.enderscape.Enderscape;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.decoration.Painting;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
@@ -292,7 +285,7 @@ public class EnderscapeCreativeModeTab {
         output.accept(MURUBLIGHT_HANGING_SIGN_ITEM);
 
     }).build();
-
+    
     static {
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.BUILDING_BLOCKS).register(entries -> {
@@ -507,7 +500,7 @@ public class EnderscapeCreativeModeTab {
             entries.addBefore(INFESTED_STONE, getEndVaultInstance());
             entries.addBefore(SKELETON_SKULL, getEndCityBannerInstance(entries.getContext().holders().lookupOrThrow(Registries.BANNER_PATTERN)));
         });
-
+        
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(entries -> {
             entries.addAfter(LIGHTNING_ROD, BLINKLIGHT, FLANGER_BERRY);
             entries.addAfter(REDSTONE_LAMP, BLINKLAMP);
@@ -542,7 +535,7 @@ public class EnderscapeCreativeModeTab {
             entries.addAfter(OMINOUS_TRIAL_KEY, END_CITY_KEY);
             entries.addBefore(ANGLER_POTTERY_SHERD, CRESCENT_BANNER_PATTERN);
         });
-
+        
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.SPAWN_EGGS).register(entries -> {
             entries.addBefore(CREAKING_HEART, END_TRIAL_SPAWNER);
             entries.addAfter(DONKEY_SPAWN_EGG, DRIFTER_SPAWN_EGG, DRIFTLET_SPAWN_EGG);
@@ -562,12 +555,7 @@ public class EnderscapeCreativeModeTab {
 
     public static ItemStack getPainting(CreativeModeTab.ItemDisplayParameters parameters, ResourceKey<PaintingVariant> painting) {
         ItemStack stack = PAINTING.getDefaultInstance();
-
-        Holder.Reference<PaintingVariant> reference = parameters.holders().lookupOrThrow(Registries.PAINTING_VARIANT).getOrThrow(painting);
-        CustomData data = CustomData.EMPTY.update(parameters.holders().createSerializationContext(NbtOps.INSTANCE), Painting.VARIANT_MAP_CODEC, reference).getOrThrow().update(compoundTag -> compoundTag.putString("id", "minecraft:painting"));
-
-        stack.set(DataComponents.ENTITY_DATA, data);
-
+        stack.set(DataComponents.PAINTING_VARIANT, parameters.holders().lookupOrThrow(Registries.PAINTING_VARIANT).getOrThrow(painting));
         return stack;
     }
 }

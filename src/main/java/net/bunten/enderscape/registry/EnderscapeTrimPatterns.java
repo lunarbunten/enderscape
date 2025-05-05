@@ -2,12 +2,10 @@ package net.bunten.enderscape.registry;
 
 import net.bunten.enderscape.Enderscape;
 import net.minecraft.Util;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
 
 import java.util.ArrayList;
@@ -20,17 +18,11 @@ public class EnderscapeTrimPatterns {
     public static final ResourceKey<TrimPattern> STASIS = register("stasis");
 
     public static void bootstrap(BootstrapContext<TrimPattern> context) {
-        register(context, EnderscapeItems.STASIS_ARMOR_TRIM_SMITHING_TEMPLATE, STASIS);
+        register(context, STASIS);
     }
 
-    public static void register(BootstrapContext<TrimPattern> bootstrapContext, Item item, ResourceKey<TrimPattern> key) {
-        TrimPattern pattern = new TrimPattern(
-                key.location(),
-                BuiltInRegistries.ITEM.wrapAsHolder(item),
-                Component.translatable(Util.makeDescriptionId("trim_pattern", key.location())),
-                false
-        );
-
+    public static void register(BootstrapContext<TrimPattern> bootstrapContext, ResourceKey<TrimPattern> key) {
+        TrimPattern pattern = new TrimPattern(key.location(), Component.translatable(Util.makeDescriptionId("trim_pattern", key.location())), false);
         bootstrapContext.register(key, pattern);
     }
 

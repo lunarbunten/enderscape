@@ -1,9 +1,10 @@
 package net.bunten.enderscape.client.hud;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.pipeline.BlendFunction;
+import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.blaze3d.platform.DepthTestFunction;
+import com.mojang.blaze3d.platform.DestFactor;
+import com.mojang.blaze3d.platform.SourceFactor;
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.client.EnderscapeClient;
 import net.fabricmc.api.EnvType;
@@ -11,7 +12,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.Util;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderStateShard;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -20,7 +21,8 @@ import net.minecraft.world.level.LightLayer;
 
 import java.util.function.Function;
 
-import static net.minecraft.client.renderer.RenderStateShard.*;
+import static net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED_SNIPPET;
+import static net.minecraft.client.renderer.RenderStateShard.TextureStateShard;
 
 @Environment(EnvType.CLIENT)
 public class MirrorScreenEffect extends HudElement {
@@ -28,25 +30,21 @@ public class MirrorScreenEffect extends HudElement {
     public static final ResourceLocation OVERLAY_TEXTURE = Enderscape.id("textures/misc/overlay.png");
     public static final ResourceLocation VIGNETTE_TEXTURE = Enderscape.id("textures/misc/vignette.png");
 
-    public static final RenderStateShard.TransparencyStateShard SCREEN_EFFECT_TRANSPARENCY = new RenderStateShard.TransparencyStateShard("enderscape_mirror_screen_effect_transparency", () -> {
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_CONSTANT_ALPHA);
-    }, () -> {
-        RenderSystem.disableBlend();
-        RenderSystem.defaultBlendFunc();
-    });
+    public static final RenderPipeline SCREEN_EFFECT_PIPELINE = RenderPipelines.register(
+            RenderPipeline.builder(GUI_TEXTURED_SNIPPET)
+                    .withLocation(Enderscape.id("pipeline/mirror_screen_effect"))
+                    .withBlend(new BlendFunction(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_CONSTANT_ALPHA))
+                    .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
+                    .withDepthWrite(false)
+                    .build()
+    );
 
-    private static final Function<ResourceLocation, RenderType> SCREEN_EFFECT = Util.memoize(location -> RenderType.create("enderscape_mirror_screen_effect",
-                    DefaultVertexFormat.POSITION_TEX_COLOR,
-                    VertexFormat.Mode.QUADS,
+    private static final Function<ResourceLocation, RenderType> SCREEN_EFFECT = Util.memoize(
+            resourceLocation -> RenderType.create(
+                    "enderscape_mirror_screen_effect",
                     786432,
-                    RenderType.CompositeState.builder()
-                            .setTextureState(new TextureStateShard(location, TriState.DEFAULT, false))
-                            .setShaderState(POSITION_TEXTURE_COLOR_SHADER)
-                            .setTransparencyState(SCREEN_EFFECT_TRANSPARENCY)
-                            .setDepthTestState(NO_DEPTH_TEST)
-                            .setWriteMaskState(COLOR_WRITE)
-                            .createCompositeState(false)
+                    SCREEN_EFFECT_PIPELINE,
+                    RenderType.CompositeState.builder().setTextureState(new TextureStateShard(resourceLocation, TriState.DEFAULT, false)).createCompositeState(false)
             )
     );
 

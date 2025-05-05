@@ -20,7 +20,7 @@ public class MagniaSproutRenderer implements BlockEntityRenderer<MagniaSproutBlo
     public MagniaSproutRenderer(BlockEntityRendererProvider.Context context) {}
 
     @Override
-    public void render(MagniaSproutBlockEntity entity, float f, PoseStack pose, MultiBufferSource source, int i, int j) {
+    public void render(MagniaSproutBlockEntity entity, float f, PoseStack pose, MultiBufferSource source, int i, int j, Vec3 cameraPos) {
         if (EnderscapeConfig.getInstance().debugMagniaSproutHitboxes) {
             if (entity.getBlockState().getBlock() instanceof MagniaSproutBlock sprout) {
                 Vec3 color = sprout.magniaType.equals(MagniaType.ALLURING) ? Vec3.fromRGB24(0x8CC9FF) : Vec3.fromRGB24(0xFF9E9B);

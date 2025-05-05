@@ -9,7 +9,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
@@ -904,8 +904,8 @@ public class EnderscapeBlocks {
         return true;
     }
 
-    public static final BlockStateProvider VEILED_OVERGROWTH_BONEMEAL_PROVIDER = new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(EnderscapeBlocks.WISP_SPROUTS.defaultBlockState(), 3).add(EnderscapeBlocks.WISP_GROWTH.defaultBlockState(), 1));
-    public static final BlockStateProvider CELESTIAL_OVERGROWTH_BONEMEAL_PROVIDER = new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(EnderscapeBlocks.CELESTIAL_CHANTERELLE.defaultBlockState(), 3).add(EnderscapeBlocks.BULB_FLOWER.defaultBlockState(), 1));
-    public static final BlockStateProvider CORRUPT_OVERGROWTH_BONEMEAL_PROVIDER = new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(EnderscapeBlocks.MURUBLIGHT_CHANTERELLE.defaultBlockState(), 3));
+    public static final BlockStateProvider VEILED_OVERGROWTH_BONEMEAL_PROVIDER = new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(EnderscapeBlocks.WISP_SPROUTS.defaultBlockState(), 3).add(EnderscapeBlocks.WISP_GROWTH.defaultBlockState(), 1));
+    public static final BlockStateProvider CELESTIAL_OVERGROWTH_BONEMEAL_PROVIDER = new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(EnderscapeBlocks.CELESTIAL_CHANTERELLE.defaultBlockState(), 3).add(EnderscapeBlocks.BULB_FLOWER.defaultBlockState(), 1));
+    public static final BlockStateProvider CORRUPT_OVERGROWTH_BONEMEAL_PROVIDER = new WeightedStateProvider(new WeightedList.Builder<BlockState>().add(EnderscapeBlocks.MURUBLIGHT_CHANTERELLE.defaultBlockState(), 3));
 
 }

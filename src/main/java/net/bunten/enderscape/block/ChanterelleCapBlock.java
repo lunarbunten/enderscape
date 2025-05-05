@@ -12,7 +12,7 @@ public class ChanterelleCapBlock extends Block {
     }
 
     @Override
-    public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+    public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
         entity.causeFallDamage(Math.max(0, fallDistance - 6), 0.33F, world.damageSources().fall());
     }
 }

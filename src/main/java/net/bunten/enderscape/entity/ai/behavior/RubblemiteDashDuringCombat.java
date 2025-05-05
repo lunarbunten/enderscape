@@ -15,7 +15,7 @@ public class RubblemiteDashDuringCombat extends Behavior<Rubblemite> {
     
     @Override
     protected boolean checkExtraStartConditions(ServerLevel level, Rubblemite mob) {
-        if (mob.getFlags() == Rubblemite.DEFAULT_FLAG && !mob.isVehicle() && mob.onGround() && !mob.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)) {
+        if (mob.getFlags() == Rubblemite.DEFAULT_FLAG && !mob.isVehicle() && mob.onGround() && !mob.hasEffect(MobEffects.SLOWNESS)) {
             double d = mob.distanceToSqr(EnderscapeMemory.getAttackTarget(mob));
             if (d >= 6 && d <= 35) {
                 return mob.getRandom().nextInt(10) == 0;

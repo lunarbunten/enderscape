@@ -6,7 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.SpawnData;
@@ -36,13 +36,13 @@ public class EnderscapeTrialSpawnerConfigs {
         context.register(END_CITY_NORMAL,
                 TrialSpawnerConfig.builder()
                         .lootTablesToEject(
-                                SimpleWeightedRandomList.<ResourceKey<LootTable>>builder()
+                                WeightedList.<ResourceKey<LootTable>>builder()
                                         .add(EnderscapeLootTables.END_CITY_SPAWNER_KEY, 2)
                                         .add(EnderscapeLootTables.END_CITY_SPAWNER_BASIC, 1)
                                         .build()
                         )
                         .spawnPotentialsDefinition(
-                                SimpleWeightedRandomList.<SpawnData>builder()
+                                WeightedList.<SpawnData>builder()
                                         .add(spawnData(EntityType.ENDERMITE), 3)
                                         .add(spawnData(EnderscapeEntities.RUBBLEMITE), 1)
                                         .build()
@@ -56,9 +56,9 @@ public class EnderscapeTrialSpawnerConfigs {
 
         context.register(END_CITY_SHIP_NORMAL,
                 TrialSpawnerConfig.builder()
-                        .lootTablesToEject(SimpleWeightedRandomList.single(EnderscapeLootTables.END_CITY_SPAWNER_KEY))
+                        .lootTablesToEject(WeightedList.of(EnderscapeLootTables.END_CITY_SPAWNER_KEY))
                         .spawnPotentialsDefinition(
-                                SimpleWeightedRandomList.<SpawnData>builder()
+                                WeightedList.<SpawnData>builder()
                                         .add(spawnData(EntityType.ENDERMITE), 1)
                                         .add(spawnData(EnderscapeEntities.RUBBLEMITE), 1)
                                         .build()

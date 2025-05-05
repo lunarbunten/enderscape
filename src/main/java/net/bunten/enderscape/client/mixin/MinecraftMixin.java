@@ -37,7 +37,7 @@ public abstract class MinecraftMixin {
 
         if (player != null && level.dimension() == Level.END) {
             Biome biome = level.getBiome(player.blockPosition()).value();
-            Optional<Music> optional = EnderscapeClient.structureMusic.isPresent() ? EnderscapeClient.structureMusic : biome.getBackgroundMusic().flatMap(tracks -> tracks.getRandomValue(level.getRandom()));
+            Optional<Music> optional = EnderscapeClient.structureMusic.isPresent() ? EnderscapeClient.structureMusic : biome.getBackgroundMusic().flatMap(tracks -> tracks.getRandom(level.getRandom()));
 
             if (optional.isPresent()) {
                 Music music = optional.get();

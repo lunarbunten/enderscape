@@ -3,6 +3,5 @@
   "decal": false,
   "description": {
     "translate": "trim_pattern.enderscape.stasis"
-  },
-  "template_item": "enderscape:stasis_armor_trim_smithing_template"
+  }
 }

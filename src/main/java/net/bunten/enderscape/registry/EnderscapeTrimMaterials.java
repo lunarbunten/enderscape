@@ -7,8 +7,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.equipment.trim.MaterialAssetGroup;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 
 import java.util.ArrayList;
@@ -22,15 +21,18 @@ public class EnderscapeTrimMaterials {
     public static final ResourceKey<TrimMaterial> NEBULITE = register("nebulite");
     public static final ResourceKey<TrimMaterial> SHADOLINE = register("shadoline");
 
-    public static void bootstrap(BootstrapContext<TrimMaterial> context) {
-        register(context, NEBULITE, EnderscapeItems.NEBULITE, Style.EMPTY.withColor(0xFF66FF));
-        register(context, SHADOLINE, EnderscapeItems.SHADOLINE_INGOT, Style.EMPTY.withColor(0x315B4D));
+    public static MaterialAssetGroup create(String string) {
+        return new MaterialAssetGroup(new MaterialAssetGroup.AssetInfo(string), Map.of());
     }
 
-    private static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> key, Item item, Style style) {
-        ResourceLocation location = key.location();
-        TrimMaterial material = TrimMaterial.create(location.getPath(), item, Component.translatable(Util.makeDescriptionId("trim_material", location)).withStyle(style), Map.of());
-        context.register(key, material);
+    public static void bootstrap(BootstrapContext<TrimMaterial> context) {
+        register(context, NEBULITE, Style.EMPTY.withColor(0xFF66FF));
+        register(context, SHADOLINE, Style.EMPTY.withColor(0x315B4D));
+    }
+
+    private static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> key, Style style) {
+        Component component = Component.translatable(Util.makeDescriptionId("trim_material", key.location())).withStyle(style);
+        context.register(key, new TrimMaterial(MaterialAssetGroup.create(key.location().getPath()), component));
     }
 
     private static ResourceKey<TrimMaterial> register(String name) {

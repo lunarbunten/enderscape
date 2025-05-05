@@ -122,8 +122,8 @@ public class Rubblemite extends Monster {
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
 
-        setFlags(tag.getInt(RUBBLEMITE_FLAGS_KEY));
-        RubblemiteVariant.set(this, RubblemiteVariant.byId(tag.getInt(RubblemiteVariant.KEY)));
+        tag.getInt(RUBBLEMITE_FLAGS_KEY).ifPresent(this::setFlags);
+        tag.getInt(RubblemiteVariant.KEY).ifPresent(id -> RubblemiteVariant.set(this, RubblemiteVariant.byId(id)));
     }
 
     public int getFlags() {

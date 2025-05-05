@@ -135,7 +135,7 @@ public abstract class AbstractDrifter extends Animal {
     }
 
     @Override
-    public boolean causeFallDamage(float f, float g, DamageSource damageSource) {
+    public boolean causeFallDamage(double f, float g, DamageSource damageSource) {
         return false;
     }
 

@@ -194,7 +194,7 @@ public class EnderscapeModifications {
         });
 
         BiomeModifications.create(Enderscape.id("add_new_barrens_content")).add(ModificationPhase.ADDITIONS, context -> context.getBiomeRegistryEntry().is(EnderscapeBiomeTags.INCLUDES_NEW_BARRENS_CONTENT), (selection, modification) -> {
-            modification.getSpawnSettings().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUBBLEMITE, 4, 2, 3));
+            modification.getSpawnSettings().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUBBLEMITE, 2, 3), 4);
 
             modification.getGenerationSettings().addFeature(Decoration.VEGETAL_DECORATION, EnderscapePlacedFeatures.DRY_END_GROWTH);
             modification.getGenerationSettings().addFeature(Decoration.VEGETAL_DECORATION, EnderscapePlacedFeatures.MURUBLIGHT_SHELF);

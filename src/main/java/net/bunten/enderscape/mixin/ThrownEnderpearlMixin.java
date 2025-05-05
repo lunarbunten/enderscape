@@ -25,7 +25,7 @@ public abstract class ThrownEnderpearlMixin extends ThrowableItemProjectile {
         super(type, level);
     }
 
-    @ModifyArgs(method = "playSound", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;)V"))
+    @ModifyArgs(method = "playSound", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/Entity;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;)V"))
     private void Enderscape$playSound(Args args) {
         if (EnderscapeConfig.getInstance().enderPearlUpdateTeleportSound) args.set(4, EnderscapeItemSounds.ENDER_PEARL_LAND);
     }

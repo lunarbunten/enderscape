@@ -8,13 +8,13 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class DirectionalPlantBlock extends BushBlock {
+public abstract class DirectionalPlantBlock extends VegetationBlock {
     public static final EnumProperty<Direction> FACING = StateProperties.FACING;
     public final DirectionProperties directionProperties;
 

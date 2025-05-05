@@ -79,7 +79,7 @@
         "type": "enderscape:rustle",
         "maxCount": 3,
         "minCount": 2,
-        "weight": 20
+        "weight": 6
       }
     ],
     "misc": [],

@@ -1,11 +1,9 @@
 package net.bunten.enderscape.client.mixin;
 
 import net.bunten.enderscape.EnderscapeConfig;
-import net.bunten.enderscape.client.EnderscapeClient;
 import net.bunten.enderscape.entity.EndTrialSpawnable;
 import net.bunten.enderscape.registry.EnderscapeBlockSounds;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
-import net.bunten.enderscape.registry.EnderscapeItemSounds;
 import net.bunten.enderscape.registry.EnderscapeParticles;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

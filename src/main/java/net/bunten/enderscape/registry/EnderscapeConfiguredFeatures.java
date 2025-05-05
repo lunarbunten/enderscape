@@ -9,7 +9,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -130,7 +130,7 @@ public class EnderscapeConfiguredFeatures {
     private static void registerVeiledWoodlands(BootstrapContext<ConfiguredFeature<?, ?>> context) {
 
         register(context, VEILED_WOODLANDS_VEGETATION, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>()
+                new WeightedStateProvider(new WeightedList.Builder<BlockState>()
                         .add(EnderscapeBlocks.WISP_SPROUTS.defaultBlockState(), 4)
                         .add(EnderscapeBlocks.WISP_GROWTH.defaultBlockState(), 1)
                 )
@@ -190,7 +190,7 @@ public class EnderscapeConfiguredFeatures {
     private static void registerCelestialGrove(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         register(context, BULB_FLOWER, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(simple(EnderscapeBlocks.BULB_FLOWER)));
         register(context, CELESTIAL_GROVE_VEGETATION, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>()
+                new WeightedStateProvider(new WeightedList.Builder<BlockState>()
                         .add(EnderscapeBlocks.CELESTIAL_CHANTERELLE.defaultBlockState(), 8)
                         .add(EnderscapeBlocks.BULB_FLOWER.defaultBlockState(), 1)
                 )
@@ -211,7 +211,7 @@ public class EnderscapeConfiguredFeatures {
                 ), Direction.DOWN, BlockPredicate.ONLY_IN_AIR_PREDICATE, true));
 
         register(context, CORRUPT_BARRENS_VEGETATION, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>()
+                new WeightedStateProvider(new WeightedList.Builder<BlockState>()
                         .add(EnderscapeBlocks.MURUBLIGHT_CHANTERELLE.defaultBlockState(), 1)
                 ))
         );

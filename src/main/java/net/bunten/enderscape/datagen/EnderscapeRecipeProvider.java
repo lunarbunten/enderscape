@@ -1,6 +1,8 @@
 package net.bunten.enderscape.datagen;
 
 import com.google.common.collect.ImmutableList;
+import com.mojang.datafixers.util.Pair;
+import net.bunten.enderscape.registry.EnderscapeTrimPatterns;
 import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -15,12 +17,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.equipment.trim.TrimPattern;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Stream;
 
 import static net.bunten.enderscape.registry.EnderscapeBlocks.*;
 import static net.bunten.enderscape.registry.EnderscapeItems.*;
+import static net.minecraft.data.recipes.RecipeProvider.getItemName;
 import static net.minecraft.world.item.Items.*;
 
 public class EnderscapeRecipeProvider extends FabricRecipeProvider {
@@ -32,6 +38,18 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
         super(output, future);
     }
 
+    public static Stream<VanillaRecipeProvider.TrimTemplate> smithingTrims() {
+        return Stream.of(
+                        Pair.of(STASIS_ARMOR_TRIM_SMITHING_TEMPLATE, EnderscapeTrimPatterns.STASIS)
+                )
+                .map(pair -> {
+                    Item item = pair.getFirst();
+                    ResourceKey<TrimPattern> pattern = pair.getSecond();
+                    ResourceKey<Recipe<?>> recipe = ResourceKey.create(Registries.RECIPE, ResourceLocation.withDefaultNamespace(getItemName(item) + "_smithing_trim"));
+                    return new VanillaRecipeProvider.TrimTemplate(item, pattern, recipe);
+                });
+    }
+
     @Override
     protected RecipeProvider createRecipeProvider(HolderLookup.Provider lookup, RecipeOutput output) {
         return new RecipeProvider(lookup, output) {
@@ -39,10 +57,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
             @Override
             public void buildRecipes() {
                 EnderscapeBlockFamilies.getAllFamilies().forEach((family) -> generateRecipes(family, FeatureFlagSet.of(FeatureFlags.VANILLA)));
-
-                VanillaRecipeProvider.TrimTemplate stasisTrim = new VanillaRecipeProvider.TrimTemplate(STASIS_ARMOR_TRIM_SMITHING_TEMPLATE, ResourceKey.create(Registries.RECIPE, ResourceLocation.withDefaultNamespace(getItemName(STASIS_ARMOR_TRIM_SMITHING_TEMPLATE) + "_smithing_trim")));
-
-                trimSmithing(stasisTrim.template(), stasisTrim.id());
+                smithingTrims().forEach(trimTemplate -> trimSmithing(trimTemplate.template(), trimTemplate.patternId(), trimTemplate.recipeId()));
 
                 shaped(RecipeCategory.MISC, MUSIC_DISC_BLISS)
                         .define('D', MUSIC_DISC_DECAY)

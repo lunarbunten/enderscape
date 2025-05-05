@@ -21,8 +21,8 @@ public class VeiledWoodlandsBiome {
         HolderGetter<ConfiguredWorldCarver<?>> carvers = context.lookup(Registries.CONFIGURED_CARVER);
 
         MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder()
-                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUSTLE, 20, 2, 3))
-                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUBBLEMITE, 4, 2, 3));
+                .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUSTLE, 2, 3))
+                .addSpawn(MobCategory.MONSTER, 4, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUBBLEMITE, 2, 3));
 
         BiomeDefaultFeatures.endSpawns(spawns);
 

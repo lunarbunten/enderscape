@@ -21,7 +21,7 @@ public class VeiledVinesBlock extends AbstractGrowthBlock {
     }
 
     @Override
-    protected MapCodec<? extends BushBlock> codec() {
+    protected MapCodec<? extends VeiledVinesBlock> codec() {
         return CODEC;
     }
 

@@ -78,7 +78,7 @@ public class Drifter extends AbstractDrifter {
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-        setDrippingJelly(tag.getBoolean(DRIPPING_JELLY_KEY));
+        tag.getBoolean(DRIPPING_JELLY_KEY).ifPresent(this::setDrippingJelly);
     }
 
     @Override

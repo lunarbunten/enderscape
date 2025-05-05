@@ -11,6 +11,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.ConversionParams;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -31,32 +32,20 @@ public class Driftlet extends AbstractDrifter {
         return createBaseDrifterAttributes().add(Attributes.MAX_HEALTH, 8).add(Attributes.FLYING_SPEED, 0.5);
     }
 
-    private void growUp() {
+    private void ageUp() {
         if (level() instanceof ServerLevel server) {
-            Drifter mob = EnderscapeEntities.DRIFTER.create(level(), null);
-            
-            mob.moveTo(getX(), getY(), getZ(), getYRot(), getXRot());
-            mob.finalizeSpawn(server, level().getCurrentDifficultyAt(mob.blockPosition()), EntitySpawnReason.CONVERSION, null);
-            mob.setNoAi(isNoAi());
-
-            if (hasCustomName()) {
-                mob.setCustomName(getCustomName());
-                mob.setCustomNameVisible(isCustomNameVisible());
-            }
-
-            if (isLeashed()) dropLeash();
-            if (isPassenger()) mob.startRiding(getVehicle());
-
-            mob.setPersistenceRequired();
-            server.addFreshEntityWithPassengers(mob);
-            discard();
+            convertTo(EnderscapeEntities.DRIFTER, ConversionParams.single(this, false, false), mob -> {
+                mob.finalizeSpawn(server, level().getCurrentDifficultyAt(mob.blockPosition()), EntitySpawnReason.CONVERSION, null);
+                mob.setPersistenceRequired();
+                mob.fudgePositionAfterSizeChange(getDimensions(getPose()));
+            });
         }
     }
 
     private void setGrowthAge(int value) {
         growthAge = value;
         if (growthAge >= MAX_GROWTH_AGE && level().noCollision(getBoundingBox().inflate(1))) {
-            growUp();
+            ageUp();
         }
     }
 
@@ -88,9 +77,9 @@ public class Driftlet extends AbstractDrifter {
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag nbt) {
-        super.readAdditionalSaveData(nbt);
-        setGrowthAge(nbt.getInt("Age"));
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        tag.getInt("Age").ifPresent(this::setGrowthAge);
     }
 
     @Override

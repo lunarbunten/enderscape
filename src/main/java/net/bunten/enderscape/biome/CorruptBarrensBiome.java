@@ -22,8 +22,8 @@ public class CorruptBarrensBiome {
         HolderGetter<ConfiguredWorldCarver<?>> carvers = context.lookup(Registries.CONFIGURED_CARVER);
 
         MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder()
-                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.ENDERMITE, 4, 1, 1))
-                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUBBLEMITE, 1, 1, 1))
+                .addSpawn(MobCategory.MONSTER, 4, new MobSpawnSettings.SpawnerData(EntityType.ENDERMITE, 1, 1))
+                .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUBBLEMITE, 1, 1))
                 .addMobCharge(EntityType.ENDERMITE, 0.3, 0.1)
                 .addMobCharge(EnderscapeEntities.RUBBLEMITE, 0.6, 0.1);
 

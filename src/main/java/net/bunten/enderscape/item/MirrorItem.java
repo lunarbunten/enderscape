@@ -27,6 +27,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Relative;
 import net.minecraft.world.entity.player.Player;
@@ -34,6 +35,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.LodestoneTracker;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
@@ -47,9 +49,10 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.apache.commons.lang3.mutable.MutableFloat;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import static net.minecraft.core.component.DataComponents.LODESTONE_TRACKER;
 
@@ -64,7 +67,7 @@ public class MirrorItem extends NebuliteToolItem {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int i, boolean bl) {
+    public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, @Nullable EquipmentSlot slot) {
         updateLodestoneTracker(stack, level);
     }
 
@@ -239,7 +242,7 @@ public class MirrorItem extends NebuliteToolItem {
 
     @Override
     @Environment(EnvType.CLIENT)
-    public void appendHoverText(ItemStack stack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, Item.TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, Consumer<Component> consumer, TooltipFlag flag) {
         Minecraft client = Minecraft.getInstance();
         EnderscapeConfig config = EnderscapeConfig.getInstance();
 
@@ -259,7 +262,7 @@ public class MirrorItem extends NebuliteToolItem {
                     MutableComponent position = tooltip("position.coordinates", linkedPos.getX(), linkedPos.getY(), linkedPos.getZ()).withStyle(valueColor);
                     MutableComponent unknown = tooltip("position.unknown").withStyle(valueColor);
 
-                    list.add(tooltip("position", isSameDimension(context, linkedDimension) ? position : unknown).withStyle(typeColor));
+                    consumer.accept(tooltip("position", isSameDimension(context, linkedDimension) ? position : unknown).withStyle(typeColor));
                 }
 
                 if (config.mirrorTooltipDisplayDistance) {
@@ -269,16 +272,16 @@ public class MirrorItem extends NebuliteToolItem {
                     MutableComponent approximate = tooltip("distance.approximate_value", roundedDistance).withStyle(valueColor);
                     MutableComponent unknown = tooltip("distance.unknown").withStyle(valueColor);
 
-                    list.add(tooltip("distance", isSameDimension(context, linkedDimension) ? approximate : unknown).withStyle(typeColor));
+                    consumer.accept(tooltip("distance", isSameDimension(context, linkedDimension) ? approximate : unknown).withStyle(typeColor));
                 }
 
                 if (config.mirrorTooltipDisplayDimension) {
                     MutableComponent dimension = Component.translatable(Util.makeDescriptionId("dimension", linkedDimension.location())).withStyle(valueColor);;
-                    list.add(tooltip("dimension", dimension).withStyle(typeColor));
+                    consumer.accept(tooltip("dimension", dimension).withStyle(typeColor));
                 }
 
             } else {
-                list.add(tooltip("unshifted").withStyle(typeColor));
+                consumer.accept(tooltip("unshifted").withStyle(typeColor));
             }
         }
     }

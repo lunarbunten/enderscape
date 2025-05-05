@@ -16,7 +16,7 @@ public abstract class EnderpearlItemMixin extends Item {
         super(properties);
     }
 
-    @ModifyArgs(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V"))
+    @ModifyArgs(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/Entity;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V"))
     private void Enderscape$playSound(Args args) {
         if (EnderscapeConfig.getInstance().enderPearlUpdateThrowSound) {
             args.set(4, EnderscapeItemSounds.ENDER_PEARL_THROW);

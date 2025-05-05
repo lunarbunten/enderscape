@@ -1,17 +1,14 @@
 package net.bunten.enderscape.client.hud;
 
 import com.google.common.collect.Lists;
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
+import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.client.EnderscapeClient;
 import net.bunten.enderscape.client.mixin.MusicManagerAccess;
-import net.bunten.enderscape.EnderscapeConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.CoreShaders;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -142,11 +139,6 @@ public class DebugHud extends HudElement {
 
         graphics.pose().pushPose();
 
-        RenderSystem.setShader(CoreShaders.POSITION_TEX);
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-
         float total = switch(client.options.guiScale().get()){
             case 3 -> 0.6666F;
             case 4 -> 0.5F;
@@ -173,11 +165,5 @@ public class DebugHud extends HudElement {
         }
 
         graphics.pose().popPose();
-
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-        RenderSystem.defaultBlendFunc();
-        RenderSystem.disableBlend();
-        RenderSystem.depthMask(true);
-        RenderSystem.enableDepthTest();
     }
 }

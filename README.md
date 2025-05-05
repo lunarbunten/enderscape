@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://i.imgur.com/76Cxl9W.png">
-  <h4>ℹ️ Requires <a href="https://modrinth.com/mod/fabric-api">Fabric API</a>, <a href="https://modrinth.com/mod/yacl">YetAnotherConfigLib</a> and <a href="https://modrinth.com/mod/mixson">Mixson</a><br><br>💖 Features subject to change. <a href="https://github.com/lunarbunten/enderscape/issues">Please report any issues.</a></h4>
+  <h4>ℹ️ Requires <a href="https://modrinth.com/mod/fabric-api">Fabric API</a> and <a href="https://modrinth.com/mod/yacl">YetAnotherConfigLib</a>.<br><br>💖 Features subject to change. <a href="https://github.com/lunarbunten/enderscape/issues">Please report any issues.</a></h4>
   <h2>🔹There's <i>far</i> more waiting for you beyond "The End"🔹</h2>
 </div>
 
@@ -103,8 +103,8 @@ Enderscape has features that may conflict or overlap with other mods, such as:
   - End Stone Slabs, Stairs, and Walls
   - Purpur Walls and Chiseled Purpur
 - "Rebound" enchantment (elytra bouncing)
-- Mirror (recall item)
-- Magnia Attractor (item magnet)
+- Mirror (recall and "fast travel" item)
+- Magnia Attractor (item and experience orb magnet)
 - Overhauled world generation, including biome distribution*
 - Overhauled End Cities, including Vaults*
 

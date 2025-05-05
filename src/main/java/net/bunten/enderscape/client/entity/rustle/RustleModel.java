@@ -52,11 +52,11 @@ public class RustleModel extends EntityModel<RustleRenderState> {
 		return LayerDefinition.create(meshdefinition, 64, 32);
 	}
 
-	@Override
-	public void setupAnim(RustleRenderState state) {
+    @Override
+    public void setupAnim(RustleRenderState state) {
 		super.setupAnim(state);
 
-		float age = state.ageInTicks;
+        float age = state.ageInTicks;
 		float animPos = state.walkAnimationPos;
 		float animSpeed = state.walkAnimationSpeed;
 
@@ -72,9 +72,9 @@ public class RustleModel extends EntityModel<RustleRenderState> {
 
 		body.zRot = Mth.sin(age + (animPos / 3) * 0.03F) * animSpeed * 0.25F;
 
-		frontSpines.yRot = Mth.sin(age + (animPos / 3) * 0.1F) * animSpeed * 0.8F;
-		middleSpines.yRot = Mth.sin(age + (animPos / 3) * 0.1F + Mth.HALF_PI) * animSpeed * 0.8F;
-		backSpines.yRot = Mth.sin(age + (animPos / 3) * 0.1F + Mth.PI) * animSpeed * 0.8F;
+        frontSpines.yRot = Mth.sin(age + (animPos / 3) * 0.1F) * animSpeed * 0.8F;
+        middleSpines.yRot = Mth.sin(age + (animPos / 3) * 0.1F + Mth.HALF_PI) * animSpeed * 0.8F;
+        backSpines.yRot = Mth.sin(age + (animPos / 3) * 0.1F + Mth.PI) * animSpeed * 0.8F;
 
 		animate(state.sleepingAnimationState, RustleAnimations.SLEEPING, state.ageInTicks, 1.0F);
 
@@ -83,5 +83,5 @@ public class RustleModel extends EntityModel<RustleRenderState> {
 		head.zScale = state.isBaby ? 1.25F : 1;
 
 		crossSpines.visible = !state.isBaby && !state.isSheared;
-	}
+    }
 }

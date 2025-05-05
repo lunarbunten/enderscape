@@ -13,7 +13,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.util.Unit;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -35,6 +36,7 @@ import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraft.world.level.block.entity.BannerPatternLayers;
 import net.minecraft.world.level.block.entity.BannerPatterns;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -89,14 +91,33 @@ public class EnderscapeItems {
 
     public static final Item END_CITY_KEY = registerItem("end_city_key");
     public static final Item RUBBLE_CHITIN = registerItem("rubble_chitin");
-    public static final Item NEBULITE = registerItem("nebulite", NebuliteItem::new, new Properties());
+    public static final Item NEBULITE = registerItem("nebulite", NebuliteItem::new, new Properties().trimMaterial(EnderscapeTrimMaterials.NEBULITE));
     public static final Item NEBULITE_SHARDS = registerItem("nebulite_shards");
     public static final Item RAW_SHADOLINE = registerItem("raw_shadoline");
-    public static final Item SHADOLINE_INGOT = registerItem("shadoline_ingot");
+    public static final Item SHADOLINE_INGOT = registerItem("shadoline_ingot", Item::new, new Properties().trimMaterial(EnderscapeTrimMaterials.SHADOLINE));
 
     public static final Properties RUBBLE_SHIELD_PROPERTIES = new Properties()
-            .component(DataComponents.USE_COOLDOWN, new UseCooldown(3, Optional.of(Enderscape.id("rubble_shield"))))
-            .component(EnderscapeDataComponents.DASH_JUMP, new DashJump(60, 2.35F, 0.35F, 0.7F, EnderscapeItemSounds.RUBBLE_SHIELD_DASH, true))
+            .component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(EnderscapeItemSounds.RUBBLE_SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            ))
+            .component(DataComponents.USE_COOLDOWN, new UseCooldown(
+                    3,
+                    Optional.of(Enderscape.id("rubble_shield")))
+            )
+            .component(EnderscapeDataComponents.DASH_JUMP, new DashJump(
+                    60,
+                    2.35F,
+                    0.35F,
+                    0.7F,
+                    EnderscapeItemSounds.RUBBLE_SHIELD_DASH,
+                    true)
+            )
             .durability(336)
             .equippableUnswappable(EquipmentSlot.OFFHAND)
             .repairable(EnderscapeItemTags.REPAIRS_RUBBLE_SHIELDS);
@@ -137,7 +158,7 @@ public class EnderscapeItems {
             .rarity(Rarity.EPIC)
     );
 
-    public static final Item CRESCENT_BANNER_PATTERN = registerItem("crescent_banner_pattern", properties -> new BannerPatternItem(EnderscapeBannerPatternTags.PATTERN_ITEM_CRESCENT, properties), new Properties().stacksTo(1).rarity(Rarity.RARE));
+    public static final Item CRESCENT_BANNER_PATTERN = registerItem("crescent_banner_pattern", Item::new, new Item.Properties().stacksTo(1).rarity(Rarity.RARE).component(DataComponents.PROVIDES_BANNER_PATTERNS, EnderscapeBannerPatternTags.PATTERN_ITEM_CRESCENT));
 
     public static final Item STASIS_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("stasis_armor_trim_smithing_template", SmithingTemplateItem::createArmorTrimTemplate, new Properties().rarity(Rarity.EPIC));
 
@@ -227,7 +248,7 @@ public class EnderscapeItems {
                 .addIfRegistered(getter, BannerPatterns.CIRCLE_MIDDLE, DyeColor.BLACK)
                 .addIfRegistered(getter, EnderscapeBannerPatterns.CRESCENT, DyeColor.MAGENTA)
                 .build());
-        stack.set(DataComponents.HIDE_ADDITIONAL_TOOLTIP, Unit.INSTANCE);
+        stack.set(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT.withHidden(DataComponents.BANNER_PATTERNS, true));
         stack.set(DataComponents.ITEM_NAME, Component.translatable("block.enderscape.end_city_banner"));
         stack.set(DataComponents.RARITY, Rarity.UNCOMMON);
         return stack;

@@ -11,6 +11,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.apache.commons.lang3.math.Fraction;
 
@@ -51,8 +52,8 @@ public abstract class NebuliteToolItem extends Item {
 
     @Override
     public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
-        boolean showTooltip = !stack.has(DataComponents.HIDE_TOOLTIP) && !stack.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP);
-        return showTooltip ? Optional.of(new NebuliteToolComponent(stack)) : Optional.empty();
+        TooltipDisplay display = stack.getOrDefault(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT);
+        return (!display.shows(CURRENT_NEBULITE_FUEL) || !display.shows(MAXIMUM_NEBULITE_FUEL)) ? Optional.empty() : Optional.of(new NebuliteToolComponent(stack));
     }
 
     @Override

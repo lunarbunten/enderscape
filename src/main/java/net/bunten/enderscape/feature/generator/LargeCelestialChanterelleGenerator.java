@@ -11,7 +11,7 @@ import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,7 +22,7 @@ import static net.bunten.enderscape.util.BlockUtil.replace;
 
 public class LargeCelestialChanterelleGenerator {
 
-    public static final WeightedStateProvider FLANGER_BERRIES = new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+    public static final WeightedStateProvider FLANGER_BERRIES = new WeightedStateProvider(WeightedList.<BlockState>builder()
             .add(EnderscapeBlocks.FLANGER_BERRY_FLOWER.defaultBlockState(), 1)
             .add(EnderscapeBlocks.UNRIPE_FLANGER_BERRY_BLOCK.defaultBlockState(), 1)
             .add(EnderscapeBlocks.RIPE_FLANGER_BERRY_BLOCK.defaultBlockState(), 1)

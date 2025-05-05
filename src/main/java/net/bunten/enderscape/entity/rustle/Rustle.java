@@ -105,9 +105,9 @@ public class Rustle extends Animal implements Bucketable, Shearable {
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
 
-        setFromBucket(tag.getBoolean("FromBucket"));
-        setSleeping(tag.getBoolean("Sleeping"));
-        setSheared(tag.getBoolean("Sheared"));
+        tag.getBoolean("FromBucket").ifPresent(this::setFromBucket);
+        tag.getBoolean("Sleeping").ifPresent(this::setSleeping);
+        tag.getBoolean("Sheared").ifPresent(this::setSheared);
     }
 
     @Override
@@ -126,9 +126,9 @@ public class Rustle extends Animal implements Bucketable, Shearable {
     public void loadFromBucketTag(CompoundTag tag) {
         Bucketable.loadDefaultDataFromBucketTag(this, tag);
 
-        if (tag.contains("Age")) setAge(tag.getInt("Age"));
-        if (tag.contains("Sheared")) setSheared(tag.getBoolean("Sheared"));
-        if (tag.contains("HairRegrowthCooldownTicks")) getBrain().setMemory(EnderscapeMemory.RUSTLE_HAIR_REGROWTH_COOLDOWN, tag.getInt("HairRegrowthCooldownTicks"));
+        tag.getInt("Age").ifPresent(this::setAge);
+        tag.getBoolean("Sheared").ifPresent(this::setSheared);
+        tag.getInt("HairRegrowthCooldownTicks").ifPresent(ticks -> getBrain().setMemory(EnderscapeMemory.RUSTLE_HAIR_REGROWTH_COOLDOWN, ticks));
     }
 
     @Override
@@ -187,7 +187,7 @@ public class Rustle extends Animal implements Bucketable, Shearable {
                     wakeUp();
                 }
 
-                if (isInWaterRainOrBubble() || getDeltaMovement().lengthSqr() > 0.1 || !level.getPoiManager().exists(blockPosition(), type -> type.is(EnderscapePoiTags.RUSTLE_SLEEPING_SPOT))) wakeUp();
+                if (isInWaterOrRain() || getDeltaMovement().lengthSqr() > 0.1 || !level.getPoiManager().exists(blockPosition(), type -> type.is(EnderscapePoiTags.RUSTLE_SLEEPING_SPOT))) wakeUp();
             }, this::wakeUp);
         }
 
