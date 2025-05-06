@@ -149,10 +149,15 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
     @Inject(method = "updateFallFlying", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;canGlide()Z", shift = At.Shift.BEFORE))
     private void Enderscape$updateFallFlying(CallbackInfo info) {
         if (onGround()) {
-            if (Enderscape$elytraGroundTicks < 10 && mob.isFallFlying()) EquipmentSlot.VALUES.forEach(slot -> {
-                ItemStack stack = mob.getItemBySlot(slot);
-                if (stack.has(DataComponents.GLIDER) && stack.has(DataComponents.EQUIPPABLE) && stack.isDamageableItem() && !stack.nextDamageWillBreak()) stack.hurtAndBreak(1, mob, mob.getEquipmentSlotForItem(stack));
-            });
+            if (Enderscape$elytraGroundTicks < 10 && mob.isFallFlying()) {
+                for (EquipmentSlot slot : EquipmentSlot.VALUES.stream().filter(EquipmentSlot::isArmor).toList()) {
+                    ItemStack stack = mob.getItemBySlot(slot);
+                    if (stack.has(DataComponents.GLIDER) && stack.has(DataComponents.EQUIPPABLE) && stack.isDamageableItem() && !stack.nextDamageWillBreak()) {
+                        stack.hurtAndBreak(1, mob, mob.getEquipmentSlotForItem(stack));
+                        break;
+                    }
+                }
+            }
             Enderscape$elytraGroundTicks++;
         }
     }
