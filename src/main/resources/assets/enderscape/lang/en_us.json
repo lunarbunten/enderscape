@@ -486,6 +486,8 @@
     "option.enderscape.skybox_scales_brightness_with_gamma.desc": "Adjusts skybox brightness by a percentage of game brightness.\n\nDesigned to alleviate visibility issues. Changing this option drastically could look bad.",
     "option.enderscape.skybox_update_enabled": "Skybox Update: Enabled",
     "option.enderscape.skybox_update_enabled.desc": "Updates the End skybox to be more interesting and dynamic.\n\nThe updated skybox features subtle stars and nebulae throughout, as well as the ability to change color between biomes.",
+    "option.enderscape.structure_music_fading_enabled": "Structure Music Fading: Enabled",
+    "option.enderscape.structure_music_fading_enabled.desc": "When enabled, entering a structure will fade out biome music to play its unique music. Exiting the structure will fade away its music as well.\n\nCurrently supports End Cities.",
     "option.enderscape.tridents_return_from_void": "Trident: Return from the void",
     "option.enderscape.tridents_return_from_void.desc": "When enabled, Tridents with the Loyalty enchantment return to you after hitting the void instead of disappearing forever.",
     "option.enderscape.void_poof_particles_upon_death": "\"Void poof\" particles upon death",

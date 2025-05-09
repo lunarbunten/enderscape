@@ -168,6 +168,14 @@ public class EnderscapeModMenu implements ModMenuApi {
                 1
         );
 
+        Option<?> structureMusicFadingEnabled = boolOption(
+                "structure_music_fading_enabled",
+                true,
+                () -> config.structureMusicFadingEnabled,
+                value -> config.structureMusicFadingEnabled = value,
+                TickBoxControllerBuilder::create
+        );
+
         builder.group(OptionGroup.createBuilder()
                 .name(Component.translatable("option.group.enderscape.ambience"))
 
@@ -175,6 +183,7 @@ public class EnderscapeModMenu implements ModMenuApi {
                 .option(skyboxScalesBrightnessWithGamma)
                 .option(skyboxBrightnessScaleFactor)
                 .option(skyboxAddDynamicFogDensity)
+                .option(structureMusicFadingEnabled)
 
                 .build()
         );
