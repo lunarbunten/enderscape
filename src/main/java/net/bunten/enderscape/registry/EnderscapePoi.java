@@ -47,8 +47,7 @@ public class EnderscapePoi {
                             RED_CARPET,
                             WHITE_CARPET,
                             YELLOW_CARPET,
-                            MOSS_CARPET,
-                            PALE_MOSS_CARPET
+                            MOSS_CARPET
                     )
                     .stream()
                     .flatMap(block -> block.getStateDefinition().getPossibleStates().stream())

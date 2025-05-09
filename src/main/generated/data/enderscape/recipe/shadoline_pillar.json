@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "enderscape:shadoline_block"
+    "#": {
+      "item": "enderscape:shadoline_block"
+    }
   },
   "pattern": [
     "#",

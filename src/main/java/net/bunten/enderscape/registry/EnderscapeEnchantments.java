@@ -2,7 +2,9 @@ package net.bunten.enderscape.registry;
 
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -17,26 +19,18 @@ import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class EnderscapeEnchantments {
 
     public static final List<ResourceKey<Enchantment>> ENCHANTMENTS = new ArrayList<>();
 
-    public static final ResourceKey<Enchantment> BUNDLING = register("bundling");
     public static final ResourceKey<Enchantment> LIGHTSPEED = register("lightspeed");
     public static final ResourceKey<Enchantment> REBOUND = register("rebound");
     public static final ResourceKey<Enchantment> TRANSDIMENSIONAL = register("transdimensional");
 
     public static void bootstrap(BootstrapContext<Enchantment> context) {
         HolderGetter<Item> items = context.lookup(Registries.ITEM);
-
-        register(context, BUNDLING,
-                Enchantment.enchantment(
-                        Enchantment.definition(
-                                items.getOrThrow(EnderscapeItemTags.MAGNIA_ATTRACTOR_ENCHANTABLE), 1, 1, Enchantment.constantCost(20), Enchantment.constantCost(50), 8, EquipmentSlotGroup.ANY
-                        )
-                )
-        );
 
         register(context, LIGHTSPEED,
                 Enchantment.enchantment(
@@ -75,14 +69,9 @@ public class EnderscapeEnchantments {
 
     public static boolean hasRebound(Level level, ItemStack stack) {
         try {
-            var registry = level.registryAccess().lookup(Registries.ENCHANTMENT).orElse(null);
-            if (registry == null) return false;
-
-            var enchantment = registry.getValue(EnderscapeEnchantments.REBOUND);
-            if (enchantment == null) return false;
-
-            var holder = registry.wrapAsHolder(enchantment);
-            return EnchantmentHelper.getItemEnchantmentLevel(holder, stack) > 0;
+            HolderLookup.RegistryLookup<Enchantment> registry = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
+            Optional<Holder.Reference<Enchantment>> enchantment = registry.get(EnderscapeEnchantments.REBOUND);
+            return EnchantmentHelper.getItemEnchantmentLevel(enchantment.get(), stack) > 0;
         } catch (Exception e) {
             return false;
         }

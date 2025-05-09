@@ -53,12 +53,12 @@ public abstract class AbstractGrowthBlock extends DirectionalPlantBlock implemen
     }
 
     @Override
-    public BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess access, BlockPos pos, Direction direction, BlockPos pos2, BlockState state2, RandomSource random) {
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor world, BlockPos pos, BlockPos pos2) {
         var plantDirection = getFacing(state);
         var opposite = plantDirection.getOpposite();
 
         if (opposite == direction && !state.canSurvive(world, pos)) {
-            access.scheduleTick(pos, this, 1);
+            world.scheduleTick(pos, this, 1);
         }
 
         var up = world.getBlockState(pos.relative(plantDirection));

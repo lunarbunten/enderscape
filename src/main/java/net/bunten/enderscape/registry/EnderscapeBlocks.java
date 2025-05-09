@@ -11,7 +11,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -415,7 +414,7 @@ public class EnderscapeBlocks {
     public static final Block STRIPPED_VEILED_WOOD = register(true, "stripped_veiled_wood", RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(STRIPPED_VEILED_LOG));
     public static final Block VEILED_WOOD = register(true, "veiled_wood", RotatedPillarBlock::new, BlockBehaviour.Properties.ofFullCopy(STRIPPED_VEILED_WOOD).mapColor(MapColor.TERRACOTTA_LIGHT_BLUE));
 
-    public static final Block VEILED_LEAVES = register(true, "veiled_leaves", VeiledLeavesBlock::new, Blocks.leavesProperties(EnderscapeSoundTypes.VEILED_LEAVES).mapColor(MapColor.CLAY));
+    public static final Block VEILED_LEAVES = register(true, "veiled_leaves", VeiledLeavesBlock::new, leavesProperties(EnderscapeSoundTypes.VEILED_LEAVES).mapColor(MapColor.CLAY));
 
     public static final Block VEILED_LEAF_PILE = register(true,
             "veiled_leaf_pile",
@@ -497,7 +496,7 @@ public class EnderscapeBlocks {
 
     public static final Block VEILED_BUTTON = register(true, "veiled_button", properties -> new ButtonBlock(VEILED_BLOCK_SET, 30, properties), buttonProperties());
     public static final Block VEILED_SIGN = register(false, "veiled_sign", properties -> new StandingSignBlock(VEILED_WOOD_TYPE, properties), BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1).ignitedByLava());
-    public static final Block VEILED_WALL_SIGN = register(false, "veiled_wall_sign", properties -> new WallSignBlock(VEILED_WOOD_TYPE, properties), wallVariant(VEILED_SIGN, true).mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1).ignitedByLava());
+    public static final Block VEILED_WALL_SIGN = register(false, "veiled_wall_sign", properties -> new WallSignBlock(VEILED_WOOD_TYPE, properties), wallVariant(VEILED_SIGN).mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1).ignitedByLava());
 
     public static final Block VEILED_HANGING_SIGN = register(false, "veiled_hanging_sign", properties -> new CeilingHangingSignBlock(VEILED_WOOD_TYPE, properties), BlockBehaviour.Properties.of()
             .mapColor(VEILED_LOG.defaultMapColor())
@@ -508,7 +507,7 @@ public class EnderscapeBlocks {
             .ignitedByLava()
     );
 
-    public static final Block VEILED_WALL_HANGING_SIGN = register(false, "veiled_wall_hanging_sign", properties -> new WallHangingSignBlock(VEILED_WOOD_TYPE, properties), wallVariant(VEILED_HANGING_SIGN, true)
+    public static final Block VEILED_WALL_HANGING_SIGN = register(false, "veiled_wall_hanging_sign", properties -> new WallHangingSignBlock(VEILED_WOOD_TYPE, properties), wallVariant(VEILED_HANGING_SIGN)
             .mapColor(VEILED_LOG.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
@@ -672,7 +671,7 @@ public class EnderscapeBlocks {
 
     public static final Block CELESTIAL_BUTTON = register(true, "celestial_button", properties -> new ButtonBlock(CELESTIAL_BLOCK_SET, 30, properties), buttonProperties());
     public static final Block CELESTIAL_SIGN = register(false, "celestial_sign", properties -> new StandingSignBlock(CELESTIAL_WOOD_TYPE, properties), BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1).ignitedByLava());
-    public static final Block CELESTIAL_WALL_SIGN = register(false, "celestial_wall_sign", properties -> new WallSignBlock(CELESTIAL_WOOD_TYPE, properties), wallVariant(CELESTIAL_SIGN, true).mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1).ignitedByLava());
+    public static final Block CELESTIAL_WALL_SIGN = register(false, "celestial_wall_sign", properties -> new WallSignBlock(CELESTIAL_WOOD_TYPE, properties), wallVariant(CELESTIAL_SIGN).mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1).ignitedByLava());
 
     public static final Block CELESTIAL_HANGING_SIGN = register(false, "celestial_hanging_sign", properties -> new CeilingHangingSignBlock(CELESTIAL_WOOD_TYPE, properties), BlockBehaviour.Properties.of()
             .mapColor(CELESTIAL_STEM.defaultMapColor())
@@ -683,7 +682,7 @@ public class EnderscapeBlocks {
             .ignitedByLava()
     );
 
-    public static final Block CELESTIAL_WALL_HANGING_SIGN = register(false, "celestial_wall_hanging_sign", properties -> new WallHangingSignBlock(CELESTIAL_WOOD_TYPE, properties), wallVariant(CELESTIAL_HANGING_SIGN, true)
+    public static final Block CELESTIAL_WALL_HANGING_SIGN = register(false, "celestial_wall_hanging_sign", properties -> new WallHangingSignBlock(CELESTIAL_WOOD_TYPE, properties), wallVariant(CELESTIAL_HANGING_SIGN)
             .mapColor(CELESTIAL_STEM.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
@@ -834,7 +833,7 @@ public class EnderscapeBlocks {
 
     public static final Block MURUBLIGHT_BUTTON = register(true, "murublight_button", properties -> new ButtonBlock(MURUBLIGHT_BLOCK_SET, 30, properties), buttonProperties());
     public static final Block MURUBLIGHT_SIGN = register(false, "murublight_sign", properties -> new StandingSignBlock(MURUBLIGHT_WOOD_TYPE, properties), BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1).ignitedByLava());
-    public static final Block MURUBLIGHT_WALL_SIGN = register(false, "murublight_wall_sign", properties -> new WallSignBlock(MURUBLIGHT_WOOD_TYPE, properties), wallVariant(MURUBLIGHT_SIGN, true).mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1).ignitedByLava());
+    public static final Block MURUBLIGHT_WALL_SIGN = register(false, "murublight_wall_sign", properties -> new WallSignBlock(MURUBLIGHT_WOOD_TYPE, properties), wallVariant(MURUBLIGHT_SIGN).mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1).ignitedByLava());
 
     public static final Block MURUBLIGHT_HANGING_SIGN = register(false, "murublight_hanging_sign", properties -> new CeilingHangingSignBlock(MURUBLIGHT_WOOD_TYPE, properties), BlockBehaviour.Properties.of()
             .mapColor(MURUBLIGHT_STEM.defaultMapColor())
@@ -845,7 +844,7 @@ public class EnderscapeBlocks {
             .ignitedByLava()
     );
 
-    public static final Block MURUBLIGHT_WALL_HANGING_SIGN = register(false, "murublight_wall_hanging_sign", properties -> new WallHangingSignBlock(MURUBLIGHT_WOOD_TYPE, properties), wallVariant(MURUBLIGHT_HANGING_SIGN, true)
+    public static final Block MURUBLIGHT_WALL_HANGING_SIGN = register(false, "murublight_wall_hanging_sign", properties -> new WallHangingSignBlock(MURUBLIGHT_WOOD_TYPE, properties), wallVariant(MURUBLIGHT_HANGING_SIGN)
             .mapColor(MURUBLIGHT_STEM.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
@@ -871,31 +870,42 @@ public class EnderscapeBlocks {
         return register(true, string, properties -> new StairBlock(block.defaultBlockState(), properties), BlockBehaviour.Properties.ofFullCopy(block));
     }
 
-    private static BlockBehaviour.Properties wallVariant(Block block, boolean bl) {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.of().overrideLootTable(block.getLootTable());
-        if (bl) properties = properties.overrideDescription(block.getDescriptionId());
+    public static BlockBehaviour.Properties flowerPotProperties() {
+        return BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY);
+    }
+
+    public static BlockBehaviour.Properties buttonProperties() {
+        return BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY);
+    }
+
+    public static BlockBehaviour.Properties leavesProperties(SoundType soundType) {
+        return BlockBehaviour.Properties.of()
+                .mapColor(MapColor.PLANT)
+                .strength(0.2F)
+                .randomTicks()
+                .sound(soundType)
+                .noOcclusion()
+                .isValidSpawn(Blocks::ocelotOrParrot)
+                .isSuffocating(Blocks::never)
+                .isViewBlocking(Blocks::never)
+                .ignitedByLava()
+                .pushReaction(PushReaction.DESTROY)
+                .isRedstoneConductor(Blocks::never);
+    }
+
+    private static BlockBehaviour.Properties wallVariant(Block block) {
+        BlockBehaviour.Properties properties = BlockBehaviour.Properties.of().dropsLike(block);
 
         return properties;
     }
 
     private static Block register(boolean hasItem, String string, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties properties) {
         ResourceKey<Block> key = ResourceKey.create(Registries.BLOCK, Enderscape.id(string));
-        Block block = function.apply(properties.setId(key));
+        Block block = function.apply(properties);
 
         Registry.register(BuiltInRegistries.BLOCK, key, block);
 
         if (hasItem) EnderscapeItems.registerBlock(block);
-
-        return block;
-    }
-
-    private static Block register(String string, Function<Item.Properties, Item> itemFunction, Item.Properties itemProperties, Function<BlockBehaviour.Properties, Block> function, BlockBehaviour.Properties properties) {
-        ResourceKey<Block> key = ResourceKey.create(Registries.BLOCK, Enderscape.id(string));
-        Block block = function.apply(properties.setId(key));
-
-        Registry.register(BuiltInRegistries.BLOCK, key, block);
-
-        EnderscapeItems.registerItem(string, itemFunction, itemProperties);
 
         return block;
     }

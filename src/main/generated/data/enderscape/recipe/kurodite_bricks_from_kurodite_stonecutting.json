@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "enderscape:kurodite",
+  "ingredient": {
+    "item": "enderscape:kurodite"
+  },
   "result": {
     "count": 1,
     "id": "enderscape:kurodite_bricks"

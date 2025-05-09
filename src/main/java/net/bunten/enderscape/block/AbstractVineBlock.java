@@ -14,6 +14,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -21,8 +22,8 @@ import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -97,7 +98,7 @@ public abstract class AbstractVineBlock extends Block {
     }
 
     @Override
-    public BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess access, BlockPos pos, Direction direction, BlockPos pos2, BlockState state2, RandomSource random) {
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor world, BlockPos pos, BlockPos pos2) {
         if (!state.canSurvive(world, pos)) {
             return Blocks.AIR.defaultBlockState();
         } else {
@@ -119,19 +120,19 @@ public abstract class AbstractVineBlock extends Block {
     }
 
     @Override
-    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player mob, InteractionHand hand, BlockHitResult result) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         if (stack.getItem() instanceof ShearsItem && getAge(state) < MAX_AGE && !getAttached(state)) {
-            mob.awardStat(Stats.ITEM_USED.get(stack.getItem()));
-            if (mob instanceof ServerPlayer server) {
+            player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
+            if (player instanceof ServerPlayer server) {
                 CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(server, pos, stack);
             }
 
-            world.playSound(mob, pos, SoundEvents.GROWING_PLANT_CROP, SoundSource.BLOCKS, 1, 1);
-            world.setBlockAndUpdate(pos, state(state, false, MAX_AGE));
-            stack.hurtAndBreak(1, mob, LivingEntity.getSlotForHand(hand));
+            level.playSound(player, pos, SoundEvents.GROWING_PLANT_CROP, SoundSource.BLOCKS, 1, 1);
+            level.setBlockAndUpdate(pos, state(state, false, MAX_AGE));
+            stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
-        return InteractionResult.TRY_WITH_EMPTY_HAND;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 }

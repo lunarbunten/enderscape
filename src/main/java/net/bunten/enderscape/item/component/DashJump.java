@@ -5,6 +5,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.bunten.enderscape.entity.DashJumpUser;
 import net.bunten.enderscape.network.ClientboundDashJumpPayload;
 import net.bunten.enderscape.network.ClientboundDashJumpSoundPayload;
+import net.bunten.enderscape.registry.EnderscapeItemSounds;
+import net.bunten.enderscape.registry.EnderscapeItems;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
@@ -56,7 +58,7 @@ public record DashJump(int dashTime, float horizontalPower, float verticalPower,
             stack.hurtAndBreak(player.isFallFlying() ? 9 : 3, player, LivingEntity.getSlotForHand(player.getUsedItemHand()));
 
             for (ServerPlayer other : level.players()) {
-                if (other.distanceToSqr(pos) < 4096) ServerPlayNetworking.send(other, new ClientboundDashJumpSoundPayload(player.getId(), jump.dashSound.value().location()));
+                if (other.distanceToSqr(pos) < 4096) ServerPlayNetworking.send(other, new ClientboundDashJumpSoundPayload(player.getId(), jump.dashSound.value().getLocation()));
             }
 
             DashJumpUser.setDashed(player, true);
@@ -68,6 +70,14 @@ public record DashJump(int dashTime, float horizontalPower, float verticalPower,
             }
 
             player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
+
+            // not a big fan of 1.21.1
+            int cooldown = 60;
+            player.getCooldowns().addCooldown(EnderscapeItems.END_STONE_RUBBLE_SHIELD, cooldown);
+            player.getCooldowns().addCooldown(EnderscapeItems.MIRESTONE_RUBBLE_SHIELD, cooldown);
+            player.getCooldowns().addCooldown(EnderscapeItems.VERADITE_RUBBLE_SHIELD, cooldown);
+            player.getCooldowns().addCooldown(EnderscapeItems.KURODITE_RUBBLE_SHIELD, cooldown);
+
             ServerPlayNetworking.send(player, new ClientboundDashJumpPayload(horizontalPower, verticalPower, glideVelocityFactor));
 
             return true;

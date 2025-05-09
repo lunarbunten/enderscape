@@ -7,7 +7,7 @@ import net.bunten.enderscape.registry.tag.EnderscapeBiomeTags;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.dispenser.BlockSource;
@@ -62,9 +62,7 @@ public class EnderscapeModifications {
         registerCompostableItem(0.65F, RIPE_FLANGER_BERRY_BLOCK);
         registerCompostableItem(0.65F, WISP_FLOWER);
 
-        FuelRegistryEvents.BUILD.register(Enderscape.id("add_fuels"), (builder, context) -> {
-            builder.add(VOID_SHALE, context.baseSmeltTime());
-        });
+        FuelRegistry.INSTANCE.add(VOID_SHALE, 200);
 
         FlammableBlockRegistry.getDefaultInstance().add(DRY_END_GROWTH, 60, 100);
         FlammableBlockRegistry.getDefaultInstance().add(CHORUS_SPROUTS, 60, 100);

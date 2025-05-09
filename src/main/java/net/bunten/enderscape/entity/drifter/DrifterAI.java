@@ -100,7 +100,7 @@ public class DrifterAI {
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
                 new DrifterRefreshHomePosition(),
-                new Swim<>(0.8f),
+                new Swim(0.8f),
 
                 SetWalkTargetAwayFrom.entity(EnderscapeMemory.HURT_BY_ENTITY, 2, 12, true),
                 SetWalkTargetAwayFrom.entity(EnderscapeMemory.NEAREST_INTIMIDATOR, 2, 8, true)

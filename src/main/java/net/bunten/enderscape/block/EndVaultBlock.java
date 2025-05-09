@@ -13,7 +13,7 @@ public class EndVaultBlock extends VaultBlock {
     }
 
     @Override
-    protected ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean bl) {
+    public ItemStack getCloneItemStack(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return EnderscapeItems.getEndVaultInstance();
     }
 }

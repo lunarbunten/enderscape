@@ -6,6 +6,7 @@ import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.ControllerBuilder;
 import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
+import dev.isxander.yacl3.api.controller.EnumControllerBuilder;
 import net.bunten.enderscape.EnderscapeConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -142,6 +143,13 @@ public class EnderscapeModMenu implements ModMenuApi {
                 TickBoxControllerBuilder::create
         );
 
+        Option<LightingStyle> lightingStyle = Option.<LightingStyle>createBuilder()
+                .name(Component.translatable("option.enderscape.lighting_style"))
+                .binding(LightingStyle.IMPROVED, () -> config.lightingStyle, value -> config.lightingStyle = value)
+                .description(OptionDescription.createBuilder().text(Component.translatable("option.enderscape.lighting_style.desc")).build())
+                .controller(opt -> EnumControllerBuilder.create(opt).enumClass(LightingStyle.class))
+                .build();
+
         Option<?> skyboxAddDynamicFogDensity = boolOption(
                 "skybox_add_dynamic_fog_density",
                 true,
@@ -168,14 +176,6 @@ public class EnderscapeModMenu implements ModMenuApi {
                 1
         );
 
-        Option<?> structureMusicFadingEnabled = boolOption(
-                "structure_music_fading_enabled",
-                true,
-                () -> config.structureMusicFadingEnabled,
-                value -> config.structureMusicFadingEnabled = value,
-                TickBoxControllerBuilder::create
-        );
-
         builder.group(OptionGroup.createBuilder()
                 .name(Component.translatable("option.group.enderscape.ambience"))
 
@@ -183,7 +183,7 @@ public class EnderscapeModMenu implements ModMenuApi {
                 .option(skyboxScalesBrightnessWithGamma)
                 .option(skyboxBrightnessScaleFactor)
                 .option(skyboxAddDynamicFogDensity)
-                .option(structureMusicFadingEnabled)
+                .option(lightingStyle)
 
                 .build()
         );

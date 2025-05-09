@@ -477,10 +477,7 @@
           "functions": [
             {
               "function": "minecraft:enchant_randomly",
-              "options": [
-                "enderscape:bundling",
-                "enderscape:rebound"
-              ]
+              "options": "enderscape:rebound"
             }
           ],
           "name": "minecraft:book",

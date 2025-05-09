@@ -8,6 +8,7 @@ import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -56,11 +57,11 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropOther(CELESTIAL_PATH_BLOCK, END_STONE);
         dropOther(CORRUPT_PATH_BLOCK, END_STONE);
 
-        add(DRY_END_GROWTH, this::createShearsOnlyDrop);
+        add(DRY_END_GROWTH, BlockLootSubProvider::createShearsOnlyDrop);
         dropPottedContents(POTTED_DRY_END_GROWTH);
 
-        add(WISP_SPROUTS, this::createShearsOnlyDrop);
-        add(WISP_GROWTH, this::createShearsOnlyDrop);
+        add(WISP_SPROUTS, BlockLootSubProvider::createShearsOnlyDrop);
+        add(WISP_GROWTH, BlockLootSubProvider::createShearsOnlyDrop);
         dropPottedContents(POTTED_WISP_GROWTH);
 
         add(WISP_FLOWER, block -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
@@ -68,13 +69,13 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(VEILED_SAPLING);
         dropPottedContents(POTTED_VEILED_SAPLING);
 
-        add(CHORUS_SPROUTS, this::createShearsOnlyDrop);
+        add(CHORUS_SPROUTS, BlockLootSubProvider::createShearsOnlyDrop);
         dropPottedContents(POTTED_CHORUS_SPROUTS);
 
-        add(CELESTIAL_GROWTH, this::createShearsOnlyDrop);
+        add(CELESTIAL_GROWTH, BlockLootSubProvider::createShearsOnlyDrop);
         dropPottedContents(POTTED_CELESTIAL_GROWTH);
 
-        add(CORRUPT_GROWTH, this::createShearsOnlyDrop);
+        add(CORRUPT_GROWTH, BlockLootSubProvider::createShearsOnlyDrop);
         dropPottedContents(POTTED_CORRUPT_GROWTH);
 
         dropSelf(BULB_FLOWER);
@@ -84,8 +85,8 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(BULB_LANTERN);
         dropSelf(BLINKLAMP);
 
-        add(FLANGER_BERRY_FLOWER, this::createShearsOnlyDrop);
-        add(UNRIPE_FLANGER_BERRY_BLOCK, this::createShearsOnlyDrop);
+        add(FLANGER_BERRY_FLOWER, BlockLootSubProvider::createShearsOnlyDrop);
+        add(UNRIPE_FLANGER_BERRY_BLOCK, BlockLootSubProvider::createShearsOnlyDrop);
         add(RIPE_FLANGER_BERRY_BLOCK, block -> createSilkTouchOrShearsDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(FLANGER_BERRY)
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                         .apply(ApplyBonusCount.addUniformBonusCount(getFortune()))

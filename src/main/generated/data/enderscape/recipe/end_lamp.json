@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": "minecraft:blaze_rod",
-    "C": "minecraft:popped_chorus_fruit"
+    "B": {
+      "item": "minecraft:blaze_rod"
+    },
+    "C": {
+      "item": "minecraft:popped_chorus_fruit"
+    }
   },
   "pattern": [
     " C ",

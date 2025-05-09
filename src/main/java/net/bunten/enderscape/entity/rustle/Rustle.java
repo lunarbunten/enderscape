@@ -20,7 +20,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -48,6 +47,8 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
@@ -71,7 +72,7 @@ public class Rustle extends Animal implements Bucketable, Shearable {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return createAnimalAttributes()
+        return createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 10)
                 .add(Attributes.MOVEMENT_SPEED, 0.13)
                 .add(Attributes.SAFE_FALL_DISTANCE, 3);
@@ -169,31 +170,33 @@ public class Rustle extends Animal implements Bucketable, Shearable {
     }
 
     @Override
-    protected void customServerAiStep(ServerLevel level) {
-        ProfilerFiller profiler = Profiler.get();
+    protected void customServerAiStep() {
+        if (level() instanceof ServerLevel server) {
+            ProfilerFiller profiler = server.getProfiler();
 
-        profiler.push("rustleBrain");
-        getBrain().tick(level, this);
-        profiler.pop();
+            profiler.push("rustleBrain");
+            getBrain().tick(server, this);
+            profiler.pop();
 
-        profiler.push("rustleActivityUpdate");
-        RustleAI.updateActivity(this);
-        profiler.pop();
+            profiler.push("rustleActivityUpdate");
+            RustleAI.updateActivity(this);
+            profiler.pop();
 
-        if (isSleeping()) {
-            getBrain().getMemory(EnderscapeMemory.RUSTLE_SLEEPING_SPOT).ifPresentOrElse(pos -> {
-                if (!level.getPoiManager().exists(pos, type -> type.is(EnderscapePoiTags.RUSTLE_SLEEPING_SPOT))) {
-                    getBrain().eraseMemory(EnderscapeMemory.RUSTLE_SLEEPING_SPOT);
-                    wakeUp();
-                }
+            if (isSleeping()) {
+                getBrain().getMemory(EnderscapeMemory.RUSTLE_SLEEPING_SPOT).ifPresentOrElse(pos -> {
+                    if (!server.getPoiManager().exists(pos, type -> type.is(EnderscapePoiTags.RUSTLE_SLEEPING_SPOT))) {
+                        getBrain().eraseMemory(EnderscapeMemory.RUSTLE_SLEEPING_SPOT);
+                        wakeUp();
+                    }
 
-                if (isInWaterRainOrBubble() || getDeltaMovement().lengthSqr() > 0.1 || !level.getPoiManager().exists(blockPosition(), type -> type.is(EnderscapePoiTags.RUSTLE_SLEEPING_SPOT))) wakeUp();
-            }, this::wakeUp);
+                    if (isInWaterRainOrBubble() || getDeltaMovement().lengthSqr() > 0.1 || !server.getPoiManager().exists(blockPosition(), type -> type.is(EnderscapePoiTags.RUSTLE_SLEEPING_SPOT))) wakeUp();
+                }, this::wakeUp);
+            }
+
+            setSleeping(getBrain().hasMemoryValue(EnderscapeMemory.RUSTLE_SLEEP_TICKS));
         }
 
-        setSleeping(getBrain().hasMemoryValue(EnderscapeMemory.RUSTLE_SLEEP_TICKS));
-
-        super.customServerAiStep(level);
+        super.customServerAiStep();
     }
 
     @Override
@@ -201,13 +204,13 @@ public class Rustle extends Animal implements Bucketable, Shearable {
         return level.getBlockState(pos.below()).is(EnderscapeBlockTags.RUSTLE_PREFERRED) ? 10 : 0;
     }
 
-    public static boolean canSpawn(EntityType<?> type, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+    public static boolean canSpawn(EntityType<?> type, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
         return level.getBlockState(pos.below()).is(EnderscapeBlockTags.RUSTLE_SPAWNABLE_ON);
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData data) {
-        if (reason == EntitySpawnReason.BUCKET) return data;
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData data) {
+        if (reason == MobSpawnType.BUCKET) return data;
         return super.finalizeSpawn(level, difficulty, reason, data);
     }
 
@@ -267,31 +270,23 @@ public class Rustle extends Animal implements Bucketable, Shearable {
     }
 
     @Override
-    public void shear(ServerLevel level, SoundSource source, ItemStack stack) {
-        playSound(EnderscapeEntitySounds.RUSTLE_SHEAR, 1, 1);
-        dropFromLootTable(
-                level,
-                EnderscapeEntityLootTables.SHEARING_RUSTLE,
-                builder -> builder.withParameter(LootContextParams.ORIGIN, position())
-                        .withParameter(LootContextParams.THIS_ENTITY, this)
-                        .withParameter(LootContextParams.TOOL, stack)
-                        .create(LootContextParamSets.SHEARING),
-                (level2, item) -> {
-                    for (int i = 0; i < item.getCount(); i++) {
-                        ItemEntity entity = spawnAtLocation(level2, item.copyWithCount(1), 0.2F);
-                        if (entity != null) {
-                            entity.setDeltaMovement(
-                                    entity.getDeltaMovement()
-                                            .add(
-                                                    Mth.nextFloat(random, -0.1F, 0.1F),
-                                                    Mth.nextFloat(random, 0, 0.05F),
-                                                    Mth.nextFloat(random, -0.1F, 0.1F)
-                                            )
-                            );
-                        }
-                    }
+    public void shear(SoundSource source) {
+        if (level() instanceof ServerLevel server) {
+            LootTable lootTable = server.getServer().reloadableRegistries().getLootTable(EnderscapeEntityLootTables.SHEARING_RUSTLE);
+            LootParams lootParams = new LootParams.Builder(server)
+                    .withParameter(LootContextParams.ORIGIN, position())
+                    .withParameter(LootContextParams.THIS_ENTITY, this)
+                    .create(LootContextParamSets.SHEARING);
+
+            for (ItemStack item : lootTable.getRandomItems(lootParams)) {
+                ItemEntity entity = spawnAtLocation(item, 0.2F);
+                if (entity != null) {
+                    entity.setDeltaMovement(entity.getDeltaMovement().add(Mth.nextFloat(random, -0.1F, 0.1F), Mth.nextFloat(random, 0, 0.05F), Mth.nextFloat(random, -0.1F, 0.1F)));
                 }
-        );
+            }
+        }
+
+        playSound(EnderscapeEntitySounds.RUSTLE_SHEAR, 1, 1);
         setSheared(true);
         RustleAI.refreshNaturalHairGrowthCooldown(this);
     }
@@ -302,8 +297,8 @@ public class Rustle extends Animal implements Bucketable, Shearable {
     }
 
     @Override
-    public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
-        boolean result = super.hurtServer(level, source, amount);
+    public boolean hurt(DamageSource source, float amount) {
+        boolean result = super.hurt(source, amount);
         if (result && isSleeping()) wakeUp();
         return result;
     }
@@ -332,7 +327,7 @@ public class Rustle extends Animal implements Bucketable, Shearable {
                 player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, bucket, false));
                 if (player instanceof ServerPlayer server) CriteriaTriggers.FILLED_BUCKET.trigger(server, bucket);
 
-                if (isLeashed()) dropLeash();
+                if (isLeashed()) dropLeash(true, true);
 
                 discard();
 
@@ -341,11 +336,11 @@ public class Rustle extends Animal implements Bucketable, Shearable {
 
             if (stack.getItem() instanceof ShearsItem && readyForShearing()) {
                 if (level() instanceof ServerLevel server) {
-                    shear(server, SoundSource.PLAYERS, stack);
+                    shear(SoundSource.PLAYERS);
                     stack.hurtAndBreak(1, player, getSlotForHand(hand));
                     gameEvent(GameEvent.SHEAR, player);
 
-                    return InteractionResult.SUCCESS_SERVER;
+                    return InteractionResult.SUCCESS;
                 }
                 return InteractionResult.CONSUME;
             }
@@ -409,7 +404,6 @@ public class Rustle extends Animal implements Bucketable, Shearable {
         if (isFood(stack)) playEatingSound();
     }
 
-    @Override
     protected void playEatingSound() {
         level().playSound(null, this, EnderscapeEntitySounds.RUSTLE_EAT, getSoundSource(), getSoundVolume(), getVoicePitch());
     }
@@ -422,6 +416,6 @@ public class Rustle extends Animal implements Bucketable, Shearable {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob mob) {
-        return EnderscapeEntities.RUSTLE.create(level, EntitySpawnReason.BREEDING);
+        return EnderscapeEntities.RUSTLE.create(level);
     }
 }

@@ -3,15 +3,15 @@ package net.bunten.enderscape.client.hud;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.client.EnderscapeClient;
 import net.bunten.enderscape.client.mixin.MusicManagerAccess;
-import net.bunten.enderscape.EnderscapeConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.CoreShaders;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -76,14 +76,12 @@ public class DebugHud extends HudElement {
         list.add("  Playing: " + client.getSoundManager().isActive(current));
         list.add("  Current event: " + (current != null ? shorten(current.getLocation().getPath(), ".") : "null"));
         list.add("  Current track: " + (current != null ? shorten(current.getSound().getPath().getPath(), "/") : "null"));
-        Music music = client.getSituationalMusic().music();
-        if (music != null) {
-            list.add("  Next event: " + shorten(music.getEvent().value().location().getPath(), "."));
-            list.add("    getMinDelay: " + music.getMinDelay());
-            list.add("    getMaxDelay: " + music.getMaxDelay());
-            list.add("    replaceCurrentMusic: " + music.replaceCurrentMusic());
-            list.add("  Playing next event: " + client.getMusicManager().isPlayingMusic(music));
-        }
+        Music music = client.getSituationalMusic();
+        list.add("  Next event: " + shorten(client.getSituationalMusic().getEvent().value().getLocation().getPath(), "."));
+        list.add("    getMinDelay: " + music.getMinDelay());
+        list.add("    getMaxDelay: " + music.getMaxDelay());
+        list.add("    replaceCurrentMusic: " + music.replaceCurrentMusic());
+        list.add("  Playing next event: " + client.getMusicManager().isPlayingMusic(music));
         list.add("  Delay: " + access.getNextSongDelay() + " (" + String.format("%02d", access.getNextSongDelay() / 20 / 60) + ":" + String.format("%02d", (access.getNextSongDelay() / 20) % 60) + ")");
 
         return list;
@@ -108,7 +106,7 @@ public class DebugHud extends HudElement {
 
             float f = (float) (player.getX() - 0);
             float h = (float) (player.getZ() - 0);
-    
+
             list.add("  Center Distance: " + (int) Mth.sqrt(f * f + h * h));
 
             list.add("  Velocity");
@@ -142,7 +140,7 @@ public class DebugHud extends HudElement {
 
         graphics.pose().pushPose();
 
-        RenderSystem.setShader(CoreShaders.POSITION_TEX);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
         RenderSystem.setShaderColor(1, 1, 1, 1);
@@ -160,9 +158,9 @@ public class DebugHud extends HudElement {
 
         for (List<String> list : getDebugText().keySet()) {
             if (!getDebugText().get(list)) continue;
-            
+
             graphics.fill(x, y, x + client.font.width(getLongestString(list)) + 10, y + (list.size() * 12) + 4, 0x4F052E60);
-            
+
             for (String string : list) {
                 if (!string.isEmpty()) {
                     graphics.drawString(client.font, string, x + 4, y + 4, 0xEFFFFFFF);

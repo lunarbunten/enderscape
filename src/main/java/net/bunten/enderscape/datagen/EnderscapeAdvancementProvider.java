@@ -85,8 +85,8 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                         BuiltInRegistries.ITEM.getKey(RUSTLE_BUCKET).getPath(),
                         PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(
                                 Optional.empty(),
-                                ItemPredicate.Builder.item().of(itemRegistry, BUCKET),
-                                Optional.of(EntityPredicate.wrap(EntityPredicate.Builder.entity().of(entityRegistry, EnderscapeEntities.RUSTLE)))
+                                ItemPredicate.Builder.item().of(BUCKET),
+                                Optional.of(EntityPredicate.wrap(EntityPredicate.Builder.entity().of(EnderscapeEntities.RUSTLE)))
                         )
                 )
                 .save(consumer, Enderscape.id("rustle_bucket").toString());
@@ -104,8 +104,8 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                 .addCriterion(
                         "unlock_end_vault",
                         ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
-                                LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blockRegistry, END_VAULT)),
-                                ItemPredicate.Builder.item().of(itemRegistry, END_CITY_KEY)
+                                LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(END_VAULT)),
+                                ItemPredicate.Builder.item().of(END_CITY_KEY)
                         )
                 )
                 .save(consumer, Enderscape.id("unlock_end_vault").toString());
@@ -139,7 +139,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                         AdvancementType.TASK,
                         true, true, false
                 )
-                .addCriterion("obtained", RecipeCraftedTrigger.TriggerInstance.craftedItem(ResourceKey.create(Registries.RECIPE, Enderscape.id("nebulite_from_shards"))))
+                .addCriterion("obtained", RecipeCraftedTrigger.TriggerInstance.craftedItem(Enderscape.id("nebulite_from_shards")))
                 .save(consumer, Enderscape.id("craft_nebulite").toString());
 
         AdvancementHolder bottleDriftJelly = Advancement.Builder.advancement()
@@ -274,7 +274,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                 )
                 .addCriterion("pulled_item", EnderscapeCriteria.PULL_ENTITY.createCriterion(new PullEntityCriterion.Conditions(
                         Optional.empty(),
-                        Optional.of(EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(entityRegistry, EntityType.ITEM)).build()),
+                        Optional.of(EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(EntityType.ITEM)).build()),
                         Optional.empty()
                 )))
                 .save(consumer, Enderscape.id("pull_item_with_attractor").toString());

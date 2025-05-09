@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": "enderscape:polished_veradite"
+    "S": {
+      "item": "enderscape:polished_veradite"
+    }
   },
   "pattern": [
     "SS",

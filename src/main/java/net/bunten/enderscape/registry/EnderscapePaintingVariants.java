@@ -26,9 +26,7 @@ public class EnderscapePaintingVariants {
         context.register(key, new PaintingVariant(
                 width,
                 height,
-                key.location(),
-                Optional.of(Component.translatable(key.location().toLanguageKey("painting", "title")).withStyle(ChatFormatting.YELLOW)),
-                Optional.of(Component.translatable(key.location().toLanguageKey("painting", "author")).withStyle(ChatFormatting.GRAY))
+                key.location()
         ));
     }
 

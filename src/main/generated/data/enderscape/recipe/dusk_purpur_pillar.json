@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "enderscape:dusk_purpur_block"
+    "#": {
+      "item": "enderscape:dusk_purpur_block"
+    }
   },
   "pattern": [
     "#",

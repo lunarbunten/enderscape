@@ -48,7 +48,7 @@ public class NearestEnemiesSensor extends Sensor<LivingEntity> {
         
         for (LivingEntity next : visible.findAll((next) -> isEnemy(mob, next))) {
             if (nearest.isEmpty()) nearest = Optional.of(next);
-            if (isEntityAttackable(level, mob, next) && nearestAttackable.isEmpty()) nearestAttackable = Optional.of(next);
+            if (isEntityAttackable(mob, next) && nearestAttackable.isEmpty()) nearestAttackable = Optional.of(next);
             enemies.add(next);
         }
 

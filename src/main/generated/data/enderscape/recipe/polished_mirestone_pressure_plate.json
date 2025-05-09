@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": "enderscape:polished_mirestone"
+    "#": {
+      "item": "enderscape:polished_mirestone"
+    }
   },
   "pattern": [
     "##"

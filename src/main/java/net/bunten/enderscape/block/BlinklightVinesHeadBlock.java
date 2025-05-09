@@ -18,8 +18,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.GrowingPlantHeadBlock;
@@ -107,11 +107,11 @@ public class BlinklightVinesHeadBlock extends GrowingPlantHeadBlock implements B
     }
 
     @Override
-    public BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess access, BlockPos pos, Direction direction, BlockPos pos2, BlockState state2, RandomSource random) {
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor world, BlockPos pos, BlockPos pos2) {
         if (!isOpen(state) && direction == growthDirection.getOpposite() && !state.canSurvive(world, pos)) {
             return Blocks.AIR.defaultBlockState();
         }
-        return super.updateShape(state, world, access, pos, direction, pos2, state2, random);
+        return super.updateShape(state, direction, state2, world, pos, pos2);
     }
 
     @Override
@@ -131,7 +131,7 @@ public class BlinklightVinesHeadBlock extends GrowingPlantHeadBlock implements B
     }
 
     @Override
-    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean bl) {
+    public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
         return new ItemStack(EnderscapeItems.BLINKLIGHT);
     }
 

@@ -3,7 +3,9 @@
   "category": "building",
   "group": "wooden_slab",
   "key": {
-    "#": "enderscape:celestial_planks"
+    "#": {
+      "item": "enderscape:celestial_planks"
+    }
   },
   "pattern": [
     "###"

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "enderscape:kurodite"
+    "#": {
+      "item": "enderscape:kurodite"
+    }
   },
   "pattern": [
     "###",

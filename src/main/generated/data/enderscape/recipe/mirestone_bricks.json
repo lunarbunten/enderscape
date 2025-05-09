@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": "enderscape:polished_mirestone"
+    "S": {
+      "item": "enderscape:polished_mirestone"
+    }
   },
   "pattern": [
     "SS",

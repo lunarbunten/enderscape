@@ -11,16 +11,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
-public class DrifterRenderer extends MobRenderer<Drifter, DrifterRenderState, DrifterModel> {
+public class DrifterRenderer extends MobRenderer<Drifter, DrifterModel> {
 
     public DrifterRenderer(Context context) {
         super(context, new DrifterModel(EnderscapeEntityRenderData.DRIFTER.bakeLayer(context)), 1);
         addLayer(new DrifterJellyLayer(this));
-    }
-
-    @Override
-    public DrifterRenderState createRenderState() {
-        return new DrifterRenderState();
     }
 
     @Override
@@ -29,13 +24,7 @@ public class DrifterRenderer extends MobRenderer<Drifter, DrifterRenderState, Dr
     }
 
     @Override
-    public void extractRenderState(Drifter mob, DrifterRenderState state, float f) {
-        super.extractRenderState(mob, state, f);
-        state.leakingJelly = mob.isDrippingJelly();
-    }
-
-    @Override
-    public ResourceLocation getTextureLocation(DrifterRenderState state) {
+    public ResourceLocation getTextureLocation(Drifter state) {
         return Enderscape.id("textures/entity/drifter/drifter.png");
     }
 }

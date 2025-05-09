@@ -3,8 +3,12 @@
   "category": "misc",
   "group": "wooden_sign",
   "key": {
-    "#": "enderscape:murublight_planks",
-    "X": "minecraft:stick"
+    "#": {
+      "item": "enderscape:murublight_planks"
+    },
+    "X": {
+      "item": "minecraft:stick"
+    }
   },
   "pattern": [
     "###",

@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    "minecraft:popped_chorus_fruit",
-    "minecraft:popped_chorus_fruit",
-    "enderscape:shadoline_ingot",
-    "enderscape:shadoline_ingot"
+    {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    {
+      "item": "enderscape:shadoline_ingot"
+    },
+    {
+      "item": "enderscape:shadoline_ingot"
+    }
   ],
   "result": {
     "count": 4,

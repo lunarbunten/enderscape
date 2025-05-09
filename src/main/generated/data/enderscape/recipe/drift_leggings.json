@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "D": "enderscape:drift_jelly_bottle",
-    "N": "enderscape:nebulite"
+    "D": {
+      "item": "enderscape:drift_jelly_bottle"
+    },
+    "N": {
+      "item": "enderscape:nebulite"
+    }
   },
   "pattern": [
     "NNN",

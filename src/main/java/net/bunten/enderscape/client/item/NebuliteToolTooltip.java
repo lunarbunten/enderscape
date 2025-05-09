@@ -7,9 +7,10 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import org.joml.Matrix4f;
 
 @Environment(EnvType.CLIENT)
 public class NebuliteToolTooltip implements ClientTooltipComponent {
@@ -33,7 +34,7 @@ public class NebuliteToolTooltip implements ClientTooltipComponent {
     }
 
     @Override
-    public int getHeight(Font font) {
+    public int getHeight() {
         return 12;
     }
 
@@ -42,18 +43,13 @@ public class NebuliteToolTooltip implements ClientTooltipComponent {
         return getBarWidth();
     }
 
+    @Override
+    public void renderImage(Font font, int x, int y, GuiGraphics graphics) {
+        renderFuelBar(graphics, x, y + 1);
+    }
+
     private int getBarWidth() {
         return 32 + 11 * (NebuliteToolItem.maxFuel(stack) - 2);
-    }
-
-    @Override
-    public boolean showTooltipWithItemInHand() {
-        return true;
-    }
-
-    @Override
-    public void renderImage(Font font, int x, int y, int k, int l, GuiGraphics graphics) {
-        renderFuelBar(graphics, x, y + 1);
     }
 
     private void renderFuelBar(GuiGraphics graphics, int x, int y) {
@@ -71,10 +67,10 @@ public class NebuliteToolTooltip implements ClientTooltipComponent {
             int offsetY = (i == 0) ? -2 : 0;
             int spriteHeight = (i == 0) ? 10 : 6;
 
-            graphics.blitSprite(RenderType::guiTextured, EMPTY_SEGMENTS[index], rx, y + offsetY, width, spriteHeight);
+            graphics.blitSprite(EMPTY_SEGMENTS[index], rx, y + offsetY, width, spriteHeight);
 
             if (isFueled) {
-                graphics.blitSprite(RenderType::guiTextured, FUELED_SEGMENT, rx + ((i == 0) ? 9 : 0), y, 11, 6);
+                graphics.blitSprite(FUELED_SEGMENT, rx + ((i == 0) ? 9 : 0), y, 11, 6);
             }
         }
 

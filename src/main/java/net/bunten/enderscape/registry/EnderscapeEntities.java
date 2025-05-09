@@ -56,7 +56,7 @@ public class EnderscapeEntities {
     }
 
     private static <T extends Entity> EntityType<T> register(ResourceKey<EntityType<?>> resourceKey, EntityType.Builder<T> builder) {
-        return Registry.register(BuiltInRegistries.ENTITY_TYPE, resourceKey, builder.build(resourceKey));
+        return Registry.register(BuiltInRegistries.ENTITY_TYPE, resourceKey, builder.build());
     }
 
     static {

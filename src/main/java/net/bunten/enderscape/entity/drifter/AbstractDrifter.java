@@ -9,12 +9,11 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -44,10 +43,10 @@ public abstract class AbstractDrifter extends Animal {
     }
 
     protected static AttributeSupplier.Builder createBaseDrifterAttributes() {
-        return createAnimalAttributes().add(Attributes.MOVEMENT_SPEED, 0.1).add(Attributes.FOLLOW_RANGE, 24).add(Attributes.TEMPT_RANGE, 24).add(Attributes.GRAVITY, 0.005).add(Attributes.JUMP_STRENGTH, 0.1);
+        return createMobAttributes().add(Attributes.MOVEMENT_SPEED, 0.1).add(Attributes.FOLLOW_RANGE, 24).add(Attributes.GRAVITY, 0.005).add(Attributes.JUMP_STRENGTH, 0.1);
     }
 
-    public static boolean canSpawn(EntityType<?> type, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+    public static boolean canSpawn(EntityType<?> type, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return true;
     }
 
@@ -68,18 +67,20 @@ public abstract class AbstractDrifter extends Animal {
     }
 
     @Override
-    protected void customServerAiStep(ServerLevel serverLevel) {
-        ProfilerFiller profiler = Profiler.get();
+    protected void customServerAiStep() {
+        if (level() instanceof ServerLevel server) {
+            ProfilerFiller profiler = server.getProfiler();
 
-        profiler.push("drifterBrain");
-        getBrain().tick(serverLevel, this);
-        profiler.pop();
+            profiler.push("drifterBrain");
+            getBrain().tick(server, this);
+            profiler.pop();
 
-        profiler.push("drifterActivityUpdate");
-        DrifterAI.updateActivity(this);
-        profiler.pop();
+            profiler.push("drifterActivityUpdate");
+            DrifterAI.updateActivity(this);
+            profiler.pop();
+        }
 
-        super.customServerAiStep(serverLevel);
+        super.customServerAiStep();
     }
 
     public abstract SoundEvent getJumpSound();
@@ -104,7 +105,6 @@ public abstract class AbstractDrifter extends Animal {
         if (isFood(stack)) playEatingSound();
     }
 
-    @Override
     protected void playEatingSound() {
         SoundEvent sound = isBaby() ? EnderscapeEntitySounds.DRIFTLET_EAT : EnderscapeEntitySounds.DRIFTER_EAT;
         level().playSound(null, this, sound, getSoundSource(), getSoundVolume(), getVoicePitch());
@@ -115,7 +115,6 @@ public abstract class AbstractDrifter extends Animal {
         FlyingPathNavigation navigation = new FlyingPathNavigation(this, level);
         navigation.setCanOpenDoors(false);
         navigation.setCanFloat(false);
-        navigation.setRequiredPathLength(48.0F);
         return navigation;
     }
 

@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "enderscape:veradite",
+  "ingredient": {
+    "item": "enderscape:veradite"
+  },
   "result": {
     "count": 2,
     "id": "enderscape:veradite_slab"

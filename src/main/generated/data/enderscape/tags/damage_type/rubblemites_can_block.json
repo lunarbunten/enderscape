@@ -1,12 +1,10 @@
 {
   "values": [
     "minecraft:arrow",
-    "minecraft:ender_pearl",
     "minecraft:explosion",
     "minecraft:falling_anvil",
     "minecraft:falling_block",
     "minecraft:falling_stalactite",
-    "minecraft:mace_smash",
     "minecraft:mob_attack",
     "minecraft:mob_attack_no_aggro",
     "minecraft:mob_projectile",

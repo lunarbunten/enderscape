@@ -33,7 +33,7 @@ public class DriftJellyBlock extends HalfTransparentBlock {
         x = Mth.clamp(x * 2, -23, 23);
         z = Mth.clamp(z * 2, -23, 23);
 
-        double height = 1.25;
+        double height = 1.35;
         if (entity instanceof LivingEntity mob && mob.isFallFlying()) height += 0.2;
         return new Vec3(x, height, z);
     }

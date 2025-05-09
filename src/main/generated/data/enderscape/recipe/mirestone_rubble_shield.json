@@ -3,9 +3,15 @@
   "category": "equipment",
   "group": "rubble_shield",
   "key": {
-    "#": "enderscape:mirestone",
-    "C": "enderscape:rubble_chitin",
-    "S": "enderscape:shadoline_ingot"
+    "#": {
+      "item": "enderscape:mirestone"
+    },
+    "C": {
+      "item": "enderscape:rubble_chitin"
+    },
+    "S": {
+      "item": "enderscape:shadoline_ingot"
+    }
   },
   "pattern": [
     "CSC",

@@ -10,8 +10,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -44,10 +44,9 @@ public class FlangerBerryVine extends AbstractVineBlock implements BonemealableB
     }
 
     @Override
-    public BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess access, BlockPos pos, Direction direction, BlockPos pos2, BlockState state2, RandomSource random) {
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor world, BlockPos pos, BlockPos pos2) {
         var down = world.getBlockState(pos.below());
-
-        return state.canSurvive(world, pos) && down.is(EnderscapeBlockTags.FLANGER_BERRY_VINE_SUPPORTS) ? state(state, true, getAge(state)) : super.updateShape(state, world, access, pos, direction, pos2, state2, random);
+        return state.canSurvive(world, pos) && down.is(EnderscapeBlockTags.FLANGER_BERRY_VINE_SUPPORTS) ? state(state, true, getAge(state)) : super.updateShape(state, direction, state2, world, pos, pos2);
     }
 
     @Override
@@ -64,7 +63,7 @@ public class FlangerBerryVine extends AbstractVineBlock implements BonemealableB
 
     @Override
     public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
-        for (pos = isBody(state) ? pos.below() : pos; pos.getY() >= world.getMinY(); pos = pos.below()) {
+        for (pos = isBody(state) ? pos.below() : pos; pos.getY() >= world.getMinBuildHeight(); pos = pos.below()) {
             if (world.getBlockState(pos).is(this) && world.getBlockState(pos.below()).isAir()) {
                 return true;
             }
@@ -79,7 +78,7 @@ public class FlangerBerryVine extends AbstractVineBlock implements BonemealableB
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-        for (pos = isBody(state) ? pos.below() : pos; pos.getY() > world.getMinY(); pos = pos.below()) {
+        for (pos = isBody(state) ? pos.below() : pos; pos.getY() > world.getMinBuildHeight(); pos = pos.below()) {
             var state2 = world.getBlockState(pos);
             if (state2.is(this)) {
                 var down = world.getBlockState(pos.below());

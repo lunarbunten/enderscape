@@ -34,7 +34,7 @@ public abstract class AbstractClientPlayerMixin extends Player {
     }
 
     @Unique
-    private float Enderscape$getElytraFovModifier() {
+    private float Enderscape$getElytraFOV() {
         float fovModifier = 1.0F;
 
         if (isFallFlying()) {
@@ -58,11 +58,7 @@ public abstract class AbstractClientPlayerMixin extends Player {
     }
 
     @Inject(method = "getFieldOfViewModifier", at = @At("RETURN"), cancellable = true)
-    private void getFieldOfViewModifier(boolean bl, float f, CallbackInfoReturnable<Float> info) {
-        if (EnderscapeConfig.getInstance().elytraAddFovEffects) {
-            float original = info.getReturnValue();
-            float adjusted = original * Enderscape$getElytraFovModifier();
-            info.setReturnValue(adjusted);
-        }
+    private void getFieldOfViewModifier(CallbackInfoReturnable<Float> info) {
+        if (EnderscapeConfig.getInstance().elytraAddFovEffects) info.setReturnValue(info.getReturnValue() * Enderscape$getElytraFOV());
     }
 }

@@ -35,7 +35,7 @@ public class MirrorDispenserBehavior extends OptionalDispenseItemBehavior {
     }
 
     private static boolean tryTeleport(ItemStack stack, LivingEntity mob, ServerLevel level) {
-        if (mob instanceof Player player && player.getCooldowns().isOnCooldown(stack)) return false;
+        if (mob instanceof Player player && player.getCooldowns().isOnCooldown(stack.getItem())) return false;
         MirrorContext context = new MirrorContext(stack, level, mob);
         for (MirrorUseChecks check : MirrorUseChecks.CHECKS_IN_ORDER) if (check.fails(context)) return false;
         return MirrorItem.teleport(context, true);

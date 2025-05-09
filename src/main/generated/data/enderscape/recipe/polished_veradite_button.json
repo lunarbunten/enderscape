@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    "enderscape:polished_veradite"
+    {
+      "item": "enderscape:polished_veradite"
+    }
   ],
   "result": {
     "count": 1,

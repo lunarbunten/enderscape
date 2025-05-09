@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "raw_shadoline",
   "ingredients": [
-    "enderscape:raw_shadoline_block"
+    {
+      "item": "enderscape:raw_shadoline_block"
+    }
   ],
   "result": {
     "count": 9,

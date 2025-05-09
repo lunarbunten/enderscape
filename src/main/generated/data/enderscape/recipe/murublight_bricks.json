@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "enderscape:murublight_cap",
-    "@": "enderscape:corrupt_growth"
+    "#": {
+      "item": "enderscape:murublight_cap"
+    },
+    "@": {
+      "item": "enderscape:corrupt_growth"
+    }
   },
   "pattern": [
     "@#",

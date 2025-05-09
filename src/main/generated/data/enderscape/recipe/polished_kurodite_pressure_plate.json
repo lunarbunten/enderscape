@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": "enderscape:polished_kurodite"
+    "#": {
+      "item": "enderscape:polished_kurodite"
+    }
   },
   "pattern": [
     "##"

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "enderscape:veradite"
+    "#": {
+      "item": "enderscape:veradite"
+    }
   },
   "pattern": [
     "###",

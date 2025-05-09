@@ -2,6 +2,7 @@ package net.bunten.enderscape.mixin;
 
 import net.bunten.enderscape.entity.magnia.MagniaMoveable;
 import net.bunten.enderscape.entity.magnia.MagniaProperties;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -11,10 +12,13 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AbstractMinecart.class)
@@ -22,6 +26,11 @@ public abstract class AbstractMinecartMixin extends Entity implements MagniaMove
 
     @Unique
     private final AbstractMinecart entity = (AbstractMinecart) (Object) this;
+
+    @Shadow
+    protected abstract void moveAlongTrack(BlockPos blockPos, BlockState blockState);
+
+    @Shadow protected abstract void comeOffTrack();
 
     public AbstractMinecartMixin(EntityType<?> type, Level world) {
         super(type, world);
@@ -45,7 +54,6 @@ public abstract class AbstractMinecartMixin extends Entity implements MagniaMove
         );
     }
 
-
     @Unique
     private static final EntityDataAccessor<Integer> MAGNIA_COOLDOWN_DATA = SynchedEntityData.defineId(AbstractMinecart.class, EntityDataSerializers.INT);
 
@@ -63,5 +71,14 @@ public abstract class AbstractMinecartMixin extends Entity implements MagniaMove
     @Inject(at = @At("TAIL"), method = "tick")
     private void Enderscape$tick(CallbackInfo info) {
         MagniaMoveable.tickMagniaCooldown(entity);
+
+        if (MagniaMoveable.wasMovedByMagnia(entity) && entity.level() instanceof ServerLevel serverLevel) {
+            comeOffTrack();
+        }
+    }
+
+    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/AbstractMinecart;moveAlongTrack(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V"))
+    public void tick(AbstractMinecart entity, BlockPos blockPos, BlockState blockState) {
+        if (!MagniaMoveable.wasMovedByMagnia(entity)) moveAlongTrack(blockPos, blockState);
     }
 }

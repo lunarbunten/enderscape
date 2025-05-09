@@ -36,7 +36,6 @@ public class EnderscapeDataGen implements DataGeneratorEntrypoint {
 		pack.addProvider(EnderscapePoiTagProvider::new);
 		pack.addProvider(EnderscapeRecipeProvider::new);
 		pack.addProvider(EnderscapeSkyParametersProvider::new);
-		pack.addProvider(EnderscapeTrialSpawnerProvider::new);
 		pack.addProvider(EnderscapeTrimPatternProvider::new);
 		pack.addProvider(EnderscapeTrimMaterialProvider::new);
 		pack.addProvider(EnderscapeVaultLootProvider::new);
@@ -53,7 +52,6 @@ public class EnderscapeDataGen implements DataGeneratorEntrypoint {
 		builder.add(Registries.NOISE, EnderscapeNoiseParameters::bootstrap);
 		builder.add(Registries.PAINTING_VARIANT, EnderscapePaintingVariants::bootstrap);
 		builder.add(Registries.PLACED_FEATURE, EnderscapePlacedFeatures::bootstrap);
-		builder.add(Registries.TRIAL_SPAWNER_CONFIG, EnderscapeTrialSpawnerConfigs::bootstrap);
 		builder.add(Registries.TRIM_PATTERN, EnderscapeTrimPatterns::bootstrap);
 		builder.add(Registries.TRIM_MATERIAL, EnderscapeTrimMaterials::bootstrap);
 

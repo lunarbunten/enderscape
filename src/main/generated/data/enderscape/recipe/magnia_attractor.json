@@ -2,9 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "A": "enderscape:alluring_magnia_sprout",
-    "R": "enderscape:repulsive_magnia_sprout",
-    "S": "enderscape:shadoline_ingot"
+    "A": {
+      "item": "enderscape:alluring_magnia_sprout"
+    },
+    "R": {
+      "item": "enderscape:repulsive_magnia_sprout"
+    },
+    "S": {
+      "item": "enderscape:shadoline_ingot"
+    }
   },
   "pattern": [
     "A R",

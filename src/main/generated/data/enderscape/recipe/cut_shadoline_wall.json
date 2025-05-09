@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "enderscape:cut_shadoline"
+    "#": {
+      "item": "enderscape:cut_shadoline"
+    }
   },
   "pattern": [
     "###",

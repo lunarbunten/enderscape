@@ -143,6 +143,6 @@ public class EnderscapeEntityLootProvider extends SimpleFabricLootTableProvider 
 
 
     private ResourceKey<LootTable> getLootTable(EntityType<?> type) {
-        return type.getDefaultLootTable().orElseThrow(() -> new IllegalStateException("Entity " + type + " has no loot table"));
+        return type.getDefaultLootTable();
     }
 }

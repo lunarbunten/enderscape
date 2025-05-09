@@ -120,7 +120,7 @@ public class ChorusCakeRollBlock extends Block {
     private static boolean teleportEntityRandomly(ServerLevel level, LivingEntity entity) {
         for (int i = 0; i < 16; i++) {
             double x = entity.getX() + (entity.getRandom().nextDouble() - 0.5) * 16;
-            double y = Mth.clamp(entity.getY() + (entity.getRandom().nextDouble() - 0.5) * 16, level.getMinY(), level.getMinY() + level.getLogicalHeight() - 1);
+            double y = Mth.clamp(entity.getY() + (entity.getRandom().nextDouble() - 0.5) * 16, level.getMinBuildHeight(), level.getMinBuildHeight() + level.getLogicalHeight() - 1);
             double z = entity.getZ() + (entity.getRandom().nextDouble() - 0.5) * 16;
 
             if (entity.isPassenger()) entity.stopRiding();
@@ -140,8 +140,8 @@ public class ChorusCakeRollBlock extends Block {
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess access, BlockPos pos, Direction direction, BlockPos pos2, BlockState state2, RandomSource random) {
-        return direction == Direction.DOWN && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, level, access, pos, direction, pos2, state2, random);
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor level, BlockPos pos, BlockPos pos2) {
+        return direction == Direction.DOWN && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, state2, level, pos, pos2);
     }
 
     @Override

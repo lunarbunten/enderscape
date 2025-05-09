@@ -1,15 +1,17 @@
 package net.bunten.enderscape.client.entity.drifter;
 
+import net.bunten.enderscape.entity.drifter.Drifter;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
-public class DrifterModel extends EntityModel<DrifterRenderState> {
+public class DrifterModel extends HierarchicalModel<Drifter> {
+    private final ModelPart root;
     private final ModelPart head;
     private final ModelPart leftLeg;
     private final ModelPart rightLeg;
@@ -21,7 +23,7 @@ public class DrifterModel extends EntityModel<DrifterRenderState> {
     private final ModelPart strandsE;
 
     public DrifterModel(ModelPart root) {
-        super(root);
+        this.root = root;
         head = root.getChild("head");
         leftLeg = head.getChild("leftLeg");
         rightLeg = head.getChild("rightLeg");
@@ -31,6 +33,11 @@ public class DrifterModel extends EntityModel<DrifterRenderState> {
         strandsW = bell.getChild("strandsW");
         strandsS = bell.getChild("strandsS");
         strandsE = bell.getChild("strandsE");
+    }
+
+    @Override
+    public ModelPart root() {
+        return root;
     }
 
     public static LayerDefinition createLayer() {
@@ -59,13 +66,9 @@ public class DrifterModel extends EntityModel<DrifterRenderState> {
     }
 
     @Override
-    public void setupAnim(DrifterRenderState state) {
-        var age = state.ageInTicks;
-        var animPos = state.walkAnimationPos;
-        var animSpeed = state.walkAnimationSpeed;
-
-        head.yRot = (state.yRot * 0.017453292F);
-        head.xRot = (state.xRot * 0.017453292F) + (Mth.sin(age * 0.2F) * 0.1F);
+    public void setupAnim(Drifter mob, float animPos, float animSpeed, float age, float headYaw, float headPitch) {
+        head.yRot = (headYaw  * 0.017453292F);
+        head.xRot = (headPitch  * 0.017453292F) + (Mth.sin(age * 0.2F) * 0.1F);
         head.zRot = 0.1F * Mth.sin(animPos * 0.8F) * 2 * (animSpeed * 0.25F);
         head.xRot += 0.1F * Mth.sin(animPos * 0.8F) * 4 * (animSpeed * 0.25F);
 

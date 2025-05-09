@@ -3,6 +3,7 @@ package net.bunten.enderscape;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
+import net.bunten.enderscape.client.LightingStyle;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class EnderscapeConfig {
@@ -79,7 +80,6 @@ public class EnderscapeConfig {
     @SerialEntry public boolean skyboxAddDynamicFogDensity = true;
     @SerialEntry public boolean skyboxScalesBrightnessWithGamma = true;
     @SerialEntry public boolean skyboxUpdateEnabled = true;
-    @SerialEntry public boolean structureMusicFadingEnabled = true;
     @SerialEntry public boolean tridentsReturnFromVoid = true;
     @SerialEntry public boolean voidPoofParticlesUponDeath = true;
 
@@ -92,6 +92,8 @@ public class EnderscapeConfig {
     @SerialEntry public int shulkerBulletEnforceDistanceLimit = 30;
     @SerialEntry public int shulkerBulletEnforceTimeLimit = 30;
     @SerialEntry public int skyboxBrightnessScaleFactor = 40;
+
+    @SerialEntry public LightingStyle lightingStyle = LightingStyle.IMPROVED;
 
     static {
         HANDLER.load();

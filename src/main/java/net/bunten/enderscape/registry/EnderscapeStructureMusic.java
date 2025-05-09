@@ -6,7 +6,8 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -39,12 +40,12 @@ public class EnderscapeStructureMusic {
     }
 
     private static ResourceLocation getStructure(ServerLevel level, ServerPlayer player) {
-        Registry<Structure> registry = level.registryAccess().lookupOrThrow(Registries.STRUCTURE);
-        List<Structure> structures = registry.stream().toList();
+        HolderLookup.RegistryLookup<Structure> registry = level.registryAccess().lookupOrThrow(Registries.STRUCTURE);
+        List<Holder.Reference<Structure>> structures = registry.listElements().toList();
 
-        for (Structure structure : structures) {
+        for (Holder.Reference<Structure> structure : structures) {
             if (structure == null) continue;
-            if (level.structureManager().getStructureAt(BlockPos.containing(player.position()), structure).isValid()) return registry.getKey(structure);
+            if (level.structureManager().getStructureAt(BlockPos.containing(player.position()), structure.value()).isValid()) return structure.key().location();
         }
 
         return ResourceLocation.withDefaultNamespace("none");

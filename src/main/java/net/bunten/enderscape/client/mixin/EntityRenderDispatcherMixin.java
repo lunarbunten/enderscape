@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.bunten.enderscape.entity.drifter.Drifter;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.renderer.ShapeRenderer;
+import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
@@ -22,7 +22,7 @@ public class EntityRenderDispatcherMixin {
     private static void Enderscape$renderHitbox(PoseStack pose, VertexConsumer consumer, Entity entity, float f, float g, float h, float i, CallbackInfo ci) {
         if (entity instanceof Drifter drifter) {
             AABB aABB = drifter.getBounceHitbox().move(-entity.getX(), -entity.getY(), -entity.getZ());
-            ShapeRenderer.renderLineBox(pose, consumer, aABB, g, h, i, 1.0F);
+            LevelRenderer.renderLineBox(pose, consumer, aABB, g, h, i, 1.0F);
         }
     }
 }

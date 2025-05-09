@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "enderscape:veiled_leaves"
+    "#": {
+      "item": "enderscape:veiled_leaves"
+    }
   },
   "pattern": [
     "###"

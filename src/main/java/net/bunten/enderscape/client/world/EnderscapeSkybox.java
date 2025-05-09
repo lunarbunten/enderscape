@@ -1,6 +1,5 @@
 package net.bunten.enderscape.client.world;
 
-import com.mojang.blaze3d.buffers.BufferUsage;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
@@ -12,8 +11,7 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.CoreShaders;
-import net.minecraft.client.renderer.FogParameters;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.util.CubicSampler;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -78,7 +76,7 @@ public class EnderscapeSkybox {
 
         RenderSystem.enableBlend();
         RenderSystem.depthMask(false);
-        RenderSystem.setShader(CoreShaders.POSITION_TEX_COLOR);
+        RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
         RenderSystem.setShaderColor(color.x, color.y, color.z, color.w);
         RenderSystem.setShaderTexture(0, Enderscape.id("textures/environment/sky.png"));
         Tesselator tesselator = Tesselator.getInstance();
@@ -123,7 +121,7 @@ public class EnderscapeSkybox {
     }
 
     private static VertexBuffer createNebulaeBuffer(double minSize, double maxSize, int count, long seed) {
-        VertexBuffer buffer = new VertexBuffer(BufferUsage.STATIC_WRITE);
+        VertexBuffer buffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
         buffer.bind();
         buffer.upload(drawNebulae(minSize, maxSize, count, seed, Tesselator.getInstance()));
         VertexBuffer.unbind();
@@ -190,10 +188,10 @@ public class EnderscapeSkybox {
         matrix.mul(new Matrix4f().rotation(SKY_ROTATION_AXIS.rotation(angle)));
 
         RenderSystem.depthMask(false);
-        RenderSystem.setShader(CoreShaders.POSITION_TEX);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(color.x, color.y, color.z, color.w);
         RenderSystem.enableBlend();
-        RenderSystem.setShaderFog(FogParameters.NO_FOG);
+        //RenderSystem.setShaderFogShape(FogParameters.NO_FOG);
         RenderSystem.setShaderTexture(0, Enderscape.id("textures/environment/nebula1.png"));
 
         nebula1.bind();
@@ -214,7 +212,7 @@ public class EnderscapeSkybox {
     }
 
     private static VertexBuffer createStarsBuffer() {
-        VertexBuffer buffer = new VertexBuffer(BufferUsage.STATIC_WRITE);
+        VertexBuffer buffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
         buffer.bind();
         buffer.upload(drawStars(1500, 0.05F, 0.25F, Tesselator.getInstance()));
         VertexBuffer.unbind();
@@ -259,10 +257,10 @@ public class EnderscapeSkybox {
         matrix.mul(new Matrix4f().rotation(SKY_ROTATION_AXIS.rotation(angle)));
 
         RenderSystem.depthMask(false);
-        RenderSystem.setShader(CoreShaders.POSITION);
+        RenderSystem.setShader(GameRenderer::getPositionShader);
         RenderSystem.setShaderColor(color.x, color.y, color.z, color.w);
         RenderSystem.enableBlend();
-        RenderSystem.setShaderFog(FogParameters.NO_FOG);
+        //RenderSystem.setShaderFog(FogParameters.NO_FOG);
 
         stars.bind();
         stars.drawWithShader(matrix, RenderSystem.getProjectionMatrix(), RenderSystem.getShader());

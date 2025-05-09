@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "minecraft:iron_nugget",
-    "@": "enderscape:bulb_flower"
+    "#": {
+      "item": "minecraft:iron_nugget"
+    },
+    "@": {
+      "item": "enderscape:bulb_flower"
+    }
   },
   "pattern": [
     "###",

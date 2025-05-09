@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "enderscape:cut_shadoline",
+  "ingredient": {
+    "item": "enderscape:cut_shadoline"
+  },
   "result": {
     "count": 2,
     "id": "enderscape:cut_shadoline_slab"

@@ -1,6 +1,5 @@
 package net.bunten.enderscape.client.mixin;
 
-import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.client.EnderscapeClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -8,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.WinScreen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
 import net.minecraft.world.level.Level;
@@ -29,7 +27,7 @@ public abstract class MinecraftMixin {
     static Minecraft instance;
 
     @Inject(method = "getSituationalMusic", at = @At("HEAD"), cancellable = true)
-    public void getSituationalMusic(CallbackInfoReturnable<MusicInfo> info) {
+    public void getSituationalMusic(CallbackInfoReturnable<Music> info) {
         if (instance.screen instanceof WinScreen && !instance.getMusicManager().isPlayingMusic(Musics.CREDITS)) instance.getSoundManager().stop();
 
         LocalPlayer player = instance.player;
@@ -37,11 +35,11 @@ public abstract class MinecraftMixin {
 
         if (player != null && level.dimension() == Level.END) {
             Biome biome = level.getBiome(player.blockPosition()).value();
-            Optional<Music> optional = EnderscapeClient.structureMusic.isPresent() ? EnderscapeClient.structureMusic : biome.getBackgroundMusic().flatMap(tracks -> tracks.getRandomValue(level.getRandom()));
+            Optional<Music> optional = EnderscapeClient.structureMusic.isPresent() ? EnderscapeClient.structureMusic : biome.getBackgroundMusic();
 
             if (optional.isPresent()) {
                 Music music = optional.get();
-                info.setReturnValue(new MusicInfo(music, biome.getBackgroundMusicVolume()));
+                info.setReturnValue(music);
             }
         }
     }

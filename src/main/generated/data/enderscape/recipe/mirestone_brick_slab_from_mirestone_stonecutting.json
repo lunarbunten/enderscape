@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "enderscape:mirestone",
+  "ingredient": {
+    "item": "enderscape:mirestone"
+  },
   "result": {
     "count": 2,
     "id": "enderscape:mirestone_brick_slab"

@@ -3,8 +3,12 @@
   "category": "misc",
   "group": "hanging_sign",
   "key": {
-    "#": "enderscape:stripped_murublight_stem",
-    "X": "minecraft:chain"
+    "#": {
+      "item": "enderscape:stripped_murublight_stem"
+    },
+    "X": {
+      "item": "minecraft:chain"
+    }
   },
   "pattern": [
     "X X",

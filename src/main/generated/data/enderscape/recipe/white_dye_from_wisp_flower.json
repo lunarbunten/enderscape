@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "white_dye",
   "ingredients": [
-    "enderscape:wisp_flower"
+    {
+      "item": "enderscape:wisp_flower"
+    }
   ],
   "result": {
     "count": 1,

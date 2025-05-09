@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "enderscape:mirestone_bricks"
+    "#": {
+      "item": "enderscape:mirestone_bricks"
+    }
   },
   "pattern": [
     "###"

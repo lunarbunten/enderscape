@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    "#enderscape:celestial_stems"
+    {
+      "tag": "enderscape:celestial_stems"
+    }
   ],
   "result": {
     "count": 4,

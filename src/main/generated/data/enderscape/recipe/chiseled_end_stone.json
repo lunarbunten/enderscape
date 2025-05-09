@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "enderscape:polished_end_stone_slab"
+    "#": {
+      "item": "enderscape:polished_end_stone_slab"
+    }
   },
   "pattern": [
     "#",

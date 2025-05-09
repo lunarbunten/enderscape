@@ -8,11 +8,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -37,14 +36,14 @@ public class RustleBucketItem extends Item implements DispensibleContainerItem {
     }
 
     @Override
-    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         BlockHitResult result = getPlayerPOVHitResult(level, player, ClipContext.Fluid.NONE);
 
         if (result.getType() == Type.MISS) {
-            return InteractionResult.PASS;
+            return InteractionResultHolder.success(stack);
         } else if (result.getType() != Type.BLOCK) {
-            return InteractionResult.PASS;
+            return InteractionResultHolder.pass(stack);
         } else {
             BlockPos pos = result.getBlockPos();
             if (level.mayInteract(player, pos) && player.mayUseItemAt(pos.relative(result.getDirection()), result.getDirection(), stack)) {
@@ -53,17 +52,17 @@ public class RustleBucketItem extends Item implements DispensibleContainerItem {
                     checkExtraContent(player, level, stack, relative);
                     level.playSound(player, pos, EnderscapeItemSounds.RUSTLE_BUCKET_EMPTY, SoundSource.NEUTRAL, 1.0F, 1.0F);
                     player.awardStat(Stats.ITEM_USED.get(this));
-                    return InteractionResult.SUCCESS.heldItemTransformedTo(ItemUtils.createFilledResult(stack, player, !player.hasInfiniteMaterials() ? new ItemStack(Items.BUCKET) : stack));
+                    return InteractionResultHolder.success(ItemUtils.createFilledResult(stack, player, !player.hasInfiniteMaterials() ? new ItemStack(Items.BUCKET) : stack));
                 }
             }
-            return InteractionResult.FAIL;
+            return InteractionResultHolder.fail(stack);
         }
     }
 
     @Override
     public void checkExtraContent(@Nullable Player player, Level level, ItemStack stack, BlockPos pos) {
         if (level instanceof ServerLevel server) {
-            Entity entity = type.create(server, EntityType.createDefaultStackConfig(server, stack, null), pos, EntitySpawnReason.BUCKET, true, false);
+            Entity entity = type.create(server, EntityType.createDefaultStackConfig(server, stack, null), pos, MobSpawnType.BUCKET, true, false);
 
             if (entity instanceof Bucketable bucketable) {
                 bucketable.loadFromBucketTag(stack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY).copyTag());

@@ -3,7 +3,9 @@
   "category": "redstone",
   "group": "wooden_pressure_plate",
   "key": {
-    "#": "enderscape:celestial_planks"
+    "#": {
+      "item": "enderscape:celestial_planks"
+    }
   },
   "pattern": [
     "##"

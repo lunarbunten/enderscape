@@ -31,9 +31,9 @@ public abstract class ShulkerMixin extends AbstractGolem {
         if (Enderscape$isPiercingArrow(source)) info.setReturnValue(SoundEvents.SHULKER_HURT);
     }
 
-    @Inject(method = "hurtServer", at = @At("HEAD"), cancellable = true)
-    public void Enderscape$hurtServer(ServerLevel level, DamageSource source, float amount, CallbackInfoReturnable<Boolean> info) {
-        if (Enderscape$isPiercingArrow(source)) info.setReturnValue(super.hurtServer(level, source, amount));
+    @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
+    public void Enderscape$hurtServer(DamageSource source, float amount, CallbackInfoReturnable<Boolean> info) {
+        if (Enderscape$isPiercingArrow(source)) info.setReturnValue(super.hurt(source, amount));
     }
 
     @Unique

@@ -6,6 +6,7 @@ import net.bunten.enderscape.entity.magnia.MagniaProperties;
 import net.bunten.enderscape.registry.EnderscapeBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -15,11 +16,25 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.HashMap;
+
 import static net.bunten.enderscape.entity.magnia.MagniaMoveable.getMagniaProperties;
 
 public class MagniaSproutBlockEntity extends BlockEntity {
+
     public MagniaSproutBlockEntity(BlockPos pos, BlockState state) {
         super(EnderscapeBlockEntities.MAGNIA_SPROUT, pos, state);
+    }
+
+    private static final HashMap<Direction, Vec3i> DIRECTION_TO_VEC3I = new HashMap<>();
+
+    static {
+        DIRECTION_TO_VEC3I.put(Direction.DOWN, new Vec3i(0, -1, 0));
+        DIRECTION_TO_VEC3I.put(Direction.UP, new Vec3i(0, 1, 0));
+        DIRECTION_TO_VEC3I.put(Direction.NORTH, new Vec3i(0, 0, -1));
+        DIRECTION_TO_VEC3I.put(Direction.SOUTH, new Vec3i(0, 0, 1));
+        DIRECTION_TO_VEC3I.put(Direction.WEST, new Vec3i(-1, 0, 0));
+        DIRECTION_TO_VEC3I.put(Direction.EAST, new Vec3i(1, 0, 0));
     }
 
     public static AABB getRange(Level level, BlockState state, BlockPos originPos) {
@@ -35,8 +50,8 @@ public class MagniaSproutBlockEntity extends BlockEntity {
                 if (level.getBlockState(current).is(type.getBlockedByTag())) break;
             }
 
-            Vec3 start = Vec3.atCenterOf(originPos.relative(direction)).add(direction.getUnitVec3().scale(-1.0F));
-            Vec3 end = Vec3.atCenterOf(current).add(direction.getUnitVec3().scale(-0.5F));
+            Vec3 start = Vec3.atCenterOf(originPos.relative(direction)).add(Vec3.atLowerCornerOf(DIRECTION_TO_VEC3I.get(direction)).scale(-1.0F));
+            Vec3 end = Vec3.atCenterOf(current).add(Vec3.atLowerCornerOf(DIRECTION_TO_VEC3I.get(direction)).scale(-0.5F));
             AABB range = new AABB(start, end);
 
             return switch (direction.getAxis()) {

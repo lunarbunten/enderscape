@@ -8,6 +8,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public interface BlinklightVines {
@@ -16,7 +17,7 @@ public interface BlinklightVines {
     void playBlinkEffects(BlockState state, ServerLevel world, BlockPos pos, RandomSource random);
     IntegerProperty getStageProperty();
 
-    DustColorTransitionOptions BLINKLIGHT_TO_REDSTONE = new DustColorTransitionOptions(0xE7A8FF, 16711680, 1.0F);
+    DustColorTransitionOptions BLINKLIGHT_TO_REDSTONE = new DustColorTransitionOptions(Vec3.fromRGB24(0xE7A8FF).toVector3f(), Vec3.fromRGB24(16711680).toVector3f(), 1.0F);
     
     IntegerProperty BODY_STAGE = StateProperties.BLINKLIGHT_BODY_STAGE;
     IntegerProperty HEAD_STAGE = StateProperties.BLINKLIGHT_HEAD_STAGE;

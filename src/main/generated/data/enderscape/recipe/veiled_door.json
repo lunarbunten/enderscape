@@ -3,7 +3,9 @@
   "category": "redstone",
   "group": "wooden_door",
   "key": {
-    "#": "enderscape:veiled_planks"
+    "#": {
+      "item": "enderscape:veiled_planks"
+    }
   },
   "pattern": [
     "##",

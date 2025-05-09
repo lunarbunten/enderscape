@@ -5,11 +5,13 @@ import net.bunten.enderscape.item.MirrorContext;
 import net.bunten.enderscape.item.MirrorItem;
 import net.bunten.enderscape.item.NebuliteToolContext;
 import net.bunten.enderscape.item.NebuliteToolItem;
+import net.bunten.enderscape.util.NineSliceBlitUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
@@ -99,14 +101,17 @@ public class NebuliteToolHud extends HudElement {
             int index = (i == 0) ? 0 : (i == maxFuel - 1) ? 2 : 1;
             int width = (i == maxFuel - 1) ? 12 : 11;
 
-            graphics.blitSprite(RenderType::guiTextured, segments[index], rx, y, width, 5, white(opacity));
+            TextureAtlasSprite sprite = Minecraft.getInstance().getGuiSprites().getSprite(segments[index]);
+
+            graphics.blit(rx, y, 0, width, 5, sprite, 1.0F, 1.0F, 1.0F, opacity);
         }
 
         costOverlayPosition = lastFueled;
     }
 
     private void renderTransdimensionalOutline(GuiGraphics graphics, int x, int y, float opacity) {
-        graphics.blitSprite(RenderType::guiTextured, TRANSDIMENSIONAL_OUTLINE, x - 6, y - 6, (maxFuel * 11) + 13, 5 + 12, white(transdimensionalAlpha * opacity));
+        NineSliceBlitUtil nineSliceBlit = new NineSliceBlitUtil(Minecraft.getInstance().getGuiSprites(), graphics, transdimensionalAlpha * opacity);
+        nineSliceBlit.blitSprite(TRANSDIMENSIONAL_OUTLINE, x - 6, y - 6, 0, (maxFuel * 11) + 13, 5 + 12);
     }
 
     private void renderInvalidOverlay(GuiGraphics graphics, int x, int y, float opacity) {
@@ -118,14 +123,16 @@ public class NebuliteToolHud extends HudElement {
             int index = (i == 0) ? 0 : (i == maxFuel - 1) ? 2 : 1;
             int width = (i == maxFuel - 1) ? 12 : 11;
 
-            graphics.blitSprite(RenderType::guiTextured, INVALID_OVERLAY_SEGMENTS[index], rx, y, width, 5, white(invalidAlpha * opacity));
+            TextureAtlasSprite sprite = Minecraft.getInstance().getGuiSprites().getSprite(INVALID_OVERLAY_SEGMENTS[index]);
+            graphics.blit(rx, y, 0, width, 5, sprite, 1.0F, 1.0F, 1.0F, invalidAlpha * opacity);
         }
     }
 
     private void renderCostOverlay(GuiGraphics graphics, int y, float opacity) {
         if (costAlpha > 0 && costOverlayPosition >= 0 && fuel >= cost) {
             for (int i = 0; i < cost; i++) {
-                graphics.blitSprite(RenderType::guiTextured, COST_OVERLAY_SEGMENT, costOverlayPosition - (i * 11), y, 11, 5, white(costAlpha * opacity));
+                TextureAtlasSprite sprite = Minecraft.getInstance().getGuiSprites().getSprite(COST_OVERLAY_SEGMENT);
+                graphics.blit(costOverlayPosition - (i * 11), y, 0, 11, 5, sprite, 1.0F, 1.0F, 1.0F, costAlpha * opacity);
             }
         }
     }
@@ -136,6 +143,7 @@ public class NebuliteToolHud extends HudElement {
 
         ItemStack stack = NebuliteToolItem.is(player.getMainHandItem()) ? player.getMainHandItem() : player.getOffhandItem();
         NebuliteToolContext context = new NebuliteToolContext(stack, player.level(), player);
+
 
         boolean displayUI = NebuliteToolItem.is(stack) && context.item().displayHudWhen(context) && !player.isSpectator() && player.getUseItem().isEmpty();
         boolean displayOutline = NebuliteToolItem.is(stack) && !context.item().hideInvalidOutlineWhen(context);

@@ -3,7 +3,9 @@
   "category": "redstone",
   "group": "wooden_button",
   "ingredients": [
-    "enderscape:murublight_planks"
+    {
+      "item": "enderscape:murublight_planks"
+    }
   ],
   "result": {
     "count": 1,

@@ -11,36 +11,23 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
-public class RustleRenderer extends MobRenderer<Rustle, RustleRenderState, RustleModel> {
+public class RustleRenderer extends MobRenderer<Rustle, RustleModel> {
     public RustleRenderer(Context context) {
         super(context, new RustleModel(EnderscapeEntityRenderData.RUSTLE.bakeLayer(context)), 0.4F);
     }
 
     @Override
-    public RustleRenderState createRenderState() {
-        return new RustleRenderState();
+    protected void scale(Rustle mob, PoseStack pose, float f) {
+        pose.scale(mob.getAgeScale(), mob.getAgeScale(), mob.getAgeScale());
     }
 
     @Override
-    protected void scale(RustleRenderState state, PoseStack pose) {
-        pose.scale(state.ageScale, state.ageScale, state.ageScale);
+    protected float getShadowRadius(Rustle mob) {
+        return mob.isBaby() ? super.getShadowRadius(mob) * 0.5F : super.getShadowRadius(mob);
     }
 
     @Override
-    protected float getShadowRadius(RustleRenderState state) {
-        return state.isBaby ? super.getShadowRadius(state) * 0.5F : super.getShadowRadius(state);
-    }
-
-    @Override
-    public void extractRenderState(Rustle mob, RustleRenderState state, float f) {
-        super.extractRenderState(mob, state, f);
-        state.isSheared = mob.isSheared();
-        state.isSleeping = mob.isSleeping();
-        state.sleepingAnimationState.copyFrom(mob.sleepingAnimationState);
-    }
-
-    @Override
-    public ResourceLocation getTextureLocation(RustleRenderState mob) {
+    public ResourceLocation getTextureLocation(Rustle mob) {
         return Enderscape.id("textures/entity/rustle/rustle.png");
     }
 }

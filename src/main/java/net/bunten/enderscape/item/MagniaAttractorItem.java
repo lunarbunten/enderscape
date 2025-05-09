@@ -2,24 +2,25 @@ package net.bunten.enderscape.item;
 
 import net.bunten.enderscape.registry.EnderscapeEnchantments;
 import net.bunten.enderscape.registry.EnderscapeItemSounds;
-import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.BundleItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.BundleContents;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import static net.bunten.enderscape.registry.EnderscapeDataComponents.*;
@@ -35,8 +36,8 @@ public class MagniaAttractorItem extends NebuliteToolItem {
     }
 
     @Override
-    public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        return tryCyclePower(new NebuliteToolContext(player.getItemInHand(hand), level, player)) ? InteractionResult.CONSUME : super.use(level, player, hand);
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        return tryCyclePower(new NebuliteToolContext(player.getItemInHand(hand), level, player)) ? InteractionResultHolder.consume(player.getItemInHand(hand)) : super.use(level, player, hand);
     }
 
     @Override
@@ -59,48 +60,8 @@ public class MagniaAttractorItem extends NebuliteToolItem {
         }
     }
 
-    public static boolean hasBundling(Level level, ItemStack stack) {
-        try {
-            var registry = level.registryAccess().lookup(Registries.ENCHANTMENT).orElse(null);
-            if (registry == null) return false;
-
-            var enchantment = registry.getValue(EnderscapeEnchantments.BUNDLING);
-            if (enchantment == null) return false;
-
-            var holder = registry.wrapAsHolder(enchantment);
-            return EnchantmentHelper.getItemEnchantmentLevel(holder, stack) > 0;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
     public static boolean is(ItemStack stack) {
         return stack.getItem() instanceof MagniaAttractorItem;
-    }
-
-    public static boolean tryAddToBundle(Inventory inventory, ItemStack toAdd) {
-        ItemStack attractor = getValidAttractor(inventory);
-
-        if (attractor.isEmpty() || !MagniaAttractorItem.isEnabled(attractor) || !MagniaAttractorItem.hasBundling(inventory.player.level(), attractor)) {
-            return false;
-        }
-
-        for (ItemStack stack : inventory.items) {
-            if (stack.getItem() instanceof BundleItem && stack.has(DataComponents.BUNDLE_CONTENTS)) {
-                BundleContents contents = stack.get(DataComponents.BUNDLE_CONTENTS);
-                for (ItemStack bundle : contents.items()) {
-                    if (ItemStack.isSameItemSameComponents(bundle, toAdd)) {
-                        BundleContents.Mutable mutableContents = new BundleContents.Mutable(contents);
-                        if (mutableContents.tryInsert(toAdd) > 0) {
-                            stack.set(DataComponents.BUNDLE_CONTENTS, mutableContents.toImmutable());
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-
-        return false;
     }
 
     public static ItemStack getValidAttractor(Inventory inventory) {

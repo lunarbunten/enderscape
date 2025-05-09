@@ -5,18 +5,16 @@
   "client": [
     "AbstractClientPlayerMixin",
     "ClientPacketListenerMixin",
-    "ConditionalItemModelPropertiesMixin",
     "EndEffectsMixin",
     "EndermiteRendererMixin",
     "EntityRenderDispatcherMixin",
     "FogRendererMixin",
     "GameRendererMixin",
-    "LevelEventHandlerMixin",
+    "LevelRendererMixin",
+    "LightTextureMixin",
     "MinecraftMixin",
     "MusicManagerAccess",
-    "MusicManagerMixin",
-    "PortalParticleMixin",
-    "SkyRendererMixin"
+    "PortalParticleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

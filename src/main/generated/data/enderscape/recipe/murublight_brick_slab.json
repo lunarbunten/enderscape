@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "enderscape:murublight_bricks"
+    "#": {
+      "item": "enderscape:murublight_bricks"
+    }
   },
   "pattern": [
     "###"

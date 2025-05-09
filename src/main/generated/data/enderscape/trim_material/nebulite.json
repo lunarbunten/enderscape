@@ -4,5 +4,6 @@
     "color": "#FF66FF",
     "translate": "trim_material.enderscape.nebulite"
   },
-  "ingredient": "enderscape:nebulite"
+  "ingredient": "enderscape:nebulite",
+  "item_model_index": 0.632
 }

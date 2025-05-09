@@ -1,22 +1,29 @@
 package net.bunten.enderscape.client.entity.rubblemite;
 
+import net.bunten.enderscape.entity.rubblemite.Rubblemite;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
-public class RubblemiteModel extends EntityModel<RubblemiteRenderState> {
+public class RubblemiteModel extends HierarchicalModel<Rubblemite> {
     private final ModelPart shell;
     private final ModelPart head;
+    private final ModelPart root;
 
     public RubblemiteModel(ModelPart root) {
-        super(root);
+        this.root = root;
         shell = root.getChild("shell");
         head = shell.getChild("head");
+    }
+
+    @Override
+    public ModelPart root() {
+        return root;
     }
 
     public static LayerDefinition createLayer() {
@@ -32,16 +39,14 @@ public class RubblemiteModel extends EntityModel<RubblemiteRenderState> {
     }
 
     @Override
-    public void setupAnim(RubblemiteRenderState state) {
+    public void setupAnim(Rubblemite mob, float animPos, float animSpeed, float age, float headYaw, float headPitch) {
         root().getAllParts().forEach(ModelPart::resetPose);
-
-        var age = state.ageInTicks;
 
         float strength = 0.05F;
         float speed = 0.3F;
         float speed2 = speed * 2;
 
-        if (state.isDashing) {
+        if (mob.isDashing()) {
             shell.yRot = age;
         } else {
             head.xRot = -Mth.sin(age * speed) * strength;
@@ -50,10 +55,10 @@ public class RubblemiteModel extends EntityModel<RubblemiteRenderState> {
             shell.xRot = Mth.sin(age * speed + Mth.HALF_PI) * strength;
             shell.zRot = Mth.sin(age * speed2) * strength;
 
-            shell.xRot += (state.xRot * (Mth.PI / 180)) / 2;
-            shell.yRot += (state.yRot * (Mth.PI / 180)) / 2;
+            shell.xRot += (headPitch * (Mth.PI / 180)) / 2;
+            shell.yRot += (headYaw * (Mth.PI / 180)) / 2;
         }
         
-        head.visible = !state.insideShell && !state.isDashing;
+        head.visible = !mob.isInsideShell() && !mob.isDashing();
     }
 }

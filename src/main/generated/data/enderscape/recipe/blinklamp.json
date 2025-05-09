@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "minecraft:popped_chorus_fruit",
-    "@": "enderscape:blinklight"
+    "#": {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    "@": {
+      "item": "enderscape:blinklight"
+    }
   },
   "pattern": [
     "#@#",

@@ -92,9 +92,6 @@ public class Enderscape implements ModInitializer {
         addBiomeForVanillaWorldgen(EnderscapeBiomes.CELESTIAL_GROVE, 0.3);
 
         FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(container -> {
-            ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("lighting"), container, Component.translatable("pack.enderscape.lighting"), ResourcePackActivationType.DEFAULT_ENABLED);
-            ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("dark_lighting"), container, Component.translatable("pack.enderscape.dark_lighting"), ResourcePackActivationType.NORMAL);
-
             ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("fix_levitation_advancement"), container, Component.translatable("pack.enderscape.fix_levitation_advancement"), ResourcePackActivationType.DEFAULT_ENABLED);
             ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("fix_vanilla_recipes"), container, Component.translatable("pack.enderscape.fix_vanilla_recipes"), ResourcePackActivationType.DEFAULT_ENABLED);
             ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("new_end_cities"), container, Component.translatable("pack.enderscape.new_end_cities"), ResourcePackActivationType.DEFAULT_ENABLED);

@@ -3,8 +3,12 @@
   "category": "misc",
   "group": "wooden_sign",
   "key": {
-    "#": "enderscape:celestial_planks",
-    "X": "minecraft:stick"
+    "#": {
+      "item": "enderscape:celestial_planks"
+    },
+    "X": {
+      "item": "minecraft:stick"
+    }
   },
   "pattern": [
     "###",

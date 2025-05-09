@@ -3,8 +3,12 @@
   "category": "misc",
   "group": "wooden_fence",
   "key": {
-    "#": "minecraft:stick",
-    "W": "enderscape:murublight_planks"
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "enderscape:murublight_planks"
+    }
   },
   "pattern": [
     "W#W",

@@ -1,5 +1,5 @@
 {
-  "carvers": [],
+  "carvers": {},
   "downfall": 0.5,
   "effects": {
     "additions_sound": {
@@ -16,18 +16,12 @@
       "sound": "enderscape:ambient.void_depths.mood",
       "tick_delay": 6000
     },
-    "music": [
-      {
-        "data": {
-          "max_delay": 24000,
-          "min_delay": 12000,
-          "replace_current_music": false,
-          "sound": "enderscape:music.the_end.biome.void_depths"
-        },
-        "weight": 1
-      }
-    ],
-    "music_volume": 1.0,
+    "music": {
+      "max_delay": 24000,
+      "min_delay": 12000,
+      "replace_current_music": false,
+      "sound": "enderscape:music.the_end.biome.void_depths"
+    },
     "particle": {
       "options": {
         "type": "enderscape:void_stars"

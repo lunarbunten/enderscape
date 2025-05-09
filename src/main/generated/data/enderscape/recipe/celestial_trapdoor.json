@@ -3,7 +3,9 @@
   "category": "redstone",
   "group": "wooden_trapdoor",
   "key": {
-    "#": "enderscape:celestial_planks"
+    "#": {
+      "item": "enderscape:celestial_planks"
+    }
   },
   "pattern": [
     "###",

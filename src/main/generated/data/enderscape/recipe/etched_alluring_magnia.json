@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "enderscape:alluring_magnia"
+    "#": {
+      "item": "enderscape:alluring_magnia"
+    }
   },
   "pattern": [
     "##",

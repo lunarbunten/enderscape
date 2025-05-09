@@ -4,6 +4,7 @@ import net.bunten.enderscape.Enderscape;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -17,12 +18,15 @@ import net.minecraft.world.entity.decoration.Painting;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
+
+import java.util.Optional;
 
 import static net.bunten.enderscape.registry.EnderscapeBlocks.*;
 import static net.bunten.enderscape.registry.EnderscapeItems.*;
@@ -47,7 +51,6 @@ public class EnderscapeCreativeModeTab {
         output.accept(SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE);
         output.accept(STASIS_ARMOR_TRIM_SMITHING_TEMPLATE);
 
-        output.accept(getEnchantedBook(parameters, EnderscapeEnchantments.BUNDLING, 1));
         output.accept(getEnchantedBook(parameters, EnderscapeEnchantments.LIGHTSPEED, 3));
         output.accept(getEnchantedBook(parameters, EnderscapeEnchantments.TRANSDIMENSIONAL, 1));
         output.accept(getEnchantedBook(parameters, EnderscapeEnchantments.REBOUND, 1));
@@ -544,7 +547,7 @@ public class EnderscapeCreativeModeTab {
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.SPAWN_EGGS).register(entries -> {
-            entries.addBefore(CREAKING_HEART, END_TRIAL_SPAWNER);
+            entries.addBefore(ALLAY_SPAWN_EGG, END_TRIAL_SPAWNER);
             entries.addAfter(DONKEY_SPAWN_EGG, DRIFTER_SPAWN_EGG, DRIFTLET_SPAWN_EGG);
             entries.addAfter(RAVAGER_SPAWN_EGG, RUBBLEMITE_SPAWN_EGG, RUSTLE_SPAWN_EGG);
         });
@@ -557,7 +560,16 @@ public class EnderscapeCreativeModeTab {
     }
 
     public static ItemStack getEnchantedBook(CreativeModeTab.ItemDisplayParameters parameters, ResourceKey<Enchantment> enchantment, int level) {
-        return EnchantmentHelper.createBook(new EnchantmentInstance(parameters.holders().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(enchantment), level));
+        Optional<HolderLookup.RegistryLookup<Enchantment>> lookup = parameters.holders().lookup(Registries.ENCHANTMENT);
+        if (lookup.isPresent()) {
+            HolderLookup.RegistryLookup<Enchantment> lookup1 = lookup.get();
+            Optional<Holder.Reference<Enchantment>> enchantmentReference = lookup1.get(enchantment);
+            if (enchantmentReference.isPresent()) {
+                Holder.Reference<Enchantment> reference = enchantmentReference.get();
+                return EnchantedBookItem.createForEnchantment(new EnchantmentInstance(reference, reference.value().getMaxLevel()));
+            }
+        }
+        return ItemStack.EMPTY;
     }
 
     public static ItemStack getPainting(CreativeModeTab.ItemDisplayParameters parameters, ResourceKey<PaintingVariant> painting) {

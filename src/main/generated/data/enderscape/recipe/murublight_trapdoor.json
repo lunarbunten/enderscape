@@ -3,7 +3,9 @@
   "category": "redstone",
   "group": "wooden_trapdoor",
   "key": {
-    "#": "enderscape:murublight_planks"
+    "#": {
+      "item": "enderscape:murublight_planks"
+    }
   },
   "pattern": [
     "###",

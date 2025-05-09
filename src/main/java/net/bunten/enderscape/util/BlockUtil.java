@@ -54,7 +54,7 @@ public class BlockUtil extends net.minecraft.BlockUtil {
             depth--;
             mutable.move(direction);
 
-            if (!level.getBlockState(mutable).isSolidRender()) return false;
+            if (!level.getBlockState(mutable).isSolidRender(level, mutable)) return false;
         }
 
         return depth == 0;

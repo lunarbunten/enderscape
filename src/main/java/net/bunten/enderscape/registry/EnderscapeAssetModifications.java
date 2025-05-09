@@ -7,6 +7,7 @@ import net.bunten.enderscape.Enderscape;
 import net.minecraft.resources.ResourceLocation;
 import net.ramixin.mixson.inline.Mixson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class EnderscapeAssetModifications  {
@@ -36,25 +37,35 @@ public final class EnderscapeAssetModifications  {
     private static void registerItemModelModification(String armorPieceType, ResourceLocation armorMaterial) {
         Mixson.registerEvent(
                 1,
-                ResourceLocation.fromNamespaceAndPath(armorMaterial.getNamespace(), "items/" + armorMaterial.getPath() + "_" + armorPieceType).toString(),
+                ResourceLocation.fromNamespaceAndPath(armorMaterial.getNamespace(), "models/item/" + armorMaterial.getPath() + "_" + armorPieceType).toString(),
                 Enderscape.id("add_trims_to_" + armorMaterial.getPath() + "_" + armorPieceType).toString(),
-                (context) -> {
+                context -> {
                     JsonObject rootJson = context.getFile().getAsJsonObject();
-                    JsonObject modelJson = rootJson.getAsJsonObject("model");
-                    JsonArray casesArray = modelJson.getAsJsonArray("cases");
-                    JsonObject baseCase = casesArray.get(0).getAsJsonObject();
+                    JsonArray overridesArray = rootJson.getAsJsonArray("overrides");
 
-                    EnderscapeTrimMaterials.TRIM_MATERIALS.forEach(trimMaterial -> {
-                        JsonObject newCase = baseCase.deepCopy();
+                    EnderscapeTrimMaterials.TRIM_MATERIALS.forEach((trimMaterial, value) -> {
+                        JsonObject newCase = new JsonObject();
+                        JsonObject predicate = new JsonObject();
 
-                        newCase.addProperty("when", trimMaterial.location().toString());
-                        newCase.getAsJsonObject("model").addProperty("model", Enderscape.id("item/" + armorMaterial.getPath() + "_" + armorPieceType + "_" + trimMaterial.location().getPath() + "_trim").toString());
-
-                        casesArray.add(newCase);
+                        predicate.addProperty("trim_type", value);
+                        newCase.add("predicate", predicate);
+                        newCase.addProperty("model", Enderscape.id("item/" + armorMaterial.getPath() + "_" + armorPieceType + "_" + trimMaterial.location().getPath() + "_trim").toString());
+                        overridesArray.add(newCase);
                     });
+
+                    List<JsonElement> overrideList = new ArrayList<>();
+                    for (JsonElement override : overridesArray) overrideList.add(override);
+
+                    overrideList.sort((a, b) -> Float.compare(a.getAsJsonObject().getAsJsonObject("predicate").get("trim_type").getAsFloat(), b.getAsJsonObject().getAsJsonObject("predicate").get("trim_type").getAsFloat()));
+
+                    JsonArray sortedOverrides = new JsonArray();
+                    overrideList.forEach(sortedOverrides::add);
+
+                    rootJson.add("overrides", sortedOverrides);
                 }
         );
     }
+
 
     private static void registerTrimPatternTextures() {
         Mixson.registerEvent(
@@ -74,8 +85,8 @@ public final class EnderscapeAssetModifications  {
 
                             EnderscapeTrimPatterns.TRIM_PATTERNS.forEach(pattern -> {
                                 String name = pattern.location().getPath();
-                                texturesArray.add(Enderscape.id("trims/entity/humanoid/" + name).toString());
-                                texturesArray.add(Enderscape.id("trims/entity/humanoid_leggings/" + name).toString());
+                                texturesArray.add(Enderscape.id("trims/models/armor/" + name).toString());
+                                texturesArray.add(Enderscape.id("trims/models/armor/" + name + "_leggings").toString());
                             });
 
                             break;
@@ -101,8 +112,8 @@ public final class EnderscapeAssetModifications  {
                         if ("paletted_permutations".equals(type) || "minecraft:paletted_permutations".equals(type)) {
                             JsonObject permutationsJson = sourceObject.getAsJsonObject("permutations");
 
-                            EnderscapeTrimMaterials.TRIM_MATERIALS.forEach(trimMaterial -> {
-                                String trimName = trimMaterial.location().getPath();
+                            EnderscapeTrimMaterials.TRIM_MATERIALS.forEach((material, value) -> {
+                                String trimName = material.location().getPath();
                                 permutationsJson.addProperty(trimName, Enderscape.id("trims/color_palettes/" + trimName).toString());
                             });
 

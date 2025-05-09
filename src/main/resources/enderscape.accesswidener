@@ -11,7 +11,5 @@ accessible method net/minecraft/world/item/enchantment/EnchantmentHelper runIter
 accessible method net/minecraft/world/item/enchantment/EnchantmentHelper runIterationOnItem (Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/enchantment/EnchantmentHelper$EnchantmentVisitor;)V
 accessible method net/minecraft/world/level/block/entity/vault/VaultSharedData getConnectedPlayers ()Ljava/util/Set;
 extendable class net/minecraft/world/level/levelgen/SurfaceRules$Context
-accessible class net/minecraft/client/data/models/ItemModelGenerators$TrimMaterialData
-accessible method net/minecraft/client/data/models/ItemModelGenerators$TrimMaterialData textureName (Lnet/minecraft/resources/ResourceKey;)Ljava/lang/String;
-accessible method net/minecraft/client/data/models/ItemModelGenerators$TrimMaterialData name ()Ljava/lang/String;
-accessible method net/minecraft/client/data/models/ItemModelGenerators$TrimMaterialData <init> (Ljava/lang/String;Lnet/minecraft/resources/ResourceKey;Ljava/util/Map;)V
+accessible method net/minecraft/world/entity/Entity setSharedFlag (IZ)V
+accessible method net/minecraft/client/gui/GuiGraphics innerBlit (Lnet/minecraft/resources/ResourceLocation;IIIIIFFFFFFFF)V

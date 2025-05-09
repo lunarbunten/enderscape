@@ -3,6 +3,7 @@ package net.bunten.enderscape.item;
 import net.bunten.enderscape.Enderscape;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -18,15 +19,16 @@ public class HealingItem extends Item {
         super(settings.stacksTo(1).rarity(Rarity.EPIC).attributes(ItemAttributeModifiers.builder().add(Attributes.ATTACK_DAMAGE, new AttributeModifier(Enderscape.id("healing_attack_damage"), 999, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build()));
     }
 
-    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (!player.getCooldowns().isOnCooldown(stack)) {
+        if (!player.getCooldowns().isOnCooldown(stack.getItem())) {
             player.heal(5000);
             player.getFoodData().eat(5000, 5000);
-            return InteractionResult.SUCCESS;
+            player.getCooldowns().addCooldown(this, 5);
+            return InteractionResultHolder.success(stack);
         }
 
-        return InteractionResult.PASS;
+        return InteractionResultHolder.pass(stack);
     }
 }

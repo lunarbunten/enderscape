@@ -10,7 +10,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -18,8 +18,8 @@ import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -111,21 +111,21 @@ public abstract class AbstractOvergrowthBlock extends DirectionalBlock implement
     }
 
     @Override
-    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player mob, InteractionHand hand, BlockHitResult result) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player mob, InteractionHand hand, BlockHitResult result) {
         if (pathBlock != null && stack.getItem() instanceof ShovelItem && world.getBlockState(pos.relative(state.getValue(FACING))).isAir()) {
             world.playSound(mob, pos, flattenSound, SoundSource.BLOCKS, 1, 1);
             if (!world.isClientSide()) {
                 world.setBlock(pos, pathBlock.defaultBlockState().setValue(FACING, state.getValue(FACING)), Block.UPDATE_ALL);
                 stack.hurtAndBreak(1, mob, LivingEntity.getSlotForHand(hand));
             }
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override
     public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
-        return !isPath && world.getBlockState(pos.relative(getDirection(state))).propagatesSkylightDown();
+        return !isPath && world.getBlockState(pos.relative(getDirection(state))).propagatesSkylightDown(world, pos.relative(getDirection(state)));
     }
 
     @Override
@@ -143,8 +143,9 @@ public abstract class AbstractOvergrowthBlock extends DirectionalBlock implement
         for (int x = -range + 1; x < range; x++) {
             for (int y = -12; y < 12; y++) {
                 for (int z = -range + 1; z < range; z++) {
-                    var pos2 = pos.offset(x, y, z);
-                    boolean bl = level.getBlockState(pos2.relative(dir)).propagatesSkylightDown() && level.getBlockState(pos2).is(baseBlock);
+                    BlockPos pos2 = pos.offset(x, y, z);
+                    BlockPos relative = pos2.relative(dir);
+                    boolean bl = level.getBlockState(relative).propagatesSkylightDown(level, relative) && level.getBlockState(pos2).is(baseBlock);
                     if (bl && Mth.sqrt(x * x + y * y + z * z) <= range) {
                         if (level.getRandom().nextFloat() < 0.6F) {
                             level.setBlock(pos2, state, 2);
@@ -163,12 +164,13 @@ public abstract class AbstractOvergrowthBlock extends DirectionalBlock implement
 
     public boolean hasAir(BlockState state, LevelReader level, BlockPos pos) {
         Direction facing = state.getValue(FACING);
-        BlockState relative = level.getBlockState(pos.relative(facing));
+        BlockPos relative = pos.relative(facing);
+        BlockState relativeState = level.getBlockState(relative);
 
         if (isPath) {
-            return !relative.isSolid() || relative.getBlock() instanceof FenceGateBlock;
+            return !relativeState.isSolid() || relativeState.getBlock() instanceof FenceGateBlock;
         } else {
-            return LightEngine.getLightBlockInto(state, relative, facing, relative.getLightBlock()) < 15;
+            return LightEngine.getLightBlockInto(level, state, pos, relativeState, relative, facing, relativeState.getLightBlock(level, relative)) < 15;
         }
     }
 
@@ -177,9 +179,9 @@ public abstract class AbstractOvergrowthBlock extends DirectionalBlock implement
         return isPath;
     }
 
-    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess access, BlockPos pos, Direction direction, BlockPos pos2, BlockState state2, RandomSource random) {
-        if (direction == state.getValue(FACING) && !hasAir(state, level, pos) && isPath && needsAir) access.scheduleTick(pos, this, 1);
-        return super.updateShape(state, level, access, pos, direction, pos2, state2, random);
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor world, BlockPos pos, BlockPos pos2) {
+        if (direction == state.getValue(FACING) && !hasAir(state, world, pos) && isPath && needsAir) world.scheduleTick(pos, this, 1);
+        return super.updateShape(state, direction, state2, world, pos, pos2);
     }
 
     @Override

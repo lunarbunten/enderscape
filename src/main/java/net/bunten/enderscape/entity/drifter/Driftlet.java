@@ -11,9 +11,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.ConversionParams;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -34,11 +33,11 @@ public class Driftlet extends AbstractDrifter {
 
     private void ageUp() {
         if (level() instanceof ServerLevel server) {
-            convertTo(EnderscapeEntities.DRIFTER, ConversionParams.single(this, false, false), mob -> {
-                mob.finalizeSpawn(server, level().getCurrentDifficultyAt(mob.blockPosition()), EntitySpawnReason.CONVERSION, null);
-                mob.setPersistenceRequired();
-                mob.fudgePositionAfterSizeChange(getDimensions(getPose()));
-            });
+            Drifter drifter = convertTo(EnderscapeEntities.DRIFTER, true);
+            drifter.finalizeSpawn(server, level().getCurrentDifficultyAt(drifter.blockPosition()), MobSpawnType.CONVERSION, null);
+            drifter.setPersistenceRequired();
+            drifter.fudgePositionAfterSizeChange(getDimensions(getPose()));
+            convertTo(EntityType.STRAY, true);
         }
     }
 

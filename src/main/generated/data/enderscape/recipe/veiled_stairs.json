@@ -3,7 +3,9 @@
   "category": "building",
   "group": "wooden_stairs",
   "key": {
-    "#": "enderscape:veiled_planks"
+    "#": {
+      "item": "enderscape:veiled_planks"
+    }
   },
   "pattern": [
     "#  ",

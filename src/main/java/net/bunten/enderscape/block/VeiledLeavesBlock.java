@@ -74,16 +74,16 @@ public class VeiledLeavesBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    protected int getLightBlock(BlockState state) {
+    protected int getLightBlock(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return 1;
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess access, BlockPos pos, Direction direction, BlockPos pos2, BlockState state2, RandomSource random) {
-        if (state.getValue(WATERLOGGED)) access.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor world, BlockPos pos, BlockPos pos2) {
+        if (state.getValue(WATERLOGGED)) world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
 
         int i = getDistanceAt(state2) + 1;
-        if (i != 1 || state.getValue(DISTANCE) != i) access.scheduleTick(pos, this, TICK_DELAY);
+        if (i != 1 || state.getValue(DISTANCE) != i) world.scheduleTick(pos, this, TICK_DELAY);
 
         return state;
     }

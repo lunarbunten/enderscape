@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "purple_dye",
   "ingredients": [
-    "enderscape:corrupt_growth"
+    {
+      "item": "enderscape:corrupt_growth"
+    }
   ],
   "result": {
     "count": 1,

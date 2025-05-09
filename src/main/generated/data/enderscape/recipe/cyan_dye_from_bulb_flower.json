@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "cyan_dye",
   "ingredients": [
-    "enderscape:bulb_flower"
+    {
+      "item": "enderscape:bulb_flower"
+    }
   ],
   "result": {
     "count": 1,

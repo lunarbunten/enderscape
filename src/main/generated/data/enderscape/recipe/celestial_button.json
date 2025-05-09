@@ -3,7 +3,9 @@
   "category": "redstone",
   "group": "wooden_button",
   "ingredients": [
-    "enderscape:celestial_planks"
+    {
+      "item": "enderscape:celestial_planks"
+    }
   ],
   "result": {
     "count": 1,

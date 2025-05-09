@@ -1,6 +1,5 @@
 package net.bunten.enderscape.datagen;
 
-import net.bunten.enderscape.registry.EnderscapeBiomes;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
 import net.minecraft.advancements.critereon.LocationPredicate;
@@ -11,10 +10,10 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.armortrim.ArmorTrim;
+import net.minecraft.world.item.armortrim.TrimMaterial;
+import net.minecraft.world.item.armortrim.TrimPattern;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.equipment.trim.ArmorTrim;
-import net.minecraft.world.item.equipment.trim.TrimMaterial;
-import net.minecraft.world.item.equipment.trim.TrimPattern;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -146,7 +145,6 @@ public class EnderscapeVaultLootProvider extends SimpleFabricLootTableProvider {
                                                 new EnchantRandomlyFunction.Builder()
                                                         .withOneOf(
                                                                 HolderSet.direct(
-                                                                        getEnchantmentReference(BUNDLING),
                                                                         getEnchantmentReference(REBOUND)
                                                                 )
                                                         )

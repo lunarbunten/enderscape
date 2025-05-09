@@ -4,7 +4,9 @@
   "cookingtime": 200,
   "experience": 0.7,
   "group": "shadoline_ingot",
-  "ingredient": "enderscape:raw_shadoline",
+  "ingredient": {
+    "item": "enderscape:raw_shadoline"
+  },
   "result": {
     "id": "enderscape:shadoline_ingot"
   }

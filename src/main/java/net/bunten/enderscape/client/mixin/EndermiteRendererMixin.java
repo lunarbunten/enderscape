@@ -8,7 +8,6 @@ import net.minecraft.client.model.EndermiteModel;
 import net.minecraft.client.renderer.entity.EndermiteRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.world.entity.monster.Endermite;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -18,14 +17,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Environment(EnvType.CLIENT)
 @Mixin(EndermiteRenderer.class)
-public abstract class EndermiteRendererMixin extends MobRenderer<Endermite, LivingEntityRenderState, EndermiteModel> {
-
-    public EndermiteRendererMixin(EntityRendererProvider.Context context, EndermiteModel entityModel, float f) {
-        super(context, entityModel, f);
-    }
+public abstract class EndermiteRendererMixin extends MobRenderer<Endermite, EndermiteModel<Endermite>> {
 
     @Unique
     private final EndermiteRenderer renderer = (EndermiteRenderer) (Object) this;
+
+    public EndermiteRendererMixin(EntityRendererProvider.Context context, EndermiteModel<Endermite> entityModel, float f) {
+        super(context, entityModel, f);
+    }
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void Enderscape$getBrightnessDependentFogColor(EntityRendererProvider.Context context, CallbackInfo ci) {

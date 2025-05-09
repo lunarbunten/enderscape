@@ -10,8 +10,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -36,7 +35,7 @@ public class RipeFlangerBerryBlock extends Block {
 
     protected boolean canFall(Level world, BlockPos pos) {
         boolean bl = FallingBlock.isFree(world.getBlockState(pos.below())) && world.getBlockState(pos.above()).getBlock() != EnderscapeBlocks.FLANGER_BERRY_VINE;
-        if (pos.getY() < world.getMinY()) bl = false;
+        if (pos.getY() < world.getMinBuildHeight()) bl = false;
         return bl;
     }
 
@@ -46,9 +45,9 @@ public class RipeFlangerBerryBlock extends Block {
     }
 
     @Override
-    public BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess access, BlockPos pos, Direction direction, BlockPos pos2, BlockState state2, RandomSource random) {
-        access.scheduleTick(pos, this, getFallDelay());
-        return super.updateShape(state, world, access, pos, direction, pos2, state2, random);
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor world, BlockPos pos, BlockPos pos2) {
+        world.scheduleTick(pos, this, getFallDelay());
+        return super.updateShape(state, direction, state2, world, pos, pos2);
     }
 
     @Override

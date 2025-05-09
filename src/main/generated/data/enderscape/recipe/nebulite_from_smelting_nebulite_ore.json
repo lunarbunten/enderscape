@@ -4,7 +4,9 @@
   "cookingtime": 200,
   "experience": 1.0,
   "group": "nebulite",
-  "ingredient": "enderscape:nebulite_ore",
+  "ingredient": {
+    "item": "enderscape:nebulite_ore"
+  },
   "result": {
     "id": "enderscape:nebulite"
   }

@@ -7,6 +7,8 @@ import net.bunten.enderscape.registry.EnderscapeRegistries;
 import net.bunten.enderscape.util.RGBA;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
@@ -41,6 +43,14 @@ public record SkyParameters(ResourceLocation location, int nebulaColor, float ne
     public static Optional<SkyParameters> getSkyParametersFor(Holder<Biome> biomeHolder) {
         if (biomeHolder == null) return Optional.empty();
 
-        return Minecraft.getInstance().level.registryAccess().lookup(EnderscapeRegistries.SKY_PARAMETERS_KEY).flatMap(registry -> biomeHolder.unwrapKey().map(ResourceKey::location).map(registry::getValue).map(Optional::ofNullable).orElse(Optional.empty()));
+        Registry<SkyParameters> lookup = Minecraft.getInstance().level.registryAccess().registryOrThrow(EnderscapeRegistries.SKY_PARAMETERS_KEY);
+
+        Optional<ResourceKey<Biome>> biomeResourceKey = biomeHolder.unwrapKey();
+        if (biomeResourceKey.isPresent()) {
+            SkyParameters value = lookup.get(biomeResourceKey.get().location());
+            return value != null ? Optional.of(value) : Optional.empty();
+        }
+
+        return Optional.empty();
     }
 }

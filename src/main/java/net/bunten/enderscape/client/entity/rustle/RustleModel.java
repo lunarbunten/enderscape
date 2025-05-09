@@ -1,15 +1,19 @@
 package net.bunten.enderscape.client.entity.rustle;
 
+import net.bunten.enderscape.entity.rubblemite.Rubblemite;
+import net.bunten.enderscape.entity.rustle.Rustle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.FrogModel;
+import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
-public class RustleModel extends EntityModel<RustleRenderState> {
+public class RustleModel extends HierarchicalModel<Rustle> {
 	private final ModelPart body;
 	private final ModelPart crossSpines;
 	private final ModelPart middleSpines;
@@ -18,9 +22,10 @@ public class RustleModel extends EntityModel<RustleRenderState> {
 	private final ModelPart rightAntenna;
 	private final ModelPart leftAntenna;
 	private final ModelPart frontSpines;
+	private final ModelPart root;
 
 	public RustleModel(ModelPart root) {
-		super(root);
+		this.root = root;
 
 		body = root.getChild("body");
 		crossSpines = body.getChild("crossSpines");
@@ -30,6 +35,11 @@ public class RustleModel extends EntityModel<RustleRenderState> {
 		rightAntenna = head.getChild("rightAntenna");
 		leftAntenna = head.getChild("leftAntenna");
 		frontSpines = head.getChild("frontSpines");
+	}
+
+	@Override
+	public ModelPart root() {
+		return root;
 	}
 
 	public static LayerDefinition createLayer() {
@@ -53,21 +63,17 @@ public class RustleModel extends EntityModel<RustleRenderState> {
 	}
 
 	@Override
-	public void setupAnim(RustleRenderState state) {
-		super.setupAnim(state);
+	public void setupAnim(Rustle mob, float animPos, float animSpeed, float age, float headYaw, float headPitch) {
+		root().getAllParts().forEach(ModelPart::resetPose);
 
-		float age = state.ageInTicks;
-		float animPos = state.walkAnimationPos;
-		float animSpeed = state.walkAnimationSpeed;
-
-		leftAntenna.yRot = Mth.sin(age + (animPos / 3) * 0.1F) * animSpeed * 0.3F;
+        leftAntenna.yRot = Mth.sin(age + (animPos / 3) * 0.1F) * animSpeed * 0.3F;
 		rightAntenna.yRot = Mth.sin(age + (animPos / 3) * 0.1F + Mth.HALF_PI) * animSpeed * 0.8F;
 
 		leftAntenna.xRot = Mth.sin(age + (animPos / 3) * 0.1F + Mth.HALF_PI) * animSpeed * 0.8F;
 		rightAntenna.xRot = Mth.sin(age + (animPos / 3) * 0.1F + (Mth.HALF_PI * 3)) * animSpeed * 0.8F;
 
-		head.xRot += (state.xRot * (Mth.PI / 180)) / 2;
-		head.yRot += (state.yRot * (Mth.PI / 180)) / 2;
+		head.xRot = (headPitch * (Mth.PI / 180)) / 2;
+		head.yRot = (headYaw * (Mth.PI / 180)) / 2;
 		head.zRot = Mth.sin(age + (animPos / 3) * 0.06F) * animSpeed * 0.5F;
 
 		body.zRot = Mth.sin(age + (animPos / 3) * 0.03F) * animSpeed * 0.25F;
@@ -76,12 +82,12 @@ public class RustleModel extends EntityModel<RustleRenderState> {
 		middleSpines.yRot = Mth.sin(age + (animPos / 3) * 0.1F + Mth.HALF_PI) * animSpeed * 0.8F;
 		backSpines.yRot = Mth.sin(age + (animPos / 3) * 0.1F + Mth.PI) * animSpeed * 0.8F;
 
-		animate(state.sleepingAnimationState, RustleAnimations.SLEEPING, state.ageInTicks, 1.0F);
+		animate(mob.sleepingAnimationState, RustleAnimations.SLEEPING, age, 1.0F);
 
-		head.xScale = state.isBaby ? 1.25F : 1;
-		head.yScale = state.isBaby ? 1.25F : 1;
-		head.zScale = state.isBaby ? 1.25F : 1;
+		head.xScale = mob.isBaby() ? 1.25F : 1;
+		head.yScale = mob.isBaby() ? 1.25F : 1;
+		head.zScale = mob.isBaby() ? 1.25F : 1;
 
-		crossSpines.visible = !state.isBaby && !state.isSheared;
+		crossSpines.visible = !mob.isBaby() && !mob.isSheared();
 	}
 }

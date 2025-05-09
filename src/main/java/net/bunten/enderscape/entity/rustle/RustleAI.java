@@ -103,7 +103,7 @@ public class RustleAI {
 
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
-                new Swim<>(0.8f),
+                new Swim(0.8f),
 
                 SetWalkTargetAwayFrom.entity(EnderscapeMemory.HURT_BY_ENTITY, 1.25F, 12, true)
             )

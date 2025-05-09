@@ -6,6 +6,7 @@ import net.bunten.enderscape.registry.EnderscapeEntitySounds;
 import net.bunten.enderscape.registry.tag.EnderscapeBlockTags;
 import net.bunten.enderscape.registry.tag.EnderscapeDamageTypeTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -17,7 +18,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
@@ -79,28 +79,30 @@ public class Rubblemite extends Monster {
     }
 
     @Override
-    protected void customServerAiStep(ServerLevel serverLevel) {
-        ProfilerFiller profiler = Profiler.get();
+    protected void customServerAiStep() {
+        if (level() instanceof ServerLevel server) {
+            ProfilerFiller profiler = server.getProfiler();
 
-        profiler.push("rubblemiteBrain");
-        getBrain().tick(serverLevel, this);
-        profiler.pop();
+            profiler.push("rubblemiteBrain");
+            getBrain().tick(server, this);
+            profiler.pop();
 
-        profiler.push("rubblemiteActivityUpdate");
-        RubblemiteAI.updateActivity(this);
-        profiler.pop();
+            profiler.push("rubblemiteActivityUpdate");
+            RubblemiteAI.updateActivity(this);
+            profiler.pop();
+        }
 
-        super.customServerAiStep(serverLevel);
+        super.customServerAiStep();
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason type, @Nullable SpawnGroupData groupData) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData groupData) {
         RubblemiteVariant.set(this, RubblemiteVariant.pickForSpawning(random, level.getBiome(blockPosition())));
-        return super.finalizeSpawn(level, difficulty, type, groupData);
+        return super.finalizeSpawn(level, difficulty, spawnType, groupData);
     }
 
-    public static boolean canSpawn(EntityType<Rubblemite> type, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
-        return level.getDifficulty() != Difficulty.PEACEFUL && (level.getBlockState(pos.below()).is(EnderscapeBlockTags.RUBBLEMITE_SPAWNABLE_ON) || EntitySpawnReason.isSpawner(reason));
+    public static boolean canSpawn(EntityType<?> type, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+        return level.getDifficulty() != Difficulty.PEACEFUL && (level.getBlockState(pos.below()).is(EnderscapeBlockTags.RUBBLEMITE_SPAWNABLE_ON) || MobSpawnType.isSpawner(spawnType));
     }
 
     @Override
@@ -182,7 +184,7 @@ public class Rubblemite extends Monster {
             float knockback = 1;
 
             if (source.getDirectEntity() instanceof LivingEntity living) {
-                Registry<Enchantment> enchantments = this.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
+                HolderLookup.RegistryLookup<Enchantment> enchantments = level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
                 knockback += EnchantmentHelper.getEnchantmentLevel(enchantments.getOrThrow(Enchantments.KNOCKBACK), living);
             }
 
@@ -201,23 +203,23 @@ public class Rubblemite extends Monster {
     }
 
     @Override
-    public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
+    public boolean hurt(DamageSource source, float amount) {
         if (isAlive() && source.is(EnderscapeDamageTypeTags.RUBBLEMITES_CAN_BLOCK)) {
-            if (amount >= 12 && super.hurtServer(level, source, amount)) {
+            if (amount >= 12 && super.hurt(source, amount)) {
                 return true;
             } else {
                 if (isDashing() || isInsideShell()) {
                     onDamageBlocked(source);
                     return false;
                 }
-                if (canHideInShell() && super.hurtServer(level, source, amount)) {
+                if (canHideInShell() && super.hurt(source, amount)) {
                     enterShell(40);
                     return true;
                 }
             }
         }
 
-        return super.hurtServer(level, source, amount);
+        return super.hurt(source, amount);
     }
 
     @Override
@@ -242,8 +244,8 @@ public class Rubblemite extends Monster {
     }
 
     @Override
-    public boolean doHurtTarget(ServerLevel serverLevel, Entity entity) {
-        return !isInsideShell() && super.doHurtTarget(serverLevel, entity);
+    public boolean doHurtTarget(Entity entity) {
+        return !isInsideShell() && super.doHurtTarget(entity);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class VeiledTreeGenerator {
     public static final Block LOG = EnderscapeBlocks.VEILED_LOG;
 
     public static boolean tryGenerate(LevelAccessor level, RandomSource random, BlockPos origin, VeiledTreeConfig config) {
-        if (level.getBlockState(origin.below()).isSolidRender() && BlockUtil.hasTerrainDepth(level, origin.below(), 8, Direction.DOWN)) {
+        if (level.getBlockState(origin.below()).isSolidRender(level, origin.below()) && BlockUtil.hasTerrainDepth(level, origin.below(), 8, Direction.DOWN)) {
             int heightOffset = Mth.nextInt(random, 0, 2);
 
             generateLogs(level, origin.above(heightOffset), random, config);

@@ -3,7 +3,9 @@
   "category": "building",
   "group": "wooden_slab",
   "key": {
-    "#": "enderscape:murublight_planks"
+    "#": {
+      "item": "enderscape:murublight_planks"
+    }
   },
   "pattern": [
     "###"

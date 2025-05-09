@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    "enderscape:polished_mirestone"
+    {
+      "item": "enderscape:polished_mirestone"
+    }
   ],
   "result": {
     "count": 1,

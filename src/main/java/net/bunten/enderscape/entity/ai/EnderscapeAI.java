@@ -10,9 +10,9 @@ import java.util.Optional;
 
 public class EnderscapeAI {
 
-    public static Optional<? extends LivingEntity> getAttackTarget(ServerLevel serverLevel, LivingEntity mob) {
+    public static Optional<? extends LivingEntity> getAttackTarget(LivingEntity mob) {
         Optional<LivingEntity> target = BehaviorUtils.getLivingEntityFromUUIDMemory(mob, EnderscapeMemory.ANGRY_AT);
-        if (target.isPresent() && Sensor.isEntityAttackableIgnoringLineOfSight(serverLevel, mob, target.get())) return target;
+        if (target.isPresent() && Sensor.isEntityAttackableIgnoringLineOfSight(mob, target.get())) return target;
         if (getAttackablePlayer(mob).isPresent()) return getAttackablePlayer(mob);
         return getAttackableFrom(mob, EnderscapeMemory.NEAREST_VISIBLE_ATTACKABLE_ENEMY);
     }

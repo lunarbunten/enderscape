@@ -55,12 +55,12 @@ public record MirrorUseChecks(@Nullable Component failureComponent, Predicate<Mi
 
         if (user instanceof Player player) {
             player.displayClientMessage(failureComponent, true);
-            player.getCooldowns().addCooldown(stack, 20);
+            player.getCooldowns().addCooldown(stack.getItem(), 20);
         }
 
         user.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
 
-        return InteractionResult.SUCCESS_SERVER;
+        return InteractionResult.SUCCESS;
     }
 
     private static boolean canTravelTo(MirrorContext context) {

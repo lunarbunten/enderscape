@@ -19,8 +19,8 @@ public abstract class MobMixin extends LivingEntity {
     }
 
     @Inject(method = "finalizeSpawn", at = @At("TAIL"))
-    public void Enderscape$applyOminous(ServerLevelAccessor level, DifficultyInstance instance, EntitySpawnReason reason, SpawnGroupData data, CallbackInfoReturnable<SpawnGroupData> info) {
-        if (reason.equals(EntitySpawnReason.TRIAL_SPAWNER) && BlockPos.findClosestMatch(blockPosition(), 16, 16, pos -> level.getBlockState(pos).is(EnderscapeBlocks.END_TRIAL_SPAWNER)).isPresent()) {
+    public void Enderscape$applyOminous(ServerLevelAccessor level, DifficultyInstance instance, MobSpawnType reason, SpawnGroupData data, CallbackInfoReturnable<SpawnGroupData> info) {
+        if (reason.equals(MobSpawnType.TRIAL_SPAWNER) && BlockPos.findClosestMatch(blockPosition(), 16, 16, pos -> level.getBlockState(pos).is(EnderscapeBlocks.END_TRIAL_SPAWNER)).isPresent()) {
             EndTrialSpawnable.setSpawnedFromEndTrialSpawner(this, true);
         }
     }

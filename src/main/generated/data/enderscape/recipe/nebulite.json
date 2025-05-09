@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "nebulite",
   "ingredients": [
-    "enderscape:nebulite_block"
+    {
+      "item": "enderscape:nebulite_block"
+    }
   ],
   "result": {
     "count": 9,

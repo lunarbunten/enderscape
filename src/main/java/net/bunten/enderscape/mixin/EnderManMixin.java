@@ -26,7 +26,7 @@ public abstract class EnderManMixin extends Monster {
         super(entityType, level);
     }
 
-    @Inject(method = "isBeingStaredBy", at = @At("RETURN"))
+    @Inject(method = "isLookingAtMe", at = @At("RETURN"))
     public void Enderscape$sendStarePayload(Player player, CallbackInfoReturnable<Boolean> info) {
         if (info.getReturnValue() && player instanceof ServerPlayer server && enderman.canAttack(server)) EnderscapeServerNetworking.sendStareOverlayPayload(server);
     }

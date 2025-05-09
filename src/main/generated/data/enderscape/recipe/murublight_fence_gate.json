@@ -3,8 +3,12 @@
   "category": "redstone",
   "group": "wooden_fence_gate",
   "key": {
-    "#": "minecraft:stick",
-    "W": "enderscape:murublight_planks"
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "enderscape:murublight_planks"
+    }
   },
   "pattern": [
     "#W#",

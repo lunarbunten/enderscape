@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.equipment.trim.TrimMaterial;
+import net.minecraft.world.item.armortrim.TrimMaterial;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -18,7 +18,7 @@ public class EnderscapeTrimMaterialProvider extends FabricDynamicRegistryProvide
 
     @Override
     protected void configure(HolderLookup.Provider provider, Entries entries) {
-        TRIM_MATERIALS.forEach((key) -> add(provider, entries, key));
+        TRIM_MATERIALS.forEach((key, value) -> add(provider, entries, key));
     }
 
     private void add(HolderLookup.Provider provider, Entries entries, ResourceKey<TrimMaterial> key) {

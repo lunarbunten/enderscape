@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    "#enderscape:veiled_logs"
+    {
+      "tag": "enderscape:veiled_logs"
+    }
   ],
   "result": {
     "count": 4,

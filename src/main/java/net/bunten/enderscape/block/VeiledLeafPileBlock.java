@@ -3,13 +3,12 @@ package net.bunten.enderscape.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -75,7 +74,7 @@ public class VeiledLeafPileBlock extends Block {
     }
 
     @Override
-    protected int getLightBlock(BlockState blockState) {
+    protected int getLightBlock(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return 1;
     }
 
@@ -90,17 +89,8 @@ public class VeiledLeafPileBlock extends Block {
     }
 
     @Override
-    protected BlockState updateShape(
-            BlockState state,
-            LevelReader level,
-            ScheduledTickAccess access,
-            BlockPos pos,
-            Direction direction,
-            BlockPos pos2,
-            BlockState state2,
-            RandomSource random
-    ) {
-        return !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, level, access, pos, direction, pos2, state2, random);
+    protected BlockState updateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor world, BlockPos pos, BlockPos pos2) {
+        return !state.canSurvive(world, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, state2, world, pos, pos2);
     }
 
     @Override

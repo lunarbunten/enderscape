@@ -15,7 +15,6 @@ import net.bunten.enderscape.registry.EnderscapeMobEffects;
 import net.bunten.enderscape.registry.EnderscapeParticles;
 import net.bunten.enderscape.registry.tag.EnderscapeEntityTags;
 import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -32,6 +31,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
@@ -48,6 +48,9 @@ import static net.bunten.enderscape.registry.EnderscapeEnchantments.hasRebound;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity implements MagniaMoveable, DashJumpUser, EndTrialSpawnable {
+
+    @Unique
+    private Vec3 Enderscape$deltaMovementAtStartOfTravel;
 
     @Shadow public abstract boolean isFallFlying();
 
@@ -141,13 +144,8 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
         if (isFallFlying() && hasRebound(level(), getItemBySlot(EquipmentSlot.CHEST)) && getDeltaMovement().y() > -0.9) info.setReturnValue(true);
     }
 
-    @Redirect(method = "canGlide", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;onGround()Z"))
-    private boolean Enderscape$canGlide(LivingEntity instance) {
-        return hasRebound(level(), instance.getItemBySlot(EquipmentSlot.CHEST)) ? Enderscape$elytraGroundTicks >= 10 : instance.onGround();
-    }
-
-    @Redirect(method = "hurtServer", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;broadcastEntityEvent(Lnet/minecraft/world/entity/Entity;B)V"))
-    private void Enderscape$redirectShieldDamageSound(ServerLevel level, Entity entity, byte b) {
+    @Redirect(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;broadcastEntityEvent(Lnet/minecraft/world/entity/Entity;B)V"))
+    private void Enderscape$redirectShieldDamageSound(Level level, Entity entity, byte b) {
         if (entity instanceof LivingEntity living && living.getUseItem().is(EnderscapeItemTags.RUBBLE_SHIELDS)) {
             level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), EnderscapeItemSounds.RUBBLE_SHIELD_BLOCK, entity.getSoundSource(), 2, 1);
         } else {
@@ -155,12 +153,13 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
         }
     }
 
-    @Inject(method = "updateFallFlying", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;canGlide()Z", shift = At.Shift.BEFORE))
+    @Inject(method = "updateFallFlying", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ElytraItem;isFlyEnabled(Lnet/minecraft/world/item/ItemStack;)Z", shift = At.Shift.BEFORE))
     private void Enderscape$updateFallFlying(CallbackInfo info) {
         if (onGround()) {
-            if (Enderscape$elytraGroundTicks < 10 && mob.isFallFlying()) mob.getArmorSlots().forEach(stack -> {
-                if (stack.has(DataComponents.GLIDER) && stack.isDamageableItem() && !stack.nextDamageWillBreak()) stack.hurtAndBreak(1, mob, mob.getEquipmentSlotForItem(stack));
-            });
+            if (Enderscape$elytraGroundTicks < 10 && mob.isFallFlying()) {
+                ItemStack stack = mob.getItemBySlot(EquipmentSlot.CHEST);
+                if (stack.isDamageableItem() && stack.getDamageValue() < stack.getMaxDamage()) stack.hurtAndBreak(1, mob, mob.getEquipmentSlotForItem(stack));
+            }
             Enderscape$elytraGroundTicks++;
         }
     }
@@ -197,7 +196,7 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
         if (!isFallFlying() && Enderscape$elytraGroundTicks > 0) Enderscape$elytraGroundTicks--;
 
         if (DashJumpUser.dashed(mob)) {
-            Vec3 vel = mob.position().subtract(mob.oldPosition()).scale(-1.0F);
+            Vec3 vel = mob.position().subtract(new Vec3(xOld, yOld, zOld)).scale(-1.0F);
 
             if (mob.isShiftKeyDown()) {
                 mob.setDeltaMovement(mob.getDeltaMovement().multiply(0.92, 1, 0.92));
@@ -217,9 +216,45 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
         }
     }
 
-    @Inject(at = @At("HEAD"), method = "handleFallFlyingCollisions")
-    private void Enderscape$handleFallFlyingCollisions(double start, double last, CallbackInfo info) {
-        if (onGround() && mob.getDeltaMovement().lengthSqr() > 0.4 && !hasRebound(level(), getItemBySlot(EquipmentSlot.CHEST))) Enderscape$playLandingEffects(start, last);
+    @Redirect(
+            method = "travel",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/LivingEntity;onGround()Z",
+                    ordinal = 1
+            )
+    )
+    private boolean Enderscape$travel(LivingEntity instance) {
+        return hasRebound(level(), instance.getItemBySlot(EquipmentSlot.CHEST)) ? Enderscape$elytraGroundTicks >= 10 && isFallFlying() : instance.onGround();
+    }
+
+    @Redirect(
+            method = "updateFallFlying",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/LivingEntity;onGround()Z"
+            )
+    )
+    private boolean Enderscape$updateFallFlying(LivingEntity instance) {
+        return hasRebound(level(), instance.getItemBySlot(EquipmentSlot.CHEST)) ? Enderscape$elytraGroundTicks >= 10 && isFallFlying() : instance.onGround();
+    }
+
+    @Inject(method = "travel", at = @At(value = "HEAD"))
+    private void Enderscape$travelHead(Vec3 vec3, CallbackInfo ci) {
+        Enderscape$deltaMovementAtStartOfTravel = getDeltaMovement();
+    }
+
+    @Inject(
+            method = "travel",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/LivingEntity;move(Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V",
+                    shift = At.Shift.AFTER,
+                    ordinal = 2
+            )
+    )
+    private void Enderscape$travelShiftAfter(Vec3 vec3, CallbackInfo ci) {
+        if (onGround() && mob.getDeltaMovement().lengthSqr() > 0.4 && !hasRebound(level(), getItemBySlot(EquipmentSlot.CHEST))) Enderscape$playLandingEffects(Enderscape$deltaMovementAtStartOfTravel.horizontalDistance(), getDeltaMovement().horizontalDistance());
     }
 
     @Inject(at = @At("HEAD"), method = "makePoofParticles", cancellable = true)
@@ -256,6 +291,21 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
     @Unique
     protected boolean Enderscape$hasDriftPhysics() {
         return mob.getItemBySlot(EquipmentSlot.LEGS).is(EnderscapeItems.DRIFT_LEGGINGS) || mob.hasEffect(EnderscapeMobEffects.LOW_GRAVITY);
+    }
+
+    @Inject(
+            method = "updateFallFlying",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/item/ItemStack;hurtAndBreak(ILnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;)V",
+                    shift = At.Shift.AFTER
+            )
+    )
+    private void Enderscape$travelShiftAfter(CallbackInfo ci) {
+        ItemStack stack = this.getItemBySlot(EquipmentSlot.CHEST);
+        if (stack.getDamageValue() == stack.getMaxDamage() - 1 && stack.getItem() == Items.ELYTRA) {
+            level().playSound(null, getX(), getY(), getZ(), EnderscapeItemSounds.ELYTRA_BREAK, getSoundSource(), 1.0F, 1.0F);
+        }
     }
 
     @Unique

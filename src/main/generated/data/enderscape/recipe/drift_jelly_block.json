@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "enderscape:drift_jelly_bottle"
+    "#": {
+      "item": "enderscape:drift_jelly_bottle"
+    }
   },
   "pattern": [
     "##",

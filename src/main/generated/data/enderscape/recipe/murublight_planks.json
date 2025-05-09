@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    "#enderscape:murublight_stems"
+    {
+      "tag": "enderscape:murublight_stems"
+    }
   ],
   "result": {
     "count": 4,

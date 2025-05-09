@@ -9,33 +9,36 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.equipment.trim.TrimMaterial;
+import net.minecraft.world.item.armortrim.TrimMaterial;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class EnderscapeTrimMaterials {
 
-    public static final List<ResourceKey<TrimMaterial>> TRIM_MATERIALS = new ArrayList<>();
+    public static final HashMap<ResourceKey<TrimMaterial>, Float> TRIM_MATERIALS = new LinkedHashMap<>();
 
-    public static final ResourceKey<TrimMaterial> NEBULITE = register("nebulite");
-    public static final ResourceKey<TrimMaterial> SHADOLINE = register("shadoline");
+    public static final float NEBULITE_VALUE = 0.632F;
+    public static final float SHADOLINE_VALUE = 0.743F;
+
+    public static final ResourceKey<TrimMaterial> NEBULITE = register("nebulite", NEBULITE_VALUE);
+    public static final ResourceKey<TrimMaterial> SHADOLINE = register("shadoline", SHADOLINE_VALUE);
 
     public static void bootstrap(BootstrapContext<TrimMaterial> context) {
-        register(context, NEBULITE, EnderscapeItems.NEBULITE, Style.EMPTY.withColor(0xFF66FF));
-        register(context, SHADOLINE, EnderscapeItems.SHADOLINE_INGOT, Style.EMPTY.withColor(0x315B4D));
+        register(context, NEBULITE, EnderscapeItems.NEBULITE, Style.EMPTY.withColor(0xFF66FF), NEBULITE_VALUE);
+        register(context, SHADOLINE, EnderscapeItems.SHADOLINE_INGOT, Style.EMPTY.withColor(0x315B4D), SHADOLINE_VALUE);
     }
 
-    private static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> key, Item item, Style style) {
+    private static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> key, Item item, Style style, float f) {
         ResourceLocation location = key.location();
-        TrimMaterial material = TrimMaterial.create(location.getPath(), item, Component.translatable(Util.makeDescriptionId("trim_material", location)).withStyle(style), Map.of());
+        TrimMaterial material = TrimMaterial.create(location.getPath(), item, f, Component.translatable(Util.makeDescriptionId("trim_material", location)).withStyle(style), Map.of());
         context.register(key, material);
     }
 
-    private static ResourceKey<TrimMaterial> register(String name) {
+    private static ResourceKey<TrimMaterial> register(String name, float value) {
         ResourceKey<TrimMaterial> key = ResourceKey.create(Registries.TRIM_MATERIAL, Enderscape.id(name));
-        TRIM_MATERIALS.add(key);
+        TRIM_MATERIALS.put(key, value);
         return key;
     }
 }

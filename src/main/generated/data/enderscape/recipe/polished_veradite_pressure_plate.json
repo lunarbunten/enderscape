@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": "enderscape:polished_veradite"
+    "#": {
+      "item": "enderscape:polished_veradite"
+    }
   },
   "pattern": [
     "##"

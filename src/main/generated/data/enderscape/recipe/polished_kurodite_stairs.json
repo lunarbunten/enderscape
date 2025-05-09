@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "enderscape:polished_kurodite"
+    "#": {
+      "item": "enderscape:polished_kurodite"
+    }
   },
   "pattern": [
     "#  ",

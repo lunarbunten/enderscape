@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "enderscape:celestial_bricks"
+    "#": {
+      "item": "enderscape:celestial_bricks"
+    }
   },
   "pattern": [
     "###",

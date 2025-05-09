@@ -3,7 +3,9 @@
   "category": "building",
   "group": "nebulite_block",
   "key": {
-    "#": "enderscape:nebulite"
+    "#": {
+      "item": "enderscape:nebulite"
+    }
   },
   "pattern": [
     "###",

@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.redstone.Orientation;
 import org.jetbrains.annotations.Nullable;
 
 public class BlinklampBlock extends Block {
@@ -43,11 +42,11 @@ public class BlinklampBlock extends Block {
     }
 
     @Override
-    public void neighborChanged(BlockState state, Level world, BlockPos pos, Block block, @Nullable Orientation orientation, boolean notify) {
-        if (!world.isClientSide()) {
-            int luminance = findLuminance(world, pos);
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos blockPos2, boolean bl) {
+        if (!level.isClientSide()) {
+            int luminance = findLuminance(level, pos);
             if (luminance != getLuminance(state)) {
-                world.scheduleTick(pos, this, 5);
+                level.scheduleTick(pos, this, 5);
             }
         }
     }

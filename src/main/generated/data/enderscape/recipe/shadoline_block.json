@@ -3,7 +3,9 @@
   "category": "building",
   "group": "shadoline_block",
   "key": {
-    "#": "enderscape:shadoline_ingot"
+    "#": {
+      "item": "enderscape:shadoline_ingot"
+    }
   },
   "pattern": [
     "###",

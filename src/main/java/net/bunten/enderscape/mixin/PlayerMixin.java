@@ -4,20 +4,21 @@ import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.entity.magnia.MagniaMoveable;
 import net.bunten.enderscape.item.MagniaAttractorItem;
 import net.bunten.enderscape.item.NebuliteToolContext;
+import net.bunten.enderscape.item.RubbleShieldItem;
 import net.bunten.enderscape.registry.EnderscapeCriteria;
+import net.bunten.enderscape.registry.EnderscapeDataComponents;
 import net.bunten.enderscape.registry.EnderscapeItemSounds;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ExperienceOrb;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -26,7 +27,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -41,8 +41,18 @@ public abstract class PlayerMixin extends LivingEntity {
     @Unique
     private int Enderscape$airTicks = 0;
 
+    @Unique
+    private final Player player = (Player) (Object) this;
+
     protected PlayerMixin(EntityType<? extends LivingEntity> type, Level world) {
         super(type, world);
+    }
+
+    @Inject(at = @At("HEAD"), method = "jumpFromGround")
+    public void Enderscape$jumpFromGround(CallbackInfo info) {
+        if (level() instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer &&  isUsingItem() && getUseItem().has(EnderscapeDataComponents.DASH_JUMP)) {
+            getUseItem().get(EnderscapeDataComponents.DASH_JUMP).apply(serverLevel, serverPlayer, player.getUseItem(), player.getUseItem().get(EnderscapeDataComponents.DASH_JUMP));
+        }
     }
 
     @Inject(at = @At("HEAD"), method = "tick")
@@ -145,8 +155,28 @@ public abstract class PlayerMixin extends LivingEntity {
         if (EnderscapeConfig.getInstance().elytraAddOpenCloseSounds) playSound(EnderscapeItemSounds.ELYTRA_STOP_GLIDING, 1, Mth.nextFloat(getRandom(), 0.8F, 1.2F));
     }
 
-    @Redirect(method = "hurtCurrentlyUsedShield", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
-    private boolean Enderscape$redirectShieldCheck(ItemStack instance, Item item) {
-        return instance.getItem() instanceof ShieldItem;
+    @Inject(at = @At("HEAD"), method = "hurtCurrentlyUsedShield")
+    private void Enderscape$redirectShieldCheck(float f, CallbackInfo info) {
+        if (useItem.getItem() instanceof RubbleShieldItem) {
+            if (!level().isClientSide) {
+                player.awardStat(Stats.ITEM_USED.get(this.useItem.getItem()));
+            }
+
+            if (f >= 3.0F) {
+                int i = 1 + Mth.floor(f);
+                InteractionHand hand = this.getUsedItemHand();
+                useItem.hurtAndBreak(i, this, getSlotForHand(hand));
+                if (useItem.isEmpty()) {
+                    if (hand == InteractionHand.MAIN_HAND) {
+                        setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+                    } else {
+                        setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
+                    }
+
+                    useItem = ItemStack.EMPTY;
+                    playSound(SoundEvents.SHIELD_BREAK, 0.8F, 0.8F + level().random.nextFloat() * 0.4F);
+                }
+            }
+        }
     }
 }
