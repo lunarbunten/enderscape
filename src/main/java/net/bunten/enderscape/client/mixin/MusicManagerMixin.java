@@ -1,5 +1,6 @@
 package net.bunten.enderscape.client.mixin;
 
+import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.client.EnderscapeClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -40,7 +41,7 @@ public abstract class MusicManagerMixin {
     public void Enderscape$tick(CallbackInfo info) {
         Music situational = minecraft.getSituationalMusic().music();
 
-        if (currentMusic != null) {
+        if (currentMusic != null && EnderscapeConfig.getInstance().structureMusicFadingEnabled) {
             boolean fadeToStructureMusic = EnderscapeClient.structureMusic.filter(music -> situational == music && currentMusic.getLocation() != music.getEvent().value().location()).isPresent();
             boolean fadeFromStructureMusic = EnderscapeClient.structureMusic.isEmpty() && STRUCTURE_TRACKS.contains(currentMusic.getLocation());
 

@@ -79,6 +79,7 @@ public class EnderscapeConfig {
     @SerialEntry public boolean skyboxAddDynamicFogDensity = true;
     @SerialEntry public boolean skyboxScalesBrightnessWithGamma = true;
     @SerialEntry public boolean skyboxUpdateEnabled = true;
+    @SerialEntry public boolean structureMusicFadingEnabled = true;
     @SerialEntry public boolean tridentsReturnFromVoid = true;
     @SerialEntry public boolean voidPoofParticlesUponDeath = true;
 
