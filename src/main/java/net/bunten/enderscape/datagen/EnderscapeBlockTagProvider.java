@@ -4,15 +4,16 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
 import java.util.concurrent.CompletableFuture;
 
 import static net.bunten.enderscape.registry.EnderscapeBlocks.*;
 import static net.bunten.enderscape.registry.tag.EnderscapeBlockTags.*;
-import static net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags.ORES;
-import static net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags.STORAGE_BLOCKS;
+import static net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags.*;
 import static net.minecraft.world.level.block.Blocks.*;
 
 public class EnderscapeBlockTagProvider extends FabricTagProvider<Block> {
@@ -212,7 +213,17 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider<Block> {
         getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS).add(VEILED_STAIRS, CELESTIAL_STAIRS, MURUBLIGHT_STAIRS);
         getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS).add(VEILED_TRAPDOOR, CELESTIAL_TRAPDOOR, MURUBLIGHT_TRAPDOOR);
 
+        getOrCreateTagBuilder(STRIPPED_LOGS).add(STRIPPED_VEILED_LOG, STRIPPED_CELESTIAL_STEM, STRIPPED_MURUBLIGHT_STEM);
+        getOrCreateTagBuilder(STRIPPED_WOODS).add(STRIPPED_VEILED_WOOD, STRIPPED_CELESTIAL_HYPHAE, STRIPPED_MURUBLIGHT_HYPHAE);
         getOrCreateTagBuilder(ORES).add(NEBULITE_ORE, SHADOLINE_ORE, MIRESTONE_NEBULITE_ORE, MIRESTONE_SHADOLINE_ORE);
         getOrCreateTagBuilder(STORAGE_BLOCKS).add(SHADOLINE_BLOCK, NEBULITE_BLOCK, DRIFT_JELLY_BLOCK);
+
+        getOrCreateTagBuilder(externalKey("create", "tree_attachments")).add(MURUBLIGHT_SHELF);
+        getOrCreateTagBuilder(externalKey("create", "tree_roots")).add(VEILED_LOG, VEILED_WOOD);
+        getOrCreateTagBuilder(externalKey("create", "wrench_pickup")).add(BLINKLAMP, ALLURING_MAGNIA_SPROUT, REPULSIVE_MAGNIA_SPROUT);
+    }
+
+    private TagKey<Block> externalKey(String namespace, String path) {
+        return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(namespace, path));
     }
 }
