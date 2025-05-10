@@ -10,7 +10,7 @@ import net.ramixin.mixson.inline.Mixson;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class EnderscapeAssetModifications  {
+public final class EnderscapeAssetModifications {
     private static final List<String> ARMOR_PIECE_TYPES = List.of("helmet", "chestplate", "leggings", "boots");
 
     private static final List<ResourceLocation> ARMOR_MATERIALS = List.of(
@@ -56,7 +56,14 @@ public final class EnderscapeAssetModifications  {
                     List<JsonElement> overrideList = new ArrayList<>();
                     for (JsonElement override : overridesArray) overrideList.add(override);
 
-                    overrideList.sort((a, b) -> Float.compare(a.getAsJsonObject().getAsJsonObject("predicate").get("trim_type").getAsFloat(), b.getAsJsonObject().getAsJsonObject("predicate").get("trim_type").getAsFloat()));
+                    overrideList.sort((a, b) -> {
+                        JsonElement typeA = a.getAsJsonObject().getAsJsonObject("predicate").get("trim_type");
+                        JsonElement typeB = b.getAsJsonObject().getAsJsonObject("predicate").get("trim_type");
+
+                        if (typeA == null || !typeA.isJsonPrimitive() || typeB == null || !typeB.isJsonPrimitive()) return 0;
+
+                        return Float.compare(typeA.getAsFloat(), typeB.getAsFloat());
+                    });
 
                     JsonArray sortedOverrides = new JsonArray();
                     overrideList.forEach(sortedOverrides::add);
@@ -65,7 +72,6 @@ public final class EnderscapeAssetModifications  {
                 }
         );
     }
-
 
     private static void registerTrimPatternTextures() {
         Mixson.registerEvent(
