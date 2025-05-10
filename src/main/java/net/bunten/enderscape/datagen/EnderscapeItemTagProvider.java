@@ -4,7 +4,9 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 import java.util.concurrent.CompletableFuture;
@@ -101,5 +103,12 @@ public class EnderscapeItemTagProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(SHIELD_TOOLS).add(END_STONE_RUBBLE_SHIELD, VERADITE_RUBBLE_SHIELD, MIRESTONE_RUBBLE_SHIELD, KURODITE_RUBBLE_SHIELD);
         getOrCreateTagBuilder(STORAGE_BLOCKS).add(SHADOLINE_BLOCK.asItem(), NEBULITE_BLOCK.asItem(), DRIFT_JELLY_BLOCK.asItem());
         getOrCreateTagBuilder(TOOLS).add(MIRROR, MAGNIA_ATTRACTOR);
+
+        getOrCreateTagBuilder(externalKey("create", "upright_on_belt")).add(RUSTLE_BUCKET, DRIFT_JELLY_BOTTLE);
+        getOrCreateTagBuilder(externalKey("create", "deployable_drink")).add(DRIFT_JELLY_BOTTLE);
+    }
+
+    private TagKey<Item> externalKey(String namespace, String path) {
+        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(namespace, path));
     }
 }
