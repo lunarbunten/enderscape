@@ -104,7 +104,7 @@ public class EnderscapeItemTagProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(STORAGE_BLOCKS).add(SHADOLINE_BLOCK.asItem(), NEBULITE_BLOCK.asItem(), DRIFT_JELLY_BLOCK.asItem());
         getOrCreateTagBuilder(TOOLS).add(MIRROR, MAGNIA_ATTRACTOR);
 
-        getOrCreateTagBuilder(externalKey("create", "upright_on_belt")).add(RUSTLE_BUCKET, DRIFT_JELLY_BOTTLE);
+        getOrCreateTagBuilder(externalKey("create", "upright_on_belt")).add(DRIFT_JELLY_BOTTLE);
         getOrCreateTagBuilder(externalKey("create", "deployable_drink")).add(DRIFT_JELLY_BOTTLE);
     }
 
