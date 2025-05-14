@@ -397,11 +397,16 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 70
+          "weight": 60
         },
         {
           "type": "minecraft:item",
           "name": "enderscape:music_disc_glare",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "name": "enderscape:mirror",
           "weight": 6
         },
         {
@@ -412,17 +417,12 @@
         {
           "type": "minecraft:item",
           "name": "enderscape:crescent_banner_pattern",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "enderscape:mirror",
-          "weight": 2
+          "weight": 4
         },
         {
           "type": "minecraft:item",
           "name": "enderscape:stasis_armor_trim_smithing_template",
-          "weight": 2
+          "weight": 4
         }
       ],
       "rolls": 1.0
