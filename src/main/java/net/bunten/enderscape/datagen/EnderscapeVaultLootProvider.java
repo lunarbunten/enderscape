@@ -105,14 +105,14 @@ public class EnderscapeVaultLootProvider extends SimpleFabricLootTableProvider {
                             LootPool.lootPool()
                                     .setRolls(ConstantValue.exactly(1))
 
-                                    .add(EmptyLootItem.emptyItem().setWeight(70))
+                                    .add(EmptyLootItem.emptyItem().setWeight(60))
 
                                     .add(createItem(MUSIC_DISC_GLARE, 6))
+                                    .add(createItem(MIRROR, 6))
                                     .add(createItem(SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE, 6))
 
-                                    .add(createItem(CRESCENT_BANNER_PATTERN, 2))
-                                    .add(createItem(MIRROR, 2))
-                                    .add(createItem(STASIS_ARMOR_TRIM_SMITHING_TEMPLATE, 2))
+                                    .add(createItem(CRESCENT_BANNER_PATTERN, 4))
+                                    .add(createItem(STASIS_ARMOR_TRIM_SMITHING_TEMPLATE, 4))
                     )
                     .withPool(
                         LootPool.lootPool()
