@@ -218,6 +218,8 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider<Block> {
         getOrCreateTagBuilder(ORES).add(NEBULITE_ORE, SHADOLINE_ORE, MIRESTONE_NEBULITE_ORE, MIRESTONE_SHADOLINE_ORE);
         getOrCreateTagBuilder(STORAGE_BLOCKS).add(SHADOLINE_BLOCK, NEBULITE_BLOCK, DRIFT_JELLY_BLOCK);
 
+        getOrCreateTagBuilder(externalKey("antixray", "hidden_only_ores")).add(NEBULITE_ORE, MIRESTONE_NEBULITE_ORE);
+
         getOrCreateTagBuilder(externalKey("create", "tree_attachments")).add(MURUBLIGHT_SHELF);
         getOrCreateTagBuilder(externalKey("create", "tree_roots")).add(VEILED_LOG, VEILED_WOOD);
         getOrCreateTagBuilder(externalKey("create", "wrench_pickup")).add(BLINKLAMP, ALLURING_MAGNIA_SPROUT, REPULSIVE_MAGNIA_SPROUT);
