@@ -1225,7 +1225,8 @@
                 "pitch": 0.9,
                 "volume": 0.22
             }
-        ]
+        ],
+        "subtitle": "subtitles.alluring_magnia.idle"
     },
     "block.alluring_magnia.place": {
         "sounds": [
@@ -1294,7 +1295,8 @@
                 "pitch": 1.5,
                 "volume": 0.1
             }
-        ]
+        ],
+        "subtitle": "subtitles.alluring_magnia_sprout.move"
     },
     "block.alluring_magnia_sprout.overheat": {
         "sounds": [
@@ -1429,7 +1431,8 @@
                 "name": "enderscape:block/blinklamp/decrease4",
                 "volume": 0.5
             }
-        ]
+        ],
+        "subtitle": "subtitles.blinklamp.decrease"
     },
     "block.blinklamp.fall": {
         "sounds": [
@@ -1466,7 +1469,8 @@
                 "name": "enderscape:block/blinklamp/increase4",
                 "volume": 0.5
             }
-        ]
+        ],
+        "subtitle": "subtitles.blinklamp.increase"
     },
     "block.blinklamp.place": {
         "sounds": [
@@ -2708,7 +2712,8 @@
             {
                 "name": "enderscape:block/chorus_flower/idle6"
             }
-        ]
+        ],
+        "subtitle": "subtitles.chorus_flower.idle"
     },
     "block.chorus_flower.place": {
         "sounds": [
@@ -2932,7 +2937,8 @@
                 "name": "enderscape:block/corrupt_growth/idle7",
                 "volume": 0.3
             }
-        ]
+        ],
+        "subtitle": "subtitles.corrupt_growth.idle"
     },
     "block.corrupt_growth.place": {
         "sounds": [
@@ -5692,7 +5698,8 @@
                 "pitch": 0.9,
                 "volume": 0.3
             }
-        ]
+        ],
+        "subtitle": "subtitles.repulsive_magnia.idle"
     },
     "block.repulsive_magnia.place": {
         "sounds": [
@@ -5761,7 +5768,8 @@
                 "pitch": 1.5,
                 "volume": 0.1
             }
-        ]
+        ],
+        "subtitle": "subtitles.repulsive_magnia_sprout.move"
     },
     "block.repulsive_magnia_sprout.overheat": {
         "sounds": [
@@ -7338,7 +7346,8 @@
                 "name": "enderscape:entity/rubblemite/extrude",
                 "volume": 0.7
             }
-        ]
+        ],
+        "subtitle": "subtitles.rubblemite.extrude"
     },
     "entity.rubblemite.hop": {
         "sounds": [
@@ -7872,7 +7881,8 @@
                 "pitch": 1,
                 "volume": 0.4
             }
-        ]
+        ],
+        "subtitle": "subtitles.ender_pearl.land"
     },
     "item.ender_pearl.throw": {
         "sounds": [
@@ -8032,7 +8042,8 @@
             {
                 "name": "enderscape:item/mirror/travel2"
             }
-        ]
+        ],
+        "subtitle": "subtitles.block.portal.travel"
     },
     "item.nebulite_tool.add_fuel": {
         "sounds": [
@@ -8111,7 +8122,8 @@
                 "name": "enderscape:item/rubble_shield/cooldown_over",
                 "volume": 0.85
             }
-        ]
+        ],
+        "subtitle": "subtitles.rubble_shield.cooldown_over"
     },
     "item.rubble_shield.dash": {
         "sounds": [
