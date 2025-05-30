@@ -1,5 +1,6 @@
 package net.bunten.enderscape.client.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.mojang.authlib.GameProfile;
 import net.bunten.enderscape.EnderscapeConfig;
 import net.fabricmc.api.EnvType;
@@ -13,8 +14,6 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Environment(EnvType.CLIENT)
 @Mixin(AbstractClientPlayer.class)
@@ -34,7 +33,7 @@ public abstract class AbstractClientPlayerMixin extends Player {
     }
 
     @Unique
-    private float Enderscape$getElytraFOV() {
+    private float Enderscape$getElytraFovModifier() {
         float fovModifier = 1.0F;
 
         if (isFallFlying()) {
@@ -57,8 +56,9 @@ public abstract class AbstractClientPlayerMixin extends Player {
         return Mth.clamp(fovModifier, 1.0F, 1.5F);
     }
 
-    @Inject(method = "getFieldOfViewModifier", at = @At("RETURN"), cancellable = true)
-    private void getFieldOfViewModifier(CallbackInfoReturnable<Float> info) {
-        if (EnderscapeConfig.getInstance().elytraAddFovEffects) info.setReturnValue(info.getReturnValue() * Enderscape$getElytraFOV());
+    @ModifyReturnValue(method = "getFieldOfViewModifier", at = @At("RETURN"))
+    private float getFieldOfViewModifier(float original) {
+        if (EnderscapeConfig.getInstance().elytraAddFovEffects) return original * Enderscape$getElytraFovModifier();
+        return original;
     }
 }
