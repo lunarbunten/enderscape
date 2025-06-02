@@ -22,5 +22,21 @@ eclipse
 run
 runs
 run-data
-
 src/main/generated/.cache
+*.DS_Store
+
+# vscode
+.vscode/
+
+# fabric
+server_run/
+*.log
+*.jar
+*.ini
+logs/
+
+# vye
+*.asd
+
+# bunten
+*.py
