@@ -31,6 +31,11 @@ repositories {
 	}
 }
 
+tasks.matching { it.name in ["jar", "sourcesJar", "remapSourcesJar", "remapJar"] }.configureEach {
+	archiveBaseName.set("${archives_base_name}")
+	archiveVersion.set("${mod_version}+mc${minecraft_version}")
+}
+
 loom {
 	accessWidenerPath = file("src/main/resources/enderscape.accesswidener")
 }
