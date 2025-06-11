@@ -82,7 +82,12 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
@@ -97,6 +102,7 @@ import static net.minecraft.world.level.block.Blocks.RAW_IRON_BLOCK;
 import static net.minecraft.world.level.block.Blocks.TRIAL_SPAWNER;
 import static net.minecraft.world.level.block.Blocks.VAULT;
 
+@EventBusSubscriber(modid = Enderscape.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class EnderscapeBlocks {
 
     public static final BlockSetType VEILED_BLOCK_SET = new BlockSetType(
@@ -922,18 +928,36 @@ public class EnderscapeBlocks {
             .ignitedByLava()
     ));
 
-    public static final Supplier<Block> POTTED_ALLURING_MAGNIA_SPROUT = register(false, "potted_alluring_magnia_sprout", properties -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ALLURING_MAGNIA_SPROUT, properties), flowerPotProperties());
-    public static final Supplier<Block> POTTED_BLINKLIGHT = register(false, "potted_blinklight", properties -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BLINKLIGHT_VINES_HEAD, properties), flowerPotProperties().lightLevel(state -> 12));
-    public static final Supplier<Block> POTTED_BULB_FLOWER = register(false, "potted_bulb_flower", properties -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BULB_FLOWER, properties), flowerPotProperties().lightLevel(state -> 7));
-    public static final Supplier<Block> POTTED_CELESTIAL_CHANTERELLE = register(false, "potted_celestial_chanterelle", properties -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, CELESTIAL_CHANTERELLE, properties), flowerPotProperties());
-    public static final Supplier<Block> POTTED_CELESTIAL_GROWTH = register(false, "potted_celestial_growth", properties -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, CELESTIAL_GROWTH, properties), flowerPotProperties());
-    public static final Supplier<Block> POTTED_CHORUS_SPROUTS = register(false, "potted_chorus_sprouts", properties -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, CHORUS_SPROUTS, properties), flowerPotProperties());
-    public static final Supplier<Block> POTTED_CORRUPT_GROWTH = register(false, "potted_corrupt_growth", properties -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, CORRUPT_GROWTH, properties), flowerPotProperties());
-    public static final Supplier<Block> POTTED_DRY_END_GROWTH = register(false, "potted_dry_end_growth", properties -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, DRY_END_GROWTH, properties), flowerPotProperties());
-    public static final Supplier<Block> POTTED_MURUBLIGHT_CHANTERELLE = register(false, "potted_murublight_chanterelle", properties -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, MURUBLIGHT_CHANTERELLE, properties), flowerPotProperties());
-    public static final Supplier<Block> POTTED_REPULSIVE_MAGNIA_SPROUT = register(false, "potted_repulsive_magnia_sprout", properties -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, REPULSIVE_MAGNIA_SPROUT, properties), flowerPotProperties());
-    public static final Supplier<Block> POTTED_VEILED_SAPLING = register(false, "potted_veiled_sapling", properties -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, VEILED_SAPLING, properties), flowerPotProperties());
-    public static final Supplier<Block> POTTED_WISP_GROWTH = register(false, "potted_wisp_growth", properties -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, WISP_GROWTH, properties), flowerPotProperties());
+    public static final Supplier<Block> POTTED_ALLURING_MAGNIA_SPROUT = register(false, "potted_alluring_magnia_sprout", properties -> createFlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ALLURING_MAGNIA_SPROUT, properties), flowerPotProperties());
+    public static final Supplier<Block> POTTED_BLINKLIGHT = register(false, "potted_blinklight", properties -> createFlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BLINKLIGHT_VINES_HEAD, properties), flowerPotProperties().lightLevel(state -> 12));
+    public static final Supplier<Block> POTTED_BULB_FLOWER = register(false, "potted_bulb_flower", properties -> createFlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BULB_FLOWER, properties), flowerPotProperties().lightLevel(state -> 7));
+    public static final Supplier<Block> POTTED_CELESTIAL_CHANTERELLE = register(false, "potted_celestial_chanterelle", properties -> createFlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, CELESTIAL_CHANTERELLE, properties), flowerPotProperties());
+    public static final Supplier<Block> POTTED_CELESTIAL_GROWTH = register(false, "potted_celestial_growth", properties -> createFlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, CELESTIAL_GROWTH, properties), flowerPotProperties());
+    public static final Supplier<Block> POTTED_CHORUS_SPROUTS = register(false, "potted_chorus_sprouts", properties -> createFlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, CHORUS_SPROUTS, properties), flowerPotProperties());
+    public static final Supplier<Block> POTTED_CORRUPT_GROWTH = register(false, "potted_corrupt_growth", properties -> createFlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, CORRUPT_GROWTH, properties), flowerPotProperties());
+    public static final Supplier<Block> POTTED_DRY_END_GROWTH = register(false, "potted_dry_end_growth", properties -> createFlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, DRY_END_GROWTH, properties), flowerPotProperties());
+    public static final Supplier<Block> POTTED_MURUBLIGHT_CHANTERELLE = register(false, "potted_murublight_chanterelle", properties -> createFlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, MURUBLIGHT_CHANTERELLE, properties), flowerPotProperties());
+    public static final Supplier<Block> POTTED_REPULSIVE_MAGNIA_SPROUT = register(false, "potted_repulsive_magnia_sprout", properties -> createFlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, REPULSIVE_MAGNIA_SPROUT, properties), flowerPotProperties());
+    public static final Supplier<Block> POTTED_VEILED_SAPLING = register(false, "potted_veiled_sapling", properties -> createFlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, VEILED_SAPLING, properties), flowerPotProperties());
+    public static final Supplier<Block> POTTED_WISP_GROWTH = register(false, "potted_wisp_growth", properties -> createFlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, WISP_GROWTH, properties), flowerPotProperties());
+    
+    private static final List<FlowerPotBlock> FLOWER_POT_BLOCKS = new ArrayList<>();
+    
+    private static FlowerPotBlock createFlowerPotBlock(Supplier<FlowerPotBlock> flowerPot, Supplier<? extends Block> content, BlockBehaviour.Properties properties) {
+        var block = new FlowerPotBlock(flowerPot, content, properties);
+        FLOWER_POT_BLOCKS.add(block);
+        return block;
+    }
+    
+    @SubscribeEvent
+    public static void onFmlCommonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            var empty = (FlowerPotBlock) (Blocks.FLOWER_POT);
+            for (var block : FLOWER_POT_BLOCKS) {
+                empty.addPlant(BuiltInRegistries.BLOCK.getKey(block.getPotted()), () -> block);
+            }
+        });
+    }
 
     private static Supplier<Block> registerStair(String string, Supplier<Block> block) {
         return register(true, string, properties -> new StairBlock(block.get().defaultBlockState(), properties), fullCopyOf(block));
