@@ -12,7 +12,7 @@ authors="${mod_authors}"
 description='''${mod_description}'''
 
 [[accessTransformers]]
-file="META-INF/accesstransformer.cfg"
+file="accesstransformer.cfg"
 
 [[mixins]]
 config="enderscape.mixins.json"
