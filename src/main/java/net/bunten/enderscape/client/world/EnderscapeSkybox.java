@@ -306,10 +306,13 @@ public class EnderscapeSkybox {
 
         RenderTarget target = Minecraft.getInstance().getMainRenderTarget();
 
+        var ib = starIndices.getBuffer(starIndexCount);
+        var type = starIndices.type();
+
         try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(target.getColorTexture(), OptionalInt.empty(), target.getDepthTexture(), OptionalDouble.empty())) {
             pass.setPipeline(RenderPipelines.STARS);
             pass.setVertexBuffer(0, stars);
-            pass.setIndexBuffer(starIndices.getBuffer(starIndexCount), starIndices.type());
+            pass.setIndexBuffer(ib, type);
             pass.drawIndexed(0, starIndexCount);
         }
 
