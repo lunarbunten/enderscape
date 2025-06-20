@@ -152,11 +152,14 @@ public class EnderscapeSkybox {
         RenderSystem.AutoStorageIndexBuffer buffer = RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS);
         RenderTarget target = Minecraft.getInstance().getMainRenderTarget();
 
+        GpuBuffer skyBuffer = buffer.getBuffer(sky.indexCount());
+        VertexFormat.IndexType type = buffer.type();
+
         try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(target.getColorTexture(), OptionalInt.empty(), target.getDepthTexture(), OptionalDouble.empty())) {
             pass.setPipeline(RenderPipelines.END_SKY);
             pass.bindSampler("Sampler0", texture.getTexture());
             pass.setVertexBuffer(0, sky.buffer());
-            pass.setIndexBuffer(buffer.getBuffer(sky.indexCount()), buffer.type());
+            pass.setIndexBuffer(skyBuffer, type);
             pass.drawIndexed(0, sky.indexCount());
         }
 
@@ -247,16 +250,18 @@ public class EnderscapeSkybox {
         RenderSystem.AutoStorageIndexBuffer buffer = RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS);
         RenderTarget target = Minecraft.getInstance().getMainRenderTarget();
 
+        GpuBuffer nebulaeBuffer = buffer.getBuffer(data.indexCount());
+        VertexFormat.IndexType type = buffer.type();
+
         try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(target.getColorTexture(), OptionalInt.empty(), target.getDepthTexture(), OptionalDouble.empty())) {
             pass.setPipeline(NEBULAE_PIPELINE);
 
             pass.bindSampler("Sampler0", texture.getTexture());
             pass.setVertexBuffer(0, data.buffer());
-            pass.setIndexBuffer(buffer.getBuffer(data.indexCount()), buffer.type());
+            pass.setIndexBuffer(nebulaeBuffer, type);
             pass.drawIndexed(0, data.indexCount());
         }
     }
-
 
     private static GpuBuffer createStarsBuffer(int count, float minSize, float maxSize) {
         RandomSource random = RandomSource.create(10842L);
@@ -305,14 +310,13 @@ public class EnderscapeSkybox {
         RenderSystem.setShaderFog(FogParameters.NO_FOG);
 
         RenderTarget target = Minecraft.getInstance().getMainRenderTarget();
-
-        var ib = starIndices.getBuffer(starIndexCount);
-        var type = starIndices.type();
+        GpuBuffer starBuffer = starIndices.getBuffer(starIndexCount);
+        VertexFormat.IndexType type = starIndices.type();
 
         try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(target.getColorTexture(), OptionalInt.empty(), target.getDepthTexture(), OptionalDouble.empty())) {
             pass.setPipeline(RenderPipelines.STARS);
             pass.setVertexBuffer(0, stars);
-            pass.setIndexBuffer(ib, type);
+            pass.setIndexBuffer(starBuffer, type);
             pass.drawIndexed(0, starIndexCount);
         }
 
