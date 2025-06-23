@@ -39,7 +39,7 @@ public abstract class ThrownEnderpearlMixin extends ThrowableItemProjectile {
 
     @Inject(at = @At("TAIL"), method = "tick")
     public void Enderscape$tick(CallbackInfo info) {
-        if (EnderscapeConfig.getInstance().enderPearlAddParticles.get() && level().isClientSide()) {
+        if (level().isClientSide() && EnderscapeConfig.getInstance().enderPearlAddParticles.get()) {
             Vec3 vel = getDeltaMovement().scale(0.5F).scale(-1.0F);
 
             double x = random.nextGaussian() * 0.02 + vel.x;
