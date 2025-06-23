@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:nebulite_from_blasting_nebulite_ore"
+        "recipe": "enderscape:nebulite_from_blasting_nebulite_ore"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:nebulite_from_blasting_nebulite_ore"
+      "enderscape:nebulite_from_blasting_nebulite_ore"
     ]
   }
 }

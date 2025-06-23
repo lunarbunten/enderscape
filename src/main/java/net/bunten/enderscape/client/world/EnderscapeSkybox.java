@@ -1,13 +1,12 @@
 package net.bunten.enderscape.client.world;
 
-import com.mojang.blaze3d.buffers.BufferType;
-import com.mojang.blaze3d.buffers.BufferUsage;
 import com.mojang.blaze3d.buffers.GpuBuffer;
+import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.pipeline.BlendFunction;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.systems.RenderPass;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.textures.GpuTextureView;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import net.bunten.enderscape.Enderscape;
@@ -18,14 +17,12 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.FogParameters;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.CubicSampler;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.TriState;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.phys.Vec3;
 import org.joml.*;
@@ -34,18 +31,19 @@ import java.lang.Math;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
-import static net.minecraft.client.renderer.RenderPipelines.MATRICES_COLOR_SNIPPET;
+import static net.minecraft.client.renderer.RenderPipelines.MATRICES_PROJECTION_SNIPPET;
 
 /**
- *  Based on BetterEnd and Eden Ring skybox renderers
- *  Credits to paulevs!
+ * Based on BetterEnd and Eden Ring skybox renderers
+ * Credits to paulevs!
  */
 @Environment(EnvType.CLIENT)
 public class EnderscapeSkybox {
 
     public static final Axis SKY_ROTATION_AXIS = Axis.YP;
 
-    private record NebulaData(GpuBuffer buffer, int indexCount) {}
+    private record NebulaData(GpuBuffer buffer, int indexCount) {
+    }
 
     public static float fogStartDensity = 1.0F;
     public static float fogEndDensity = 1.0F;
@@ -53,7 +51,7 @@ public class EnderscapeSkybox {
     public static Vector4f starColor = new Vector4f(0, 0, 0, 0);
 
     public static final RenderPipeline NEBULAE_PIPELINE = RenderPipelines.register(
-            RenderPipeline.builder(MATRICES_COLOR_SNIPPET)
+            RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET)
                     .withLocation(Enderscape.id("pipeline/nebulae"))
                     .withVertexShader("core/position_tex")
                     .withFragmentShader("core/position_tex")
@@ -130,9 +128,9 @@ public class EnderscapeSkybox {
                 bufferBuilder.addVertex(matrix4f, 100.0F, -100.0F, -100.0F).setUv(16.0F, 0.0F).setColor(0xFFFFFFFF);
             }
 
-            try (MeshData meshData = bufferBuilder.buildOrThrow()) {
-                buffer = RenderSystem.getDevice().createBuffer(() -> "End sky vertex buffer", BufferType.VERTICES, BufferUsage.STATIC_WRITE, meshData.vertexBuffer());
-                return new NebulaData(buffer, meshData.drawState().indexCount());
+            try (MeshData mesh = bufferBuilder.buildOrThrow()) {
+                buffer = RenderSystem.getDevice().createBuffer(() -> "End sky vertex buffer", 40, mesh.vertexBuffer());
+                return new NebulaData(buffer, mesh.drawState().indexCount());
             }
         }
     }
@@ -142,28 +140,30 @@ public class EnderscapeSkybox {
 
         matrix.pushMatrix();
         matrix.mul(pose.last().pose());
-
         matrix.mul(new Matrix4f().rotation(SKY_ROTATION_AXIS.rotation(angle)));
 
-        RenderSystem.setShaderColor(color.x, color.y, color.z, 1.0F);
-
         AbstractTexture texture = Minecraft.getInstance().getTextureManager().getTexture(Enderscape.id("textures/environment/sky.png"));
-        texture.setFilter(TriState.FALSE, false);
+        texture.setUseMipmaps(false);
+
         RenderSystem.AutoStorageIndexBuffer buffer = RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS);
-        RenderTarget target = Minecraft.getInstance().getMainRenderTarget();
+
+        GpuTextureView colorView = Minecraft.getInstance().getMainRenderTarget().getColorTextureView();
+        GpuTextureView textureView = Minecraft.getInstance().getMainRenderTarget().getDepthTextureView();
+        GpuBufferSlice slice = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrix(), color, new Vector3f(), new Matrix4f(), 0.0F);
 
         GpuBuffer skyBuffer = buffer.getBuffer(sky.indexCount());
         VertexFormat.IndexType type = buffer.type();
 
-        try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(target.getColorTexture(), OptionalInt.empty(), target.getDepthTexture(), OptionalDouble.empty())) {
+        try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "End sky box", colorView, OptionalInt.empty(), textureView, OptionalDouble.empty())) {
             pass.setPipeline(RenderPipelines.END_SKY);
-            pass.bindSampler("Sampler0", texture.getTexture());
+            RenderSystem.bindDefaultUniforms(pass);
+            pass.setUniform("DynamicTransforms", slice);
+            pass.bindSampler("Sampler0", texture.getTextureView());
             pass.setVertexBuffer(0, sky.buffer());
             pass.setIndexBuffer(skyBuffer, type);
-            pass.drawIndexed(0, sky.indexCount());
+            pass.drawIndexed(0, 0, sky.indexCount(), 1);
         }
 
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         matrix.popMatrix();
     }
 
@@ -219,9 +219,9 @@ public class EnderscapeSkybox {
                 }
             }
 
-            try (MeshData meshData = builder.buildOrThrow()) {
-                buffer = RenderSystem.getDevice().createBuffer(() -> "Nebulae vertex buffer", BufferType.VERTICES, BufferUsage.STATIC_WRITE, meshData.vertexBuffer());
-                return new NebulaData(buffer, meshData.drawState().indexCount());
+            try (MeshData mesh = builder.buildOrThrow()) {
+                buffer = RenderSystem.getDevice().createBuffer(() -> "Nebulae vertex buffer", 40, mesh.vertexBuffer());
+                return new NebulaData(buffer, mesh.drawState().indexCount());
             }
         }
     }
@@ -231,67 +231,69 @@ public class EnderscapeSkybox {
 
         matrix.pushMatrix();
         matrix.mul(pose.last().pose());
-
         matrix.mul(new Matrix4f().rotation(SKY_ROTATION_AXIS.rotation(angle)));
 
-        RenderSystem.setShaderColor(color.x, color.y, color.z, color.w);
+        drawIndividualNebulae(nebula1, color, Enderscape.id("textures/environment/nebula1.png"));
+        drawIndividualNebulae(nebula2, color, Enderscape.id("textures/environment/nebula2.png"));
 
-        drawIndividualNebulae(nebula1, Enderscape.id("textures/environment/nebula1.png"));
-        drawIndividualNebulae(nebula2, Enderscape.id("textures/environment/nebula2.png"));
-
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         matrix.popMatrix();
     }
 
-    private static void drawIndividualNebulae(NebulaData data, ResourceLocation id) {
+    private static void drawIndividualNebulae(NebulaData data, Vector4f color, ResourceLocation id) {
+        Matrix4fStack matrix = RenderSystem.getModelViewStack();
+
+        GpuTextureView colorView = Minecraft.getInstance().getMainRenderTarget().getColorTextureView();
+        GpuTextureView depthView = Minecraft.getInstance().getMainRenderTarget().getDepthTextureView();
         AbstractTexture texture = Minecraft.getInstance().getTextureManager().getTexture(id);
-        texture.setFilter(TriState.FALSE, false);
+        texture.setUseMipmaps(false);
+
+        GpuBufferSlice slice = RenderSystem.getDynamicUniforms().writeTransform(matrix, color, new Vector3f(), new Matrix4f(), 0.0F);
 
         RenderSystem.AutoStorageIndexBuffer buffer = RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS);
-        RenderTarget target = Minecraft.getInstance().getMainRenderTarget();
-
         GpuBuffer nebulaeBuffer = buffer.getBuffer(data.indexCount());
         VertexFormat.IndexType type = buffer.type();
 
-        try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(target.getColorTexture(), OptionalInt.empty(), target.getDepthTexture(), OptionalDouble.empty())) {
+        try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "End sky nebulae", colorView, OptionalInt.empty(), depthView, OptionalDouble.empty())) {
             pass.setPipeline(NEBULAE_PIPELINE);
-
-            pass.bindSampler("Sampler0", texture.getTexture());
+            pass.setUniform("DynamicTransforms", slice);
+            pass.bindSampler("Sampler0", texture.getTextureView());
             pass.setVertexBuffer(0, data.buffer());
             pass.setIndexBuffer(nebulaeBuffer, type);
-            pass.drawIndexed(0, data.indexCount());
+            pass.drawIndexed(0, 0, data.indexCount(), 1);
         }
     }
 
     private static GpuBuffer createStarsBuffer(int count, float minSize, float maxSize) {
         RandomSource random = RandomSource.create(10842L);
+        float distance = 100.0F;
 
         GpuBuffer buffer;
-        try (ByteBufferBuilder byteBufferBuilder = new ByteBufferBuilder(DefaultVertexFormat.POSITION.getVertexSize() * count * 4)) {
-            BufferBuilder bufferBuilder = new BufferBuilder(byteBufferBuilder, VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
+        try (ByteBufferBuilder builder = ByteBufferBuilder.exactlySized(DefaultVertexFormat.POSITION.getVertexSize() * count * 4)) {
+            BufferBuilder buf = new BufferBuilder(builder, VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
 
             for (int i = 0; i < count; i++) {
                 float x = random.nextFloat() * 2.0F - 1.0F;
                 float y = random.nextFloat() * 2.0F - 1.0F;
                 float z = random.nextFloat() * 2.0F - 1.0F;
                 float size = Mth.randomBetween(random, minSize, maxSize);
-                float lengthSquared = Mth.lengthSquared(x, y, z);
+                float lenSq = Mth.lengthSquared(x, y, z);
 
-                if (!(lengthSquared <= 0.010000001F) && !(lengthSquared >= 1.0F)) {
-                    Vector3f direction = new Vector3f(x, y, z).normalize(100.0F);
-                    float rotation = (float)(random.nextDouble() * (float) Math.PI * 2.0);
-                    Matrix3f matrix = new Matrix3f().rotateTowards(new Vector3f(direction).negate(), new Vector3f(0.0F, 1.0F, 0.0F)).rotateZ(-rotation);
+                if (!(lenSq <= 0.010000001F) && !(lenSq >= 1.0F)) {
+                    Vector3f dir = new Vector3f(x, y, z).normalize(distance);
+                    float rotation = (float) (random.nextDouble() * Math.PI * 2.0);
 
-                    bufferBuilder.addVertex(new Vector3f(size, -size, 0.0F).mul(matrix).add(direction));
-                    bufferBuilder.addVertex(new Vector3f(size, size, 0.0F).mul(matrix).add(direction));
-                    bufferBuilder.addVertex(new Vector3f(-size, size, 0.0F).mul(matrix).add(direction));
-                    bufferBuilder.addVertex(new Vector3f(-size, -size, 0.0F).mul(matrix).add(direction));
+                    Matrix3f mat = new Matrix3f().rotateTowards(new Vector3f(dir).negate(), new Vector3f(0.0F, 1.0F, 0.0F)).rotateZ(-rotation);
+
+                    buf.addVertex(new Vector3f(size, -size, 0.0F).mul(mat).add(dir));
+                    buf.addVertex(new Vector3f(size, size, 0.0F).mul(mat).add(dir));
+                    buf.addVertex(new Vector3f(-size, size, 0.0F).mul(mat).add(dir));
+                    buf.addVertex(new Vector3f(-size, -size, 0.0F).mul(mat).add(dir));
                 }
             }
 
-            try (MeshData meshData = bufferBuilder.buildOrThrow()) {
-                starIndexCount = meshData.drawState().indexCount();
-                buffer = RenderSystem.getDevice().createBuffer(() -> "Stars vertex buffer", BufferType.VERTICES, BufferUsage.STATIC_WRITE, meshData.vertexBuffer());
+            try (MeshData mesh = buf.buildOrThrow()) {
+                starIndexCount = mesh.drawState().indexCount();
+                buffer = RenderSystem.getDevice().createBuffer(() -> "Stars vertex buffer", 40, mesh.vertexBuffer());
             }
         }
 
@@ -303,25 +305,24 @@ public class EnderscapeSkybox {
 
         matrix.pushMatrix();
         matrix.mul(pose.last().pose());
-
         matrix.mul(new Matrix4f().rotation(SKY_ROTATION_AXIS.rotation(angle)));
 
-        RenderSystem.setShaderColor(color.x, color.y, color.z, color.w);
-        RenderSystem.setShaderFog(FogParameters.NO_FOG);
+        GpuTextureView colorView = Minecraft.getInstance().getMainRenderTarget().getColorTextureView();
+        GpuTextureView depthView = Minecraft.getInstance().getMainRenderTarget().getDepthTextureView();
+        GpuBufferSlice slice = RenderSystem.getDynamicUniforms().writeTransform(matrix, color, new Vector3f(), new Matrix4f(), 0.0F);
 
-        RenderTarget target = Minecraft.getInstance().getMainRenderTarget();
         GpuBuffer starBuffer = starIndices.getBuffer(starIndexCount);
         VertexFormat.IndexType type = starIndices.type();
 
-        try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(target.getColorTexture(), OptionalInt.empty(), target.getDepthTexture(), OptionalDouble.empty())) {
+        try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "End sky stars", colorView, OptionalInt.empty(), depthView, OptionalDouble.empty())) {
             pass.setPipeline(RenderPipelines.STARS);
+            RenderSystem.bindDefaultUniforms(pass);
+            pass.setUniform("DynamicTransforms", slice);
             pass.setVertexBuffer(0, stars);
             pass.setIndexBuffer(starBuffer, type);
-            pass.drawIndexed(0, starIndexCount);
+            pass.drawIndexed(0, 0, starIndexCount, 1);
         }
 
-        //RenderSystem.setShaderFog(fogParameters);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         matrix.popMatrix();
     }
 }

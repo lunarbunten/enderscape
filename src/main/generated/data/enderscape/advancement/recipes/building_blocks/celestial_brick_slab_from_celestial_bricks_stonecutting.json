@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:celestial_brick_slab_from_celestial_bricks_stonecutting"
+        "recipe": "enderscape:celestial_brick_slab_from_celestial_bricks_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:celestial_brick_slab_from_celestial_bricks_stonecutting"
+      "enderscape:celestial_brick_slab_from_celestial_bricks_stonecutting"
     ]
   }
 }

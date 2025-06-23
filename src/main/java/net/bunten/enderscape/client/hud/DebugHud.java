@@ -75,9 +75,9 @@ public class DebugHud extends HudElement {
         list.add("  Current track: " + (current != null ? shorten(current.getSound().getPath().getPath(), "/") : "null"));
         Music music = client.getSituationalMusic().music();
         if (music != null) {
-            list.add("  Next event: " + shorten(music.getEvent().value().location().getPath(), "."));
-            list.add("    getMinDelay: " + music.getMinDelay());
-            list.add("    getMaxDelay: " + music.getMaxDelay());
+            list.add("  Next event: " + shorten(music.event().value().location().getPath(), "."));
+            list.add("    getMinDelay: " + music.minDelay());
+            list.add("    getMaxDelay: " + music.maxDelay());
             list.add("    replaceCurrentMusic: " + music.replaceCurrentMusic());
             list.add("  Playing next event: " + client.getMusicManager().isPlayingMusic(music));
         }
@@ -137,7 +137,7 @@ public class DebugHud extends HudElement {
     public void render(GuiGraphics graphics, DeltaTracker delta) {
         if (client.player == null || client.getDebugOverlay().showDebugScreen() || client.options.hideGui || !EnderscapeConfig.getInstance().debugHudEnabled) return;
 
-        graphics.pose().pushPose();
+        graphics.pose().pushMatrix();
 
         float total = switch(client.options.guiScale().get()){
             case 3 -> 0.6666F;
@@ -145,7 +145,7 @@ public class DebugHud extends HudElement {
             default -> 1;
         };
 
-        graphics.pose().scale(total, total, total);
+        graphics.pose().scale(total, total);
 
         int x = 2;
         int y = 2;
@@ -164,6 +164,6 @@ public class DebugHud extends HudElement {
             y += 6;
         }
 
-        graphics.pose().popPose();
+        graphics.pose().popMatrix();
     }
 }

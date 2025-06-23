@@ -3,7 +3,6 @@ package net.bunten.enderscape.entity.drifter;
 import net.bunten.enderscape.entity.ai.behavior.DrifterStartOrStopLeakingJelly;
 import net.bunten.enderscape.registry.*;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -25,6 +24,8 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -70,15 +71,15 @@ public class Drifter extends AbstractDrifter {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
-        super.addAdditionalSaveData(tag);
-        tag.putBoolean(DRIPPING_JELLY_KEY, isDrippingJelly());
+    protected void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putBoolean(DRIPPING_JELLY_KEY, isDrippingJelly());
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
-        tag.getBoolean(DRIPPING_JELLY_KEY).ifPresent(this::setDrippingJelly);
+    protected void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        setDrippingJelly(input.getBooleanOr(DRIPPING_JELLY_KEY, false));
     }
 
     @Override

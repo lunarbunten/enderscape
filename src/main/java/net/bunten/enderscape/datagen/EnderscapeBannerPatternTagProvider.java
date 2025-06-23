@@ -4,6 +4,9 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.tags.TagAppender;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.entity.BannerPattern;
 
 import java.util.concurrent.CompletableFuture;
@@ -17,8 +20,12 @@ public class EnderscapeBannerPatternTagProvider extends FabricTagProvider<Banner
         super(output, Registries.BANNER_PATTERN, future);
     }
 
+    protected TagAppender<ResourceKey<BannerPattern>, BannerPattern> tag(TagKey<BannerPattern> key) {
+        return TagAppender.forBuilder(getOrCreateRawBuilder(key));
+    }
+
     @Override
     protected void addTags(HolderLookup.Provider lookup) {
-        getOrCreateTagBuilder(PATTERN_ITEM_CRESCENT).add(CRESCENT);
+        tag(PATTERN_ITEM_CRESCENT).add(CRESCENT);
     }
 }

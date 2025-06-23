@@ -37,7 +37,7 @@
     "environment": "*",
     "entrypoints": {
         "fabric-datagen": [
-          "net.bunten.enderscape.datagen.EnderscapeDataGen"
+            "net.bunten.enderscape.datagen.EnderscapeDataGen"
         ],
         "main": [
             "net.bunten.enderscape.Enderscape"
@@ -46,7 +46,7 @@
             "net.bunten.enderscape.client.EnderscapeClient"
         ],
         "modmenu": [
-          "net.bunten.enderscape.client.EnderscapeModMenu"
+            "net.bunten.enderscape.client.EnderscapeModMenu"
         ]
     },
     "mixins": [
@@ -57,9 +57,9 @@
         }
     ],
     "depends": {
-        "minecraft": "1.21.5",
+        "minecraft": "1.21.6",
         "fabricloader": ">=0.16.14",
-        "fabric": ">=0.121.0",
+        "fabric": ">=0.127.0",
         "mixson": ">=1.3.1",
         "yet_another_config_lib_v3": ">=3.6.6"
     },

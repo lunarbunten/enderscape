@@ -4,7 +4,6 @@ import net.bunten.enderscape.registry.EnderscapeEntities;
 import net.bunten.enderscape.registry.EnderscapeEntitySounds;
 import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
@@ -19,6 +18,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 public class Driftlet extends AbstractDrifter {
     public static int MAX_GROWTH_AGE = 24000;
@@ -71,15 +72,15 @@ public class Driftlet extends AbstractDrifter {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag nbt) {
-        super.addAdditionalSaveData(nbt);
-        nbt.putInt("Age", growthAge);
+    protected void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putInt("Age", growthAge);
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
-        tag.getInt("Age").ifPresent(this::setGrowthAge);
+    protected void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        input.getInt("Age").ifPresent(this::setGrowthAge);
     }
 
     @Override

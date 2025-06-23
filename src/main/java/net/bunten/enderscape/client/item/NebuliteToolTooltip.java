@@ -7,7 +7,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -71,10 +71,10 @@ public class NebuliteToolTooltip implements ClientTooltipComponent {
             int offsetY = (i == 0) ? -2 : 0;
             int spriteHeight = (i == 0) ? 10 : 6;
 
-            graphics.blitSprite(RenderType::guiTextured, EMPTY_SEGMENTS[index], rx, y + offsetY, width, spriteHeight);
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, EMPTY_SEGMENTS[index], rx, y + offsetY, width, spriteHeight);
 
             if (isFueled) {
-                graphics.blitSprite(RenderType::guiTextured, FUELED_SEGMENT, rx + ((i == 0) ? 9 : 0), y, 11, 6);
+                graphics.blitSprite(RenderPipelines.GUI_TEXTURED, FUELED_SEGMENT, rx + ((i == 0) ? 9 : 0), y, 11, 6);
             }
         }
 

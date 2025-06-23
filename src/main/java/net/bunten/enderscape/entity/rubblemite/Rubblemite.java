@@ -35,6 +35,8 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
@@ -111,19 +113,19 @@ public class Rubblemite extends Monster {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
-        super.addAdditionalSaveData(tag);
+    protected void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
 
-        tag.putInt(RUBBLEMITE_FLAGS_KEY, getFlags());
-        tag.putInt(RubblemiteVariant.KEY, RubblemiteVariant.get(this).getId());
+        output.putInt(RUBBLEMITE_FLAGS_KEY, getFlags());
+        output.putInt(RubblemiteVariant.KEY, RubblemiteVariant.get(this).getId());
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
+    protected void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
 
-        tag.getInt(RUBBLEMITE_FLAGS_KEY).ifPresent(this::setFlags);
-        tag.getInt(RubblemiteVariant.KEY).ifPresent(id -> RubblemiteVariant.set(this, RubblemiteVariant.byId(id)));
+        setFlags(input.getIntOr(RUBBLEMITE_FLAGS_KEY, DEFAULT_FLAG));
+        input.getInt(RubblemiteVariant.KEY).ifPresent(id -> RubblemiteVariant.set(this, RubblemiteVariant.byId(id)));
     }
 
     public int getFlags() {

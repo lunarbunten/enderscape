@@ -9,7 +9,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
@@ -67,9 +67,9 @@ public class NebuliteToolHud extends HudElement {
             return;
         }
 
-        graphics.pose().pushPose();
+        graphics.pose().pushMatrix();
 
-        graphics.pose().translate(0, heightOffset, 0);
+        graphics.pose().translate(0.0F, heightOffset);
 
         float opacity = totalAlpha * ((float) (config.nebuliteToolHudOpacity)) / 100.0F;
 
@@ -81,7 +81,7 @@ public class NebuliteToolHud extends HudElement {
         renderInvalidOverlay(graphics, x, y, opacity);
         renderCostOverlay(graphics, y, opacity);
 
-        graphics.pose().popPose();
+        graphics.pose().popMatrix();
     }
 
     private void renderFuelBar(GuiGraphics graphics, int x, int y, float opacity) {
@@ -99,14 +99,14 @@ public class NebuliteToolHud extends HudElement {
             int index = (i == 0) ? 0 : (i == maxFuel - 1) ? 2 : 1;
             int width = (i == maxFuel - 1) ? 12 : 11;
 
-            graphics.blitSprite(RenderType::guiTextured, segments[index], rx, y, width, 5, white(opacity));
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, segments[index], rx, y, width, 5, white(opacity));
         }
 
         costOverlayPosition = lastFueled;
     }
 
     private void renderTransdimensionalOutline(GuiGraphics graphics, int x, int y, float opacity) {
-        graphics.blitSprite(RenderType::guiTextured, TRANSDIMENSIONAL_OUTLINE, x - 6, y - 6, (maxFuel * 11) + 13, 5 + 12, white(transdimensionalAlpha * opacity));
+        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, TRANSDIMENSIONAL_OUTLINE, x - 6, y - 6, (maxFuel * 11) + 13, 5 + 12, white(transdimensionalAlpha * opacity));
     }
 
     private void renderInvalidOverlay(GuiGraphics graphics, int x, int y, float opacity) {
@@ -118,14 +118,14 @@ public class NebuliteToolHud extends HudElement {
             int index = (i == 0) ? 0 : (i == maxFuel - 1) ? 2 : 1;
             int width = (i == maxFuel - 1) ? 12 : 11;
 
-            graphics.blitSprite(RenderType::guiTextured, INVALID_OVERLAY_SEGMENTS[index], rx, y, width, 5, white(invalidAlpha * opacity));
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, INVALID_OVERLAY_SEGMENTS[index], rx, y, width, 5, white(invalidAlpha * opacity));
         }
     }
 
     private void renderCostOverlay(GuiGraphics graphics, int y, float opacity) {
         if (costAlpha > 0 && costOverlayPosition >= 0 && fuel >= cost) {
             for (int i = 0; i < cost; i++) {
-                graphics.blitSprite(RenderType::guiTextured, COST_OVERLAY_SEGMENT, costOverlayPosition - (i * 11), y, 11, 5, white(costAlpha * opacity));
+                graphics.blitSprite(RenderPipelines.GUI_TEXTURED, COST_OVERLAY_SEGMENT, costOverlayPosition - (i * 11), y, 11, 5, white(costAlpha * opacity));
             }
         }
     }

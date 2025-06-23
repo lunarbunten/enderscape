@@ -4,6 +4,7 @@ import net.bunten.enderscape.EnderscapeConfig;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityReference;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
@@ -21,7 +22,7 @@ public abstract class ShulkerBulletMixin extends Projectile {
 
     @Shadow protected abstract void destroy();
 
-    @Shadow private @Nullable Entity finalTarget;
+    @Shadow private @Nullable EntityReference<Entity> finalTarget;
 
     public ShulkerBulletMixin(EntityType<? extends Projectile> type, Level level) {
         super(type, level);
@@ -29,8 +30,10 @@ public abstract class ShulkerBulletMixin extends Projectile {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void isValid(CallbackInfo info) {
+        Entity entity = !level().isClientSide() ? EntityReference.get(finalTarget, level(), Entity.class) : null;
+
         boolean pastTimeLimit = EnderscapeConfig.getInstance().shulkerBulletEnforceTimeLimit > 0 && tickCount > EnderscapeConfig.getInstance().shulkerBulletEnforceTimeLimit * 20;
-        boolean pastDistance = EnderscapeConfig.getInstance().shulkerBulletEnforceDistanceLimit > 0 && finalTarget != null && distanceTo(finalTarget) >= EnderscapeConfig.getInstance().shulkerBulletEnforceDistanceLimit;
+        boolean pastDistance = EnderscapeConfig.getInstance().shulkerBulletEnforceDistanceLimit > 0 && entity != null && distanceTo(entity) >= EnderscapeConfig.getInstance().shulkerBulletEnforceDistanceLimit;
         boolean ownerInvalid = EnderscapeConfig.getInstance().shulkerBulletEnforceOwnerLimit && (getOwner() == null || !getOwner().isAlive());
 
         if (pastTimeLimit || pastDistance || ownerInvalid) {

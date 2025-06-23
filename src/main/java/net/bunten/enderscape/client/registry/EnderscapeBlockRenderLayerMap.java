@@ -1,7 +1,7 @@
 package net.bunten.enderscape.client.registry;
 
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.minecraft.client.renderer.RenderType;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 
 import static net.bunten.enderscape.registry.EnderscapeBlocks.*;
 import static net.minecraft.world.level.block.Blocks.DRAGON_EGG;
@@ -9,7 +9,7 @@ import static net.minecraft.world.level.block.Blocks.DRAGON_EGG;
 public class EnderscapeBlockRenderLayerMap {
 
     static {
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
+        BlockRenderLayerMap.putBlocks(ChunkSectionLayer.CUTOUT,
                 ALLURING_MAGNIA_SPROUT,
                 BLINKLIGHT_VINES_BODY,
                 BLINKLIGHT_VINES_HEAD,
@@ -56,12 +56,12 @@ public class EnderscapeBlockRenderLayerMap {
                 WISP_SPROUTS
         );
 
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutoutMipped(),
+        BlockRenderLayerMap.putBlocks(ChunkSectionLayer.CUTOUT_MIPPED,
                 VEILED_LEAVES,
                 VEILED_LEAF_PILE
         );
 
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.translucent(),
+        BlockRenderLayerMap.putBlocks(ChunkSectionLayer.TRANSLUCENT,
                 DRIFT_JELLY_BLOCK
         );
     }

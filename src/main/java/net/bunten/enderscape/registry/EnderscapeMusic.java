@@ -19,7 +19,7 @@ public class EnderscapeMusic {
     @NotNull
     private static Music createStructureMusic(String name) {
         Music music = new Music(Enderscape.registerSoundEventHolder("music.the_end.structure." + name), 0, 6000, false);
-        STRUCTURE_TRACKS.add(music.getEvent().value().location());
+        STRUCTURE_TRACKS.add(music.event().value().location());
         return music;
     }
 

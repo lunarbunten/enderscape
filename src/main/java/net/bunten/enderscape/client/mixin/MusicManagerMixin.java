@@ -42,13 +42,13 @@ public abstract class MusicManagerMixin {
         Music situational = minecraft.getSituationalMusic().music();
 
         if (currentMusic != null && EnderscapeConfig.getInstance().structureMusicFadingEnabled) {
-            boolean fadeToStructureMusic = EnderscapeClient.structureMusic.filter(music -> situational == music && currentMusic.getLocation() != music.getEvent().value().location()).isPresent();
+            boolean fadeToStructureMusic = EnderscapeClient.structureMusic.filter(music -> situational == music && currentMusic.getLocation() != music.event().value().location()).isPresent();
             boolean fadeFromStructureMusic = EnderscapeClient.structureMusic.isEmpty() && STRUCTURE_TRACKS.contains(currentMusic.getLocation());
 
             if (fadeToStructureMusic || fadeFromStructureMusic) {
                 if (!Enderscape$slowlyFadePlaying(-1.0F)) {
                     currentMusic = null;
-                    nextSongDelay = Mth.nextInt(random, 0, situational.getMinDelay()) / 2;
+                    nextSongDelay = Mth.nextInt(random, 0, situational.minDelay()) / 2;
                 }
             }
         }

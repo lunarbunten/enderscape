@@ -4,6 +4,9 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.tags.TagAppender;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
 
 import java.util.concurrent.CompletableFuture;
@@ -20,10 +23,14 @@ public class EnderscapeDamageTypeTagProvider extends FabricTagProvider<DamageTyp
         super(output, Registries.DAMAGE_TYPE, future);
     }
 
+    protected TagAppender<ResourceKey<DamageType>, DamageType> tag(TagKey<DamageType> key) {
+        return TagAppender.forBuilder(getOrCreateRawBuilder(key));
+    }
+
     @Override
     protected void addTags(HolderLookup.Provider lookup) {
-        getOrCreateTagBuilder(RUBBLEMITES_CAN_BLOCK).add(ARROW, ENDER_PEARL, EXPLOSION, FALLING_ANVIL, FALLING_BLOCK, FALLING_STALACTITE, MACE_SMASH, MOB_ATTACK, MOB_ATTACK_NO_AGGRO, MOB_PROJECTILE, PLAYER_ATTACK, PLAYER_EXPLOSION, SPIT, STING, TRIDENT, UNATTRIBUTED_FIREBALL, WIND_CHARGE, WITHER_SKULL, STOMP);
-        getOrCreateTagBuilder(DAMAGES_HELMET).add(STOMP);
-        getOrCreateTagBuilder(NO_KNOCKBACK).add(STOMP);
+        tag(RUBBLEMITES_CAN_BLOCK).add(ARROW, ENDER_PEARL, EXPLOSION, FALLING_ANVIL, FALLING_BLOCK, FALLING_STALACTITE, MACE_SMASH, MOB_ATTACK, MOB_ATTACK_NO_AGGRO, MOB_PROJECTILE, PLAYER_ATTACK, PLAYER_EXPLOSION, SPIT, STING, TRIDENT, UNATTRIBUTED_FIREBALL, WIND_CHARGE, WITHER_SKULL, STOMP);
+        tag(DAMAGES_HELMET).add(STOMP);
+        tag(NO_KNOCKBACK).add(STOMP);
     }
 }

@@ -4,7 +4,6 @@ import com.mojang.authlib.GameProfile;
 import net.bunten.enderscape.entity.DashJumpUser;
 import net.bunten.enderscape.registry.EnderscapeDataComponents;
 import net.bunten.enderscape.registry.EnderscapeStats;
-import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -19,24 +18,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin extends Player {
 
-    @Shadow public abstract ServerLevel serverLevel();
+    public ServerPlayerMixin(Level level, GameProfile gameProfile) {
+        super(level, gameProfile);
+    }
 
     @Shadow
     private static boolean didNotMove(double d, double e, double f) {
         return false;
     }
 
+    @Shadow public abstract ServerLevel level();
+
     @Unique
     private final ServerPlayer player = (ServerPlayer) (Object) this;
-
-    public ServerPlayerMixin(Level level, BlockPos pos, float f, GameProfile profile) {
-        super(level, pos, f, profile);
-    }
 
     @Inject(at = @At("HEAD"), method = "jumpFromGround")
     public void Enderscape$jumpFromGround(CallbackInfo info) {
         if (player.isUsingItem() && player.getUseItem().has(EnderscapeDataComponents.DASH_JUMP)) {
-            player.getUseItem().get(EnderscapeDataComponents.DASH_JUMP).apply(serverLevel(), player, player.getUseItem(), player.getUseItem().get(EnderscapeDataComponents.DASH_JUMP));
+            player.getUseItem().get(EnderscapeDataComponents.DASH_JUMP).apply(level(), player, player.getUseItem(), player.getUseItem().get(EnderscapeDataComponents.DASH_JUMP));
         }
     }
 

@@ -4,8 +4,8 @@ import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.trialspawner.TrialSpawner;
-import net.minecraft.world.level.block.entity.trialspawner.TrialSpawnerData;
 import net.minecraft.world.level.block.entity.trialspawner.TrialSpawnerState;
+import net.minecraft.world.level.block.entity.trialspawner.TrialSpawnerStateData;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-@Mixin(TrialSpawnerData.class)
+@Mixin(TrialSpawnerStateData.class)
 public abstract class TrialSpawnerDataMixin {
 
     @Shadow @Final
@@ -35,7 +35,7 @@ public abstract class TrialSpawnerDataMixin {
                     List<UUID> nearbyPlayers = spawner.getPlayerDetector().detect(level, spawner.getEntitySelector(), pos, spawner.getRequiredPlayerRange(), true);
 
                     if (!spawner.getState().equals(TrialSpawnerState.COOLDOWN)) {
-                        boolean noPreviouslyDetected = spawner.getData().detectedPlayers.isEmpty();
+                        boolean noPreviouslyDetected = spawner.getStateData().detectedPlayers.isEmpty();
                         List<UUID> newlyDetectedPlayers = noPreviouslyDetected ? nearbyPlayers : spawner.getPlayerDetector().detect(level, spawner.getEntitySelector(), pos, spawner.getRequiredPlayerRange(), false);
 
                         if (detectedPlayers.addAll(newlyDetectedPlayers)) {

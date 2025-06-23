@@ -48,6 +48,8 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
@@ -93,21 +95,21 @@ public class Rustle extends Animal implements Bucketable, Shearable {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
-        super.addAdditionalSaveData(tag);
+    protected void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
 
-        tag.putBoolean("FromBucket", fromBucket());
-        tag.putBoolean("Sleeping", isSleeping());
-        tag.putBoolean("Sheared", isSheared());
+        output.putBoolean("FromBucket", fromBucket());
+        output.putBoolean("Sleeping", isSleeping());
+        output.putBoolean("Sheared", isSheared());
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag tag) {
-        super.readAdditionalSaveData(tag);
+    protected void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
 
-        tag.getBoolean("FromBucket").ifPresent(this::setFromBucket);
-        tag.getBoolean("Sleeping").ifPresent(this::setSleeping);
-        tag.getBoolean("Sheared").ifPresent(this::setSheared);
+        setFromBucket(input.getBooleanOr("FromBucket", false));
+        setSleeping(input.getBooleanOr("Sleeping", false));
+        setSheared(input.getBooleanOr("Sheared", false));
     }
 
     @Override
