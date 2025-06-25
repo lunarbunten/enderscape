@@ -8219,17 +8219,17 @@
     "music.the_end.biome.celestial_grove": {
         "sounds": [
             {
-                "name": "enderscape:music/celestial_grove/elysium",
+                "name": "enderscape:music/biome/celestial_grove/elysium",
                 "stream": true,
                 "weight": 5
             },
             {
-                "name": "enderscape:music/celestial_grove/finality",
+                "name": "enderscape:music/biome/celestial_grove/finality",
                 "stream": true,
                 "weight": 5
             },
             {
-                "name": "enderscape:music/celestial_grove/otherworld",
+                "name": "enderscape:music/biome/celestial_grove/otherworld",
                 "stream": true,
                 "weight": 5
             },
@@ -8243,12 +8243,12 @@
     "music.the_end.biome.corrupt_barrens": {
         "sounds": [
             {
-                "name": "enderscape:music/corrupt_barrens/mutagen",
+                "name": "enderscape:music/biome/corrupt_barrens/mutagen",
                 "stream": true,
                 "weight": 5
             },
             {
-                "name": "enderscape:music/corrupt_barrens/nebula",
+                "name": "enderscape:music/biome/corrupt_barrens/nebula",
                 "stream": true,
                 "weight": 5
             },
@@ -8262,7 +8262,7 @@
     "music.the_end.biome.default_end": {
         "sounds": [
             {
-                "name": "enderscape:music/default_end/desolation",
+                "name": "enderscape:music/biome/default_end/desolation",
                 "stream": true,
                 "weight": 1
             },
@@ -8276,12 +8276,12 @@
     "music.the_end.biome.magnia_crags": {
         "sounds": [
             {
-                "name": "enderscape:music/default_end/desolation",
+                "name": "enderscape:music/biome/default_end/desolation",
                 "stream": true,
                 "weight": 1
             },
             {
-                "name": "enderscape:music/magnia_crags/flutters",
+                "name": "enderscape:music/biome/magnia_crags/flutters",
                 "stream": true,
                 "weight": 5
             },
@@ -8295,12 +8295,12 @@
     "music.the_end.biome.veiled_woodlands": {
         "sounds": [
             {
-                "name": "enderscape:music/default_end/desolation",
+                "name": "enderscape:music/biome/default_end/desolation",
                 "stream": true,
                 "weight": 1
             },
             {
-                "name": "enderscape:music/veiled_woodlands/respite",
+                "name": "enderscape:music/biome/veiled_woodlands/respite",
                 "stream": true,
                 "weight": 5
             },
@@ -8338,7 +8338,7 @@
     "music.the_end.structure.end_city": {
         "sounds": [
             {
-                "name": "enderscape:music/end_city/grandeur",
+                "name": "enderscape:music/structure/end_city/grandeur",
                 "stream": true,
                 "weight": 20
             }
@@ -8347,7 +8347,7 @@
     "music_disc.bliss": {
         "sounds": [
             {
-                "name": "enderscape:music/bliss",
+                "name": "enderscape:music/jukebox/bliss",
                 "stream": true
             }
         ]
@@ -8355,7 +8355,7 @@
     "music_disc.decay": {
         "sounds": [
             {
-                "name": "enderscape:music/decay",
+                "name": "enderscape:music/jukebox/decay",
                 "stream": true
             }
         ]
@@ -8363,7 +8363,7 @@
     "music_disc.glare": {
         "sounds": [
             {
-                "name": "enderscape:music/glare",
+                "name": "enderscape:music/jukebox/glare",
                 "stream": true
             }
         ]
