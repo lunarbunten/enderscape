@@ -1,67 +1,60 @@
 {
-    "schemaVersion": 1,
-    "id": "enderscape",
-    "version": "${version}",
-    "name": "Enderscape",
-    "description": "Total overhaul of The End with new generation, biomes, mobs, and other features.",
-    "authors": [
-        "lunarbunten",
-        "hivye",
-        "Konci",
-        "Ninni",
-        "Orcinus"
+  "schemaVersion": 1,
+  "id": "enderscape",
+  "version": "${version}",
+  "name": "Enderscape",
+  "description": "Total overhaul of The End with new generation, biomes, mobs, and other features.",
+  "authors": [
+    "lunarbunten",
+    "hivye",
+    "Konci",
+    "Ninni",
+    "Orcinus"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/enderscape",
+    "sources": "https://github.com/they-made-enderscape/enderscape",
+    "issues": "https://github.com/they-made-enderscape/enderscape/issues"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "enderscape.external_link.credits": "https://github.com/they-made-enderscape/enderscape/wiki/credits",
+        "enderscape.external_link.discord": "https://discord.gg/bksj9aqqgb",
+        "enderscape.external_link.wiki": "https://github.com/they-made-enderscape/enderscape/wiki"
+      }
+    }
+  },
+  "license": "MIT",
+  "icon": "assets/enderscape/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "net.bunten.enderscape.datagen.EnderscapeDataGen"
     ],
-    "contributors": [
-        "Aigis (previous logo art)",
-        "ArathainFarqoe (additional art)",
-        "dopadream (additional sound design)",
-        "FourTimesCold (additional concept art)",
-        "Julius (Brazilian Portuguese translation)",
-        "marleyinbloom (promotional renders and concept art)",
-        "Walls (additional structure design and implementation)"
+    "main": [
+      "net.bunten.enderscape.Enderscape"
     ],
-    "contact": {
-        "sources": "https://github.com/lunarbunten/enderscape",
-        "issues": "https://github.com/lunarbunten/enderscape/issues"
-    },
-    "custom": {
-        "modmenu": {
-            "links": {
-                "modmenu.enderscape.curseforge": "https://www.curseforge.com/minecraft/mc-mods/enderscape",
-                "modmenu.enderscape.modrinth": "https://modrinth.com/mod/enderscape"
-            }
-        }
-    },
-    "license": "MIT",
-    "icon": "assets/enderscape/icon.png",
-    "environment": "*",
-    "entrypoints": {
-        "fabric-datagen": [
-            "net.bunten.enderscape.datagen.EnderscapeDataGen"
-        ],
-        "main": [
-            "net.bunten.enderscape.Enderscape"
-        ],
-        "client": [
-            "net.bunten.enderscape.client.EnderscapeClient"
-        ],
-        "modmenu": [
-            "net.bunten.enderscape.client.EnderscapeModMenu"
-        ]
-    },
-    "mixins": [
-        "enderscape.mixins.json",
-        {
-            "config": "enderscape.client.mixins.json",
-            "environment": "client"
-        }
+    "client": [
+      "net.bunten.enderscape.client.EnderscapeClient"
     ],
-    "depends": {
-        "minecraft": ">=1.21.6 <=1.21.7",
-        "fabricloader": ">=0.16.14",
-        "fabric": ">=0.127.0",
-        "mixson": ">=1.3.1",
-        "yet_another_config_lib_v3": ">=3.6.6"
-    },
-    "accessWidener": "enderscape.accesswidener"
+    "modmenu": [
+      "net.bunten.enderscape.client.EnderscapeModMenu"
+    ]
+  },
+  "mixins": [
+    "enderscape.mixins.json",
+    {
+      "config": "enderscape.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "minecraft": ">=1.21.6 <=1.21.7",
+    "fabricloader": ">=0.16.14",
+    "fabric": ">=0.127.0",
+    "mixson": ">=1.3.1",
+    "yet_another_config_lib_v3": ">=3.6.6"
+  },
+  "accessWidener": "enderscape.accesswidener"
 }
