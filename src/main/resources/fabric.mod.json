@@ -11,24 +11,17 @@
         "Ninni",
         "Orcinus"
     ],
-    "contributors": [
-        "Aigis (previous logo art)",
-        "ArathainFarqoe (additional art)",
-        "dopadream (additional sound design)",
-        "FourTimesCold (additional concept art)",
-        "Julius (Brazilian Portuguese translation)",
-        "marleyinbloom (promotional renders and concept art)",
-        "Walls (additional structure design and implementation)"
-    ],
     "contact": {
-        "sources": "https://github.com/lunarbunten/enderscape",
-        "issues": "https://github.com/lunarbunten/enderscape/issues"
+        "homepage": "https://modrinth.com/mod/enderscape",
+        "sources": "https://github.com/they-made-enderscape/enderscape",
+        "issues": "https://github.com/they-made-enderscape/enderscape/issues"
     },
     "custom": {
         "modmenu": {
             "links": {
-                "modmenu.enderscape.curseforge": "https://www.curseforge.com/minecraft/mc-mods/enderscape",
-                "modmenu.enderscape.modrinth": "https://modrinth.com/mod/enderscape"
+                "enderscape.external_link.credits": "https://github.com/they-made-enderscape/enderscape/wiki/credits",
+                "enderscape.external_link.discord": "https://discord.gg/bksj9aqqgb",
+                "enderscape.external_link.wiki": "https://github.com/they-made-enderscape/enderscape/wiki"
             }
         }
     },
@@ -37,7 +30,7 @@
     "environment": "*",
     "entrypoints": {
         "fabric-datagen": [
-          "net.bunten.enderscape.datagen.EnderscapeDataGen"
+            "net.bunten.enderscape.datagen.EnderscapeDataGen"
         ],
         "main": [
             "net.bunten.enderscape.Enderscape"
@@ -46,7 +39,7 @@
             "net.bunten.enderscape.client.EnderscapeClient"
         ],
         "modmenu": [
-          "net.bunten.enderscape.client.EnderscapeModMenu"
+            "net.bunten.enderscape.client.EnderscapeModMenu"
         ]
     },
     "mixins": [
