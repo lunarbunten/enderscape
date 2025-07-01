@@ -46,9 +46,9 @@ public class DebugHud extends HudElement {
 
     private LinkedHashMap<List<String>, Boolean> getDebugText() {
         LinkedHashMap<List<String>, Boolean> map = new LinkedHashMap<>();
-        map.put(getClientInfo(), config.debugHudClientInfo.get());
-        map.put(getMusicInfo(), config.debugHudMusicInfo.get());
-        map.put(getPlayerInfo(), config.debugHudPlayerInfo.get());
+        map.put(getClientInfo(), config.debugHudClientInfo);
+        map.put(getMusicInfo(), config.debugHudMusicInfo);
+        map.put(getPlayerInfo(), config.debugHudPlayerInfo);
         return map;
     }
 
@@ -135,7 +135,7 @@ public class DebugHud extends HudElement {
     }
 
     public void render(GuiGraphics graphics, DeltaTracker delta) {
-        if (Minecraft.getInstance().player == null || Minecraft.getInstance().getDebugOverlay().showDebugScreen() || Minecraft.getInstance().options.hideGui || !EnderscapeConfig.getInstance().debugHudEnabled.getAsBoolean()) return;
+        if (Minecraft.getInstance().player == null || Minecraft.getInstance().getDebugOverlay().showDebugScreen() || Minecraft.getInstance().options.hideGui || !EnderscapeConfig.getInstance().debugHudEnabled) return;
 
         graphics.pose().pushPose();
 

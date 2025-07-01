@@ -10,6 +10,10 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
+    maven {
+        name 'Xander Maven'
+        url 'https://maven.isxander.dev/releases'
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -88,6 +92,8 @@ configurations {
 
 dependencies {
     implementation("maven.modrinth:trimmed:1.21-${trimmed_version}+neoforge")
+    implementation ("dev.isxander:yet-another-config-lib:${project.yacl_version}")
+
     compileOnly("com.github.glitchfiend:TerraBlender-neoforge:1.21.1-${terrablender_version}")
 }
 
@@ -106,6 +112,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_credits            : mod_credits,
             mod_description        : mod_description,
             trimmed_version        : trimmed_version,
+            yacl_version           : yacl_version,
             terrablender_version   : terrablender_version,
     ]
     inputs.properties replaceProperties

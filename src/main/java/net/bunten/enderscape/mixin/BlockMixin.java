@@ -30,10 +30,10 @@ public abstract class BlockMixin extends BlockBehaviour {
     public void Enderscape$animateTick(BlockState state, Level level, BlockPos pos, RandomSource random, CallbackInfo info) {
         if (state.getBlock() instanceof ChorusFlowerBlock && state.getValue(ChorusFlowerBlock.AGE) == 5) {
             info.cancel();
-            if (EnderscapeConfig.getInstance().chorusFlowerPollen.get() && random.nextFloat() < 0.7F) {
+            if (EnderscapeConfig.getInstance().chorusFlowerPollen && random.nextFloat() < 0.7F) {
                 level.addParticle(EnderscapeParticles.CHORUS_POLLEN.get(), pos.getX() + random.nextDouble(), pos.getY() + random.nextDouble(), pos.getZ() + random.nextDouble(), 0.25, random.nextGaussian() * 0.025, 0.25);
             }
-            if (EnderscapeConfig.getInstance().chorusFlowerHumming.get() && random.nextInt(18) == 0) {
+            if (EnderscapeConfig.getInstance().chorusFlowerHumming && random.nextInt(18) == 0) {
                 level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, EnderscapeBlockSounds.CHORUS_FLOWER_IDLE, SoundSource.AMBIENT, 0.15F + random.nextFloat(), random.nextFloat() + 0.3F, false);
             }
         }

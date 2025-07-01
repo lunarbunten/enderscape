@@ -32,7 +32,7 @@ public abstract class ThrownTridentMixin extends AbstractArrow {
 
     @Inject(at = @At("HEAD"), method = "tick")
     public void tick(CallbackInfo info) {
-        if (EnderscapeConfig.getInstance().tridentsReturnFromVoid.get() && getOwner() != null && getY() < level().getMinBuildHeight() && entityData.get(ID_LOYALTY) > 0) {
+        if (EnderscapeConfig.getInstance().tridentsReturnFromVoid && getOwner() != null && getY() < level().getMinBuildHeight() && entityData.get(ID_LOYALTY) > 0) {
             dealtDamage = true;
             teleportTo(getOwner().getX(), getOwner().getY(), getOwner().getZ());
             setDeltaMovement(0, 0, 0);

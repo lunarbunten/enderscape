@@ -62,7 +62,7 @@ public class NebuliteToolHud extends HudElement {
     private int cost;
 
     public void render(GuiGraphics graphics, DeltaTracker delta) {
-        if (!config.nebuliteToolHudEnabled.get() || Minecraft.getInstance().player == null || Minecraft.getInstance().options.hideGui || totalAlpha <= 0.01F || !Minecraft.getInstance().options.getCameraType().isFirstPerson() || Minecraft.getInstance().player.isSpectator()) {
+        if (!config.nebuliteToolHudEnabled || Minecraft.getInstance().player == null || Minecraft.getInstance().options.hideGui || totalAlpha <= 0.01F || !Minecraft.getInstance().options.getCameraType().isFirstPerson() || Minecraft.getInstance().player.isSpectator()) {
             return;
         }
 
@@ -70,10 +70,10 @@ public class NebuliteToolHud extends HudElement {
 
         graphics.pose().translate(0, heightOffset, 0);
 
-        float opacity = totalAlpha * ((float) (config.nebuliteToolHudOpacity.getAsInt())) / 100.0F;
+        float opacity = totalAlpha * ((float) (config.nebuliteToolHudOpacity)) / 100.0F;
 
         int x = graphics.guiWidth() / 2 - (((11 * maxFuel) + 1) / 2);
-        int y = graphics.guiHeight() / 2 - 13 - config.nebuliteToolHudOffset.getAsInt();
+        int y = graphics.guiHeight() / 2 - 13 - config.nebuliteToolHudOffset;
 
         renderFuelBar(graphics, x, y, opacity);
         renderTransdimensionalOutline(graphics, x, y, opacity);

@@ -22,7 +22,7 @@ public class StareScreenEffect extends HudElement {
     }
 
     public void render(GuiGraphics graphics, DeltaTracker delta) {
-        if (Minecraft.getInstance().player == null || Minecraft.getInstance().options.hideGui || !Minecraft.getInstance().options.getCameraType().isFirstPerson() || Minecraft.getInstance().player.isSpectator() || EnderscapeClient.stareTicks <= 0 || !EnderscapeConfig.getInstance().endermanStaticOverlay.getAsBoolean()) {
+        if (Minecraft.getInstance().player == null || Minecraft.getInstance().options.hideGui || !Minecraft.getInstance().options.getCameraType().isFirstPerson() || Minecraft.getInstance().player.isSpectator() || EnderscapeClient.stareTicks <= 0 || !EnderscapeConfig.getInstance().endermanStaticOverlay) {
             return;
         }
 

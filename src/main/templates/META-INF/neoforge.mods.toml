@@ -42,6 +42,13 @@ ordering="NONE"
 side="BOTH"
 
 [[dependencies.${mod_id}]]
+modId = "yet_another_config_lib_v3"
+type="required"
+versionRange="[${yacl_version},)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.${mod_id}]]
 modId="terrablender"
 type="optional"
 versionRange="[${terrablender_version},)"

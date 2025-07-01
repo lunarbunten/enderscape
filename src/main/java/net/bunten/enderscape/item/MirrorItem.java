@@ -237,24 +237,24 @@ public class MirrorItem extends NebuliteToolItem {
 
             MirrorContext context = new MirrorContext(stack, client.level, client.player);
 
-            if (isLinked(stack) && config.mirrorTooltipEnabled.get()) {
+            if (isLinked(stack) && config.mirrorTooltipEnabled) {
 
                 ChatFormatting typeColor = ChatFormatting.GRAY;
                 ChatFormatting valueColor = ChatFormatting.BLUE;
 
-                if (!config.mirrorTooltipShiftToDisplay.get() || Screen.hasShiftDown()) {
+                if (!config.mirrorTooltipShiftToDisplay || Screen.hasShiftDown()) {
                     BlockPos user = context.user().blockPosition();
                     BlockPos linkedPos = context.linkedPos();
                     ResourceKey<Level> linkedDimension = context.linkedDimension();
 
-                    if (config.mirrorTooltipDisplayCoordinates.get()) {
+                    if (config.mirrorTooltipDisplayCoordinates) {
                         MutableComponent position = tooltip("position.coordinates", linkedPos.getX(), linkedPos.getY(), linkedPos.getZ()).withStyle(valueColor);
                         MutableComponent unknown = tooltip("position.unknown").withStyle(valueColor);
 
                         list.add(tooltip("position", isSameDimension(context, linkedDimension) ? position : unknown).withStyle(typeColor));
                     }
 
-                    if (config.mirrorTooltipDisplayDistance.get()) {
+                    if (config.mirrorTooltipDisplayDistance) {
                         float step = getDistanceForCostIncrease(stack) / 2.0F;
                         int roundedDistance = (int) (Math.round(distanceBetweenPoints(user, linkedPos) / step) * step);
 
@@ -264,7 +264,7 @@ public class MirrorItem extends NebuliteToolItem {
                         list.add(tooltip("distance", isSameDimension(context, linkedDimension) ? approximate : unknown).withStyle(typeColor));
                     }
 
-                    if (config.mirrorTooltipDisplayDimension.get()) {
+                    if (config.mirrorTooltipDisplayDimension) {
                         MutableComponent dimension = Component.translatable(Util.makeDescriptionId("dimension", linkedDimension.location())).withStyle(valueColor);;
                         list.add(tooltip("dimension", dimension).withStyle(typeColor));
                     }

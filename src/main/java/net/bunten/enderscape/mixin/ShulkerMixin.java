@@ -38,6 +38,6 @@ public abstract class ShulkerMixin extends AbstractGolem {
 
     @Unique
     private boolean Enderscape$isPiercingArrow(DamageSource source) {
-        return EnderscapeConfig.getInstance().shulkerHurtByPiercing.get() && isClosed() && source.getDirectEntity() instanceof AbstractArrow arrow && arrow.getPierceLevel() > 0;
+        return EnderscapeConfig.getInstance().shulkerHurtByPiercing && isClosed() && source.getDirectEntity() instanceof AbstractArrow arrow && arrow.getPierceLevel() > 0;
     }
 }

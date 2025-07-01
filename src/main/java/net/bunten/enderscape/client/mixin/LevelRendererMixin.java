@@ -37,7 +37,7 @@ public abstract class LevelRendererMixin {
 
     @Inject(method = "renderEndSky", at = @At("HEAD"), cancellable = true)
     public void renderEndSky(PoseStack pose, CallbackInfo ci) {
-        if (EnderscapeConfig.getInstance().skyboxUpdateEnabled.getAsBoolean())  {
+        if (EnderscapeConfig.getInstance().skyboxUpdateEnabled)  {
             EnderscapeSkybox.render(pose, level, Minecraft.getInstance().gameRenderer.getMainCamera(), Minecraft.getInstance().getTimer());
             ci.cancel();
         }
@@ -45,7 +45,7 @@ public abstract class LevelRendererMixin {
 
     @ModifyArgs(method = "levelEvent", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/resources/sounds/SimpleSoundInstance;forLocalAmbience(Lnet/minecraft/sounds/SoundEvent;FF)Lnet/minecraft/client/resources/sounds/SimpleSoundInstance;"))
     public void levelEvent(Args args) {
-        if (EnderscapeConfig.getInstance().endPortalUpdateTravelSound.getAsBoolean() && level.dimension() == Level.END) {
+        if (EnderscapeConfig.getInstance().endPortalUpdateTravelSound && level.dimension() == Level.END) {
             args.set(0, EnderscapeBlockSounds.END_PORTAL_TRAVEL);
         }
     }

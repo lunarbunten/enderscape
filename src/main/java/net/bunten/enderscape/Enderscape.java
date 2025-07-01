@@ -51,9 +51,8 @@ public class Enderscape {
     }
 
     public Enderscape(IEventBus modBus, ModContainer modContainer) {
-        EnderscapeConfig.register(modContainer);
-        
         Reflection.initialize(
+                EnderscapeConfig.class,
                 EnderscapeItems.class,
                 EnderscapeBlocks.class,
                 EnderscapeFeatures.class,

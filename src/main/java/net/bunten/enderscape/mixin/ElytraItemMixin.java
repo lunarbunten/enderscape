@@ -21,7 +21,7 @@ public abstract class ElytraItemMixin {
 
     @Inject(at = @At("RETURN"), method = "getEquipSound", cancellable = true)
     protected void equipSound(CallbackInfoReturnable<Holder<SoundEvent>> info) {
-        if (EnderscapeConfig.getInstance().elytraUpdateEquipSound.get() && info.getReturnValue() == SoundEvents.ARMOR_EQUIP_ELYTRA) {
+        if (EnderscapeConfig.getInstance().elytraUpdateEquipSound && info.getReturnValue() == SoundEvents.ARMOR_EQUIP_ELYTRA) {
             info.setReturnValue(EnderscapeItemSounds.ELYTRA_EQUIP);
         }
     }

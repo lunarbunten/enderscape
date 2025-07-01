@@ -18,6 +18,6 @@ public abstract class PortalParticleMixin extends TextureSheetParticle {
 
     @Inject(method = "getLightColor", at = @At("RETURN"), cancellable = true)
     private void setupColor(float f, CallbackInfoReturnable<Integer> cir) {
-        if (EnderscapeConfig.getInstance().portalParticleEmissive.getAsBoolean()) cir.setReturnValue(Math.min(160, cir.getReturnValueI()));
+        if (EnderscapeConfig.getInstance().portalParticleEmissive) cir.setReturnValue(Math.min(160, cir.getReturnValueI()));
     }
 }

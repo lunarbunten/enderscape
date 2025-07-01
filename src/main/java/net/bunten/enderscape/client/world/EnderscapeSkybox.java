@@ -37,10 +37,10 @@ public class EnderscapeSkybox {
     private static final VertexBuffer stars = createStarsBuffer();
 
     public static float gammaFactor() {
-        if (!EnderscapeConfig.getInstance().skyboxScalesBrightnessWithGamma.getAsBoolean()) return 1.0F;
+        if (!EnderscapeConfig.getInstance().skyboxScalesBrightnessWithGamma) return 1.0F;
 
         float gamma = Minecraft.getInstance().options.gamma().get().floatValue();
-        float scale = ((float) EnderscapeConfig.getInstance().skyboxBrightnessScaleFactor.getAsInt()) / 100.0F;
+        float scale = ((float) EnderscapeConfig.getInstance().skyboxBrightnessScaleFactor) / 100.0F;
 
         return 1.0F + (gamma * scale);
     }

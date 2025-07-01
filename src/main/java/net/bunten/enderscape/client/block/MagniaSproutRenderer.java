@@ -18,7 +18,7 @@ public class MagniaSproutRenderer implements BlockEntityRenderer<MagniaSproutBlo
 
     @Override
     public void render(MagniaSproutBlockEntity entity, float f, PoseStack pose, MultiBufferSource source, int i, int j) {
-        if (EnderscapeConfig.getInstance().debugMagniaSproutHitboxes.get()) {
+        if (EnderscapeConfig.getInstance().debugMagniaSproutHitboxes) {
             if (entity.getBlockState().getBlock() instanceof MagniaSproutBlock sprout) {
                 Vec3 color = sprout.magniaType.equals(MagniaType.ALLURING) ? Vec3.fromRGB24(0x8CC9FF) : Vec3.fromRGB24(0xFF9E9B);
                 LevelRenderer.renderLineBox(pose, source.getBuffer(RenderType.lines()), MagniaSproutBlockEntity.getRange(entity.getLevel(), entity.getBlockState(), entity.getBlockPos()).move(entity.getBlockPos().multiply(-1)), (float) color.x, (float) color.y, (float) color.z, entity.getBlockState().getValue(MagniaSproutBlock.POWERED) ? 0.85F : 0.05F);

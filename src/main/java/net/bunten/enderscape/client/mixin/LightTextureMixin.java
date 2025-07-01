@@ -26,7 +26,7 @@ public abstract class LightTextureMixin {
 
     @Unique
     private boolean Enderscape$shouldUpdateLighting(LightingStyle style) {
-        return minecraft.level != null && minecraft.level.dimension() == Level.END && EnderscapeConfig.getInstance().lightingStyle.get() == style;
+        return minecraft.level != null && minecraft.level.dimension() == Level.END && EnderscapeConfig.getInstance().lightingStyle == style;
     }
 
     @ModifyArgs(

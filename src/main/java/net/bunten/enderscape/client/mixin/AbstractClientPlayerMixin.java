@@ -25,7 +25,7 @@ public abstract class AbstractClientPlayerMixin extends Player {
 
     @Unique
     private float Enderscape$getElytraFovIntensity() {
-        float configIntensity = (float) EnderscapeConfig.getInstance().elytraFovEffectIntensity.getAsInt() / 100.0F;
+        float configIntensity = (float) EnderscapeConfig.getInstance().elytraFovEffectIntensity / 100.0F;
         return (float) (configIntensity * Minecraft.getInstance().options.fovEffectScale().get());
     }
 
@@ -55,7 +55,7 @@ public abstract class AbstractClientPlayerMixin extends Player {
 
     @ModifyReturnValue(method = "getFieldOfViewModifier", at = @At("RETURN"))
     private float getFieldOfViewModifier(float original) {
-        if (EnderscapeConfig.getInstance().elytraAddFovEffects.getAsBoolean()) return original * Enderscape$getElytraFovModifier();
+        if (EnderscapeConfig.getInstance().elytraAddFovEffects) return original * Enderscape$getElytraFovModifier();
         return original;
     }
 }

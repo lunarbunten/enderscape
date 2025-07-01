@@ -25,6 +25,6 @@ public abstract class EndermiteRendererMixin extends MobRenderer<Endermite, Ende
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void Enderscape$getBrightnessDependentFogColor(EntityRendererProvider.Context context, CallbackInfo ci) {
-        if (EnderscapeConfig.getInstance().endermiteEmissiveEyes.getAsBoolean()) addLayer(new EndermiteEyesLayer(renderer));
+        if (EnderscapeConfig.getInstance().endermiteEmissiveEyes) addLayer(new EndermiteEyesLayer(renderer));
     }
 }

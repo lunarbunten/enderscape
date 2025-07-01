@@ -33,11 +33,11 @@ public abstract class EnderManMixin extends Monster {
 
     @Inject(method = "playStareSound", at = @At("HEAD"), cancellable = true)
     public void Enderscape$playStareSound(CallbackInfo info) {
-        if (EnderscapeConfig.getInstance().endermanStereoStareSound.get()) info.cancel();
+        if (EnderscapeConfig.getInstance().endermanStereoStareSound) info.cancel();
     }
 
     @Inject(method = "setTarget", at = @At("TAIL"))
     public void Enderscape$setTarget(LivingEntity target, CallbackInfo ci) {
-        if (target instanceof ServerPlayer server && enderman.canAttack(server) && EnderscapeConfig.getInstance().endermanStereoStareSound.get()) EnderscapeServerNetworking.sendStareSoundPayload(server, getId());
+        if (target instanceof ServerPlayer server && enderman.canAttack(server) && EnderscapeConfig.getInstance().endermanStereoStareSound) EnderscapeServerNetworking.sendStareSoundPayload(server, getId());
     }
 }

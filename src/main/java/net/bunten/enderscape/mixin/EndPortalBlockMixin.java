@@ -21,7 +21,7 @@ public abstract class EndPortalBlockMixin extends BaseEntityBlock {
 
     @ModifyArgs(method = "animateTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V"))
     private void Enderscape$ReplaceParticles(Args args) {
-        if (EnderscapeConfig.getInstance().endPortalUpdateParticles.get()) {
+        if (EnderscapeConfig.getInstance().endPortalUpdateParticles) {
             args.set(0, EnderscapeParticles.END_PORTAL_STARS.get());
             args.set(2, ((double) args.get(2)) + 0.2);
             args.set(5, 0.0185);
@@ -30,7 +30,7 @@ public abstract class EndPortalBlockMixin extends BaseEntityBlock {
 
     @WrapWithCondition(method = "animateTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V"))
     private boolean Enderscape$ReduceParticleCount(Level instance, ParticleOptions particleOptions, double d, double e, double f, double g, double h, double i) {
-        if (EnderscapeConfig.getInstance().endPortalUpdateParticles.get() && instance.getRandom().nextBoolean()) return false;
+        if (EnderscapeConfig.getInstance().endPortalUpdateParticles && instance.getRandom().nextBoolean()) return false;
         return true;
     }
 }

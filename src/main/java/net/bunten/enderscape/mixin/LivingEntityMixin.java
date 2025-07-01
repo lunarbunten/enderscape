@@ -222,7 +222,7 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
 
     @Inject(at = @At("HEAD"), method = "makePoofParticles", cancellable = true)
     public void Enderscape$makePoofParticles(CallbackInfo info) {
-        if (EnderscapeConfig.getInstance().voidPoofParticlesUponDeath.get() && mob.getType().is(EnderscapeEntityTags.CREATES_VOID_PARTICLES_UPON_DEATH)) {
+        if (EnderscapeConfig.getInstance().voidPoofParticlesUponDeath && mob.getType().is(EnderscapeEntityTags.CREATES_VOID_PARTICLES_UPON_DEATH)) {
             info.cancel();
 
             for (int i = 0; i < 20; i++) {

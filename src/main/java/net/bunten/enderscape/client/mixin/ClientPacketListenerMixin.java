@@ -33,7 +33,7 @@ public abstract class ClientPacketListenerMixin extends ClientCommonPacketListen
     public void Enderscape$handleEntityEvent(ClientboundEntityEventPacket packet, CallbackInfo ci) {
         Entity entity = packet.getEntity(this.level);
         if (entity != null) {
-            if (packet.getEventId() == -68 && EnderscapeConfig.getInstance().elytraAddGlidingSound.getAsBoolean()) {
+            if (packet.getEventId() == -68 && EnderscapeConfig.getInstance().elytraAddGlidingSound) {
                 minecraft.getSoundManager().play(new ElytraSoundInstance((Player) entity));
                 ci.cancel();
             }
@@ -42,6 +42,6 @@ public abstract class ClientPacketListenerMixin extends ClientCommonPacketListen
 
     @Inject(method = "postAddEntitySoundInstance", at = @At(value = "HEAD"))
     public void Enderscape$handleEntityEvent(Entity entity, CallbackInfo ci) {
-        if (entity instanceof ShulkerBullet bullet && EnderscapeConfig.getInstance().shulkerBulletLoopSound.getAsBoolean()) minecraft.getSoundManager().queueTickingSound(new ShulkerBulletSoundInstance(bullet));
+        if (entity instanceof ShulkerBullet bullet && EnderscapeConfig.getInstance().shulkerBulletLoopSound) minecraft.getSoundManager().queueTickingSound(new ShulkerBulletSoundInstance(bullet));
     }
 }

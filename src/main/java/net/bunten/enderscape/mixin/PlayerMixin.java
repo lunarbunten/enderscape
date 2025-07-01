@@ -62,7 +62,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
         Enderscape$airTicks = (!onGround() && !isInWater()) ? Enderscape$airTicks + 1 : 0;
 
-        if (isFallFlying() && isShiftKeyDown() && EnderscapeConfig.getInstance().elytraSneakToStopGliding.get()) ((Player) (Object) this).stopFallFlying();
+        if (isFallFlying() && isShiftKeyDown() && EnderscapeConfig.getInstance().elytraSneakToStopGliding) ((Player) (Object) this).stopFallFlying();
     }
 
     @Unique
@@ -147,13 +147,13 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(at = @At("HEAD"), method = "startFallFlying")
     public void Enderscape$startFallFlying(CallbackInfo info) {
-        if (EnderscapeConfig.getInstance().elytraAddOpenCloseSounds.get()) playSound(EnderscapeItemSounds.ELYTRA_START_GLIDING.get(), 1, Mth.nextFloat(getRandom(), 0.8F, 1.2F));
+        if (EnderscapeConfig.getInstance().elytraAddOpenCloseSounds) playSound(EnderscapeItemSounds.ELYTRA_START_GLIDING.get(), 1, Mth.nextFloat(getRandom(), 0.8F, 1.2F));
         level().broadcastEntityEvent(this, (byte) -68);
     }
 
     @Inject(at = @At("HEAD"), method = "stopFallFlying")
     public void Enderscape$stopFallFlying(CallbackInfo info) {
-        if (EnderscapeConfig.getInstance().elytraAddOpenCloseSounds.get()) playSound(EnderscapeItemSounds.ELYTRA_STOP_GLIDING.get(), 1, Mth.nextFloat(getRandom(), 0.8F, 1.2F));
+        if (EnderscapeConfig.getInstance().elytraAddOpenCloseSounds) playSound(EnderscapeItemSounds.ELYTRA_STOP_GLIDING.get(), 1, Mth.nextFloat(getRandom(), 0.8F, 1.2F));
     }
 
     @Inject(at = @At("HEAD"), method = "hurtCurrentlyUsedShield")

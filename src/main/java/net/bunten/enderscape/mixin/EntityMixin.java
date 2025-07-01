@@ -20,13 +20,13 @@ public class EntityMixin {
     public float expandHitRange(float original) {
         float expanded = 0.35F;
 
-        if (self instanceof Silverfish && EnderscapeConfig.getInstance().silverfishExpandHitRange.get()) {
+        if (self instanceof Silverfish && EnderscapeConfig.getInstance().silverfishExpandHitRange) {
             return expanded;
         }
-        if (self instanceof Endermite && EnderscapeConfig.getInstance().endermiteExpandHitRange.get()) {
+        if (self instanceof Endermite && EnderscapeConfig.getInstance().endermiteExpandHitRange) {
             return expanded;
         }
-        if (self instanceof Rubblemite && EnderscapeConfig.getInstance().rubblemiteExpandHitRange.get()) {
+        if (self instanceof Rubblemite && EnderscapeConfig.getInstance().rubblemiteExpandHitRange) {
             return expanded;
         }
 

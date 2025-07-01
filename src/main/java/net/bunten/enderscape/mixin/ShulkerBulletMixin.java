@@ -29,9 +29,9 @@ public abstract class ShulkerBulletMixin extends Projectile {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void isValid(CallbackInfo info) {
-        boolean pastTimeLimit = EnderscapeConfig.getInstance().shulkerBulletEnforceTimeLimit.getAsInt() > 0 && tickCount > EnderscapeConfig.getInstance().shulkerBulletEnforceTimeLimit.getAsInt() * 20;
-        boolean pastDistance = EnderscapeConfig.getInstance().shulkerBulletEnforceDistanceLimit.getAsInt() > 0 && finalTarget != null && distanceTo(finalTarget) >= EnderscapeConfig.getInstance().shulkerBulletEnforceDistanceLimit.getAsInt();
-        boolean ownerInvalid = EnderscapeConfig.getInstance().shulkerBulletEnforceOwnerLimit.getAsBoolean() && (getOwner() == null || !getOwner().isAlive());
+        boolean pastTimeLimit = EnderscapeConfig.getInstance().shulkerBulletEnforceTimeLimit > 0 && tickCount > EnderscapeConfig.getInstance().shulkerBulletEnforceTimeLimit * 20;
+        boolean pastDistance = EnderscapeConfig.getInstance().shulkerBulletEnforceDistanceLimit > 0 && finalTarget != null && distanceTo(finalTarget) >= EnderscapeConfig.getInstance().shulkerBulletEnforceDistanceLimit;
+        boolean ownerInvalid = EnderscapeConfig.getInstance().shulkerBulletEnforceOwnerLimit && (getOwner() == null || !getOwner().isAlive());
 
         if (pastTimeLimit || pastDistance || ownerInvalid) {
             destroy();
@@ -41,7 +41,7 @@ public abstract class ShulkerBulletMixin extends Projectile {
 
     @ModifyArg(method = "onHitEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z"))
     protected MobEffectInstance onHitEntity(MobEffectInstance original) {
-        if (EnderscapeConfig.getInstance().shulkerBulletRebalanceLevitation.getAsBoolean()) {
+        if (EnderscapeConfig.getInstance().shulkerBulletRebalanceLevitation) {
             return new MobEffectInstance(MobEffects.LEVITATION, 20 * 4, 2);
         }
         return original;

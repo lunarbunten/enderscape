@@ -115,7 +115,7 @@ public class EnderscapeClientNetworking {
         Minecraft client = Minecraft.getInstance();
         client.execute(() -> {
             if (EnderscapeClient.stareTicks < MAX_STARE_STICKS) EnderscapeClient.stareTicks += 2;
-            if ((staticSoundInstance == null || !client.getSoundManager().isActive(staticSoundInstance)) && EnderscapeConfig.getInstance().endermanStaticSound.get()) client.getSoundManager().play(staticSoundInstance = new EndermanStaticSoundInstance(client));
+            if ((staticSoundInstance == null || !client.getSoundManager().isActive(staticSoundInstance)) && EnderscapeConfig.getInstance().endermanStaticSound) client.getSoundManager().play(staticSoundInstance = new EndermanStaticSoundInstance(client));
         });
     }
 

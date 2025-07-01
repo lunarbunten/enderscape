@@ -21,16 +21,16 @@ public abstract class EndermiteMixin extends Monster {
 
     @Inject(method = "getAmbientSound", at = @At("RETURN"), cancellable = true)
     public void Enderscape$getAmbientSound(CallbackInfoReturnable<SoundEvent> info) {
-        if (EnderscapeConfig.getInstance().endermiteUpdateSounds.get()) info.setReturnValue(EnderscapeEntitySounds.ENDERMITE_AMBIENT.get());
+        if (EnderscapeConfig.getInstance().endermiteUpdateSounds) info.setReturnValue(EnderscapeEntitySounds.ENDERMITE_AMBIENT.get());
     }
 
     @Inject(method = "getHurtSound", at = @At("RETURN"), cancellable = true)
     public void Enderscape$getHurtSound(DamageSource source, CallbackInfoReturnable<SoundEvent> info) {
-        if (EnderscapeConfig.getInstance().endermiteUpdateSounds.get()) info.setReturnValue(EnderscapeEntitySounds.ENDERMITE_HURT.get());
+        if (EnderscapeConfig.getInstance().endermiteUpdateSounds) info.setReturnValue(EnderscapeEntitySounds.ENDERMITE_HURT.get());
     }
 
     @Inject(method = "getDeathSound", at = @At("RETURN"), cancellable = true)
     public void Enderscape$getDeathSound(CallbackInfoReturnable<SoundEvent> info) {
-        if (EnderscapeConfig.getInstance().endermiteUpdateSounds.get()) info.setReturnValue(EnderscapeEntitySounds.ENDERMITE_DEATH.get());
+        if (EnderscapeConfig.getInstance().endermiteUpdateSounds) info.setReturnValue(EnderscapeEntitySounds.ENDERMITE_DEATH.get());
     }
 }

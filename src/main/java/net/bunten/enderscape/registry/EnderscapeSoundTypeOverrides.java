@@ -43,16 +43,16 @@ public class EnderscapeSoundTypeOverrides {
 
 	static {
 		Map<SoundType, Predicate<BlockState>> overrides = Map.of(
-				EnderscapeSoundTypes.CHORUS_PLANT, (state) -> CONFIG.blockSoundsUpdateChorus.get() && getNameOf(state).equals("chorus_plant"),
-				EnderscapeSoundTypes.CHORUS_FLOWER, (state) -> CONFIG.blockSoundsUpdateChorus.get() && getNameOf(state).equals("chorus_flower"),
-				EnderscapeSoundTypes.PURPUR, (state) -> CONFIG.blockSoundsUpdatePurpur.get() && getNameOf(state).contains("purpur"),
-				EnderscapeSoundTypes.END_PORTAL_FRAME, (state) -> CONFIG.blockSoundsUpdateEndPortalFrame.get() && getNameOf(state).equals("end_portal_frame"),
-				EnderscapeSoundTypes.END_PORTAL, (state) -> CONFIG.blockSoundsUpdateEndPortals.get() && getNameOf(state).equals("end_portal"),
-				EnderscapeSoundTypes.END_GATEWAY, (state) -> CONFIG.blockSoundsUpdateEndPortals.get() && getNameOf(state).equals("end_gateway"),
-				EnderscapeSoundTypes.END_ROD, (state) -> CONFIG.blockSoundsUpdateEndRods.get() && getNameOf(state).equals("end_rod"),
-				EnderscapeSoundTypes.END_STONE, (state) -> CONFIG.blockSoundsUpdateEndStone.get() && getNameOf(state).contains("end_stone") && !getNameOf(state).contains("brick") && !getNameOf(state).contains("chiseled")&& !getNameOf(state).contains("veiled"),
-				EnderscapeSoundTypes.END_STONE_BRICKS, (state) -> CONFIG.blockSoundsUpdateEndStoneBricks.get() && getNameOf(state).contains("end_stone") && (getNameOf(state).contains("brick") || getNameOf(state).contains("chiseled")),
-				EnderscapeSoundTypes.SHULKER_BOX, (state) -> CONFIG.blockSoundsUpdateShulkerBoxes.get() && state.getBlock() instanceof ShulkerBoxBlock
+				EnderscapeSoundTypes.CHORUS_PLANT, (state) -> CONFIG.blockSoundUpdateChorus && getNameOf(state).equals("chorus_plant"),
+				EnderscapeSoundTypes.CHORUS_FLOWER, (state) -> CONFIG.blockSoundUpdateChorus && getNameOf(state).equals("chorus_flower"),
+				EnderscapeSoundTypes.PURPUR, (state) -> CONFIG.blockSoundUpdatePurpur && getNameOf(state).contains("purpur"),
+				EnderscapeSoundTypes.END_PORTAL_FRAME, (state) -> CONFIG.blockSoundUpdateEndPortalFrame && getNameOf(state).equals("end_portal_frame"),
+				EnderscapeSoundTypes.END_PORTAL, (state) -> CONFIG.blockSoundUpdateEndPortals && getNameOf(state).equals("end_portal"),
+				EnderscapeSoundTypes.END_GATEWAY, (state) -> CONFIG.blockSoundUpdateEndPortals && getNameOf(state).equals("end_gateway"),
+				EnderscapeSoundTypes.END_ROD, (state) -> CONFIG.blockSoundUpdateEndRods && getNameOf(state).equals("end_rod"),
+				EnderscapeSoundTypes.END_STONE, (state) -> CONFIG.blockSoundUpdateEndStone && getNameOf(state).contains("end_stone") && !getNameOf(state).contains("brick") && !getNameOf(state).contains("chiseled")&& !getNameOf(state).contains("veiled"),
+				EnderscapeSoundTypes.END_STONE_BRICKS, (state) -> CONFIG.blockSoundUpdateEndStoneBricks && getNameOf(state).contains("end_stone") && (getNameOf(state).contains("brick") || getNameOf(state).contains("chiseled")),
+				EnderscapeSoundTypes.SHULKER_BOX, (state) -> CONFIG.blockSoundUpdateShulkerBoxes && state.getBlock() instanceof ShulkerBoxBlock
 		);
 
 		overrides.forEach((sound, condition) -> register(new SoundTypeOverride(sound, condition)));

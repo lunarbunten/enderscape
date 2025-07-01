@@ -36,7 +36,7 @@ public class FogRendererMixin {
     private static void afterSetupFog(Camera camera, FogRenderer.FogMode mode, float viewDistance, boolean thickFog, float partialTick, CallbackInfo info) {
         ClientLevel level = Minecraft.getInstance().level;
 
-        if (EnderscapeConfig.getInstance().skyboxAddDynamicFogDensity.getAsBoolean() && level != null && level.dimension() == Level.END && mode == FogRenderer.FogMode.FOG_TERRAIN && !thickFog) {
+        if (EnderscapeConfig.getInstance().skyboxAddDynamicFogDensity && level != null && level.dimension() == Level.END && mode == FogRenderer.FogMode.FOG_TERRAIN && !thickFog) {
             float fogStart = (viewDistance * 30.0F * 0.01F) / EnderscapeSkybox.fogStartDensity, fogEnd = viewDistance * 95.0F * 0.01F / EnderscapeSkybox.fogEndDensity;
 
             RenderSystem.setShaderFogStart(fogStart);
