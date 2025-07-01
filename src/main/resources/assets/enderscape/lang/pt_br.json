@@ -345,8 +345,6 @@
     "jukebox_song.enderscape.decay": "vye - decay",
     "jukebox_song.enderscape.glare": "lunarbunten - glare",
     "menu.enderscape.config": "Configuração do Enderscape",
-    "modmenu.enderscape.curseforge": "CurseForge",
-    "modmenu.enderscape.modrinth": "Modrinth",
     "option.enderscape.ambience_update_default_additions": "Ambiente: Atualizar sons de adição padrão",
     "option.enderscape.ambience_update_default_additions.desc": "§eEficaz somente após recarregar o mundo!§r\n\nAdiciona sons ambientes \"adicionais\" que são reproduzidos de vez em quando em Planaltos do End, Zona Média do End, etc.",
     "option.enderscape.ambience_update_default_fog_color": "Ambiente: Atualizar cor de neblina padrão",
