@@ -106,6 +106,10 @@ public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider
         valueLookupBuilder(STORAGE_BLOCKS).add(SHADOLINE_BLOCK.asItem(), NEBULITE_BLOCK.asItem(), DRIFT_JELLY_BLOCK.asItem());
         valueLookupBuilder(TOOLS).add(MIRROR, MAGNIA_ATTRACTOR);
 
+        valueLookupBuilder(HAS_DESCRIPTION).add(MAGNIA_ATTRACTOR, DRIFT_LEGGINGS, DRIFT_JELLY_BOTTLE, DRIFT_JELLY_BLOCK.asItem(), NEBULITE).addTag(RUBBLE_SHIELDS);
+
+        valueLookupBuilder(externalKey("item_tooltips", "has_description")).addTag(HAS_DESCRIPTION);
+
         valueLookupBuilder(externalKey("create", "upright_on_belt")).add(DRIFT_JELLY_BOTTLE);
         valueLookupBuilder(externalKey("create", "deployable_drink")).add(DRIFT_JELLY_BOTTLE);
     }

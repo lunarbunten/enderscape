@@ -78,6 +78,7 @@
     "block.enderscape.cut_shadoline_stairs": "Cut Shadoline Stairs",
     "block.enderscape.cut_shadoline_wall": "Cut Shadoline Wall",
     "block.enderscape.drift_jelly_block": "Drift Jelly Block",
+    "block.enderscape.drift_jelly_block.desc": "Launches entities when stepped on",
     "block.enderscape.dry_end_growth": "Dry End Growth",
     "block.enderscape.dusk_purpur_block": "Dusk Purpur Block",
     "block.enderscape.dusk_purpur_pillar": "Dusk Purpur Pillar",

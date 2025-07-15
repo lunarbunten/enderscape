@@ -38,6 +38,8 @@ public class EnderscapeItemTags {
     public static final TagKey<Item> VEILED_WOOD_TAG = register("veiled_wood");
     public static final TagKey<Item> VERADITE_BLOCKS = register("veradite_blocks");
 
+    public static final TagKey<Item> HAS_DESCRIPTION = register("has_description");
+
     private static TagKey<Item> register(String name) {
         return TagKey.create(Registries.ITEM, Enderscape.id(name));
     }
