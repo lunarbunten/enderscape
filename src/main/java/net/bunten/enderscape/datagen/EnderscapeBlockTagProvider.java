@@ -141,6 +141,7 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider.BlockTagProvid
                 CELESTIAL_BRICK_SLAB,
                 CELESTIAL_SLAB,
                 DUSK_PURPUR_SLAB,
+                END_STONE_SLAB,
                 KURODITE_BRICK_SLAB,
                 KURODITE_SLAB,
                 MIRESTONE_BRICK_SLAB,
@@ -163,6 +164,7 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider.BlockTagProvid
                 CELESTIAL_BRICK_STAIRS,
                 CELESTIAL_STAIRS,
                 DUSK_PURPUR_STAIRS,
+                END_STONE_STAIRS,
                 KURODITE_BRICK_STAIRS,
                 KURODITE_STAIRS,
                 MIRESTONE_BRICK_STAIRS,
@@ -184,6 +186,7 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider.BlockTagProvid
         valueLookupBuilder(BlockTags.WALLS).add(
                 CELESTIAL_BRICK_WALL,
                 DUSK_PURPUR_WALL,
+                END_STONE_WALL,
                 KURODITE_BRICK_WALL,
                 KURODITE_WALL,
                 MIRESTONE_BRICK_WALL,
