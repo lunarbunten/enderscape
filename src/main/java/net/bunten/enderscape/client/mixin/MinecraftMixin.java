@@ -1,12 +1,12 @@
 package net.bunten.enderscape.client.mixin;
 
-import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.client.EnderscapeClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.Optionull;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.WinScreen;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.sounds.Music;
@@ -30,19 +30,30 @@ public abstract class MinecraftMixin {
 
     @Inject(method = "getSituationalMusic", at = @At("HEAD"), cancellable = true)
     public void getSituationalMusic(CallbackInfoReturnable<MusicInfo> info) {
-        if (instance.screen instanceof WinScreen && !instance.getMusicManager().isPlayingMusic(Musics.CREDITS)) instance.getSoundManager().stop();
+        Music music = Optionull.map(instance.screen, Screen::getBackgroundMusic);
+
+        if (music != null) {
+            if (instance.screen instanceof WinScreen && !instance.getMusicManager().isPlayingMusic(Musics.CREDITS)) instance.getSoundManager().stop();
+            return;
+        }
 
         LocalPlayer player = instance.player;
-        ClientLevel level = instance.level;
 
-        if (player != null && level.dimension() == Level.END) {
-            Biome biome = level.getBiome(player.blockPosition()).value();
-            Optional<Music> optional = EnderscapeClient.structureMusic.isPresent() ? EnderscapeClient.structureMusic : biome.getBackgroundMusic().flatMap(tracks -> tracks.getRandom(level.getRandom()));
+        if (player != null && !instance.gui.getBossOverlay().shouldPlayMusic()) {
+            EnderscapeClient.structureMusic.ifPresentOrElse((value) -> {
+                info.setReturnValue(new MusicInfo(value, 1.0F));
+            }, () -> {
+                Level level = player.level();
+                if (level.dimension() == Level.END) {
+                    Biome biome = level.getBiome(player.blockPosition()).value();
+                    float volume = biome.getBackgroundMusicVolume();
 
-            if (optional.isPresent()) {
-                Music music = optional.get();
-                info.setReturnValue(new MusicInfo(music, biome.getBackgroundMusicVolume()));
-            }
+                    biome.getBackgroundMusic().ifPresent(list -> {
+                        Optional<Music> value = list.getRandom(level.random);
+                        info.setReturnValue(new MusicInfo(value.orElse(null), volume));
+                    });
+                }
+            });
         }
     }
 }
