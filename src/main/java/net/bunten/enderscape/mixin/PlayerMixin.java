@@ -141,7 +141,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(at = @At("HEAD"), method = "tryToStartFallFlying", cancellable = true)
     public void Enderscape$tryToStartFallFlying(CallbackInfoReturnable<Boolean> cir) {
-        if (Enderscape$airTicks < 5) cir.setReturnValue(false);
+        if (Enderscape$airTicks < 1) cir.setReturnValue(false);
     }
 
     @Inject(at = @At("HEAD"), method = "startFallFlying")
