@@ -12,8 +12,8 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import static net.bunten.enderscape.registry.EnderscapeBlocks.*;
 import static net.bunten.enderscape.registry.tag.EnderscapeBlockTags.*;
-import static net.neoforged.neoforge.common.Tags.Blocks.*;
 import static net.minecraft.world.level.block.Blocks.*;
+import static net.neoforged.neoforge.common.Tags.Blocks.*;
 
 public class EnderscapeBlockTagProvider extends BlockTagsProvider {
 
@@ -140,6 +140,7 @@ public class EnderscapeBlockTagProvider extends BlockTagsProvider {
                 CELESTIAL_BRICK_SLAB.get(),
                 CELESTIAL_SLAB.get(),
                 DUSK_PURPUR_SLAB.get(),
+                END_STONE_SLAB.get(),
                 KURODITE_BRICK_SLAB.get(),
                 KURODITE_SLAB.get(),
                 MIRESTONE_BRICK_SLAB.get(),
@@ -162,6 +163,7 @@ public class EnderscapeBlockTagProvider extends BlockTagsProvider {
                 CELESTIAL_BRICK_STAIRS.get(),
                 CELESTIAL_STAIRS.get(),
                 DUSK_PURPUR_STAIRS.get(),
+                END_STONE_STAIRS.get(),
                 KURODITE_BRICK_STAIRS.get(),
                 KURODITE_STAIRS.get(),
                 MIRESTONE_BRICK_STAIRS.get(),
@@ -183,6 +185,7 @@ public class EnderscapeBlockTagProvider extends BlockTagsProvider {
         tag(BlockTags.WALLS).add(
                 CELESTIAL_BRICK_WALL.get(),
                 DUSK_PURPUR_WALL.get(),
+                END_STONE_WALL.get(),
                 KURODITE_BRICK_WALL.get(),
                 KURODITE_WALL.get(),
                 MIRESTONE_BRICK_WALL.get(),
