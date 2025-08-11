@@ -96,7 +96,10 @@ configurations {
 
 dependencies {
     implementation("maven.modrinth:trimmed:1.21-${trimmed_version}+neoforge")
-    implementation ("dev.isxander:yet-another-config-lib:${project.yacl_version}")
+    implementation("dev.isxander:yet-another-config-lib:${project.yacl_version}") {
+        // YACL depends on kotlin-for-forge which itself has transitive dependencies it shouldn't have on FML.
+        exclude group: 'net.neoforged.fancymodloader', module: 'loader'
+    }
 
     compileOnly("com.github.glitchfiend:TerraBlender-neoforge:1.21.1-${terrablender_version}")
 }
