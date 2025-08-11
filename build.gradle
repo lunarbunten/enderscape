@@ -9,10 +9,14 @@ version = mod_version
 group = mod_group_id
 
 repositories {
-    mavenLocal()
     maven {
         name 'Xander Maven'
         url 'https://maven.isxander.dev/releases'
+    }
+    maven {
+        name = 'Kotlin for Forge'
+        url = 'https://thedarkcolour.github.io/KotlinForForge/'
+        content { includeGroup "thedarkcolour" }
     }
     exclusiveContent {
         forRepository {
