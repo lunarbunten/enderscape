@@ -1,5 +1,6 @@
 {
   "biome": "enderscape:veiled_woodlands",
+  "flash_color": 65535,
   "fog_end_density": 1.0,
   "fog_start_density": 4.0,
   "nebula_alpha": 0.035,

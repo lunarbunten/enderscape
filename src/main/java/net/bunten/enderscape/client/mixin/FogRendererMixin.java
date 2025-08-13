@@ -30,5 +30,6 @@ public class FogRendererMixin {
         EnderscapeSkybox.fogEndDensity = RGBA.sampleFloat(manager, pos, SkyParameters::fogEndDensity, SkyParameters.DEFAULT_FOG_END_DENSITY);
         EnderscapeSkybox.nebulaColor = RGBA.sampleVector4f(manager, pos, SkyParameters::nebulaRGBA, SkyParameters.DEFAULT_NEBULA_COLOR).mul(gamma, gamma, gamma, 1);
         EnderscapeSkybox.starColor = RGBA.sampleVector4f(manager, pos, SkyParameters::starRGBA, SkyParameters.DEFAULT_STAR_COLOR).mul(gamma, gamma, gamma, 1);
+        EnderscapeSkybox.flashColor = RGBA.sampleVector4f(manager, pos, SkyParameters::flashRGBA, SkyParameters.DEFAULT_FLASH_COLOR);
     }
 }
