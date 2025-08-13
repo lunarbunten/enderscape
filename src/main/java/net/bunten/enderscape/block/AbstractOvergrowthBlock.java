@@ -116,7 +116,7 @@ public abstract class AbstractOvergrowthBlock extends DirectionalBlock implement
             world.playSound(mob, pos, flattenSound, SoundSource.BLOCKS, 1, 1);
             if (!world.isClientSide()) {
                 world.setBlock(pos, pathBlock.defaultBlockState().setValue(FACING, state.getValue(FACING)), Block.UPDATE_ALL);
-                stack.hurtAndBreak(1, mob, LivingEntity.getSlotForHand(hand));
+                stack.hurtAndBreak(1, mob, hand.asEquipmentSlot());
             }
             return InteractionResult.SUCCESS;
         }

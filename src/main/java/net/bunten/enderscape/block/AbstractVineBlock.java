@@ -128,7 +128,7 @@ public abstract class AbstractVineBlock extends Block {
 
             world.playSound(mob, pos, SoundEvents.GROWING_PLANT_CROP, SoundSource.BLOCKS, 1, 1);
             world.setBlockAndUpdate(pos, state(state, false, MAX_AGE));
-            stack.hurtAndBreak(1, mob, LivingEntity.getSlotForHand(hand));
+            stack.hurtAndBreak(1, mob, hand.asEquipmentSlot());
 
             return InteractionResult.SUCCESS;
         }

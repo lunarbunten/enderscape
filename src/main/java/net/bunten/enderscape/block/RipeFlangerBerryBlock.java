@@ -69,7 +69,7 @@ public class RipeFlangerBerryBlock extends Block {
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos) {
+    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
         return 6;
     }
 }

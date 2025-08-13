@@ -85,7 +85,7 @@ public class EnderscapeClientNetworking {
             ResourceKey<Level> dimension = payload.globalPos().dimension();
 
             ClientLevel level = client.level;
-            Entity entity = client.cameraEntity;
+            Entity entity = client.getCameraEntity();
 
             if (level != null && level.dimension() == dimension && entity instanceof LivingEntity mob) {
                 SoundEvent sound;

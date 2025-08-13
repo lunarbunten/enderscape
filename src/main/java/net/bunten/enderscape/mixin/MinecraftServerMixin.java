@@ -5,7 +5,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.progress.ChunkProgressListener;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
@@ -23,7 +22,7 @@ public abstract class MinecraftServerMixin {
     public abstract RegistryAccess.Frozen registryAccess();
 
     @Inject(at = @At("TAIL"), method = "createLevels")
-    private void addSurfaceRules(ChunkProgressListener listener, CallbackInfo ci) {
+    private void addSurfaceRules(CallbackInfo ci) {
         Registry<LevelStem> value = registryAccess().lookupOrThrow(Registries.LEVEL_STEM);
         LevelStem stem = value.getValue(LevelStem.END);
 

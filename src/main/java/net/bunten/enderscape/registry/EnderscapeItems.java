@@ -35,6 +35,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraft.world.level.block.entity.BannerPatternLayers;
 import net.minecraft.world.level.block.entity.BannerPatterns;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.List;
 import java.util.Optional;
@@ -171,7 +172,7 @@ public class EnderscapeItems {
     private static <T extends Mob> Item registerSpawnEgg(EntityType<T> type) {
         String name = type + "_spawn_egg";
         name = name.replace("entity.enderscape.", "");
-        return registerItem(name, properties -> new SpawnEggItem(type, properties), new Item.Properties());
+        return registerItem(name, SpawnEggItem::new, new Item.Properties().spawnEgg(type));
     }
 
     private static Item registerMusicDisc(ResourceKey<JukeboxSong> song, Rarity rarity) {
@@ -229,7 +230,7 @@ public class EnderscapeItems {
         blockEntityData.putString("id", "minecraft:vault");
         blockEntityData.put("config", configTag);
 
-        stack.set(DataComponents.BLOCK_ENTITY_DATA, CustomData.of(blockEntityData));
+        stack.set(DataComponents.BLOCK_ENTITY_DATA, TypedEntityData.of(BlockEntityType.VAULT, blockEntityData));
 
         return stack;
     }

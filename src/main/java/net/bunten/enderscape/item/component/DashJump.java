@@ -53,7 +53,7 @@ public record DashJump(int dashTime, float horizontalPower, float verticalPower,
         if (player.onGround() && !player.isInLiquid()) {
             Vec3 pos = player.position();
             level.sendParticles(ParticleTypes.POOF, pos.x, pos.y + 0.5, pos.z, 5, 0, 0, 0, 0.1);
-            stack.hurtAndBreak(player.isFallFlying() ? 9 : 3, player, LivingEntity.getSlotForHand(player.getUsedItemHand()));
+            stack.hurtAndBreak(player.isFallFlying() ? 9 : 3, player, player.getUsedItemHand().asEquipmentSlot());
 
             for (ServerPlayer other : level.players()) {
                 if (other.distanceToSqr(pos) < 4096) ServerPlayNetworking.send(other, new ClientboundDashJumpSoundPayload(player.getId(), jump.dashSound.value().location()));
