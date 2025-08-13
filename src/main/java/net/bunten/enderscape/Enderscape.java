@@ -29,6 +29,7 @@ public class Enderscape implements ModInitializer {
 
     public static final ResourceKey<Structure> END_CITY_RESOURCE_KEY = ResourceKey.create(Registries.STRUCTURE, Enderscape.id("end_city"));
 
+
     public static ResourceLocation id(String path) {
         return ResourceLocation.tryBuild(MOD_ID, path);
     }
@@ -48,6 +49,9 @@ public class Enderscape implements ModInitializer {
         TheEndBiomes.addMidlandsBiome(key, key, weight);
         TheEndBiomes.addBarrensBiome(key, key, weight);
     }
+
+    public static final SoundEvent END_FLASH = registerSoundEvent("ambient.weather.end_flash");
+
 
     @Override
     public void onInitialize() {

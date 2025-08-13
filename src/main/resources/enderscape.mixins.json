@@ -58,5 +58,8 @@
   "server": [],
   "injectors": {
     "defaultRequire": 1
-	}
+  },
+  "client": [
+    "EndFlashSoundMixin"
+  ]
 }
