@@ -18,7 +18,7 @@ public record SkyParameters(ResourceLocation location, int nebulaColor, float ne
     public static final RGBA DEFAULT_NEBULA_COLOR = new RGBA(EnderscapeBiomes.DEFAULT_NEBULA_COLOR, EnderscapeBiomes.DEFAULT_NEBULA_ALPHA);
     public static final RGBA DEFAULT_STAR_COLOR = new RGBA(EnderscapeBiomes.DEFAULT_STAR_COLOR, EnderscapeBiomes.DEFAULT_STAR_ALPHA);
 
-    public static final RGBA DEFAULT_FLASH_COLOR = new RGBA(EnderscapeBiomes.DEFAULT_STAR_COLOR, 1.0F);
+    public static final RGBA DEFAULT_FLASH_COLOR = new RGBA(EnderscapeBiomes.DEFAULT_FLASH_COLOR, 1.0F);
 
     public static final float DEFAULT_FOG_START_DENSITY = 1.0F;
     public static final float DEFAULT_FOG_END_DENSITY = 1.0F;

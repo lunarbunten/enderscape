@@ -15,5 +15,5 @@ import org.spongepowered.asm.mixin.Shadow;
 public class LightTextureMixin {
 
     @Shadow @Mutable @Final
-    private static final Vector3f END_FLASH_SKY_LIGHT_COLOR = ARGB.vector3fFromRGB24(0x251d33);
+    private static final Vector3f END_FLASH_SKY_LIGHT_COLOR = ARGB.vector3fFromRGB24(0x2f213f);
 }
