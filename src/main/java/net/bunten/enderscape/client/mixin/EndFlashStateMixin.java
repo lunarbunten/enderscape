@@ -1,8 +1,10 @@
 package net.bunten.enderscape.client.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.bunten.enderscape.Enderscape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EndFlashState;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -16,7 +18,7 @@ import java.util.Random;
 
 @Environment(EnvType.CLIENT)
 @Mixin(EndFlashState.class)
-public class EndFlashStateMixin {
+public abstract class EndFlashStateMixin {
 
     @ModifyReturnValue(method = "getIntensity", at = @At("RETURN"))
     private float getFieldOfViewModifier(float original, float f) {
@@ -73,6 +75,17 @@ public class EndFlashStateMixin {
         }
 
         return 0.0F;
+    }
+
+    @Shadow
+    private float intensity;
+    @Shadow
+    private float oldIntensity;
+
+    @ModifyReturnValue(method = "shouldProduceSoundThisTick", at = @At("RETURN"))
+    private boolean shouldProduceSoundThisTick (boolean original) {
+        float threshold = 0.7f;
+        return this.oldIntensity > threshold && this.intensity <= threshold;
     }
 }
 

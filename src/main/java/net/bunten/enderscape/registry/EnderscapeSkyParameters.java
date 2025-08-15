@@ -17,7 +17,7 @@ public class EnderscapeSkyParameters {
     public static final List<ResourceKey<SkyParameters>> SKY_PARAMETERS = new ArrayList<>();
 
     public static void bootstrap(BootstrapContext<SkyParameters> context) {
-        register(context, CELESTIAL_GROVE, 0x875643, DEFAULT_NEBULA_ALPHA * 1.15F, 0xFFA589, DEFAULT_STAR_ALPHA * 1.4F, 0xFF000000, 2.0F, 1.0F);
+        register(context, CELESTIAL_GROVE, 0x875643, DEFAULT_NEBULA_ALPHA * 1.15F, 0xFFA589, DEFAULT_STAR_ALPHA * 1.4F, 0x37231f, 2.0F, 1.0F);
         register(context, CORRUPT_BARRENS, RGBA.darkenColor(DEFAULT_NEBULA_COLOR, CORRUPT_BARRENS_DARKENING_FACTOR), DEFAULT_NEBULA_ALPHA, RGBA.darkenColor(DEFAULT_NEBULA_COLOR, CORRUPT_BARRENS_DARKENING_FACTOR), DEFAULT_STAR_ALPHA, 0x432868, 4.0F, 1.25F);
 
         register(context, MAGNIA_CRAGS, 0x96AD9E, DEFAULT_NEBULA_ALPHA * 0.5F, 0x89FFD5, DEFAULT_STAR_ALPHA * 0.85F, 0x43494f, 1.0F, 1.0F);
