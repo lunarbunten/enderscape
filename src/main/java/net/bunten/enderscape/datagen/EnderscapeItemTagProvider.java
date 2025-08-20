@@ -72,11 +72,15 @@ public class EnderscapeItemTagProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(ItemTags.FENCE_GATES).add(CELESTIAL_FENCE_GATE.asItem(), MURUBLIGHT_FENCE_GATE.asItem());
         getOrCreateTagBuilder(HANGING_SIGNS).add(VEILED_HANGING_SIGN_ITEM.asItem(), CELESTIAL_HANGING_SIGN_ITEM, MURUBLIGHT_HANGING_SIGN_ITEM);
         getOrCreateTagBuilder(LEG_ARMOR).add(DRIFT_LEGGINGS);
+        getOrCreateTagBuilder(SAPLINGS).add(VEILED_SAPLING.asItem());
+        getOrCreateTagBuilder(LEAVES).add(VEILED_LEAVES.asItem());
         getOrCreateTagBuilder(LOGS_THAT_BURN).forceAddTag(VEILED_LOGS).forceAddTag(CELESTIAL_STEMS).forceAddTag(MURUBLIGHT_STEMS);
         getOrCreateTagBuilder(PLANKS).add(VEILED_PLANKS.asItem(), CELESTIAL_PLANKS.asItem(), MURUBLIGHT_PLANKS.asItem());
         getOrCreateTagBuilder(SIGNS).add(VEILED_SIGN_ITEM.asItem(), CELESTIAL_SIGN_ITEM, MURUBLIGHT_SIGN_ITEM);
         getOrCreateTagBuilder(SLABS).add(VEILED_SLAB.asItem(), CELESTIAL_SLAB.asItem(), CELESTIAL_BRICK_SLAB.asItem(), MURUBLIGHT_SLAB.asItem(), MURUBLIGHT_BRICK_SLAB.asItem(), VERADITE_SLAB.asItem(), POLISHED_VERADITE_SLAB.asItem(), VERADITE_BRICK_SLAB.asItem(), KURODITE_SLAB.asItem(), POLISHED_KURODITE_SLAB.asItem(), KURODITE_BRICK_SLAB.asItem(), SHADOLINE_BLOCK_SLAB.asItem(), CUT_SHADOLINE_SLAB.asItem());
         getOrCreateTagBuilder(SMALL_FLOWERS).add(BULB_FLOWER.asItem());
+        getOrCreateTagBuilder(TALL_FLOWERS).add(WISP_FLOWER.asItem());
+        getOrCreateTagBuilder(FLOWERS).add(FLANGER_BERRY_FLOWER.asItem(), WISP_FLOWER.asItem());
         getOrCreateTagBuilder(STAIRS).add(VEILED_STAIRS.asItem(), CELESTIAL_STAIRS.asItem(), CELESTIAL_BRICK_STAIRS.asItem(), MURUBLIGHT_STAIRS.asItem(), MURUBLIGHT_BRICK_STAIRS.asItem(), VERADITE_STAIRS.asItem(), POLISHED_VERADITE_STAIRS.asItem(), VERADITE_BRICK_STAIRS.asItem(), KURODITE_STAIRS.asItem(), POLISHED_KURODITE_STAIRS.asItem(), KURODITE_BRICK_STAIRS.asItem(), SHADOLINE_BLOCK_STAIRS.asItem(), CUT_SHADOLINE_STAIRS.asItem());
         getOrCreateTagBuilder(STONE_BUTTONS).add(POLISHED_VERADITE_BUTTON.asItem(), POLISHED_KURODITE_BUTTON.asItem());
         getOrCreateTagBuilder(STONE_CRAFTING_MATERIALS).add(END_STONE.asItem(), VERADITE.asItem(), MIRESTONE.asItem(), KURODITE.asItem());
@@ -97,12 +101,23 @@ public class EnderscapeItemTagProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(EDIBLE_WHEN_PLACED_FOODS).add(CHORUS_CAKE_ROLL_ITEM);
         getOrCreateTagBuilder(FOODS).add(DRIFT_JELLY_BOTTLE);
         getOrCreateTagBuilder(FRUIT_FOODS).add(FLANGER_BERRY);
+        getOrCreateTagBuilder(BERRY_FOODS).add(FLANGER_BERRY);
         getOrCreateTagBuilder(GEMS).add(NEBULITE);
         getOrCreateTagBuilder(INGOTS).add(SHADOLINE_INGOT);
+        getOrCreateTagBuilder(RAW_MATERIALS).add(RAW_SHADOLINE);
         getOrCreateTagBuilder(MUSIC_DISCS).add(MUSIC_DISC_GLARE, MUSIC_DISC_DECAY, MUSIC_DISC_BLISS);
         getOrCreateTagBuilder(SHIELD_TOOLS).add(END_STONE_RUBBLE_SHIELD, VERADITE_RUBBLE_SHIELD, MIRESTONE_RUBBLE_SHIELD, KURODITE_RUBBLE_SHIELD);
         getOrCreateTagBuilder(STORAGE_BLOCKS).add(SHADOLINE_BLOCK.asItem(), NEBULITE_BLOCK.asItem(), DRIFT_JELLY_BLOCK.asItem());
         getOrCreateTagBuilder(TOOLS).add(MIRROR, MAGNIA_ATTRACTOR);
+
+        getOrCreateTagBuilder(STORAGE_BLOCKS_NEBULITE).add(NEBULITE_BLOCK.asItem());
+        getOrCreateTagBuilder(STORAGE_BLOCKS_SHADOLINE).add(SHADOLINE_BLOCK.asItem());
+        getOrCreateTagBuilder(STORAGE_BLOCKS_RAW_SHADOLINE).add(RAW_SHADOLINE_BLOCK.asItem());
+        getOrCreateTagBuilder(NEBULITE_ORES).add(NEBULITE_ORE.asItem(), MIRESTONE_NEBULITE_ORE.asItem());
+        getOrCreateTagBuilder(SHADOLINE_ORES).add(SHADOLINE_ORE.asItem(), MIRESTONE_SHADOLINE_ORE.asItem());
+        getOrCreateTagBuilder(GEMS_NEBULITE).add(NEBULITE);
+        getOrCreateTagBuilder(INGOTS_SHADOLINE).add(SHADOLINE_INGOT);
+        getOrCreateTagBuilder(RAW_ORE_SHADOLINE).add(RAW_SHADOLINE);
 
         getOrCreateTagBuilder(externalKey("create", "upright_on_belt")).add(DRIFT_JELLY_BOTTLE);
         getOrCreateTagBuilder(externalKey("create", "deployable_drink")).add(DRIFT_JELLY_BOTTLE);

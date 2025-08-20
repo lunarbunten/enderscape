@@ -127,15 +127,19 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider<Block> {
         getOrCreateTagBuilder(BlockTags.FALL_DAMAGE_RESETTING).add(VEILED_LEAF_PILE);
         getOrCreateTagBuilder(BlockTags.FEATURES_CANNOT_REPLACE).add(END_TRIAL_SPAWNER, END_VAULT);
         getOrCreateTagBuilder(BlockTags.FENCE_GATES).add(VEILED_FENCE_GATE, CELESTIAL_FENCE_GATE, MURUBLIGHT_FENCE_GATE);
-        getOrCreateTagBuilder(BlockTags.FLOWERS).add(WISP_FLOWER);
+        getOrCreateTagBuilder(BlockTags.TALL_FLOWERS).add(WISP_FLOWER);
+        getOrCreateTagBuilder(BlockTags.FLOWERS).add(WISP_FLOWER, FLANGER_BERRY_FLOWER);
         getOrCreateTagBuilder(BlockTags.FLOWER_POTS).add(POTTED_ALLURING_MAGNIA_SPROUT, POTTED_BLINKLIGHT, POTTED_BULB_FLOWER, POTTED_CELESTIAL_CHANTERELLE, POTTED_CELESTIAL_GROWTH, POTTED_CHORUS_SPROUTS, POTTED_CORRUPT_GROWTH, POTTED_MURUBLIGHT_CHANTERELLE, POTTED_REPULSIVE_MAGNIA_SPROUT, POTTED_DRY_END_GROWTH, POTTED_VEILED_SAPLING, POTTED_WISP_GROWTH);
         getOrCreateTagBuilder(BlockTags.LEAVES).add(VEILED_LEAVES);
+        getOrCreateTagBuilder(BlockTags.SAPLINGS).add(VEILED_SAPLING);
         getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN).forceAddTag(VEILED_LOGS).forceAddTag(CELESTIAL_STEMS).forceAddTag(MURUBLIGHT_STEMS);
         getOrCreateTagBuilder(BlockTags.MUSHROOM_GROW_BLOCK).forceAddTag(OVERGROWTH_BLOCKS);
         getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL).add(NEBULITE_ORE, MIRESTONE_NEBULITE_ORE, NEBULITE_BLOCK);
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL).add(SHADOLINE_ORE, MIRESTONE_SHADOLINE_ORE).forceAddTag(SHADOLINE_BLOCKS).forceAddTag(MAGNIA_BLOCKS).forceAddTag(MAGNIA_SPROUTS);
         getOrCreateTagBuilder(BlockTags.PLANKS).add(VEILED_PLANKS, CELESTIAL_PLANKS, MURUBLIGHT_PLANKS);
         getOrCreateTagBuilder(BlockTags.SMALL_FLOWERS).add(BULB_FLOWER);
+        getOrCreateTagBuilder(BlockTags.REPLACEABLE).add(DRY_END_GROWTH, WISP_SPROUTS, WISP_GROWTH);
+
 
         getOrCreateTagBuilder(BlockTags.SLABS).add(
                 CELESTIAL_BRICK_SLAB,
@@ -220,6 +224,12 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider<Block> {
         getOrCreateTagBuilder(STRIPPED_WOODS).add(STRIPPED_VEILED_WOOD, STRIPPED_CELESTIAL_HYPHAE, STRIPPED_MURUBLIGHT_HYPHAE);
         getOrCreateTagBuilder(ORES).add(NEBULITE_ORE, SHADOLINE_ORE, MIRESTONE_NEBULITE_ORE, MIRESTONE_SHADOLINE_ORE);
         getOrCreateTagBuilder(STORAGE_BLOCKS).add(SHADOLINE_BLOCK, NEBULITE_BLOCK, DRIFT_JELLY_BLOCK);
+
+        getOrCreateTagBuilder(STORAGE_BLOCKS_NEBULITE).add(NEBULITE_BLOCK);
+        getOrCreateTagBuilder(STORAGE_BLOCKS_SHADOLINE).add(SHADOLINE_BLOCK);
+        getOrCreateTagBuilder(STORAGE_BLOCKS_RAW_SHADOLINE).add(RAW_SHADOLINE_BLOCK);
+        getOrCreateTagBuilder(NEBULITE_ORES).add(NEBULITE_ORE, MIRESTONE_NEBULITE_ORE);
+        getOrCreateTagBuilder(SHADOLINE_ORES).add(SHADOLINE_ORE, MIRESTONE_SHADOLINE_ORE);
 
         getOrCreateTagBuilder(externalKey("antixray", "hidden_only_ores")).add(NEBULITE_ORE, MIRESTONE_NEBULITE_ORE);
 

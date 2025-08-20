@@ -2,6 +2,7 @@ package net.bunten.enderscape.registry.tag;
 
 import net.bunten.enderscape.Enderscape;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
@@ -54,7 +55,18 @@ public class EnderscapeBlockTags {
     public static final TagKey<Block> VEILED_WOOD_TAG = register("veiled_wood");
     public static final TagKey<Block> VERADITE_BLOCKS = register("veradite_blocks");
 
+    // Common tags for better compat
+    public static final TagKey<Block> STORAGE_BLOCKS_NEBULITE = registerCommon("storage_blocks/nebulite");
+    public static final TagKey<Block> STORAGE_BLOCKS_SHADOLINE = registerCommon("storage_blocks/shadoline");
+    public static final TagKey<Block> STORAGE_BLOCKS_RAW_SHADOLINE = registerCommon("storage_blocks/raw_shadoline");
+    public static final TagKey<Block> NEBULITE_ORES = registerCommon("ores/nebulite");
+    public static final TagKey<Block> SHADOLINE_ORES = registerCommon("ores/shadoline");
+
     private static TagKey<Block> register(String name) {
         return TagKey.create(Registries.BLOCK, Enderscape.id(name));
+    }
+
+    private static TagKey<Block> registerCommon(String name) {
+        return TagKey.create(Registries.BLOCK, ResourceLocation.tryBuild("c", name));
     }
 }
