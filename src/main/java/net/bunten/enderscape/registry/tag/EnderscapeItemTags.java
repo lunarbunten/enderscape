@@ -48,6 +48,7 @@ public class EnderscapeItemTags {
     public static final TagKey<Item> GEMS_NEBULITE = registerCommon("gems/nebulite");
     public static final TagKey<Item> INGOTS_SHADOLINE = registerCommon("ingots/shadoline");
     public static final TagKey<Item> RAW_ORE_SHADOLINE = registerCommon("raw_materials/shadoline");
+    public static final TagKey<Item> DRIFT_JELLY_DRINKS = registerCommon("drinks/drift_jelly");
 
     private static TagKey<Item> register(String name) {
         return TagKey.create(Registries.ITEM, Enderscape.id(name));

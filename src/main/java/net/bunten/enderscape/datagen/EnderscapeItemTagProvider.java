@@ -100,6 +100,10 @@ public class EnderscapeItemTagProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(BUCKETS).add(RUSTLE_BUCKET);
         getOrCreateTagBuilder(EDIBLE_WHEN_PLACED_FOODS).add(CHORUS_CAKE_ROLL_ITEM);
         getOrCreateTagBuilder(FOODS).add(DRIFT_JELLY_BOTTLE);
+        getOrCreateTagBuilder(DRINKS).add(DRIFT_JELLY_BOTTLE);
+        getOrCreateTagBuilder(DRINK_CONTAINING_BOTTLE).add(DRIFT_JELLY_BOTTLE);
+        getOrCreateTagBuilder(MAGIC_DRINKS).add(DRIFT_JELLY_BOTTLE);
+        getOrCreateTagBuilder(DRIFT_JELLY_DRINKS).add(DRIFT_JELLY_BOTTLE);
         getOrCreateTagBuilder(BERRY_FOODS).add(FLANGER_BERRY);
         getOrCreateTagBuilder(GEMS).add(NEBULITE);
         getOrCreateTagBuilder(INGOTS).add(SHADOLINE_INGOT);
