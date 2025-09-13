@@ -412,7 +412,7 @@
     "option.enderscape.debug_magnia_sprout_hitboxes": "Показ гитбоксу діапазону паростка маґнії",
     "option.enderscape.debug_magnia_sprout_hitboxes.desc": "",
     "option.enderscape.elytra_add_fov_effects": "Елітри: додання ефектів поля зору",
-    "option.enderscape.elytra_add_fov_effects.desc": "Якщо ввімкнено, ковзання елітр впливатиме на ваше поле зору.",
+    "option.enderscape.elytra_add_fov_effects.desc": "Якщо ввімкнено, ковзання елітр упливатиме на ваше поле зору.",
     "option.enderscape.elytra_add_gliding_sound": "Елітри: додання звук ковзання",
     "option.enderscape.elytra_add_gliding_sound.desc": "Якщо ввімкнено, ковзання за допомогою елітр відтворюватиме новий звук ковзання.\n\nІнші гравці також зможуть почути його здалеку!",
     "option.enderscape.elytra_add_open_close_sounds": "Елітри: додання звуків відкриття та закриття",
