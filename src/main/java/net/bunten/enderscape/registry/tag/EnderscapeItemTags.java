@@ -39,6 +39,8 @@ public class EnderscapeItemTags {
     public static final TagKey<Item> VEILED_WOOD_TAG = register("veiled_wood");
     public static final TagKey<Item> VERADITE_BLOCKS = register("veradite_blocks");
 
+    public static final TagKey<Item> HAS_DESCRIPTION = register("has_description");
+
     // Common tags for better compat
     public static final TagKey<Item> STORAGE_BLOCKS_NEBULITE = registerCommon("storage_blocks/nebulite");
     public static final TagKey<Item> STORAGE_BLOCKS_SHADOLINE = registerCommon("storage_blocks/shadoline");
