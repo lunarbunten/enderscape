@@ -103,7 +103,7 @@ public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider
         valueLookupBuilder(INGOTS).add(SHADOLINE_INGOT);
         valueLookupBuilder(MUSIC_DISCS).add(MUSIC_DISC_GLARE, MUSIC_DISC_DECAY, MUSIC_DISC_BLISS);
         valueLookupBuilder(SHIELD_TOOLS).add(END_STONE_RUBBLE_SHIELD, VERADITE_RUBBLE_SHIELD, MIRESTONE_RUBBLE_SHIELD, KURODITE_RUBBLE_SHIELD);
-        valueLookupBuilder(STORAGE_BLOCKS).add(SHADOLINE_BLOCK.asItem(), NEBULITE_BLOCK.asItem(), DRIFT_JELLY_BLOCK.asItem());
+        valueLookupBuilder(STORAGE_BLOCKS).add(SHADOLINE_BLOCK.asItem(), NEBULITE_BLOCK.asItem());
         valueLookupBuilder(TOOLS).add(MIRROR, MAGNIA_ATTRACTOR);
 
         valueLookupBuilder(HAS_DESCRIPTION).add(MAGNIA_ATTRACTOR, DRIFT_LEGGINGS, DRIFT_JELLY_BOTTLE, DRIFT_JELLY_BLOCK.asItem(), NEBULITE).addTag(RUBBLE_SHIELDS);

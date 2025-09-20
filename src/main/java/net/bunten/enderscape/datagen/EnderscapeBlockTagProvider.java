@@ -219,7 +219,7 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider.BlockTagProvid
         valueLookupBuilder(STRIPPED_LOGS).add(STRIPPED_VEILED_LOG, STRIPPED_CELESTIAL_STEM, STRIPPED_MURUBLIGHT_STEM);
         valueLookupBuilder(STRIPPED_WOODS).add(STRIPPED_VEILED_WOOD, STRIPPED_CELESTIAL_HYPHAE, STRIPPED_MURUBLIGHT_HYPHAE);
         valueLookupBuilder(ORES).add(NEBULITE_ORE, SHADOLINE_ORE, MIRESTONE_NEBULITE_ORE, MIRESTONE_SHADOLINE_ORE);
-        valueLookupBuilder(STORAGE_BLOCKS).add(SHADOLINE_BLOCK, NEBULITE_BLOCK, DRIFT_JELLY_BLOCK);
+        valueLookupBuilder(STORAGE_BLOCKS).add(SHADOLINE_BLOCK, NEBULITE_BLOCK);
 
         valueLookupBuilder(externalKey("antixray", "hidden_only_ores")).add(NEBULITE_ORE, MIRESTONE_NEBULITE_ORE);
 
