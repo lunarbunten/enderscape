@@ -2,6 +2,7 @@ package net.bunten.enderscape.registry.tag;
 
 import net.bunten.enderscape.Enderscape;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
@@ -38,7 +39,22 @@ public class EnderscapeItemTags {
     public static final TagKey<Item> VEILED_WOOD_TAG = register("veiled_wood");
     public static final TagKey<Item> VERADITE_BLOCKS = register("veradite_blocks");
 
+    // Common tags for better compat
+    public static final TagKey<Item> STORAGE_BLOCKS_NEBULITE = registerCommon("storage_blocks/nebulite");
+    public static final TagKey<Item> STORAGE_BLOCKS_SHADOLINE = registerCommon("storage_blocks/shadoline");
+    public static final TagKey<Item> STORAGE_BLOCKS_RAW_SHADOLINE = registerCommon("storage_blocks/raw_shadoline");
+    public static final TagKey<Item> NEBULITE_ORES = registerCommon("ores/nebulite");
+    public static final TagKey<Item> SHADOLINE_ORES = registerCommon("ores/shadoline");
+    public static final TagKey<Item> GEMS_NEBULITE = registerCommon("gems/nebulite");
+    public static final TagKey<Item> INGOTS_SHADOLINE = registerCommon("ingots/shadoline");
+    public static final TagKey<Item> RAW_ORE_SHADOLINE = registerCommon("raw_materials/shadoline");
+    public static final TagKey<Item> DRIFT_JELLY_DRINKS = registerCommon("drinks/drift_jelly");
+
     private static TagKey<Item> register(String name) {
         return TagKey.create(Registries.ITEM, Enderscape.id(name));
+    }
+
+    private static TagKey<Item> registerCommon(String name) {
+        return TagKey.create(Registries.ITEM, ResourceLocation.tryBuild("c", name));
     }
 }
