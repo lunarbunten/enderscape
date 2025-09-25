@@ -1,7 +1,7 @@
 package net.bunten.enderscape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.bunten.enderscape.block.properties.DirectionProperties;
+import net.bunten.enderscape.block.properties.DirectionSet;
 import net.bunten.enderscape.registry.tag.EnderscapeBlockTags;
 import net.bunten.enderscape.util.BlockUtil;
 import net.minecraft.core.BlockPos;
@@ -20,7 +20,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class DryEndGrowthBlock extends DirectionalPlantBlock implements BonemealableBlock {
 
     public DryEndGrowthBlock(Properties settings) {
-        super(DirectionProperties.create().up(), settings);
+        super(DirectionSet.create().up(), settings);
     }
 
     public static final MapCodec<DryEndGrowthBlock> CODEC = simpleCodec(DryEndGrowthBlock::new);

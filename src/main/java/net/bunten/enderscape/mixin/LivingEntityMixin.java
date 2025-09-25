@@ -1,5 +1,7 @@
 package net.bunten.enderscape.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.entity.DashJumpUser;
 import net.bunten.enderscape.entity.EndTrialSpawnable;
@@ -40,7 +42,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -79,9 +80,6 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
                         if (!gravity.hasModifier(MAGNIA_GRAVITY_MODIFIER.id())) gravity.addTransientModifier(MAGNIA_GRAVITY_MODIFIER);
                     }
                     entity.fallDistance = 0;
-                    if (random.nextInt(16) == 0 && level() instanceof ServerLevel server) {
-                        server.sendParticles(ParticleTypes.END_ROD, position().x, position().y + 0.5, position().z, 1, 0.3F, 0.3, 0.3F, 0);
-                    }
                 },
                 entity -> {
                     if (entity instanceof LivingEntity living && !(entity instanceof Player)) {
@@ -141,9 +139,9 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
         if (isFallFlying() && hasRebound(level(), getItemBySlot(EquipmentSlot.CHEST)) && getDeltaMovement().y() > -0.9) info.setReturnValue(true);
     }
 
-    @Redirect(method = "canGlide", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;onGround()Z"))
-    private boolean Enderscape$canGlide(LivingEntity instance) {
-        return hasRebound(level(), instance.getItemBySlot(EquipmentSlot.CHEST)) ? Enderscape$elytraGroundTicks >= 10 : instance.onGround();
+    @WrapOperation(method = "canGlide", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;onGround()Z"))
+    private boolean Enderscape$canGlide(LivingEntity instance, Operation<Boolean> original) {
+        return hasRebound(level(), instance.getItemBySlot(EquipmentSlot.CHEST)) ? Enderscape$elytraGroundTicks >= 10 : original.call(instance);
     }
 
     @Inject(method = "updateFallFlying", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;canGlide()Z", shift = At.Shift.BEFORE))
@@ -170,7 +168,7 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
                 NebuliteToolContext context = new NebuliteToolContext(stack, level(), player);
                 if (stack.getItem() instanceof MagniaAttractorItem && NebuliteToolItem.fuelExceedsCost(context)) {
                     MagniaAttractorItem.incrementEntitiesPulled(stack, 1);
-                    MagniaAttractorItem.tryUseFuel(context, 1 - MagniaAttractorItem.getEntitiesPulledToUseFuel(stack));
+                    MagniaAttractorItem.tryUseFuel(context, 1 - MagniaAttractorItem.getTotalEntitiesPulledToUseFuel(stack, mob));
                 }
             }
         }

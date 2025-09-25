@@ -24,7 +24,6 @@
     "ExperienceOrbMixin",
     "FungusBlockMixin",
     "ItemEntityMixin",
-    "ItemsMixin",
     "ItemStackMixin",
     "LivingEntityMixin",
     "MinecraftServerMixin",

@@ -160,6 +160,18 @@ public class EnderscapeBlockFamilies {
             .slab(EnderscapeBlocks.MIRESTONE_BRICK_SLAB)
             .getFamily();
 
+    public static final BlockFamily ETCHED_ALLURING_MAGNIA = build(EnderscapeBlocks.ETCHED_ALLURING_MAGNIA)
+            .wall(EnderscapeBlocks.ETCHED_ALLURING_MAGNIA_WALL)
+            .stairs(EnderscapeBlocks.ETCHED_ALLURING_MAGNIA_STAIRS)
+            .slab(EnderscapeBlocks.ETCHED_ALLURING_MAGNIA_SLAB)
+            .getFamily();
+
+    public static final BlockFamily ETCHED_REPULSIVE_MAGNIA = build(EnderscapeBlocks.ETCHED_REPULSIVE_MAGNIA)
+            .wall(EnderscapeBlocks.ETCHED_REPULSIVE_MAGNIA_WALL)
+            .stairs(EnderscapeBlocks.ETCHED_REPULSIVE_MAGNIA_STAIRS)
+            .slab(EnderscapeBlocks.ETCHED_REPULSIVE_MAGNIA_SLAB)
+            .getFamily();
+
     public static final BlockFamily SHADOLINE_BLOCK = build(EnderscapeBlocks.SHADOLINE_BLOCK)
             .wall(EnderscapeBlocks.SHADOLINE_BLOCK_WALL)
             .stairs(EnderscapeBlocks.SHADOLINE_BLOCK_STAIRS)

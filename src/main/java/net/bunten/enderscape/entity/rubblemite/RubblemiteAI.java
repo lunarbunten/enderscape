@@ -7,6 +7,7 @@ import com.mojang.datafixers.util.Pair;
 import net.bunten.enderscape.entity.ai.EnderscapeAI;
 import net.bunten.enderscape.entity.ai.EnderscapeMemory;
 import net.bunten.enderscape.entity.ai.EnderscapeSensors;
+import net.bunten.enderscape.entity.ai.behavior.ConditionalLookAtTargetSink;
 import net.bunten.enderscape.entity.ai.behavior.RubblemiteDashDuringCombat;
 import net.bunten.enderscape.entity.ai.behavior.RubblemiteManageFlags;
 import net.bunten.enderscape.entity.ai.behavior.RubblemiteShellCooldown;
@@ -87,7 +88,7 @@ public class RubblemiteAI {
     private static void initCoreActivity(Brain<Rubblemite> brain) {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new MoveToTargetSink(),
-                new LookAtTargetSink(45, 90),
+                new ConditionalLookAtTargetSink<>(rubblemite -> rubblemite.isDashing() || rubblemite.isInsideShell(), 45, 90),
                 new RubblemiteShellCooldown(),
                 new RubblemiteManageFlags(),
                 StopBeingAngryIfTargetDead.create()

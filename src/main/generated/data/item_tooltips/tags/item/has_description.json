@@ -1,5 +1,10 @@
 {
   "values": [
-    "#enderscape:has_description"
+    "enderscape:magnia_attractor",
+    "enderscape:drift_leggings",
+    "enderscape:drift_jelly_bottle",
+    "enderscape:drift_jelly_block",
+    "enderscape:nebulite",
+    "#enderscape:rubble_shields"
   ]
 }

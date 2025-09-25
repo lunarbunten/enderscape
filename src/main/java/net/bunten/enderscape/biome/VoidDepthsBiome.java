@@ -28,7 +28,7 @@ public class VoidDepthsBiome {
                 .addFeature(UNDERGROUND_ORES, EnderscapePlacedFeatures.CEILING_NEBULITE_ORE)
                 .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.UNCOMMON_CHORUS_PLANTS)
                 .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.UNCOMMON_CHORUS_SPROUTS)
-                .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.MURUBLIGHT_SHELF);
+                .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.MURUBLIGHT_BRACKET);
 
         MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder();
         return new Biome.BiomeBuilder()

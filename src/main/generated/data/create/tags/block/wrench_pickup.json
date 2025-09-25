@@ -1,7 +1,10 @@
 {
   "values": [
-    "enderscape:blinklamp",
     "enderscape:alluring_magnia_sprout",
+    "enderscape:blistered_magnia",
+    "enderscape:blinklamp",
+    "enderscape:magnia_radio",
+    "enderscape:polarized_magnia",
     "enderscape:repulsive_magnia_sprout"
   ]
 }

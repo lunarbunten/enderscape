@@ -1,7 +1,7 @@
 package net.bunten.enderscape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.bunten.enderscape.block.properties.DirectionProperties;
+import net.bunten.enderscape.block.properties.DirectionSet;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -15,7 +15,7 @@ public class VeiledOvergrowthBlock extends AbstractOvergrowthBlock {
     public static final MapCodec<VeiledOvergrowthBlock> CODEC = simpleCodec(VeiledOvergrowthBlock::new);
 
     public VeiledOvergrowthBlock(Properties settings) {
-        super(true, Blocks.END_STONE, null, null, false, DirectionProperties.create().up(), settings);
+        super(true, Blocks.END_STONE, null, null, false, DirectionSet.create().up(), settings);
 
         horizontalBonemealRange = 4;
     }

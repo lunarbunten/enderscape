@@ -2,11 +2,9 @@ package net.bunten.enderscape.mixin;
 
 import net.bunten.enderscape.entity.magnia.MagniaMoveable;
 import net.bunten.enderscape.entity.magnia.MagniaProperties;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -35,12 +33,7 @@ public abstract class ExperienceOrbMixin extends Entity implements MagniaMoveabl
                 item -> 0.6F,
                 item -> 0.8F,
                 item -> true,
-                item -> {
-                    orb.setNoGravity(true);
-                    if (random.nextInt(16) == 0 && level() instanceof ServerLevel server) {
-                        server.sendParticles(ParticleTypes.END_ROD, position().x, position().y + 0.5, position().z, 1, 0.3F, 0.3, 0.3F, 0);
-                    }
-                },
+                item -> orb.setNoGravity(true),
                 item -> item.setNoGravity(false)
         );
     }

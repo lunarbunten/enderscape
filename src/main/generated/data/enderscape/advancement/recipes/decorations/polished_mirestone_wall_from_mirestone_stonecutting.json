@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:polished_mirestone_wall_from_mirestone_stonecutting"
+        "recipe": "enderscape:polished_mirestone_wall_from_mirestone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:polished_mirestone_wall_from_mirestone_stonecutting"
+      "enderscape:polished_mirestone_wall_from_mirestone_stonecutting"
     ]
   }
 }

@@ -28,6 +28,7 @@ public class EnderscapeBlockRenderLayerMap {
                 END_VAULT,
                 FLANGER_BERRY_FLOWER,
                 FLANGER_BERRY_VINE,
+                MAGNIA_RADIO,
                 MIRESTONE_NEBULITE_ORE,
                 MURUBLIGHT_CHANTERELLE,
                 MURUBLIGHT_DOOR,

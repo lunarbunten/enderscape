@@ -7,7 +7,6 @@ import net.minecraft.sounds.SoundEvent;
 public class EnderscapeItemSounds {
 
     public static final Holder.Reference<SoundEvent> DRIFT_JELLY_BOTTLE_DRINK = registerHolder("drift_jelly_bottle.drink");
-    public static final Holder.Reference<SoundEvent> DRIFT_JELLY_BOTTLE_FINISH = registerHolder("drift_jelly_bottle.finish");
     public static final Holder.Reference<SoundEvent> DRIFT_LEGGINGS_EQUIP = registerHolder("drift_leggings.equip");
     public static final Holder.Reference<SoundEvent> ELYTRA_EQUIP = registerHolder("elytra.equip");
     public static final Holder.Reference<SoundEvent> RUBBLE_SHIELD_BLOCK = registerHolder("rubble_shield.block");

@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/wall_inventory",
+	"textures": {
+		"wall": "enderscape:block/etched_alluring_magnia"
+	}
+}

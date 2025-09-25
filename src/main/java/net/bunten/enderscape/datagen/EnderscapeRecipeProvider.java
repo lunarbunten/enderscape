@@ -20,6 +20,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.SuspiciousEffectHolder;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
@@ -58,6 +59,9 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
             public void buildRecipes() {
                 EnderscapeBlockFamilies.getAllFamilies().forEach((family) -> generateRecipes(family, FeatureFlagSet.of(FeatureFlags.VANILLA)));
                 smithingTrims().forEach(trimTemplate -> trimSmithing(trimTemplate.template(), trimTemplate.patternId(), trimTemplate.recipeId()));
+
+                SuspiciousEffectHolder holder = SuspiciousEffectHolder.tryGet(BULB_FLOWER.asItem());
+                if (holder != null) suspiciousStew(BULB_FLOWER.asItem(), holder);
 
                 shaped(RecipeCategory.MISC, MUSIC_DISC_BLISS)
                         .define('D', MUSIC_DISC_DECAY)
@@ -102,7 +106,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                         .pattern("A R")
                         .pattern("SSS")
                         .pattern(" S ")
-                        .unlockedBy("has_magnia_block", has(EnderscapeItemTags.MAGNIA_SPROUTS))
+                        .unlockedBy("has_any_magnia_sprout", has(EnderscapeItemTags.MAGNIA_SPROUTS))
                         .save(output);
 
                 stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, END_STONE_SLAB, END_STONE, 2);
@@ -208,8 +212,39 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_repulsive_magnia", has(REPULSIVE_MAGNIA))
                         .save(output);
 
+//                shaped(RecipeCategory.BUILDING_BLOCKS, MAGNIA_RADIO)
+//                        .define('A', ETCHED_ALLURING_MAGNIA)
+//                        .define('R', ETCHED_REPULSIVE_MAGNIA)
+//                        .define('!', ALLURING_MAGNIA_SPROUT)
+//                        .define('@', REPULSIVE_MAGNIA_SPROUT)
+//                        .define('N', NEBULITE)
+//                        .pattern("! @")
+//                        .pattern("RNR")
+//                        .pattern("AAA")
+//                        .unlockedBy("has_any_magnia_sprout", has(EnderscapeItemTags.MAGNIA_SPROUTS))
+//                        .save(output);
+
+                shaped(RecipeCategory.BUILDING_BLOCKS, POLARIZED_MAGNIA)
+                        .define('B', BLISTERED_MAGNIA)
+                        .define('S', SHADOLINE_INGOT)
+                        .define('P', POPPED_CHORUS_FRUIT)
+                        .define('R', REDSTONE)
+                        .pattern("SSS")
+                        .pattern("PBP")
+                        .pattern("SRS")
+                        .unlockedBy("has_blistered_magnia", has(BLISTERED_MAGNIA))
+                        .save(output);
+
                 stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, ETCHED_ALLURING_MAGNIA, ALLURING_MAGNIA);
                 stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, ETCHED_REPULSIVE_MAGNIA, REPULSIVE_MAGNIA);
+
+                stonecutterResultFromBase(RecipeCategory.DECORATIONS, ETCHED_ALLURING_MAGNIA_STAIRS, ETCHED_ALLURING_MAGNIA);
+                stonecutterResultFromBase(RecipeCategory.DECORATIONS, ETCHED_ALLURING_MAGNIA_SLAB, ETCHED_ALLURING_MAGNIA);
+                stonecutterResultFromBase(RecipeCategory.DECORATIONS, ETCHED_ALLURING_MAGNIA_WALL, ETCHED_ALLURING_MAGNIA);
+
+                stonecutterResultFromBase(RecipeCategory.DECORATIONS, ETCHED_REPULSIVE_MAGNIA_STAIRS, ETCHED_REPULSIVE_MAGNIA);
+                stonecutterResultFromBase(RecipeCategory.DECORATIONS, ETCHED_REPULSIVE_MAGNIA_SLAB, ETCHED_REPULSIVE_MAGNIA);
+                stonecutterResultFromBase(RecipeCategory.DECORATIONS, ETCHED_REPULSIVE_MAGNIA_WALL, ETCHED_REPULSIVE_MAGNIA);
 
                 oreSmelting(SHADOLINE_SMELTABLES, RecipeCategory.MISC, SHADOLINE_INGOT, 0.7F, 200, "shadoline_ingot");
                 oreBlasting(SHADOLINE_SMELTABLES, RecipeCategory.MISC, SHADOLINE_INGOT, 0.7F, 100, "shadoline_ingot");
@@ -267,6 +302,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 shapeless(RecipeCategory.MISC, NEBULITE)
                         .requires(NEBULITE_SHARDS, 4)
                         .unlockedBy("has_nebulite_shards", has(NEBULITE_SHARDS))
+                        .group("nebulite")
                         .save(output, "enderscape:nebulite_from_shards");
 
                 oreSmelting(NEBULITE_SMELTABLES, RecipeCategory.MISC, NEBULITE, 1.0F, 200, "nebulite");

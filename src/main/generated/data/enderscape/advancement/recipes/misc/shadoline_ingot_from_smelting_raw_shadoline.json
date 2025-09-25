@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:shadoline_ingot_from_smelting_raw_shadoline"
+        "recipe": "enderscape:shadoline_ingot_from_smelting_raw_shadoline"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:shadoline_ingot_from_smelting_raw_shadoline"
+      "enderscape:shadoline_ingot_from_smelting_raw_shadoline"
     ]
   }
 }
