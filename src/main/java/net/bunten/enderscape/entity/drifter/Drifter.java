@@ -139,7 +139,7 @@ public class Drifter extends AbstractDrifter {
             setDeltaMovement(velocity);
 
             mob.setDeltaMovement(getEntityBounceVelocity(mob));
-            gameEvent(GameEvent.STEP, mob);
+            gameEvent(EnderscapeGameEvents.BOUNCE, mob);
 
             if (mob instanceof ServerPlayer player) {
                 EnderscapeCriteria.BOUNCE_ON_DRIFTER.trigger(player, this);

@@ -5,6 +5,7 @@ import net.bunten.enderscape.entity.magnia.MagniaMoveable;
 import net.bunten.enderscape.item.MagniaAttractorItem;
 import net.bunten.enderscape.item.NebuliteToolContext;
 import net.bunten.enderscape.item.RubbleShieldItem;
+import net.bunten.enderscape.particle.MagniaParticleOptions;
 import net.bunten.enderscape.registry.EnderscapeCriteria;
 import net.bunten.enderscape.registry.EnderscapeDataComponents;
 import net.bunten.enderscape.registry.EnderscapeItemSounds;
@@ -119,6 +120,7 @@ public abstract class PlayerMixin extends LivingEntity {
         Vec3 speed = position().subtract(entity.position()).normalize().scale(entity.isUnderWater() ? 0.04 : 0.2);
         entity.setDeltaMovement(entity.getDeltaMovement().add(speed));
         MagniaMoveable.setMovedByMagnia(entity, true);
+        if (level() instanceof ServerLevel server) MagniaMoveable.sendEntityEffectParticles(server, entity, MagniaParticleOptions.MAGNIA_ATTRACTOR, 0.25F);
 
         if (abuseCost > 0) {
             if (MagniaMoveable.wasMovedByMagnia(entity)) {
@@ -126,7 +128,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
                 if (ticks >= 40) {
                     MagniaAttractorItem.incrementEntitiesPulled(stack, abuseCost);
-                    MagniaAttractorItem.tryUseFuel(context, abuseCost - MagniaAttractorItem.getEntitiesPulledToUseFuel(stack));
+                    MagniaAttractorItem.tryUseFuel(context, abuseCost - MagniaAttractorItem.getTotalEntitiesPulledToUseFuel(stack, context.user()));
                     ticks = 0;
                 }
 
@@ -158,13 +160,11 @@ public abstract class PlayerMixin extends LivingEntity {
     @Inject(at = @At("HEAD"), method = "hurtCurrentlyUsedShield")
     private void Enderscape$redirectShieldCheck(float f, CallbackInfo info) {
         if (useItem.getItem() instanceof RubbleShieldItem) {
-            if (!level().isClientSide) {
-                player.awardStat(Stats.ITEM_USED.get(this.useItem.getItem()));
-            }
+            if (!level().isClientSide()) player.awardStat(Stats.ITEM_USED.get(useItem.getItem()));
 
             if (f >= 3.0F) {
                 int i = 1 + Mth.floor(f);
-                InteractionHand hand = this.getUsedItemHand();
+                InteractionHand hand = getUsedItemHand();
                 useItem.hurtAndBreak(i, this, getSlotForHand(hand));
                 if (useItem.isEmpty()) {
                     if (hand == InteractionHand.MAIN_HAND) {

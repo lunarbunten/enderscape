@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "enderscape:block/etched_alluring_magnia_slab"
+    },
+    "type=double": {
+      "model": "enderscape:block/etched_alluring_magnia"
+    },
+    "type=top": {
+      "model": "enderscape:block/etched_alluring_magnia_slab_top"
+    }
+  }
+}

@@ -1,5 +1,7 @@
 package net.bunten.enderscape.client.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.client.LightingStyle;
 import net.fabricmc.api.EnvType;
@@ -16,7 +18,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Environment(EnvType.CLIENT)
@@ -54,7 +55,7 @@ public abstract class LightTextureMixin {
         }
     }
 
-    @Redirect(
+    @WrapOperation(
             method = "updateLightTexture",
             at = @At(
                     value = "INVOKE",
@@ -62,10 +63,10 @@ public abstract class LightTextureMixin {
                     ordinal = 1
             )
     )
-    private Vector3f changeEndLighting(Vector3f instance, Vector3fc other, float t) {
+    private Vector3f changeEndLighting(Vector3f instance, Vector3fc other, float t, Operation<Vector3f> original) {
         if (Enderscape$shouldUpdateLighting(LightingStyle.IMPROVED)) return instance.lerp(new Vector3f(0.93f, 1.1f, 0.93f), 0.1F);
         if (Enderscape$shouldUpdateLighting(LightingStyle.MIDNIGHT)) return instance.lerp(new Vector3f(0.93f, 1.1f, 0.93f), 0.01F);
-        return instance.lerp(other, t);
+        return original.call(instance, other, t);
     }
 
     @ModifyArgs(

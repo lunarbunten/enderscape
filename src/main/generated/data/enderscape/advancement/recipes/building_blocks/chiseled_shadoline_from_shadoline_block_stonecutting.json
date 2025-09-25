@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:chiseled_shadoline_from_shadoline_block_stonecutting"
+        "recipe": "enderscape:chiseled_shadoline_from_shadoline_block_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:chiseled_shadoline_from_shadoline_block_stonecutting"
+      "enderscape:chiseled_shadoline_from_shadoline_block_stonecutting"
     ]
   }
 }

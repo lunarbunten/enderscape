@@ -1,5 +1,6 @@
 package net.bunten.enderscape.item;
 
+import net.bunten.enderscape.registry.EnderscapeEnchantmentEffectComponents;
 import net.bunten.enderscape.registry.EnderscapeEnchantments;
 import net.bunten.enderscape.registry.EnderscapeItemSounds;
 import net.minecraft.core.Holder;
@@ -19,6 +20,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import org.apache.commons.lang3.mutable.MutableFloat;
 
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -107,22 +109,32 @@ public class MagniaAttractorItem extends NebuliteToolItem {
         throw new IllegalStateException(stack.getItem() + " missing component of " + ENTITIES_PULLED_TO_USE_FUEL);
     }
 
+    public static int getTotalEntitiesPulledToUseFuel(ItemStack stack, LivingEntity user) {
+        return (int) getAdditionalEntitiesPulledToUseFuel(stack, user, getEntitiesPulledToUseFuel(stack));
+    }
+
+    public static float getAdditionalEntitiesPulledToUseFuel(ItemStack stack, LivingEntity user, float f) {
+        MutableFloat mutable = new MutableFloat(f);
+        EnchantmentHelper.runIterationOnItem(stack, (holder, i) -> holder.value().modifyUnfilteredValue(EnderscapeEnchantmentEffectComponents.MAGNIA_ATTRACTOR_ENTITIES_PULLED_TO_USE_FUEL, user.getRandom(), i, mutable));
+        return Math.max(0.0F, mutable.floatValue());
+    }
+
     public static int getEntityPullRange(ItemStack stack) {
         if (stack.has(ENTITY_PULL_RANGE)) return stack.get(ENTITY_PULL_RANGE);
         return 0;
     }
 
-    public static boolean shouldReduceFuel(ItemStack stack) {
-        return getEntitiesPulled(stack) >= getEntitiesPulledToUseFuel(stack);
+    public static boolean shouldReduceFuel(ItemStack stack, LivingEntity user) {
+        return getEntitiesPulled(stack) >= getTotalEntitiesPulledToUseFuel(stack, user);
     }
 
     public static boolean tryUseFuel(NebuliteToolContext context, int count) {
         ItemStack stack = context.stack();
         LivingEntity user = context.user();
 
-        if (MagniaAttractorItem.shouldReduceFuel(stack)) {
+        if (MagniaAttractorItem.shouldReduceFuel(stack, user)) {
             NebuliteToolItem.useFuel(context);
-            MagniaAttractorItem.setEntitiesPulled(stack, Math.max(0, count - MagniaAttractorItem.getEntitiesPulledToUseFuel(stack)));
+            MagniaAttractorItem.setEntitiesPulled(stack, Math.max(0, count - MagniaAttractorItem.getTotalEntitiesPulledToUseFuel(stack, user)));
             MagniaAttractorItem.setEnabled(stack, true);
 
             user.level().playSound(null, user.getX(), user.getY(), user.getZ(), EnderscapeItemSounds.MAGNIA_ATTRACTOR_USE_FUEL, SoundSource.PLAYERS, 1, 1);

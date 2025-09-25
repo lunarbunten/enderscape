@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:chiseled_kurodite_from_kurodite_stonecutting"
+        "recipe": "enderscape:chiseled_kurodite_from_kurodite_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:chiseled_kurodite_from_kurodite_stonecutting"
+      "enderscape:chiseled_kurodite_from_kurodite_stonecutting"
     ]
   }
 }

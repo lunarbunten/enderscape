@@ -179,6 +179,14 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy("has_alluring_magnia", has(ALLURING_MAGNIA))
                 .save(output);
 
+        stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, ETCHED_ALLURING_MAGNIA, ALLURING_MAGNIA);
+        stonecutterResultFromBase(output, RecipeCategory.DECORATIONS, ETCHED_ALLURING_MAGNIA_WALL, ALLURING_MAGNIA);
+        stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, ETCHED_ALLURING_MAGNIA_SLAB, ALLURING_MAGNIA, 2);
+        stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, ETCHED_ALLURING_MAGNIA_STAIRS, ALLURING_MAGNIA);
+        stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, ETCHED_ALLURING_MAGNIA_SLAB, ETCHED_ALLURING_MAGNIA, 2);
+        stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, ETCHED_ALLURING_MAGNIA_STAIRS, ETCHED_ALLURING_MAGNIA);
+        stonecutterResultFromBase(output, RecipeCategory.DECORATIONS, ETCHED_ALLURING_MAGNIA_WALL, ETCHED_ALLURING_MAGNIA);
+
         shaped(RecipeCategory.BUILDING_BLOCKS, ETCHED_REPULSIVE_MAGNIA, 4)
                 .define('#', REPULSIVE_MAGNIA)
                 .pattern("##")
@@ -186,8 +194,36 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy("has_repulsive_magnia", has(REPULSIVE_MAGNIA))
                 .save(output);
 
-        stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, ETCHED_ALLURING_MAGNIA, ALLURING_MAGNIA);
         stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, ETCHED_REPULSIVE_MAGNIA, REPULSIVE_MAGNIA);
+        stonecutterResultFromBase(output, RecipeCategory.DECORATIONS, ETCHED_REPULSIVE_MAGNIA_WALL, REPULSIVE_MAGNIA);
+        stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, ETCHED_REPULSIVE_MAGNIA_SLAB, REPULSIVE_MAGNIA, 2);
+        stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, ETCHED_REPULSIVE_MAGNIA_STAIRS, REPULSIVE_MAGNIA);
+        stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, ETCHED_REPULSIVE_MAGNIA_SLAB, ETCHED_REPULSIVE_MAGNIA, 2);
+        stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, ETCHED_REPULSIVE_MAGNIA_STAIRS, ETCHED_REPULSIVE_MAGNIA);
+        stonecutterResultFromBase(output, RecipeCategory.DECORATIONS, ETCHED_REPULSIVE_MAGNIA_WALL, ETCHED_REPULSIVE_MAGNIA);
+
+//        shaped(RecipeCategory.BUILDING_BLOCKS, MAGNIA_RADIO)
+//                .define('A', ETCHED_ALLURING_MAGNIA)
+//                .define('R', ETCHED_REPULSIVE_MAGNIA)
+//                .define('!', ALLURING_MAGNIA_SPROUT)
+//                .define('@', REPULSIVE_MAGNIA_SPROUT)
+//                .define('N', NEBULITE)
+//                .pattern("! @")
+//                .pattern("RNR")
+//                .pattern("AAA")
+//                .unlockedBy("has_any_magnia_sprout", has(EnderscapeItemTags.MAGNIA_SPROUTS))
+//                .save(output);
+//
+        shaped(RecipeCategory.BUILDING_BLOCKS, POLARIZED_MAGNIA)
+                .define('B', BLISTERED_MAGNIA)
+                .define('S', SHADOLINE_INGOT)
+                .define('P', POPPED_CHORUS_FRUIT)
+                .define('R', REDSTONE)
+                .pattern("SSS")
+                .pattern("PBP")
+                .pattern("SRS")
+                .unlockedBy("has_blistered_magnia", has(BLISTERED_MAGNIA))
+                .save(output);
 
         oreSmelting(output, SHADOLINE_SMELTABLES, RecipeCategory.MISC, SHADOLINE_INGOT, 0.7F, 200, "shadoline_ingot");
         oreBlasting(output, SHADOLINE_SMELTABLES, RecipeCategory.MISC, SHADOLINE_INGOT, 0.7F, 100, "shadoline_ingot");

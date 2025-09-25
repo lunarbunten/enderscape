@@ -1,8 +1,8 @@
 package net.bunten.enderscape.client.mixin;
 
 import net.bunten.enderscape.EnderscapeConfig;
-import net.bunten.enderscape.client.entity.ElytraSoundInstance;
-import net.bunten.enderscape.client.entity.ShulkerBulletSoundInstance;
+import net.bunten.enderscape.client.sound.ElytraSoundInstance;
+import net.bunten.enderscape.client.sound.ShulkerBulletSoundInstance;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;

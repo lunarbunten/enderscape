@@ -51,14 +51,6 @@ public class EnderscapeEntities {
             .clientTrackingRange(8)
     );
 
-    private static <T extends Entity> EntityType<T> register(String name, EntityType.Builder<T> builder) {
-        return register(ResourceKey.create(Registries.ENTITY_TYPE, Enderscape.id(name)), builder);
-    }
-
-    private static <T extends Entity> EntityType<T> register(ResourceKey<EntityType<?>> resourceKey, EntityType.Builder<T> builder) {
-        return Registry.register(BuiltInRegistries.ENTITY_TYPE, resourceKey, builder.build());
-    }
-
     static {
         Reflection.initialize(
                 EnderscapeMemory.class,
@@ -74,5 +66,13 @@ public class EnderscapeEntities {
         FabricDefaultAttributeRegistry.register(DRIFTLET, Driftlet.createAttributes());
         FabricDefaultAttributeRegistry.register(RUBBLEMITE, Rubblemite.createAttributes());
         FabricDefaultAttributeRegistry.register(RUSTLE, Rustle.createAttributes());
+    }
+
+    private static <T extends Entity> EntityType<T> register(String name, EntityType.Builder<T> builder) {
+        return register(ResourceKey.create(Registries.ENTITY_TYPE, Enderscape.id(name)), builder);
+    }
+
+    private static <T extends Entity> EntityType<T> register(ResourceKey<EntityType<?>> resourceKey, EntityType.Builder<T> builder) {
+        return Registry.register(BuiltInRegistries.ENTITY_TYPE, resourceKey, builder.build());
     }
 }

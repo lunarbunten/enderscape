@@ -1,0 +1,96 @@
+{
+  "carvers": {},
+  "downfall": 0.5,
+  "effects": {
+    "additions_sound": {
+      "sound": "enderscape:ambient.magnia_fields.additions",
+      "tick_chance": 0.0015
+    },
+    "ambient_sound": "enderscape:ambient.magnia_fields.loop",
+    "fog_color": 6515306,
+    "foliage_color": 9542796,
+    "grass_color": 9542796,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "enderscape:ambient.magnia_fields.mood",
+      "tick_delay": 6000
+    },
+    "music": {
+      "max_delay": 24000,
+      "min_delay": 12000,
+      "replace_current_music": false,
+      "sound": "enderscape:music.enderscape.biome.magnia_fields"
+    },
+    "particle": {
+      "options": {
+        "type": "enderscape:void_stars"
+      },
+      "probability": 0.003
+    },
+    "sky_color": 1381910,
+    "water_color": 9015708,
+    "water_fog_color": 6186350
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [
+      "enderscape:magnia_arches"
+    ],
+    [
+      "minecraft:end_gateway_return",
+      "enderscape:magnia_towers",
+      "enderscape:magnia_spikes",
+      "enderscape:large_magnia_spikes"
+    ],
+    [],
+    [
+      "enderscape:void_shale",
+      "enderscape:void_shale_blobs",
+      "enderscape:veradite",
+      "enderscape:mirestone_blobs",
+      "enderscape:shadoline_ore",
+      "enderscape:scattered_shadoline_ore",
+      "enderscape:nebulite_ore",
+      "enderscape:ceiling_nebulite_ore"
+    ],
+    [],
+    [],
+    [
+      "enderscape:upward_alluring_magnia_sprouts",
+      "enderscape:downward_repulsive_magnia_sprouts",
+      "enderscape:uncommon_chorus_plants",
+      "enderscape:uncommon_chorus_sprouts",
+      "enderscape:common_dry_end_growth",
+      "enderscape:murublight_bracket"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "enderscape:rubblemite",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 2
+      },
+      {
+        "type": "minecraft:enderman",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 10
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.5
+}

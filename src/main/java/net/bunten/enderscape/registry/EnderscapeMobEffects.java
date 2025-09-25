@@ -12,8 +12,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 public class EnderscapeMobEffects {
 
     public static final Holder<MobEffect> LOW_GRAVITY = register("low_gravity", new LowGravityEffect()
-            .addAttributeModifier(Attributes.GRAVITY, Enderscape.id("effect.drift.gravity"), -0.4, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)
-            .addAttributeModifier(Attributes.SAFE_FALL_DISTANCE, Enderscape.id("effect.drift.fall_damage_multiplier"), 0.6, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
+            .addAttributeModifier(Attributes.GRAVITY, Enderscape.id("effect.drift.gravity"), -0.6, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)
+            .addAttributeModifier(Attributes.SAFE_FALL_DISTANCE, Enderscape.id("effect.drift.fall_damage_multiplier"), 0.6, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)
+            .withSoundOnAdded(EnderscapeEventSounds.APPLY_EFFECT_LOW_GRAVITY)
     );
 
     private static Holder.Reference<MobEffect> register(String name, MobEffect effect) {

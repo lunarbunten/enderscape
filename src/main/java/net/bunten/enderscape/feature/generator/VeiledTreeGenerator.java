@@ -2,7 +2,7 @@ package net.bunten.enderscape.feature.generator;
 
 import net.bunten.enderscape.block.VeiledLeafPileBlock;
 import net.bunten.enderscape.block.VeiledVinesBlock;
-import net.bunten.enderscape.block.properties.StateProperties;
+import net.bunten.enderscape.block.state.StateProperties;
 import net.bunten.enderscape.feature.GrowthConfig;
 import net.bunten.enderscape.feature.VeiledLeafPileConfig;
 import net.bunten.enderscape.feature.VeiledTreeConfig;

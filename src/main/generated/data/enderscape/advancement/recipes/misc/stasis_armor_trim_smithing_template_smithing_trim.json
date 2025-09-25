@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:stasis_armor_trim_smithing_template_smithing_trim"
+        "recipe": "enderscape:stasis_armor_trim_smithing_template_smithing_trim"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:stasis_armor_trim_smithing_template_smithing_trim"
+      "enderscape:stasis_armor_trim_smithing_template_smithing_trim"
     ]
   }
 }

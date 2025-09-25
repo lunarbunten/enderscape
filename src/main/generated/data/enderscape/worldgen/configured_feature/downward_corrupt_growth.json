@@ -12,7 +12,7 @@
       "Name": "enderscape:corrupt_growth",
       "Properties": {
         "facing": "down",
-        "part": "top"
+        "part": "single"
       }
     }
   }

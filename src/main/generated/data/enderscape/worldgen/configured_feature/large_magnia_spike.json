@@ -1,0 +1,12 @@
+{
+  "type": "enderscape:magnia_spike",
+  "config": {
+    "height": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 12,
+      "min_inclusive": 6
+    },
+    "minimum_terrain_depth": 6,
+    "repulsive_magnia_sprout_placement_chance": 0.05
+  }
+}

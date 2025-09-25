@@ -1,8 +1,8 @@
 package net.bunten.enderscape.block;
 
-import net.bunten.enderscape.block.properties.DirectionProperties;
-import net.bunten.enderscape.block.properties.Part;
-import net.bunten.enderscape.block.properties.StateProperties;
+import net.bunten.enderscape.block.properties.DirectionSet;
+import net.bunten.enderscape.block.state.PartProperty;
+import net.bunten.enderscape.block.state.StateProperties;
 import net.bunten.enderscape.feature.GrowthConfig;
 import net.bunten.enderscape.util.BlockUtil;
 import net.minecraft.core.BlockPos;
@@ -21,20 +21,20 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public abstract class AbstractGrowthBlock extends DirectionalPlantBlock implements BonemealableBlock {
-    public static final EnumProperty<Part> GROWTH = StateProperties.GROWTH_PART;
+    public static final EnumProperty<PartProperty> PART = StateProperties.GROWTH_PART;
 
-    public AbstractGrowthBlock(DirectionProperties properties, Properties settings) {
+    public AbstractGrowthBlock(DirectionSet properties, Properties settings) {
         super(properties, settings);
-        registerDefaultState(defaultBlockState().setValue(GROWTH, Part.TOP));
+        registerDefaultState(defaultBlockState().setValue(PART, PartProperty.SINGLE));
     }
 
-    public static Part getPart(BlockState state) {
-        return state.getValue(GROWTH);
+    public static PartProperty getPart(BlockState state) {
+        return state.getValue(PART);
     }
 
     @Override
     protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
-        builder.add(GROWTH, FACING);
+        builder.add(PART, FACING);
     }
 
     public boolean hasGrowthSupport(BlockState state, BlockState floor) {
@@ -43,8 +43,7 @@ public abstract class AbstractGrowthBlock extends DirectionalPlantBlock implemen
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        int i = getPart(state) == Part.TOP ? 15 : 16;
-        return BlockUtil.createRotatedShape(1, 0, 1, 15, i, 15, state.getValue(FACING));
+        return BlockUtil.createRotatedShape(1, 0, 1, 15, isTopOrSinglePart(state) ? 15 : 16, 15, state.getValue(FACING));
     }
 
     @Override
@@ -65,15 +64,19 @@ public abstract class AbstractGrowthBlock extends DirectionalPlantBlock implemen
         var down = world.getBlockState(pos.relative(opposite));
         
         if (down.is(this)) {
-            return state.setValue(GROWTH, up.is(this) && getFacing(up) == plantDirection ? Part.MIDDLE : Part.TOP);
+            return state.setValue(PART, up.is(this) && getFacing(up) == plantDirection ? PartProperty.MIDDLE : PartProperty.TOP);
         } else {
-            return state.setValue(GROWTH, up.is(this) && getFacing(up) == plantDirection ? Part.BOTTOM : Part.TOP);
+            return state.setValue(PART, up.is(this) && getFacing(up) == plantDirection ? PartProperty.BOTTOM : PartProperty.SINGLE);
         }
     }
 
     @Override
     public boolean isValidBonemealTarget(LevelReader world, BlockPos origin, BlockState state) {
-        return getPart(state) == Part.TOP && world.getBlockState(origin.relative(getFacing(state))).isAir();
+        return isTopOrSinglePart(state) && world.getBlockState(origin.relative(getFacing(state))).isAir();
+    }
+
+    private static boolean isTopOrSinglePart(BlockState state) {
+        return getPart(state) == PartProperty.SINGLE || getPart(state) == PartProperty.TOP;
     }
 
     @Override
@@ -110,7 +113,7 @@ public abstract class AbstractGrowthBlock extends DirectionalPlantBlock implemen
         int i = 0;
 
         while (totalHeight > i) {
-            Part part = i == totalHeight - 1 ? Part.TOP : (i == 0 ? Part.BOTTOM : Part.MIDDLE);
+            PartProperty part = i == totalHeight - 1 ? (totalHeight == 1 ? PartProperty.SINGLE : PartProperty.TOP) : (i == 0 ? PartProperty.BOTTOM : PartProperty.MIDDLE);
             BlockUtil.replace(world, mutable, state.setValue(StateProperties.GROWTH_PART, part));
             mutable.move(direction);
             i++;

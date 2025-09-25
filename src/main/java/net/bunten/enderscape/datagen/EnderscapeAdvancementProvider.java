@@ -2,6 +2,7 @@ package net.bunten.enderscape.datagen;
 
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.criteria.BounceOnDrifterCriterion;
+import net.bunten.enderscape.criteria.HearMagniaRadioSongCriterion;
 import net.bunten.enderscape.criteria.MirrorTeleportCriterion;
 import net.bunten.enderscape.criteria.PullEntityCriterion;
 import net.bunten.enderscape.registry.EnderscapeBiomes;
@@ -26,6 +27,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
@@ -37,8 +39,8 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
-import static net.bunten.enderscape.registry.EnderscapeBlocks.CELESTIAL_OVERGROWTH;
-import static net.bunten.enderscape.registry.EnderscapeBlocks.END_VAULT;
+import static net.bunten.enderscape.registry.EnderscapeBlocks.*;
+import static net.bunten.enderscape.registry.EnderscapeCriteria.HEAR_MAGNIA_RADIO_SONG;
 import static net.bunten.enderscape.registry.EnderscapeItems.*;
 import static net.minecraft.world.item.Items.BUCKET;
 import static net.minecraft.world.item.Items.FIREWORK_ROCKET;
@@ -47,10 +49,12 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
 
     public static final List<ResourceKey<Biome>> EXPLORE_END_BIOMES = List.of(
             Biomes.THE_END, Biomes.END_HIGHLANDS, Biomes.END_MIDLANDS, Biomes.SMALL_END_ISLANDS,
-            EnderscapeBiomes.VEILED_WOODLANDS, EnderscapeBiomes.MAGNIA_CRAGS,
+            EnderscapeBiomes.VEILED_WOODLANDS, EnderscapeBiomes.MAGNIA_FIELDS,
             EnderscapeBiomes.CELESTIAL_GROVE, EnderscapeBiomes.CORRUPT_BARRENS,
             EnderscapeBiomes.VOID_DEPTHS, EnderscapeBiomes.VOID_SKIES, EnderscapeBiomes.VOID_SKY_ISLANDS
     );
+
+    public static final List<ResourceKey<Level>> ALL_DIMENSION_TYPES = List.of(Level.OVERWORLD, Level.NETHER, Level.END);
 
     public EnderscapeAdvancementProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, registryLookup);
@@ -278,5 +282,24 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                         Optional.empty()
                 )))
                 .save(consumer, Enderscape.id("pull_item_with_attractor").toString());
+
+//        Advancement.Builder hearMagniaRadioSongs = Advancement.Builder.advancement()
+//                .parent(endGatewayKey.location())
+//                .display(MAGNIA_RADIO,
+//                        Component.translatable("advancement.enderscape.hear_magnia_radio_songs"),
+//                        Component.translatable("advancement.enderscape.hear_magnia_radio_songs.description"),
+//                        null,
+//                        AdvancementType.GOAL,
+//                        true, true, false)
+//                .rewards(AdvancementRewards.Builder.experience(50));
+//
+//        ALL_DIMENSION_TYPES.forEach(dimension ->
+//                hearMagniaRadioSongs.addCriterion(
+//                        dimension.location().toString(),
+//                        HEAR_MAGNIA_RADIO_SONG.createCriterion(new HearMagniaRadioSongCriterion.Conditions(Optional.empty(), Optional.of(LocationPredicate.Builder.inDimension(dimension).build()), Optional.empty()))
+//                )
+//        );
+//
+//        hearMagniaRadioSongs.save(consumer, Enderscape.id("hear_magnia_radio_songs").toString());
     }
 }

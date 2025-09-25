@@ -90,7 +90,31 @@
             }
           ],
           "name": "minecraft:spectral_arrow",
-          "weight": 8
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:potion_contents": {
+                  "potion": "enderscape:long_low_gravity"
+                }
+              },
+              "function": "minecraft:set_components"
+            },
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 8.0,
+                "min": 4.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:tipped_arrow",
+          "weight": 6
         },
         {
           "type": "minecraft:item",
@@ -210,7 +234,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 0.8,
-                "min": 0.65
+                "min": 0.4
               },
               "function": "minecraft:set_damage"
             }
@@ -235,7 +259,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 0.8,
-                "min": 0.65
+                "min": 0.4
               },
               "function": "minecraft:set_damage"
             }
@@ -260,7 +284,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 0.8,
-                "min": 0.65
+                "min": 0.4
               },
               "function": "minecraft:set_damage"
             }
@@ -285,12 +309,28 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 0.8,
-                "min": 0.65
+                "min": 0.4
               },
               "function": "minecraft:set_damage"
             }
           ],
           "name": "minecraft:iron_hoe",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.6,
+                "min": 0.2
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
+          "name": "minecraft:shield",
           "weight": 3
         },
         {
@@ -310,7 +350,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 0.8,
-                "min": 0.65
+                "min": 0.4
               },
               "function": "minecraft:set_damage"
             }
@@ -335,7 +375,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 0.8,
-                "min": 0.65
+                "min": 0.4
               },
               "function": "minecraft:set_damage"
             }
@@ -360,7 +400,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 0.8,
-                "min": 0.65
+                "min": 0.4
               },
               "function": "minecraft:set_damage"
             }
@@ -385,7 +425,7 @@
               "damage": {
                 "type": "minecraft:uniform",
                 "max": 0.8,
-                "min": 0.65
+                "min": 0.4
               },
               "function": "minecraft:set_damage"
             }
@@ -404,6 +444,15 @@
                 "min": 5.0
               },
               "options": "#minecraft:on_random_loot"
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.8,
+                "min": 0.4
+              },
+              "function": "minecraft:set_damage"
             }
           ],
           "name": "minecraft:bow",
@@ -445,22 +494,13 @@
             {
               "components": {
                 "minecraft:potion_contents": {
-                  "potion": "minecraft:strong_healing"
+                  "potion": "minecraft:slow_falling"
                 }
               },
               "function": "minecraft:set_components"
-            },
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:splash_potion"
+          "name": "minecraft:potion"
         },
         {
           "type": "minecraft:item",
@@ -468,22 +508,13 @@
             {
               "components": {
                 "minecraft:potion_contents": {
-                  "potion": "minecraft:strong_harming"
+                  "potion": "minecraft:slowness"
                 }
               },
               "function": "minecraft:set_components"
-            },
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:splash_potion"
+          "name": "minecraft:lingering_potion"
         },
         {
           "type": "minecraft:item",
@@ -491,22 +522,13 @@
             {
               "components": {
                 "minecraft:potion_contents": {
-                  "potion": "minecraft:long_slow_falling"
+                  "potion": "enderscape:low_gravity"
                 }
               },
               "function": "minecraft:set_components"
-            },
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:splash_potion"
+          "name": "minecraft:lingering_potion"
         }
       ],
       "rolls": {

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:polished_veradite_stairs_from_veradite_stonecutting"
+        "recipe": "enderscape:polished_veradite_stairs_from_veradite_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:polished_veradite_stairs_from_veradite_stonecutting"
+      "enderscape:polished_veradite_stairs_from_veradite_stonecutting"
     ]
   }
 }

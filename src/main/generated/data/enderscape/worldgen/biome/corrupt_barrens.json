@@ -7,7 +7,7 @@
       "tick_chance": 0.0015
     },
     "ambient_sound": "enderscape:ambient.corrupt_barrens.loop",
-    "fog_color": 722959,
+    "fog_color": 4799331,
     "foliage_color": 8682641,
     "grass_color": 8682641,
     "mood_sound": {
@@ -20,7 +20,7 @@
       "max_delay": 24000,
       "min_delay": 12000,
       "replace_current_music": false,
-      "sound": "enderscape:music.the_end.biome.corrupt_barrens"
+      "sound": "enderscape:music.enderscape.biome.corrupt_barrens"
     },
     "particle": {
       "options": {
@@ -61,7 +61,7 @@
       "enderscape:upward_corrupt_growth",
       "enderscape:upward_tall_corrupt_growth",
       "enderscape:corrupt_barrens_vegetation",
-      "enderscape:murublight_shelf"
+      "enderscape:murublight_bracket"
     ]
   ],
   "has_precipitation": false,

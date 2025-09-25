@@ -2,11 +2,13 @@ package net.bunten.enderscape.client.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.bunten.enderscape.EnderscapeConfig;
+import net.bunten.enderscape.client.sound.ClientsideMagniaRadioHandler;
 import net.bunten.enderscape.client.world.EnderscapeSkybox;
 import net.bunten.enderscape.entity.EndTrialSpawnable;
 import net.bunten.enderscape.registry.EnderscapeBlockSounds;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.EnderscapeParticles;
+import net.bunten.enderscape.registry.EnderscapeRegistries;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -41,6 +43,8 @@ public abstract class LevelRendererMixin {
     @Shadow
     private ClientLevel level;
 
+    @Unique private final ClientsideMagniaRadioHandler Enderscape$magniaRadioHandler = new ClientsideMagniaRadioHandler();
+
     @Inject(method = "renderEndSky", at = @At("HEAD"), cancellable = true)
     public void renderEndSky(PoseStack pose, CallbackInfo ci) {
         if (EnderscapeConfig.getInstance().skyboxUpdateEnabled)  {
@@ -59,6 +63,19 @@ public abstract class LevelRendererMixin {
     @Inject(at = @At("HEAD"), method = "levelEvent", cancellable = true)
     public void Enderscape$tryToStartFallFlying(int eventID, BlockPos pos, int extraID, CallbackInfo ci) {
         RandomSource random = level.getRandom();
+
+        if (eventID == -624641) {
+            Enderscape$magniaRadioHandler.playAmbientSound(pos);
+        }
+
+        if (eventID == -624642) {
+            level.registryAccess().registryOrThrow(EnderscapeRegistries.MAGNIA_RADIO_SONG).getHolder(extraID).ifPresent(reference -> Enderscape$magniaRadioHandler.playSong(reference, pos));
+        }
+
+        if (eventID == -624643) {
+            Enderscape$magniaRadioHandler.stopAllInstances(pos);
+            Enderscape$magniaRadioHandler.notifyNearbyEntities(level, pos, false);
+        }
 
         if (eventID == 3015 && level.getBlockState(pos).is(EnderscapeBlocks.END_VAULT)) {
             if (level.getBlockEntity(pos) instanceof VaultBlockEntity entity) {

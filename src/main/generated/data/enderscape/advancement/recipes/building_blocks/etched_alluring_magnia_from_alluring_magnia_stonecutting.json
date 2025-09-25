@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:etched_alluring_magnia_from_alluring_magnia_stonecutting"
+        "recipe": "enderscape:etched_alluring_magnia_from_alluring_magnia_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:etched_alluring_magnia_from_alluring_magnia_stonecutting"
+      "enderscape:etched_alluring_magnia_from_alluring_magnia_stonecutting"
     ]
   }
 }

@@ -1,14 +1,14 @@
 package net.bunten.enderscape.client.registry;
 
-import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.client.EnderscapeClient;
-import net.bunten.enderscape.client.entity.EndermanStareSoundInstance;
-import net.bunten.enderscape.client.entity.EndermanStaticSoundInstance;
+import net.bunten.enderscape.client.sound.EndermanStareSoundInstance;
+import net.bunten.enderscape.client.sound.EndermanStaticSoundInstance;
 import net.bunten.enderscape.network.*;
 import net.bunten.enderscape.registry.EnderscapeBlockSounds;
 import net.bunten.enderscape.registry.EnderscapeItemSounds;
-import net.bunten.enderscape.registry.EnderscapeMusic;
+import net.bunten.enderscape.registry.EnderscapeRegistries;
+import net.bunten.enderscape.sound.StructureMusic;
 import net.bunten.enderscape.util.BlockUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -18,19 +18,17 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-
-import java.util.Optional;
 
 import static net.bunten.enderscape.client.EnderscapeClient.MAX_STARE_STICKS;
 import static net.bunten.enderscape.client.EnderscapeClient.staticSoundInstance;
@@ -134,7 +132,10 @@ public class EnderscapeClientNetworking {
         ResourceLocation location = payload.location();
 
         client.execute(() -> {
-            EnderscapeClient.structureMusic = location.equals(Enderscape.END_CITY_RESOURCE_KEY.location()) ? Optional.of(EnderscapeMusic.MUSIC_END_CITY) : Optional.empty();
+            if (client.level == null) return;
+
+            Registry<StructureMusic> registry = client.level.registryAccess().registryOrThrow(EnderscapeRegistries.STRUCTURE_MUSIC);
+            EnderscapeClient.structureMusic = registry.stream().filter(music -> music.permittedStructures().contains(location)).map(StructureMusic::music).findFirst();
         });
     }
 

@@ -22,7 +22,7 @@ public class EnderscapeSkyParametersProvider extends FabricDynamicRegistryProvid
     }
 
     private void add(HolderLookup.Provider provider, Entries entries, ResourceKey<SkyParameters> key) {
-        entries.add(key, provider.lookupOrThrow(EnderscapeRegistries.SKY_PARAMETERS_KEY).getOrThrow(key).value());
+        entries.add(key, provider.lookupOrThrow(EnderscapeRegistries.SKY_PARAMETERS).getOrThrow(key).value());
     }
 
     @Override

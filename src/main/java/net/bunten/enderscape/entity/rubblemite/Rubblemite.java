@@ -101,8 +101,10 @@ public class Rubblemite extends Monster {
         return super.finalizeSpawn(level, difficulty, spawnType, groupData);
     }
 
-    public static boolean canSpawn(EntityType<?> type, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return level.getDifficulty() != Difficulty.PEACEFUL && (level.getBlockState(pos.below()).is(EnderscapeBlockTags.RUBBLEMITE_SPAWNABLE_ON) || MobSpawnType.isSpawner(spawnType));
+    public static boolean canSpawn(EntityType<Rubblemite> type, ServerLevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return level.getDifficulty() != Difficulty.PEACEFUL
+                && (MobSpawnType.isSpawner(reason) || level.getBlockState(pos.below()).is(EnderscapeBlockTags.RUBBLEMITE_SPAWNABLE_ON))
+                && (MobSpawnType.ignoresLightRequirements(reason) || isDarkEnoughToSpawn(level, pos, random));
     }
 
     @Override

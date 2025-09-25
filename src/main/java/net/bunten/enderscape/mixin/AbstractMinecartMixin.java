@@ -1,9 +1,10 @@
 package net.bunten.enderscape.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.bunten.enderscape.entity.magnia.MagniaMoveable;
 import net.bunten.enderscape.entity.magnia.MagniaProperties;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -18,7 +19,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AbstractMinecart.class)
@@ -44,12 +44,7 @@ public abstract class AbstractMinecartMixin extends Entity implements MagniaMove
                 entity -> 0.6F,
                 entity -> 0.2F,
                 DEFAULT_MAGNIA_PREDICATE,
-                entity -> {
-                    entity.setNoGravity(true);
-                    if (random.nextInt(16) == 0 && level() instanceof ServerLevel server) {
-                        server.sendParticles(ParticleTypes.END_ROD, position().x, position().y + 0.5, position().z, 1, 0.3F, 0.3, 0.3F, 0);
-                    }
-                },
+                entity -> entity.setNoGravity(true),
                 entity -> entity.setNoGravity(false)
         );
     }
@@ -72,13 +67,13 @@ public abstract class AbstractMinecartMixin extends Entity implements MagniaMove
     private void Enderscape$tick(CallbackInfo info) {
         MagniaMoveable.tickMagniaCooldown(entity);
 
-        if (MagniaMoveable.wasMovedByMagnia(entity) && entity.level() instanceof ServerLevel serverLevel) {
+        if (MagniaMoveable.wasMovedByMagnia(entity) && entity.level() instanceof ServerLevel) {
             comeOffTrack();
         }
     }
 
-    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/AbstractMinecart;moveAlongTrack(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V"))
-    public void tick(AbstractMinecart entity, BlockPos blockPos, BlockState blockState) {
-        if (!MagniaMoveable.wasMovedByMagnia(entity)) moveAlongTrack(blockPos, blockState);
+    @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/AbstractMinecart;moveAlongTrack(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V"))
+    public void tick(AbstractMinecart instance, BlockPos pos, BlockState state, Operation<Void> original) {
+        if (!MagniaMoveable.wasMovedByMagnia(entity)) original.call(instance, pos, state);
     }
 }

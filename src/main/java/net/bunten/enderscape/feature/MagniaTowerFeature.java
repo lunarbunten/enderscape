@@ -2,7 +2,12 @@ package net.bunten.enderscape.feature;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
+import net.bunten.enderscape.block.BlisteredMagniaBlock;
+import net.bunten.enderscape.block.HasMagniaPolarity;
+import net.bunten.enderscape.block.MagniaBlock;
 import net.bunten.enderscape.block.MagniaSproutBlock;
+import net.bunten.enderscape.block.properties.MagniaPolarity;
+import net.bunten.enderscape.block.state.StateProperties;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.tag.EnderscapeBlockTags;
 import net.minecraft.core.BlockPos;
@@ -17,6 +22,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 import java.util.List;
+import java.util.Optional;
 
 public class MagniaTowerFeature extends Feature<MagniaTowerConfig> {
 
@@ -37,7 +43,7 @@ public class MagniaTowerFeature extends Feature<MagniaTowerConfig> {
 
             replaceFloor(level, origin, random, placedBlocks, config);
             generateTower(level, origin, random, placedBlocks, config);
-            generateSprouts(level, random, placedBlocks, config);
+            generateSprouts(level, origin, random, placedBlocks, config);
 
             return true;
         }
@@ -126,15 +132,36 @@ public class MagniaTowerFeature extends Feature<MagniaTowerConfig> {
         }
     }
 
-    private void generateSprouts(WorldGenLevel level, RandomSource random, List<BlockPos> placedBlocks, MagniaTowerConfig config) {
+    private void generateSprouts(WorldGenLevel level, BlockPos origin, RandomSource random, List<BlockPos> placedBlocks, MagniaTowerConfig config) {
         for (BlockPos pos : placedBlocks) {
-            if (random.nextFloat() <= config.sprout_placement_chance().sample(random)) {
-                for (Direction direction : Direction.values()) {
-                    BlockState currentState = level.getBlockState(pos);
-                    BlockPos adjacentPos = pos.relative(direction);
-                    if (random.nextBoolean() && level.getBlockState(adjacentPos).isAir() && (currentState.is(EnderscapeBlockTags.MAGNIA_BLOCKS) || currentState.is(EnderscapeBlockTags.ETCHED_MAGNIA_BLOCKS))) {
-                        Block sproutBlock = currentState.is(EnderscapeBlocks.ALLURING_MAGNIA) ? EnderscapeBlocks.ALLURING_MAGNIA_SPROUT : EnderscapeBlocks.REPULSIVE_MAGNIA_SPROUT;
-                        level.setBlock(adjacentPos, sproutBlock.defaultBlockState().setValue(MagniaSproutBlock.FACING, direction), 2);
+            for (Direction direction : Direction.values()) {
+                BlockState floor = level.getBlockState(pos);
+
+                if (floor.getBlock() instanceof MagniaBlock) {
+                    Optional<MagniaPolarity> type = HasMagniaPolarity.optional(floor);
+                    if (type.isEmpty()) continue;
+
+                    float chance = type.get() == MagniaPolarity.ALLURING ? config.alluring_magnia_sprout_placement_chance().sample(random) : config.repulsive_magnia_sprout_placement_chance().sample(random);
+
+                    if (random.nextFloat() <= chance) {
+                        BlockPos relative = pos.relative(direction);
+
+                        if (level.getBlockState(relative).canBeReplaced() && level.getBlockState(pos.relative(direction, 2)).canBeReplaced()) {
+                            double dx = pos.getX() - origin.getX();
+                            double dz = pos.getZ() - origin.getZ();
+                            boolean nearCenter = (dx * dx + dz * dz) <= 6 * 6;
+
+                            if (random.nextInt(200) == 0 && nearCenter) {
+                                BlockState state = EnderscapeBlocks.BLISTERED_MAGNIA.defaultBlockState().setValue(StateProperties.OPTIONAL_MAGNIA_POLARITY, BlisteredMagniaBlock.selectPolarity(level, relative));
+
+                                level.setBlock(relative, state, 2);
+                                level.scheduleTick(relative, state.getBlock(), 1);
+                            } else {
+                                Block sprout = type.get() == MagniaPolarity.ALLURING ? EnderscapeBlocks.ALLURING_MAGNIA_SPROUT : EnderscapeBlocks.REPULSIVE_MAGNIA_SPROUT;
+
+                                level.setBlock(relative, sprout.defaultBlockState().setValue(MagniaSproutBlock.FACING, direction), 2);
+                            }
+                        }
                     }
                 }
             }

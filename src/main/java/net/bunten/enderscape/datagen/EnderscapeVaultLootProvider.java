@@ -51,18 +51,18 @@ public class EnderscapeVaultLootProvider extends SimpleFabricLootTableProvider {
     public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer) {
         consumer.accept(END_CITY_VAULT, endCityVaultRewards());
         consumer.accept(END_CITY_ELYTRA_VAULT, endCityVaultRewards().withPool(
-                LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1))
-                        .add(createItem(ELYTRA, 1))
+                        LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1))
+                                .add(createItem(ELYTRA, 1))
                 )
         );
     }
 
     public LootTable.Builder endCityVaultRewards() {
         try {
-            LootItemConditionalFunction.Builder<?> toolDamage = SetItemDamageFunction.setDamage(UniformGenerator.between(0.65F, 1.0F));
-            EnchantWithLevelsFunction.Builder toolEnchantments = EnchantWithLevelsFunction.enchantWithLevels(lookup.get(), UniformGenerator.between(30, 50));
-            
+            LootItemConditionalFunction.Builder<?> toolDamage = SetItemDamageFunction.setDamage(UniformGenerator.between(0.4F, 1.0F));
+            EnchantWithLevelsFunction.Builder toolEnchantments = EnchantWithLevelsFunction.enchantWithLevels(lookup.get(), UniformGenerator.between(20, 40));
+
             return LootTable.lootTable()
                     .withPool(
                             LootPool.lootPool()
@@ -114,54 +114,54 @@ public class EnderscapeVaultLootProvider extends SimpleFabricLootTableProvider {
                                     .add(createItem(STASIS_ARMOR_TRIM_SMITHING_TEMPLATE, 4))
                     )
                     .withPool(
-                        LootPool.lootPool()
-                            .setRolls(ConstantValue.exactly(2))
-                                .add(EmptyLootItem.emptyItem().setWeight(100))
+                            LootPool.lootPool()
+                                    .setRolls(ConstantValue.exactly(2))
+                                    .add(EmptyLootItem.emptyItem().setWeight(100))
 
-                                .add(createItem(BOOK, 50).apply(
-                                                new EnchantRandomlyFunction.Builder()
-                                                        .withOneOf(
-                                                                HolderSet.direct(
-                                                                        getEnchantmentReference(PROTECTION),
-                                                                        getEnchantmentReference(FEATHER_FALLING),
-                                                                        getEnchantmentReference(SHARPNESS),
-                                                                        getEnchantmentReference(BANE_OF_ARTHROPODS),
-                                                                        getEnchantmentReference(KNOCKBACK),
-                                                                        getEnchantmentReference(LOOTING),
-                                                                        getEnchantmentReference(EFFICIENCY),
-                                                                        getEnchantmentReference(FORTUNE),
-                                                                        getEnchantmentReference(SILK_TOUCH),
-                                                                        getEnchantmentReference(UNBREAKING),
-                                                                        getEnchantmentReference(POWER),
-                                                                        getEnchantmentReference(PUNCH)
-                                                                )
-                                                        )
-                                        )
-                                )
+                                    .add(createItem(BOOK, 50).apply(
+                                                    new EnchantRandomlyFunction.Builder()
+                                                            .withOneOf(
+                                                                    HolderSet.direct(
+                                                                            getEnchantmentReference(PROTECTION),
+                                                                            getEnchantmentReference(FEATHER_FALLING),
+                                                                            getEnchantmentReference(SHARPNESS),
+                                                                            getEnchantmentReference(BANE_OF_ARTHROPODS),
+                                                                            getEnchantmentReference(KNOCKBACK),
+                                                                            getEnchantmentReference(LOOTING),
+                                                                            getEnchantmentReference(EFFICIENCY),
+                                                                            getEnchantmentReference(FORTUNE),
+                                                                            getEnchantmentReference(SILK_TOUCH),
+                                                                            getEnchantmentReference(UNBREAKING),
+                                                                            getEnchantmentReference(POWER),
+                                                                            getEnchantmentReference(PUNCH)
+                                                                    )
+                                                            )
+                                            )
+                                    )
 
-                                .add(createEnchantedBook(LIGHTSPEED, 10))
+                                    .add(createEnchantedBook(LIGHTSPEED, 10))
 
-                                .add(createItem(BOOK, 10).apply(
-                                                new EnchantRandomlyFunction.Builder()
-                                                        .withOneOf(
-                                                                HolderSet.direct(
-                                                                        getEnchantmentReference(REBOUND)
-                                                                )
-                                                        )
-                                        )
-                                )
+                                    .add(createItem(BOOK, 10).apply(
+                                                    new EnchantRandomlyFunction.Builder()
+                                                            .withOneOf(
+                                                                    HolderSet.direct(
+                                                                            getEnchantmentReference(REBOUND)
+                                                                    )
+                                                            )
+                                            )
+                                    )
 
-                                .add(createItem(BOOK, 4).apply(
-                                                new EnchantRandomlyFunction.Builder()
-                                                        .withOneOf(
-                                                                HolderSet.direct(
-                                                                        getEnchantmentReference(TRANSDIMENSIONAL),
-                                                                        getEnchantmentReference(MENDING)
-                                                                )
-                                                        )
-                                        )
-                                )
-            );
+                                    .add(createItem(BOOK, 4).apply(
+                                                    new EnchantRandomlyFunction.Builder()
+                                                            .withOneOf(
+                                                                    HolderSet.direct(
+                                                                            getEnchantmentReference(TRANSDIMENSIONAL),
+                                                                            getEnchantmentReference(MENDING)
+                                                                    )
+                                                            )
+                                            )
+                                    )
+                    );
         } catch (InterruptedException ignored) {
 
         } catch (ExecutionException e) {

@@ -10,9 +10,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.NbtOps;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.decoration.Painting;
 import net.minecraft.world.entity.decoration.PaintingVariant;
@@ -20,10 +18,9 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 
 import java.util.Optional;
@@ -77,6 +74,14 @@ public class EnderscapeCreativeModeTab {
         output.accept(DRIFT_JELLY_BOTTLE);
         output.accept(DRIFT_JELLY_BLOCK);
         output.accept(DRIFT_LEGGINGS);
+
+        parameters.holders().lookup(Registries.POTION).ifPresent(potion -> {
+            output.accept(PotionContents.createItemStack(POTION, EnderscapePotions.LOW_GRAVITY));
+            output.accept(PotionContents.createItemStack(SPLASH_POTION, EnderscapePotions.LOW_GRAVITY));
+            output.accept(PotionContents.createItemStack(LINGERING_POTION, EnderscapePotions.LOW_GRAVITY));
+            output.accept(PotionContents.createItemStack(TIPPED_ARROW, EnderscapePotions.LOW_GRAVITY));
+        });
+
         output.accept(MAGNIA_ATTRACTOR);
         output.accept(MIRROR);
         output.accept(ELYTRA);
@@ -151,10 +156,18 @@ public class EnderscapeCreativeModeTab {
 
         output.accept(ALLURING_MAGNIA);
         output.accept(ETCHED_ALLURING_MAGNIA);
+        output.accept(ETCHED_ALLURING_MAGNIA_STAIRS);
+        output.accept(ETCHED_ALLURING_MAGNIA_SLAB);
+        output.accept(ETCHED_ALLURING_MAGNIA_WALL);
         output.accept(ALLURING_MAGNIA_SPROUT);
         output.accept(REPULSIVE_MAGNIA);
         output.accept(ETCHED_REPULSIVE_MAGNIA);
+        output.accept(ETCHED_REPULSIVE_MAGNIA_STAIRS);
+        output.accept(ETCHED_REPULSIVE_MAGNIA_SLAB);
+        output.accept(ETCHED_REPULSIVE_MAGNIA_WALL);
         output.accept(REPULSIVE_MAGNIA_SPROUT);
+        output.accept(BLISTERED_MAGNIA);
+        output.accept(POLARIZED_MAGNIA);
 
         output.accept(VOID_SHALE);
 
@@ -231,7 +244,7 @@ public class EnderscapeCreativeModeTab {
         output.accept(VEILED_HANGING_SIGN_ITEM);
 
         output.accept(CELESTIAL_OVERGROWTH);
-        output.accept(CELESTIAL_PATH_BLOCK);
+        output.accept(CELESTIAL_PATH);
         output.accept(CELESTIAL_GROWTH);
         output.accept(BULB_FLOWER);
         output.accept(BULB_LANTERN);
@@ -264,12 +277,12 @@ public class EnderscapeCreativeModeTab {
         output.accept(CELESTIAL_HANGING_SIGN_ITEM);
 
         output.accept(CORRUPT_OVERGROWTH);
-        output.accept(CORRUPT_PATH_BLOCK);
+        output.accept(CORRUPT_PATH);
         output.accept(CORRUPT_GROWTH);
         output.accept(BLINKLIGHT);
         output.accept(BLINKLAMP);
 
-        output.accept(MURUBLIGHT_SHELF_ITEM);
+        output.accept(MURUBLIGHT_BRACKET_ITEM);
         output.accept(MURUBLIGHT_CHANTERELLE);
 
         output.accept(MURUBLIGHT_CAP);
@@ -363,8 +376,14 @@ public class EnderscapeCreativeModeTab {
 
                     ALLURING_MAGNIA,
                     ETCHED_ALLURING_MAGNIA,
+                    ETCHED_ALLURING_MAGNIA_STAIRS,
+                    ETCHED_ALLURING_MAGNIA_SLAB,
+                    ETCHED_ALLURING_MAGNIA_WALL,
                     REPULSIVE_MAGNIA,
-                    ETCHED_REPULSIVE_MAGNIA
+                    ETCHED_REPULSIVE_MAGNIA,
+                    ETCHED_REPULSIVE_MAGNIA_STAIRS,
+                    ETCHED_REPULSIVE_MAGNIA_SLAB,
+                    ETCHED_REPULSIVE_MAGNIA_WALL
             );
 
             entries.addBefore(PURPUR_PILLAR, CHISELED_PURPUR);
@@ -459,16 +478,17 @@ public class EnderscapeCreativeModeTab {
             entries.addAfter(END_STONE,
                     VEILED_END_STONE,
                     CELESTIAL_OVERGROWTH,
-                    CELESTIAL_PATH_BLOCK,
+                    CELESTIAL_PATH,
                     MIRESTONE,
                     CORRUPT_OVERGROWTH,
-                    CORRUPT_PATH_BLOCK,
+                    CORRUPT_PATH,
                     VERADITE,
                     KURODITE,
                     ALLURING_MAGNIA,
                     ALLURING_MAGNIA_SPROUT,
                     REPULSIVE_MAGNIA,
                     REPULSIVE_MAGNIA_SPROUT,
+                    BLISTERED_MAGNIA,
                     VOID_SHALE
             );
 
@@ -480,7 +500,7 @@ public class EnderscapeCreativeModeTab {
             entries.addBefore(OAK_LEAVES, CELESTIAL_STEM, MURUBLIGHT_STEM);
             entries.addBefore(BROWN_MUSHROOM_BLOCK, VEILED_LEAVES, VEILED_LEAF_PILE, VEILED_VINES);
             entries.addBefore(OAK_SAPLING, CELESTIAL_CAP, MURUBLIGHT_CAP);
-            entries.addBefore(SHORT_GRASS, CELESTIAL_CHANTERELLE, MURUBLIGHT_CHANTERELLE, MURUBLIGHT_SHELF_ITEM);
+            entries.addBefore(SHORT_GRASS, CELESTIAL_CHANTERELLE, MURUBLIGHT_CHANTERELLE, MURUBLIGHT_BRACKET_ITEM);
             entries.addBefore(BROWN_MUSHROOM, VEILED_SAPLING);
 
             entries.addBefore(VINE,
@@ -506,13 +526,15 @@ public class EnderscapeCreativeModeTab {
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(entries -> {
             entries.addBefore(CHAIN, BULB_LANTERN);
             entries.addBefore(END_ROD, END_LAMP);
+            entries.addBefore(CRYING_OBSIDIAN, POLARIZED_MAGNIA, BLINKLAMP);
             entries.addBefore(CHEST, VEILED_SIGN_ITEM, VEILED_HANGING_SIGN_ITEM, CELESTIAL_SIGN_ITEM, CELESTIAL_HANGING_SIGN_ITEM, MURUBLIGHT_SIGN_ITEM, MURUBLIGHT_HANGING_SIGN_ITEM);
             entries.addBefore(INFESTED_STONE, getEndVaultInstance());
             entries.addBefore(SKELETON_SKULL, getEndCityBannerInstance(entries.getContext().holders().lookupOrThrow(Registries.BANNER_PATTERN)));
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(entries -> {
-            entries.addAfter(LIGHTNING_ROD, BLINKLIGHT, FLANGER_BERRY);
+            entries.addBefore(PISTON, BLINKLIGHT);
+            entries.addAfter(CAULDRON, BLISTERED_MAGNIA, POLARIZED_MAGNIA, NEBULITE_BLOCK, ALLURING_MAGNIA, REPULSIVE_MAGNIA, FLANGER_BERRY);
             entries.addAfter(REDSTONE_LAMP, BLINKLAMP);
             entries.addAfter(BIG_DRIPLEAF, ALLURING_MAGNIA_SPROUT, REPULSIVE_MAGNIA_SPROUT);
         });
@@ -521,7 +543,10 @@ public class EnderscapeCreativeModeTab {
             entries.addAfter(LEAD, MAGNIA_ATTRACTOR);
             entries.addAfter(ELYTRA, MIRROR);
             entries.addBefore(LAVA_BUCKET, RUSTLE_BUCKET);
-            entries.addAfter(MUSIC_DISC_PIGSTEP, MUSIC_DISC_GLARE, MUSIC_DISC_DECAY, MUSIC_DISC_BLISS);
+
+            entries.accept(MUSIC_DISC_GLARE);
+            entries.accept(MUSIC_DISC_DECAY);
+            entries.accept(MUSIC_DISC_BLISS);
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT).register(entries -> {
@@ -530,7 +555,7 @@ public class EnderscapeCreativeModeTab {
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(entries -> {
-            entries.addBefore(CARROT, FLANGER_BERRY, MURUBLIGHT_SHELF_ITEM);
+            entries.addBefore(CARROT, FLANGER_BERRY, MURUBLIGHT_BRACKET_ITEM);
             entries.addBefore(PUMPKIN_PIE, CHORUS_CAKE_ROLL_ITEM);
             entries.addAfter(HONEY_BOTTLE, DRIFT_JELLY_BOTTLE);
         });

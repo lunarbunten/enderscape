@@ -21,7 +21,6 @@ public class DriftJellyBottleItem extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
         super.finishUsingItem(stack, level, user);
-        user.playSound(EnderscapeItemSounds.DRIFT_JELLY_BOTTLE_FINISH.value(), 1, 1);
 
         if (user instanceof ServerPlayer player) {
             CriteriaTriggers.CONSUME_ITEM.trigger(player, stack);
