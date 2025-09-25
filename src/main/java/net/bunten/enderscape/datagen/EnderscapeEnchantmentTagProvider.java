@@ -27,7 +27,7 @@ public class EnderscapeEnchantmentTagProvider extends FabricTagProvider<Enchantm
 
     @Override
     protected void addTags(HolderLookup.Provider lookup) {
-        tag(IN_ENCHANTING_TABLE).add(REBOUND);
-        tag(TREASURE).add(LIGHTSPEED, TRANSDIMENSIONAL, BUNDLING);
+        tag(IN_ENCHANTING_TABLE).add(BUNDLING, LIGHTSPEED);
+        tag(TREASURE).add(REBOUND, TRANSDIMENSIONAL);
     }
 }

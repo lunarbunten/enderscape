@@ -1,8 +1,8 @@
 package net.bunten.enderscape.client.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.bunten.enderscape.client.world.EnderscapeSkybox;
 import net.bunten.enderscape.EnderscapeConfig;
+import net.bunten.enderscape.client.world.EnderscapeSkybox;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;

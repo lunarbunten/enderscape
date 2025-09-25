@@ -1,0 +1,15 @@
+{
+  "assets": {
+    "asset": "enderscape:entity/rubblemite/kurodite"
+  },
+  "extra_drop_items": "enderscape:rubblemite/kurodite",
+  "spawn_conditions": [
+    {
+      "condition": {
+        "type": "enderscape:floor_check",
+        "blocks": "#enderscape:rubblemite/kurodite_variants_spawn_on"
+      },
+      "priority": 1
+    }
+  ]
+}

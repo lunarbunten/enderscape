@@ -1,8 +1,8 @@
 package net.bunten.enderscape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.bunten.enderscape.block.properties.DirectionProperties;
-import net.bunten.enderscape.block.properties.StateProperties;
+import net.bunten.enderscape.block.properties.DirectionSet;
+import net.bunten.enderscape.block.state.StateProperties;
 import net.bunten.enderscape.registry.EnderscapeBlockSounds;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.EnderscapeConfiguredFeatures;
@@ -41,7 +41,7 @@ public class MurublightChanterelleBlock extends DirectionalPlantBlock implements
     private final ConfiguredFeatureFunction<BlockState> featureFunction = state -> DirectionalPlantBlock.getFacing(state) == Direction.UP ? EnderscapeConfiguredFeatures.UPWARD_LARGE_MURUBLIGHT_CHANTERELLE : EnderscapeConfiguredFeatures.DOWNWARD_LARGE_MURUBLIGHT_CHANTERELLE;
 
     public MurublightChanterelleBlock(Properties properties) {
-        super(DirectionProperties.create().vertical(), properties);
+        super(DirectionSet.create().vertical(), properties);
         registerDefaultState(defaultBlockState().setValue(STAGE, 0));
     }
 

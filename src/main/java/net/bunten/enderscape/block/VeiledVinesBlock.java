@@ -1,7 +1,7 @@
 package net.bunten.enderscape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.bunten.enderscape.block.properties.DirectionProperties;
+import net.bunten.enderscape.block.properties.DirectionSet;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.EnderscapeParticles;
 import net.minecraft.core.BlockPos;
@@ -9,7 +9,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class VeiledVinesBlock extends AbstractGrowthBlock {
@@ -17,7 +16,7 @@ public class VeiledVinesBlock extends AbstractGrowthBlock {
     public static final MapCodec<VeiledVinesBlock> CODEC = simpleCodec(VeiledVinesBlock::new);
 
     public VeiledVinesBlock(Properties settings) {
-        super(DirectionProperties.create().up(), settings);
+        super(DirectionSet.create().up(), settings);
     }
 
     @Override

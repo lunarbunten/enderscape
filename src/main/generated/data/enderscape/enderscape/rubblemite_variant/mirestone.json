@@ -1,0 +1,15 @@
+{
+  "assets": {
+    "asset": "enderscape:entity/rubblemite/mirestone"
+  },
+  "extra_drop_items": "enderscape:rubblemite/mirestone",
+  "spawn_conditions": [
+    {
+      "condition": {
+        "type": "enderscape:floor_check",
+        "blocks": "#enderscape:rubblemite/mirestone_variants_spawn_on"
+      },
+      "priority": 1
+    }
+  ]
+}

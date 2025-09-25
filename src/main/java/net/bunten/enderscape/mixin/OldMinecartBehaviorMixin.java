@@ -1,5 +1,7 @@
 package net.bunten.enderscape.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.bunten.enderscape.entity.magnia.MagniaMoveable;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
@@ -26,8 +28,8 @@ public abstract class OldMinecartBehaviorMixin extends MinecartBehavior {
         }
     }
 
-    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/OldMinecartBehavior;moveAlongTrack(Lnet/minecraft/server/level/ServerLevel;)V"))
-    public void tick(OldMinecartBehavior instance, ServerLevel level) {
-        if (!MagniaMoveable.wasMovedByMagnia(minecart)) moveAlongTrack(level);
+    @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/OldMinecartBehavior;moveAlongTrack(Lnet/minecraft/server/level/ServerLevel;)V"))
+    public void tick(OldMinecartBehavior instance, ServerLevel level, Operation<Void> original) {
+        if (!MagniaMoveable.wasMovedByMagnia(minecart)) original.call(instance, level);
     }
 }
