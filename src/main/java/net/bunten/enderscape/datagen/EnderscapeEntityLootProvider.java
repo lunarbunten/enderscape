@@ -1,43 +1,36 @@
 package net.bunten.enderscape.datagen;
 
-import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.entity.rubblemite.RubblemiteVariant;
-import net.bunten.enderscape.entity.rubblemite.RubblemiteVariantPredicate;
+import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.EnderscapeEntityLootTables;
-import net.bunten.enderscape.registry.EnderscapeItems;
+import net.bunten.enderscape.registry.EnderscapeRegistries;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
-import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 import net.minecraft.world.level.storage.loot.functions.EnchantedCountIncreaseFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
 
 import static net.bunten.enderscape.registry.EnderscapeEntities.*;
+import static net.bunten.enderscape.registry.EnderscapeEntityLootTables.*;
+import static net.bunten.enderscape.registry.EnderscapeItems.RUBBLE_CHITIN;
 
 public class EnderscapeEntityLootProvider extends SimpleFabricLootTableProvider {
 
@@ -51,6 +44,8 @@ public class EnderscapeEntityLootProvider extends SimpleFabricLootTableProvider 
     @Override
     public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer) {
         try {
+            HolderGetter<RubblemiteVariant> variants = lookup.get().lookupOrThrow(EnderscapeRegistries.RUBBLEMITE_VARIANT);
+
             consumer.accept(
                     getLootTable(DRIFTER),
                     LootTable.lootTable()
@@ -68,35 +63,19 @@ public class EnderscapeEntityLootProvider extends SimpleFabricLootTableProvider 
                                     LootPool.lootPool()
                                             .setRolls(ConstantValue.exactly(1))
                                             .add(
-                                                    LootItem.lootTableItem(EnderscapeItems.RUBBLE_CHITIN)
+                                                    LootItem.lootTableItem(RUBBLE_CHITIN)
                                                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                                                             .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup.get(), UniformGenerator.between(0, 1)))
                                                             .when(LootItemRandomChanceCondition.randomChance(0.25F))
                                             )
                                             .when(LootItemKilledByPlayerCondition.killedByPlayer())
                             )
-                            .withPool(createRubblemiteVariantPool())
             );
 
-            RUBBLEMITE_BY_VARIANT.forEach((variant, key) -> {
-                try {
-                    consumer.accept(
-                            key,
-                            LootTable.lootTable()
-                                    .withPool(
-                                            LootPool.lootPool()
-                                                    .setRolls(ConstantValue.exactly(1))
-                                                    .add(
-                                                            LootItem.lootTableItem(variant.getDropItem())
-                                                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1)))
-                                                                    .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup.get(), UniformGenerator.between(0, 1)))
-                                                    )
-                                    )
-                    );
-                } catch (InterruptedException | ExecutionException exception) {
-                    throw new RuntimeException("Error processing Rubblemite variant loot table", exception);
-                }
-            });
+            createRubblemiteExtraDropItems(consumer, RUBBLEMITE_END_STONE, Blocks.END_STONE);
+            createRubblemiteExtraDropItems(consumer, RUBBLEMITE_MIRESTONE, EnderscapeBlocks.MIRESTONE);
+            createRubblemiteExtraDropItems(consumer, RUBBLEMITE_VERADITE, EnderscapeBlocks.VERADITE);
+            createRubblemiteExtraDropItems(consumer, RUBBLEMITE_KURODITE, EnderscapeBlocks.KURODITE);
 
             consumer.accept(
                     getLootTable(RUSTLE),
@@ -113,34 +92,27 @@ public class EnderscapeEntityLootProvider extends SimpleFabricLootTableProvider 
                             )
             );
 
-        } catch (InterruptedException | ExecutionException exception) {
-            throw new RuntimeException("Error processing loot table", exception);
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public static final Map<RubblemiteVariant, ResourceKey<LootTable>> RUBBLEMITE_BY_VARIANT = Arrays.stream(RubblemiteVariant.values()).collect(Collectors.toMap(
-            variant -> variant, variant -> ResourceKey.create(Registries.LOOT_TABLE, Enderscape.id("entities/rubblemite/" + variant.getSerializedName())),
-                    (a, b) -> b, () -> new EnumMap<>(RubblemiteVariant.class)
-            )
-    );
-
-    public static LootPool.Builder createRubblemiteVariantPool() {
-        AlternativesEntry.Builder builder = AlternativesEntry.alternatives();
-
-        RUBBLEMITE_BY_VARIANT.forEach((variant, lootTableKey) ->
-                builder.otherwise(
-                        NestedLootTable.lootTableReference(lootTableKey)
-                                .when(LootItemEntityPropertyCondition.hasProperties(
-                                                LootContext.EntityTarget.THIS,
-                                                EntityPredicate.Builder.entity().subPredicate(new RubblemiteVariantPredicate(Optional.ofNullable(variant)))
+    private void createRubblemiteExtraDropItems(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer, ResourceKey<LootTable> table, ItemLike item) throws InterruptedException, ExecutionException {
+        consumer.accept(
+                table,
+                LootTable.lootTable()
+                        .withPool(
+                                LootPool.lootPool()
+                                        .setRolls(ConstantValue.exactly(1))
+                                        .add(
+                                                LootItem.lootTableItem(item)
+                                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1)))
+                                                        .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup.get(), UniformGenerator.between(0, 1)))
                                         )
-                                )
-                )
+                                        .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                        )
         );
-
-        return LootPool.lootPool().add(builder);
     }
-
 
     private ResourceKey<LootTable> getLootTable(EntityType<?> type) {
         return type.getDefaultLootTable().orElseThrow(() -> new IllegalStateException("Entity " + type + " has no loot table"));

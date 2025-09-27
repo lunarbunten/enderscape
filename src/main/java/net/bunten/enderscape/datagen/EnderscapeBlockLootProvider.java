@@ -53,8 +53,8 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         add(CELESTIAL_OVERGROWTH, block -> createSingleItemTableWithSilkTouch(block, END_STONE));
         add(CORRUPT_OVERGROWTH, block -> createSingleItemTableWithSilkTouch(block, MIRESTONE));
 
-        dropOther(CELESTIAL_PATH_BLOCK, END_STONE);
-        dropOther(CORRUPT_PATH_BLOCK, END_STONE);
+        dropOther(CELESTIAL_PATH, END_STONE);
+        dropOther(CORRUPT_PATH, END_STONE);
 
         add(DRY_END_GROWTH, this::createShearsOnlyDrop);
         dropPottedContents(POTTED_DRY_END_GROWTH);
@@ -158,7 +158,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropOther(CELESTIAL_HANGING_SIGN, CELESTIAL_HANGING_SIGN_ITEM);
         dropOther(CELESTIAL_WALL_HANGING_SIGN, CELESTIAL_HANGING_SIGN_ITEM);
 
-        dropOther(MURUBLIGHT_SHELF, MURUBLIGHT_SHELF_ITEM);
+        dropOther(MURUBLIGHT_BRACKET, MURUBLIGHT_BRACKET_ITEM);
 
         dropSelf(MURUBLIGHT_CHANTERELLE);
         dropPottedContents(POTTED_MURUBLIGHT_CHANTERELLE);
@@ -192,8 +192,20 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(REPULSIVE_MAGNIA);
         dropSelf(REPULSIVE_MAGNIA_SPROUT);
 
+        dropSelf(BLISTERED_MAGNIA);
+        dropSelf(POLARIZED_MAGNIA);
+
         dropSelf(ETCHED_ALLURING_MAGNIA);
+        dropSelf(ETCHED_ALLURING_MAGNIA_STAIRS);
+        dropSelf(ETCHED_ALLURING_MAGNIA_SLAB);
+        dropSelf(ETCHED_ALLURING_MAGNIA_WALL);
+
         dropSelf(ETCHED_REPULSIVE_MAGNIA);
+        dropSelf(ETCHED_REPULSIVE_MAGNIA_STAIRS);
+        dropSelf(ETCHED_REPULSIVE_MAGNIA_SLAB);
+        dropSelf(ETCHED_REPULSIVE_MAGNIA_WALL);
+
+        dropSelf(MAGNIA_RADIO);
 
         dropPottedContents(POTTED_ALLURING_MAGNIA_SPROUT);
         dropPottedContents(POTTED_REPULSIVE_MAGNIA_SPROUT);

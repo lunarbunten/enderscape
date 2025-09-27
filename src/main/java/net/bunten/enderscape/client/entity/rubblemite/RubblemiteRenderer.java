@@ -1,9 +1,7 @@
 package net.bunten.enderscape.client.entity.rubblemite;
 
-import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.client.registry.EnderscapeEntityRenderData;
 import net.bunten.enderscape.entity.rubblemite.Rubblemite;
-import net.bunten.enderscape.entity.rubblemite.RubblemiteVariant;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
@@ -25,13 +23,13 @@ public class RubblemiteRenderer extends MobRenderer<Rubblemite, RubblemiteRender
     @Override
     public void extractRenderState(Rubblemite mob, RubblemiteRenderState state, float f) {
         super.extractRenderState(mob, state, f);
-        state.variant = RubblemiteVariant.get(mob);
         state.insideShell = mob.isInsideShell();
         state.isDashing = mob.isDashing();
+        state.texture = mob.getTexture();
     }
 
     @Override
-    public ResourceLocation getTextureLocation(RubblemiteRenderState mob) {
-        return Enderscape.id("textures/entity/rubblemite/" + mob.variant.getName() + ".png");
+    public ResourceLocation getTextureLocation(RubblemiteRenderState state) {
+        return state.texture;
     }
 }

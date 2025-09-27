@@ -4,8 +4,10 @@ import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.entity.magnia.MagniaMoveable;
 import net.bunten.enderscape.item.MagniaAttractorItem;
 import net.bunten.enderscape.item.NebuliteToolContext;
+import net.bunten.enderscape.particle.MagniaParticleOptions;
 import net.bunten.enderscape.registry.EnderscapeCriteria;
 import net.bunten.enderscape.registry.EnderscapeItemSounds;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
@@ -104,6 +106,7 @@ public abstract class PlayerMixin extends LivingEntity {
         Vec3 speed = position().subtract(entity.position()).normalize().scale(entity.isUnderWater() ? 0.04 : 0.2);
         entity.setDeltaMovement(entity.getDeltaMovement().add(speed));
         MagniaMoveable.setMovedByMagnia(entity, true);
+        if (level() instanceof ServerLevel server) MagniaMoveable.sendEntityEffectParticles(server, entity, MagniaParticleOptions.MAGNIA_ATTRACTOR, 0.25F);
 
         if (abuseCost > 0) {
             if (MagniaMoveable.wasMovedByMagnia(entity)) {
@@ -111,7 +114,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
                 if (ticks >= 40) {
                     MagniaAttractorItem.incrementEntitiesPulled(stack, abuseCost);
-                    MagniaAttractorItem.tryUseFuel(context, abuseCost - MagniaAttractorItem.getEntitiesPulledToUseFuel(stack));
+                    MagniaAttractorItem.tryUseFuel(context, abuseCost - MagniaAttractorItem.getTotalEntitiesPulledToUseFuel(stack, context.user()));
                     ticks = 0;
                 }
 

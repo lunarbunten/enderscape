@@ -1,7 +1,7 @@
 package net.bunten.enderscape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.bunten.enderscape.block.properties.DirectionProperties;
+import net.bunten.enderscape.block.properties.DirectionSet;
 import net.bunten.enderscape.registry.EnderscapeBlockSounds;
 import net.bunten.enderscape.registry.tag.EnderscapeBlockTags;
 import net.minecraft.core.BlockPos;
@@ -17,7 +17,7 @@ public class CelestialGrowthBlock extends AbstractGrowthBlock {
     public static final MapCodec<CelestialGrowthBlock> CODEC = simpleCodec(CelestialGrowthBlock::new);
 
     public CelestialGrowthBlock(Properties settings) {
-        super(DirectionProperties.create().up(), settings);
+        super(DirectionSet.create().up(), settings);
     }
 
     @Override

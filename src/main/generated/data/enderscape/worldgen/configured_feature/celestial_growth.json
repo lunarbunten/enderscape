@@ -16,7 +16,7 @@
       "Name": "enderscape:celestial_growth",
       "Properties": {
         "facing": "up",
-        "part": "top"
+        "part": "single"
       }
     }
   }

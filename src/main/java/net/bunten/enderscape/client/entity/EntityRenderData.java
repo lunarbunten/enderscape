@@ -21,26 +21,38 @@ public class EntityRenderData<T extends Entity> {
     private final TexturedModelDataProvider dataProvider;
     private final ModelLayerLocation modelLayerLocation;
 
-    public EntityRenderData(EntityType<T> type, EntityRendererProvider<T> renderer, TexturedModelDataProvider dataProvider) {
+    public EntityRenderData(EntityType<T> type, EntityRendererProvider<T> renderer, TexturedModelDataProvider dataProvider, ModelLayerLocation location) {
         this.type = type;
         this.renderer = renderer;
         this.dataProvider = dataProvider;
-        this.modelLayerLocation = registerModelLayer(type);
+        this.modelLayerLocation = location;
 
         register();
     }
 
-    private void register() {
-        EntityRendererRegistry.register(type, renderer);
-        EntityModelLayerRegistry.registerModelLayer(modelLayerLocation, dataProvider);
+    public EntityRenderData(EntityType<T> type, EntityRendererProvider<T> renderer, TexturedModelDataProvider dataProvider) {
+        this(type, renderer, dataProvider, registerModelLayer(type));
     }
 
-    private ModelLayerLocation registerModelLayer(EntityType<?> type) {
+    public EntityRenderData(EntityType<T> type, EntityRendererProvider<T> renderer) {
+        this(type, renderer, null, null);
+    }
+
+    private void register() {
+        EntityRendererRegistry.register(type, renderer);
+        if (modelLayerLocation != null && dataProvider != null) EntityModelLayerRegistry.registerModelLayer(modelLayerLocation, dataProvider);
+    }
+
+    private static ModelLayerLocation registerModelLayer(EntityType<?> type) {
         return new ModelLayerLocation(BuiltInRegistries.ENTITY_TYPE.getKey(type), BuiltInRegistries.ENTITY_TYPE.getKey(type).getPath());
     }
 
     public static <T extends Entity> EntityRenderData<T> create(EntityType<T> type, EntityRendererProvider<T> renderer, TexturedModelDataProvider dataProvider) {
         return new EntityRenderData<T>(type, renderer, dataProvider);
+    }
+
+    public static <T extends Entity> EntityRenderData<T> create(EntityType<T> type, EntityRendererProvider<T> renderer) {
+        return new EntityRenderData<T>(type, renderer, null);
     }
 
     public EntityType<T> getEntityType() {

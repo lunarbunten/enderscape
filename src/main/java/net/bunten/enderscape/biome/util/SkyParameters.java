@@ -20,7 +20,7 @@ public record SkyParameters(ResourceLocation location, int nebulaColor, float ne
     public static final float DEFAULT_FOG_START_DENSITY = 1.0F;
     public static final float DEFAULT_FOG_END_DENSITY = 1.0F;
 
-    public static final Codec<SkyParameters> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final Codec<SkyParameters> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
         (ResourceLocation.CODEC.fieldOf("biome")).forGetter(config -> config.location),
         (Codec.intRange(0x000000, 0xFFFFFF).fieldOf("nebula_color")).forGetter(config -> config.nebulaColor),
         (Codec.floatRange(0, 1).fieldOf("nebula_alpha")).forGetter(config -> config.nebulaAlpha),
@@ -41,6 +41,6 @@ public record SkyParameters(ResourceLocation location, int nebulaColor, float ne
     public static Optional<SkyParameters> getSkyParametersFor(Holder<Biome> biomeHolder) {
         if (biomeHolder == null) return Optional.empty();
 
-        return Minecraft.getInstance().level.registryAccess().lookup(EnderscapeRegistries.SKY_PARAMETERS_KEY).flatMap(registry -> biomeHolder.unwrapKey().map(ResourceKey::location).map(registry::getValue).map(Optional::ofNullable).orElse(Optional.empty()));
+        return Minecraft.getInstance().level.registryAccess().lookup(EnderscapeRegistries.SKY_PARAMETERS).flatMap(registry -> biomeHolder.unwrapKey().map(ResourceKey::location).map(registry::getValue).map(Optional::ofNullable).orElse(Optional.empty()));
     }
 }

@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.redstone.Orientation;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,6 +26,10 @@ public class BlinklampBlock extends Block {
 
     public static int getLuminance(BlockState state) {
         return state.getValue(LUMINANCE);
+    }
+
+    public static MapColor getColor(BlockState state) {
+        return getLuminance(state) > 0 ? MapColor.COLOR_PINK : MapColor.COLOR_BLACK;
     }
 
     private int findLuminance(Level world, BlockPos pos) {

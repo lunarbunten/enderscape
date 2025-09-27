@@ -33,7 +33,7 @@
       },
       "trigger": "minecraft:location"
     },
-    "enderscape:magnia_crags": {
+    "enderscape:magnia_fields": {
       "conditions": {
         "player": [
           {
@@ -41,7 +41,7 @@
             "entity": "this",
             "predicate": {
               "location": {
-                "biomes": "enderscape:magnia_crags"
+                "biomes": "enderscape:magnia_fields"
               }
             }
           }
@@ -208,7 +208,7 @@
       "enderscape:veiled_woodlands"
     ],
     [
-      "enderscape:magnia_crags"
+      "enderscape:magnia_fields"
     ],
     [
       "enderscape:celestial_grove"

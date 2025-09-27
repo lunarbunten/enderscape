@@ -21,5 +21,4 @@ public class EnderscapeEntityRenderData {
     public static final EntityRenderData<Driftlet> DRIFTLET = EntityRenderData.create(EnderscapeEntities.DRIFTLET, DriftletRenderer::new, DriftletModel::createLayer);
     public static final EntityRenderData<Rubblemite> RUBBLEMITE = EntityRenderData.create(EnderscapeEntities.RUBBLEMITE, RubblemiteRenderer::new, RubblemiteModel::createLayer);
     public static final EntityRenderData<Rustle> RUSTLE = EntityRenderData.create(EnderscapeEntities.RUSTLE, RustleRenderer::new, RustleModel::createLayer);
-
 }

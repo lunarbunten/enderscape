@@ -1,7 +1,7 @@
 package net.bunten.enderscape.feature.generator;
 
 import net.bunten.enderscape.block.AbstractVineBlock;
-import net.bunten.enderscape.block.properties.StateProperties;
+import net.bunten.enderscape.block.state.StateProperties;
 import net.bunten.enderscape.feature.LargeCelestialChanterelleConfig;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.tag.EnderscapeBlockTags;

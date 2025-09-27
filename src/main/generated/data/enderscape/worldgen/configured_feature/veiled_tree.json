@@ -46,7 +46,7 @@
         "Name": "enderscape:veiled_vines",
         "Properties": {
           "facing": "up",
-          "part": "top"
+          "part": "single"
         }
       }
     },

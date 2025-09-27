@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": "enderscape:blistered_magnia",
+    "P": "minecraft:popped_chorus_fruit",
+    "R": "minecraft:redstone",
+    "S": "enderscape:shadoline_ingot"
+  },
+  "pattern": [
+    "SSS",
+    "PBP",
+    "SRS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:polarized_magnia"
+  }
+}

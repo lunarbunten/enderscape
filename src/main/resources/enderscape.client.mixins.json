@@ -4,9 +4,9 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "AbstractClientPlayerMixin",
-    "AtmosphericFogEnvironmentMixin",
     "ClientPacketListenerMixin",
     "ConditionalItemModelPropertiesMixin",
+    "AtmosphericFogEnvironmentMixin",
     "EndEffectsMixin",
     "EndermiteRendererMixin",
     "FogRendererMixin",
