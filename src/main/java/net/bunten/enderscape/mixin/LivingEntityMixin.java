@@ -268,6 +268,6 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
 
     @Inject(at = @At("HEAD"), method = "stopFallFlying")
     public void Enderscape$stopFallFlying(CallbackInfo info) {
-        if (EnderscapeConfig.getInstance().elytraAddOpenCloseSounds && getItemBySlot(EquipmentSlot.CHEST).is(Items.ELYTRA)) playSound(EnderscapeItemSounds.ELYTRA_STOP_GLIDING, 1, Mth.nextFloat(getRandom(), 0.8F, 1.2F));
+        if (EnderscapeConfig.getInstance().elytraAddOpenCloseSounds && mob.isFallFlying() && getItemBySlot(EquipmentSlot.CHEST).is(Items.ELYTRA)) playSound(EnderscapeItemSounds.ELYTRA_STOP_GLIDING, 1, Mth.nextFloat(getRandom(), 0.8F, 1.2F));
     }
 }
