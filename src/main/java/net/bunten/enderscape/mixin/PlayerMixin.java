@@ -154,7 +154,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(at = @At("HEAD"), method = "stopFallFlying")
     public void Enderscape$stopFallFlying(CallbackInfo info) {
-        if (EnderscapeConfig.getInstance().elytraAddOpenCloseSounds) playSound(EnderscapeItemSounds.ELYTRA_STOP_GLIDING, 1, Mth.nextFloat(getRandom(), 0.8F, 1.2F));
+        if (EnderscapeConfig.getInstance().elytraAddOpenCloseSounds && isFallFlying()) playSound(EnderscapeItemSounds.ELYTRA_STOP_GLIDING, 1, Mth.nextFloat(getRandom(), 0.8F, 1.2F));
     }
 
     @Inject(at = @At("HEAD"), method = "hurtCurrentlyUsedShield")
