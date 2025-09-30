@@ -388,11 +388,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
 
                 woodFromLogs(VEILED_WOOD, VEILED_LOG);
                 woodFromLogs(STRIPPED_VEILED_WOOD, STRIPPED_VEILED_LOG);
-
-                shapeless(RecipeCategory.BUILDING_BLOCKS, VEILED_PLANKS, 4)
-                        .requires(EnderscapeItemTags.VEILED_LOGS)
-                        .unlockedBy("has_veiled_logs", has(EnderscapeItemTags.VEILED_LOGS))
-                        .save(output);
+                planksFromLogs(VEILED_PLANKS, EnderscapeItemTags.VEILED_LOGS, 4);
 
                 hangingSign(VEILED_HANGING_SIGN_ITEM, STRIPPED_VEILED_LOG);
 
@@ -431,11 +427,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
 
                 woodFromLogs(CELESTIAL_HYPHAE, CELESTIAL_STEM);
                 woodFromLogs(STRIPPED_CELESTIAL_HYPHAE, STRIPPED_CELESTIAL_STEM);
-
-                shapeless(RecipeCategory.BUILDING_BLOCKS, CELESTIAL_PLANKS, 4)
-                        .requires(EnderscapeItemTags.CELESTIAL_STEMS)
-                        .unlockedBy("has_celestial_stems", has(EnderscapeItemTags.CELESTIAL_STEMS))
-                        .save(output);
+                planksFromLogs(CELESTIAL_PLANKS, EnderscapeItemTags.CELESTIAL_STEMS, 4);
 
                 hangingSign(CELESTIAL_HANGING_SIGN_ITEM, STRIPPED_CELESTIAL_STEM);
 
@@ -468,11 +460,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
 
                 woodFromLogs(MURUBLIGHT_HYPHAE, MURUBLIGHT_STEM);
                 woodFromLogs(STRIPPED_MURUBLIGHT_HYPHAE, STRIPPED_MURUBLIGHT_STEM);
-
-                shapeless(RecipeCategory.BUILDING_BLOCKS, MURUBLIGHT_PLANKS, 4)
-                        .requires(EnderscapeItemTags.MURUBLIGHT_STEMS)
-                        .unlockedBy("has_murublight_stems", has(EnderscapeItemTags.MURUBLIGHT_STEMS))
-                        .save(output);
+                planksFromLogs(MURUBLIGHT_PLANKS, EnderscapeItemTags.MURUBLIGHT_STEMS, 4);
 
                 hangingSign(MURUBLIGHT_HANGING_SIGN_ITEM, STRIPPED_MURUBLIGHT_STEM);
             }
