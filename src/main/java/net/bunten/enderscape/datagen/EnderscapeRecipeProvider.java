@@ -9,9 +9,11 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -366,11 +368,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
 
         woodFromLogs(output, VEILED_WOOD, VEILED_LOG);
         woodFromLogs(output, STRIPPED_VEILED_WOOD, STRIPPED_VEILED_LOG);
-
-        shapeless(RecipeCategory.BUILDING_BLOCKS, VEILED_PLANKS, 4)
-                .requires(EnderscapeItemTags.VEILED_LOGS)
-                .unlockedBy("has_veiled_logs", has(EnderscapeItemTags.VEILED_LOGS))
-                .save(output);
+        planksFromLogs(output, VEILED_PLANKS, EnderscapeItemTags.VEILED_LOGS, 4);
 
         hangingSign(output, VEILED_HANGING_SIGN_ITEM, STRIPPED_VEILED_LOG);
 
@@ -409,11 +407,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
 
         woodFromLogs(output, CELESTIAL_HYPHAE, CELESTIAL_STEM);
         woodFromLogs(output, STRIPPED_CELESTIAL_HYPHAE, STRIPPED_CELESTIAL_STEM);
-
-        shapeless(RecipeCategory.BUILDING_BLOCKS, CELESTIAL_PLANKS, 4)
-                .requires(EnderscapeItemTags.CELESTIAL_STEMS)
-                .unlockedBy("has_celestial_stems", has(EnderscapeItemTags.CELESTIAL_STEMS))
-                .save(output);
+        planksFromLogs(output, CELESTIAL_PLANKS, EnderscapeItemTags.CELESTIAL_STEMS, 4);
 
         hangingSign(output, CELESTIAL_HANGING_SIGN_ITEM, STRIPPED_CELESTIAL_STEM);
 
@@ -446,11 +440,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
 
         woodFromLogs(output, MURUBLIGHT_HYPHAE, MURUBLIGHT_STEM);
         woodFromLogs(output, STRIPPED_MURUBLIGHT_HYPHAE, STRIPPED_MURUBLIGHT_STEM);
-
-        shapeless(RecipeCategory.BUILDING_BLOCKS, MURUBLIGHT_PLANKS, 4)
-                .requires(EnderscapeItemTags.MURUBLIGHT_STEMS)
-                .unlockedBy("has_murublight_stems", has(EnderscapeItemTags.MURUBLIGHT_STEMS))
-                .save(output);
+        planksFromLogs(output, MURUBLIGHT_PLANKS, EnderscapeItemTags.MURUBLIGHT_STEMS, 4);
 
         hangingSign(output, MURUBLIGHT_HANGING_SIGN_ITEM, STRIPPED_MURUBLIGHT_STEM);
     }
