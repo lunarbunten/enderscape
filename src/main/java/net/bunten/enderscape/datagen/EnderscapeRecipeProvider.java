@@ -364,6 +364,9 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy("has_wisp_flower", has(WISP_FLOWER))
                 .save(output, "enderscape:white_dye_from_wisp_flower");
 
+        woodFromLogs(output, VEILED_WOOD, VEILED_LOG);
+        woodFromLogs(output, STRIPPED_VEILED_WOOD, STRIPPED_VEILED_LOG);
+
         shapeless(RecipeCategory.BUILDING_BLOCKS, VEILED_PLANKS, 4)
                 .requires(EnderscapeItemTags.VEILED_LOGS)
                 .unlockedBy("has_veiled_logs", has(EnderscapeItemTags.VEILED_LOGS))
@@ -404,6 +407,9 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
         stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, CELESTIAL_BRICK_STAIRS, CELESTIAL_BRICKS);
         stonecutterResultFromBase(output, RecipeCategory.DECORATIONS, CELESTIAL_BRICK_WALL, CELESTIAL_BRICKS);
 
+        woodFromLogs(output, CELESTIAL_HYPHAE, CELESTIAL_STEM);
+        woodFromLogs(output, STRIPPED_CELESTIAL_HYPHAE, STRIPPED_CELESTIAL_STEM);
+
         shapeless(RecipeCategory.BUILDING_BLOCKS, CELESTIAL_PLANKS, 4)
                 .requires(EnderscapeItemTags.CELESTIAL_STEMS)
                 .unlockedBy("has_celestial_stems", has(EnderscapeItemTags.CELESTIAL_STEMS))
@@ -437,6 +443,9 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
         stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, MURUBLIGHT_BRICK_SLAB, MURUBLIGHT_BRICKS, 2);
         stonecutterResultFromBase(output, RecipeCategory.BUILDING_BLOCKS, MURUBLIGHT_BRICK_STAIRS, MURUBLIGHT_BRICKS);
         stonecutterResultFromBase(output, RecipeCategory.DECORATIONS, MURUBLIGHT_BRICK_WALL, MURUBLIGHT_BRICKS);
+
+        woodFromLogs(output, MURUBLIGHT_HYPHAE, MURUBLIGHT_STEM);
+        woodFromLogs(output, STRIPPED_MURUBLIGHT_HYPHAE, STRIPPED_MURUBLIGHT_STEM);
 
         shapeless(RecipeCategory.BUILDING_BLOCKS, MURUBLIGHT_PLANKS, 4)
                 .requires(EnderscapeItemTags.MURUBLIGHT_STEMS)
