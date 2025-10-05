@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "enderscape:shadoline_ingot"
+  ],
+  "result": {
+    "count": 9,
+    "id": "enderscape:shadoline_nugget"
+  }
+}

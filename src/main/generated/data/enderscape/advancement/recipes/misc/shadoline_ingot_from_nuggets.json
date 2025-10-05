@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_shadoline_nugget": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:shadoline_nugget"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:shadoline_ingot_from_nuggets"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_shadoline_nugget"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:shadoline_ingot_from_nuggets"
+    ]
+  }
+}
