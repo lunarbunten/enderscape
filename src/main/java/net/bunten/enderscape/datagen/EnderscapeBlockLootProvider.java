@@ -251,7 +251,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
                 applyExplosionDecay(
                         block,
                         LootItem.lootTableItem(RAW_SHADOLINE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4)))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
                                 .apply(ApplyBonusCount.addOreBonusCount(enchantment.getOrThrow(Enchantments.FORTUNE)))
                 )
         );
