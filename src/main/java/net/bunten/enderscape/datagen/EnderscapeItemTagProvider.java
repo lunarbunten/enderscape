@@ -258,6 +258,7 @@ public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider
         valueLookupBuilder(FOODS).add(DRIFT_JELLY_BOTTLE);
         valueLookupBuilder(GEMS).add(NEBULITE);
         valueLookupBuilder(INGOTS).add(SHADOLINE_INGOT);
+        valueLookupBuilder(NUGGETS).add(SHADOLINE_NUGGET);
         valueLookupBuilder(MAGIC_DRINKS).add(DRIFT_JELLY_BOTTLE);
         valueLookupBuilder(MUSIC_DISCS).add(MUSIC_DISC_GLARE, MUSIC_DISC_DECAY, MUSIC_DISC_BLISS);
         valueLookupBuilder(NEBULITE_GEMS).add(NEBULITE);
@@ -266,6 +267,7 @@ public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider
         valueLookupBuilder(RAW_MATERIALS).add(RAW_SHADOLINE);
         valueLookupBuilder(RAW_SHADOLINE_STORAGE_BLOCKS).add(RAW_SHADOLINE_BLOCK.asItem());
         valueLookupBuilder(SHADOLINE_INGOTS).add(SHADOLINE_INGOT);
+        valueLookupBuilder(SHADOLINE_NUGGETS).add(SHADOLINE_NUGGET);
         valueLookupBuilder(SHADOLINE_ORES).add(SHADOLINE_ORE.asItem(), MIRESTONE_SHADOLINE_ORE.asItem());
         valueLookupBuilder(SHADOLINE_RAW_MATERIALS).add(RAW_SHADOLINE);
         valueLookupBuilder(SHADOLINE_STORAGE_BLOCKS).add(SHADOLINE_BLOCK.asItem());

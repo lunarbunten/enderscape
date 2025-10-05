@@ -92,6 +92,7 @@ public class EnderscapeItems {
     public static final Item NEBULITE_SHARDS = registerItem("nebulite_shards");
     public static final Item RAW_SHADOLINE = registerItem("raw_shadoline");
     public static final Item SHADOLINE_INGOT = registerItem("shadoline_ingot", Item::new, new Properties().trimMaterial(EnderscapeTrimMaterials.SHADOLINE));
+    public static final Item SHADOLINE_NUGGET = registerItem("shadoline_nugget");
 
     public static final Properties RUBBLE_SHIELD_PROPERTIES = new Properties()
             .component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
