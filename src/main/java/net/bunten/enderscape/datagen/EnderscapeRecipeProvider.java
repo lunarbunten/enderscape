@@ -9,11 +9,9 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -230,7 +228,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
         oreSmelting(output, SHADOLINE_SMELTABLES, RecipeCategory.MISC, SHADOLINE_INGOT, 0.7F, 200, "shadoline_ingot");
         oreBlasting(output, SHADOLINE_SMELTABLES, RecipeCategory.MISC, SHADOLINE_INGOT, 0.7F, 100, "shadoline_ingot");
 
-        nineBlockStorageRecipesWithCustomPacking(RecipeCategory.MISC, SHADOLINE_NUGGET, RecipeCategory.MISC, SHADOLINE_INGOT, "enderscape:shadoline_ingot_from_nuggets", "enderscape:shadoline_ingot");
+        nineBlockStorageRecipesWithCustomPacking(output, RecipeCategory.MISC, SHADOLINE_NUGGET, RecipeCategory.MISC, SHADOLINE_INGOT, "enderscape:shadoline_ingot_from_nuggets", "enderscape:shadoline_ingot");
 
         shapeless(RecipeCategory.MISC, RAW_SHADOLINE, 9)
                 .requires(RAW_SHADOLINE_BLOCK)

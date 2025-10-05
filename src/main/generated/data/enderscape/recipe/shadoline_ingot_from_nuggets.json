@@ -3,7 +3,9 @@
   "category": "misc",
   "group": "enderscape:shadoline_ingot",
   "key": {
-    "#": "enderscape:shadoline_nugget"
+    "#": {
+      "item": "enderscape:shadoline_nugget"
+    }
   },
   "pattern": [
     "###",
