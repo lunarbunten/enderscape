@@ -176,6 +176,7 @@ public class EnderscapeCreativeModeTab {
         output.accept(RAW_SHADOLINE);
         output.accept(RAW_SHADOLINE_BLOCK);
         output.accept(SHADOLINE_INGOT);
+        output.accept(SHADOLINE_NUGGET);
         output.accept(SHADOLINE_BLOCK);
         output.accept(SHADOLINE_BLOCK_STAIRS);
         output.accept(SHADOLINE_BLOCK_SLAB);
@@ -565,6 +566,7 @@ public class EnderscapeCreativeModeTab {
             entries.addBefore(ECHO_SHARD, DRIFT_JELLY_BOTTLE);
             entries.addBefore(EMERALD, RAW_SHADOLINE);
             entries.addBefore(STICK, NEBULITE, SHADOLINE_INGOT);
+            entries.addBefore(IRON_INGOT, SHADOLINE_NUGGET);
             entries.addBefore(QUARTZ, NEBULITE_SHARDS);
             entries.addAfter(SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE, STASIS_ARMOR_TRIM_SMITHING_TEMPLATE);
             entries.addAfter(OMINOUS_TRIAL_KEY, END_CITY_KEY);

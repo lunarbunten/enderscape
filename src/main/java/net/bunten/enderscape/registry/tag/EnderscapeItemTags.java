@@ -60,6 +60,7 @@ public class EnderscapeItemTags {
 
     public static final TagKey<Item> NEBULITE_GEMS = common("gems/nebulite");
     public static final TagKey<Item> SHADOLINE_INGOTS = common("ingots/shadoline");
+    public static final TagKey<Item> SHADOLINE_NUGGETS = common("nuggets/shadoline");
     public static final TagKey<Item> SHADOLINE_RAW_MATERIALS = common("raw_materials/shadoline");
     public static final TagKey<Item> DRIFT_JELLY_DRINKS = common("drinks/drift_jelly");
 

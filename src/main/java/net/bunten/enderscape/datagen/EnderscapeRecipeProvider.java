@@ -230,6 +230,8 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
         oreSmelting(output, SHADOLINE_SMELTABLES, RecipeCategory.MISC, SHADOLINE_INGOT, 0.7F, 200, "shadoline_ingot");
         oreBlasting(output, SHADOLINE_SMELTABLES, RecipeCategory.MISC, SHADOLINE_INGOT, 0.7F, 100, "shadoline_ingot");
 
+        nineBlockStorageRecipesWithCustomPacking(RecipeCategory.MISC, SHADOLINE_NUGGET, RecipeCategory.MISC, SHADOLINE_INGOT, "enderscape:shadoline_ingot_from_nuggets", "enderscape:shadoline_ingot");
+
         shapeless(RecipeCategory.MISC, RAW_SHADOLINE, 9)
                 .requires(RAW_SHADOLINE_BLOCK)
                 .group("raw_shadoline")

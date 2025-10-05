@@ -111,6 +111,7 @@ public class EnderscapeItems {
     public static final Item NEBULITE_SHARDS = registerItem("nebulite_shards");
     public static final Item RAW_SHADOLINE = registerItem("raw_shadoline");
     public static final Item SHADOLINE_INGOT = registerItem("shadoline_ingot");
+    public static final Item SHADOLINE_NUGGET = registerItem("shadoline_nugget");
 
     public static final Properties RUBBLE_SHIELD_PROPERTIES = new Properties()
             .component(EnderscapeDataComponents.DASH_JUMP, new DashJump(60, 2.35F, 0.35F, 0.7F, EnderscapeItemSounds.RUBBLE_SHIELD_DASH, true))
