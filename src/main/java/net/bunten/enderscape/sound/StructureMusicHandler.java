@@ -68,7 +68,7 @@ public class StructureMusicHandler {
                     int newTimer = entry.getValue() - 1;
                     if (newTimer <= 0) {
                         ServerPlayer player = entry.getKey();
-                        if (playerStructures.containsKey(player)) ServerPlayNetworking.send(player, new ClientboundStructureChangedPayload(playerStructures.get(player)));
+                        if (playerStructures.containsKey(player) && playerStructures.get(player).equals(getStructure(level, player))) ServerPlayNetworking.send(player, new ClientboundStructureChangedPayload(playerStructures.get(player)));
                         iterator.remove();
                     } else {
                         entry.setValue(newTimer);
