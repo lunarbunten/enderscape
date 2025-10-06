@@ -279,6 +279,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(POLISHED_END_STONE_SLAB);
         dropSelf(POLISHED_END_STONE_WALL);
         dropSelf(POLISHED_END_STONE_BUTTON);
+        dropSelf(POLISHED_END_STONE_PRESSURE_PLATE);
         dropSelf(CHISELED_END_STONE);
 
         dropSelf(CHISELED_PURPUR);
@@ -293,6 +294,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(POLISHED_MIRESTONE_SLAB);
         dropSelf(POLISHED_MIRESTONE_WALL);
         dropSelf(POLISHED_MIRESTONE_BUTTON);
+        dropSelf(POLISHED_MIRESTONE_PRESSURE_PLATE);
         dropSelf(MIRESTONE_BRICKS);
         dropSelf(MIRESTONE_BRICK_STAIRS);
         dropSelf(MIRESTONE_BRICK_SLAB);
@@ -308,6 +310,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(POLISHED_VERADITE_SLAB);
         dropSelf(POLISHED_VERADITE_WALL);
         dropSelf(POLISHED_VERADITE_BUTTON);
+        dropSelf(POLISHED_VERADITE_PRESSURE_PLATE);
         dropSelf(VERADITE_BRICKS);
         dropSelf(VERADITE_BRICK_STAIRS);
         dropSelf(VERADITE_BRICK_SLAB);
@@ -323,6 +326,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(POLISHED_KURODITE_SLAB);
         dropSelf(POLISHED_KURODITE_WALL);
         dropSelf(POLISHED_KURODITE_BUTTON);
+        dropSelf(POLISHED_KURODITE_PRESSURE_PLATE);
         dropSelf(KURODITE_BRICKS);
         dropSelf(KURODITE_BRICK_STAIRS);
         dropSelf(KURODITE_BRICK_SLAB);
