@@ -77,11 +77,9 @@ public class DriftJellyBlock extends HalfTransparentBlock {
 
     @Override
     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
-        if (entity.isSuppressingBounce()) {
-            super.fallOn(level, state, pos, entity, fallDistance);
-        } else {
-            entity.causeFallDamage(fallDistance, 0, level.damageSources().fall());
+        if (!entity.isSuppressingBounce()) {
             playBounceEffects(level, pos);
+            entity.causeFallDamage(fallDistance, 0.0F, level.damageSources().fall());
         }
     }
 }
