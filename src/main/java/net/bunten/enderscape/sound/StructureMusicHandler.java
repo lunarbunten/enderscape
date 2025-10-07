@@ -1,6 +1,7 @@
 package net.bunten.enderscape.sound;
 
 import net.bunten.enderscape.network.ClientboundStructureChangedPayload;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
@@ -29,10 +30,13 @@ public class StructureMusicHandler {
     private static final Map<ServerPlayer, Integer> playerTimers = new HashMap<>();
     private static final Map<ServerPlayer, ResourceLocation> playerStructures = new HashMap<>();
 
+    public static final ResourceLocation NONE = ResourceLocation.withDefaultNamespace("none");
+
     private static int structureChangeTimer = 0;
 
     private static void tryStructureChange(ServerPlayer player, ResourceLocation structure) {
         ResourceLocation currentStructure = playerStructures.get(player);
+
         if (currentStructure == null || !currentStructure.equals(structure)) {
             playerStructures.put(player, structure);
             playerTimers.put(player, 60 * 20);
@@ -40,35 +44,54 @@ public class StructureMusicHandler {
     }
 
     private static ResourceLocation getStructure(ServerLevel level, ServerPlayer player) {
-        Registry<Structure> registry = level.registryAccess().registryOrThrow(Registries.STRUCTURE);
-        List<Structure> structures = registry.stream().toList();
+        if (level != null && player != null) {
+            Registry<Structure> registry = level.registryAccess().registryOrThrow(Registries.STRUCTURE);
+            List<Structure> structures = registry.stream().toList();
 
-        for (Structure structure : structures) {
-            if (structure == null) continue;
+            for (Structure structure : structures) {
+                if (structure == null) continue;
 
-            if (level.structureManager().getStructureWithPieceAt(BlockPos.containing(player.position()), structure).isValid()) return registry.getKey(structure);
+                if (level.structureManager().getStructureWithPieceAt(BlockPos.containing(player.position()), structure).isValid()) return registry.getKey(structure);
+            }
         }
 
-        return ResourceLocation.withDefaultNamespace("none");
+        return NONE;
+    }
+
+    private static void sendStructureToClient(ServerPlayer player, ResourceLocation structure) {
+        if (player != null) {
+            ServerPlayNetworking.send(player, new ClientboundStructureChangedPayload(structure));
+        }
+    }
+
+    private static void removeFromAll(ServerPlayer player) {
+        playerStructures.remove(player);
+        playerTimers.remove(player);
     }
 
     static {
         ServerWorldEvents.UNLOAD.register((server, level) -> {
-            if (!level.isClientSide()) {
-                playerStructures.clear();
-                playerTimers.clear();
+            for (ServerPlayer player : level.players()) {
+                removeFromAll(player);
             }
         });
 
         ServerTickEvents.START_WORLD_TICK.register((level) -> {
             if (!playerTimers.isEmpty()) {
                 Iterator<Map.Entry<ServerPlayer, Integer>> iterator = playerTimers.entrySet().iterator();
+
                 while (iterator.hasNext()) {
                     Map.Entry<ServerPlayer, Integer> entry = iterator.next();
                     int newTimer = entry.getValue() - 1;
+
                     if (newTimer <= 0) {
                         ServerPlayer player = entry.getKey();
-                        if (playerStructures.containsKey(player) && playerStructures.get(player).equals(getStructure(level, player))) ServerPlayNetworking.send(player, new ClientboundStructureChangedPayload(playerStructures.get(player)));
+                        ResourceLocation queued = playerStructures.get(player);
+
+                        if (player.isAlive() && getStructure(level, player).equals(queued)) {
+                            sendStructureToClient(player, queued);
+                        }
+
                         iterator.remove();
                     } else {
                         entry.setValue(newTimer);
@@ -83,16 +106,16 @@ public class StructureMusicHandler {
         });
 
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
-            ServerPlayer player = handler.getPlayer();
-            playerStructures.remove(player);
-            playerTimers.remove(player);
+            removeFromAll(handler.getPlayer());
         });
 
         ServerEntityEvents.ENTITY_UNLOAD.register((entity, level) -> {
-            if (entity instanceof ServerPlayer player) {
-                playerStructures.remove(player);
-                playerTimers.remove(player);
-            }
+            if (entity instanceof ServerPlayer player) removeFromAll(player);
+        });
+
+        ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
+            removeFromAll(oldPlayer);
+            sendStructureToClient(newPlayer, NONE);
         });
     }
 }
