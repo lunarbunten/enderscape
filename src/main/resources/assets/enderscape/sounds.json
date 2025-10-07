@@ -2712,7 +2712,7 @@
                 "volume": 0.65
             }
         ],
-        "subtitle": "subtitles.block.trapdoor.toggle"
+        "subtitle": "subtitles.block.trapdoor.close"
     },
     "block.celestial_trapdoor.open": {
         "sounds": [
@@ -2729,7 +2729,7 @@
                 "volume": 0.65
             }
         ],
-        "subtitle": "subtitles.block.trapdoor.toggle"
+        "subtitle": "subtitles.block.trapdoor.open"
     },
     "block.chorus_cake_roll.break": {
         "sounds": [
@@ -5687,7 +5687,7 @@
                 "volume": 0.65
             }
         ],
-        "subtitle": "subtitles.block.trapdoor.toggle"
+        "subtitle": "subtitles.block.trapdoor.close"
     },
     "block.murublight_trapdoor.open": {
         "sounds": [
@@ -5704,7 +5704,7 @@
                 "volume": 0.65
             }
         ],
-        "subtitle": "subtitles.block.trapdoor.toggle"
+        "subtitle": "subtitles.block.trapdoor.open"
     },
     "block.nebulite_block.break": {
         "sounds": [
@@ -7122,7 +7122,7 @@
                 "volume": 0.65
             }
         ],
-        "subtitle": "subtitles.block.trapdoor.toggle"
+        "subtitle": "subtitles.block.trapdoor.close"
     },
     "block.veiled_trapdoor.open": {
         "sounds": [
@@ -7139,7 +7139,7 @@
                 "volume": 0.5
             }
         ],
-        "subtitle": "subtitles.block.trapdoor.toggle"
+        "subtitle": "subtitles.block.trapdoor.open"
     },
     "block.veradite.break": {
         "sounds": [
