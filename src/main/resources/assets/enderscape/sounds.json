@@ -8846,6 +8846,11 @@
                 "name": "enderscape:music/structure/end_city/grandeur",
                 "stream": true,
                 "weight": 20
+            },
+            {
+                "name": "enderscape:music/structure/end_city/mystique",
+                "stream": true,
+                "weight": 20
             }
         ]
     },
