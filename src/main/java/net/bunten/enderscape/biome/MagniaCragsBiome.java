@@ -20,15 +20,17 @@ public class MagniaCragsBiome {
         HolderGetter<PlacedFeature> features = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<ConfiguredWorldCarver<?>> carvers = context.lookup(Registries.CONFIGURED_CARVER);
 
-        MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder().addSpawn(MobCategory.MONSTER, 4, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUBBLEMITE, 2, 3));
+        MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder().addSpawn(MobCategory.MONSTER, 2, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUBBLEMITE, 2, 3));
 
         BiomeDefaultFeatures.endSpawns(spawns);
 
         BiomeGenerationSettings.Builder builder = new BiomeGenerationSettings.Builder(features, carvers)
-                .addFeature(UNDERGROUND_STRUCTURES, EnderscapePlacedFeatures.MAGNIA_ARCH)
+                .addFeature(UNDERGROUND_STRUCTURES, EnderscapePlacedFeatures.MAGNIA_ARCHES)
 
                 .addFeature(SURFACE_STRUCTURES, EndPlacements.END_GATEWAY_RETURN)
-                .addFeature(SURFACE_STRUCTURES, EnderscapePlacedFeatures.MAGNIA_TOWER)
+                .addFeature(SURFACE_STRUCTURES, EnderscapePlacedFeatures.MAGNIA_TOWERS)
+                .addFeature(SURFACE_STRUCTURES, EnderscapePlacedFeatures.MAGNIA_SPIKES)
+                .addFeature(SURFACE_STRUCTURES, EnderscapePlacedFeatures.LARGE_MAGNIA_SPIKES)
 
                 .addFeature(UNDERGROUND_ORES, EnderscapePlacedFeatures.VOID_SHALE)
                 .addFeature(UNDERGROUND_ORES, EnderscapePlacedFeatures.VOID_SHALE_BLOBS)
@@ -44,7 +46,7 @@ public class MagniaCragsBiome {
                 .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.UNCOMMON_CHORUS_PLANTS)
                 .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.UNCOMMON_CHORUS_SPROUTS)
                 .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.COMMON_DRY_END_GROWTH)
-                .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.MURUBLIGHT_SHELF);
+                .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.MURUBLIGHT_BRACKET);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)
@@ -52,16 +54,16 @@ public class MagniaCragsBiome {
                 .downfall(0.5F)
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .skyColor(0x151616)
-                        .fogColor(0x0F1010)
+                        .fogColor(EnderscapeBiomes.lightenFogColor(0x0F1010))
                         .waterColor(0x89919c)
                         .waterFogColor(0x5e656e)
                         .foliageColorOverride(0x919c8c)
                         .grassColorOverride(0x919c8c)
                         .ambientParticle(new AmbientParticleSettings(EnderscapeParticles.VOID_STARS, 0.003F))
-                        .ambientLoopSound(EnderscapeBiomeSounds.MAGNIA_CRAGS.loop())
-                        .ambientAdditionsSound(new AmbientAdditionsSettings(EnderscapeBiomeSounds.MAGNIA_CRAGS.additions(), 0.0015))
-                        .ambientMoodSound(new AmbientMoodSettings(EnderscapeBiomeSounds.MAGNIA_CRAGS.mood(), 6000, 8, 2))
-                        .backgroundMusic(Musics.createGameMusic(EnderscapeBiomeSounds.MAGNIA_CRAGS.music()))
+                        .ambientLoopSound(EnderscapeBiomeSounds.MAGNIA_FIELDS.loop())
+                        .ambientAdditionsSound(new AmbientAdditionsSettings(EnderscapeBiomeSounds.MAGNIA_FIELDS.additions(), 0.0015))
+                        .ambientMoodSound(new AmbientMoodSettings(EnderscapeBiomeSounds.MAGNIA_FIELDS.mood(), 6000, 8, 2))
+                        .backgroundMusic(Musics.createGameMusic(EnderscapeBiomeSounds.MAGNIA_FIELDS.music()))
                         .build()
                 )
 

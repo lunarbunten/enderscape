@@ -43,7 +43,10 @@ public class EnderscapeEnchantments {
                         Enchantment.definition(
                                 items.getOrThrow(EnderscapeItemTags.MIRROR_ENCHANTABLE), 1, 3, Enchantment.constantCost(20), Enchantment.constantCost(50), 8, EquipmentSlotGroup.HAND
                         )
-                ).withSpecialEffect(EnderscapeEnchantmentEffectComponents.MIRROR_DISTANCE_FOR_COST_INCREASE, new AddValue(LevelBasedValue.perLevel(250)))
+                ).withSpecialEffect(
+                        EnderscapeEnchantmentEffectComponents.MIRROR_DISTANCE_FOR_COST_INCREASE,
+                        new AddValue(LevelBasedValue.perLevel(250))
+                )
         );
 
         register(context, REBOUND,

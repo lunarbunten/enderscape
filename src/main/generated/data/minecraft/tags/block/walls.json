@@ -16,6 +16,8 @@
     "enderscape:shadoline_block_wall",
     "enderscape:cut_shadoline_wall",
     "enderscape:veradite_brick_wall",
-    "enderscape:veradite_wall"
+    "enderscape:veradite_wall",
+    "enderscape:etched_alluring_magnia_wall",
+    "enderscape:etched_repulsive_magnia_wall"
   ]
 }

@@ -6,10 +6,7 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import net.bunten.enderscape.entity.ai.EnderscapeMemory;
 import net.bunten.enderscape.entity.ai.EnderscapeSensors;
-import net.bunten.enderscape.entity.ai.behavior.CalmDownFromAttacker;
-import net.bunten.enderscape.entity.ai.behavior.RustleEatWhenSheared;
-import net.bunten.enderscape.entity.ai.behavior.RustleGoToSleep;
-import net.bunten.enderscape.entity.ai.behavior.RustleRegrowHairNaturally;
+import net.bunten.enderscape.entity.ai.behavior.*;
 import net.bunten.enderscape.registry.EnderscapeEntities;
 import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
 import net.minecraft.core.BlockPos;
@@ -101,7 +98,7 @@ public class RustleAI {
 
                 new RustleRegrowHairNaturally(),
 
-                new LookAtTargetSink(45, 90),
+                new ConditionalLookAtTargetSink<>(Rustle::isSleeping, 45, 90),
                 new MoveToTargetSink(),
                 new Swim<>(0.8f),
 

@@ -1,0 +1,13 @@
+{
+	"variants": {
+		"polarity=none": {
+			"model": "enderscape:block/blistered_magnia"
+		},
+		"polarity=alluring": {
+			"model": "enderscape:block/blistered_magnia_alluring"
+		},
+		"polarity=repulsive": {
+			"model": "enderscape:block/blistered_magnia_repulsive"
+		}
+	}
+}

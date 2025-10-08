@@ -2,9 +2,11 @@ package net.bunten.enderscape.client.mixin;
 
 import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.client.EnderscapeClient;
+import net.bunten.enderscape.registry.EnderscapeRegistries;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.sounds.Music;
@@ -18,8 +20,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import static net.bunten.enderscape.registry.EnderscapeMusic.STRUCTURE_TRACKS;
 
 @Environment(EnvType.CLIENT)
 @Mixin(MusicManager.class)
@@ -40,10 +40,11 @@ public abstract class MusicManagerMixin {
     @Inject(method = "tick", at = @At("HEAD"))
     public void Enderscape$tick(CallbackInfo info) {
         Music situational = minecraft.getSituationalMusic().music();
+        ClientLevel level = minecraft.level;
 
-        if (currentMusic != null && EnderscapeConfig.getInstance().structureMusicFadingEnabled) {
+        if (level != null && currentMusic != null && EnderscapeConfig.getInstance().structureMusicFadingEnabled) {
             boolean fadeToStructureMusic = EnderscapeClient.structureMusic.filter(music -> situational == music && currentMusic.getLocation() != music.event().value().location()).isPresent();
-            boolean fadeFromStructureMusic = EnderscapeClient.structureMusic.isEmpty() && STRUCTURE_TRACKS.contains(currentMusic.getLocation());
+            boolean fadeFromStructureMusic = EnderscapeClient.structureMusic.isEmpty() && Enderscape$currentMusicIsStructureMusic(level);
 
             if (fadeToStructureMusic || fadeFromStructureMusic) {
                 if (!Enderscape$slowlyFadePlaying(-1.0F)) {
@@ -52,6 +53,12 @@ public abstract class MusicManagerMixin {
                 }
             }
         }
+    }
+
+    @Unique
+    private boolean Enderscape$currentMusicIsStructureMusic(ClientLevel level) {
+        if (currentMusic == null) return false;
+        return level.registryAccess().lookupOrThrow(EnderscapeRegistries.STRUCTURE_MUSIC).stream().anyMatch(music -> music.music().event().value().location().equals(currentMusic.getLocation()));
     }
 
     @Unique

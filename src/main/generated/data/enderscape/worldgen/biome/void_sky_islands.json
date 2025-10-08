@@ -7,7 +7,7 @@
       "tick_chance": 6.0E-4
     },
     "ambient_sound": "enderscape:ambient.void_sky_islands.loop",
-    "fog_color": 328712,
+    "fog_color": 2563640,
     "foliage_color": 10598275,
     "grass_color": 10598275,
     "mood_sound": {
@@ -22,7 +22,7 @@
           "max_delay": 24000,
           "min_delay": 12000,
           "replace_current_music": false,
-          "sound": "enderscape:music.the_end.biome.void_sky_islands"
+          "sound": "enderscape:music.enderscape.biome.void_sky_islands"
         },
         "weight": 1
       }

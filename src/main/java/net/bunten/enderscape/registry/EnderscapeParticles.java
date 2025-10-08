@@ -3,6 +3,7 @@ package net.bunten.enderscape.registry;
 import com.mojang.serialization.MapCodec;
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.particle.DashJumpShockwaveParticleOptions;
+import net.bunten.enderscape.particle.MagniaParticleOptions;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
@@ -16,7 +17,6 @@ import java.util.function.Function;
 
 public class EnderscapeParticles {
 
-    public static final SimpleParticleType ALLURING_MAGNIA = register("alluring_magnia", true);
     public static final SimpleParticleType BLINKLIGHT_SPORES = register("blinklight_spores", false);
     public static final SimpleParticleType CELESTIAL_SPORES = register("celestial_spores", false);
     public static final SimpleParticleType CHORUS_POLLEN = register("chorus_pollen", false);
@@ -33,10 +33,14 @@ public class EnderscapeParticles {
     public static final SimpleParticleType END_TRIAL_SPAWNER_EXHALE = register("end_trial_spawner_exhale", true);
     public static final SimpleParticleType END_VAULT_CONNECTION = register("end_vault_connection", true);
     public static final SimpleParticleType END_PORTAL_STARS = register("end_portal_stars", false);
+
+    public static final ParticleType<MagniaParticleOptions> ENTITY_EFFECTED_BY_MAGNIA = register("entity_effected_by_magnia", false, MagniaParticleOptions::codec, MagniaParticleOptions::streamCodec);
+    public static final SimpleParticleType MAGNIA_BLISTERING = register("magnia_blistering", true);
+    public static final ParticleType<MagniaParticleOptions> MAGNIA_SPROUT = register("magnia_sprout", true, MagniaParticleOptions::codec, MagniaParticleOptions::streamCodec);
+
     public static final SimpleParticleType MIRROR_TELEPORT_IN = register("mirror_teleport_in", true);
     public static final SimpleParticleType MIRROR_TELEPORT_OUT = register("mirror_teleport_out", true);
     public static final SimpleParticleType NEBULITE_ORE = register("nebulite_ore", true);
-    public static final SimpleParticleType REPULSIVE_MAGNIA = register("repulsive_magnia", true);
     public static final SimpleParticleType RUSTLE_SLEEPING_BUBBLE = register("rustle_sleeping_bubble", true);
     public static final SimpleParticleType RUSTLE_SLEEPING_BUBBLE_POP = register("rustle_sleeping_bubble_pop", true);
     public static final SimpleParticleType VEILED_LEAVES = register("veiled_leaves", false);

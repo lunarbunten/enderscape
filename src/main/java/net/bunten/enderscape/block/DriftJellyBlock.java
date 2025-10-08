@@ -1,9 +1,12 @@
 package net.bunten.enderscape.block;
 
 import net.bunten.enderscape.registry.EnderscapeBlockSounds;
+import net.bunten.enderscape.registry.EnderscapeGameEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -12,16 +15,18 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class DriftJellyBlock extends HalfTransparentBlock {
     public DriftJellyBlock(Properties settings) {
         super(settings);
     }
 
-    protected boolean allowsBouncing(BlockGetter world, BlockPos pos) {
-        return world.getBlockState(pos.above()).isAir();
+    @Override
+    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return box(0, 0, 0, 16, 14, 16);
     }
 
     protected Vec3 getBounceVelocity(Entity entity) {
@@ -39,28 +44,33 @@ public class DriftJellyBlock extends HalfTransparentBlock {
     }
 
     @Override
-    public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
-        if (!entity.isSuppressingBounce() && allowsBouncing(level, pos)) {
+    public void updateEntityMovementAfterFallOn(BlockGetter level, Entity entity) {
+        if (entity.isSuppressingBounce() || entity.getDeltaMovement().y() > -0.1) {
+            super.updateEntityMovementAfterFallOn(level, entity);
+        } else {
+            entity.setDeltaMovement(getBounceVelocity(entity));
+            entity.gameEvent(EnderscapeGameEvents.BOUNCE);
+        }
+    }
+
+    private void playBounceEffects(Level level, BlockPos pos) {
+        if (!level.isClientSide()) {
             level.playSound(null, pos, EnderscapeBlockSounds.DRIFT_JELLY_BOUNCE, SoundSource.BLOCKS, 1, 1.2F);
+        }
 
-            Vec3 velocity = getBounceVelocity(entity);
-            entity.setDeltaMovement(velocity);
-            entity.gameEvent(GameEvent.STEP);
+        if (level.isClientSide()) {
+            Vec3 vec3 = pos.getCenter().add(0, 0.75, 0);
+            BlockParticleOption option = new BlockParticleOption(ParticleTypes.DUST_PILLAR, level.getBlockState(pos));
 
-            if (level.isClientSide()) {
-                Vec3 vec3 = pos.getCenter().add(0, 0.75, 0);
-                BlockParticleOption option = new BlockParticleOption(ParticleTypes.DUST_PILLAR, level.getBlockState(pos));
+            for (int i = 0; i < 20; i++) {
+                double x = vec3.x;
+                double y = vec3.y;
+                double z = vec3.z;
+                double xd = level.getRandom().nextGaussian() * 0.05F;
+                double yd = level.getRandom().nextGaussian() * 0.05F;
+                double zd = level.getRandom().nextGaussian() * 0.05F;
 
-                for (int i = 0; i < 20; i++) {
-                    double x = vec3.x;
-                    double y = vec3.y;
-                    double z = vec3.z;
-                    double xd = level.getRandom().nextGaussian() * 0.05F;
-                    double yd = level.getRandom().nextGaussian() * 0.05F;
-                    double zd = level.getRandom().nextGaussian() * 0.05F;
-
-                    level.addParticle(option, x, y, z, xd, yd, zd);
-                }
+                level.addParticle(option, x, y, z, xd, yd, zd);
             }
         }
     }
@@ -68,7 +78,8 @@ public class DriftJellyBlock extends HalfTransparentBlock {
     @Override
     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
         if (!entity.isSuppressingBounce()) {
-            entity.causeFallDamage(fallDistance, 0, level.damageSources().fall());
+            playBounceEffects(level, pos);
+            entity.causeFallDamage(fallDistance, 0.0F, level.damageSources().fall());
         }
     }
 }

@@ -1,6 +1,6 @@
 package net.bunten.enderscape.block;
 
-import net.bunten.enderscape.block.properties.DirectionProperties;
+import net.bunten.enderscape.block.properties.DirectionSet;
 import net.bunten.enderscape.util.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -37,11 +37,11 @@ public abstract class AbstractOvergrowthBlock extends DirectionalBlock implement
     protected final Block baseBlock;
     public final SoundEvent flattenSound;
     protected final boolean isPath;
-    protected final DirectionProperties properties;
+    protected final DirectionSet properties;
 
     protected int horizontalBonemealRange = 8;
 
-    public AbstractOvergrowthBlock(boolean needsAir, Block baseBlock, @Nullable Block pathBlock, @Nullable SoundEvent flattenSound, boolean isPath, DirectionProperties properties, Properties settings) {
+    public AbstractOvergrowthBlock(boolean needsAir, Block baseBlock, @Nullable Block pathBlock, @Nullable SoundEvent flattenSound, boolean isPath, DirectionSet properties, Properties settings) {
         super(settings);
 
         this.needsAir = needsAir;
@@ -54,11 +54,11 @@ public abstract class AbstractOvergrowthBlock extends DirectionalBlock implement
         registerDefaultState(defaultBlockState().setValue(FACING, Direction.UP));
     }
 
-    public AbstractOvergrowthBlock(boolean needsAir, Block baseBlock, @Nullable Block pathBlock, @Nullable SoundEvent flattenSound, DirectionProperties properties, Properties settings) {
+    public AbstractOvergrowthBlock(boolean needsAir, Block baseBlock, @Nullable Block pathBlock, @Nullable SoundEvent flattenSound, DirectionSet properties, Properties settings) {
         this(needsAir, baseBlock, pathBlock, flattenSound, false, properties, settings);
     }
 
-    public AbstractOvergrowthBlock(boolean needsAir, Block baseBlock, DirectionProperties properties, Properties settings) {
+    public AbstractOvergrowthBlock(boolean needsAir, Block baseBlock, DirectionSet properties, Properties settings) {
         this(needsAir, baseBlock, null, null, true, properties, settings);
     }
 

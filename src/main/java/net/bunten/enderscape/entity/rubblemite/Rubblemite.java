@@ -2,17 +2,21 @@ package net.bunten.enderscape.entity.rubblemite;
 
 import com.mojang.serialization.Dynamic;
 import net.bunten.enderscape.entity.ai.EnderscapeMemory;
+import net.bunten.enderscape.registry.EnderscapeEntityDataSerializers;
 import net.bunten.enderscape.registry.EnderscapeEntitySounds;
+import net.bunten.enderscape.registry.EnderscapeRegistries;
+import net.bunten.enderscape.registry.EnderscapeRubblemiteVariants;
 import net.bunten.enderscape.registry.tag.EnderscapeBlockTags;
 import net.bunten.enderscape.registry.tag.EnderscapeDamageTypeTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
@@ -27,16 +31,22 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.variant.SpawnContext;
+import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,6 +57,7 @@ public class Rubblemite extends Monster {
     public static final int INSIDE_SHELL_FLAG = 1;
     public static final int DASHING_FLAG = 2;
 
+    private static final EntityDataAccessor<Holder<RubblemiteVariant>> DATA_VARIANT_ID = SynchedEntityData.defineId(Rubblemite.class, EnderscapeEntityDataSerializers.RUBBLEMITE_VARIANT_SERIALIZER);
     private static final EntityDataAccessor<Integer> RUBBLEMITE_FLAGS = SynchedEntityData.defineId(Rubblemite.class, EntityDataSerializers.INT);
 
     public Rubblemite(EntityType<? extends Rubblemite> type, Level world) {
@@ -95,37 +106,72 @@ public class Rubblemite extends Monster {
         super.customServerAiStep(serverLevel);
     }
 
-    @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason type, @Nullable SpawnGroupData groupData) {
-        RubblemiteVariant.set(this, RubblemiteVariant.pickForSpawning(random, level.getBiome(blockPosition())));
-        return super.finalizeSpawn(level, difficulty, type, groupData);
+    public Holder<RubblemiteVariant> getVariant() {
+        return entityData.get(DATA_VARIANT_ID);
     }
 
-    public static boolean canSpawn(EntityType<Rubblemite> type, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
-        return level.getDifficulty() != Difficulty.PEACEFUL && (level.getBlockState(pos.below()).is(EnderscapeBlockTags.RUBBLEMITE_SPAWNABLE_ON) || EntitySpawnReason.isSpawner(reason));
+    public void setVariant(Holder<RubblemiteVariant> holder) {
+        entityData.set(DATA_VARIANT_ID, holder);
+    }
+
+    public ResourceLocation getTexture() {
+        RubblemiteVariant variant = getVariant().value();
+        return variant.assetInfo().asset().texturePath();
+    }
+
+    @Override
+    protected void dropCustomDeathLoot(ServerLevel level, DamageSource source, boolean bl) {
+        super.dropCustomDeathLoot(level, source, bl);
+
+        getVariant().value().extraDropItems().ifPresent(key -> {
+            LootTable table = level.getServer().reloadableRegistries().getLootTable(key);
+            LootParams.Builder builder = new LootParams.Builder(level)
+                    .withParameter(LootContextParams.THIS_ENTITY, this)
+                    .withParameter(LootContextParams.ORIGIN, position())
+                    .withParameter(LootContextParams.DAMAGE_SOURCE, source)
+                    .withOptionalParameter(LootContextParams.ATTACKING_ENTITY, source.getEntity())
+                    .withOptionalParameter(LootContextParams.DIRECT_ATTACKING_ENTITY, source.getDirectEntity());
+
+            Player player = getLastHurtByPlayer();
+            if (bl && player != null) builder = builder.withParameter(LootContextParams.LAST_DAMAGE_PLAYER, player).withLuck(player.getLuck());
+
+            table.getRandomItems(builder.create(LootContextParamSets.ENTITY), getLootTableSeed(), stack -> spawnAtLocation(level, stack));
+        });
+    }
+
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason type, @Nullable SpawnGroupData group) {
+        RubblemiteVariant.selectVariantToSpawn(random, registryAccess(), SpawnContext.create(level, blockPosition())).ifPresent(this::setVariant);
+        return super.finalizeSpawn(level, difficulty, type, group);
+    }
+
+    public static boolean canSpawn(EntityType<Rubblemite> type, ServerLevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+        return level.getDifficulty() != Difficulty.PEACEFUL
+                && (EntitySpawnReason.isSpawner(reason) || level.getBlockState(pos.below()).is(EnderscapeBlockTags.RUBBLEMITE_SPAWNABLE_ON))
+                && (EntitySpawnReason.ignoresLightRequirements(reason) || isDarkEnoughToSpawn(level, pos, random));
     }
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(RUBBLEMITE_FLAGS, DEFAULT_FLAG);
-        builder.define(RubblemiteVariant.DATA, RubblemiteVariant.END_STONE.getId());
+        builder.define(DATA_VARIANT_ID, VariantUtils.getDefaultOrAny(registryAccess(), EnderscapeRubblemiteVariants.DEFAULT));
     }
 
     @Override
     protected void addAdditionalSaveData(ValueOutput output) {
         super.addAdditionalSaveData(output);
 
+        VariantUtils.writeVariant(output, getVariant());
         output.putInt(RUBBLEMITE_FLAGS_KEY, getFlags());
-        output.putInt(RubblemiteVariant.KEY, RubblemiteVariant.get(this).getId());
     }
 
     @Override
     protected void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
 
+        VariantUtils.readVariant(input, EnderscapeRegistries.RUBBLEMITE_VARIANT).ifPresent(this::setVariant);
         setFlags(input.getIntOr(RUBBLEMITE_FLAGS_KEY, DEFAULT_FLAG));
-        input.getInt(RubblemiteVariant.KEY).ifPresent(id -> RubblemiteVariant.set(this, RubblemiteVariant.byId(id)));
     }
 
     public int getFlags() {
@@ -184,7 +230,7 @@ public class Rubblemite extends Monster {
             float knockback = 1;
 
             if (source.getDirectEntity() instanceof LivingEntity living) {
-                Registry<Enchantment> enchantments = this.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
+                Registry<Enchantment> enchantments = level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
                 knockback += EnchantmentHelper.getEnchantmentLevel(enchantments.getOrThrow(Enchantments.KNOCKBACK), living);
             }
 
@@ -235,12 +281,6 @@ public class Rubblemite extends Monster {
             vec = Vec3.ZERO;
         }
         super.travel(vec);
-    }
-
-    @Override
-    public void lookAt(Entity entity, float f, float g) {
-        if (isInsideShell() || isDashing()) return;
-        super.lookAt(entity, f, g);
     }
 
     @Override

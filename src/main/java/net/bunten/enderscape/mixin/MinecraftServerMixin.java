@@ -1,7 +1,6 @@
 package net.bunten.enderscape.mixin;
 
 import net.bunten.enderscape.registry.EnderscapeSurfaceRuleData;
-import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.MinecraftServer;
@@ -23,14 +22,14 @@ public abstract class MinecraftServerMixin {
 
     @Inject(at = @At("TAIL"), method = "createLevels")
     private void addSurfaceRules(CallbackInfo ci) {
-        Registry<LevelStem> value = registryAccess().lookupOrThrow(Registries.LEVEL_STEM);
-        LevelStem stem = value.getValue(LevelStem.END);
+        registryAccess().lookup(Registries.LEVEL_STEM).flatMap(stems -> stems.get(LevelStem.END)).ifPresent(reference -> {
+            LevelStem value = reference.value();
+            if (value.generator() instanceof NoiseBasedChunkGenerator generator) {
+                NoiseGeneratorSettings settings = generator.generatorSettings().value();
+                NoiseGeneratorSettingsAccessor accessor = (NoiseGeneratorSettingsAccessor) (Object) settings;
 
-        if (stem != null && stem.generator() instanceof NoiseBasedChunkGenerator generator) {
-            NoiseGeneratorSettings settings = generator.generatorSettings().value();
-            NoiseGeneratorSettingsAccessor accessor = (NoiseGeneratorSettingsAccessor) (Object) settings;
-
-            accessor.setSurfaceRule(SurfaceRules.sequence(EnderscapeSurfaceRuleData.makeRules(), settings.surfaceRule()));
-        }
+                accessor.setSurfaceRule(SurfaceRules.sequence(EnderscapeSurfaceRuleData.makeRules(), settings.surfaceRule()));
+            }
+        });
     }
 }

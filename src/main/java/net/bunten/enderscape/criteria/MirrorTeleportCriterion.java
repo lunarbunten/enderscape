@@ -26,7 +26,7 @@ public class MirrorTeleportCriterion extends SimpleCriterionTrigger<MirrorTelepo
         public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(Conditions::player),
                 ItemPredicate.CODEC.optionalFieldOf("item").forGetter(Conditions::item),
-                LocationPredicate.CODEC.optionalFieldOf("prior").forGetter(Conditions::prior),
+                LocationPredicate.CODEC.optionalFieldOf("location").forGetter(Conditions::prior),
                 LocationPredicate.CODEC.optionalFieldOf("latter").forGetter(Conditions::latter),
                 DistancePredicate.CODEC.optionalFieldOf("distance").forGetter(Conditions::distance),
                 Codec.BOOL.optionalFieldOf("different_dimensions").forGetter(Conditions::differentDimensions)

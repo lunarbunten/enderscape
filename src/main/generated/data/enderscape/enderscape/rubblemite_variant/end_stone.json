@@ -1,0 +1,11 @@
+{
+  "assets": {
+    "asset": "enderscape:entity/rubblemite/end_stone"
+  },
+  "extra_drop_items": "enderscape:rubblemite/end_stone",
+  "spawn_conditions": [
+    {
+      "priority": 0
+    }
+  ]
+}

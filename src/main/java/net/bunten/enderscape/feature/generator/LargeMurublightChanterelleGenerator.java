@@ -108,7 +108,7 @@ public class LargeMurublightChanterelleGenerator {
 
             for (int i = -2; i < 2; i++) {
                 var pos2 = pos.relative(dir2).offset(0, i, 0);
-                var state = EnderscapeBlocks.MURUBLIGHT_SHELF.defaultBlockState().setValue(MurublightShelfBlock.FACING, dir2);
+                var state = EnderscapeBlocks.MURUBLIGHT_BRACKET.defaultBlockState().setValue(MurublightShelfBlock.FACING, dir2);
 
                 if (state.canSurvive(level, pos2) && level.isEmptyBlock(pos2)) if (random.nextFloat() >= 0.45F) replace(level, pos2, state);
             }

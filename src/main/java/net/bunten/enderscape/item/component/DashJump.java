@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.bunten.enderscape.entity.DashJumpUser;
 import net.bunten.enderscape.network.ClientboundDashJumpPayload;
 import net.bunten.enderscape.network.ClientboundDashJumpSoundPayload;
+import net.bunten.enderscape.registry.EnderscapeGameEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
@@ -18,6 +19,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 
 public record DashJump(int dashTime, float horizontalPower, float verticalPower, float glideVelocityFactor, Holder<SoundEvent> dashSound, boolean stopUsingAfterDash) {
@@ -68,6 +70,8 @@ public record DashJump(int dashTime, float horizontalPower, float verticalPower,
             }
 
             player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
+            player.gameEvent(EnderscapeGameEvents.DASH_JUMP);
+
             ServerPlayNetworking.send(player, new ClientboundDashJumpPayload(horizontalPower, verticalPower, glideVelocityFactor));
 
             return true;

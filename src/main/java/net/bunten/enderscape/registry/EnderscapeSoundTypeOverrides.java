@@ -1,6 +1,6 @@
 package net.bunten.enderscape.registry;
 
-import net.bunten.enderscape.block.sound.SoundTypeOverride;
+import net.bunten.enderscape.sound.SoundTypeOverride;
 import net.bunten.enderscape.EnderscapeConfig;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
@@ -45,7 +45,7 @@ public class EnderscapeSoundTypeOverrides {
 		Map<SoundType, Predicate<BlockState>> overrides = Map.of(
 				EnderscapeSoundTypes.CHORUS_PLANT, (state) -> CONFIG.blocksSoundUpdateChorus && getNameOf(state).equals("chorus_plant"),
 				EnderscapeSoundTypes.CHORUS_FLOWER, (state) -> CONFIG.blocksSoundUpdateChorus && getNameOf(state).equals("chorus_flower"),
-				EnderscapeSoundTypes.PURPUR, (state) -> CONFIG.blocksSoundUpdatePurpur && getNameOf(state).contains("purpur"),
+				EnderscapeSoundTypes.PURPUR, (state) -> CONFIG.blocksSoundUpdatePurpur && getNameOf(state).contains("purpur") && !getNameOf(state).contains("dusk"),
 				EnderscapeSoundTypes.END_PORTAL_FRAME, (state) -> CONFIG.blockSoundUpdateEndPortalFrame && getNameOf(state).equals("end_portal_frame"),
 				EnderscapeSoundTypes.END_PORTAL, (state) -> CONFIG.blockSoundUpdateEndPortals && getNameOf(state).equals("end_portal"),
 				EnderscapeSoundTypes.END_GATEWAY, (state) -> CONFIG.blockSoundUpdateEndPortals && getNameOf(state).equals("end_gateway"),

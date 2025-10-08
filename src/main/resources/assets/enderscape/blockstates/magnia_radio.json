@@ -1,0 +1,50 @@
+{
+	"variants": {
+		"enabled=false,facing=east": [
+			{
+				"model": "enderscape:block/magnia_radio_disabled",
+				"y": 90
+			}
+		],
+		"enabled=false,facing=north": [
+			{
+				"model": "enderscape:block/magnia_radio_disabled"
+			}
+		],
+		"enabled=false,facing=south": [
+			{
+				"model": "enderscape:block/magnia_radio_disabled",
+				"y": 180
+			}
+		],
+		"enabled=false,facing=west": [
+			{
+				"model": "enderscape:block/magnia_radio_disabled",
+				"y": 270
+			}
+		],
+		"enabled=true,facing=east": [
+			{
+				"model": "enderscape:block/magnia_radio_enabled",
+				"y": 90
+			}
+		],
+		"enabled=true,facing=north": [
+			{
+				"model": "enderscape:block/magnia_radio_enabled"
+			}
+		],
+		"enabled=true,facing=south": [
+			{
+				"model": "enderscape:block/magnia_radio_enabled",
+				"y": 180
+			}
+		],
+		"enabled=true,facing=west": [
+			{
+				"model": "enderscape:block/magnia_radio_enabled",
+				"y": 270
+			}
+		]
+	}
+}

@@ -1,98 +1,57 @@
 package net.bunten.enderscape.entity.rubblemite;
 
 import com.mojang.serialization.Codec;
-import net.bunten.enderscape.registry.EnderscapeBlocks;
-import net.bunten.enderscape.registry.tag.EnderscapeBiomeTags;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.bunten.enderscape.registry.EnderscapeRegistries;
+import net.minecraft.core.ClientAsset;
 import net.minecraft.core.Holder;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.tags.TagKey;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.RegistryFixedCodec;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.entity.variant.PriorityProvider;
+import net.minecraft.world.entity.variant.SpawnCondition;
+import net.minecraft.world.entity.variant.SpawnContext;
+import net.minecraft.world.entity.variant.SpawnPrioritySelectors;
+import net.minecraft.world.level.storage.loot.LootTable;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Optional;
 
-public enum RubblemiteVariant implements StringRepresentable {
-    END_STONE(0, "end_stone", Blocks.END_STONE, 8, EnderscapeBiomeTags.DOES_NOT_SPAWN_END_STONE_RUBBLEMITES),
-    MIRESTONE(1, "mirestone", EnderscapeBlocks.MIRESTONE, 4, EnderscapeBiomeTags.DOES_NOT_SPAWN_MIRESTONE_RUBBLEMITES),
-    VERADITE(2, "veradite", EnderscapeBlocks.VERADITE, 1, EnderscapeBiomeTags.DOES_NOT_SPAWN_VERADITE_RUBBLEMITES),
-    KURODITE(3, "kurodite", EnderscapeBlocks.KURODITE, 1, EnderscapeBiomeTags.DOES_NOT_SPAWN_KURODITE_RUBBLEMITES);
+public record RubblemiteVariant(Optional<ResourceKey<LootTable>> extraDropItems, RubblemiteVariant.AssetInfo assetInfo, SpawnPrioritySelectors spawnConditions) implements PriorityProvider<SpawnContext, SpawnCondition> {
 
-    public static final EntityDataAccessor<Integer> DATA = SynchedEntityData.defineId(Rubblemite.class, EntityDataSerializers.INT);
-    public static final String KEY = "RubblemiteVariant";
+    public static final Codec<RubblemiteVariant> DIRECT_CODEC = RecordCodecBuilder.create(
+            instance -> instance.group(
+                            LootTable.KEY_CODEC.optionalFieldOf("extra_drop_items").forGetter(RubblemiteVariant::extraDropItems),
+                            RubblemiteVariant.AssetInfo.CODEC.fieldOf("assets").forGetter(RubblemiteVariant::assetInfo),
+                            SpawnPrioritySelectors.CODEC.fieldOf("spawn_conditions").forGetter(RubblemiteVariant::spawnConditions)
+                    ).apply(instance, RubblemiteVariant::new)
+    );
 
-    public static final Codec<RubblemiteVariant> CODEC = StringRepresentable.fromEnum(RubblemiteVariant::values);
-    public static final RubblemiteVariant[] BY_ID = Arrays.stream(RubblemiteVariant.values()).sorted(Comparator.comparingInt(RubblemiteVariant::getId)).toArray(RubblemiteVariant[]::new);
+    public static final Codec<RubblemiteVariant> NETWORK_CODEC = RecordCodecBuilder.create(
+            instance -> instance.group(RubblemiteVariant.AssetInfo.CODEC.fieldOf("assets").forGetter(RubblemiteVariant::assetInfo)).apply(instance, RubblemiteVariant::new)
+    );
 
-    private final int id;
-    private final String name;
-    private final ItemLike dropItem;
-    private final int weight;
-    private final TagKey<Biome> skippedBiomes;
+    public static final Codec<Holder<RubblemiteVariant>> CODEC = RegistryFixedCodec.create(EnderscapeRegistries.RUBBLEMITE_VARIANT);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<RubblemiteVariant>> STREAM_CODEC = ByteBufCodecs.holderRegistry(EnderscapeRegistries.RUBBLEMITE_VARIANT);
 
-    RubblemiteVariant(int id, String name, ItemLike dropItem, int weight, TagKey<Biome> skippedBiomes) {
-        this.id = id;
-        this.name = name;
-        this.dropItem = dropItem;
-        this.weight = weight;
-        this.skippedBiomes = skippedBiomes;
+    private RubblemiteVariant(RubblemiteVariant.AssetInfo assetInfo) {
+        this(Optional.empty(), assetInfo, SpawnPrioritySelectors.EMPTY);
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public static RubblemiteVariant byId(int id) {
-        return id >= 0 && id < BY_ID.length ? BY_ID[id] : END_STONE;
-    }
-
-    public String getName() {
-        return name;
+    public static Optional<? extends Holder<RubblemiteVariant>> selectVariantToSpawn(RandomSource random, RegistryAccess access, SpawnContext context) {
+        return PriorityProvider.pick(access.lookupOrThrow(EnderscapeRegistries.RUBBLEMITE_VARIANT).listElements(), Holder::value, random, context);
     }
 
     @Override
-    public String getSerializedName() {
-        return getName();
+    public List<PriorityProvider.Selector<SpawnContext, SpawnCondition>> selectors() {
+        return spawnConditions.selectors();
     }
 
-    public ItemLike getDropItem() {
-        return dropItem;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public TagKey<Biome> getSkippedBiomes() {
-        return skippedBiomes;
-    }
-
-    public static RubblemiteVariant get(Rubblemite mob) {
-        return RubblemiteVariant.BY_ID[mob.getEntityData().get(DATA)];
-    }
-
-    public static void set(Rubblemite mob, RubblemiteVariant variant) {
-        mob.getEntityData().set(DATA, variant.getId());
-    }
-
-    public static RubblemiteVariant pickForSpawning(RandomSource random, Holder<Biome> biome) {
-        int totalWeight = Arrays.stream(RubblemiteVariant.values()).filter(variant -> !biome.is(variant.getSkippedBiomes())).mapToInt(RubblemiteVariant::getWeight).sum();
-        int roll = random.nextInt(totalWeight);
-        int cumulativeWeight = 0;
-
-        for (RubblemiteVariant variant : RubblemiteVariant.values()) {
-            if (biome.is(variant.getSkippedBiomes())) continue;
-            cumulativeWeight += variant.getWeight();
-            if (roll < cumulativeWeight) return variant;
-        }
-
-        throw new IllegalStateException("No variant could be selected");
+    public record AssetInfo(ClientAsset.ResourceTexture asset) {
+        public static final Codec<RubblemiteVariant.AssetInfo> CODEC = RecordCodecBuilder.create(instance -> instance.group(ClientAsset.ResourceTexture.CODEC.fieldOf("asset").forGetter(RubblemiteVariant.AssetInfo::asset)).apply(instance, RubblemiteVariant.AssetInfo::new));
     }
 }

@@ -2,7 +2,7 @@ package net.bunten.enderscape.block;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.bunten.enderscape.block.properties.StateProperties;
+import net.bunten.enderscape.block.state.StateProperties;
 import net.bunten.enderscape.registry.tag.EnderscapeBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;

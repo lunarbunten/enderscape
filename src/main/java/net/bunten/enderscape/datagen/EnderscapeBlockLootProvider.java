@@ -53,8 +53,8 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         add(CELESTIAL_OVERGROWTH, block -> createSingleItemTableWithSilkTouch(block, END_STONE));
         add(CORRUPT_OVERGROWTH, block -> createSingleItemTableWithSilkTouch(block, MIRESTONE));
 
-        dropOther(CELESTIAL_PATH_BLOCK, END_STONE);
-        dropOther(CORRUPT_PATH_BLOCK, END_STONE);
+        dropOther(CELESTIAL_PATH, END_STONE);
+        dropOther(CORRUPT_PATH, END_STONE);
 
         add(DRY_END_GROWTH, this::createShearsOnlyDrop);
         dropPottedContents(POTTED_DRY_END_GROWTH);
@@ -158,7 +158,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropOther(CELESTIAL_HANGING_SIGN, CELESTIAL_HANGING_SIGN_ITEM);
         dropOther(CELESTIAL_WALL_HANGING_SIGN, CELESTIAL_HANGING_SIGN_ITEM);
 
-        dropOther(MURUBLIGHT_SHELF, MURUBLIGHT_SHELF_ITEM);
+        dropOther(MURUBLIGHT_BRACKET, MURUBLIGHT_BRACKET_ITEM);
 
         dropSelf(MURUBLIGHT_CHANTERELLE);
         dropPottedContents(POTTED_MURUBLIGHT_CHANTERELLE);
@@ -192,8 +192,20 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(REPULSIVE_MAGNIA);
         dropSelf(REPULSIVE_MAGNIA_SPROUT);
 
+        dropSelf(BLISTERED_MAGNIA);
+        dropSelf(POLARIZED_MAGNIA);
+
         dropSelf(ETCHED_ALLURING_MAGNIA);
+        dropSelf(ETCHED_ALLURING_MAGNIA_STAIRS);
+        dropSelf(ETCHED_ALLURING_MAGNIA_SLAB);
+        dropSelf(ETCHED_ALLURING_MAGNIA_WALL);
+
         dropSelf(ETCHED_REPULSIVE_MAGNIA);
+        dropSelf(ETCHED_REPULSIVE_MAGNIA_STAIRS);
+        dropSelf(ETCHED_REPULSIVE_MAGNIA_SLAB);
+        dropSelf(ETCHED_REPULSIVE_MAGNIA_WALL);
+
+        dropSelf(MAGNIA_RADIO);
 
         dropPottedContents(POTTED_ALLURING_MAGNIA_SPROUT);
         dropPottedContents(POTTED_REPULSIVE_MAGNIA_SPROUT);
@@ -238,7 +250,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
                 applyExplosionDecay(
                         block,
                         LootItem.lootTableItem(RAW_SHADOLINE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4)))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
                                 .apply(ApplyBonusCount.addOreBonusCount(enchantment.getOrThrow(Enchantments.FORTUNE)))
                 )
         );
@@ -266,6 +278,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(POLISHED_END_STONE_SLAB);
         dropSelf(POLISHED_END_STONE_WALL);
         dropSelf(POLISHED_END_STONE_BUTTON);
+        dropSelf(POLISHED_END_STONE_PRESSURE_PLATE);
         dropSelf(CHISELED_END_STONE);
 
         dropSelf(CHISELED_PURPUR);
@@ -280,6 +293,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(POLISHED_MIRESTONE_SLAB);
         dropSelf(POLISHED_MIRESTONE_WALL);
         dropSelf(POLISHED_MIRESTONE_BUTTON);
+        dropSelf(POLISHED_MIRESTONE_PRESSURE_PLATE);
         dropSelf(MIRESTONE_BRICKS);
         dropSelf(MIRESTONE_BRICK_STAIRS);
         dropSelf(MIRESTONE_BRICK_SLAB);
@@ -295,6 +309,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(POLISHED_VERADITE_SLAB);
         dropSelf(POLISHED_VERADITE_WALL);
         dropSelf(POLISHED_VERADITE_BUTTON);
+        dropSelf(POLISHED_VERADITE_PRESSURE_PLATE);
         dropSelf(VERADITE_BRICKS);
         dropSelf(VERADITE_BRICK_STAIRS);
         dropSelf(VERADITE_BRICK_SLAB);
@@ -310,6 +325,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(POLISHED_KURODITE_SLAB);
         dropSelf(POLISHED_KURODITE_WALL);
         dropSelf(POLISHED_KURODITE_BUTTON);
+        dropSelf(POLISHED_KURODITE_PRESSURE_PLATE);
         dropSelf(KURODITE_BRICKS);
         dropSelf(KURODITE_BRICK_STAIRS);
         dropSelf(KURODITE_BRICK_SLAB);

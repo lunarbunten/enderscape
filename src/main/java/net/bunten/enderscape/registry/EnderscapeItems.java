@@ -52,11 +52,9 @@ public class EnderscapeItems {
             .add(Attributes.ARMOR, new AttributeModifier(Enderscape.id("drift_leggings_armor"), 4, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.LEGS)
             .add(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(Enderscape.id("drift_leggings_armor_toughness"), 2, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.LEGS)
             .add(Attributes.MOVEMENT_SPEED, new AttributeModifier(Enderscape.id("drift_leggings_movement_speed"), 0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), EquipmentSlotGroup.LEGS)
-            .add(Attributes.SAFE_FALL_DISTANCE, new AttributeModifier(Enderscape.id("drift_leggings_safe_fall_distance"), 0.6, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), EquipmentSlotGroup.LEGS)
-            .add(Attributes.GRAVITY, new AttributeModifier(Enderscape.id("drift_leggings_gravity"), -0.4, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), EquipmentSlotGroup.LEGS)
+            .add(Attributes.SAFE_FALL_DISTANCE, new AttributeModifier(Enderscape.id("drift_leggings_safe_fall_distance"), 0.3, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), EquipmentSlotGroup.LEGS)
+            .add(Attributes.GRAVITY, new AttributeModifier(Enderscape.id("drift_leggings_gravity"), -0.3, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), EquipmentSlotGroup.LEGS)
             .build();
-
-    public static final Properties SHULKER_SHELL_PROPERTIES = new Item.Properties().component(DataComponents.EQUIPPABLE, Equippable.builder(ArmorType.HELMET.getSlot()).setEquipSound(EnderscapeItemSounds.SHULKER_SHELL_EQUIP).setAsset(ResourceKey.create(ROOT_ID, Enderscape.id("shulker_shell"))).build());
 
     public static final Item DRIFTER_SPAWN_EGG = registerSpawnEgg(EnderscapeEntities.DRIFTER);
     public static final Item DRIFTLET_SPAWN_EGG = registerSpawnEgg(EnderscapeEntities.DRIFTLET);
@@ -81,14 +79,13 @@ public class EnderscapeItems {
                     new FoodProperties.Builder().alwaysEdible().nutrition(6).saturationModifier(0.2F).build(),
                     Consumables.defaultDrink()
                             .sound(EnderscapeItemSounds.DRIFT_JELLY_BOTTLE_DRINK)
-                            .soundAfterConsume(EnderscapeItemSounds.DRIFT_JELLY_BOTTLE_FINISH)
-                            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(EnderscapeMobEffects.LOW_GRAVITY, 400), 1.0F)).build()
+                            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(EnderscapeMobEffects.LOW_GRAVITY, 20 * 20), 1.0F)).build()
             )
             .stacksTo(16)
             .usingConvertsTo(Items.GLASS_BOTTLE)
     );
     public static final Item FLANGER_BERRY = registerItem("flanger_berry", properties -> new BlockItem(EnderscapeBlocks.FLANGER_BERRY_VINE, properties), new Properties().useItemDescriptionPrefix().food(new FoodProperties.Builder().nutrition(5).saturationModifier(1.2F).build()));
-    public static final Item MURUBLIGHT_SHELF_ITEM = registerItem("murublight_shelf", properties -> new BlockItem(EnderscapeBlocks.MURUBLIGHT_SHELF, properties), new Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(4).saturationModifier(0.3F).build(), Consumable.builder().onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.POISON, 200), 1.0F)).build()));
+    public static final Item MURUBLIGHT_BRACKET_ITEM = registerItem("murublight_bracket", properties -> new BlockItem(EnderscapeBlocks.MURUBLIGHT_BRACKET, properties), new Properties().useBlockDescriptionPrefix().food(new FoodProperties.Builder().alwaysEdible().nutrition(4).saturationModifier(0.3F).build(), Consumable.builder().onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.POISON, 200), 1.0F)).build()));
 
     public static final Item END_CITY_KEY = registerItem("end_city_key");
     public static final Item RUBBLE_CHITIN = registerItem("rubble_chitin");
@@ -96,6 +93,7 @@ public class EnderscapeItems {
     public static final Item NEBULITE_SHARDS = registerItem("nebulite_shards");
     public static final Item RAW_SHADOLINE = registerItem("raw_shadoline");
     public static final Item SHADOLINE_INGOT = registerItem("shadoline_ingot", Item::new, new Properties().trimMaterial(EnderscapeTrimMaterials.SHADOLINE));
+    public static final Item SHADOLINE_NUGGET = registerItem("shadoline_nugget");
 
     public static final Properties RUBBLE_SHIELD_PROPERTIES = new Properties()
             .component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
@@ -144,6 +142,7 @@ public class EnderscapeItems {
             .component(EnderscapeDataComponents.ENTITY_PULL_RANGE, 10)
             .component(EnderscapeDataComponents.MAXIMUM_NEBULITE_FUEL, 6)
             .component(EnderscapeDataComponents.NEBULITE_FUEL_PER_USE, 1)
+            //.enchantable(1)
     );
 
     public static final Item CRACKED_MIRROR = registerItem("cracked_mirror", CrackedMirrorItem::new, new Properties()
@@ -156,6 +155,7 @@ public class EnderscapeItems {
             .component(EnderscapeDataComponents.DISTANCE_FOR_COST_TO_INCREASE, 500)
             .component(EnderscapeDataComponents.MAXIMUM_NEBULITE_FUEL, 5)
             .component(EnderscapeDataComponents.NEBULITE_FUEL_PER_USE, 1)
+            //.enchantable(1)
             .rarity(Rarity.EPIC)
     );
 

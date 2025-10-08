@@ -376,12 +376,6 @@ public class Rustle extends Animal implements Bucketable, Shearable {
     }
 
     @Override
-    public void lookAt(Entity entity, float f, float g) {
-        if (isSleeping()) return;
-        super.lookAt(entity, f, g);
-    }
-
-    @Override
     protected SoundEvent getAmbientSound() {
         return isSleeping() ? EnderscapeEntitySounds.RUSTLE_SNORE : EnderscapeEntitySounds.RUSTLE_AMBIENT;
     }

@@ -1,7 +1,7 @@
 package net.bunten.enderscape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.bunten.enderscape.block.properties.DirectionProperties;
+import net.bunten.enderscape.block.properties.DirectionSet;
 import net.bunten.enderscape.registry.EnderscapeBlockSounds;
 import net.bunten.enderscape.registry.tag.EnderscapeBlockTags;
 import net.minecraft.core.BlockPos;
@@ -17,7 +17,7 @@ public class CorruptGrowthBlock extends AbstractGrowthBlock {
     public static final MapCodec<CorruptGrowthBlock> CODEC = simpleCodec(CorruptGrowthBlock::new);
 
     public CorruptGrowthBlock(Properties settings) {
-        super(DirectionProperties.create().all(), settings);
+        super(DirectionSet.create().all(), settings);
     }
 
     @Override

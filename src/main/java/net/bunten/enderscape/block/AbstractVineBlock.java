@@ -1,6 +1,6 @@
 package net.bunten.enderscape.block;
 
-import net.bunten.enderscape.block.properties.StateProperties;
+import net.bunten.enderscape.block.state.StateProperties;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

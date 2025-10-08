@@ -3,7 +3,11 @@ package net.bunten.enderscape.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -27,7 +31,13 @@ public class EnderscapeEntityTagProvider extends FabricTagProvider.EntityTypeTag
         valueLookupBuilder(RUBBLEMITE_HOSTILE_TOWARDS).add(IRON_GOLEM);
 
         valueLookupBuilder(EntityTypeTags.ARTHROPOD).add(RUBBLEMITE);
-        valueLookupBuilder(EntityTypeTags.FALL_DAMAGE_IMMUNE).forceAddTag(DRIFTERS);
+        valueLookupBuilder(EntityTypeTags.FALL_DAMAGE_IMMUNE).addTag(DRIFTERS);
         valueLookupBuilder(EntityTypeTags.POWDER_SNOW_WALKABLE_MOBS).add(RUBBLEMITE);
+
+        valueLookupBuilder(externalKey("supplementaries", "ash_blacklist")).add(ENDERMAN, ENDERMITE, ENDER_DRAGON, SHULKER, RUBBLEMITE).addTag(DRIFTERS);
+    }
+
+    private TagKey<EntityType<?>> externalKey(String namespace, String path) {
+        return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(namespace, path));
     }
 }

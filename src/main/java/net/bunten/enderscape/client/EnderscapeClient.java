@@ -2,7 +2,7 @@ package net.bunten.enderscape.client;
 
 import com.google.common.reflect.Reflection;
 import net.bunten.enderscape.client.block.MagniaSproutRenderer;
-import net.bunten.enderscape.client.entity.EndermanStaticSoundInstance;
+import net.bunten.enderscape.client.sound.EndermanStaticSoundInstance;
 import net.bunten.enderscape.client.hud.HudElement;
 import net.bunten.enderscape.client.item.NebuliteToolTooltip;
 import net.bunten.enderscape.client.registry.*;

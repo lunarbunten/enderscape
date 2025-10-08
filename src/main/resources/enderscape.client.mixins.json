@@ -8,6 +8,7 @@
         "ClientLevelMixin",
         "ClientPacketListenerMixin",
         "ConditionalItemModelPropertiesMixin",
+        "AtmosphericFogEnvironmentMixin",
         "EndEffectsMixin",
         "EndermiteRendererMixin",
         "EndFlashStateMixin",

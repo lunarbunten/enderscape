@@ -20,6 +20,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.SuspiciousEffectHolder;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
@@ -58,6 +59,9 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
             public void buildRecipes() {
                 EnderscapeBlockFamilies.getAllFamilies().forEach((family) -> generateRecipes(family, FeatureFlagSet.of(FeatureFlags.VANILLA)));
                 smithingTrims().forEach(trimTemplate -> trimSmithing(trimTemplate.template(), trimTemplate.patternId(), trimTemplate.recipeId()));
+
+                SuspiciousEffectHolder holder = SuspiciousEffectHolder.tryGet(BULB_FLOWER.asItem());
+                if (holder != null) suspiciousStew(BULB_FLOWER.asItem(), holder);
 
                 shaped(RecipeCategory.MISC, MUSIC_DISC_BLISS)
                         .define('D', MUSIC_DISC_DECAY)
@@ -102,7 +106,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                         .pattern("A R")
                         .pattern("SSS")
                         .pattern(" S ")
-                        .unlockedBy("has_magnia_block", has(EnderscapeItemTags.MAGNIA_SPROUTS))
+                        .unlockedBy("has_any_magnia_sprout", has(EnderscapeItemTags.MAGNIA_SPROUTS))
                         .save(output);
 
                 stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, END_STONE_SLAB, END_STONE, 2);
@@ -208,11 +212,44 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_repulsive_magnia", has(REPULSIVE_MAGNIA))
                         .save(output);
 
+//                shaped(RecipeCategory.BUILDING_BLOCKS, MAGNIA_RADIO)
+//                        .define('A', ETCHED_ALLURING_MAGNIA)
+//                        .define('R', ETCHED_REPULSIVE_MAGNIA)
+//                        .define('!', ALLURING_MAGNIA_SPROUT)
+//                        .define('@', REPULSIVE_MAGNIA_SPROUT)
+//                        .define('N', NEBULITE)
+//                        .pattern("! @")
+//                        .pattern("RNR")
+//                        .pattern("AAA")
+//                        .unlockedBy("has_any_magnia_sprout", has(EnderscapeItemTags.MAGNIA_SPROUTS))
+//                        .save(output);
+
+                shaped(RecipeCategory.BUILDING_BLOCKS, POLARIZED_MAGNIA)
+                        .define('B', BLISTERED_MAGNIA)
+                        .define('S', SHADOLINE_INGOT)
+                        .define('P', POPPED_CHORUS_FRUIT)
+                        .define('R', REDSTONE)
+                        .pattern("SSS")
+                        .pattern("PBP")
+                        .pattern("SRS")
+                        .unlockedBy("has_blistered_magnia", has(BLISTERED_MAGNIA))
+                        .save(output);
+
                 stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, ETCHED_ALLURING_MAGNIA, ALLURING_MAGNIA);
                 stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, ETCHED_REPULSIVE_MAGNIA, REPULSIVE_MAGNIA);
 
+                stonecutterResultFromBase(RecipeCategory.DECORATIONS, ETCHED_ALLURING_MAGNIA_STAIRS, ETCHED_ALLURING_MAGNIA);
+                stonecutterResultFromBase(RecipeCategory.DECORATIONS, ETCHED_ALLURING_MAGNIA_SLAB, ETCHED_ALLURING_MAGNIA);
+                stonecutterResultFromBase(RecipeCategory.DECORATIONS, ETCHED_ALLURING_MAGNIA_WALL, ETCHED_ALLURING_MAGNIA);
+
+                stonecutterResultFromBase(RecipeCategory.DECORATIONS, ETCHED_REPULSIVE_MAGNIA_STAIRS, ETCHED_REPULSIVE_MAGNIA);
+                stonecutterResultFromBase(RecipeCategory.DECORATIONS, ETCHED_REPULSIVE_MAGNIA_SLAB, ETCHED_REPULSIVE_MAGNIA);
+                stonecutterResultFromBase(RecipeCategory.DECORATIONS, ETCHED_REPULSIVE_MAGNIA_WALL, ETCHED_REPULSIVE_MAGNIA);
+
                 oreSmelting(SHADOLINE_SMELTABLES, RecipeCategory.MISC, SHADOLINE_INGOT, 0.7F, 200, "shadoline_ingot");
                 oreBlasting(SHADOLINE_SMELTABLES, RecipeCategory.MISC, SHADOLINE_INGOT, 0.7F, 100, "shadoline_ingot");
+
+                nineBlockStorageRecipesWithCustomPacking(RecipeCategory.MISC, SHADOLINE_NUGGET, RecipeCategory.MISC, SHADOLINE_INGOT, "enderscape:shadoline_ingot_from_nuggets", "enderscape:shadoline_ingot");
 
                 shapeless(RecipeCategory.MISC, RAW_SHADOLINE, 9)
                         .requires(RAW_SHADOLINE_BLOCK)
@@ -267,6 +304,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 shapeless(RecipeCategory.MISC, NEBULITE)
                         .requires(NEBULITE_SHARDS, 4)
                         .unlockedBy("has_nebulite_shards", has(NEBULITE_SHARDS))
+                        .group("nebulite")
                         .save(output, "enderscape:nebulite_from_shards");
 
                 oreSmelting(NEBULITE_SMELTABLES, RecipeCategory.MISC, NEBULITE, 1.0F, 200, "nebulite");
@@ -350,10 +388,9 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_wisp_flower", has(WISP_FLOWER))
                         .save(output, "enderscape:white_dye_from_wisp_flower");
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, VEILED_PLANKS, 4)
-                        .requires(EnderscapeItemTags.VEILED_LOGS)
-                        .unlockedBy("has_veiled_logs", has(EnderscapeItemTags.VEILED_LOGS))
-                        .save(output);
+                woodFromLogs(VEILED_WOOD, VEILED_LOG);
+                woodFromLogs(STRIPPED_VEILED_WOOD, STRIPPED_VEILED_LOG);
+                planksFromLogs(VEILED_PLANKS, EnderscapeItemTags.VEILED_LOGS, 4);
 
                 hangingSign(VEILED_HANGING_SIGN_ITEM, STRIPPED_VEILED_LOG);
 
@@ -390,10 +427,9 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, CELESTIAL_BRICK_STAIRS, CELESTIAL_BRICKS);
                 stonecutterResultFromBase(RecipeCategory.DECORATIONS, CELESTIAL_BRICK_WALL, CELESTIAL_BRICKS);
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, CELESTIAL_PLANKS, 4)
-                        .requires(EnderscapeItemTags.CELESTIAL_STEMS)
-                        .unlockedBy("has_celestial_stems", has(EnderscapeItemTags.CELESTIAL_STEMS))
-                        .save(output);
+                woodFromLogs(CELESTIAL_HYPHAE, CELESTIAL_STEM);
+                woodFromLogs(STRIPPED_CELESTIAL_HYPHAE, STRIPPED_CELESTIAL_STEM);
+                planksFromLogs(CELESTIAL_PLANKS, EnderscapeItemTags.CELESTIAL_STEMS, 4);
 
                 hangingSign(CELESTIAL_HANGING_SIGN_ITEM, STRIPPED_CELESTIAL_STEM);
 
@@ -424,10 +460,9 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, MURUBLIGHT_BRICK_STAIRS, MURUBLIGHT_BRICKS);
                 stonecutterResultFromBase(RecipeCategory.DECORATIONS, MURUBLIGHT_BRICK_WALL, MURUBLIGHT_BRICKS);
 
-                shapeless(RecipeCategory.BUILDING_BLOCKS, MURUBLIGHT_PLANKS, 4)
-                        .requires(EnderscapeItemTags.MURUBLIGHT_STEMS)
-                        .unlockedBy("has_murublight_stems", has(EnderscapeItemTags.MURUBLIGHT_STEMS))
-                        .save(output);
+                woodFromLogs(MURUBLIGHT_HYPHAE, MURUBLIGHT_STEM);
+                woodFromLogs(STRIPPED_MURUBLIGHT_HYPHAE, STRIPPED_MURUBLIGHT_STEM);
+                planksFromLogs(MURUBLIGHT_PLANKS, EnderscapeItemTags.MURUBLIGHT_STEMS, 4);
 
                 hangingSign(MURUBLIGHT_HANGING_SIGN_ITEM, STRIPPED_MURUBLIGHT_STEM);
             }

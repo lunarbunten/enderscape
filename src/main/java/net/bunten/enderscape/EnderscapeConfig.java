@@ -19,17 +19,25 @@ public class EnderscapeConfig {
         return HANDLER.instance();
     }
 
-    @SerialEntry public boolean ambienceUpdateDefaultAdditions = true;
-    @SerialEntry public boolean ambienceUpdateDefaultFogColor = true;
-    @SerialEntry public boolean ambienceUpdateDefaultFoliageColor = true;
-    @SerialEntry public boolean ambienceUpdateDefaultGrassColor = true;
-    @SerialEntry public boolean ambienceUpdateDefaultLoop = true;
-    @SerialEntry public boolean ambienceUpdateDefaultMood = true;
-    @SerialEntry public boolean ambienceUpdateDefaultMusic = true;
-    @SerialEntry public boolean ambienceUpdateDefaultParticles = true;
-    @SerialEntry public boolean ambienceUpdateDefaultSkyColor = true;
-    @SerialEntry public boolean ambienceUpdateDefaultWaterColor = true;
-    @SerialEntry public boolean ambienceUpdateDefaultWaterFogColor = true;
+    @SerialEntry public boolean defaultResourcePackLighting = true;
+    @SerialEntry public boolean defaultResourcePackDarkLighting = false;
+
+    @SerialEntry public boolean defaultDataPackFixLevitationAdvancement = true;
+    @SerialEntry public boolean defaultDataPackFixVanillaRecipes = true;
+    @SerialEntry public boolean defaultDataPackNewEndCities = true;
+    @SerialEntry public boolean defaultDataPackNewTerrain = true;
+
+    @SerialEntry public boolean ambienceUpdateAdditionSounds = true;
+    @SerialEntry public boolean ambienceUpdateFogColors = true;
+    @SerialEntry public boolean ambienceUpdateFoliageColors = true;
+    @SerialEntry public boolean ambienceUpdateGrassColors = true;
+    @SerialEntry public boolean ambienceUpdateLoopSounds = true;
+    @SerialEntry public boolean ambienceUpdateMoodSounds = true;
+    @SerialEntry public boolean ambienceUpdateMusicPools = true;
+    @SerialEntry public boolean ambienceUpdateParticles = true;
+    @SerialEntry public boolean ambienceUpdateSkyColors = true;
+    @SerialEntry public boolean ambienceUpdateWaterColors = true;
+    @SerialEntry public boolean ambienceUpdateWaterFogColors = true;
     @SerialEntry public boolean blockSoundsUpdateEndRods = true;
     @SerialEntry public boolean blockSoundUpdateEndPortalFrame = true;
     @SerialEntry public boolean blockSoundUpdateEndPortals = true;

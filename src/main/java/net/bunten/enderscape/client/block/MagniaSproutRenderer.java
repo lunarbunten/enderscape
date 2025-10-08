@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.block.MagniaSproutBlock;
 import net.bunten.enderscape.block.MagniaSproutBlockEntity;
-import net.bunten.enderscape.block.properties.MagniaType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.RenderType;
@@ -14,6 +13,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,10 +31,11 @@ public class MagniaSproutRenderer implements BlockEntityRenderer<MagniaSproutBlo
     public void extractRenderState(MagniaSproutBlockEntity entity, MagniaSproutState state, float f, Vec3 vec3, @Nullable ModelFeatureRenderer.CrumblingOverlay crumblingOverlay) {
         BlockEntityRenderer.super.extractRenderState(entity, state, f, vec3, crumblingOverlay);
 
-        if (entity.getBlockState().getBlock() instanceof MagniaSproutBlock sprout) {
-            state.range = MagniaSproutBlockEntity.getRange(entity.getLevel(), entity.getBlockState(), entity.getBlockPos()).move(entity.getBlockPos().multiply(-1));
-            state.color = sprout.magniaType.equals(MagniaType.ALLURING) ? Vec3.fromRGB24(0x8CC9FF) : Vec3.fromRGB24(0xFF9E9B);
-            state.intensity = entity.getBlockState().getValue(MagniaSproutBlock.POWERED) ? 0.85F : 0.05F;
+        BlockState blockState = entity.getBlockState();
+        if (blockState.getBlock() instanceof MagniaSproutBlock sprout) {
+            state.range = MagniaSproutBlockEntity.getRange(entity.getLevel(), blockState, entity.getBlockPos()).move(entity.getBlockPos().multiply(-1));
+            state.color = Vec3.fromRGB24(sprout.getPolarity(blockState).get().getRangeHitboxColor());
+            state.intensity = blockState.getValue(MagniaSproutBlock.POWERED) ? 0.85F : 0.05F;
         }
     }
 
