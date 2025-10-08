@@ -4,14 +4,16 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 
 @Environment(EnvType.CLIENT)
 public class EndPortalStarParticle extends RisingParticle {
 
-    private EndPortalStarParticle(ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-        super(level, x, y, z, velocityX, velocityY, velocityZ);
+    private EndPortalStarParticle(ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ, TextureAtlasSprite textureAtlasSprite) {
+        super(level, x, y, z, velocityX, velocityY, velocityZ, textureAtlasSprite);
 
         float darkeningFactor = Mth.nextFloat(level.getRandom(), 0.4F, 1.0F);
 
@@ -37,8 +39,9 @@ public class EndPortalStarParticle extends RisingParticle {
         super.tick();
     }
 
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    @Override
+    protected Layer getLayer() {
+        return Layer.TRANSLUCENT;
     }
 
     public void move(double dx, double dy, double dz) {
@@ -59,10 +62,8 @@ public class EndPortalStarParticle extends RisingParticle {
             this.sprites = sprites;
         }
 
-        public Particle createParticle(SimpleParticleType type, ClientLevel world, double x, double y, double z, double vx, double vy, double vz) {
-            EndPortalStarParticle particle = new EndPortalStarParticle(world, x, y, z, vx, vy, vz);
-            particle.pickSprite(sprites);
-            return particle;
+        public Particle createParticle(SimpleParticleType type, ClientLevel world, double x, double y, double z, double vx, double vy, double vz, RandomSource randomSource) {
+            return new EndPortalStarParticle(world, x, y, z, vx, vy, vz, sprites.get(randomSource));
         }
     }
 }

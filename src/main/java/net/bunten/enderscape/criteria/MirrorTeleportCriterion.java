@@ -14,7 +14,7 @@ import java.util.Optional;
 public class MirrorTeleportCriterion extends SimpleCriterionTrigger<MirrorTeleportCriterion.Conditions> {
 
     public void trigger(ServerPlayer player, ItemStack stack, GlobalPos prior, GlobalPos latter) {
-        trigger(player, instance -> instance.matches(player.getServer(), stack, prior, latter));
+        trigger(player, instance -> instance.matches(player.level().getServer(), stack, prior, latter));
     }
 
     @Override

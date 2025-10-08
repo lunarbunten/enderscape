@@ -31,7 +31,7 @@ public abstract class GameRendererMixin {
         method = "render",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V"
+            target = "Lnet/minecraft/util/profiling/ProfilerFiller;push(Ljava/lang/String;)V"
         ),
         slice = @Slice(
             from = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/platform/Lighting;setupFor(Lcom/mojang/blaze3d/platform/Lighting$Entry;)V"),

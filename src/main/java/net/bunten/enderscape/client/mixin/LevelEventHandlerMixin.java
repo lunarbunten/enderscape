@@ -7,6 +7,7 @@ import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.EnderscapeParticles;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LevelEventHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -31,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 @Mixin(LevelEventHandler.class)
 public abstract class LevelEventHandlerMixin {
 
-    @Shadow @Final private Level level;
+    @Shadow @Final private ClientLevel level;
 
     @ModifyArgs(method = "levelEvent", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/resources/sounds/SimpleSoundInstance;forLocalAmbience(Lnet/minecraft/sounds/SoundEvent;FF)Lnet/minecraft/client/resources/sounds/SimpleSoundInstance;"))
     public void levelEvent(Args args) {

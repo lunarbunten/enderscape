@@ -82,7 +82,7 @@ public abstract class EndFlashStateMixin {
     @Shadow
     private float oldIntensity;
 
-    @ModifyReturnValue(method = "shouldProduceSoundThisTick", at = @At("RETURN"))
+    @ModifyReturnValue(method = "flashStartedThisTick", at = @At("RETURN"))
     private boolean shouldProduceSoundThisTick (boolean original) {
         float threshold = 0.7f;
         return this.oldIntensity > threshold && this.intensity <= threshold;

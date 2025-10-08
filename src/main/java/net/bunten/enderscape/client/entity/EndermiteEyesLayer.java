@@ -14,19 +14,14 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 
 @Environment(EnvType.CLIENT)
 public class EndermiteEyesLayer extends RenderLayer<LivingEntityRenderState, EndermiteModel> {
+    private static final RenderType ENDERMITE_EYES = RenderType.eyes(Enderscape.id("textures/entity/endermite/eyes.png"));
 
     public EndermiteEyesLayer(RenderLayerParent<LivingEntityRenderState, EndermiteModel> parent) {
         super(parent);
     }
 
-    public RenderType renderType() {
-        return RenderType.eyes(Enderscape.id("textures/entity/endermite/eyes.png"));
-    }
-
     @Override
     public void submit(PoseStack pose, SubmitNodeCollector collector, int i, LivingEntityRenderState state, float f, float g) {
-        collector.submitModel(
-                getParentModel(), state, pose, renderType(), i, OverlayTexture.NO_OVERLAY, -1, null, state.outlineColor, 1
-        );
+        collector.submitModel(getParentModel(), state, pose, ENDERMITE_EYES, i, OverlayTexture.NO_OVERLAY, -1, null, state.outlineColor, null);
     }
 }

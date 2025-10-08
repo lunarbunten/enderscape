@@ -5,9 +5,10 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 
 @Environment(EnvType.CLIENT)
-public class VeiledLeavesParticle extends TextureSheetParticle {
+public class VeiledLeavesParticle extends SingleQuadParticle {
     private float rotSpeed;
     private final float spinAcceleration;
     private final float windBig;
@@ -18,7 +19,7 @@ public class VeiledLeavesParticle extends TextureSheetParticle {
     private final double swirlPeriod;
 
     protected VeiledLeavesParticle(ClientLevel level, double x, double y, double z, SpriteSet sprites, float gravity, float windBig, boolean swirl, boolean flowAway, float i) {
-        super(level, x, y, z);
+        super(level, x, y, z, sprites.first());
 
         setSprite(sprites.get(random.nextInt(12), 12));
 
@@ -47,8 +48,8 @@ public class VeiledLeavesParticle extends TextureSheetParticle {
     }
 
     @Override
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+    protected Layer getLayer() {
+        return Layer.OPAQUE;
     }
 
     @Override
@@ -102,7 +103,7 @@ public class VeiledLeavesParticle extends TextureSheetParticle {
             this.sprites = sprites;
         }
 
-        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xd, double yd, double zd) {
+        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xd, double yd, double zd, RandomSource randomSource) {
             return new VeiledLeavesParticle(level, x, y, z, sprites, 0.25F, 2.0F, false, true, 1.0F);
         }
     }

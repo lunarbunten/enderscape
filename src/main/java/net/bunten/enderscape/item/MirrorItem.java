@@ -253,7 +253,7 @@ public class MirrorItem extends NebuliteToolItem {
             ChatFormatting typeColor = ChatFormatting.GRAY;
             ChatFormatting valueColor = ChatFormatting.BLUE;
 
-            if (!config.mirrorTooltipShiftToDisplay || Screen.hasShiftDown()) {
+            if (!config.mirrorTooltipShiftToDisplay || client.hasShiftDown()) {
                 BlockPos user = context.user().blockPosition();
                 BlockPos linkedPos = context.linkedPos();
                 ResourceKey<Level> linkedDimension = context.linkedDimension();

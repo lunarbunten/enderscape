@@ -33,9 +33,10 @@ public abstract class SkyRendererMixin {
         }
     }
 
-    @ModifyArgs(method = "renderEndFlash", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/ARGB;color(FI)I"))
-    private void Enderscape$playSound(Args args) {
-        Vector4f thing = EnderscapeSkybox.flashColor;
-        args.set(1, ARGB.color(new Vec3(thing.x, thing.y, thing.z)));
-    }
+    // TODO 1.21.10
+//    @ModifyArgs(method = "renderEndFlash", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/ARGB;color(FI)I"))
+//    private void Enderscape$changeColor(Args args) {
+//        Vector4f thing = EnderscapeSkybox.flashColor;
+//        args.set(1, ARGB.color(new Vec3(thing.x, thing.y, thing.z)));
+//    }
 }

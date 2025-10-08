@@ -12,19 +12,15 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 
 @Environment(EnvType.CLIENT)
 public class RubblemiteEyesLayer extends RenderLayer<RubblemiteRenderState, RubblemiteModel> {
+    private static final RenderType RUBBLEMITE_EYES = RenderType.eyes(Enderscape.id("textures/entity/rubblemite/eyes.png"));
 
     public RubblemiteEyesLayer(RenderLayerParent<RubblemiteRenderState, RubblemiteModel> parent) {
         super(parent);
     }
 
-    public RenderType renderType() {
-        return RenderType.eyes(Enderscape.id("textures/entity/rubblemite/eyes.png"));
-    }
 
     @Override
     public void submit(PoseStack pose, SubmitNodeCollector collector, int i, RubblemiteRenderState state, float f, float g) {
-        collector.submitModel(
-                getParentModel(), state, pose, renderType(), i, OverlayTexture.NO_OVERLAY, -1, null, state.outlineColor, 1
-        );
+        collector.submitModel(getParentModel(), state, pose, RUBBLEMITE_EYES, i, OverlayTexture.NO_OVERLAY, -1, null, state.outlineColor, null);
     }
 }
