@@ -10,6 +10,7 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 
 @Environment(EnvType.CLIENT)
 public class EnderPearlParticle extends SimpleAnimatedParticle {
@@ -57,7 +58,7 @@ public class EnderPearlParticle extends SimpleAnimatedParticle {
             this.sprites = sprites;
         }
 
-        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xd, double yd, double zd) {
+        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xd, double yd, double zd, RandomSource randomSource) {
             return new EnderPearlParticle(level, x, y, z, xd, yd, zd, sprites);
         }
     }

@@ -16,6 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.TypedEntityData;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -176,7 +177,8 @@ public class MagniaRadioBlock extends BaseEntityBlock implements SimpleWaterlogg
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity mob, ItemStack stack) {
         super.setPlacedBy(level, pos, state, mob, stack);
-        if (stack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY).contains(MagniaRadioBlockEntity.MAGNIA_RADIO_SONG_TAG_ID) && isEnabled(state)) {
+        TypedEntityData<BlockEntityType<?>> typedEntityData = stack.get(DataComponents.BLOCK_ENTITY_DATA);
+        if (typedEntityData != null && typedEntityData.contains(MagniaRadioBlockEntity.MAGNIA_RADIO_SONG_TAG_ID) && isEnabled(state)) {
             level.setBlock(pos, state.setValue(IS_PLAYING, true), 2);
         }
     }

@@ -1,6 +1,5 @@
 package net.bunten.enderscape.client.particle;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
@@ -9,7 +8,9 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SimpleAnimatedParticle;
 import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.renderer.state.QuadParticleRenderState;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 
 @Environment(EnvType.CLIENT)
 public class DashJumpSparksParticle extends SimpleAnimatedParticle {
@@ -36,9 +37,9 @@ public class DashJumpSparksParticle extends SimpleAnimatedParticle {
     }
 
     @Override
-    public void render(VertexConsumer vertexConsumer, Camera camera, float f) {
+    public void extract(QuadParticleRenderState quadParticleRenderState, Camera camera, float f) {
         if (age < lifetime / 3 || (age + lifetime) / 3 % 2 == 0) {
-            super.render(vertexConsumer, camera, f);
+            super.extract(quadParticleRenderState, camera, f);
         }
     }
 
@@ -50,7 +51,7 @@ public class DashJumpSparksParticle extends SimpleAnimatedParticle {
             this.sprites = sprites;
         }
 
-        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double d, double xd, double yd, double zd) {
+        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double d, double xd, double yd, double zd, RandomSource randomSource) {
             return new DashJumpSparksParticle(level, x, y, d, xd, yd, zd, sprites);
         }
     }

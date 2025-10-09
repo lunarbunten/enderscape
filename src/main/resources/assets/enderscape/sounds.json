@@ -8877,5 +8877,18 @@
                 "stream": true
             }
         ]
+    },
+    "ambient.weather.end_flash": {
+        "sounds": [
+           "enderscape:ambient/weather/end_flash1",
+            "enderscape:ambient/weather/end_flash2",
+            "enderscape:ambient/weather/end_flash3",
+            "enderscape:ambient/weather/end_flash4",
+            "enderscape:ambient/weather/end_flash5",
+            "enderscape:ambient/weather/end_flash6",
+            "enderscape:ambient/weather/end_flash7",
+            "enderscape:ambient/weather/end_flash8"
+        ],
+        "subtitle": "subtitles.weather.end_flash"
     }
 }

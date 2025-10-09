@@ -8,6 +8,7 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 
 @Environment(EnvType.CLIENT)
 public class MirrorTeleportOutParticle extends NebuliteOreParticle {
@@ -32,7 +33,7 @@ public class MirrorTeleportOutParticle extends NebuliteOreParticle {
         }
 
         @Override
-        public Particle createParticle(SimpleParticleType type, ClientLevel level, double d, double e, double f, double g, double h, double i) {
+        public Particle createParticle(SimpleParticleType type, ClientLevel level, double d, double e, double f, double g, double h, double i, RandomSource randomSource) {
             return new MirrorTeleportOutParticle(level, d, e, f, g, h, i, sprites);
         }
     }

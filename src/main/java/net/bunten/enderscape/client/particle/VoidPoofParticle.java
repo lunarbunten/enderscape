@@ -9,6 +9,7 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 
 @Environment(EnvType.CLIENT)
 public class VoidPoofParticle extends ExplodeParticle {
@@ -30,7 +31,7 @@ public class VoidPoofParticle extends ExplodeParticle {
             sprites = spriteSet;
         }
 
-        public Particle createParticle(SimpleParticleType type, ClientLevel level, double d, double e, double f, double g, double h, double i) {
+        public Particle createParticle(SimpleParticleType type, ClientLevel level, double d, double e, double f, double g, double h, double i, RandomSource randomSource) {
             return new VoidPoofParticle(level, d, e, f, g, h, i, sprites);
         }
     }

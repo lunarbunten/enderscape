@@ -51,7 +51,7 @@ public record RubblemiteVariant(Optional<ResourceKey<LootTable>> extraDropItems,
         return spawnConditions.selectors();
     }
 
-    public record AssetInfo(ClientAsset asset) {
-        public static final Codec<RubblemiteVariant.AssetInfo> CODEC = RecordCodecBuilder.create(instance -> instance.group(ClientAsset.CODEC.fieldOf("asset").forGetter(RubblemiteVariant.AssetInfo::asset)).apply(instance, RubblemiteVariant.AssetInfo::new));
+    public record AssetInfo(ClientAsset.ResourceTexture asset) {
+        public static final Codec<RubblemiteVariant.AssetInfo> CODEC = RecordCodecBuilder.create(instance -> instance.group(ClientAsset.ResourceTexture.CODEC.fieldOf("asset").forGetter(RubblemiteVariant.AssetInfo::asset)).apply(instance, RubblemiteVariant.AssetInfo::new));
     }
 }

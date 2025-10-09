@@ -17,7 +17,7 @@ import java.util.Optional;
 public class HearMagniaRadioSongCriterion extends SimpleCriterionTrigger<HearMagniaRadioSongCriterion.Conditions> {
 
     public void trigger(ServerPlayer player, GlobalPos pos, ResourceKey<MagniaRadioSong> song) {
-        trigger(player, instance -> instance.matches(player.getServer(), pos, song));
+        trigger(player, instance -> instance.matches(player.level().getServer(), pos, song));
     }
 
     @Override

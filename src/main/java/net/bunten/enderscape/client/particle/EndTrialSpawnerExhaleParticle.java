@@ -7,12 +7,14 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.PortalParticle;
 import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 
 @Environment(EnvType.CLIENT)
 public class EndTrialSpawnerExhaleParticle extends PortalParticle {
-    EndTrialSpawnerExhaleParticle(ClientLevel level, double x, double y, double z, double xd, double yd, double zd) {
-        super(level, x, y, z, xd, yd, zd);
+    EndTrialSpawnerExhaleParticle(ClientLevel level, double x, double y, double z, double xd, double yd, double zd, TextureAtlasSprite textureAtlasSprite) {
+        super(level, x, y, z, xd, yd, zd, textureAtlasSprite);
         quadSize *= 1.5F;
         lifetime = (int)(Math.random() * 2.0) + 60;
     }
@@ -43,10 +45,8 @@ public class EndTrialSpawnerExhaleParticle extends PortalParticle {
             this.sprites = sprites;
         }
 
-        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel level, double x, double y, double z, double xd, double yd, double zd) {
-            EndTrialSpawnerExhaleParticle particle = new EndTrialSpawnerExhaleParticle(level, x, y, z, xd, yd, zd);
-            particle.pickSprite(sprites);
-            return particle;
+        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel level, double x, double y, double z, double xd, double yd, double zd, RandomSource randomSource) {
+            return new EndTrialSpawnerExhaleParticle(level, x, y, z, xd, yd, zd, sprites.get(randomSource));
         }
     }
 }

@@ -519,7 +519,7 @@ public class EnderscapeCreativeModeTab {
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(entries -> {
-            entries.addBefore(CHAIN, BULB_LANTERN);
+            entries.addBefore(IRON_CHAIN, BULB_LANTERN);
             entries.addBefore(END_ROD, END_LAMP);
             entries.addBefore(CRYING_OBSIDIAN, POLARIZED_MAGNIA, BLINKLAMP);
             entries.addBefore(CHEST, VEILED_SIGN_ITEM, VEILED_HANGING_SIGN_ITEM, CELESTIAL_SIGN_ITEM, CELESTIAL_HANGING_SIGN_ITEM, MURUBLIGHT_SIGN_ITEM, MURUBLIGHT_HANGING_SIGN_ITEM);

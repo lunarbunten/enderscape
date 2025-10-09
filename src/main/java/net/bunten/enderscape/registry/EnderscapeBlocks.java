@@ -118,7 +118,7 @@ public class EnderscapeBlocks {
             .instrument(NoteBlockInstrument.BASEDRUM)
             .sound(SoundType.STONE)
             .requiresCorrectToolForDrops()
-            .noCollission()
+            .noCollision()
             .strength(0.5F)
             .pushReaction(PushReaction.DESTROY)
     );
@@ -148,7 +148,7 @@ public class EnderscapeBlocks {
             .instrument(NoteBlockInstrument.BASEDRUM)
             .sound(EnderscapeSoundTypes.MIRESTONE)
             .requiresCorrectToolForDrops()
-            .noCollission()
+            .noCollision()
             .strength(0.5F)
             .pushReaction(PushReaction.DESTROY)
     );
@@ -183,7 +183,7 @@ public class EnderscapeBlocks {
             .instrument(NoteBlockInstrument.BASEDRUM)
             .sound(EnderscapeSoundTypes.VERADITE)
             .requiresCorrectToolForDrops()
-            .noCollission()
+            .noCollision()
             .strength(0.5F)
             .pushReaction(PushReaction.DESTROY)
     );
@@ -218,7 +218,7 @@ public class EnderscapeBlocks {
             .instrument(NoteBlockInstrument.BASEDRUM)
             .sound(EnderscapeSoundTypes.KURODITE)
             .requiresCorrectToolForDrops()
-            .noCollission()
+            .noCollision()
             .strength(0.5F)
             .pushReaction(PushReaction.DESTROY)
     );
@@ -358,7 +358,7 @@ public class EnderscapeBlocks {
             .instabreak()
             .instrument(NoteBlockInstrument.BASEDRUM)
             .mapColor(MapColor.SAND)
-            .noCollission()
+            .noCollision()
             .noOcclusion()
             .offsetType(BlockBehaviour.OffsetType.XZ)
             .replaceable()
@@ -367,7 +367,7 @@ public class EnderscapeBlocks {
 
     public static final Block CHORUS_SPROUTS = register(true, "chorus_sprouts", ChorusSproutsBlock::new, Properties.of()
             .mapColor(MapColor.COLOR_PURPLE)
-            .noCollission()
+            .noCollision()
             .instabreak()
             .instrument(NoteBlockInstrument.BASEDRUM)
             .sound(EnderscapeSoundTypes.CHORUS_SPROUTS)
@@ -413,7 +413,7 @@ public class EnderscapeBlocks {
             .instabreak()
             .instrument(NoteBlockInstrument.BASEDRUM)
             .mapColor(MapColor.CLAY)
-            .noCollission()
+            .noCollision()
             .noOcclusion()
             .offsetType(BlockBehaviour.OffsetType.XZ)
             .replaceable()
@@ -424,7 +424,7 @@ public class EnderscapeBlocks {
             .instabreak()
             .instrument(NoteBlockInstrument.BASEDRUM)
             .mapColor(MapColor.CLAY)
-            .noCollission()
+            .noCollision()
             .noOcclusion()
             .offsetType(BlockBehaviour.OffsetType.XZ)
             .replaceable()
@@ -433,7 +433,7 @@ public class EnderscapeBlocks {
 
     public static final Block WISP_FLOWER = register(true, "wisp_flower", WispFlowerBlock::new, Properties.of()
             .mapColor(MapColor.CLAY)
-            .noCollission()
+            .noCollision()
             .instabreak()
             .sound(EnderscapeSoundTypes.WISP_FLOWER)
             .offsetType(BlockBehaviour.OffsetType.XZ)
@@ -475,7 +475,7 @@ public class EnderscapeBlocks {
 
     public static final Block VEILED_VINES = register(true, "veiled_vines", VeiledVinesBlock::new, Properties.of()
             .mapColor(MapColor.CLAY)
-            .noCollission()
+            .noCollision()
             .noOcclusion()
             .pushReaction(PushReaction.DESTROY)
             .sound(EnderscapeSoundTypes.VEILED_LEAVES)
@@ -499,7 +499,7 @@ public class EnderscapeBlocks {
             .mapColor(VEILED_PLANKS.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
+            .noCollision()
             .strength(0.5F)
             .ignitedByLava()
             .pushReaction(PushReaction.DESTROY)
@@ -533,14 +533,14 @@ public class EnderscapeBlocks {
     );
 
     public static final Block VEILED_BUTTON = register(true, "veiled_button", properties -> new ButtonBlock(VEILED_BLOCK_SET, 30, properties), buttonProperties());
-    public static final Block VEILED_SIGN = register(false, "veiled_sign", properties -> new StandingSignBlock(VEILED_WOOD_TYPE, properties), BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1).ignitedByLava());
-    public static final Block VEILED_WALL_SIGN = register(false, "veiled_wall_sign", properties -> new WallSignBlock(VEILED_WOOD_TYPE, properties), wallVariant(VEILED_SIGN, true).mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1).ignitedByLava());
+    public static final Block VEILED_SIGN = register(false, "veiled_sign", properties -> new StandingSignBlock(VEILED_WOOD_TYPE, properties), BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
+    public static final Block VEILED_WALL_SIGN = register(false, "veiled_wall_sign", properties -> new WallSignBlock(VEILED_WOOD_TYPE, properties), wallVariant(VEILED_SIGN, true).mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
 
     public static final Block VEILED_HANGING_SIGN = register(false, "veiled_hanging_sign", properties -> new CeilingHangingSignBlock(VEILED_WOOD_TYPE, properties), BlockBehaviour.Properties.of()
             .mapColor(VEILED_LOG.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
+            .noCollision()
             .strength(1)
             .ignitedByLava()
     );
@@ -549,7 +549,7 @@ public class EnderscapeBlocks {
             .mapColor(VEILED_LOG.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
+            .noCollision()
             .strength(1)
             .ignitedByLava()
     );
@@ -574,7 +574,7 @@ public class EnderscapeBlocks {
 
     public static final Block CELESTIAL_GROWTH = register(true, "celestial_growth", CelestialGrowthBlock::new, Properties.of()
             .mapColor(MapColor.TERRACOTTA_YELLOW)
-            .noCollission()
+            .noCollision()
             .instabreak()
             .sound(EnderscapeSoundTypes.CELESTIAL_GROWTH)
             .noOcclusion()
@@ -582,7 +582,7 @@ public class EnderscapeBlocks {
 
     public static final Block BULB_FLOWER = register(true, "bulb_flower", BulbFlowerBlock::new, Properties.of()
             .mapColor(MapColor.COLOR_YELLOW)
-            .noCollission()
+            .noCollision()
             .instabreak()
             .sound(EnderscapeSoundTypes.BULB_FLOWER)
             .noOcclusion()
@@ -594,7 +594,7 @@ public class EnderscapeBlocks {
     public static final Block FLANGER_BERRY_VINE = register(false, "flanger_berry_vine", FlangerBerryVine::new, Properties.of()
             .mapColor(MapColor.TERRACOTTA_YELLOW)
             .randomTicks()
-            .noCollission()
+            .noCollision()
             .sound(EnderscapeSoundTypes.FLANGER_BERRY_VINE)
             .strength(0.2F)
     );
@@ -604,7 +604,7 @@ public class EnderscapeBlocks {
             .randomTicks()
             .strength(0.3F)
             .pushReaction(PushReaction.DESTROY)
-            .noCollission()
+            .noCollision()
             .sound(EnderscapeSoundTypes.FLANGER_FLOWER)
             .noOcclusion()
     );
@@ -627,7 +627,7 @@ public class EnderscapeBlocks {
 
     public static final Block CELESTIAL_CHANTERELLE = register(true, "celestial_chanterelle", properties -> new CelestialChanterelleBlock(EnderscapeConfiguredFeatures.LARGE_CELESTIAL_CHANTERELLE, properties), Properties.of()
             .mapColor(MapColor.TERRACOTTA_YELLOW)
-            .noCollission()
+            .noCollision()
             .instabreak()
             .randomTicks()
             .sound(EnderscapeSoundTypes.CELESTIAL_CHANTERELLE)
@@ -674,7 +674,7 @@ public class EnderscapeBlocks {
             .mapColor(CELESTIAL_PLANKS.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
+            .noCollision()
             .strength(0.5F)
             .ignitedByLava()
             .pushReaction(PushReaction.DESTROY)
@@ -708,14 +708,14 @@ public class EnderscapeBlocks {
     );
 
     public static final Block CELESTIAL_BUTTON = register(true, "celestial_button", properties -> new ButtonBlock(CELESTIAL_BLOCK_SET, 30, properties), buttonProperties());
-    public static final Block CELESTIAL_SIGN = register(false, "celestial_sign", properties -> new StandingSignBlock(CELESTIAL_WOOD_TYPE, properties), BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1).ignitedByLava());
-    public static final Block CELESTIAL_WALL_SIGN = register(false, "celestial_wall_sign", properties -> new WallSignBlock(CELESTIAL_WOOD_TYPE, properties), wallVariant(CELESTIAL_SIGN, true).mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1).ignitedByLava());
+    public static final Block CELESTIAL_SIGN = register(false, "celestial_sign", properties -> new StandingSignBlock(CELESTIAL_WOOD_TYPE, properties), BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
+    public static final Block CELESTIAL_WALL_SIGN = register(false, "celestial_wall_sign", properties -> new WallSignBlock(CELESTIAL_WOOD_TYPE, properties), wallVariant(CELESTIAL_SIGN, true).mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
 
     public static final Block CELESTIAL_HANGING_SIGN = register(false, "celestial_hanging_sign", properties -> new CeilingHangingSignBlock(CELESTIAL_WOOD_TYPE, properties), BlockBehaviour.Properties.of()
             .mapColor(CELESTIAL_STEM.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
+            .noCollision()
             .strength(1)
             .ignitedByLava()
     );
@@ -724,7 +724,7 @@ public class EnderscapeBlocks {
             .mapColor(CELESTIAL_STEM.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
+            .noCollision()
             .strength(1)
             .ignitedByLava()
     );
@@ -747,7 +747,7 @@ public class EnderscapeBlocks {
 
     public static final Block CORRUPT_GROWTH = register(true, "corrupt_growth", CorruptGrowthBlock::new, Properties.of()
             .mapColor(MapColor.COLOR_PURPLE)
-            .noCollission()
+            .noCollision()
             .instabreak()
             .sound(EnderscapeSoundTypes.CORRUPT_GROWTH)
             .noOcclusion()
@@ -755,7 +755,7 @@ public class EnderscapeBlocks {
 
     public static final Block BLINKLIGHT_VINES_BODY = register(false, "blinklight_vines_body", BlinklightVinesBodyBlock::new, Properties.of()
             .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
-            .noCollission()
+            .noCollision()
             .sound(EnderscapeSoundTypes.BLINKLIGHT_VINES)
             .strength(0.8F)
             .randomTicks()
@@ -764,7 +764,7 @@ public class EnderscapeBlocks {
 
     public static final Block BLINKLIGHT_VINES_HEAD = register(false, "blinklight_vines_head", BlinklightVinesHeadBlock::new, Properties.of()
             .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
-            .noCollission()
+            .noCollision()
             .sound(EnderscapeSoundTypes.BLINKLIGHT_VINES)
             .strength(0.8F)
             .randomTicks()
@@ -781,7 +781,7 @@ public class EnderscapeBlocks {
 
     public static final Block MURUBLIGHT_BRACKET = register(false, "murublight_bracket", MurublightShelfBlock::new, Properties.of()
             .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
-            .noCollission()
+            .noCollision()
             .instabreak()
             .sound(EnderscapeSoundTypes.MURUBLIGHT_BRACKET)
             .noOcclusion()
@@ -789,7 +789,7 @@ public class EnderscapeBlocks {
 
     public static final Block MURUBLIGHT_CHANTERELLE = register(true, "murublight_chanterelle", MurublightChanterelleBlock::new, Properties.of()
             .mapColor(MapColor.TERRACOTTA_LIGHT_BLUE)
-            .noCollission()
+            .noCollision()
             .instabreak()
             .randomTicks()
             .sound(EnderscapeSoundTypes.CELESTIAL_CHANTERELLE)
@@ -836,7 +836,7 @@ public class EnderscapeBlocks {
             .mapColor(MURUBLIGHT_PLANKS.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
+            .noCollision()
             .strength(0.5F)
             .ignitedByLava()
             .pushReaction(PushReaction.DESTROY)
@@ -871,14 +871,14 @@ public class EnderscapeBlocks {
     );
 
     public static final Block MURUBLIGHT_BUTTON = register(true, "murublight_button", properties -> new ButtonBlock(MURUBLIGHT_BLOCK_SET, 30, properties), buttonProperties());
-    public static final Block MURUBLIGHT_SIGN = register(false, "murublight_sign", properties -> new StandingSignBlock(MURUBLIGHT_WOOD_TYPE, properties), BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1).ignitedByLava());
-    public static final Block MURUBLIGHT_WALL_SIGN = register(false, "murublight_wall_sign", properties -> new WallSignBlock(MURUBLIGHT_WOOD_TYPE, properties), wallVariant(MURUBLIGHT_SIGN, true).mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1).ignitedByLava());
+    public static final Block MURUBLIGHT_SIGN = register(false, "murublight_sign", properties -> new StandingSignBlock(MURUBLIGHT_WOOD_TYPE, properties), BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
+    public static final Block MURUBLIGHT_WALL_SIGN = register(false, "murublight_wall_sign", properties -> new WallSignBlock(MURUBLIGHT_WOOD_TYPE, properties), wallVariant(MURUBLIGHT_SIGN, true).mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
 
     public static final Block MURUBLIGHT_HANGING_SIGN = register(false, "murublight_hanging_sign", properties -> new CeilingHangingSignBlock(MURUBLIGHT_WOOD_TYPE, properties), BlockBehaviour.Properties.of()
             .mapColor(MURUBLIGHT_STEM.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
+            .noCollision()
             .strength(1)
             .ignitedByLava()
     );
@@ -887,7 +887,7 @@ public class EnderscapeBlocks {
             .mapColor(MURUBLIGHT_STEM.defaultMapColor())
             .forceSolidOn()
             .instrument(NoteBlockInstrument.BASS)
-            .noCollission()
+            .noCollision()
             .strength(1)
             .ignitedByLava()
     );

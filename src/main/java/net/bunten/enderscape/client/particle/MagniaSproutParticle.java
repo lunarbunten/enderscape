@@ -5,9 +5,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.util.RandomSource;
 
 @Environment(EnvType.CLIENT)
-public class MagniaSproutParticle extends TextureSheetParticle {
+public class MagniaSproutParticle extends SingleQuadParticle {
 
     protected final SpriteSet sprites;
 
@@ -20,7 +21,7 @@ public class MagniaSproutParticle extends TextureSheetParticle {
     protected float colorFadeRate;
 
     protected MagniaSproutParticle(ClientLevel level, double x, double y, double z, double xd, double yd, double zd, SpriteSet sprites, MagniaParticleOptions options) {
-        super(level, x, y, z, xd, yd, zd);
+        super(level, x, y, z, xd, yd, zd, sprites.first());
 
         this.sprites = sprites;
 
@@ -80,8 +81,8 @@ public class MagniaSproutParticle extends TextureSheetParticle {
     }
 
     @Override
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    protected Layer getLayer() {
+        return Layer.TRANSLUCENT;
     }
 
     @Environment(EnvType.CLIENT)
@@ -93,7 +94,7 @@ public class MagniaSproutParticle extends TextureSheetParticle {
         }
 
         @Override
-        public Particle createParticle(MagniaParticleOptions options, ClientLevel level, double x, double y, double z, double xd, double yd, double zd) {
+        public Particle createParticle(MagniaParticleOptions options, ClientLevel level, double x, double y, double z, double xd, double yd, double zd, RandomSource randomSource) {
             return new MagniaSproutParticle(level, x, y, z, xd, yd, zd, sprites, options);
         }
     }

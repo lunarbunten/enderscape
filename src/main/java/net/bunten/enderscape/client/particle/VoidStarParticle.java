@@ -4,13 +4,16 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
+import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
 public class VoidStarParticle extends RisingParticle {
 
-    private VoidStarParticle(ClientLevel world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-        super(world, x, y, z, velocityX, velocityY, velocityZ);
+    private VoidStarParticle(ClientLevel world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, TextureAtlasSprite textureAtlasSprite) {
+        super(world, x, y, z, velocityX, velocityY, velocityZ, textureAtlasSprite);
 
         rCol *= (1 - (world.random.nextFloat() * 0.6F));
 
@@ -32,8 +35,9 @@ public class VoidStarParticle extends RisingParticle {
         super.tick();
     }
 
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    @Override
+    protected Layer getLayer() {
+        return Layer.TRANSLUCENT;
     }
 
     public void move(double dx, double dy, double dz) {
@@ -54,10 +58,9 @@ public class VoidStarParticle extends RisingParticle {
             this.sprites = sprites;
         }
 
-        public Particle createParticle(SimpleParticleType type, ClientLevel world, double x, double y, double z, double vx, double vy, double vz) {
-            VoidStarParticle particle = new VoidStarParticle(world, x, y, z, vx, vy, vz);
-            particle.pickSprite(sprites);
-            return particle;
+        @Override
+        public @Nullable Particle createParticle(SimpleParticleType type, ClientLevel world, double x, double y, double z, double vx, double vy, double vz, RandomSource randomSource) {
+            return new VoidStarParticle(world, x, y, z, vx, vy, vz, this.sprites.get(randomSource));
         }
     }
 }

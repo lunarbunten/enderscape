@@ -4,12 +4,14 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 
 @Environment(EnvType.CLIENT)
-public class MagniaBlisteringParticle extends TextureSheetParticle {
-    public MagniaBlisteringParticle(ClientLevel level, double x, double y, double z, double xd, double yd, double zd) {
-        super(level, x, y, z, xd, yd, zd);
+public class MagniaBlisteringParticle extends SingleQuadParticle {
+    public MagniaBlisteringParticle(ClientLevel level, double x, double y, double z, double xd, double yd, double zd, TextureAtlasSprite textureAtlasSprite) {
+        super(level, x, y, z, xd, yd, zd, textureAtlasSprite);
         float j = random.nextFloat() * 0.1F + 0.2F;
 
         rCol = j;
@@ -27,8 +29,8 @@ public class MagniaBlisteringParticle extends TextureSheetParticle {
     }
 
     @Override
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+    protected Layer getLayer() {
+        return Layer.OPAQUE;
     }
 
     @Override
@@ -59,9 +61,8 @@ public class MagniaBlisteringParticle extends TextureSheetParticle {
             this.sprites = sprites;
         }
 
-        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xd, double yd, double zd) {
-            MagniaBlisteringParticle particle = new MagniaBlisteringParticle(level, x, y, z, xd, yd, zd);
-            particle.pickSprite(sprites);
+        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xd, double yd, double zd, RandomSource randomSource) {
+            MagniaBlisteringParticle particle = new MagniaBlisteringParticle(level, x, y, z, xd, yd, zd, sprites.get(randomSource));
             particle.setColor(1.0F, 1.0F, 1.0F);
             return particle;
         }

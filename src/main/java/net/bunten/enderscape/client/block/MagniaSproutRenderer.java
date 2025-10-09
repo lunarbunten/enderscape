@@ -6,27 +6,46 @@ import net.bunten.enderscape.block.MagniaSproutBlock;
 import net.bunten.enderscape.block.MagniaSproutBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShapeRenderer;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
-public class MagniaSproutRenderer implements BlockEntityRenderer<MagniaSproutBlockEntity> {
+public class MagniaSproutRenderer implements BlockEntityRenderer<MagniaSproutBlockEntity, MagniaSproutState> {
 
     public MagniaSproutRenderer(BlockEntityRendererProvider.Context context) {}
 
     @Override
-    public void render(MagniaSproutBlockEntity entity, float f, PoseStack pose, MultiBufferSource source, int i, int j, Vec3 cameraPos) {
+    public MagniaSproutState createRenderState() {
+        return new MagniaSproutState();
+    }
+
+    @Override
+    public void extractRenderState(MagniaSproutBlockEntity entity, MagniaSproutState state, float f, Vec3 vec3, @Nullable ModelFeatureRenderer.CrumblingOverlay crumblingOverlay) {
+        BlockEntityRenderer.super.extractRenderState(entity, state, f, vec3, crumblingOverlay);
+
+        BlockState blockState = entity.getBlockState();
+        if (blockState.getBlock() instanceof MagniaSproutBlock sprout) {
+            state.range = MagniaSproutBlockEntity.getRange(entity.getLevel(), blockState, entity.getBlockPos()).move(entity.getBlockPos().multiply(-1));
+            state.color = Vec3.fromRGB24(sprout.getPolarity(blockState).get().getRangeHitboxColor());
+            state.intensity = blockState.getValue(MagniaSproutBlock.POWERED) ? 0.85F : 0.05F;
+        }
+    }
+
+    @Override
+    public void submit(MagniaSproutState state, PoseStack pose, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
         if (EnderscapeConfig.getInstance().debugMagniaSproutHitboxes) {
-            BlockState state = entity.getBlockState();
-            if (state.getBlock() instanceof MagniaSproutBlock sprout && sprout.getPolarity(state).isPresent()) {
-                Vec3 color = Vec3.fromRGB24(sprout.getPolarity(state).get().getRangeHitboxColor());
-                ShapeRenderer.renderLineBox(pose, source.getBuffer(RenderType.lines()), MagniaSproutBlockEntity.getRange(entity.getLevel(), state, entity.getBlockPos()).move(entity.getBlockPos().multiply(-1)), (float) color.x, (float) color.y, (float) color.z, state.getValue(MagniaSproutBlock.POWERED) ? 0.85F : 0.05F);
-            }
+            if (state.range == null) return;
+            submitNodeCollector.submitCustomGeometry(pose, RenderType.lines(), (pose1, vertexConsumer) -> {
+                ShapeRenderer.renderLineBox(pose1, vertexConsumer, state.range, (float) state.color.x, (float) state.color.y, (float) state.color.z, state.intensity);
+            });
         }
     }
 }

@@ -38,7 +38,7 @@ public class MagniaBlock extends AbstractMagniaBlock implements HasMagniaPowerSi
     }
 
     @Override
-    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
         return getPower(state);
     }
 

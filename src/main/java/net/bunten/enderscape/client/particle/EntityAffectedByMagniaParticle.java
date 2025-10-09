@@ -8,6 +8,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SimpleAnimatedParticle;
 import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.util.RandomSource;
 
 @Environment(EnvType.CLIENT)
 public class EntityAffectedByMagniaParticle extends SimpleAnimatedParticle {
@@ -47,7 +48,7 @@ public class EntityAffectedByMagniaParticle extends SimpleAnimatedParticle {
         }
 
         @Override
-        public Particle createParticle(MagniaParticleOptions options, ClientLevel level, double x, double y, double z, double xd, double yd, double zd) {
+        public Particle createParticle(MagniaParticleOptions options, ClientLevel level, double x, double y, double z, double xd, double yd, double zd, RandomSource randomSource) {
             return new EntityAffectedByMagniaParticle(level, x, y, z, sprites, options);
         }
     }

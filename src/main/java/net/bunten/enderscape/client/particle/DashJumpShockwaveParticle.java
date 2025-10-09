@@ -1,20 +1,21 @@
 package net.bunten.enderscape.client.particle;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.bunten.enderscape.particle.DashJumpShockwaveParticleOptions;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.state.QuadParticleRenderState;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 @Environment(EnvType.CLIENT)
-public class DashJumpShockwaveParticle extends TextureSheetParticle {
+public class DashJumpShockwaveParticle extends SingleQuadParticle {
     private final SpriteSet sprites;
     private final DashJumpShockwaveParticleOptions options;
 
@@ -22,7 +23,7 @@ public class DashJumpShockwaveParticle extends TextureSheetParticle {
     protected float spinSpeed;
 
     public DashJumpShockwaveParticle(ClientLevel level, double x, double y, double z, SpriteSet sprites, DashJumpShockwaveParticleOptions options) {
-        super(level, x, y, z);
+        super(level, x, y, z, sprites.first());
 
         this.sprites = sprites;
         this.options = options;
@@ -64,7 +65,8 @@ public class DashJumpShockwaveParticle extends TextureSheetParticle {
     }
 
     @Override
-    public void render(VertexConsumer consumer, Camera camera, float delta) {
+    public void extract(QuadParticleRenderState quadParticleRenderState, Camera camera, float delta) {
+        super.extract(quadParticleRenderState, camera, delta);
         float spinAngle = (age + delta) * spinSpeed;
 
         Vector3f velocity = new Vector3f(options.velocity()).normalize();
@@ -75,13 +77,14 @@ public class DashJumpShockwaveParticle extends TextureSheetParticle {
         Quaternionf rotation = new Quaternionf().rotationTo(new Vector3f(0, 0, 1), velocity);
         rotation.rotateZ(spinAngle);
 
-        renderRotatedQuad(consumer, camera, rotation, delta);
-        renderRotatedQuad(consumer, camera, new Quaternionf(rotation).rotateY((float) Math.PI), delta);
+        extractRotatedQuad(quadParticleRenderState, camera, rotation, delta);
+        extractRotatedQuad(quadParticleRenderState, camera, new Quaternionf(rotation).rotateY((float) Math.PI), delta);
+
     }
 
     @Override
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    protected Layer getLayer() {
+        return Layer.TRANSLUCENT;
     }
 
     @Override
@@ -99,7 +102,7 @@ public class DashJumpShockwaveParticle extends TextureSheetParticle {
 
         @Nullable
         @Override
-        public Particle createParticle(DashJumpShockwaveParticleOptions options, ClientLevel level, double x, double y, double z, double xd, double yd, double zd) {
+        public Particle createParticle(DashJumpShockwaveParticleOptions options, ClientLevel level, double x, double y, double z, double xd, double yd, double zd, RandomSource randomSource) {
             return new DashJumpShockwaveParticle(level, x, y, z, sprites, options);
         }
     }

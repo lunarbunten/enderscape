@@ -344,7 +344,7 @@ public class Rustle extends Animal implements Bucketable, Shearable {
             if (stack.getItem() instanceof ShearsItem && readyForShearing()) {
                 if (level() instanceof ServerLevel server) {
                     shear(server, SoundSource.PLAYERS, stack);
-                    stack.hurtAndBreak(1, player, getSlotForHand(hand));
+                    stack.hurtAndBreak(1, player, hand.asEquipmentSlot());
                     gameEvent(GameEvent.SHEAR, player);
 
                     return InteractionResult.SUCCESS_SERVER;

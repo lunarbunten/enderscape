@@ -170,7 +170,7 @@ public class ChorusCakeRollBlock extends Block {
     }
 
     @Override
-    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
         return getOutputSignal(state.getValue(BITES));
     }
 

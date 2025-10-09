@@ -7,11 +7,16 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.SkyRenderer;
+import net.minecraft.util.ARGB;
+import net.minecraft.world.phys.Vec3;
+import org.joml.Vector4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Environment(EnvType.CLIENT)
 @Mixin(SkyRenderer.class)
@@ -27,4 +32,11 @@ public abstract class SkyRendererMixin {
             ci.cancel();
         }
     }
+
+    // TODO 1.21.10
+//    @ModifyArgs(method = "renderEndFlash", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/ARGB;color(FI)I"))
+//    private void Enderscape$changeColor(Args args) {
+//        Vector4f thing = EnderscapeSkybox.flashColor;
+//        args.set(1, ARGB.color(new Vec3(thing.x, thing.y, thing.z)));
+//    }
 }

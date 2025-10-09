@@ -1,5 +1,6 @@
 {
   "biome": "enderscape:magnia_fields",
+  "flash_color": 4409679,
   "fog_end_density": 1.0,
   "fog_start_density": 1.0,
   "nebula_alpha": 0.025,

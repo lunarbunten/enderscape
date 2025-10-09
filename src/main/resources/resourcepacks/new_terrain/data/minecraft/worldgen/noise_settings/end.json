@@ -15,6 +15,7 @@
     "size_vertical": 1
   },
   "noise_router": {
+    "preliminary_surface_level": 0.0,
     "barrier": 0.0,
     "continents": {
       "type": "minecraft:add",

@@ -11,7 +11,6 @@ import net.bunten.enderscape.registry.EnderscapeEntities;
 import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
 import net.bunten.enderscape.registry.tag.EnderscapePoiTags;
 import net.minecraft.core.GlobalPos;
-import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
@@ -70,7 +69,7 @@ public class DrifterAI {
         if (mob.level() instanceof ServerLevel level) {
             level.getPoiManager().getType(value.pos()).ifPresent(type -> {
                 level.getPoiManager().take(poi -> poi.is(EnderscapePoiTags.DRIFTER_HOME), (type2, pos) -> pos.equals(value.pos()), value.pos(), 1);
-                DebugPackets.sendPoiTicketCountPacket(level, value.pos());
+                level.debugSynchronizers().updatePoi(value.pos());
             });
         }
         mob.getBrain().setMemory(EnderscapeMemory.HOME, value);

@@ -4,7 +4,6 @@ import net.bunten.enderscape.registry.EnderscapeSurfaceRuleData;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.progress.ChunkProgressListener;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
@@ -22,7 +21,7 @@ public abstract class MinecraftServerMixin {
     public abstract RegistryAccess.Frozen registryAccess();
 
     @Inject(at = @At("TAIL"), method = "createLevels")
-    private void addSurfaceRules(ChunkProgressListener listener, CallbackInfo ci) {
+    private void addSurfaceRules(CallbackInfo ci) {
         registryAccess().lookup(Registries.LEVEL_STEM).flatMap(stems -> stems.get(LevelStem.END)).ifPresent(reference -> {
             LevelStem value = reference.value();
             if (value.generator() instanceof NoiseBasedChunkGenerator generator) {

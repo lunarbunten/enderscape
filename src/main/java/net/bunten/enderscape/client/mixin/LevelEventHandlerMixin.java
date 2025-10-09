@@ -9,6 +9,7 @@ import net.bunten.enderscape.registry.EnderscapeParticles;
 import net.bunten.enderscape.registry.EnderscapeRegistries;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LevelEventHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -34,7 +35,7 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 @Mixin(LevelEventHandler.class)
 public abstract class LevelEventHandlerMixin {
 
-    @Shadow @Final private Level level;
+    @Shadow @Final private ClientLevel level;
 
     @Unique private final ClientsideMagniaRadioHandler Enderscape$magniaRadioHandler = new ClientsideMagniaRadioHandler();
 

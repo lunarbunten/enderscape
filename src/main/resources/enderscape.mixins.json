@@ -58,5 +58,5 @@
   "server": [],
   "injectors": {
     "defaultRequire": 1
-	}
+  }
 }
