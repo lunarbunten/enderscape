@@ -27,8 +27,6 @@ public class Enderscape implements ModInitializer {
 
     public static final boolean IS_DEBUG = FabricLoader.getInstance().isDevelopmentEnvironment();
 
-    public static final SoundEvent END_FLASH = registerSoundEvent("ambient.weather.end_flash");
-
     public static ResourceLocation id(String path) {
         return ResourceLocation.tryBuild(MOD_ID, path);
     }
