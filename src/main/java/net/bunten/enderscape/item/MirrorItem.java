@@ -25,7 +25,9 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -137,11 +139,12 @@ public class MirrorItem extends NebuliteToolItem {
     public static Optional<Vec3> getTeleportPosition(MirrorContext context) {
         ServerLevel level = context.linkedLevel();
         LivingEntity user = context.user();
+        EntityDimensions dimensions = user.getDimensions(Pose.STANDING);
+        
+        Vec3 offsetPos = context.linkedPos().above().getBottomCenter().add(0.0, dimensions.height() / 2.0, 0.0);
 
-        Vec3 offsetPos = context.linkedPos().above().getBottomCenter().add(0.0, user.getBbHeight() / 2.0, 0.0);
-
-        VoxelShape shape = Shapes.create(AABB.ofSize(offsetPos, user.getBbWidth() + 1, user.getBbHeight() + 1, user.getBbWidth() + 1).inflate(1.0E-6));
-        Optional<Vec3> freePos = level.findFreePosition(user, shape, offsetPos, user.getBbWidth(), user.getBbHeight(), user.getBbWidth());
+        VoxelShape shape = Shapes.create(AABB.ofSize(offsetPos, dimensions.width() + 1, dimensions.height() + 1, dimensions.width() + 1).inflate(1.0E-6));
+        Optional<Vec3> freePos = level.findFreePosition(user, shape, offsetPos, dimensions.width(), dimensions.height(), dimensions.width());
 
         if (freePos.isPresent()) {
             Vec3 pos = freePos.get();
