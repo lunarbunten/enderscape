@@ -1,11 +1,15 @@
 package net.bunten.enderscape.client.particle;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.bunten.enderscape.mixin.LevelLightEngineAccessor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SingleQuadParticle;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.renderer.state.QuadParticleRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -34,11 +38,11 @@ public class CorruptSporesParticle extends SingleQuadParticle {
         xd += Mth.sin(age * 0.4F) * 0.01F;
         zd += Mth.sin(age * 0.4F + Mth.PI) * 0.01F;
 
-        float newAlpha = MINIMUM_OPACITY;
         BlockPos pos = BlockPos.containing(x, y, z);
-        if (level.getChunk(pos) != null) {
-            newAlpha = level.getChunkSource().getLightEngine().getRawBrightness(pos, 0) / 15.0F;
-        }
+
+        int value = ((LevelLightEngineAccessor) level.getLightEngine()).getBlockEngine().getLightValue(pos);
+        float flashIntensity = level.endFlashState().getIntensity(Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false));
+        float newAlpha = Math.min(1, (value / 15.0F) + (flashIntensity / 2));
 
         alpha = Mth.lerp(0.15F, alpha, Math.max(MINIMUM_OPACITY, newAlpha));
 
