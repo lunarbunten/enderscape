@@ -1,6 +1,6 @@
 {
   "biome": "enderscape:void_sky_islands",
-  "flash_color": 15305215,
+  "flash_color": 0,
   "fog_end_density": 2.0,
   "fog_start_density": 4.0,
   "nebula_alpha": 0.05,
