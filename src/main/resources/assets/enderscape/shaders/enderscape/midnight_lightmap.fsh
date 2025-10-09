@@ -1,4 +1,4 @@
-#version 150
+#version 330
 
 layout(std140) uniform LightmapInfo {
     float AmbientLightFactor;
@@ -20,9 +20,11 @@ float get_brightness(float level) {
     return level / (4.0 - 3.0 * level);
 }
 
-vec3 notGamma(vec3 x) {
-    vec3 nx = 1.0 - x;
-    return 1.0 - nx * nx * nx * nx;
+vec3 notGamma(vec3 color) {
+    float maxComponent = max(max(color.x, color.y), color.z);
+    float maxInverted = 1.0f - maxComponent;
+    float maxScaled = 1.0f - maxInverted * maxInverted * maxInverted * maxInverted;
+    return color * (maxScaled / maxComponent);
 }
 
 void main() {
@@ -31,19 +33,19 @@ void main() {
 
     // cubic nonsense, dips to yellowish in the middle, white when fully saturated
     vec3 color = vec3(
-    block_brightness,
-    block_brightness * ((block_brightness * 0.6 + 0.4) * 0.6 + 0.4),
-    block_brightness * (block_brightness * block_brightness * 0.6 + 0.4)
+        block_brightness,
+        block_brightness * ((block_brightness * 0.6 + 0.4) * 0.6 + 0.4),
+        block_brightness * (block_brightness * block_brightness * 0.6 + 0.4)
     );
 
-    color = mix(color, lightmapInfo.AmbientColor, lightmapInfo.AmbientLightFactor);
-    color = clamp(color, 0.0, 1.0);
+    color.g -= block_brightness * 0.1;
+    color.b += block_brightness * 0.16;
 
+    color = mix(color, vec3(0.92, 1.2, 0.92), 0.02);
     color += lightmapInfo.SkyLightColor * sky_brightness;
-    color = mix(color, vec3(0.75), 0.04);
 
     vec3 darkened_color = color * vec3(0.7, 0.6, 0.6);
-    color = mix(color, darkened_color, lightmapInfo.DarkenWorldFactor);
+    color = mix(color, darkened_color, lightmapInfo.DarkenWorldFactor / 2);
 
     if (lightmapInfo.NightVisionFactor > 0.0) {
         // scale up uniformly until 1.0 is hit by one of the colors
@@ -54,12 +56,11 @@ void main() {
         }
     }
 
-    color = clamp(color - vec3(lightmapInfo.DarknessScale), 0.0, 1.0);
+    color = color - vec3(lightmapInfo.DarknessScale);
+    color = clamp(color, 0.0, 1.0);
 
     vec3 notGamma = notGamma(color);
-    color = mix(color, notGamma, lightmapInfo.BrightnessFactor);
-    color = mix(color, vec3(0.75), 0.04);
-    color = clamp(color, 0.0, 1.0);
+    color = mix(color, notGamma, lightmapInfo.BrightnessFactor * 0.4);
 
     fragColor = vec4(color, 1.0);
 }

@@ -99,9 +99,6 @@ public class Enderscape implements ModInitializer {
         EnderscapeConfig config = EnderscapeConfig.getInstance();
 
         FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(container -> {
-            ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("lighting"), container, Component.translatable("pack.enderscape.lighting"), getActivationType(config.defaultResourcePackLighting));
-            ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("dark_lighting"), container, Component.translatable("pack.enderscape.dark_lighting"), getActivationType(config.defaultResourcePackDarkLighting));
-
             ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("fix_levitation_advancement"), container, Component.translatable("pack.enderscape.fix_levitation_advancement"), getActivationType(config.defaultDataPackFixLevitationAdvancement));
             ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("fix_vanilla_recipes"), container, Component.translatable("pack.enderscape.fix_vanilla_recipes"), getActivationType(config.defaultDataPackFixVanillaRecipes));
             ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("new_end_cities"), container, Component.translatable("pack.enderscape.new_end_cities"), getActivationType(config.defaultDataPackNewEndCities));

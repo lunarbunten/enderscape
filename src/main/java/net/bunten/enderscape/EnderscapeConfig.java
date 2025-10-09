@@ -3,6 +3,7 @@ package net.bunten.enderscape;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
+import net.bunten.enderscape.client.renderer.LightingStyle;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class EnderscapeConfig {
@@ -19,8 +20,6 @@ public class EnderscapeConfig {
         return HANDLER.instance();
     }
 
-    @SerialEntry public boolean defaultResourcePackLighting = true;
-    @SerialEntry public boolean defaultResourcePackDarkLighting = false;
 
     @SerialEntry public boolean defaultDataPackFixLevitationAdvancement = true;
     @SerialEntry public boolean defaultDataPackFixVanillaRecipes = true;
@@ -100,6 +99,8 @@ public class EnderscapeConfig {
     @SerialEntry public int shulkerBulletEnforceDistanceLimit = 30;
     @SerialEntry public int shulkerBulletEnforceTimeLimit = 30;
     @SerialEntry public int skyboxBrightnessScaleFactor = 40;
+
+    @SerialEntry public LightingStyle lightingStyle = LightingStyle.IMPROVED;
 
     static {
         HANDLER.load();

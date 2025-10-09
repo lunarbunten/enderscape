@@ -1,5 +1,5 @@
 {
-  "ambient_light": 0.025,
+  "ambient_light": 0.25,
   "bed_works": false,
   "coordinate_scale": 1.0,
   "effects": "minecraft:the_end",

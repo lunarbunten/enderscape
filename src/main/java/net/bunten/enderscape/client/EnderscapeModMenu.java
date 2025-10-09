@@ -4,9 +4,11 @@ import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.ControllerBuilder;
+import dev.isxander.yacl3.api.controller.EnumControllerBuilder;
 import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import net.bunten.enderscape.EnderscapeConfig;
+import net.bunten.enderscape.client.renderer.LightingStyle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screens.Screen;
@@ -71,7 +73,6 @@ public class EnderscapeModMenu implements ModMenuApi {
         ConfigCategory.Builder main = ConfigCategory.createBuilder().name(Component.translatable("option.enderscape.category.clientside"));
 
         if (IS_DEBUG) addDebugOptions(config, main);
-        addResourcePackOptions(config, main);
         addClientsideAmbienceOptions(config, main);
         addClientsideBlockOptions(config, main);
         addClientsideEntityOptions(config, main);
@@ -179,32 +180,6 @@ public class EnderscapeModMenu implements ModMenuApi {
         );
     }
 
-    private static void addResourcePackOptions(EnderscapeConfig config, ConfigCategory.Builder builder) {
-        Option<?> defaultResourcePackLighting = boolOption(
-                "default_resource_pack_lighting",
-                true,
-                () -> config.defaultResourcePackLighting,
-                value -> config.defaultResourcePackLighting = value,
-                TickBoxControllerBuilder::create
-        );
-
-        Option<?> defaultResourcePackDarkLighting = boolOption(
-                "default_resource_pack_dark_lighting",
-                false,
-                () -> config.defaultResourcePackDarkLighting,
-                value -> config.defaultResourcePackDarkLighting = value,
-                TickBoxControllerBuilder::create
-        );
-
-        builder.group(OptionGroup.createBuilder()
-                .name(Component.translatable("option.group.enderscape.resource_packs"))
-
-                .option(defaultResourcePackLighting)
-                .option(defaultResourcePackDarkLighting)
-                .build()
-        );
-    }
-
     private static void addClientsideAmbienceOptions(EnderscapeConfig config, ConfigCategory.Builder builder) {
         Option<?> skyboxUpdateEnabled = boolOption(
                 "skybox_update_enabled",
@@ -213,6 +188,13 @@ public class EnderscapeModMenu implements ModMenuApi {
                 value -> config.skyboxUpdateEnabled = value,
                 TickBoxControllerBuilder::create
         );
+
+        Option<LightingStyle> lightingStyle = Option.<LightingStyle>createBuilder()
+                .name(Component.translatable("option.enderscape.lighting_style"))
+                .binding(LightingStyle.IMPROVED, () -> config.lightingStyle, value -> config.lightingStyle = value)
+                .description(OptionDescription.createBuilder().text(Component.translatable("option.enderscape.lighting_style.desc")).build())
+                .controller(opt -> EnumControllerBuilder.create(opt).enumClass(LightingStyle.class))
+                .build();
 
         Option<?> skyboxAddDynamicFogDensity = boolOption(
                 "skybox_add_dynamic_fog_density",
@@ -256,6 +238,7 @@ public class EnderscapeModMenu implements ModMenuApi {
                 .option(skyboxBrightnessScaleFactor)
                 .option(skyboxAddDynamicFogDensity)
                 .option(structureMusicFadingEnabled)
+                .option(lightingStyle)
 
                 .build()
         );

@@ -2,6 +2,7 @@ package net.bunten.enderscape.client;
 
 import com.google.common.reflect.Reflection;
 import net.bunten.enderscape.client.block.MagniaSproutRenderer;
+import net.bunten.enderscape.client.renderer.EnderscapeRenderPipelines;
 import net.bunten.enderscape.client.sound.EndermanStaticSoundInstance;
 import net.bunten.enderscape.client.hud.HudElement;
 import net.bunten.enderscape.client.item.NebuliteToolTooltip;
@@ -45,6 +46,7 @@ public class EnderscapeClient implements ClientModInitializer {
 
         Reflection.initialize(
                 EnderscapeClientNetworking.class,
+                EnderscapeRenderPipelines.class,
                 EnderscapeParticleProviders.class,
                 EnderscapeEntityRenderData.class,
                 EnderscapeBlockRenderLayerMap.class,
