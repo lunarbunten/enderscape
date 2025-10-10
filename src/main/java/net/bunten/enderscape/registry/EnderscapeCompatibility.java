@@ -67,8 +67,6 @@ public class EnderscapeCompatibility {
 
         blockAndItemAlias("celestial_path_block", "celestial_path");
         blockAndItemAlias("corrupt_path_block", "corrupt_path");
-
-        blockAndItemAlias("murublight_shelf", "murublight_bracket");
     }
 
     private static <T> void dynamicRegistryAlias(DynamicRegistryView view, ResourceKey<Registry<T>> registry, String old_name, String new_name) {
