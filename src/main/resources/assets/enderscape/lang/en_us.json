@@ -289,6 +289,7 @@
     "dimension.the_bumblezone.the_bumblezone": "The Bumblezone",
     "dimension.twilightforest.twilightforest": "The Twilight Forest",
     "effect.enderscape.low_gravity": "Low Gravity",
+    "effect.enderscape.low_gravity.description": "Grants higher jumps, slower falls, and increased mid-air speed.",
     "enchantment.enderscape.bundling": "Bundling",
     "enchantment.enderscape.bundling.desc": "Automatically stacks picked up items into Bundles",
     "enchantment.enderscape.lightspeed": "Lightspeed",
