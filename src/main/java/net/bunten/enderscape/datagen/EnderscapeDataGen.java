@@ -40,7 +40,7 @@ public class EnderscapeDataGen implements DataGeneratorEntrypoint {
 		pack.addProvider(EnderscapePoiTagProvider::new);
 		pack.addProvider(EnderscapeProcessorListProvider::new);
 		pack.addProvider(EnderscapeRecipeProvider::new);
-		pack.addProvider(EnderscapeSkyParametersProvider::new);
+		pack.addProvider(EnderscapeBiomeParamatersProviders::new);
 		pack.addProvider(EnderscapeSoundEventTagProvider::new);
 		pack.addProvider(EnderscapeStructureMusicProvider::new);
 		pack.addProvider(EnderscapeStructureProvider::new);
@@ -69,7 +69,7 @@ public class EnderscapeDataGen implements DataGeneratorEntrypoint {
 		builder.add(Registries.TRIM_PATTERN, EnderscapeTrimPatterns::bootstrap);
 
 		builder.add(EnderscapeRegistries.MAGNIA_RADIO_SONG, EnderscapeMagniaRadioSongs::bootstrap);
-		builder.add(EnderscapeRegistries.SKY_PARAMETERS, EnderscapeSkyParameters::bootstrap);
+		builder.add(EnderscapeRegistries.BIOME_PARAMETERS, EnderscapeBiomeParameters::bootstrap);
 		builder.add(EnderscapeRegistries.STRUCTURE_MUSIC, EnderscapeStructureMusic::bootstrap);
 	}
 }
