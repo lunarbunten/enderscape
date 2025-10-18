@@ -1,0 +1,6 @@
+{
+    "model": {
+        "type": "minecraft:model",
+        "model": "enderscape:block/veiled_shelf_inventory"
+    }
+}

@@ -533,8 +533,10 @@ public class EnderscapeBlocks {
     );
 
     public static final Block VEILED_BUTTON = register(true, "veiled_button", properties -> new ButtonBlock(VEILED_BLOCK_SET, 30, properties), buttonProperties());
-    public static final Block VEILED_SIGN = register(false, "veiled_sign", properties -> new StandingSignBlock(VEILED_WOOD_TYPE, properties), BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
-    public static final Block VEILED_WALL_SIGN = register(false, "veiled_wall_sign", properties -> new WallSignBlock(VEILED_WOOD_TYPE, properties), wallVariant(VEILED_SIGN, true).mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
+
+    public static final Block VEILED_SHELF = register(false, "veiled_shelf", ShelfBlock::new, BlockBehaviour.Properties.of().mapColor(VEILED_PLANKS.defaultMapColor()).instrument(NoteBlockInstrument.BASS).sound(SoundType.SHELF).ignitedByLava().strength(2.0F, 3.0F));
+    public static final Block VEILED_SIGN = register(false, "veiled_sign", properties -> new StandingSignBlock(VEILED_WOOD_TYPE, properties), BlockBehaviour.Properties.of().mapColor(VEILED_PLANKS.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
+    public static final Block VEILED_WALL_SIGN = register(false, "veiled_wall_sign", properties -> new WallSignBlock(VEILED_WOOD_TYPE, properties), wallVariant(VEILED_SIGN, true).mapColor(VEILED_PLANKS.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
 
     public static final Block VEILED_HANGING_SIGN = register(false, "veiled_hanging_sign", properties -> new CeilingHangingSignBlock(VEILED_WOOD_TYPE, properties), BlockBehaviour.Properties.of()
             .mapColor(VEILED_LOG.defaultMapColor())
@@ -708,8 +710,9 @@ public class EnderscapeBlocks {
     );
 
     public static final Block CELESTIAL_BUTTON = register(true, "celestial_button", properties -> new ButtonBlock(CELESTIAL_BLOCK_SET, 30, properties), buttonProperties());
-    public static final Block CELESTIAL_SIGN = register(false, "celestial_sign", properties -> new StandingSignBlock(CELESTIAL_WOOD_TYPE, properties), BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
-    public static final Block CELESTIAL_WALL_SIGN = register(false, "celestial_wall_sign", properties -> new WallSignBlock(CELESTIAL_WOOD_TYPE, properties), wallVariant(CELESTIAL_SIGN, true).mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
+    public static final Block CELESTIAL_SHELF = register(false, "celestial_shelf", ShelfBlock::new, BlockBehaviour.Properties.of().mapColor(CELESTIAL_PLANKS.defaultMapColor()).instrument(NoteBlockInstrument.BASS).sound(SoundType.SHELF).ignitedByLava().strength(2.0F, 3.0F));
+    public static final Block CELESTIAL_SIGN = register(false, "celestial_sign", properties -> new StandingSignBlock(CELESTIAL_WOOD_TYPE, properties), BlockBehaviour.Properties.of().mapColor(CELESTIAL_PLANKS.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
+    public static final Block CELESTIAL_WALL_SIGN = register(false, "celestial_wall_sign", properties -> new WallSignBlock(CELESTIAL_WOOD_TYPE, properties), wallVariant(CELESTIAL_SIGN, true).mapColor(CELESTIAL_PLANKS.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
 
     public static final Block CELESTIAL_HANGING_SIGN = register(false, "celestial_hanging_sign", properties -> new CeilingHangingSignBlock(CELESTIAL_WOOD_TYPE, properties), BlockBehaviour.Properties.of()
             .mapColor(CELESTIAL_STEM.defaultMapColor())
@@ -871,8 +874,9 @@ public class EnderscapeBlocks {
     );
 
     public static final Block MURUBLIGHT_BUTTON = register(true, "murublight_button", properties -> new ButtonBlock(MURUBLIGHT_BLOCK_SET, 30, properties), buttonProperties());
-    public static final Block MURUBLIGHT_SIGN = register(false, "murublight_sign", properties -> new StandingSignBlock(MURUBLIGHT_WOOD_TYPE, properties), BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
-    public static final Block MURUBLIGHT_WALL_SIGN = register(false, "murublight_wall_sign", properties -> new WallSignBlock(MURUBLIGHT_WOOD_TYPE, properties), wallVariant(MURUBLIGHT_SIGN, true).mapColor(MapColor.WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
+    public static final Block MURUBLIGHT_SHELF = register(false, "murublight_shelf", ShelfBlock::new, BlockBehaviour.Properties.of().mapColor(MURUBLIGHT_PLANKS.defaultMapColor()).instrument(NoteBlockInstrument.BASS).sound(SoundType.SHELF).ignitedByLava().strength(2.0F, 3.0F));
+    public static final Block MURUBLIGHT_SIGN = register(false, "murublight_sign", properties -> new StandingSignBlock(MURUBLIGHT_WOOD_TYPE, properties), BlockBehaviour.Properties.of().mapColor(MURUBLIGHT_PLANKS.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
+    public static final Block MURUBLIGHT_WALL_SIGN = register(false, "murublight_wall_sign", properties -> new WallSignBlock(MURUBLIGHT_WOOD_TYPE, properties), wallVariant(MURUBLIGHT_SIGN, true).mapColor(MURUBLIGHT_PLANKS.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollision().strength(1).ignitedByLava());
 
     public static final Block MURUBLIGHT_HANGING_SIGN = register(false, "murublight_hanging_sign", properties -> new CeilingHangingSignBlock(MURUBLIGHT_WOOD_TYPE, properties), BlockBehaviour.Properties.of()
             .mapColor(MURUBLIGHT_STEM.defaultMapColor())

@@ -146,6 +146,7 @@ public class EnderscapeCompatibility {
         FlammableBlockRegistry.getDefaultInstance().add(VEILED_FENCE_GATE, 5, 5);
         FlammableBlockRegistry.getDefaultInstance().add(VEILED_FENCE, 5, 5);
         FlammableBlockRegistry.getDefaultInstance().add(VEILED_STAIRS, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(VEILED_SHELF, 30, 20);
 
         FlammableBlockRegistry.getDefaultInstance().add(VEILED_SAPLING, 15, 60);
         FlammableBlockRegistry.getDefaultInstance().add(VEILED_LEAVES, 30, 60);
@@ -161,6 +162,7 @@ public class EnderscapeCompatibility {
         FlammableBlockRegistry.getDefaultInstance().add(CELESTIAL_FENCE_GATE, 5, 5);
         FlammableBlockRegistry.getDefaultInstance().add(CELESTIAL_FENCE, 5, 5);
         FlammableBlockRegistry.getDefaultInstance().add(CELESTIAL_STAIRS, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(CELESTIAL_SHELF, 30, 20);
 
         FlammableBlockRegistry.getDefaultInstance().add(CELESTIAL_CAP, 30, 60);
 
@@ -174,9 +176,10 @@ public class EnderscapeCompatibility {
         FlammableBlockRegistry.getDefaultInstance().add(MURUBLIGHT_FENCE_GATE, 5, 5);
         FlammableBlockRegistry.getDefaultInstance().add(MURUBLIGHT_FENCE, 5, 5);
         FlammableBlockRegistry.getDefaultInstance().add(MURUBLIGHT_STAIRS, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(MURUBLIGHT_SHELF, 30, 20);
 
         FlammableBlockRegistry.getDefaultInstance().add(MURUBLIGHT_CAP, 30, 60);
-
+        
         FlammableBlockRegistry.getDefaultInstance().add(CELESTIAL_GROWTH, 60, 60);
         FlammableBlockRegistry.getDefaultInstance().add(BULB_FLOWER, 60, 100);
         FlammableBlockRegistry.getDefaultInstance().add(FLANGER_BERRY_VINE, 60, 100);

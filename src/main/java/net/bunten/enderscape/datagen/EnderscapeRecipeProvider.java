@@ -393,6 +393,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 planksFromLogs(VEILED_PLANKS, EnderscapeItemTags.VEILED_LOGS, 4);
 
                 hangingSign(VEILED_HANGING_SIGN_ITEM, STRIPPED_VEILED_LOG);
+                shelf(VEILED_SHELF_ITEM, STRIPPED_VEILED_LOG);
 
                 shapeless(RecipeCategory.MISC, YELLOW_DYE)
                         .group("yellow_dye")
@@ -432,6 +433,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 planksFromLogs(CELESTIAL_PLANKS, EnderscapeItemTags.CELESTIAL_STEMS, 4);
 
                 hangingSign(CELESTIAL_HANGING_SIGN_ITEM, STRIPPED_CELESTIAL_STEM);
+                shelf(CELESTIAL_SHELF_ITEM, STRIPPED_CELESTIAL_STEM);
 
                 shapeless(RecipeCategory.MISC, PURPLE_DYE)
                         .group("purple_dye")
@@ -465,6 +467,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 planksFromLogs(MURUBLIGHT_PLANKS, EnderscapeItemTags.MURUBLIGHT_STEMS, 4);
 
                 hangingSign(MURUBLIGHT_HANGING_SIGN_ITEM, STRIPPED_MURUBLIGHT_STEM);
+                shelf(MURUBLIGHT_SHELF_ITEM, STRIPPED_MURUBLIGHT_STEM);
             }
 
             private void rubbleShield(ItemLike stone, ItemLike shield) {

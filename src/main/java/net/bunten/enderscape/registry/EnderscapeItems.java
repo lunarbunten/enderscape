@@ -70,6 +70,10 @@ public class EnderscapeItems {
     public static final Item MURUBLIGHT_HANGING_SIGN_ITEM = registerItem("murublight_hanging_sign", properties -> new HangingSignItem(EnderscapeBlocks.MURUBLIGHT_HANGING_SIGN, EnderscapeBlocks.MURUBLIGHT_WALL_HANGING_SIGN, properties), new Properties().stacksTo(16).useBlockDescriptionPrefix());
     public static final Item MURUBLIGHT_SIGN_ITEM = registerItem("murublight_sign", properties -> new SignItem(EnderscapeBlocks.MURUBLIGHT_SIGN, EnderscapeBlocks.MURUBLIGHT_WALL_SIGN, properties), new Properties().stacksTo(16).useBlockDescriptionPrefix());
 
+    public static final Item VEILED_SHELF_ITEM = registerBlock(EnderscapeBlocks.VEILED_SHELF, new Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY));
+    public static final Item CELESTIAL_SHELF_ITEM = registerBlock(EnderscapeBlocks.CELESTIAL_SHELF, new Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY));
+    public static final Item MURUBLIGHT_SHELF_ITEM = registerBlock(EnderscapeBlocks.MURUBLIGHT_SHELF, new Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY));
+
     public static final Item CHORUS_CAKE_ROLL_ITEM = registerItem("chorus_cake_roll", properties -> new BlockItem(EnderscapeBlocks.CHORUS_CAKE_ROLL, properties), new Properties().stacksTo(1).useBlockDescriptionPrefix());
 
     public static final Item BLINKLIGHT = registerItem("blinklight", properties -> new BlockItem(EnderscapeBlocks.BLINKLIGHT_VINES_HEAD, properties), new Properties().useItemDescriptionPrefix());
@@ -189,6 +193,10 @@ public class EnderscapeItems {
 
     public static Item registerBlock(Block block) {
         return registerBlock(block, BlockItem::new, new Item.Properties());
+    }
+
+    public static Item registerBlock(Block block, Item.Properties properties) {
+        return registerBlock(block, BlockItem::new, properties);
     }
 
     public static Item registerBlock(Block block, BiFunction<Block, Item.Properties, Item> biFunction, Item.Properties properties) {

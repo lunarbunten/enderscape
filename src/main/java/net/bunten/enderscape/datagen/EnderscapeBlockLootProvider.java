@@ -115,6 +115,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(VEILED_TRAPDOOR);
         dropSelf(VEILED_PRESSURE_PLATE);
         dropSelf(VEILED_BUTTON);
+        dropSelf(VEILED_SHELF);
         dropOther(VEILED_SIGN, VEILED_SIGN_ITEM);
         dropOther(VEILED_WALL_SIGN, VEILED_SIGN_ITEM);
         dropOther(VEILED_HANGING_SIGN, VEILED_HANGING_SIGN_ITEM);
@@ -153,6 +154,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(CELESTIAL_TRAPDOOR);
         dropSelf(CELESTIAL_PRESSURE_PLATE);
         dropSelf(CELESTIAL_BUTTON);
+        dropSelf(CELESTIAL_SHELF);
         dropOther(CELESTIAL_SIGN, CELESTIAL_SIGN_ITEM);
         dropOther(CELESTIAL_WALL_SIGN, CELESTIAL_SIGN_ITEM);
         dropOther(CELESTIAL_HANGING_SIGN, CELESTIAL_HANGING_SIGN_ITEM);
@@ -182,6 +184,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(MURUBLIGHT_TRAPDOOR);
         dropSelf(MURUBLIGHT_PRESSURE_PLATE);
         dropSelf(MURUBLIGHT_BUTTON);
+        dropSelf(MURUBLIGHT_SHELF);
         dropOther(MURUBLIGHT_SIGN, MURUBLIGHT_SIGN_ITEM);
         dropOther(MURUBLIGHT_WALL_SIGN, MURUBLIGHT_SIGN_ITEM);
         dropOther(MURUBLIGHT_HANGING_SIGN, MURUBLIGHT_HANGING_SIGN_ITEM);

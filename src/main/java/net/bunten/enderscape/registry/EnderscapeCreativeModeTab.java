@@ -235,6 +235,7 @@ public class EnderscapeCreativeModeTab {
         output.accept(VEILED_TRAPDOOR);
         output.accept(VEILED_PRESSURE_PLATE);
         output.accept(VEILED_BUTTON);
+        output.accept(VEILED_SHELF_ITEM);
         output.accept(VEILED_SIGN_ITEM);
         output.accept(VEILED_HANGING_SIGN_ITEM);
 
@@ -268,6 +269,7 @@ public class EnderscapeCreativeModeTab {
         output.accept(CELESTIAL_TRAPDOOR);
         output.accept(CELESTIAL_PRESSURE_PLATE);
         output.accept(CELESTIAL_BUTTON);
+        output.accept(CELESTIAL_SHELF_ITEM);
         output.accept(CELESTIAL_SIGN_ITEM);
         output.accept(CELESTIAL_HANGING_SIGN_ITEM);
 
@@ -299,6 +301,7 @@ public class EnderscapeCreativeModeTab {
         output.accept(MURUBLIGHT_TRAPDOOR);
         output.accept(MURUBLIGHT_PRESSURE_PLATE);
         output.accept(MURUBLIGHT_BUTTON);
+        output.accept(MURUBLIGHT_SHELF_ITEM);
         output.accept(MURUBLIGHT_SIGN_ITEM);
         output.accept(MURUBLIGHT_HANGING_SIGN_ITEM);
 

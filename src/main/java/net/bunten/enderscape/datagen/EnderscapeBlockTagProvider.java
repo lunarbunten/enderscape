@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
@@ -282,6 +283,7 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider.BlockTagProvid
         valueLookupBuilder(BlockTags.REPLACEABLE).add(DRY_END_GROWTH, WISP_SPROUTS, WISP_GROWTH);
         valueLookupBuilder(BlockTags.SAPLINGS).add(VEILED_SAPLING);
         valueLookupBuilder(BlockTags.SMALL_FLOWERS).add(BULB_FLOWER);
+        valueLookupBuilder(BlockTags.WOODEN_SHELVES).add(VEILED_SHELF, CELESTIAL_SHELF, MURUBLIGHT_SHELF);
 
         valueLookupBuilder(BlockTags.SLABS).add(
                 CELESTIAL_BRICK_SLAB,
