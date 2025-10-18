@@ -1103,6 +1103,16 @@
             }
         ]
     },
+    "ambient.weather.end_flash": {
+        "sounds": [
+            {
+                "name": "minecraft:weather.end_flash",
+                "type": "event",
+                "volume": 2
+            }
+        ],
+        "subtitle": "subtitles.weather.end_flash"
+    },
     "block.alluring_magnia.break": {
         "sounds": [
             {

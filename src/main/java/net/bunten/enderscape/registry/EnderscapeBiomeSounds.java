@@ -1,6 +1,8 @@
 package net.bunten.enderscape.registry;
 
+import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.biome.util.BiomeSounds;
+import net.minecraft.sounds.SoundEvent;
 
 public class EnderscapeBiomeSounds {
 
@@ -12,5 +14,7 @@ public class EnderscapeBiomeSounds {
     public static final BiomeSounds VOID_DEPTHS = BiomeSounds.of("void_depths");
     public static final BiomeSounds VOID_SKIES = BiomeSounds.of("void_skies");
     public static final BiomeSounds VOID_SKY_ISLANDS = BiomeSounds.of("void_sky_islands");
+
+    public static final SoundEvent END_FLASH = Enderscape.registerSoundEvent("ambient.weather.end_flash");
 
 }

@@ -5,6 +5,7 @@
     "client": [
         "AbstractClientPlayerMixin",
         "AtmosphericFogEnvironmentMixin",
+        "ClientLevelMixin",
         "ClientPacketListenerMixin",
         "ConditionalItemModelPropertiesMixin",
         "EndEffectsMixin",
