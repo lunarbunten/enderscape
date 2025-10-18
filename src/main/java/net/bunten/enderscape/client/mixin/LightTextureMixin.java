@@ -3,7 +3,7 @@ package net.bunten.enderscape.client.mixin;
 import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.client.renderer.EnderscapeRenderPipelines;
 import net.bunten.enderscape.client.renderer.LightingStyle;
-import net.bunten.enderscape.client.world.EnderscapeSkybox;
+import net.bunten.enderscape.client.world.EndFlashParameters;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LightTexture;
@@ -49,7 +49,7 @@ public class LightTextureMixin {
     private Vector3f Enderscape$updateEndFlashColor(Vector3f original) {
         ClientLevel level = minecraft.level;
         if (level != null && level.effects().hasEndFlashes() && EnderscapeConfig.getInstance().flashUpdatedVisuals) {
-            Vector4f color = EnderscapeSkybox.flashColor;
+            Vector4f color = EndFlashParameters.color;
             return new Vector3f(color.x, color.y, color.z);
         }
         return original;

@@ -107,10 +107,6 @@ public class EnderscapeConfig {
 
     @SerialEntry public LightingStyle lightingStyle = LightingStyle.IMPROVED;
 
-    public long flashFrequencyInTicks() {
-        return Math.max(1L, (long) (flashFrequency * 60F * 20F));
-    }
-
     static {
         HANDLER.load();
     }

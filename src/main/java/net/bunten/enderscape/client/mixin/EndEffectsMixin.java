@@ -2,6 +2,7 @@ package net.bunten.enderscape.client.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.bunten.enderscape.EnderscapeConfig;
+import net.bunten.enderscape.client.world.EndFlashParameters;
 import net.bunten.enderscape.client.world.EnderscapeSkybox;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -17,6 +18,6 @@ public abstract class EndEffectsMixin {
     @ModifyReturnValue(method = "getBrightnessDependentFogColor", at = @At("RETURN"))
     public Vec3 Enderscape$getBrightnessDependentFogColor(Vec3 original) {
         if (EnderscapeConfig.getInstance().skyboxUpdateEnabled) original = original.scale(EnderscapeSkybox.gammaFactor());
-        return original.scale(EnderscapeSkybox.getSkyboxLightScale());
+        return original.scale(EndFlashParameters.skyboxBrightness());
     }
 }

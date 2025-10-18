@@ -49,7 +49,6 @@ public class EnderscapeSkybox {
     public static float fogEndDensity = 1.0F;
     public static Vector4f nebulaColor = new Vector4f(0, 0, 0, 0);
     public static Vector4f starColor = new Vector4f(0, 0, 0, 0);
-    public static Vector4f flashColor = new Vector4f(0, 0, 0, 0);
 
     public static final RenderPipeline NEBULAE_PIPELINE = RenderPipelines.register(
             RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET)
@@ -85,23 +84,9 @@ public class EnderscapeSkybox {
         Vec3 skyColor = CubicSampler.gaussianSampleVec3(
                 position,
                 (ix, jx, k) -> Vec3.fromRGB24(level.getBiomeManager().getNoiseBiomeAtQuart(ix, jx, k).value().getSkyColor())
-        ).scale(getSkyboxLightScale()).scale(gammaFactor());
+        ).scale(EndFlashParameters.skyboxBrightness()).scale(gammaFactor());
 
         return new Vector4f((float) skyColor.x(), (float) skyColor.y(), (float) skyColor.z(), 1.0F);
-    }
-
-    public static float getSkyboxLightScale() {
-        Minecraft client = Minecraft.getInstance();
-        ClientLevel level = client.level;
-
-        float value = 1.0F;
-
-        if (level != null && EnderscapeConfig.getInstance().flashInfluencesSkybox) {
-            float intensity = level.endFlashState().getIntensity(client.getDeltaTracker().getGameTimeDeltaPartialTick(false));
-            value -= (intensity / 2);
-        }
-
-        return value;
     }
 
     public static void render(PoseStack pose, ClientLevel level, Camera camera, DeltaTracker tracker) {

@@ -4,6 +4,7 @@ import com.mojang.blaze3d.textures.GpuTextureView;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.EnderscapeConfig;
+import net.bunten.enderscape.client.world.EndFlashParameters;
 import net.bunten.enderscape.client.world.EnderscapeSkybox;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -53,7 +54,7 @@ public abstract class SkyRendererMixin {
     private void Enderscape$changeColor(Args args) {
         if (EnderscapeConfig.getInstance().flashUpdatedVisuals)  {
             float intensity = args.get(3);
-            Vector4f color = EnderscapeSkybox.flashColor;
+            Vector4f color = EndFlashParameters.color;
             args.set(0, color.x * intensity);
             args.set(1, color.y * intensity);
             args.set(2, color.z * intensity);
