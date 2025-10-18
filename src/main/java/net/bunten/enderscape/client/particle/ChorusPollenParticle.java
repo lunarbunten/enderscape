@@ -1,9 +1,13 @@
 package net.bunten.enderscape.client.particle;
 
+import net.bunten.enderscape.client.registry.EnderscapeParticleProviders;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SingleQuadParticle;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -29,9 +33,8 @@ public class ChorusPollenParticle extends SingleQuadParticle {
         return Layer.TRANSLUCENT;
     }
 
-    @Override
-    protected int getLightColor(float tint) {
-        return Math.max(60, super.getLightColor(tint));
+    public int getLightColor(float tint) {
+        return Math.max(EnderscapeParticleProviders.scaledLight(0.25F), super.getLightColor(tint));
     }
 
     @Override

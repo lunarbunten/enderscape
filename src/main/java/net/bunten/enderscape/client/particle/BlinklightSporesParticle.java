@@ -1,9 +1,13 @@
 package net.bunten.enderscape.client.particle;
 
+import net.bunten.enderscape.client.registry.EnderscapeParticleProviders;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SingleQuadParticle;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 
@@ -37,7 +41,7 @@ public class BlinklightSporesParticle extends SingleQuadParticle {
 
     @Override
     public int getLightColor(float delta) {
-        return 0xF000F0;
+        return EnderscapeParticleProviders.scaledLight(1.0F);
     }
 
     @Override

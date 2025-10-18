@@ -1,5 +1,6 @@
 package net.bunten.enderscape.client.particle;
 
+import net.bunten.enderscape.client.registry.EnderscapeParticleProviders;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -44,10 +45,7 @@ public class EnderPearlParticle extends SimpleAnimatedParticle {
 
     @Override
     public int getLightColor(float delta) {
-        BlockPos pos = BlockPos.containing(x, y, z);
-        int color = level.hasChunkAt(pos) ? LevelRenderer.getLightColor(level, pos) : 0;
-
-        return Math.max(160, color);
+        return Math.max(EnderscapeParticleProviders.scaledLight(0.65F), super.getLightColor(delta));
     }
 
     @Environment(EnvType.CLIENT)

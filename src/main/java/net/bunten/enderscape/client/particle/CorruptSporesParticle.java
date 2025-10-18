@@ -1,5 +1,6 @@
 package net.bunten.enderscape.client.particle;
 
+import net.bunten.enderscape.client.registry.EnderscapeParticleProviders;
 import net.bunten.enderscape.mixin.LevelLightEngineAccessor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -10,6 +11,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.state.QuadParticleRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -49,9 +51,8 @@ public class CorruptSporesParticle extends SingleQuadParticle {
         super.tick();
     }
 
-    @Override
-    public int getLightColor(float delta) {
-        return 255;
+    public int getLightColor(float tint) {
+        return EnderscapeParticleProviders.scaledLight(1.0F);
     }
 
     @Override

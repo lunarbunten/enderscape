@@ -1,5 +1,6 @@
 package net.bunten.enderscape.client.particle;
 
+import net.bunten.enderscape.client.registry.EnderscapeParticleProviders;
 import net.bunten.enderscape.particle.MagniaParticleOptions;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -35,8 +36,8 @@ public class EntityAffectedByMagniaParticle extends SimpleAnimatedParticle {
     }
 
     @Override
-    public int getLightColor(float tint) {
-        return Math.max(150, super.getLightColor(tint));
+    public int getLightColor(float delta) {
+        return Math.max(EnderscapeParticleProviders.scaledLight(0.6F), super.getLightColor(delta));
     }
 
     @Environment(EnvType.CLIENT)

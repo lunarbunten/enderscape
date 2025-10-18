@@ -37,4 +37,8 @@ public class EnderscapeParticleProviders {
         ParticleFactoryRegistry.getInstance().register(VOID_POOF, VoidPoofParticle.Provider::new);
         ParticleFactoryRegistry.getInstance().register(VOID_STARS, VoidStarParticle.Provider::new);
     }
+
+    public static int scaledLight(float factor) {
+        return (15 << 20) | ((int) (15 * factor) << 4);
+    }
 }

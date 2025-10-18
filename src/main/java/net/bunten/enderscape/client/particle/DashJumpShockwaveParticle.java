@@ -1,5 +1,6 @@
 package net.bunten.enderscape.client.particle;
 
+import net.bunten.enderscape.client.registry.EnderscapeParticleProviders;
 import net.bunten.enderscape.particle.DashJumpShockwaveParticleOptions;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -86,7 +87,7 @@ public class DashJumpShockwaveParticle extends SingleQuadParticle {
 
     @Override
     protected int getLightColor(float tint) {
-        return Math.max(50, super.getLightColor(tint));
+        return Math.max(EnderscapeParticleProviders.scaledLight(0.2F), super.getLightColor(tint));
     }
 
     @Environment(EnvType.CLIENT)

@@ -1,5 +1,6 @@
 package net.bunten.enderscape.client.particle;
 
+import net.bunten.enderscape.client.registry.EnderscapeParticleProviders;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -47,12 +48,9 @@ public class NebuliteOreParticle extends SimpleAnimatedParticle {
 
     @Override
     public int getLightColor(float tint) {
-        int color = 0;
         BlockPos pos = BlockPos.containing(x, y, z);
-        if (level.getChunk(pos) != null) {
-            color = LevelRenderer.getLightColor(level, pos);
-        }
-        return Math.max(150, color);
+        int color = level.hasChunkAt(pos) ? LevelRenderer.getLightColor(level, pos) : 0;
+        return Math.max(EnderscapeParticleProviders.scaledLight(0.6F), color);
     }
 
     @Environment(EnvType.CLIENT)

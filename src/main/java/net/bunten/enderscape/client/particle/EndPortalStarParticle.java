@@ -1,5 +1,6 @@
 package net.bunten.enderscape.client.particle;
 
+import net.bunten.enderscape.client.registry.EnderscapeParticleProviders;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -51,7 +52,7 @@ public class EndPortalStarParticle extends RisingParticle {
 
     @Override
     public int getLightColor(float delta) {
-        return Math.max(160, super.getLightColor(delta));
+        return Math.max(EnderscapeParticleProviders.scaledLight(0.65F), super.getLightColor(delta));
     }
 
     @Environment(EnvType.CLIENT)

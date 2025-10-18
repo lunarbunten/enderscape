@@ -1,9 +1,13 @@
 package net.bunten.enderscape.client.particle;
 
+import net.bunten.enderscape.client.registry.EnderscapeParticleProviders;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.RisingParticle;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
@@ -47,7 +51,7 @@ public class VoidStarParticle extends RisingParticle {
 
     @Override
     public int getLightColor(float delta) {
-        return Math.max(160, super.getLightColor(delta));
+        return Math.max(EnderscapeParticleProviders.scaledLight(0.65F), super.getLightColor(delta));
     }
 
     @Environment(EnvType.CLIENT)
