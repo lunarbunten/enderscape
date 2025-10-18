@@ -51,6 +51,7 @@ public class EnderscapeSkybox {
     public static float fogEndDensity = 1.0F;
     public static Vector4f nebulaColor = new Vector4f(0, 0, 0, 0);
     public static Vector4f starColor = new Vector4f(0, 0, 0, 0);
+    public static Vector4f flashColor = new Vector4f(0, 0, 0, 0);
 
     public static final RenderPipeline NEBULAE_PIPELINE = RenderPipelines.register(
             RenderPipeline.builder(MATRICES_COLOR_SNIPPET)
