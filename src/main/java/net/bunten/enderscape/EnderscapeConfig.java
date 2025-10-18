@@ -69,6 +69,9 @@ public class EnderscapeConfig {
     @SerialEntry public boolean enderPearlUpdateThrowSound = true;
     @SerialEntry public boolean endPortalUpdateParticles = true;
     @SerialEntry public boolean endPortalUpdateTravelSound = true;
+    @SerialEntry public boolean flashEnabled = true;
+    @SerialEntry public boolean flashInfluencesSkybox = true;
+    @SerialEntry public boolean flashUpdatedVisuals = true;
     @SerialEntry public boolean mirrorScreenEffectEnabled = true;
     @SerialEntry public boolean mirrorTooltipDisplayCoordinates = false;
     @SerialEntry public boolean mirrorTooltipDisplayDimension = true;
@@ -100,7 +103,13 @@ public class EnderscapeConfig {
     @SerialEntry public int shulkerBulletEnforceTimeLimit = 30;
     @SerialEntry public int skyboxBrightnessScaleFactor = 40;
 
+    @SerialEntry public float flashFrequency = 2.0F;
+
     @SerialEntry public LightingStyle lightingStyle = LightingStyle.IMPROVED;
+
+    public long flashFrequencyInTicks() {
+        return Math.max(1L, (long) (flashFrequency * 60F * 20F));
+    }
 
     static {
         HANDLER.load();

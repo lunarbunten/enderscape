@@ -24,7 +24,7 @@ public class EnderscapeSkyParameters {
                 DEFAULT_NEBULA_ALPHA * 1.15F,
                 0xFFA589,
                 DEFAULT_STAR_ALPHA * 1.4F,
-                0x331931,
+                0x6B3D4D,
                 2.0F,
                 1.0F
         );
@@ -35,7 +35,7 @@ public class EnderscapeSkyParameters {
                 DEFAULT_NEBULA_ALPHA * 0.8F,
                 0x9F89FF,
                 DEFAULT_STAR_ALPHA * 0.7F,
-                0x2A1E33,
+                0x242035,
                 4.0F,
                 1.25F
         );
@@ -46,7 +46,7 @@ public class EnderscapeSkyParameters {
                 DEFAULT_NEBULA_ALPHA * 0.5F,
                 0x89FFD5,
                 DEFAULT_STAR_ALPHA * 0.85F,
-                0x1D242B,
+                0x374745,
                 1.0F,
                 1.0F
         );
@@ -56,7 +56,7 @@ public class EnderscapeSkyParameters {
                 0x969BAA,
                 DEFAULT_NEBULA_ALPHA * 0.7F,
                 0xB493FF, DEFAULT_STAR_ALPHA,
-                0x2A2133,
+                0x413A54,
                 4.0F,
                 1.0F
         );

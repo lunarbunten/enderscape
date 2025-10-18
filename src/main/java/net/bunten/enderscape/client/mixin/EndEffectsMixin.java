@@ -16,7 +16,7 @@ public abstract class EndEffectsMixin {
 
     @ModifyReturnValue(method = "getBrightnessDependentFogColor", at = @At("RETURN"))
     public Vec3 Enderscape$getBrightnessDependentFogColor(Vec3 original) {
-        if (EnderscapeConfig.getInstance().skyboxUpdateEnabled) return original.scale(EnderscapeSkybox.gammaFactor());
-        return original;
+        if (EnderscapeConfig.getInstance().skyboxUpdateEnabled) original = original.scale(EnderscapeSkybox.gammaFactor());
+        return original.scale(EnderscapeSkybox.getSkyboxLightScale());
     }
 }

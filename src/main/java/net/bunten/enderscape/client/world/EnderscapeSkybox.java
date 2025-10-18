@@ -81,15 +81,27 @@ public class EnderscapeSkybox {
     }
 
     private static Vector4f computeSkyColor(Camera camera, ClientLevel level) {
-        float flashIntensity = level.endFlashState().getIntensity(Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false));
-
         Vec3 position = camera.getPosition().subtract(2.0, 2.0, 2.0).scale(0.25);
         Vec3 skyColor = CubicSampler.gaussianSampleVec3(
                 position,
                 (ix, jx, k) -> Vec3.fromRGB24(level.getBiomeManager().getNoiseBiomeAtQuart(ix, jx, k).value().getSkyColor())
-        ).add(new Vec3(flashColor.x, flashColor.y, flashColor.z).scale(flashIntensity / 3)).scale(gammaFactor());
+        ).scale(getSkyboxLightScale()).scale(gammaFactor());
 
         return new Vector4f((float) skyColor.x(), (float) skyColor.y(), (float) skyColor.z(), 1.0F);
+    }
+
+    public static float getSkyboxLightScale() {
+        Minecraft client = Minecraft.getInstance();
+        ClientLevel level = client.level;
+
+        float value = 1.0F;
+
+        if (level != null && EnderscapeConfig.getInstance().flashInfluencesSkybox) {
+            float intensity = level.endFlashState().getIntensity(client.getDeltaTracker().getGameTimeDeltaPartialTick(false));
+            value -= (intensity / 2);
+        }
+
+        return value;
     }
 
     public static void render(PoseStack pose, ClientLevel level, Camera camera, DeltaTracker tracker) {

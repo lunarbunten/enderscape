@@ -41,11 +41,11 @@ void main() {
     color.g -= block_brightness * 0.1;
     color.b += block_brightness * 0.16;
 
-    color = mix(color, vec3(0.92, 1.2, 0.92), 0.02);
-    color += lightmapInfo.SkyLightColor * sky_brightness;
+    vec3 ambient = vec3(0.98, 1.2, 0.98);
 
-    vec3 darkened_color = color * vec3(0.7, 0.6, 0.6);
-    color = mix(color, darkened_color, lightmapInfo.DarkenWorldFactor / 2);
+    ambient = mix(ambient, lightmapInfo.SkyLightColor, lightmapInfo.SkyFactor);
+
+    color = mix(color, ambient, 0.04);
 
     if (lightmapInfo.NightVisionFactor > 0.0) {
         // scale up uniformly until 1.0 is hit by one of the colors
@@ -56,7 +56,6 @@ void main() {
         }
     }
 
-    color = color - vec3(lightmapInfo.DarknessScale);
     color = clamp(color, 0.0, 1.0);
 
     vec3 notGamma = notGamma(color);

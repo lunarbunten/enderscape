@@ -48,7 +48,7 @@ public class LightTextureMixin {
     )
     private Vector3f Enderscape$updateEndFlashColor(Vector3f original) {
         ClientLevel level = minecraft.level;
-        if (level != null && level.effects().hasEndFlashes()) {
+        if (level != null && level.effects().hasEndFlashes() && EnderscapeConfig.getInstance().flashUpdatedVisuals) {
             Vector4f color = EnderscapeSkybox.flashColor;
             return new Vector3f(color.x, color.y, color.z);
         }

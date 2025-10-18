@@ -3,10 +3,7 @@ package net.bunten.enderscape.client;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import dev.isxander.yacl3.api.*;
-import dev.isxander.yacl3.api.controller.ControllerBuilder;
-import dev.isxander.yacl3.api.controller.EnumControllerBuilder;
-import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
-import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
+import dev.isxander.yacl3.api.controller.*;
 import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.client.renderer.LightingStyle;
 import net.fabricmc.api.EnvType;
@@ -222,6 +219,37 @@ public class EnderscapeModMenu implements ModMenuApi {
                 1
         );
 
+        Option<?> flashEnabled = boolOption(
+                "flash_enabled",
+                true,
+                () -> config.flashEnabled,
+                value -> config.flashEnabled = value,
+                TickBoxControllerBuilder::create
+        );
+
+        Option<?> flashUpdatedVisuals = boolOption(
+                "flash_updated_visuals",
+                true,
+                () -> config.flashUpdatedVisuals,
+                value -> config.flashUpdatedVisuals = value,
+                TickBoxControllerBuilder::create
+        );
+
+        Option<?> flashInfluencesSkybox = boolOption(
+                "flash_influences_skybox",
+                true,
+                () -> config.flashInfluencesSkybox,
+                value -> config.flashInfluencesSkybox = value,
+                TickBoxControllerBuilder::create
+        );
+
+        Option<?> flashFrequency = Option.<Float>createBuilder()
+                .name(Component.translatable("option.enderscape.flash_frequency"))
+                .binding(2.0F, () -> config.flashFrequency, value -> config.flashFrequency = value)
+                .description(OptionDescription.createBuilder().text(Component.translatable("option.enderscape.flash_frequency.desc")).build())
+                .controller(opt -> FloatSliderControllerBuilder.create(opt).range(0.5F, 4.0F).step(0.2F))
+                .build();
+
         Option<?> structureMusicFadingEnabled = boolOption(
                 "structure_music_fading_enabled",
                 true,
@@ -233,12 +261,16 @@ public class EnderscapeModMenu implements ModMenuApi {
         builder.group(OptionGroup.createBuilder()
                 .name(Component.translatable("option.group.enderscape.ambience"))
 
+                .option(lightingStyle)
                 .option(skyboxUpdateEnabled)
                 .option(skyboxScalesBrightnessWithGamma)
                 .option(skyboxBrightnessScaleFactor)
                 .option(skyboxAddDynamicFogDensity)
+                .option(flashEnabled)
+                .option(flashUpdatedVisuals)
+                .option(flashInfluencesSkybox)
+                .option(flashFrequency)
                 .option(structureMusicFadingEnabled)
-                .option(lightingStyle)
 
                 .build()
         );

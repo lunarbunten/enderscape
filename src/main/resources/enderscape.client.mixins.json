@@ -9,6 +9,7 @@
         "ConditionalItemModelPropertiesMixin",
         "EndEffectsMixin",
         "EndermiteRendererMixin",
+        "EndFlashStateMixin",
         "FogRendererMixin",
         "GameRendererMixin",
         "LevelEventHandlerMixin",
