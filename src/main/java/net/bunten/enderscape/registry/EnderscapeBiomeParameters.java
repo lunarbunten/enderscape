@@ -1,6 +1,6 @@
 package net.bunten.enderscape.registry;
 
-import net.bunten.enderscape.biome.util.SkyParameters;
+import net.bunten.enderscape.biome.util.BiomeParameters;
 import net.bunten.enderscape.util.RGBA;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -12,11 +12,11 @@ import java.util.List;
 
 import static net.bunten.enderscape.registry.EnderscapeBiomes.*;
 
-public class EnderscapeSkyParameters {
+public class EnderscapeBiomeParameters {
 
-    public static final List<ResourceKey<SkyParameters>> SKY_PARAMETERS = new ArrayList<>();
+    public static final List<ResourceKey<BiomeParameters>> BIOME_PARAMETERS = new ArrayList<>();
 
-    public static void bootstrap(BootstrapContext<SkyParameters> context) {
+    public static void bootstrap(BootstrapContext<BiomeParameters> context) {
 
         register(context,
                 CELESTIAL_GROVE,
@@ -95,13 +95,13 @@ public class EnderscapeSkyParameters {
         );
     }
 
-    private static void register(BootstrapContext<SkyParameters> context, ResourceKey<Biome> biome, int nebulaColor, float nebulaAlpha, int starColor, float starAlpha, int flashColor, float fogStartDensity, float fogEndDensity) {
-        context.register(register(biome.location()), new SkyParameters(biome.location(), nebulaColor, nebulaAlpha, starColor, starAlpha, flashColor, fogStartDensity, fogEndDensity));
+    private static void register(BootstrapContext<BiomeParameters> context, ResourceKey<Biome> biome, int nebulaColor, float nebulaAlpha, int starColor, float starAlpha, int flashColor, float fogStartDensity, float fogEndDensity) {
+        context.register(register(biome.location()), new BiomeParameters(biome.location(), nebulaColor, nebulaAlpha, starColor, starAlpha, flashColor, fogStartDensity, fogEndDensity));
     }
 
-    private static ResourceKey<SkyParameters> register(ResourceLocation location) {
-        ResourceKey<SkyParameters> key = ResourceKey.create(EnderscapeRegistries.SKY_PARAMETERS, location);
-        SKY_PARAMETERS.add(key);
+    private static ResourceKey<BiomeParameters> register(ResourceLocation location) {
+        ResourceKey<BiomeParameters> key = ResourceKey.create(EnderscapeRegistries.BIOME_PARAMETERS, location);
+        BIOME_PARAMETERS.add(key);
         return key;
     }
 }

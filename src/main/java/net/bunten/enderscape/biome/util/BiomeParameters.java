@@ -13,7 +13,7 @@ import net.minecraft.world.level.biome.Biome;
 
 import java.util.Optional;
 
-public record SkyParameters(ResourceLocation location, int nebulaColor, float nebulaAlpha, int starColor, float starAlpha, int flashColor, float fogStartDensity, float fogEndDensity) {
+public record BiomeParameters(ResourceLocation location, int nebulaColor, float nebulaAlpha, int starColor, float starAlpha, int flashColor, float fogStartDensity, float fogEndDensity) {
 
     public static final RGBA DEFAULT_NEBULA_COLOR = new RGBA(EnderscapeBiomes.DEFAULT_NEBULA_COLOR, EnderscapeBiomes.DEFAULT_NEBULA_ALPHA);
     public static final RGBA DEFAULT_STAR_COLOR = new RGBA(EnderscapeBiomes.DEFAULT_STAR_COLOR, EnderscapeBiomes.DEFAULT_STAR_ALPHA);
@@ -23,7 +23,7 @@ public record SkyParameters(ResourceLocation location, int nebulaColor, float ne
     public static final float DEFAULT_FOG_START_DENSITY = 1.0F;
     public static final float DEFAULT_FOG_END_DENSITY = 1.0F;
 
-    public static final Codec<SkyParameters> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final Codec<BiomeParameters> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             (ResourceLocation.CODEC.fieldOf("biome")).forGetter(config -> config.location),
             (Codec.intRange(0x000000, 0xFFFFFF).fieldOf("nebula_color")).forGetter(config -> config.nebulaColor),
             (Codec.floatRange(0, 1).fieldOf("nebula_alpha")).forGetter(config -> config.nebulaAlpha),
@@ -32,7 +32,7 @@ public record SkyParameters(ResourceLocation location, int nebulaColor, float ne
             (Codec.intRange(0x000000, 0xFFFFFF).fieldOf("flash_color")).forGetter(config -> config.flashColor),
             (Codec.floatRange(1, 4).fieldOf("fog_start_density")).forGetter(config -> config.fogStartDensity),
             (Codec.floatRange(1, 4).fieldOf("fog_end_density")).forGetter(config -> config.fogEndDensity)
-    ).apply(instance, SkyParameters::new));
+    ).apply(instance, BiomeParameters::new));
 
     public RGBA nebulaRGBA() {
         return new RGBA(nebulaColor, nebulaAlpha);
@@ -46,9 +46,9 @@ public record SkyParameters(ResourceLocation location, int nebulaColor, float ne
         return new RGBA(flashColor, 1.0F);
     }
 
-    public static Optional<SkyParameters> getSkyParametersFor(Holder<Biome> biomeHolder) {
+    public static Optional<BiomeParameters> findFor(Holder<Biome> biomeHolder) {
         if (biomeHolder == null) return Optional.empty();
 
-        return Minecraft.getInstance().level.registryAccess().lookup(EnderscapeRegistries.SKY_PARAMETERS).flatMap(registry -> biomeHolder.unwrapKey().map(ResourceKey::location).map(registry::getValue).map(Optional::ofNullable).orElse(Optional.empty()));
+        return Minecraft.getInstance().level.registryAccess().lookup(EnderscapeRegistries.BIOME_PARAMETERS).flatMap(registry -> biomeHolder.unwrapKey().map(ResourceKey::location).map(registry::getValue).map(Optional::ofNullable).orElse(Optional.empty()));
     }
 }

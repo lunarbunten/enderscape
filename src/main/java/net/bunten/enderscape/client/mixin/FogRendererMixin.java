@@ -1,6 +1,6 @@
 package net.bunten.enderscape.client.mixin;
 
-import net.bunten.enderscape.biome.util.SkyParameters;
+import net.bunten.enderscape.biome.util.BiomeParameters;
 import net.bunten.enderscape.client.world.EnderscapeSkybox;
 import net.bunten.enderscape.util.RGBA;
 import net.fabricmc.api.EnvType;
@@ -26,10 +26,10 @@ public class FogRendererMixin {
         Vec3 pos = camera.getPosition().subtract(2, 2, 2).scale(0.25);
         float gamma = EnderscapeSkybox.gammaFactor();
 
-        EnderscapeSkybox.fogStartDensity = RGBA.sampleFloat(manager, pos, SkyParameters::fogStartDensity, SkyParameters.DEFAULT_FOG_START_DENSITY);
-        EnderscapeSkybox.fogEndDensity = RGBA.sampleFloat(manager, pos, SkyParameters::fogEndDensity, SkyParameters.DEFAULT_FOG_END_DENSITY);
-        EnderscapeSkybox.nebulaColor = RGBA.sampleVector4f(manager, pos, SkyParameters::nebulaRGBA, SkyParameters.DEFAULT_NEBULA_COLOR).mul(gamma, gamma, gamma, 1);
-        EnderscapeSkybox.starColor = RGBA.sampleVector4f(manager, pos, SkyParameters::starRGBA, SkyParameters.DEFAULT_STAR_COLOR).mul(gamma, gamma, gamma, 1);
-        EnderscapeSkybox.flashColor = RGBA.sampleVector4f(manager, pos, SkyParameters::flashRGBA, SkyParameters.DEFAULT_FLASH_COLOR);
+        EnderscapeSkybox.fogStartDensity = RGBA.sampleFloat(manager, pos, BiomeParameters::fogStartDensity, BiomeParameters.DEFAULT_FOG_START_DENSITY);
+        EnderscapeSkybox.fogEndDensity = RGBA.sampleFloat(manager, pos, BiomeParameters::fogEndDensity, BiomeParameters.DEFAULT_FOG_END_DENSITY);
+        EnderscapeSkybox.nebulaColor = RGBA.sampleVector4f(manager, pos, BiomeParameters::nebulaRGBA, BiomeParameters.DEFAULT_NEBULA_COLOR).mul(gamma, gamma, gamma, 1);
+        EnderscapeSkybox.starColor = RGBA.sampleVector4f(manager, pos, BiomeParameters::starRGBA, BiomeParameters.DEFAULT_STAR_COLOR).mul(gamma, gamma, gamma, 1);
+        EnderscapeSkybox.flashColor = RGBA.sampleVector4f(manager, pos, BiomeParameters::flashRGBA, BiomeParameters.DEFAULT_FLASH_COLOR);
     }
 }
