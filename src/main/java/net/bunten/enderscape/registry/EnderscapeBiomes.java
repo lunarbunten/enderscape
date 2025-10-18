@@ -41,6 +41,8 @@ public class EnderscapeBiomes {
     public static final int DEFAULT_STAR_COLOR = 0xE989FF;
     public static final float DEFAULT_STAR_ALPHA = 0.12F;
 
+    public static final int DEFAULT_FLASH_COLOR = 0x654B82;
+
     public static final float CORRUPT_BARRENS_DARKENING_FACTOR = 0.65F;
     public static final float VOID_BIOMES_DARKENING_FACTOR = 0.35F;
 

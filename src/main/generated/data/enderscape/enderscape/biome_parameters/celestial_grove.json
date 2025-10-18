@@ -1,5 +1,6 @@
 {
   "biome": "enderscape:celestial_grove",
+  "flash_color": 7028045,
   "fog_end_density": 1.0,
   "fog_start_density": 2.0,
   "nebula_alpha": 0.0575,
