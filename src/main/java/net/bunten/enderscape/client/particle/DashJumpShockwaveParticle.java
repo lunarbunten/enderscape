@@ -65,21 +65,18 @@ public class DashJumpShockwaveParticle extends SingleQuadParticle {
     }
 
     @Override
-    public void extract(QuadParticleRenderState quadParticleRenderState, Camera camera, float delta) {
-        super.extract(quadParticleRenderState, camera, delta);
-        float spinAngle = (age + delta) * spinSpeed;
+    public void extract(QuadParticleRenderState state, Camera camera, float delta) {
+        float spin = (age + delta) * spinSpeed;
 
         Vector3f velocity = new Vector3f(options.velocity()).normalize();
         Vector3f up = new Vector3f(0, 1, 0);
 
         if (Math.abs(velocity.dot(up)) > 0.99f) up.set(1, 0, 0);
 
-        Quaternionf rotation = new Quaternionf().rotationTo(new Vector3f(0, 0, 1), velocity);
-        rotation.rotateZ(spinAngle);
+        Quaternionf rot = new Quaternionf().rotationTo(new Vector3f(0, 0, 1), velocity).rotateZ(spin);
 
-        extractRotatedQuad(quadParticleRenderState, camera, rotation, delta);
-        extractRotatedQuad(quadParticleRenderState, camera, new Quaternionf(rotation).rotateY((float) Math.PI), delta);
-
+        extractRotatedQuad(state, camera, rot, delta);
+        extractRotatedQuad(state, camera, new Quaternionf(rot).rotateY((float) Math.PI), delta);
     }
 
     @Override
