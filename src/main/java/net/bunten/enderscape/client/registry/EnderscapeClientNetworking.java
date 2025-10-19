@@ -30,8 +30,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-import static net.bunten.enderscape.client.EnderscapeClient.MAX_STARE_STICKS;
-import static net.bunten.enderscape.client.EnderscapeClient.staticSoundInstance;
+import static net.bunten.enderscape.client.EnderscapeClient.*;
 
 @Environment(EnvType.CLIENT)
 public class EnderscapeClientNetworking {
@@ -124,7 +123,9 @@ public class EnderscapeClientNetworking {
     private static void receiveStareSoundPayload(ClientboundStareSoundPayload payload, ClientPlayNetworking.Context context) {
         Minecraft client = context.client();
         int entityId = payload.entityId();
-        client.execute(() -> client.getSoundManager().play(new EndermanStareSoundInstance(client, entityId)));
+        client.execute(() -> {
+            if ((stareSoundInstance == null || !client.getSoundManager().isActive(stareSoundInstance))) client.getSoundManager().play(stareSoundInstance = new EndermanStareSoundInstance(client, entityId));
+        });
     }
 
     private static void receiveStructureChangedPayload(ClientboundStructureChangedPayload payload, ClientPlayNetworking.Context context) {
