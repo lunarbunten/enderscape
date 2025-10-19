@@ -32,8 +32,8 @@ public class EndFlashParameters {
     }
 
     private static float intensityFromCurve(int offset, int duration, long remainder) {
-        float attack = 0.02F;
-        float sustain = 0.1F;
+        float attack = 0.03F;
+        float sustain = 0.15F;
         float decay = 0.9F;
         float intensity;
 
