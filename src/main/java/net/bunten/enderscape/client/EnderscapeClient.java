@@ -3,10 +3,11 @@ package net.bunten.enderscape.client;
 import com.google.common.reflect.Reflection;
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.client.block.MagniaSproutRenderer;
+import net.bunten.enderscape.client.sound.EndermanStareSoundInstance;
+import net.bunten.enderscape.client.sound.EndermanStaticSoundInstance;
 import net.bunten.enderscape.client.hud.HudElement;
 import net.bunten.enderscape.client.item.NebuliteToolTooltip;
 import net.bunten.enderscape.client.registry.*;
-import net.bunten.enderscape.client.sound.EndermanStaticSoundInstance;
 import net.bunten.enderscape.item.MagniaAttractorItem;
 import net.bunten.enderscape.item.NebuliteToolComponent;
 import net.bunten.enderscape.item.NebuliteToolContext;
@@ -41,6 +42,7 @@ public class EnderscapeClient implements ClientModInitializer {
 
     public static int postMirrorUseTicks;
 
+    @Nullable public static EndermanStareSoundInstance stareSoundInstance = null;
     @Nullable public static EndermanStaticSoundInstance staticSoundInstance = null;
 
     public static void register(HudElement element) {
