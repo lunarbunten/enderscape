@@ -1,11 +1,9 @@
 package net.bunten.enderscape.client.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.bunten.enderscape.client.world.EndFlashParameters;
 import net.minecraft.client.renderer.EndFlashState;
-import net.minecraft.util.RandomSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,10 +32,17 @@ public abstract class EndFlashStateMixin {
         return EndFlashParameters.frequencyInTicks();
     }
 
-    @WrapOperation(method = "calculateFlashParameters", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;randomBetweenInclusive(Lnet/minecraft/util/RandomSource;II)I", ordinal = 1))
-    private int Enderscape$changeDuration(RandomSource random, int min, int max, Operation<Integer> original) {
-        if (EndFlashParameters.updatedVisuals()) return original.call(random, min, max) * 3;
-        return original.call(random, min, max);
+    @ModifyExpressionValue(
+            method = "calculateFlashParameters",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/util/Mth;randomBetweenInclusive(Lnet/minecraft/util/RandomSource;II)I",
+                    ordinal = 1
+            )
+    )
+    private int changeDuration(int original) {
+        if (EndFlashParameters.updatedVisuals()) return original * 3;
+        return original;
     }
 
     @Inject(method = "calculateIntensity", at = @At("HEAD"), cancellable = true)
