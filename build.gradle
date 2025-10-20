@@ -31,8 +31,11 @@ repositories {
 	}
 }
 
+def dateFormat = new Date().format("yy.MM.dd")
+
 tasks.matching { it.name in ["jar", "sourcesJar", "remapSourcesJar", "remapJar"] }.configureEach {
-	archiveBaseName.set("${archives_base_name}")
+	def prefix = project.include_build_date.toBoolean() ? "${dateFormat}-" : ""
+	archiveBaseName.set("${prefix}${archives_base_name}")
 	archiveVersion.set("${mod_version}+mc${minecraft_version}")
 }
 
