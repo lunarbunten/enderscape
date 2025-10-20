@@ -525,6 +525,7 @@ public class EnderscapeCreativeModeTab {
             entries.addBefore(IRON_CHAIN, BULB_LANTERN);
             entries.addBefore(END_ROD, END_LAMP);
             entries.addBefore(CRYING_OBSIDIAN, POLARIZED_MAGNIA, BLINKLAMP);
+            entries.addBefore(LECTERN, VEILED_SHELF_ITEM, CELESTIAL_SHELF_ITEM, MURUBLIGHT_SHELF_ITEM);
             entries.addBefore(CHEST, VEILED_SIGN_ITEM, VEILED_HANGING_SIGN_ITEM, CELESTIAL_SIGN_ITEM, CELESTIAL_HANGING_SIGN_ITEM, MURUBLIGHT_SIGN_ITEM, MURUBLIGHT_HANGING_SIGN_ITEM);
             entries.addBefore(INFESTED_STONE, getEndVaultInstance());
             entries.addBefore(SKELETON_SKULL, getEndCityBannerInstance(entries.getContext().holders().lookupOrThrow(Registries.BANNER_PATTERN)));
