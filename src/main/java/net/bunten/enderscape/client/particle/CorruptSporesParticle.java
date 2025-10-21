@@ -1,7 +1,6 @@
 package net.bunten.enderscape.client.particle;
 
 import net.bunten.enderscape.client.registry.EnderscapeParticleProviders;
-import net.bunten.enderscape.mixin.LevelLightEngineAccessor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
@@ -11,7 +10,6 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.particle.SpriteSet;
-import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.state.QuadParticleRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -40,11 +38,12 @@ public class CorruptSporesParticle extends SingleQuadParticle {
         xd += Mth.sin(age * 0.4F) * 0.01F;
         zd += Mth.sin(age * 0.4F + Mth.PI) * 0.01F;
 
-        BlockPos pos = BlockPos.containing(x, y, z);
+        int light = EnderscapeParticleProviders.blockLightAt(level, BlockPos.containing(x, y, z), 0);
 
-        int value = ((LevelLightEngineAccessor) level.getLightEngine()).getBlockEngine().getLightValue(pos);
-        float flashIntensity = level.endFlashState().getIntensity(Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false));
-        float newAlpha = Math.min(1, (value / 15.0F) + (flashIntensity / 2));
+        float delta = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false);
+        float flashIntensity = level.endFlashState().getIntensity(delta);
+
+        float newAlpha = Math.min(1, (light / 15.0F) + (flashIntensity / 2.0F));
 
         alpha = Mth.lerp(0.15F, alpha, Math.max(MINIMUM_OPACITY, newAlpha));
 
@@ -57,9 +56,7 @@ public class CorruptSporesParticle extends SingleQuadParticle {
 
     @Override
     public void extract(QuadParticleRenderState quadParticleRenderState, Camera camera, float f) {
-        if (alpha >= 0.1F) {
-            super.extract(quadParticleRenderState, camera, f);
-        }
+        if (alpha >= 0.1F) super.extract(quadParticleRenderState, camera, f);
     }
 
     @Override

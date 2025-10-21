@@ -1,11 +1,15 @@
 package net.bunten.enderscape.client.registry;
 
 import net.bunten.enderscape.client.particle.*;
+import net.bunten.enderscape.mixin.LevelLightEngineAccessor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.minecraft.client.particle.FlyTowardsPositionParticle;
 import net.minecraft.client.particle.TrialSpawnerDetectionParticle;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.lighting.LightEngine;
 
 import static net.bunten.enderscape.registry.EnderscapeParticles.*;
 
@@ -40,5 +44,10 @@ public class EnderscapeParticleProviders {
 
     public static int scaledLight(float factor) {
         return (15 << 20) | ((int) (15 * factor) << 4);
+    }
+
+    public static int blockLightAt(LevelAccessor level, BlockPos pos, int fallback) {
+        LightEngine<?, ?> blockEngine = ((LevelLightEngineAccessor) level.getLightEngine()).getBlockEngine();
+        return blockEngine != null ? blockEngine.getLightValue(pos) : fallback;
     }
 }
