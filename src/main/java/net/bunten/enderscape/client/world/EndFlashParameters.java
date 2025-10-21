@@ -59,7 +59,7 @@ public class EndFlashParameters {
         float value = 1.0F;
 
         if (level != null && EnderscapeConfig.getInstance().flashInfluencesSkybox) {
-            float intensity = level.endFlashState().getIntensity(client.getDeltaTracker().getGameTimeDeltaPartialTick(false));
+            float intensity = level.endFlashState() != null ? level.endFlashState().getIntensity(client.getDeltaTracker().getGameTimeDeltaPartialTick(false)) : 0;
             value -= (intensity / 2);
         }
 

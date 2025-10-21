@@ -41,7 +41,7 @@ public class CorruptSporesParticle extends SingleQuadParticle {
         int light = EnderscapeParticleProviders.blockLightAt(level, BlockPos.containing(x, y, z), 0);
 
         float delta = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false);
-        float flashIntensity = level.endFlashState().getIntensity(delta);
+        float flashIntensity = level.endFlashState() != null ? level.endFlashState().getIntensity(delta) : 0;
 
         float newAlpha = Math.min(1, (light / 15.0F) + (flashIntensity / 2.0F));
 
