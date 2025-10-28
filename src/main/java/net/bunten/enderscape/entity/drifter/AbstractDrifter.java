@@ -159,11 +159,6 @@ public abstract class AbstractDrifter extends Animal {
     }
 
     @Override
-    public boolean canBeLeashed() {
-        return !isLeashed();
-    }
-
-    @Override
     public Vec3 getLeashOffset() {
         return isBaby() ? new Vec3(0, getEyeHeight() + 0.26F, getBbWidth() * 0.05F) : new Vec3(0, getEyeHeight() + 0.38F, 0);
     }
