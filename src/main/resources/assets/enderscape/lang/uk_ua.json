@@ -443,7 +443,7 @@
     "option.enderscape.default_resource_pack_lighting": "Умикати «Покращення освітлення Енду» усталено",
     "option.enderscape.default_resource_pack_lighting.desc": "§eДіє лише після перезапуску!",
     "option.enderscape.elytra_add_fov_effects": "Елітри: додання ефектів поля зору",
-    "option.enderscape.elytra_add_fov_effects.desc": "Якщо ввімкнено, політ на елітр упливатиме на ваше поле зору.",
+    "option.enderscape.elytra_add_fov_effects.desc": "Якщо ввімкнено, політ на елітр впливатиме на ваше поле зору.",
     "option.enderscape.elytra_add_gliding_sound": "Елітри: додання звуку польоту",
     "option.enderscape.elytra_add_gliding_sound.desc": "Якщо ввімкнено, політ за допомогою елітр відтворюватиме новий звук польоту.\n\nІнші гравці також зможуть почути його здалеку!",
     "option.enderscape.elytra_add_open_close_sounds": "Елітри: додання звуків відкриття та закриття",
