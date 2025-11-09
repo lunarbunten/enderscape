@@ -5,12 +5,13 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.bunten.enderscape.Enderscape;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.ramixin.mixson.inline.Mixson;
 
+import java.util.Arrays;
 import java.util.List;
 
 public final class EnderscapeAssetModifications  {
-    private static final List<String> ARMOR_PIECE_TYPES = List.of("helmet", "chestplate", "leggings", "boots");
 
     private static final List<ResourceLocation> ARMOR_MATERIALS = List.of(
             ResourceLocation.withDefaultNamespace("leather"),
@@ -22,7 +23,7 @@ public final class EnderscapeAssetModifications  {
     );
 
     static {
-        ARMOR_PIECE_TYPES.forEach(armorType -> ARMOR_MATERIALS.forEach(material -> registerItemModelModification(armorType, material)));
+        Arrays.stream(ArmorType.values()).filter(type -> type != ArmorType.BODY).forEach(type -> ARMOR_MATERIALS.forEach(material -> registerItemModelModification(type.getName(), material)));
 
         registerItemModelModification("helmet", ResourceLocation.withDefaultNamespace("turtle"));
         registerItemModelModification("leggings", Enderscape.id("drift"));
@@ -39,18 +40,27 @@ public final class EnderscapeAssetModifications  {
                 ResourceLocation.fromNamespaceAndPath(armorMaterial.getNamespace(), "items/" + armorMaterial.getPath() + "_" + armorPieceType).toString(),
                 Enderscape.id("add_trims_to_" + armorMaterial.getPath() + "_" + armorPieceType).toString(),
                 (context) -> {
-                    JsonObject rootJson = context.getFile().getAsJsonObject();
-                    JsonObject modelJson = rootJson.getAsJsonObject("model");
-                    JsonArray casesArray = modelJson.getAsJsonArray("cases");
-                    JsonObject baseCase = casesArray.get(0).getAsJsonObject();
+                    JsonObject root = context.getFile().getAsJsonObject();
+                    if (root == null || !root.has("model")) return;
 
-                    EnderscapeTrimMaterials.TRIM_MATERIALS.forEach(trimMaterial -> {
-                        JsonObject newCase = baseCase.deepCopy();
+                    JsonObject model = root.getAsJsonObject("model");
+                    if (model == null) return;
 
-                        newCase.addProperty("when", trimMaterial.location().toString());
-                        newCase.getAsJsonObject("model").addProperty("model", Enderscape.id("item/" + armorMaterial.getPath() + "_" + armorPieceType + "_" + trimMaterial.location().getPath() + "_trim").toString());
+                    if (!model.has("type") || !model.get("type").getAsString().equals("minecraft:select")) return;
 
-                        casesArray.add(newCase);
+                    JsonArray cases = model.getAsJsonArray("cases");
+                    if (cases == null || cases.isEmpty()) return;
+
+                    EnderscapeTrimMaterials.TRIM_MATERIALS.forEach(material -> {
+                        JsonObject newCase = new JsonObject();
+                        newCase.addProperty("when", material.location().toString());
+
+                        JsonObject caseModel = new JsonObject();
+                        caseModel.addProperty("type", "minecraft:model");
+                        caseModel.addProperty("model", Enderscape.id("item/" + armorMaterial.getPath() + "_" + armorPieceType + "_" + material.location().getPath() + "_trim").toString());
+
+                        newCase.add("model", caseModel);
+                        cases.add(newCase);
                     });
                 }
         );
@@ -62,20 +72,28 @@ public final class EnderscapeAssetModifications  {
                 ResourceLocation.withDefaultNamespace("atlases/armor_trims").toString(),
                 Enderscape.id("add_trim_patterns_to_armor_trims_atlas").toString(),
                 (context) -> {
-                    JsonObject rootJson = context.getFile().getAsJsonObject();
-                    JsonArray sourcesArray = rootJson.getAsJsonArray("sources");
+                    JsonObject root = context.getFile().getAsJsonObject();
+                    if (root == null || !root.has("sources")) return;
 
-                    for (JsonElement sourceElement : sourcesArray) {
-                        JsonObject sourceObject = sourceElement.getAsJsonObject();
+                    JsonArray sources = root.getAsJsonArray("sources");
+                    if (sources == null || sources.isEmpty()) return;
 
-                        String type = sourceObject.get("type").getAsString();
+                    for (JsonElement element : sources) {
+                        if (!element.isJsonObject()) continue;
+
+                        JsonObject object = element.getAsJsonObject();
+                        if (object == null || !object.has("type")) continue;
+
+                        String type = object.get("type").getAsString();
+
                         if ("paletted_permutations".equals(type) || "minecraft:paletted_permutations".equals(type)) {
-                            JsonArray texturesArray = sourceObject.getAsJsonArray("textures");
+                            JsonArray textures = object.getAsJsonArray("textures");
+                            if (textures == null || textures.isEmpty()) return;
 
                             EnderscapeTrimPatterns.TRIM_PATTERNS.forEach(pattern -> {
                                 String name = pattern.location().getPath();
-                                texturesArray.add(Enderscape.id("trims/entity/humanoid/" + name).toString());
-                                texturesArray.add(Enderscape.id("trims/entity/humanoid_leggings/" + name).toString());
+                                textures.add(Enderscape.id("trims/entity/humanoid/" + name).toString());
+                                textures.add(Enderscape.id("trims/entity/humanoid_leggings/" + name).toString());
                             });
 
                             break;
@@ -91,19 +109,27 @@ public final class EnderscapeAssetModifications  {
                 ResourceLocation.withDefaultNamespace("atlases/" + atlasName).toString(),
                 Enderscape.id("add_trim_materials_to_" + atlasName + "_atlas").toString(),
                 (context) -> {
-                    JsonObject rootJson = context.getFile().getAsJsonObject();
-                    JsonArray sourcesArray = rootJson.getAsJsonArray("sources");
+                    JsonObject root = context.getFile().getAsJsonObject();
+                    if (root == null || !root.has("sources")) return;
 
-                    for (JsonElement sourceElement : sourcesArray) {
-                        JsonObject sourceObject = sourceElement.getAsJsonObject();
+                    JsonArray sources = root.getAsJsonArray("sources");
+                    if (sources == null || sources.isEmpty()) return;
 
-                        String type = sourceObject.get("type").getAsString();
+                    for (JsonElement element : sources) {
+                        if (!element.isJsonObject()) continue;
+
+                        JsonObject object = element.getAsJsonObject();
+                        if (object == null || !object.has("type")) return;
+
+                        String type = object.get("type").getAsString();
+
                         if ("paletted_permutations".equals(type) || "minecraft:paletted_permutations".equals(type)) {
-                            JsonObject permutationsJson = sourceObject.getAsJsonObject("permutations");
+                            JsonObject permutations = object.getAsJsonObject("permutations");
+                            if (permutations == null || permutations.isEmpty()) return;
 
-                            EnderscapeTrimMaterials.TRIM_MATERIALS.forEach(trimMaterial -> {
-                                String trimName = trimMaterial.location().getPath();
-                                permutationsJson.addProperty(trimName, Enderscape.id("trims/color_palettes/" + trimName).toString());
+                            EnderscapeTrimMaterials.TRIM_MATERIALS.forEach(material -> {
+                                String name = material.location().getPath();
+                                permutations.addProperty(name, Enderscape.id("trims/color_palettes/" + name).toString());
                             });
 
                             break;
