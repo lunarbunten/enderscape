@@ -71,7 +71,7 @@ public class MagniaSproutBlockEntity extends BlockEntity {
         } else {
             entity.setDeltaMovement(velocity);
         }
-        entity.hasImpulse = true;
+        entity.needsSync = true;
     }
 
     static void doMagniaMovement(Entity entity, MagniaSproutBlockEntity blockEntity) {

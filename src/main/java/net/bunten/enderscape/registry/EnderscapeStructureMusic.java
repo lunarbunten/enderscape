@@ -5,8 +5,9 @@ import net.bunten.enderscape.structure.EnderscapeStructures;
 import net.bunten.enderscape.sound.StructureMusic;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.Music;
+import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 
 import java.util.ArrayList;
@@ -20,12 +21,12 @@ public class EnderscapeStructureMusic {
     public static final ResourceKey<StructureMusic> STRONGHOLD = register("stronghold");
 
     public static void bootstrap(BootstrapContext<StructureMusic> context) {
-        register(context, END_CITY, EnderscapeMusic.STRUCTURE_END_CITY, BuiltinStructures.END_CITY.location(), Enderscape.id("end_city"));
-        register(context, STRONGHOLD, EnderscapeMusic.STRUCTURE_STRONGHOLD, BuiltinStructures.STRONGHOLD.location(), EnderscapeStructures.STRONGHOLD.location());
+        register(context, END_CITY, EnderscapeMusic.STRUCTURE_END_CITY, BuiltinStructures.END_CITY.identifier(), Enderscape.id("end_city"));
+        register(context, STRONGHOLD, EnderscapeMusic.STRUCTURE_STRONGHOLD, BuiltinStructures.STRONGHOLD.identifier(), EnderscapeStructures.STRONGHOLD.identifier());
     }
 
-    private static void register(BootstrapContext<StructureMusic> context, ResourceKey<StructureMusic> key, Music music, ResourceLocation... locations) {
-        context.register(key, new StructureMusic(music, Arrays.stream(locations).toList()));
+    private static void register(BootstrapContext<StructureMusic> context, ResourceKey<StructureMusic> key, Music music, Identifier... locations) {
+        context.register(key, new StructureMusic(new BackgroundMusic(music), Arrays.stream(locations).toList()));
     }
 
     private static ResourceKey<StructureMusic> register(String name) {

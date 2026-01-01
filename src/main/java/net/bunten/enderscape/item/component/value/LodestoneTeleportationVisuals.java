@@ -10,7 +10,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record LodestoneTeleportationVisuals(
         ParticleOptions teleportOutParticle,
@@ -92,7 +92,7 @@ public record LodestoneTeleportationVisuals(
         public static final StreamCodec<ByteBuf, AssetInfo> STREAM_CODEC = ClientAsset.ResourceTexture.STREAM_CODEC.map(AssetInfo::new, AssetInfo::asset);
     }
 
-    private static AssetInfo assetOf(ResourceLocation id) {
+    private static AssetInfo assetOf(Identifier id) {
         return new AssetInfo(new ClientAsset.ResourceTexture(id));
     }
 }

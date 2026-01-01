@@ -41,9 +41,7 @@ void main() {
     color.g -= block_brightness * 0.1;
     color.b += block_brightness * 0.16;
 
-    vec3 ambient = vec3(0.98, 1.2, 0.98);
-
-    ambient = mix(ambient, lightmapInfo.SkyLightColor, lightmapInfo.SkyFactor);
+    vec3 ambient = mix(lightmapInfo.AmbientColor, lightmapInfo.SkyLightColor, lightmapInfo.SkyFactor);
 
     color = mix(color, ambient, 0.04);
 

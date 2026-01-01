@@ -12,6 +12,7 @@ import net.bunten.enderscape.registry.EnderscapeItemSounds;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -70,10 +71,9 @@ public abstract class PlayerMixin extends LivingEntity {
             method = "attack",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/Entity;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V",
+                    target = "Lnet/minecraft/world/entity/player/Player;playServerSideSound(Lnet/minecraft/sounds/SoundEvent;)V",
                     ordinal = 0
-            ),
-            index = 4
+            )
     )
     public SoundEvent Enderscape$changeKnockbackSound(SoundEvent original) {
         ItemStack stack = getWeaponItem();
@@ -81,13 +81,11 @@ public abstract class PlayerMixin extends LivingEntity {
     }
 
     @ModifyArg(
-            method = "attack",
+            method = "doSweepAttack",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/Entity;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V",
-                    ordinal = 1
-            ),
-            index = 4
+                    target = "Lnet/minecraft/world/entity/player/Player;playServerSideSound(Lnet/minecraft/sounds/SoundEvent;)V"
+            )
     )
     public SoundEvent Enderscape$changeSweepSound(SoundEvent original) {
         ItemStack stack = getWeaponItem();
@@ -95,13 +93,12 @@ public abstract class PlayerMixin extends LivingEntity {
     }
 
     @ModifyArg(
-            method = "attack",
+            method = "attackVisualEffects",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/Entity;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V",
-                    ordinal = 2
-            ),
-            index = 4
+                    target = "Lnet/minecraft/world/entity/player/Player;playServerSideSound(Lnet/minecraft/sounds/SoundEvent;)V",
+                    ordinal = 0
+            )
     )
     public SoundEvent Enderscape$changeCritSound(SoundEvent original) {
         ItemStack stack = getWeaponItem();
@@ -109,41 +106,33 @@ public abstract class PlayerMixin extends LivingEntity {
     }
 
     @ModifyArg(
-            method = "attack",
+            method = "attackVisualEffects",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/Entity;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V",
-                    ordinal = 3
-            ),
-            index = 4
+                    target = "Lnet/minecraft/world/entity/player/Player;playServerSideSound(Lnet/minecraft/sounds/SoundEvent;)V",
+                    ordinal = 1
+            )
     )
-    public SoundEvent Enderscape$changeStrongSound(SoundEvent original) {
+    public SoundEvent Enderscape$changeStrongAndWeakSound(SoundEvent original) {
         ItemStack stack = getWeaponItem();
-        return (!stack.isEmpty() && AttackSounds.is(stack)) ? AttackSounds.get(stack).strong().value() : original;
+        if (!stack.isEmpty() && AttackSounds.is(stack)) {
+            AttackSounds sounds = AttackSounds.get(stack);
+            SoundEvent strong = sounds.strong().value();
+            SoundEvent weak = sounds.weak().value();
+
+            return original == SoundEvents.PLAYER_ATTACK_WEAK ? weak : strong;
+        } else {
+            return original;
+        }
     }
 
     @ModifyArg(
             method = "attack",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/Entity;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V",
-                    ordinal = 4
-            ),
-            index = 4
-    )
-    public SoundEvent Enderscape$changeWeakSound(SoundEvent original) {
-        ItemStack stack = getWeaponItem();
-        return (!stack.isEmpty() && AttackSounds.is(stack)) ? AttackSounds.get(stack).weak().value() : original;
-    }
-
-    @ModifyArg(
-            method = "attack",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/Entity;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V",
-                    ordinal = 5
-            ),
-            index = 4
+                    target = "Lnet/minecraft/world/entity/player/Player;playServerSideSound(Lnet/minecraft/sounds/SoundEvent;)V",
+                    ordinal = 1
+            )
     )
     public SoundEvent Enderscape$changeNoDamageSound(SoundEvent original) {
         ItemStack stack = getWeaponItem();

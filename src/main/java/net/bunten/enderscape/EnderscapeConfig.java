@@ -34,6 +34,7 @@ public class EnderscapeConfig {
 
     @SerialEntry public boolean ambienceUpdateAdditionSounds = true;
     @SerialEntry public boolean ambienceUpdateFogColors = true;
+    @SerialEntry public boolean ambienceUpdateFogDensity = true;
     @SerialEntry public boolean ambienceUpdateFoliageColors = true;
     @SerialEntry public boolean ambienceUpdateGrassColors = true;
     @SerialEntry public boolean ambienceUpdateLoopSounds = true;
@@ -90,7 +91,6 @@ public class EnderscapeConfig {
     @SerialEntry public boolean silverfishDelayBeforeInfestingStone = true;
     @SerialEntry public boolean silverfishExpandHitRange = true;
     @SerialEntry public boolean silverfishNaturalSpawnsObeyLightLevel = true;
-    @SerialEntry public boolean skyboxAddDynamicFogDensity = true;
     @SerialEntry public boolean skyboxScalesBrightnessWithGamma = true;
     @SerialEntry public boolean skyboxUpdateEnabled = true;
     @SerialEntry public boolean structureMusicFadingEnabled = true;

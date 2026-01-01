@@ -9,11 +9,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.debug.DebugScreenDisplayer;
 import net.minecraft.client.gui.components.debug.DebugScreenEntry;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.Objects;
 public class PlayerSpeedDebugEntry implements DebugScreenEntry {
 
     private static final Minecraft CLIENT = Minecraft.getInstance();
-    private static final ResourceLocation GROUP = Enderscape.id("player_speed");
+    private static final Identifier GROUP = Enderscape.id("player_speed");
 
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.0");
 

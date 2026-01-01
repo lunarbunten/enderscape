@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -239,6 +239,7 @@ public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider
 
         valueLookupBuilder(BARS).add(SHADOLINE_BARS.asItem());
         valueLookupBuilder(BEACON_PAYMENT_ITEMS).add(NEBULITE);
+        valueLookupBuilder(ItemTags.CHAINS).add(SHADOLINE_CHAIN.asItem());
         valueLookupBuilder(CHEST_ARMOR).add(SHADOLINE_CHESTPLATE);
         valueLookupBuilder(DURABILITY_ENCHANTABLE).add(END_STONE_RUBBLE_SHIELD, MIRESTONE_RUBBLE_SHIELD, VERADITE_RUBBLE_SHIELD, KURODITE_RUBBLE_SHIELD);
         valueLookupBuilder(EQUIPPABLE_ENCHANTABLE).add(SHULKER_SHELL);
@@ -246,12 +247,10 @@ public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider
         valueLookupBuilder(FOOT_ARMOR).add(SHADOLINE_BOOTS);
         valueLookupBuilder(HANGING_SIGNS).add(VEILED_HANGING_SIGN_ITEM.asItem(), CELESTIAL_HANGING_SIGN_ITEM, MURUBLIGHT_HANGING_SIGN_ITEM);
         valueLookupBuilder(HEAD_ARMOR).add(SHADOLINE_HELMET);
-        valueLookupBuilder(ItemTags.CHAINS).add(SHADOLINE_CHAIN.asItem());
         valueLookupBuilder(ItemTags.FENCE_GATES).add(CELESTIAL_FENCE_GATE.asItem(), MURUBLIGHT_FENCE_GATE.asItem());
         valueLookupBuilder(ItemTags.FLOWERS).add(WISP_FLOWER.asItem(), FLANGER_BERRY_FLOWER.asItem());
         valueLookupBuilder(ItemTags.SMALL_FLOWERS).add(BULB_FLOWER.asItem());
         valueLookupBuilder(ItemTags.WOODEN_FENCES).add(VEILED_FENCE.asItem(), CELESTIAL_FENCE.asItem(), MURUBLIGHT_FENCE.asItem());
-        valueLookupBuilder(ItemTags.WOODEN_SHELVES).add(VEILED_SHELF_ITEM, CELESTIAL_SHELF_ITEM, MURUBLIGHT_SHELF_ITEM);
         valueLookupBuilder(LEAVES).add(VEILED_LEAVES.asItem());
         valueLookupBuilder(LEG_ARMOR).add(SHADOLINE_LEGGINGS, DRIFT_LEGGINGS);
         valueLookupBuilder(LOGS_THAT_BURN).forceAddTag(VEILED_LOGS).forceAddTag(CELESTIAL_STEMS).forceAddTag(MURUBLIGHT_STEMS);
@@ -264,8 +263,7 @@ public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider
         valueLookupBuilder(STONE_BUTTONS).add(POLISHED_VERADITE_BUTTON.asItem(), POLISHED_KURODITE_BUTTON.asItem());
         valueLookupBuilder(STONE_CRAFTING_MATERIALS).add(END_STONE.asItem(), VERADITE.asItem(), MIRESTONE.asItem(), KURODITE.asItem());
         valueLookupBuilder(STONE_TOOL_MATERIALS).add(END_STONE.asItem(), VERADITE.asItem(), MIRESTONE.asItem(), KURODITE.asItem());
-        valueLookupBuilder(SWEEPING_EDGE_INCOMPATIBLE).add(DAGGER);
-        valueLookupBuilder(SWORD_ENCHANTABLE).add(DAGGER);
+        valueLookupBuilder(MELEE_WEAPON_ENCHANTABLE).add(DAGGER);
         valueLookupBuilder(TRIMMABLE_ARMOR).add(SHADOLINE_HELMET, SHADOLINE_CHESTPLATE, SHADOLINE_LEGGINGS, SHADOLINE_BOOTS, DRIFT_LEGGINGS);
         valueLookupBuilder(TRIM_MATERIALS).add(NEBULITE, SHADOLINE_INGOT);
         valueLookupBuilder(VANISHING_ENCHANTABLE).add(MIRROR, SHULKER_SHELL);
@@ -273,6 +271,7 @@ public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider
         valueLookupBuilder(WOODEN_BUTTONS).add(VEILED_BUTTON.asItem(), CELESTIAL_BUTTON.asItem(), MURUBLIGHT_BUTTON.asItem());
         valueLookupBuilder(WOODEN_DOORS).add(VEILED_DOOR.asItem(), CELESTIAL_DOOR.asItem(), MURUBLIGHT_DOOR.asItem());
         valueLookupBuilder(WOODEN_PRESSURE_PLATES).add(VEILED_PRESSURE_PLATE.asItem(), CELESTIAL_PRESSURE_PLATE.asItem(), MURUBLIGHT_PRESSURE_PLATE.asItem());
+        valueLookupBuilder(ItemTags.WOODEN_SHELVES).add(VEILED_SHELF_ITEM, CELESTIAL_SHELF_ITEM, MURUBLIGHT_SHELF_ITEM);
         valueLookupBuilder(WOODEN_SLABS).add(VEILED_SLAB.asItem(), CELESTIAL_SLAB.asItem(), MURUBLIGHT_SLAB.asItem());
         valueLookupBuilder(WOODEN_STAIRS).add(VEILED_STAIRS.asItem(), CELESTIAL_STAIRS.asItem(), MURUBLIGHT_STAIRS.asItem());
         valueLookupBuilder(WOODEN_TRAPDOORS).add(VEILED_TRAPDOOR.asItem(), CELESTIAL_TRAPDOOR.asItem(), MURUBLIGHT_TRAPDOOR.asItem());
@@ -315,6 +314,6 @@ public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider
     }
 
     private TagKey<Item> externalKey(String namespace, String path) {
-        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(namespace, path));
+        return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(namespace, path));
     }
 }

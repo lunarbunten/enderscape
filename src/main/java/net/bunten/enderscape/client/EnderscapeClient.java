@@ -16,7 +16,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.Music;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,8 +35,8 @@ public class EnderscapeClient implements ClientModInitializer {
     public static final int MAX_STARE_STICKS = 100;
     public static int stareTicks;
 
-    public static Optional<ResourceLocation> lodestoneTeleportationOverlayTexture = Optional.empty();
-    public static Optional<ResourceLocation> lodestoneTeleportationVignetteTexture = Optional.empty();
+    public static Optional<Identifier> lodestoneTeleportationOverlayTexture = Optional.empty();
+    public static Optional<Identifier> lodestoneTeleportationVignetteTexture = Optional.empty();
     public static final int MAX_LODESTONE_TELEPORTATION_TICKS = 60;
     public static int lodestoneTeleportationTicks;
 

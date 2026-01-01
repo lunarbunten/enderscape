@@ -6,7 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class RubblemiteRenderer extends MobRenderer<Rubblemite, RubblemiteRenderState, RubblemiteModel> {
@@ -37,7 +37,7 @@ public class RubblemiteRenderer extends MobRenderer<Rubblemite, RubblemiteRender
     }
 
     @Override
-    public ResourceLocation getTextureLocation(RubblemiteRenderState state) {
+    public Identifier getTextureLocation(RubblemiteRenderState state) {
         return state.texture;
     }
 }

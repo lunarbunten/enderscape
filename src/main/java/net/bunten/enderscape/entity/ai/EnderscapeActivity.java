@@ -3,7 +3,7 @@ package net.bunten.enderscape.entity.ai;
 import net.bunten.enderscape.Enderscape;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.schedule.Activity;
 
 public class EnderscapeActivity extends Activity {
@@ -12,7 +12,7 @@ public class EnderscapeActivity extends Activity {
     }
     
     protected static Activity register(String name) {
-        ResourceLocation id = Enderscape.id(name);
+        Identifier id = Enderscape.id(name);
         return Registry.register(BuiltInRegistries.ACTIVITY, id, new Activity(id.toString()));
     }
 }

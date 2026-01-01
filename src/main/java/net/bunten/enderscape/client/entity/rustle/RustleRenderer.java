@@ -8,7 +8,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class RustleRenderer extends MobRenderer<Rustle, RustleRenderState, RustleModel> {
@@ -40,7 +40,7 @@ public class RustleRenderer extends MobRenderer<Rustle, RustleRenderState, Rustl
     }
 
     @Override
-    public ResourceLocation getTextureLocation(RustleRenderState mob) {
+    public Identifier getTextureLocation(RustleRenderState mob) {
         return Enderscape.id("textures/entity/rustle/rustle.png");
     }
 }

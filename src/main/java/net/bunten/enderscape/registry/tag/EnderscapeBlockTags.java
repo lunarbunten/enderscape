@@ -2,7 +2,7 @@ package net.bunten.enderscape.registry.tag;
 
 import net.bunten.enderscape.Enderscape;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
@@ -69,6 +69,6 @@ public class EnderscapeBlockTags {
     }
 
     private static TagKey<Block> common(String name) {
-        return TagKey.create(Registries.BLOCK, ResourceLocation.tryBuild("c", name));
+        return TagKey.create(Registries.BLOCK, Identifier.tryBuild("c", name));
     }
 }

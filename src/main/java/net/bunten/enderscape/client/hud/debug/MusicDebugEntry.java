@@ -10,10 +10,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.debug.DebugScreenDisplayer;
 import net.minecraft.client.gui.components.debug.DebugScreenEntry;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.LevelChunk;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +22,7 @@ import java.util.Optional;
 public class MusicDebugEntry implements DebugScreenEntry {
 
     private static final Minecraft CLIENT = Minecraft.getInstance();
-    private static final ResourceLocation GROUP = Enderscape.id("music");
+    private static final Identifier GROUP = Enderscape.id("music");
 
     @Override
     public void display(DebugScreenDisplayer displayer, @Nullable Level level, @Nullable LevelChunk clientChunk, @Nullable LevelChunk chunk) {
@@ -31,12 +31,12 @@ public class MusicDebugEntry implements DebugScreenEntry {
         String key = CLIENT.getMusicManager().getCurrentMusicTranslationKey();
         list.add(ChatFormatting.UNDERLINE + "Music: " + (key != null ? Component.translatable(key.replace("/", ".")).getString() : "None"));
 
-        Optional.of(CLIENT.getSituationalMusic()).ifPresent(info -> {
+        Optional.ofNullable(CLIENT.getSituationalMusic()).ifPresent(music -> {
             MusicManagerAccess manager = (MusicManagerAccess) (CLIENT.getMusicManager());
 
-            String nextEvent = shorten(info.music().event().value().location().getPath(), ".");
-            boolean sameAsNow = CLIENT.getMusicManager().isPlayingMusic(info.music());
-            String delayRange = info.music().minDelay() + " | " + info.music().maxDelay();
+            String nextEvent = shorten(music.sound().value().location().getPath(), ".");
+            boolean sameAsNow = CLIENT.getMusicManager().isPlayingMusic(music);
+            String delayRange = music.minDelay() + " | " + music.maxDelay();
             String delayTimer = manager.getNextSongDelay() + " (" + String.format("%02d", manager.getNextSongDelay() / 20 / 60) + ":" + String.format("%02d", (manager.getNextSongDelay() / 20) % 60) + ")";
 
             list.add("Next event: " + nextEvent + " | same as now: " + sameAsNow);

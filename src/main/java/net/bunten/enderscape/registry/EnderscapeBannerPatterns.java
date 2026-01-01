@@ -20,7 +20,7 @@ public class EnderscapeBannerPatterns {
     }
 
     public static void register(BootstrapContext<BannerPattern> context, ResourceKey<BannerPattern> key) {
-        context.register(key, new BannerPattern(key.location(), "block.minecraft.banner." + key.location().toShortLanguageKey()));
+        context.register(key, new BannerPattern(key.identifier(), "block.minecraft.banner." + key.identifier().toShortLanguageKey()));
     }
 
     private static ResourceKey<BannerPattern> register(String name) {

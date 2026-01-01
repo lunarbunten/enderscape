@@ -51,6 +51,31 @@
               "function": "minecraft:set_damage"
             }
           ],
+          "name": "minecraft:diamond_spear",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 40.0,
+                "min": 20.0
+              },
+              "options": "#minecraft:on_random_loot"
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.4
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
           "name": "minecraft:diamond_pickaxe",
           "weight": 20
         },
@@ -152,7 +177,7 @@
             }
           ],
           "name": "minecraft:diamond_helmet",
-          "weight": 25
+          "weight": 30
         },
         {
           "type": "minecraft:item",
@@ -177,7 +202,7 @@
             }
           ],
           "name": "minecraft:diamond_chestplate",
-          "weight": 25
+          "weight": 30
         },
         {
           "type": "minecraft:item",
@@ -202,7 +227,7 @@
             }
           ],
           "name": "minecraft:diamond_leggings",
-          "weight": 25
+          "weight": 30
         },
         {
           "type": "minecraft:item",
@@ -227,7 +252,7 @@
             }
           ],
           "name": "minecraft:diamond_boots",
-          "weight": 25
+          "weight": 30
         }
       ],
       "rolls": {

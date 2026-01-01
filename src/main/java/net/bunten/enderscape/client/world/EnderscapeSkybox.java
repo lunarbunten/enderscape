@@ -19,18 +19,22 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.AbstractTexture;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.CubicSampler;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.attribute.EnvironmentAttribute;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
-import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.joml.*;
 
 import java.lang.Math;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
+import static net.bunten.enderscape.registry.EnderscapeEnvironmentAttributes.*;
 import static net.minecraft.client.renderer.RenderPipelines.MATRICES_PROJECTION_SNIPPET;
 
 /**
@@ -44,11 +48,6 @@ public class EnderscapeSkybox {
 
     private record NebulaData(GpuBuffer buffer, int indexCount) {
     }
-
-    public static float fogStartDensity = 1.0F;
-    public static float fogEndDensity = 1.0F;
-    public static Vector4f nebulaColor = new Vector4f(0, 0, 0, 0);
-    public static Vector4f starColor = new Vector4f(0, 0, 0, 0);
 
     public static final RenderPipeline NEBULAE_PIPELINE = RenderPipelines.register(
             RenderPipeline.builder(MATRICES_PROJECTION_SNIPPET)
@@ -70,6 +69,10 @@ public class EnderscapeSkybox {
     private static final NebulaData nebula2 = createNebulaeBuffer(16, 64, 60, 3);
     private static final GpuBuffer stars = createStarsBuffer(1500, 0.05F, 0.25F);
 
+    private static AbstractTexture skyTexture;
+    private static AbstractTexture nebulaTexture1;
+    private static AbstractTexture nebulaTexture2;
+
     public static float gammaFactor() {
         if (!EnderscapeConfig.getInstance().skyboxScalesBrightnessWithGamma) return 1.0F;
 
@@ -79,23 +82,32 @@ public class EnderscapeSkybox {
         return 1.0F + (gamma * scale);
     }
 
-    private static Vector4f computeSkyColor(Camera camera, ClientLevel level) {
-        Vec3 position = camera.getPosition().subtract(2.0, 2.0, 2.0).scale(0.25);
-        Vec3 skyColor = CubicSampler.gaussianSampleVec3(
-                position,
-                (ix, jx, k) -> Vec3.fromRGB24(level.getBiomeManager().getNoiseBiomeAtQuart(ix, jx, k).value().getSkyColor())
-        ).scale(EndFlashParameters.skyboxBrightness()).scale(gammaFactor());
+    private static Vector4f computeSkyColor(Camera camera, float partial) {
+        Vector3f skyColor = ARGB.vector3fFromRGB24(camera.attributeProbe().getValue(EnvironmentAttributes.SKY_COLOR, partial));
+        skyColor = skyColor.mul(gammaFactor()).mul(EndFlashParameters.skyboxBrightness());
 
-        return new Vector4f((float) skyColor.x(), (float) skyColor.y(), (float) skyColor.z(), 1.0F);
+        return new Vector4f(skyColor.x(), skyColor.y(), skyColor.z(), 1.0F);
     }
 
     public static void render(PoseStack pose, ClientLevel level, Camera camera, DeltaTracker tracker) {
+        if (skyTexture == null) {
+            skyTexture = getTexture(Minecraft.getInstance().getTextureManager(), Enderscape.id("textures/environment/sky.png"));
+            nebulaTexture1 = getTexture(Minecraft.getInstance().getTextureManager(), Enderscape.id("textures/environment/nebula1.png"));
+            nebulaTexture2 = getTexture(Minecraft.getInstance().getTextureManager(), Enderscape.id("textures/environment/nebula2.png"));
+        }
+
+        float partial = tracker.getGameTimeDeltaPartialTick(false);
         float gameTime = (level.getGameTime() + tracker.getGameTimeDeltaTicks()) % 360000;
         float baseSpeed = gameTime * 0.00003F;
 
-        renderSkybox(pose, computeSkyColor(camera, level), baseSpeed);
-        renderNebulae(pose, nebulaColor, baseSpeed * 5);
-        renderStars(pose, starColor, baseSpeed * 10);
+        renderSkybox(pose, computeSkyColor(camera, partial), baseSpeed);
+        renderNebulae(pose, createVector4fColor(camera, partial, NEBULA_COLOR, NEBULA_ALPHA), baseSpeed * 5);
+        renderStars(pose, createVector4fColor(camera, partial, STAR_COLOR, STAR_ALPHA), baseSpeed * 10);
+    }
+
+    @NotNull
+    private static Vector4f createVector4fColor(Camera camera, float partial, EnvironmentAttribute<Integer> main, EnvironmentAttribute<Float> alpha) {
+        return new Vector4f(ARGB.vector3fFromRGB24(camera.attributeProbe().getValue(main, partial).intValue()), camera.attributeProbe().getValue(alpha, partial).floatValue());
     }
 
     private static NebulaData createSkyBuffer() {
@@ -142,14 +154,11 @@ public class EnderscapeSkybox {
         matrix.mul(pose.last().pose());
         matrix.mul(new Matrix4f().rotation(SKY_ROTATION_AXIS.rotation(angle)));
 
-        AbstractTexture texture = Minecraft.getInstance().getTextureManager().getTexture(Enderscape.id("textures/environment/sky.png"));
-        texture.setUseMipmaps(false);
-
         RenderSystem.AutoStorageIndexBuffer buffer = RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS);
 
         GpuTextureView colorView = Minecraft.getInstance().getMainRenderTarget().getColorTextureView();
         GpuTextureView textureView = Minecraft.getInstance().getMainRenderTarget().getDepthTextureView();
-        GpuBufferSlice slice = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrix(), color, new Vector3f(), new Matrix4f(), 0.0F);
+        GpuBufferSlice slice = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrix(), color, new Vector3f(), new Matrix4f());
 
         GpuBuffer skyBuffer = buffer.getBuffer(sky.indexCount());
         VertexFormat.IndexType type = buffer.type();
@@ -158,7 +167,7 @@ public class EnderscapeSkybox {
             pass.setPipeline(RenderPipelines.END_SKY);
             RenderSystem.bindDefaultUniforms(pass);
             pass.setUniform("DynamicTransforms", slice);
-            pass.bindSampler("Sampler0", texture.getTextureView());
+            pass.bindTexture("Sampler0", skyTexture.getTextureView(), skyTexture.getSampler());
             pass.setVertexBuffer(0, sky.buffer());
             pass.setIndexBuffer(skyBuffer, type);
             pass.drawIndexed(0, 0, sky.indexCount(), 1);
@@ -233,21 +242,19 @@ public class EnderscapeSkybox {
         matrix.mul(pose.last().pose());
         matrix.mul(new Matrix4f().rotation(SKY_ROTATION_AXIS.rotation(angle)));
 
-        drawIndividualNebulae(nebula1, color, Enderscape.id("textures/environment/nebula1.png"));
-        drawIndividualNebulae(nebula2, color, Enderscape.id("textures/environment/nebula2.png"));
+        drawIndividualNebulae(nebula1, color, nebulaTexture1);
+        drawIndividualNebulae(nebula2, color, nebulaTexture2);
 
         matrix.popMatrix();
     }
 
-    private static void drawIndividualNebulae(NebulaData data, Vector4f color, ResourceLocation id) {
+    private static void drawIndividualNebulae(NebulaData data, Vector4f color, AbstractTexture texture) {
         Matrix4fStack matrix = RenderSystem.getModelViewStack();
 
         GpuTextureView colorView = Minecraft.getInstance().getMainRenderTarget().getColorTextureView();
         GpuTextureView depthView = Minecraft.getInstance().getMainRenderTarget().getDepthTextureView();
-        AbstractTexture texture = Minecraft.getInstance().getTextureManager().getTexture(id);
-        texture.setUseMipmaps(false);
 
-        GpuBufferSlice slice = RenderSystem.getDynamicUniforms().writeTransform(matrix, color, new Vector3f(), new Matrix4f(), 0.0F);
+        GpuBufferSlice slice = RenderSystem.getDynamicUniforms().writeTransform(matrix, color, new Vector3f(), new Matrix4f());
 
         RenderSystem.AutoStorageIndexBuffer buffer = RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS);
         GpuBuffer nebulaeBuffer = buffer.getBuffer(data.indexCount());
@@ -256,7 +263,7 @@ public class EnderscapeSkybox {
         try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "End sky nebulae", colorView, OptionalInt.empty(), depthView, OptionalDouble.empty())) {
             pass.setPipeline(NEBULAE_PIPELINE);
             pass.setUniform("DynamicTransforms", slice);
-            pass.bindSampler("Sampler0", texture.getTextureView());
+            pass.bindTexture("Sampler0", texture.getTextureView(), texture.getSampler());
             pass.setVertexBuffer(0, data.buffer());
             pass.setIndexBuffer(nebulaeBuffer, type);
             pass.drawIndexed(0, 0, data.indexCount(), 1);
@@ -309,7 +316,7 @@ public class EnderscapeSkybox {
 
         GpuTextureView colorView = Minecraft.getInstance().getMainRenderTarget().getColorTextureView();
         GpuTextureView depthView = Minecraft.getInstance().getMainRenderTarget().getDepthTextureView();
-        GpuBufferSlice slice = RenderSystem.getDynamicUniforms().writeTransform(matrix, color, new Vector3f(), new Matrix4f(), 0.0F);
+        GpuBufferSlice slice = RenderSystem.getDynamicUniforms().writeTransform(matrix, color, new Vector3f(), new Matrix4f());
 
         GpuBuffer starBuffer = starIndices.getBuffer(starIndexCount);
         VertexFormat.IndexType type = starIndices.type();
@@ -324,5 +331,9 @@ public class EnderscapeSkybox {
         }
 
         matrix.popMatrix();
+    }
+
+    private static AbstractTexture getTexture(TextureManager manager, Identifier location) {
+        return manager.getTexture(location);
     }
 }

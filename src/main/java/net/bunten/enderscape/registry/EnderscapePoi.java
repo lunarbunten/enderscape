@@ -22,7 +22,7 @@ public class EnderscapePoi {
 
     static {
         PointOfInterestHelper.register(
-                DRIFTER_HOME.location(),
+                DRIFTER_HOME.identifier(),
                 4,
                 8,
                 ImmutableList.of(
@@ -36,7 +36,7 @@ public class EnderscapePoi {
         );
 
         PointOfInterestHelper.register(
-                RUSTLE_SLEEPING_SPOT.location(),
+                RUSTLE_SLEEPING_SPOT.identifier(),
                 1,
                 8,
                 ImmutableList.of(

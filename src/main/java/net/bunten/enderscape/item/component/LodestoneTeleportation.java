@@ -17,7 +17,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -36,6 +35,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
+import net.minecraft.util.Util;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityDimensions;
@@ -323,7 +323,7 @@ public record LodestoneTeleportation(
 
     public static boolean isSameCoordinateScale(LodestoneTrackerContext context) {
         Registry<DimensionType> registry = context.level().registryAccess().lookupOrThrow(Registries.DIMENSION_TYPE);
-        return DimensionType.getTeleportationScale(registry.get(context.dimension().location()).get().value(), registry.get(context.linkedDimension().location()).get().value()) == 1;
+        return DimensionType.getTeleportationScale(registry.get(context.dimension().identifier()).get().value(), registry.get(context.linkedDimension().identifier()).get().value()) == 1;
     }
 
     private static int getTotalDistanceForCostIncrease(ItemStackContext context) {
@@ -387,7 +387,7 @@ public record LodestoneTeleportation(
                 }
 
                 if (config.mirrorTooltipDisplayDimension) {
-                    MutableComponent dimension = Component.translatable(Util.makeDescriptionId("dimension", linkedDimension.location())).withStyle(valueColor);;
+                    MutableComponent dimension = Component.translatable(Util.makeDescriptionId("dimension", linkedDimension.identifier())).withStyle(valueColor);;
                     MutableComponent component = tooltip("dimension", dimension);
 
                     consumer.accept(CommonComponents.space().append(component.withStyle(infoColor)));

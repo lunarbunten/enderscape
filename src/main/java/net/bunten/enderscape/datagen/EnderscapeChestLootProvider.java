@@ -4,7 +4,7 @@ import net.bunten.enderscape.registry.EnderscapeBiomes;
 import net.bunten.enderscape.registry.EnderscapePotions;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
-import net.minecraft.advancements.critereon.LocationPredicate;
+import net.minecraft.advancements.criterion.LocationPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
@@ -442,6 +442,7 @@ public class EnderscapeChestLootProvider extends SimpleFabricLootTableProvider {
                                         .add(createItem(LODESTONE, 4))
 
                                         .add(createItem(IRON_SWORD, 3).apply(toolEnchantments).apply(toolDamage))
+                                        .add(createItem(IRON_SPEAR, 3).apply(toolEnchantments).apply(toolDamage))
                                         .add(createItem(IRON_PICKAXE, 3).apply(toolEnchantments).apply(toolDamage))
                                         .add(createItem(IRON_AXE, 3).apply(toolEnchantments).apply(toolDamage))
                                         .add(createItem(IRON_HOE, 3).apply(toolEnchantments).apply(toolDamage))

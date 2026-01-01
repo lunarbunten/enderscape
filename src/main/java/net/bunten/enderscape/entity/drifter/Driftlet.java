@@ -36,7 +36,7 @@ public class Driftlet extends AbstractDrifter {
     private void ageUp() {
         if (level() instanceof ServerLevel server) {
             convertTo(EnderscapeEntities.DRIFTER, ConversionParams.single(this, false, false), mob -> {
-                mob.finalizeSpawn(server, level().getCurrentDifficultyAt(mob.blockPosition()), EntitySpawnReason.CONVERSION, null);
+                mob.finalizeSpawn(server, server.getCurrentDifficultyAt(mob.blockPosition()), EntitySpawnReason.CONVERSION, null);
                 mob.setPersistenceRequired();
                 mob.fudgePositionAfterSizeChange(getDimensions(getPose()));
             });

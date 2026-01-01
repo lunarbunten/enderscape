@@ -1,9 +1,10 @@
 {
   "music": {
-    "max_delay": 6000,
-    "min_delay": 0,
-    "replace_current_music": false,
-    "sound": "enderscape:music.enderscape.structure.stronghold"
+    "default": {
+      "max_delay": 6000,
+      "min_delay": 0,
+      "sound": "enderscape:music.enderscape.structure.stronghold"
+    }
   },
   "permitted_structures": [
     "minecraft:stronghold",

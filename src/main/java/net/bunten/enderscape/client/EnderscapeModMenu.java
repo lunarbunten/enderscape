@@ -198,14 +198,6 @@ public class EnderscapeModMenu implements ModMenuApi {
                 .controller(opt -> EnumControllerBuilder.create(opt).enumClass(LightingStyle.class))
                 .build();
 
-        Option<?> skyboxAddDynamicFogDensity = boolOption(
-                "skybox_add_dynamic_fog_density",
-                true,
-                () -> config.skyboxAddDynamicFogDensity,
-                value -> config.skyboxAddDynamicFogDensity = value,
-                TickBoxControllerBuilder::create
-        );
-
         Option<?> skyboxScalesBrightnessWithGamma = boolOption(
                 "skybox_scales_brightness_with_gamma",
                 true,
@@ -270,7 +262,6 @@ public class EnderscapeModMenu implements ModMenuApi {
                 .option(skyboxUpdateEnabled)
                 .option(skyboxScalesBrightnessWithGamma)
                 .option(skyboxBrightnessScaleFactor)
-                .option(skyboxAddDynamicFogDensity)
                 .option(flashEnabled)
                 .option(flashUpdatedVisuals)
                 .option(flashInfluencesSkybox)

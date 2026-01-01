@@ -1,42 +1,55 @@
 {
+  "attributes": {
+    "enderscape:visual/enderscape/nebula_alpha": {
+      "argument": 0.5,
+      "modifier": "multiply"
+    },
+    "enderscape:visual/enderscape/nebula_color": "#96ad9e",
+    "enderscape:visual/enderscape/star_alpha": {
+      "argument": 0.85,
+      "modifier": "multiply"
+    },
+    "enderscape:visual/enderscape/star_color": "#89ffd5",
+    "minecraft:audio/ambient_sounds": {
+      "additions": {
+        "sound": "enderscape:ambient.magnia_fields.additions",
+        "tick_chance": 0.0015
+      },
+      "loop": "enderscape:ambient.magnia_fields.loop",
+      "mood": {
+        "block_search_extent": 8,
+        "offset": 2.0,
+        "sound": "enderscape:ambient.magnia_fields.mood",
+        "tick_delay": 6000
+      }
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "max_delay": 24000,
+        "min_delay": 12000,
+        "sound": "enderscape:music.enderscape.biome.magnia_fields"
+      }
+    },
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "enderscape:void_stars"
+        },
+        "probability": 0.003
+      }
+    ],
+    "minecraft:visual/cloud_color": "#00000000",
+    "minecraft:visual/fog_color": "#0f1010",
+    "minecraft:visual/sky_color": "#151616",
+    "minecraft:visual/sky_light_color": "#374745",
+    "minecraft:visual/water_fog_color": "#5e656e"
+  },
   "carvers": [],
   "downfall": 0.5,
   "effects": {
-    "additions_sound": {
-      "sound": "enderscape:ambient.magnia_fields.additions",
-      "tick_chance": 0.0015
-    },
-    "ambient_sound": "enderscape:ambient.magnia_fields.loop",
-    "fog_color": 6515306,
-    "foliage_color": 9542796,
-    "grass_color": 9542796,
-    "mood_sound": {
-      "block_search_extent": 8,
-      "offset": 2.0,
-      "sound": "enderscape:ambient.magnia_fields.mood",
-      "tick_delay": 6000
-    },
-    "music": [
-      {
-        "data": {
-          "max_delay": 24000,
-          "min_delay": 12000,
-          "replace_current_music": false,
-          "sound": "enderscape:music.enderscape.biome.magnia_fields"
-        },
-        "weight": 1
-      }
-    ],
-    "music_volume": 1.0,
-    "particle": {
-      "options": {
-        "type": "enderscape:void_stars"
-      },
-      "probability": 0.003
-    },
-    "sky_color": 1381910,
-    "water_color": 9015708,
-    "water_fog_color": 6186350
+    "foliage_color": "#919c8c",
+    "grass_color": "#919c8c",
+    "water_color": "#89919c"
   },
   "features": [
     [],

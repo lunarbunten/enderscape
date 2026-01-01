@@ -4,15 +4,16 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.bunten.enderscape.Enderscape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 
 @Environment(EnvType.CLIENT)
 public class RubblemiteEyesLayer extends RenderLayer<RubblemiteRenderState, RubblemiteModel> {
-    private static final RenderType RUBBLEMITE_EYES = RenderType.eyes(Enderscape.id("textures/entity/rubblemite/eyes.png"));
+    private static final RenderType RUBBLEMITE_EYES = RenderTypes.eyes(Enderscape.id("textures/entity/rubblemite/eyes.png"));
 
     public RubblemiteEyesLayer(RenderLayerParent<RubblemiteRenderState, RubblemiteModel> parent) {
         super(parent);

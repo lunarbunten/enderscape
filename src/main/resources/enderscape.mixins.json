@@ -15,7 +15,6 @@
         "ChorusPlantFeatureMixin",
         "CreeperMixin",
         "DispenseItemBehaviorMixin",
-        "EnchantmentMixin",
         "EndCityPieceMixin",
         "EnderManMixin",
         "EndermiteMixin",

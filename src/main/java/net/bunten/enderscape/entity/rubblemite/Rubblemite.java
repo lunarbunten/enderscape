@@ -13,7 +13,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.ByIdMap;
@@ -141,7 +141,7 @@ public class Rubblemite extends Monster {
         entityData.set(DATA_VARIANT_ID, holder);
     }
 
-    public ResourceLocation getTexture() {
+    public Identifier getTexture() {
         RubblemiteVariant variant = getVariant().value();
         return variant.assetInfo().asset().texturePath();
     }

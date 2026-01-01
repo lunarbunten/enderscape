@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record FuelDisplay(
         int barColor,
@@ -35,7 +35,7 @@ public record FuelDisplay(
 
     public static final FuelDisplay DEFAULT = FuelDisplay.Builder.create().build();
 
-    public static ResourceLocation segmentOf(ResourceLocation segments, int index) {
+    public static Identifier segmentOf(Identifier segments, int index) {
         return switch (index) {
             case 0 -> segments.withSuffix("/start");
             case 1 -> segments.withSuffix("/loop");

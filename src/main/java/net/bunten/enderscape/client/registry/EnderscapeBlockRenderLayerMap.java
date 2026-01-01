@@ -59,10 +59,7 @@ public class EnderscapeBlockRenderLayerMap {
                 VOID_SHALE,
                 WISP_FLOWER,
                 WISP_GROWTH,
-                WISP_SPROUTS
-        );
-
-        BlockRenderLayerMap.putBlocks(ChunkSectionLayer.CUTOUT_MIPPED,
+                WISP_SPROUTS,
                 VEILED_LEAVES,
                 VEILED_LEAF_PILE
         );

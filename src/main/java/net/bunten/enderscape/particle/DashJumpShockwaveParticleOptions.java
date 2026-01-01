@@ -10,9 +10,9 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ExtraCodecs;
-import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
-public record DashJumpShockwaveParticleOptions(Vector3f velocity, float scale) implements ParticleOptions {
+public record DashJumpShockwaveParticleOptions(Vector3fc velocity, float scale) implements ParticleOptions {
 
     public static final MapCodec<DashJumpShockwaveParticleOptions> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(

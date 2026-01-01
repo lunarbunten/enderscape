@@ -20,8 +20,8 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -134,13 +134,20 @@ public class EnderscapeClientNetworking {
 
     private static void receiveStructureChangedPayload(ClientboundStructureChangedPayload payload, ClientPlayNetworking.Context context) {
         Minecraft client = context.client();
-        ResourceLocation location = payload.location();
+        Identifier location = payload.location();
+        LocalPlayer player = client.player;
 
         client.execute(() -> {
-            if (client.level == null) return;
-
+            if (client.level == null || player == null) return;
             Registry<StructureMusic> registry = client.level.registryAccess().lookupOrThrow(EnderscapeRegistries.STRUCTURE_MUSIC);
-            EnderscapeClient.structureMusic = registry.stream().filter(music -> music.permittedStructures().contains(location)).map(StructureMusic::music).findFirst();
+            boolean creative = player.getAbilities().instabuild && player.getAbilities().mayfly;
+
+            EnderscapeClient.structureMusic = registry.stream()
+                    .filter(music -> music.permittedStructures().contains(location))
+                    .map(mus -> mus.music().select(creative, player.isUnderWater()))
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .findFirst();
         });
     }
 

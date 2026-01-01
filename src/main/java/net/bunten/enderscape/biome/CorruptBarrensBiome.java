@@ -1,17 +1,24 @@
 package net.bunten.enderscape.biome;
 
 import net.bunten.enderscape.registry.*;
-import net.bunten.enderscape.util.RGBA;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.EndPlacements;
-import net.minecraft.sounds.Musics;
+import net.minecraft.util.ARGB;
+import net.minecraft.world.attribute.*;
+import net.minecraft.world.attribute.modifier.FloatModifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.biome.*;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+
+import java.util.List;
+import java.util.Optional;
 
 import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.*;
 
@@ -50,18 +57,34 @@ public class CorruptBarrensBiome {
                 .hasPrecipitation(false)
                 .temperature(0.5F)
                 .downfall(0.5F)
+                .putAttributes(EnvironmentAttributeMap.builder()
+                        .set(EnderscapeEnvironmentAttributes.AMBIENT_LIGHT_FACTOR, 0.75F)
+
+                        .set(EnderscapeEnvironmentAttributes.NEBULA_COLOR, 0x555189)
+                        .modify(EnderscapeEnvironmentAttributes.NEBULA_ALPHA, FloatModifier.MULTIPLY, 0.8F)
+                        .set(EnderscapeEnvironmentAttributes.STAR_COLOR, 0x9F89FF)
+                        .modify(EnderscapeEnvironmentAttributes.STAR_ALPHA, FloatModifier.MULTIPLY, 0.7F)
+
+                        .set(EnvironmentAttributes.SKY_COLOR, ARGB.scaleRGB(EnderscapeBiomes.DEFAULT_SKY_COLOR, EnderscapeBiomes.CORRUPT_BARRENS_DARKENING_FACTOR))
+                        .set(EnvironmentAttributes.SKY_LIGHT_COLOR, 0x242035)
+                        .set(EnvironmentAttributes.FOG_COLOR, 0x0B090F)
+                        .set(EnvironmentAttributes.FOG_START_DISTANCE, -40.0F)
+                        .modify(EnderscapeEnvironmentAttributes.FOG_END_DENSITY, FloatModifier.MULTIPLY, 0.5F)
+                        .set(EnvironmentAttributes.CLOUD_COLOR, EnderscapeBiomes.DEFAULT_CLOUD_COLOR)
+
+                        .set(EnvironmentAttributes.WATER_FOG_COLOR, 0x544f63)
+                        .set(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(EnderscapeParticles.CORRUPT_SPORES, 0.03F))
+                        .set(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
+                                Optional.of(EnderscapeBiomeSounds.CORRUPT_BARRENS.loop()),
+                                Optional.of(new AmbientMoodSettings(EnderscapeBiomeSounds.CORRUPT_BARRENS.mood(), 6000, 8, 2)),
+                                List.of(new AmbientAdditionsSettings(EnderscapeBiomeSounds.CORRUPT_BARRENS.additions(), 0.0015))
+                        ))
+                        .set(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(EnderscapeBiomeSounds.CORRUPT_BARRENS.music()))
+                        .build())
                 .specialEffects(new BiomeSpecialEffects.Builder()
-                        .skyColor(RGBA.darkenColor(EnderscapeBiomes.DEFAULT_SKY_COLOR, EnderscapeBiomes.CORRUPT_BARRENS_DARKENING_FACTOR))
-                        .fogColor(EnderscapeBiomes.lightenFogColor(0x0B090F))
                         .waterColor(0x6a647d)
-                        .waterFogColor(0x544f63)
                         .foliageColorOverride(0x847c91)
                         .grassColorOverride(0x847c91)
-                        .ambientParticle(new AmbientParticleSettings(EnderscapeParticles.CORRUPT_SPORES, 0.03F))
-                        .ambientLoopSound(EnderscapeBiomeSounds.CORRUPT_BARRENS.loop())
-                        .ambientAdditionsSound(new AmbientAdditionsSettings(EnderscapeBiomeSounds.CORRUPT_BARRENS.additions(), 0.0015))
-                        .ambientMoodSound(new AmbientMoodSettings(EnderscapeBiomeSounds.CORRUPT_BARRENS.mood(), 6000, 8, 2))
-                        .backgroundMusic(Musics.createGameMusic(EnderscapeBiomeSounds.CORRUPT_BARRENS.music()))
                         .build()
                 )
 

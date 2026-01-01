@@ -2,7 +2,7 @@ package net.bunten.enderscape.registry.tag;
 
 import net.bunten.enderscape.Enderscape;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
@@ -13,8 +13,6 @@ public class EnderscapeItemTags {
     public static final TagKey<Item> MAGNIA_ATTRACTOR_ENCHANTABLE = register("enchantable/magnia_attractor");
     public static final TagKey<Item> MIRROR_ENCHANTABLE = register("enchantable/mirror");
     public static final TagKey<Item> NEBULITE_TOOL_ENCHANTABLE = register("enchantable/nebulite_tool");
-
-    public static final TagKey<Item> SWEEPING_EDGE_INCOMPATIBLE = register("incompatible/sweeping_edge");
 
     public static final TagKey<Item> WEAK_MAGNIA_STRENGTH = register("magnia_strength/weak");
     public static final TagKey<Item> AVERAGE_MAGNIA_STRENGTH = register("magnia_strength/medium");
@@ -73,6 +71,6 @@ public class EnderscapeItemTags {
     }
 
     private static TagKey<Item> common(String name) {
-        return TagKey.create(Registries.ITEM, ResourceLocation.tryBuild("c", name));
+        return TagKey.create(Registries.ITEM, Identifier.tryBuild("c", name));
     }
 }

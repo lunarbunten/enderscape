@@ -11,7 +11,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,11 +25,11 @@ public class FueledToolHud extends HudElement {
         super(RenderPhase.AFTER_HUD);
     }
 
-    private ResourceLocation emptySegments;
-    private ResourceLocation fueledSegments;
-    private ResourceLocation invalidSegments;
-    private ResourceLocation outlineOverlay;
-    private ResourceLocation costOverlay;
+    private Identifier emptySegments;
+    private Identifier fueledSegments;
+    private Identifier invalidSegments;
+    private Identifier outlineOverlay;
+    private Identifier costOverlay;
 
     private float heightOffset = 0, previousHeightOffset = 0;
     private float totalAlpha = 0, previousTotalAlpha = 0;

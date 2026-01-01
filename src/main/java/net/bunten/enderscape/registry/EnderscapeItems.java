@@ -21,7 +21,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -81,7 +81,7 @@ public class EnderscapeItems {
     private static Properties shadolineArmorProperties(ArmorType type) {
         ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
         EquipmentSlotGroup group = EquipmentSlotGroup.bySlot(type.getSlot());
-        ResourceLocation location = Enderscape.id("armor." + type.getName());
+        Identifier location = Enderscape.id("armor." + type.getName());
 
         builder.add(Attributes.ARMOR, new AttributeModifier(location, SHADOLINE_ARMOR_MATERIAL.defense().getOrDefault(type, 0), AttributeModifier.Operation.ADD_VALUE), group);
 
@@ -267,7 +267,7 @@ public class EnderscapeItems {
     }
 
     private static Item registerMusicDisc(ResourceKey<JukeboxSong> song, Rarity rarity) {
-        return registerItem("music_disc_" + song.location().getPath(), new Properties().stacksTo(1).rarity(rarity).jukeboxPlayable(song));
+        return registerItem("music_disc_" + song.identifier().getPath(), new Properties().stacksTo(1).rarity(rarity).jukeboxPlayable(song));
     }
 
     private static ResourceKey<Item> createResourceKey(String name) {
@@ -275,7 +275,7 @@ public class EnderscapeItems {
     }
 
     private static ResourceKey<Item> blockIdToItemId(ResourceKey<Block> resourceKey) {
-        return ResourceKey.create(Registries.ITEM, resourceKey.location());
+        return ResourceKey.create(Registries.ITEM, resourceKey.identifier());
     }
 
     public static Item registerBlock(Block block) {

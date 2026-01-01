@@ -6,7 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.decoration.PaintingVariant;
+import net.minecraft.world.entity.decoration.painting.PaintingVariant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +26,9 @@ public class EnderscapePaintingVariants {
         context.register(key, new PaintingVariant(
                 width,
                 height,
-                key.location(),
-                Optional.of(Component.translatable(key.location().toLanguageKey("painting", "title")).withStyle(ChatFormatting.YELLOW)),
-                Optional.of(Component.translatable(key.location().toLanguageKey("painting", "author")).withStyle(ChatFormatting.GRAY))
+                key.identifier(),
+                Optional.of(Component.translatable(key.identifier().toLanguageKey("painting", "title")).withStyle(ChatFormatting.YELLOW)),
+                Optional.of(Component.translatable(key.identifier().toLanguageKey("painting", "author")).withStyle(ChatFormatting.GRAY))
         ));
     }
 

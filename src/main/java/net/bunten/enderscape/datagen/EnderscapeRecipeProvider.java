@@ -12,7 +12,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.*;
 import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
@@ -47,7 +47,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 .map(pair -> {
                     Item item = pair.getFirst();
                     ResourceKey<TrimPattern> pattern = pair.getSecond();
-                    ResourceKey<Recipe<?>> recipe = ResourceKey.create(Registries.RECIPE, ResourceLocation.withDefaultNamespace(getItemName(item) + "_smithing_trim"));
+                    ResourceKey<Recipe<?>> recipe = ResourceKey.create(Registries.RECIPE, Identifier.withDefaultNamespace(getItemName(item) + "_smithing_trim"));
                     return new VanillaRecipeProvider.TrimTemplate(item, pattern, recipe);
                 });
     }

@@ -10,7 +10,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.decoration.PaintingVariant;
+import net.minecraft.world.entity.decoration.painting.PaintingVariant;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
@@ -530,7 +530,7 @@ public class EnderscapeCreativeModeTab {
             );
 
             entries.addAfter(HONEY_BLOCK, DRIFT_JELLY_BLOCK);
-            entries.addBefore(HAY_BLOCK,
+            entries.addAfter(JACK_O_LANTERN,
                     FLANGER_BERRY_FLOWER,
                     UNRIPE_FLANGER_BERRY_BLOCK,
                     RIPE_FLANGER_BERRY_BLOCK
@@ -607,8 +607,8 @@ public class EnderscapeCreativeModeTab {
             if (!EnderscapeConfig.getInstance().includeItemsInVanillaCreativeTabs) return;
 
             entries.addBefore(CREAKING_HEART, END_TRIAL_SPAWNER);
-            entries.addAfter(DONKEY_SPAWN_EGG, DRIFTER_SPAWN_EGG, DRIFTLET_SPAWN_EGG);
-            entries.addAfter(RAVAGER_SPAWN_EGG, RUBBLEMITE_SPAWN_EGG, RUSTLE_SPAWN_EGG);
+            entries.addAfter(ENDERMITE_SPAWN_EGG, RUBBLEMITE_SPAWN_EGG);
+            entries.addAfter(SHULKER_SPAWN_EGG, RUSTLE_SPAWN_EGG, DRIFTER_SPAWN_EGG, DRIFTLET_SPAWN_EGG);
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.OP_BLOCKS).register(entries -> {

@@ -7,13 +7,13 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.AnimationState;
 
 @Environment(EnvType.CLIENT)
 public class RubblemiteRenderState extends LivingEntityRenderState {
-    private static final ResourceLocation DEFAULT_TEXTURE = Enderscape.id("textures/entity/rubblemite/end_stone.png");
-    public ResourceLocation texture = DEFAULT_TEXTURE;
+    private static final Identifier DEFAULT_TEXTURE = Enderscape.id("textures/entity/rubblemite/end_stone.png");
+    public Identifier texture = DEFAULT_TEXTURE;
     boolean isDashing;
 
     public final AnimationState insideShellAnimationState = new AnimationState();

@@ -13,7 +13,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
 import static net.bunten.enderscape.client.EnderscapeClient.MAX_STARE_STICKS;
@@ -22,7 +22,7 @@ import static net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED_SNIPPET
 @Environment(EnvType.CLIENT)
 public class StareScreenEffect extends HudElement {
 
-    public static final ResourceLocation STATIC_TEXTURE = Enderscape.id("textures/misc/static.png");
+    public static final Identifier STATIC_TEXTURE = Enderscape.id("textures/misc/static.png");
 
     public static final RenderPipeline SCREEN_EFFECT_PIPELINE = RenderPipelines.register(
             RenderPipeline.builder(GUI_TEXTURED_SNIPPET)

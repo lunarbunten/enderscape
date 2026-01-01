@@ -2,7 +2,7 @@ package net.bunten.enderscape.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
-import net.minecraft.advancements.critereon.LocationPredicate;
+import net.minecraft.advancements.criterion.LocationPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
@@ -69,15 +69,16 @@ public class EnderscapeVaultLootProvider extends SimpleFabricLootTableProvider {
                                     .setRolls(UniformGenerator.between(0, 2))
 
                                     .add(createItem(DIAMOND_SWORD, 20).apply(toolEnchantments).apply(toolDamage))
+                                    .add(createItem(DIAMOND_SPEAR, 20).apply(toolEnchantments).apply(toolDamage))
                                     .add(createItem(DIAMOND_PICKAXE, 20).apply(toolEnchantments).apply(toolDamage))
                                     .add(createItem(DIAMOND_AXE, 20).apply(toolEnchantments).apply(toolDamage))
                                     .add(createItem(DIAMOND_SHOVEL, 20).apply(toolEnchantments).apply(toolDamage))
                                     .add(createItem(DIAMOND_HOE, 20).apply(toolEnchantments).apply(toolDamage))
 
-                                    .add(createItem(DIAMOND_HELMET, 25).apply(toolEnchantments).apply(toolDamage))
-                                    .add(createItem(DIAMOND_CHESTPLATE, 25).apply(toolEnchantments).apply(toolDamage))
-                                    .add(createItem(DIAMOND_LEGGINGS, 25).apply(toolEnchantments).apply(toolDamage))
-                                    .add(createItem(DIAMOND_BOOTS, 25).apply(toolEnchantments).apply(toolDamage))
+                                    .add(createItem(DIAMOND_HELMET, 30).apply(toolEnchantments).apply(toolDamage))
+                                    .add(createItem(DIAMOND_CHESTPLATE, 30).apply(toolEnchantments).apply(toolDamage))
+                                    .add(createItem(DIAMOND_LEGGINGS, 30).apply(toolEnchantments).apply(toolDamage))
+                                    .add(createItem(DIAMOND_BOOTS, 30).apply(toolEnchantments).apply(toolDamage))
                     )
                     .withPool(
                             LootPool.lootPool()

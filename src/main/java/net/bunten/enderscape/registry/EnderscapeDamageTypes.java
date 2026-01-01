@@ -21,7 +21,7 @@ public class EnderscapeDamageTypes {
     }
 
     private static void register(BootstrapContext<DamageType> context, ResourceKey<DamageType> key) {
-        context.register(key, new DamageType(key.location().getPath(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1F));
+        context.register(key, new DamageType(key.identifier().getPath(), DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1F));
     }
 
     private static ResourceKey<DamageType> register(String name) {

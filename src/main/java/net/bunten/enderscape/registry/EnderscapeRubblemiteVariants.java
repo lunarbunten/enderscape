@@ -49,7 +49,7 @@ public class EnderscapeRubblemiteVariants {
     }
 
     private static void register(BootstrapContext<RubblemiteVariant> context, ResourceKey<RubblemiteVariant> key, ResourceKey<LootTable> table, SpawnPrioritySelectors selectors) {
-        context.register(key, new RubblemiteVariant(Optional.of(table), new RubblemiteVariant.AssetInfo(new ClientAsset.ResourceTexture(Enderscape.id("entity/rubblemite/" + key.location().getPath()))), selectors));
+        context.register(key, new RubblemiteVariant(Optional.of(table), new RubblemiteVariant.AssetInfo(new ClientAsset.ResourceTexture(Enderscape.id("entity/rubblemite/" + key.identifier().getPath()))), selectors));
     }
 
     private static SpawnPrioritySelectors spawnsOnBlocks(HolderSet<Block> set) {

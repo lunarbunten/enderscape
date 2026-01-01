@@ -4,7 +4,7 @@ import net.bunten.enderscape.Enderscape;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -17,7 +17,7 @@ import static net.bunten.enderscape.registry.EnderscapeDataComponents.BACKSTAB_A
 
 public class EnderscapeAttributes {
 
-    public static final ResourceLocation BASE_BACKSTAB_DAMAGE_ID = Enderscape.id("base_backstab_damage");
+    public static final Identifier BASE_BACKSTAB_DAMAGE_ID = Enderscape.id("base_backstab_damage");
 
     public static final Holder<Attribute> BACKSTAB_DAMAGE = register("backstab_damage", new RangedAttribute("attribute.enderscape.backstab_damage", 0, 0, 2048).setSyncable(true));
     public static final Holder<Attribute> STEALTH = register("stealth", new RangedAttribute("attribute.enderscape.stealth", 1, 0, 2).setSyncable(true));

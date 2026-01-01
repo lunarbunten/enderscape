@@ -1,15 +1,18 @@
 package net.bunten.enderscape.client.world;
 
 import net.bunten.enderscape.EnderscapeConfig;
+import net.minecraft.client.Camera;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
-import org.joml.Vector4f;
+import net.minecraft.world.attribute.EnvironmentAttributes;
+import org.joml.Vector3f;
 
 public class EndFlashParameters {
 
     public static final EnderscapeConfig CONFIG = EnderscapeConfig.getInstance();
-    public static Vector4f color = new Vector4f(0, 0, 0, 0);
 
     public static boolean enabled() {
         return EnderscapeConfig.getInstance().flashEnabled;
@@ -21,6 +24,14 @@ public class EndFlashParameters {
 
     public static long frequencyInTicks() {
         return Math.max(1L, (long) (CONFIG.flashFrequency * 60F * 20F));
+    }
+
+    public static Vector3f getSkyLightColor(Minecraft minecraft) {
+        Camera camera = minecraft.gameRenderer.getMainCamera();
+        DeltaTracker tracker = minecraft.getDeltaTracker();
+        int color = camera.attributeProbe().getValue(EnvironmentAttributes.SKY_LIGHT_COLOR, tracker.getGameTimeDeltaPartialTick(false));
+
+        return ARGB.vector3fFromRGB24(color);
     }
 
     public static float getIntensity(int offset, int duration, long remainder) {

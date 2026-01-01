@@ -13,7 +13,7 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
@@ -21,7 +21,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -67,15 +67,15 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
         HolderGetter<Block> blockRegistry = provider.lookupOrThrow(Registries.BLOCK);
         HolderLookup.RegistryLookup<EntityType<?>> entityRegistry = provider.lookupOrThrow(Registries.ENTITY_TYPE);
 
-        ResourceKey<Advancement> endGatewayKey = ResourceKey.create(Registries.ADVANCEMENT, ResourceLocation.withDefaultNamespace("end/enter_end_gateway"));
-        ResourceKey<Advancement> findEndCityKey = ResourceKey.create(Registries.ADVANCEMENT, ResourceLocation.withDefaultNamespace("end/find_end_city"));
-        ResourceKey<Advancement> elytraKey = ResourceKey.create(Registries.ADVANCEMENT, ResourceLocation.withDefaultNamespace("end/elytra"));
+        ResourceKey<Advancement> endGatewayKey = ResourceKey.create(Registries.ADVANCEMENT, Identifier.withDefaultNamespace("end/enter_end_gateway"));
+        ResourceKey<Advancement> findEndCityKey = ResourceKey.create(Registries.ADVANCEMENT, Identifier.withDefaultNamespace("end/find_end_city"));
+        ResourceKey<Advancement> elytraKey = ResourceKey.create(Registries.ADVANCEMENT, Identifier.withDefaultNamespace("end/elytra"));
 
         ItemStack glintMirror = MIRROR.getDefaultInstance();
         glintMirror.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
 
         Advancement.Builder.advancement()
-                .parent(endGatewayKey.location())
+                .parent(endGatewayKey.identifier())
                 .display(
                         CELESTIAL_CAP,
                         Component.translatable("advancement.enderscape.fall_onto_chanterelle_cap"),
@@ -103,7 +103,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                 .save(consumer, Enderscape.id("fall_onto_chanterelle_cap").toString());
 
         AdvancementHolder rubbleShieldDash = Advancement.Builder.advancement()
-                .parent(endGatewayKey.location())
+                .parent(endGatewayKey.identifier())
                 .display(
                         END_STONE_RUBBLE_SHIELD,
                         Component.translatable("advancement.enderscape.rubble_shield_dash"),
@@ -123,7 +123,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                 .save(consumer, Enderscape.id("rubble_shield_dash").toString());
 
         AdvancementHolder rustleBucket = Advancement.Builder.advancement()
-                .parent(endGatewayKey.location())
+                .parent(endGatewayKey.identifier())
                 .display(
                         RUSTLE_BUCKET,
                         Component.translatable("advancement.enderscape.rustle_bucket"),
@@ -143,7 +143,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                 .save(consumer, Enderscape.id("rustle_bucket").toString());
 
         AdvancementHolder unlockEndVault = Advancement.Builder.advancement()
-                .parent(findEndCityKey.location())
+                .parent(findEndCityKey.identifier())
                 .display(
                         END_CITY_KEY,
                         Component.translatable("advancement.enderscape.unlock_end_vault"),
@@ -162,7 +162,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                 .save(consumer, Enderscape.id("unlock_end_vault").toString());
 
         Advancement.Builder exploreEnd = Advancement.Builder.advancement()
-                .parent(endGatewayKey.location())
+                .parent(endGatewayKey.identifier())
                 .display(SHADOLINE_BOOTS,
                         Component.translatable("advancement.enderscape.explore_end"),
                         Component.translatable("advancement.enderscape.explore_end.description"),
@@ -173,7 +173,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
 
         EXPLORE_END_BIOMES.forEach(biome ->
                 exploreEnd.addCriterion(
-                        biome.location().toString(),
+                        biome.identifier().toString(),
                         PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(provider.lookupOrThrow(Registries.BIOME).getOrThrow(biome)))
                 )
         );
@@ -181,7 +181,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
         exploreEnd.save(consumer, Enderscape.id("explore_end").toString());
 
         AdvancementHolder obtainNebulite = Advancement.Builder.advancement()
-                .parent(endGatewayKey.location())
+                .parent(endGatewayKey.identifier())
                 .display(
                         NEBULITE,
                         Component.translatable("advancement.enderscape.obtain_nebulite"),
@@ -194,7 +194,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                 .save(consumer, Enderscape.id("craft_nebulite").toString());
 
         AdvancementHolder bottleDriftJelly = Advancement.Builder.advancement()
-                .parent(endGatewayKey.location())
+                .parent(endGatewayKey.identifier())
                 .display(
                         DRIFT_JELLY_BOTTLE,
                         Component.translatable("advancement.enderscape.bottle_drift_jelly"),
@@ -358,7 +358,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                 .save(consumer, Enderscape.id("stun_attack").toString());
 
 //        Advancement.Builder hearMagniaRadioSongs = Advancement.Builder.advancement()
-//                .parent(endGatewayKey.location())
+//                .parent(endGatewayKey.identifier())
 //                .display(MAGNIA_RADIO,
 //                        Component.translatable("advancement.enderscape.hear_magnia_radio_songs"),
 //                        Component.translatable("advancement.enderscape.hear_magnia_radio_songs.description"),
@@ -369,7 +369,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
 //
 //        ALL_DIMENSION_TYPES.forEach(dimension ->
 //                hearMagniaRadioSongs.addCriterion(
-//                        dimension.location().toString(),
+//                        dimension.identifier().toString(),
 //                        HEAR_MAGNIA_RADIO_SONG.createCriterion(new HearMagniaRadioSongCriterion.Conditions(Optional.empty(), Optional.of(LocationPredicate.Builder.inDimension(dimension).build()), Optional.empty()))
 //                )
 //        );
