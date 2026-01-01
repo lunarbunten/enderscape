@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": [
+    {
+      "item": "enderscape:shadoline_helmet"
+    },
+    {
+      "item": "enderscape:shadoline_chestplate"
+    },
+    {
+      "item": "enderscape:shadoline_leggings"
+    },
+    {
+      "item": "enderscape:shadoline_boots"
+    }
+  ],
+  "result": {
+    "id": "enderscape:shadoline_nugget"
+  }
+}

@@ -1,6 +1,7 @@
 package net.bunten.enderscape.registry;
 
 import net.bunten.enderscape.Enderscape;
+import net.bunten.enderscape.EnderscapeConfig;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Holder;
@@ -32,6 +33,8 @@ import static net.minecraft.world.item.Items.*;
 public class EnderscapeCreativeModeTab {
 
     public static final CreativeModeTab ENDERSCAPE = FabricItemGroup.builder().title(Component.translatable("itemGroup.enderscape")).icon(NEBULITE::getDefaultInstance).displayItems((parameters, output) -> {
+        if (!EnderscapeConfig.getInstance().creativeTabEnabled) return;
+
         output.accept(ENDERMAN_SPAWN_EGG);
         output.accept(ENDERMITE_SPAWN_EGG);
         output.accept(RUBBLEMITE_SPAWN_EGG);
@@ -48,9 +51,9 @@ public class EnderscapeCreativeModeTab {
         output.accept(SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE);
         output.accept(STASIS_ARMOR_TRIM_SMITHING_TEMPLATE);
 
-        output.accept(getEnchantedBook(parameters, EnderscapeEnchantments.LIGHTSPEED, 3));
-        output.accept(getEnchantedBook(parameters, EnderscapeEnchantments.TRANSDIMENSIONAL, 1));
         output.accept(getEnchantedBook(parameters, EnderscapeEnchantments.REBOUND, 1));
+        output.accept(getEnchantedBook(parameters, EnderscapeEnchantments.RESONANCE, 3));
+        output.accept(getEnchantedBook(parameters, EnderscapeEnchantments.TRANSDIMENSIONAL, 1));
 
         output.accept(END_PORTAL_FRAME);
         output.accept(ENDER_EYE);
@@ -66,6 +69,10 @@ public class EnderscapeCreativeModeTab {
         output.accept(END_CITY_KEY);
 
         output.accept(ENDER_PEARL);
+        output.accept(SHADOLINE_HELMET);
+        output.accept(SHADOLINE_CHESTPLATE);
+        output.accept(SHADOLINE_LEGGINGS);
+        output.accept(SHADOLINE_BOOTS);
         output.accept(END_STONE_RUBBLE_SHIELD);
         output.accept(VERADITE_RUBBLE_SHIELD);
         output.accept(MIRESTONE_RUBBLE_SHIELD);
@@ -82,6 +89,7 @@ public class EnderscapeCreativeModeTab {
             output.accept(PotionContents.createItemStack(TIPPED_ARROW, EnderscapePotions.LOW_GRAVITY));
         });
 
+        output.accept(DAGGER);
         output.accept(MAGNIA_ATTRACTOR);
         output.accept(MIRROR);
         output.accept(ELYTRA);
@@ -170,6 +178,9 @@ public class EnderscapeCreativeModeTab {
         output.accept(POLARIZED_MAGNIA);
 
         output.accept(VOID_SHALE);
+        output.accept(VOID_TORCH_ITEM);
+        output.accept(VOID_LANTERN);
+        output.accept(VOID_CAMPFIRE);
 
         output.accept(SHADOLINE_ORE);
         output.accept(MIRESTONE_SHADOLINE_ORE);
@@ -187,6 +198,8 @@ public class EnderscapeCreativeModeTab {
         output.accept(CUT_SHADOLINE_WALL);
         output.accept(CHISELED_SHADOLINE);
         output.accept(SHADOLINE_PILLAR);
+        output.accept(SHADOLINE_BARS);
+        output.accept(SHADOLINE_CHAIN);
 
         output.accept(NEBULITE_ORE);
         output.accept(MIRESTONE_NEBULITE_ORE);
@@ -311,8 +324,9 @@ public class EnderscapeCreativeModeTab {
     }).build();
 
     static {
-
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.BUILDING_BLOCKS).register(entries -> {
+            if (!EnderscapeConfig.getInstance().includeItemsInVanillaCreativeTabs) return;
+
             entries.addAfter(END_STONE,
                     END_STONE_STAIRS,
                     END_STONE_SLAB,
@@ -458,9 +472,8 @@ public class EnderscapeCreativeModeTab {
                     MURUBLIGHT_BUTTON
             );
 
-            entries.addAfter(NETHERITE_BLOCK, NEBULITE_BLOCK);
-
-            entries.addAfter(WAXED_OXIDIZED_COPPER_BULB,
+            entries.addBefore(AMETHYST_BLOCK,
+                    NEBULITE_BLOCK,
                     SHADOLINE_BLOCK,
                     SHADOLINE_BLOCK_STAIRS,
                     SHADOLINE_BLOCK_SLAB,
@@ -470,11 +483,14 @@ public class EnderscapeCreativeModeTab {
                     CUT_SHADOLINE_SLAB,
                     CUT_SHADOLINE_WALL,
                     CHISELED_SHADOLINE,
-                    SHADOLINE_PILLAR
+                    SHADOLINE_PILLAR,
+                    SHADOLINE_BARS,
+                    SHADOLINE_CHAIN
             );
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.NATURAL_BLOCKS).register(entries -> {
+            if (!EnderscapeConfig.getInstance().includeItemsInVanillaCreativeTabs) return;
 
             entries.addAfter(END_STONE,
                     VEILED_END_STONE,
@@ -525,15 +541,21 @@ public class EnderscapeCreativeModeTab {
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(entries -> {
-            entries.addBefore(CHAIN, BULB_LANTERN);
-            entries.addBefore(END_ROD, END_LAMP);
+            if (!EnderscapeConfig.getInstance().includeItemsInVanillaCreativeTabs) return;
+
+            entries.addBefore(REDSTONE_TORCH, VOID_TORCH_ITEM);
+            entries.addBefore(CHAIN, VOID_LANTERN, BULB_LANTERN);
+            entries.addBefore(END_ROD, SHADOLINE_CHAIN, END_LAMP);
             entries.addBefore(CRYING_OBSIDIAN, POLARIZED_MAGNIA, BLINKLAMP);
+            entries.addBefore(ANVIL, VOID_CAMPFIRE);
             entries.addBefore(CHEST, VEILED_SIGN_ITEM, VEILED_HANGING_SIGN_ITEM, CELESTIAL_SIGN_ITEM, CELESTIAL_HANGING_SIGN_ITEM, MURUBLIGHT_SIGN_ITEM, MURUBLIGHT_HANGING_SIGN_ITEM);
             entries.addBefore(INFESTED_STONE, getEndVaultInstance());
             entries.addBefore(SKELETON_SKULL, getEndCityBannerInstance(entries.getContext().holders().lookupOrThrow(Registries.BANNER_PATTERN)));
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(entries -> {
+            if (!EnderscapeConfig.getInstance().includeItemsInVanillaCreativeTabs) return;
+
             entries.addBefore(PISTON, BLINKLIGHT);
             entries.addAfter(CAULDRON, BLISTERED_MAGNIA, POLARIZED_MAGNIA, NEBULITE_BLOCK, ALLURING_MAGNIA, REPULSIVE_MAGNIA, FLANGER_BERRY);
             entries.addAfter(REDSTONE_LAMP, BLINKLAMP);
@@ -541,6 +563,8 @@ public class EnderscapeCreativeModeTab {
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(entries -> {
+            if (!EnderscapeConfig.getInstance().includeItemsInVanillaCreativeTabs) return;
+
             entries.addAfter(LEAD, MAGNIA_ATTRACTOR);
             entries.addAfter(ELYTRA, MIRROR);
             entries.addBefore(LAVA_BUCKET, RUSTLE_BUCKET);
@@ -551,17 +575,25 @@ public class EnderscapeCreativeModeTab {
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT).register(entries -> {
+            if (!EnderscapeConfig.getInstance().includeItemsInVanillaCreativeTabs) return;
+
+            entries.addBefore(SHIELD, DAGGER);
             entries.addBefore(LEATHER_HELMET, END_STONE_RUBBLE_SHIELD, VERADITE_RUBBLE_SHIELD, MIRESTONE_RUBBLE_SHIELD, KURODITE_RUBBLE_SHIELD);
+            entries.addBefore(TURTLE_HELMET, SHADOLINE_HELMET, SHADOLINE_CHESTPLATE, SHADOLINE_LEGGINGS, SHADOLINE_BOOTS);
             entries.addAfter(TURTLE_HELMET, DRIFT_LEGGINGS);
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(entries -> {
+            if (!EnderscapeConfig.getInstance().includeItemsInVanillaCreativeTabs) return;
+
             entries.addBefore(CARROT, FLANGER_BERRY, MURUBLIGHT_BRACKET_ITEM);
             entries.addBefore(PUMPKIN_PIE, CHORUS_CAKE_ROLL_ITEM);
             entries.addAfter(HONEY_BOTTLE, DRIFT_JELLY_BOTTLE);
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(entries -> {
+            if (!EnderscapeConfig.getInstance().includeItemsInVanillaCreativeTabs) return;
+
             entries.addBefore(SHULKER_SHELL, RUBBLE_CHITIN);
             entries.addBefore(ECHO_SHARD, DRIFT_JELLY_BOTTLE);
             entries.addBefore(EMERALD, RAW_SHADOLINE);
@@ -574,12 +606,16 @@ public class EnderscapeCreativeModeTab {
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.SPAWN_EGGS).register(entries -> {
+            if (!EnderscapeConfig.getInstance().includeItemsInVanillaCreativeTabs) return;
+
             entries.addBefore(ALLAY_SPAWN_EGG, END_TRIAL_SPAWNER);
             entries.addAfter(DONKEY_SPAWN_EGG, DRIFTER_SPAWN_EGG, DRIFTLET_SPAWN_EGG);
             entries.addAfter(RAVAGER_SPAWN_EGG, RUBBLEMITE_SPAWN_EGG, RUSTLE_SPAWN_EGG);
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.OP_BLOCKS).register(entries -> {
+            if (!EnderscapeConfig.getInstance().includeItemsInVanillaCreativeTabs) return;
+
             entries.accept(HEALING);
         });
 

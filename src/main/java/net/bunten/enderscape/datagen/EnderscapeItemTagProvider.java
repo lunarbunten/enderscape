@@ -2,6 +2,7 @@ package net.bunten.enderscape.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -26,19 +27,38 @@ public class EnderscapeItemTagProvider extends FabricTagProvider<Item> {
 
     @Override
     protected void addTags(HolderLookup.Provider lookup) {
-        getOrCreateTagBuilder(WEAK_MAGNETISM_WHEN_WORN).add(CHAINMAIL_HELMET, CHAINMAIL_CHESTPLATE, CHAINMAIL_LEGGINGS, CHAINMAIL_BOOTS, NETHERITE_HELMET, NETHERITE_CHESTPLATE, NETHERITE_LEGGINGS, NETHERITE_BOOTS);
-        getOrCreateTagBuilder(AVERAGE_MAGNETISM_WHEN_WORN).add(IRON_HELMET, IRON_CHESTPLATE, IRON_LEGGINGS, IRON_BOOTS);
-        getOrCreateTagBuilder(STRONG_MAGNETISM_WHEN_WORN);
-        getOrCreateTagBuilder(POWERS_MAGNIA_WHEN_MINED_WITH);
+        getOrCreateTagBuilder(WEAK_MAGNIA_STRENGTH).add(
+                CHAINMAIL_HELMET,
+                CHAINMAIL_CHESTPLATE,
+                CHAINMAIL_LEGGINGS,
+                CHAINMAIL_BOOTS,
+                NETHERITE_HELMET,
+                NETHERITE_CHESTPLATE,
+                NETHERITE_LEGGINGS,
+                NETHERITE_BOOTS
+        );
 
+        getOrCreateTagBuilder(AVERAGE_MAGNIA_STRENGTH).add(
+                IRON_HELMET,
+                IRON_CHESTPLATE,
+                IRON_LEGGINGS,
+                IRON_BOOTS,
+                IRON_HORSE_ARMOR
+        );
+
+        getOrCreateTagBuilder(STRONG_MAGNIA_STRENGTH);
+
+        getOrCreateTagBuilder(DAGGER_ENCHANTABLE).add(DAGGER);
         getOrCreateTagBuilder(DRIFTER_FOOD).add(CHORUS_FRUIT, FLANGER_BERRY);
         getOrCreateTagBuilder(ELYTRA_ENCHANTABLE).add(ELYTRA);
         getOrCreateTagBuilder(MAGNIA_ATTRACTOR_ENCHANTABLE).add(MAGNIA_ATTRACTOR);
         getOrCreateTagBuilder(MIRROR_ENCHANTABLE).add(MIRROR);
-        getOrCreateTagBuilder(NEBULITE_TOOLS).add(MIRROR, MAGNIA_ATTRACTOR);
+        getOrCreateTagBuilder(NEBULITE_TOOLS).add(DAGGER, MIRROR, MAGNIA_ATTRACTOR);
         getOrCreateTagBuilder(NEBULITE_TOOL_ENCHANTABLE).forceAddTag(NEBULITE_TOOLS);
+        getOrCreateTagBuilder(NEBULITE_TOOL_FUELS).add(NEBULITE);
         getOrCreateTagBuilder(REPAIRS_DRIFT_LEGGINGS).add(DRIFT_JELLY_BOTTLE);
         getOrCreateTagBuilder(REPAIRS_RUBBLE_SHIELDS).add(RUBBLE_CHITIN);
+        getOrCreateTagBuilder(REPAIRS_SHADOLINE_ARMOR).add(SHADOLINE_INGOT);
         getOrCreateTagBuilder(RUBBLE_SHIELDS).add(END_STONE_RUBBLE_SHIELD, MIRESTONE_RUBBLE_SHIELD, VERADITE_RUBBLE_SHIELD, KURODITE_RUBBLE_SHIELD);
         getOrCreateTagBuilder(RUSTLE_FOOD).add(MURUBLIGHT_BRACKET_ITEM);
 
@@ -191,7 +211,9 @@ public class EnderscapeItemTagProvider extends FabricTagProvider<Item> {
                 SHADOLINE_BLOCK_SLAB.asItem(),
                 SHADOLINE_BLOCK_STAIRS.asItem(),
                 SHADOLINE_BLOCK_WALL.asItem(),
-                SHADOLINE_PILLAR.asItem()
+                SHADOLINE_PILLAR.asItem(),
+                SHADOLINE_BARS.asItem(),
+                SHADOLINE_CHAIN.asItem()
         );
 
         getOrCreateTagBuilder(ALL_ETCHED_MAGNIA_BLOCKS).addTag(ETCHED_ALLURING_MAGNIA_BLOCKS).addTag(ETCHED_REPULSIVE_MAGNIA_BLOCKS);
@@ -214,31 +236,38 @@ public class EnderscapeItemTagProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(MAGNIA_SPROUTS).add(ALLURING_MAGNIA_SPROUT.asItem(), REPULSIVE_MAGNIA_SPROUT.asItem());
 
         getOrCreateTagBuilder(BEACON_PAYMENT_ITEMS).add(NEBULITE);
+        getOrCreateTagBuilder(CHEST_ARMOR).add(SHADOLINE_CHESTPLATE);
         getOrCreateTagBuilder(DURABILITY_ENCHANTABLE).add(END_STONE_RUBBLE_SHIELD, MIRESTONE_RUBBLE_SHIELD, VERADITE_RUBBLE_SHIELD, KURODITE_RUBBLE_SHIELD);
         getOrCreateTagBuilder(EQUIPPABLE_ENCHANTABLE).add(SHULKER_SHELL);
-        getOrCreateTagBuilder(ItemTags.FLOWERS).add(WISP_FLOWER.asItem(), FLANGER_BERRY_FLOWER.asItem());
-        getOrCreateTagBuilder(ItemTags.FENCE_GATES).add(CELESTIAL_FENCE_GATE.asItem(), MURUBLIGHT_FENCE_GATE.asItem());
+        getOrCreateTagBuilder(FIRE_ASPECT_ENCHANTABLE).add(DAGGER);
+        getOrCreateTagBuilder(FOOT_ARMOR).add(SHADOLINE_BOOTS);
         getOrCreateTagBuilder(HANGING_SIGNS).add(VEILED_HANGING_SIGN_ITEM.asItem(), CELESTIAL_HANGING_SIGN_ITEM, MURUBLIGHT_HANGING_SIGN_ITEM);
+        getOrCreateTagBuilder(HEAD_ARMOR).add(SHADOLINE_HELMET);
+        getOrCreateTagBuilder(ItemTags.FENCE_GATES).add(CELESTIAL_FENCE_GATE.asItem(), MURUBLIGHT_FENCE_GATE.asItem());
+        getOrCreateTagBuilder(ItemTags.TALL_FLOWERS).add(WISP_FLOWER.asItem());
+        getOrCreateTagBuilder(ItemTags.FLOWERS).add(FLANGER_BERRY_FLOWER.asItem());
+        getOrCreateTagBuilder(ItemTags.SMALL_FLOWERS).add(BULB_FLOWER.asItem());
+        getOrCreateTagBuilder(ItemTags.WOODEN_FENCES).add(VEILED_FENCE.asItem(), CELESTIAL_FENCE.asItem(), MURUBLIGHT_FENCE.asItem());
         getOrCreateTagBuilder(LEAVES).add(VEILED_LEAVES.asItem());
-        getOrCreateTagBuilder(LEG_ARMOR).add(DRIFT_LEGGINGS);
+        getOrCreateTagBuilder(LEG_ARMOR).add(SHADOLINE_LEGGINGS, DRIFT_LEGGINGS);
         getOrCreateTagBuilder(LOGS_THAT_BURN).forceAddTag(VEILED_LOGS).forceAddTag(CELESTIAL_STEMS).forceAddTag(MURUBLIGHT_STEMS);
         getOrCreateTagBuilder(PLANKS).add(VEILED_PLANKS.asItem(), CELESTIAL_PLANKS.asItem(), MURUBLIGHT_PLANKS.asItem());
         getOrCreateTagBuilder(SAPLINGS).add(VEILED_SAPLING.asItem());
+        getOrCreateTagBuilder(SHARP_WEAPON_ENCHANTABLE).add(DAGGER);
         getOrCreateTagBuilder(SIGNS).add(VEILED_SIGN_ITEM.asItem(), CELESTIAL_SIGN_ITEM, MURUBLIGHT_SIGN_ITEM);
         getOrCreateTagBuilder(SLABS).add(ETCHED_ALLURING_MAGNIA_SLAB.asItem(), ETCHED_REPULSIVE_MAGNIA_SLAB.asItem(), VEILED_SLAB.asItem(), CELESTIAL_SLAB.asItem(), CELESTIAL_BRICK_SLAB.asItem(), MURUBLIGHT_SLAB.asItem(), MURUBLIGHT_BRICK_SLAB.asItem(), VERADITE_SLAB.asItem(), POLISHED_VERADITE_SLAB.asItem(), VERADITE_BRICK_SLAB.asItem(), KURODITE_SLAB.asItem(), POLISHED_KURODITE_SLAB.asItem(), KURODITE_BRICK_SLAB.asItem(), SHADOLINE_BLOCK_SLAB.asItem(), CUT_SHADOLINE_SLAB.asItem());
-        getOrCreateTagBuilder(ItemTags.SMALL_FLOWERS).add(BULB_FLOWER.asItem());
         getOrCreateTagBuilder(STAIRS).add(ETCHED_ALLURING_MAGNIA_SLAB.asItem(), ETCHED_REPULSIVE_MAGNIA_STAIRS.asItem(), VEILED_STAIRS.asItem(), CELESTIAL_STAIRS.asItem(), CELESTIAL_BRICK_STAIRS.asItem(), MURUBLIGHT_STAIRS.asItem(), MURUBLIGHT_BRICK_STAIRS.asItem(), VERADITE_STAIRS.asItem(), POLISHED_VERADITE_STAIRS.asItem(), VERADITE_BRICK_STAIRS.asItem(), KURODITE_STAIRS.asItem(), POLISHED_KURODITE_STAIRS.asItem(), KURODITE_BRICK_STAIRS.asItem(), SHADOLINE_BLOCK_STAIRS.asItem(), CUT_SHADOLINE_STAIRS.asItem());
         getOrCreateTagBuilder(STONE_BUTTONS).add(POLISHED_VERADITE_BUTTON.asItem(), POLISHED_KURODITE_BUTTON.asItem());
         getOrCreateTagBuilder(STONE_CRAFTING_MATERIALS).add(END_STONE.asItem(), VERADITE.asItem(), MIRESTONE.asItem(), KURODITE.asItem());
         getOrCreateTagBuilder(STONE_TOOL_MATERIALS).add(END_STONE.asItem(), VERADITE.asItem(), MIRESTONE.asItem(), KURODITE.asItem());
-        getOrCreateTagBuilder(TALL_FLOWERS).add(WISP_FLOWER.asItem());
-        getOrCreateTagBuilder(TRIMMABLE_ARMOR).add(DRIFT_LEGGINGS);
+        getOrCreateTagBuilder(SWEEPING_EDGE_INCOMPATIBLE).add(DAGGER);
+        getOrCreateTagBuilder(SWORD_ENCHANTABLE).add(DAGGER);
+        getOrCreateTagBuilder(TRIMMABLE_ARMOR).add(SHADOLINE_HELMET, SHADOLINE_CHESTPLATE, SHADOLINE_LEGGINGS, SHADOLINE_BOOTS, DRIFT_LEGGINGS);
         getOrCreateTagBuilder(TRIM_MATERIALS).add(NEBULITE, SHADOLINE_INGOT);
         getOrCreateTagBuilder(VANISHING_ENCHANTABLE).add(MIRROR, SHULKER_SHELL);
         getOrCreateTagBuilder(WALLS).add(ETCHED_ALLURING_MAGNIA_WALL.asItem(), ETCHED_REPULSIVE_MAGNIA_WALL.asItem(), VERADITE_WALL.asItem(), POLISHED_VERADITE_WALL.asItem(), VERADITE_BRICK_WALL.asItem(), SHADOLINE_BLOCK_WALL.asItem(), KURODITE_WALL.asItem(), POLISHED_KURODITE_WALL.asItem(), KURODITE_BRICK_WALL.asItem(), CUT_SHADOLINE_WALL.asItem(), CELESTIAL_BRICK_WALL.asItem(), MURUBLIGHT_BRICK_WALL.asItem());
         getOrCreateTagBuilder(WOODEN_BUTTONS).add(VEILED_BUTTON.asItem(), CELESTIAL_BUTTON.asItem(), MURUBLIGHT_BUTTON.asItem());
         getOrCreateTagBuilder(WOODEN_DOORS).add(VEILED_DOOR.asItem(), CELESTIAL_DOOR.asItem(), MURUBLIGHT_DOOR.asItem());
-        getOrCreateTagBuilder(ItemTags.WOODEN_FENCES).add(VEILED_FENCE.asItem(), CELESTIAL_FENCE.asItem(), MURUBLIGHT_FENCE.asItem());
         getOrCreateTagBuilder(WOODEN_PRESSURE_PLATES).add(VEILED_PRESSURE_PLATE.asItem(), CELESTIAL_PRESSURE_PLATE.asItem(), MURUBLIGHT_PRESSURE_PLATE.asItem());
         getOrCreateTagBuilder(WOODEN_SLABS).add(VEILED_SLAB.asItem(), CELESTIAL_SLAB.asItem(), MURUBLIGHT_SLAB.asItem());
         getOrCreateTagBuilder(WOODEN_STAIRS).add(VEILED_STAIRS.asItem(), CELESTIAL_STAIRS.asItem(), MURUBLIGHT_STAIRS.asItem());
@@ -252,6 +281,7 @@ public class EnderscapeItemTagProvider extends FabricTagProvider<Item> {
 
         getOrCreateTagBuilder(BERRY_FOODS).add(FLANGER_BERRY);
         getOrCreateTagBuilder(BUCKETS).add(RUSTLE_BUCKET);
+        getOrCreateTagBuilder(ConventionalItemTags.CHAINS).add(SHADOLINE_CHAIN.asItem());
         getOrCreateTagBuilder(DRIFT_JELLY_DRINKS).add(DRIFT_JELLY_BOTTLE);
         getOrCreateTagBuilder(DRINKS).add(DRIFT_JELLY_BOTTLE);
         getOrCreateTagBuilder(DRINK_CONTAINING_BOTTLE).add(DRIFT_JELLY_BOTTLE);

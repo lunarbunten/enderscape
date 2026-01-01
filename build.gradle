@@ -29,18 +29,44 @@ repositories {
 		name 'Xander Maven'
 		url 'https://maven.isxander.dev/releases'
 	}
+	maven {
+		name = "Modrinth"
+		url = "https://api.modrinth.com/maven"
+		content {
+			includeGroup "maven.modrinth"
+		}
+	}
 }
 
 def dateFormat = new Date().format("yy.MM.dd")
 
-tasks.matching { it.name in ["jar", "sourcesJar", "remapSourcesJar", "remapJar"] }.configureEach {
-	def prefix = project.include_build_date.toBoolean() ? "${dateFormat}-" : ""
-	archiveBaseName.set("${prefix}${archives_base_name}")
-	archiveVersion.set("${mod_version}+mc${minecraft_version}")
+tasks.register("buildDated") {
+	group = "build"
+	description = "Assembles project with date in archive filenames"
+	dependsOn "build"
+}
+
+gradle.taskGraph.whenReady { graph ->
+	def dated = graph.hasTask(tasks.buildDated)
+
+	tasks.matching { it.name in ["jar", "sourcesJar", "remapSourcesJar", "remapJar"] }.configureEach {
+		def prefix = dated ? "${dateFormat}-" : ""
+		archiveBaseName.set("${prefix}${archives_base_name}")
+		archiveVersion.set("${mod_version}+mc${minecraft_version}")
+	}
 }
 
 loom {
 	accessWidenerPath = file("src/main/resources/enderscape.accesswidener")
+
+	runs {
+		client {
+			runDir "run"
+		}
+		server {
+			runDir "run_server"
+		}
+	}
 }
 
 fabricApi {
@@ -56,6 +82,7 @@ dependencies {
 	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 	modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
 	modImplementation "com.github.ramixin:mixson-fabric:${project.mixson_version}"
+	modImplementation "maven.modrinth:lithostitched:${project.lithostitched_version}"
 	include "com.github.ramixin:mixson-fabric:${project.mixson_version}"
 }
 

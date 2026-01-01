@@ -27,13 +27,11 @@ public class RubblemiteModel extends HierarchicalModel<Rubblemite> {
     }
 
     public static LayerDefinition createLayer() {
-        CubeDeformation dilation = CubeDeformation.NONE;
-
         MeshDefinition data = new MeshDefinition();
         PartDefinition rootData = data.getRoot();
 
-        PartDefinition shellData = rootData.addOrReplaceChild("shell", CubeListBuilder.create().texOffs(0, 0).addBox(-4, -6, -4, 8, 6, 8, dilation), PartPose.offset(0, 24, 0));
-        shellData.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 14).addBox(-2, -2, -1, 4, 4, 1, dilation), PartPose.offset(0, -2, -4));
+        PartDefinition shell = rootData.addOrReplaceChild("shell", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -3.5F, -4.0F, 8.0F, 6.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.5F, 0.0F));
+        shell.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 14).addBox(-2.0F, -2.0F, -1.0F, 4.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.5F, -4.0F));
 
         return LayerDefinition.create(data, 32, 32);
     }
@@ -42,23 +40,21 @@ public class RubblemiteModel extends HierarchicalModel<Rubblemite> {
     public void setupAnim(Rubblemite mob, float animPos, float animSpeed, float age, float headYaw, float headPitch) {
         root().getAllParts().forEach(ModelPart::resetPose);
 
-        float strength = 0.05F;
-        float speed = 0.3F;
-        float speed2 = speed * 2;
-
-        if (mob.isDashing()) {
-            shell.yRot = age;
+        if (mob.deathTime > 0) {
+            head.zRot = Mth.lerp(0.1F, head.zRot, 0);
+            shell.xRot = Mth.lerp(0.1F, head.zRot, 0);
+            shell.yRot = Mth.lerp(0.1F, head.zRot, 0);
+            shell.zRot = Mth.lerp(0.1F, head.zRot, 0);
         } else {
-            head.xRot = -Mth.sin(age * speed) * strength;
-            head.zRot = -Mth.sin(age * speed2 + Mth.HALF_PI) * strength;
-
-            shell.xRot = Mth.sin(age * speed + Mth.HALF_PI) * strength;
-            shell.zRot = Mth.sin(age * speed2) * strength;
+            head.zRot = Mth.sin(age + (animPos / 3) * 0.06F) * animSpeed * 0.1F;
 
             shell.xRot += (headPitch * (Mth.PI / 180)) / 2;
             shell.yRot += (headYaw * (Mth.PI / 180)) / 2;
+            shell.zRot = Mth.sin(age + (animPos / 3) * 0.03F + Mth.HALF_PI) * animSpeed * 0.15F;
         }
-        
-        head.visible = !mob.isInsideShell() && !mob.isDashing();
+
+        animate(mob.dashAnimationState, RubblemiteAnimations.DASH, age);
+        animate(mob.prepareDashAnimationState, RubblemiteAnimations.PREPARE_DASH, age);
+        animate(mob.insideShellAnimationState, RubblemiteAnimations.INSIDE_SHELL, age);
     }
 }

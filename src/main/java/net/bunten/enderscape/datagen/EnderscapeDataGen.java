@@ -40,7 +40,7 @@ public class EnderscapeDataGen implements DataGeneratorEntrypoint {
 		pack.addProvider(EnderscapePoiTagProvider::new);
 		pack.addProvider(EnderscapeProcessorListProvider::new);
 		pack.addProvider(EnderscapeRecipeProvider::new);
-		pack.addProvider(EnderscapeBiomeParamatersProviders::new);
+		pack.addProvider(EnderscapeBiomeProvidersProvider::new);
 		pack.addProvider(EnderscapeSoundEventTagProvider::new);
 		pack.addProvider(EnderscapeStructureMusicProvider::new);
 		pack.addProvider(EnderscapeStructureProvider::new);

@@ -67,9 +67,9 @@ public interface MagniaMoveable {
             int weak = 0, average = 0, strong = 0;
 
             for (ItemStack stack : mob.getArmorSlots()) {
-                if (stack.is(EnderscapeItemTags.WEAK_MAGNETISM_WHEN_WORN)) weak++;
-                else if (stack.is(EnderscapeItemTags.AVERAGE_MAGNETISM_WHEN_WORN)) average++;
-                else if (stack.is(EnderscapeItemTags.STRONG_MAGNETISM_WHEN_WORN)) strong++;
+                if (stack.is(EnderscapeItemTags.WEAK_MAGNIA_STRENGTH)) weak++;
+                else if (stack.is(EnderscapeItemTags.AVERAGE_MAGNIA_STRENGTH)) average++;
+                else if (stack.is(EnderscapeItemTags.STRONG_MAGNIA_STRENGTH)) strong++;
             }
 
             factor += weak * 0.5F + average + strong * 1.5F;

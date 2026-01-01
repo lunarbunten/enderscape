@@ -20,13 +20,20 @@ public class EnderscapeConfig {
         return HANDLER.instance();
     }
 
+    @SerialEntry public boolean creativeTabEnabled = true;
+    @SerialEntry public boolean includeItemsInVanillaCreativeTabs = true;
+
     @SerialEntry public boolean defaultResourcePackLighting = true;
     @SerialEntry public boolean defaultResourcePackDarkLighting = false;
 
     @SerialEntry public boolean defaultDataPackFixLevitationAdvancement = true;
     @SerialEntry public boolean defaultDataPackFixVanillaRecipes = true;
     @SerialEntry public boolean defaultDataPackNewEndCities = true;
+    @SerialEntry public boolean defaultDataPackNewStrongholds = true;
     @SerialEntry public boolean defaultDataPackNewTerrain = true;
+
+    @SerialEntry public boolean supplementVanillaEndCityTreasureLoot = true;
+    @SerialEntry public boolean supplementVanillaStrongholdLibraryLoot = true;
 
     @SerialEntry public boolean ambienceUpdateAdditionSounds = true;
     @SerialEntry public boolean ambienceUpdateFogColors = true;
@@ -64,6 +71,7 @@ public class EnderscapeConfig {
     @SerialEntry public boolean endermanStereoStareSound = true;
     @SerialEntry public boolean endermiteEmissiveEyes = true;
     @SerialEntry public boolean endermiteExpandHitRange = true;
+    @SerialEntry public boolean endermiteNaturalSpawnsObeyLightLevel = true;
     @SerialEntry public boolean endermiteUpdateSounds = true;
     @SerialEntry public boolean enderPearlAddParticles = true;
     @SerialEntry public boolean enderPearlBreakParticles = true;
@@ -84,7 +92,9 @@ public class EnderscapeConfig {
     @SerialEntry public boolean shulkerBulletLoopSound = true;
     @SerialEntry public boolean shulkerBulletRebalanceLevitation = true;
     @SerialEntry public boolean shulkerHurtByPiercing = true;
+    @SerialEntry public boolean silverfishDelayBeforeInfestingStone = true;
     @SerialEntry public boolean silverfishExpandHitRange = true;
+    @SerialEntry public boolean silverfishNaturalSpawnsObeyLightLevel = true;
     @SerialEntry public boolean skyboxAddDynamicFogDensity = true;
     @SerialEntry public boolean skyboxScalesBrightnessWithGamma = true;
     @SerialEntry public boolean skyboxUpdateEnabled = true;
@@ -94,7 +104,7 @@ public class EnderscapeConfig {
     @SerialEntry public int elytraFovEffectIntensity = 100;
     @SerialEntry public int mirrorScreenEffectOverlayIntensity = 50;
     @SerialEntry public int mirrorScreenEffectVignetteIntensity = 50;
-    @SerialEntry public int nebuliteToolHudOffset = 0;
+    @SerialEntry public int nebuliteToolHudOffset = 13;
     @SerialEntry public int nebuliteToolHudOpacity = 100;
     @SerialEntry public int shulkerBulletEnforceCountLimit = 3;
     @SerialEntry public int shulkerBulletEnforceDistanceLimit = 30;

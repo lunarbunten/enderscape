@@ -7,6 +7,7 @@ accessible field net/minecraft/world/level/block/entity/trialspawner/TrialSpawne
 accessible field net/minecraft/world/level/block/entity/vault/VaultConfig CODEC Lcom/mojang/serialization/Codec;
 accessible field net/minecraft/world/level/levelgen/SurfaceRules$Context blockX I
 accessible field net/minecraft/world/level/levelgen/SurfaceRules$Context blockZ I
+accessible method net/minecraft/world/item/enchantment/Enchantment modifyItemFilteredCount (Lnet/minecraft/core/component/DataComponentType;Lnet/minecraft/server/level/ServerLevel;ILnet/minecraft/world/item/ItemStack;Lorg/apache/commons/lang3/mutable/MutableFloat;)V
 accessible method net/minecraft/world/item/enchantment/EnchantmentHelper runIterationOnItem (Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/EquipmentSlot;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/enchantment/EnchantmentHelper$EnchantmentInSlotVisitor;)V
 accessible method net/minecraft/world/item/enchantment/EnchantmentHelper runIterationOnItem (Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/enchantment/EnchantmentHelper$EnchantmentVisitor;)V
 accessible method net/minecraft/world/level/block/entity/vault/VaultSharedData getConnectedPlayers ()Ljava/util/Set;

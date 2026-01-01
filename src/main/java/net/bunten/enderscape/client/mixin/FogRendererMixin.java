@@ -33,7 +33,7 @@ public class FogRendererMixin {
         EnderscapeSkybox.fogEndDensity = RGBA.sampleFloat(manager, pos, BiomeParameters::fogEndDensity, BiomeParameters.DEFAULT_FOG_END_DENSITY);
         EnderscapeSkybox.nebulaColor = RGBA.sampleVector4f(manager, pos, BiomeParameters::nebulaRGBA, BiomeParameters.DEFAULT_NEBULA_COLOR).mul(gamma, gamma, gamma, 1);
         EnderscapeSkybox.starColor = RGBA.sampleVector4f(manager, pos, BiomeParameters::starRGBA, BiomeParameters.DEFAULT_STAR_COLOR).mul(gamma, gamma, gamma, 1);
-        EnderscapeSkybox.flashColor = RGBA.sampleVector4f(manager, pos, BiomeParameters::flashRGBA, BiomeParameters.DEFAULT_FLASH_COLOR);
+        EnderscapeSkybox.flashColor = RGBA.sampleVector4f(manager, pos, BiomeParameters::flashRGBA, BiomeParameters.DEFAULT_FLASH_COLOR).mul(gamma, gamma, gamma, 1);
     }
 
     @Inject(at = @At("RETURN"), method = "setupFog(Lnet/minecraft/client/Camera;Lnet/minecraft/client/renderer/FogRenderer$FogMode;FZF)V")

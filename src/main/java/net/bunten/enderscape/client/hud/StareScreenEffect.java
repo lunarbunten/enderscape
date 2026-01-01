@@ -23,21 +23,21 @@ public class StareScreenEffect extends HudElement {
         super(RenderPhase.BEFORE_HUD);
     }
 
-    public void render(GuiGraphics graphics, DeltaTracker delta) {
+    private float alpha = 0, previousAlpha = 0;
+
+    public void render(GuiGraphics graphics, DeltaTracker tracker) {
         if (client.player == null || client.options.hideGui || !client.options.getCameraType().isFirstPerson() || client.player.isSpectator() || EnderscapeClient.stareTicks <= 0 || !EnderscapeConfig.getInstance().endermanStaticOverlay) {
             return;
         }
 
         graphics.pose().pushPose();
 
-        float alpha = Mth.clamp((float) EnderscapeClient.stareTicks / MAX_STARE_STICKS, 0.0F, 0.25F);
-
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_CONSTANT_ALPHA);
 
-        graphics.setColor(1, 1, 1, alpha);
+        graphics.setColor(1, 1, 1, Mth.lerp(tracker.getGameTimeDeltaPartialTick(false), previousAlpha, alpha));
         graphics.blit(
                 STATIC_TEXTURE,
                 0,
@@ -59,6 +59,10 @@ public class StareScreenEffect extends HudElement {
 
     public void tick() {
         super.tick();
-        if (EnderscapeClient.stareTicks > 0 && !client.isPaused()) EnderscapeClient.stareTicks--;
+
+        if (EnderscapeClient.stareTicks > 0 && !client.isPaused()) {
+            previousAlpha = alpha;
+            alpha = Mth.clamp((float) EnderscapeClient.stareTicks-- / MAX_STARE_STICKS, 0.0F, 0.25F);
+        }
     }
 }

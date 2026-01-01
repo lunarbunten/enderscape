@@ -3,9 +3,12 @@
   "criteria": {
     "teleported": {
       "conditions": {
-        "different_dimensions": true
+        "different_dimensions": true,
+        "item": {
+          "items": "enderscape:mirror"
+        }
       },
-      "trigger": "enderscape:mirror_teleport"
+      "trigger": "enderscape:lodestone_teleportation"
     }
   },
   "display": {

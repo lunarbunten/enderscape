@@ -179,11 +179,6 @@
           ],
           "name": "minecraft:black_dye",
           "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "enderscape:music_disc_decay",
-          "weight": 3
         }
       ],
       "rolls": {
@@ -191,6 +186,24 @@
         "max": 4.0,
         "min": 2.0
       }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "enderscape:dagger"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "enderscape:music_disc_decay"
+        }
+      ],
+      "rolls": 1.0
     }
   ]
 }

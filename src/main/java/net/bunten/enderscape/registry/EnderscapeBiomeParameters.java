@@ -63,7 +63,7 @@ public class EnderscapeBiomeParameters {
 
         register(context, VOID_DEPTHS,
                 RGBA.darkenColor(DEFAULT_NEBULA_COLOR,
-                VOID_BIOMES_DARKENING_FACTOR),
+                        VOID_BIOMES_DARKENING_FACTOR),
                 DEFAULT_NEBULA_ALPHA,
                 RGBA.darkenColor(DEFAULT_STAR_COLOR, VOID_BIOMES_DARKENING_FACTOR),
                 DEFAULT_STAR_ALPHA,

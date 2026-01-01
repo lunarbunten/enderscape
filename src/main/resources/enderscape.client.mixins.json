@@ -1,22 +1,23 @@
 {
-  "required": true,
-  "package": "net.bunten.enderscape.client.mixin",
-  "compatibilityLevel": "JAVA_21",
-  "client": [
-    "AbstractClientPlayerMixin",
-    "ClientPacketListenerMixin",
-    "EndEffectsMixin",
-    "EndermiteRendererMixin",
-    "EntityRenderDispatcherMixin",
-    "FogRendererMixin",
-    "GameRendererMixin",
-    "LevelRendererMixin",
-    "LightTextureMixin",
-    "MinecraftMixin",
-    "MusicManagerAccess",
-    "PortalParticleMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
+    "required": true,
+    "package": "net.bunten.enderscape.client.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "client": [
+        "AbstractClientPlayerMixin",
+        "ClientPacketListenerMixin",
+        "EndEffectsMixin",
+        "EndermiteRendererMixin",
+        "EntityRenderDispatcherMixin",
+        "FogRendererMixin",
+        "GameRendererMixin",
+        "KeyboardInputMixin",
+        "LevelRendererMixin",
+        "LightTextureMixin",
+        "MinecraftMixin",
+        "MusicManagerAccess",
+        "PortalParticleMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
   }
 }

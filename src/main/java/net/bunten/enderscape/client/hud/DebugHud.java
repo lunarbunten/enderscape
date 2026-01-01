@@ -60,7 +60,7 @@ public class DebugHud extends HudElement {
         list.add("  fps: " + client.getFps());
         list.add("  guiScale: " + client.options.guiScale().get());
         list.add("  renderDistance: " + client.options.renderDistance().get());
-        list.add("  postMirrorUseTicks: " + EnderscapeClient.postMirrorUseTicks);
+        list.add("  postMirrorUseTicks: " + EnderscapeClient.lodestoneTeleportationTicks);
 
         return list;
     }

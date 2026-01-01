@@ -1,5 +1,6 @@
 package net.bunten.enderscape.registry;
 
+import net.bunten.enderscape.item.component.value.LodestoneTeleportationVisuals;
 import net.bunten.enderscape.network.*;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -12,8 +13,8 @@ import java.util.function.Predicate;
 
 public class EnderscapeServerNetworking {
 
-    public static void sendMirrorInfoPayload(ServerPlayer player, boolean isDifferentDimension) {
-        ServerPlayNetworking.send(player, new ClientboundMirrorTeleportInfoPayload(isDifferentDimension));
+    public static void sendLodestoneTeleportationInfoPayload(ServerPlayer player, boolean isDifferentDimension, LodestoneTeleportationVisuals visuals) {
+        ServerPlayNetworking.send(player, new ClientboundLodestoneTeleportationInfoPayload(isDifferentDimension, visuals.overlayTexture().asset().withPrefix("textures/").withSuffix(".png"), visuals.vignetteTexture().asset().withPrefix("textures/").withSuffix(".png")));
     }
 
     public static void sendNebuliteOreSoundPayload(ServerLevel world, BlockPos pos) {
@@ -32,7 +33,7 @@ public class EnderscapeServerNetworking {
     static {
         PayloadTypeRegistry.playS2C().register(ClientboundDashJumpSoundPayload.TYPE, ClientboundDashJumpSoundPayload.STREAM_CODEC);
         PayloadTypeRegistry.playS2C().register(ClientboundDashJumpPayload.TYPE, ClientboundDashJumpPayload.STREAM_CODEC);
-        PayloadTypeRegistry.playS2C().register(ClientboundMirrorTeleportInfoPayload.TYPE, ClientboundMirrorTeleportInfoPayload.STREAM_CODEC);
+        PayloadTypeRegistry.playS2C().register(ClientboundLodestoneTeleportationInfoPayload.TYPE, ClientboundLodestoneTeleportationInfoPayload.STREAM_CODEC);
         PayloadTypeRegistry.playS2C().register(ClientboundNebuliteOreSoundPayload.TYPE, ClientboundNebuliteOreSoundPayload.STREAM_CODEC);
         PayloadTypeRegistry.playS2C().register(ClientboundRubbleShieldCooldownSoundPayload.TYPE, ClientboundRubbleShieldCooldownSoundPayload.STREAM_CODEC);
         PayloadTypeRegistry.playS2C().register(ClientboundStareOverlayPayload.TYPE, ClientboundStareOverlayPayload.STREAM_CODEC);

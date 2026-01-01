@@ -18,6 +18,11 @@ public class RubblemiteRenderer extends MobRenderer<Rubblemite, RubblemiteModel>
     }
 
     @Override
+    protected float getFlipDegrees(Rubblemite mob) {
+        return 180.0F;
+    }
+
+    @Override
     public ResourceLocation getTextureLocation(Rubblemite mob) {
         return Enderscape.id("textures/entity/rubblemite/" + RubblemiteVariant.get(mob).getName() + ".png");
     }

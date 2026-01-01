@@ -9,8 +9,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import java.util.concurrent.CompletableFuture;
 
 import static net.bunten.enderscape.registry.EnderscapeEnchantments.*;
-import static net.minecraft.tags.EnchantmentTags.IN_ENCHANTING_TABLE;
-import static net.minecraft.tags.EnchantmentTags.TREASURE;
+import static net.minecraft.tags.EnchantmentTags.*;
 
 public class EnderscapeEnchantmentTagProvider extends FabricTagProvider<Enchantment> {
 
@@ -20,7 +19,11 @@ public class EnderscapeEnchantmentTagProvider extends FabricTagProvider<Enchantm
 
     @Override
     protected void addTags(HolderLookup.Provider lookup) {
-        getOrCreateTagBuilder(IN_ENCHANTING_TABLE).add(LIGHTSPEED);
+        getOrCreateTagBuilder(TOOLTIP_ORDER).add(
+                TRANSDIMENSIONAL,
+                RESONANCE
+        );
+        getOrCreateTagBuilder(IN_ENCHANTING_TABLE).add(RESONANCE);
         getOrCreateTagBuilder(TREASURE).add(REBOUND, TRANSDIMENSIONAL);
     }
 }

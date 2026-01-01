@@ -1,0 +1,32 @@
+{
+  "parent": "enderscape:craft_nebulite",
+  "criteria": {
+    "stun_attack": {
+      "conditions": {
+        "backstab": true
+      },
+      "trigger": "enderscape:stun_attack"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.enderscape.stun_attack.description"
+    },
+    "icon": {
+      "components": {
+        "enderscape:current_fuel": 1
+      },
+      "count": 1,
+      "id": "enderscape:dagger"
+    },
+    "title": {
+      "translate": "advancement.enderscape.stun_attack"
+    }
+  },
+  "requirements": [
+    [
+      "stun_attack"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

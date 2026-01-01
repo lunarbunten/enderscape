@@ -4,6 +4,8 @@ import com.mojang.serialization.Codec;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.tag.EnderscapeBiomeTags;
 import net.minecraft.core.Holder;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -29,6 +31,12 @@ public enum RubblemiteVariant implements StringRepresentable {
     public static final String KEY = "RubblemiteVariant";
 
     public static final Codec<RubblemiteVariant> CODEC = StringRepresentable.fromEnum(RubblemiteVariant::values);
+
+    public static final StreamCodec<FriendlyByteBuf, RubblemiteVariant> STREAM_CODEC = StreamCodec.of(
+            (buf, variant) -> buf.writeVarInt(variant.getId()),
+            buf -> RubblemiteVariant.byId(buf.readVarInt())
+    );
+
     public static final RubblemiteVariant[] BY_ID = Arrays.stream(RubblemiteVariant.values()).sorted(Comparator.comparingInt(RubblemiteVariant::getId)).toArray(RubblemiteVariant[]::new);
 
     private final int id;

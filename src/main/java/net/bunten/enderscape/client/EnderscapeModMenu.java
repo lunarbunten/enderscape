@@ -4,9 +4,9 @@ import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.ControllerBuilder;
+import dev.isxander.yacl3.api.controller.EnumControllerBuilder;
 import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
-import dev.isxander.yacl3.api.controller.EnumControllerBuilder;
 import net.bunten.enderscape.EnderscapeConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -58,7 +58,9 @@ public class EnderscapeModMenu implements ModMenuApi {
 
         ConfigCategory.Builder main = ConfigCategory.createBuilder().name(Component.translatable("option.enderscape.category.serverside"));
 
+        addCreativeModeOptions(config, main);
         addDataPackOptions(config, main);
+        addLootTableOptions(config, main);
         addServersideAmbienceOptions(config, main);
         addServersideBlockOptions(config, main);
         addServersideEntityOptions(config, main);
@@ -79,6 +81,32 @@ public class EnderscapeModMenu implements ModMenuApi {
         if (!IS_DEBUG) addDebugOptions(config, main);
 
         return main.build();
+    }
+
+    private static void addCreativeModeOptions(EnderscapeConfig config, ConfigCategory.Builder builder) {
+        Option<?> creativeTabEnabled = boolOption(
+                "creative_tab_enabled",
+                true,
+                () -> config.creativeTabEnabled,
+                value -> config.creativeTabEnabled = value,
+                TickBoxControllerBuilder::create
+        );
+
+        Option<?> includeItemsInVanillaCreativeTabs = boolOption(
+                "include_items_in_vanilla_creative_tabs",
+                true,
+                () -> config.includeItemsInVanillaCreativeTabs,
+                value -> config.includeItemsInVanillaCreativeTabs = value,
+                TickBoxControllerBuilder::create
+        );
+
+        builder.group(OptionGroup.createBuilder()
+                .name(Component.translatable("option.group.enderscape.creative_mode"))
+
+                .option(creativeTabEnabled)
+                .option(includeItemsInVanillaCreativeTabs)
+                .build()
+        );
     }
 
     private static void addDebugOptions(EnderscapeConfig config, ConfigCategory.Builder builder) {
@@ -135,6 +163,32 @@ public class EnderscapeModMenu implements ModMenuApi {
         );
     }
 
+    private static void addLootTableOptions(EnderscapeConfig config, ConfigCategory.Builder builder) {
+        Option<?> supplementVanillaStrongholdLibraryLoot = boolOption(
+                "supplement_vanilla_stronghold_library_loot",
+                true,
+                () -> config.supplementVanillaStrongholdLibraryLoot,
+                value -> config.supplementVanillaStrongholdLibraryLoot = value,
+                TickBoxControllerBuilder::create
+        );
+
+        Option<?> supplementVanillaEndCityTreasureLoot = boolOption(
+                "supplement_vanilla_end_city_treasure_loot",
+                true,
+                () -> config.supplementVanillaEndCityTreasureLoot,
+                value -> config.supplementVanillaEndCityTreasureLoot = value,
+                TickBoxControllerBuilder::create
+        );
+
+        builder.group(OptionGroup.createBuilder()
+                .name(Component.translatable("option.group.enderscape.loot_tables"))
+
+                .option(supplementVanillaStrongholdLibraryLoot)
+                .option(supplementVanillaEndCityTreasureLoot)
+                .build()
+        );
+    }
+
     private static void addDataPackOptions(EnderscapeConfig config, ConfigCategory.Builder builder) {
         Option<?> defaultDataPackFixLevitationAdvancement = boolOption(
                 "default_data_pack_fix_levitation_advancement",
@@ -152,14 +206,6 @@ public class EnderscapeModMenu implements ModMenuApi {
                 TickBoxControllerBuilder::create
         );
 
-        Option<?> defaultDataPackNewEndCities = boolOption(
-                "default_data_pack_new_end_cities",
-                true,
-                () -> config.defaultDataPackNewEndCities,
-                value -> config.defaultDataPackNewEndCities = value,
-                TickBoxControllerBuilder::create
-        );
-
         Option<?> defaultDataPackNewTerrain = boolOption(
                 "default_data_pack_new_terrain",
                 true,
@@ -168,13 +214,30 @@ public class EnderscapeModMenu implements ModMenuApi {
                 TickBoxControllerBuilder::create
         );
 
+        Option<?> defaultDataPackNewEndCities = boolOption(
+                "default_data_pack_new_end_cities",
+                true,
+                () -> config.defaultDataPackNewEndCities,
+                value -> config.defaultDataPackNewEndCities = value,
+                TickBoxControllerBuilder::create
+        );
+
+        Option<?> defaultDataPackNewStrongholds = boolOption(
+                "default_data_pack_new_strongholds",
+                true,
+                () -> config.defaultDataPackNewStrongholds,
+                value -> config.defaultDataPackNewStrongholds = value,
+                TickBoxControllerBuilder::create
+        );
+
         builder.group(OptionGroup.createBuilder()
                 .name(Component.translatable("option.group.enderscape.data_packs"))
 
                 .option(defaultDataPackFixLevitationAdvancement)
                 .option(defaultDataPackFixVanillaRecipes)
-                .option(defaultDataPackNewEndCities)
                 .option(defaultDataPackNewTerrain)
+                .option(defaultDataPackNewEndCities)
+                .option(defaultDataPackNewStrongholds)
                 .build()
         );
     }
@@ -505,6 +568,14 @@ public class EnderscapeModMenu implements ModMenuApi {
                 TickBoxControllerBuilder::create
         );
 
+        Option<?> endermiteNaturalSpawnsObeyLightLevel = boolOption(
+                "endermite_natural_spawns_obey_light_level",
+                true,
+                () -> config.endermiteNaturalSpawnsObeyLightLevel,
+                value -> config.endermiteNaturalSpawnsObeyLightLevel = value,
+                TickBoxControllerBuilder::create
+        );
+
         Option<?> endermiteExpandHitRange = boolOption(
                 "endermite_expand_hit_range",
                 true,
@@ -583,11 +654,27 @@ public class EnderscapeModMenu implements ModMenuApi {
                 TickBoxControllerBuilder::create
         );
 
+        Option<?> silverfishDelayBeforeInfestingStone = boolOption(
+                "silverfish_delay_before_infesting_stone",
+                true,
+                () -> config.silverfishDelayBeforeInfestingStone,
+                value -> config.silverfishDelayBeforeInfestingStone = value,
+                TickBoxControllerBuilder::create
+        );
+
         Option<?> silverfishExpandHitRange = boolOption(
                 "silverfish_expand_hit_range",
                 true,
                 () -> config.silverfishExpandHitRange,
                 value -> config.silverfishExpandHitRange = value,
+                TickBoxControllerBuilder::create
+        );
+
+        Option<?> silverfishNaturalSpawnsObeyLightLevel = boolOption(
+                "silverfish_natural_spawns_obey_light_level",
+                true,
+                () -> config.silverfishNaturalSpawnsObeyLightLevel,
+                value -> config.silverfishNaturalSpawnsObeyLightLevel = value,
                 TickBoxControllerBuilder::create
         );
 
@@ -604,6 +691,7 @@ public class EnderscapeModMenu implements ModMenuApi {
 
                 .option(endermanStereoStareSound)
                 .option(endermiteExpandHitRange)
+                .option(endermiteNaturalSpawnsObeyLightLevel)
                 .option(endermiteUpdateSounds)
                 .option(rubblemiteExpandHitRange)
                 .option(shulkerBulletEnforceCountLimit)
@@ -612,7 +700,9 @@ public class EnderscapeModMenu implements ModMenuApi {
                 .option(shulkerBulletEnforceTimeLimit)
                 .option(shulkerBulletRebalanceLevitation)
                 .option(shulkerHurtByPiercing)
+                .option(silverfishDelayBeforeInfestingStone)
                 .option(silverfishExpandHitRange)
+                .option(silverfishNaturalSpawnsObeyLightLevel)
                 .option(voidPoofParticlesUponDeath)
 
                 .build()
@@ -859,11 +949,11 @@ public class EnderscapeModMenu implements ModMenuApi {
 
         Option<?> nebuliteToolHudOffset = intOption(
                 "nebulite_tool_hud_offset",
-                0,
+                13,
                 () -> config.nebuliteToolHudOffset,
                 value -> config.nebuliteToolHudOffset = value,
-                0,
-                50,
+                -25,
+                25,
                 1
         );
 

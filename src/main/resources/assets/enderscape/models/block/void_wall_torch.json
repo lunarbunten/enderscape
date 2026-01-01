@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/template_torch_wall",
+    "textures": {
+        "torch": "enderscape:block/void_torch"
+    }
+}

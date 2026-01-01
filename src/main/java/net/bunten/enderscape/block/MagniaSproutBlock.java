@@ -9,7 +9,6 @@ import net.bunten.enderscape.registry.EnderscapeBlockEntities;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.EnderscapeParticles;
 import net.bunten.enderscape.registry.tag.EnderscapeBlockTags;
-import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
 import net.bunten.enderscape.util.BlockUtil;
 import net.bunten.enderscape.util.MagniaUtil;
 import net.fabricmc.api.EnvType;
@@ -19,8 +18,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -241,15 +238,6 @@ public class MagniaSproutBlock extends DirectionalPlantBlock implements HasMagni
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         updateState(state, level, pos, false);
-    }
-
-    @Override
-    protected void attack(BlockState state, Level level, BlockPos pos, Player player) {
-        if (!isPowered(state) && player.getItemInHand(InteractionHand.MAIN_HAND).is(EnderscapeItemTags.POWERS_MAGNIA_WHEN_MINED_WITH)) {
-            if (trySetPowered(state, level, pos)) level.scheduleTick(pos, this, 30);
-        }
-
-        super.attack(state, level, pos, player);
     }
 
     @Override

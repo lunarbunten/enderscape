@@ -3209,98 +3209,6 @@
         ],
         "subtitle": "subtitles.block.generic.footsteps"
     },
-    "block.cut_shadoline.break": {
-        "sounds": [
-            {
-                "name": "enderscape:block/cut_shadoline/break1",
-                "pitch": 1.3,
-                "volume": 0.65
-            },
-            {
-                "name": "enderscape:block/cut_shadoline/break2",
-                "pitch": 1.3,
-                "volume": 0.65
-            },
-            {
-                "name": "enderscape:block/cut_shadoline/break3",
-                "pitch": 1.3,
-                "volume": 0.65
-            },
-            {
-                "name": "enderscape:block/cut_shadoline/break4",
-                "pitch": 1.3,
-                "volume": 0.65
-            }
-        ],
-        "subtitle": "subtitles.block.generic.break"
-    },
-    "block.cut_shadoline.fall": {
-        "sounds": [
-            {
-                "name": "enderscape:block.cut_shadoline.break",
-                "type": "event"
-            }
-        ]
-    },
-    "block.cut_shadoline.hit": {
-        "sounds": [
-            {
-                "name": "enderscape:block.cut_shadoline.step",
-                "type": "event"
-            }
-        ],
-        "subtitle": "subtitles.block.generic.hit"
-    },
-    "block.cut_shadoline.place": {
-        "sounds": [
-            {
-                "name": "enderscape:block/cut_shadoline/place1",
-                "pitch": 1.4,
-                "volume": 0.5
-            },
-            {
-                "name": "enderscape:block/cut_shadoline/place2",
-                "pitch": 1.4,
-                "volume": 0.35
-            },
-            {
-                "name": "enderscape:block/cut_shadoline/place3",
-                "pitch": 1.4,
-                "volume": 0.4
-            },
-            {
-                "name": "enderscape:block/cut_shadoline/place4",
-                "pitch": 1.4,
-                "volume": 0.5
-            }
-        ],
-        "subtitle": "subtitles.block.generic.place"
-    },
-    "block.cut_shadoline.step": {
-        "sounds": [
-            {
-                "name": "enderscape:block/shadoline/step1",
-                "pitch": 0.7,
-                "volume": 1
-            },
-            {
-                "name": "enderscape:block/shadoline/step2",
-                "pitch": 0.7,
-                "volume": 1
-            },
-            {
-                "name": "enderscape:block/shadoline/step3",
-                "pitch": 0.7,
-                "volume": 1
-            },
-            {
-                "name": "enderscape:block/shadoline/step4",
-                "pitch": 0.7,
-                "volume": 1
-            }
-        ],
-        "subtitle": "subtitles.block.generic.footsteps"
-    },
     "block.drift_jelly.bounce": {
         "sounds": [
             "enderscape:entity/drifter/bounce1",
@@ -7883,6 +7791,26 @@
         ],
         "subtitle": "subtitles.rubblemite.hurt"
     },
+    "entity.rubblemite.prepare_dash": {
+        "sounds": [
+            {
+                "name": "enderscape:entity/rubblemite/prepare_dash1",
+                "pitch": 1.1,
+                "volume": 0.3
+            },
+            {
+                "name": "enderscape:entity/rubblemite/prepare_dash2",
+                "pitch": 1.15,
+                "volume": 0.3
+            },
+            {
+                "name": "enderscape:entity/rubblemite/prepare_dash3",
+                "pitch": 1.2,
+                "volume": 0.3
+            }
+        ],
+        "subtitle": "subtitles.rubblemite.prepare_dash"
+    },
     "entity.rubblemite.shield": {
         "sounds": [
             {
@@ -8167,6 +8095,103 @@
             }
         ],
         "subtitle": "subtitles.cracked_mirror.try_teleport"
+    },
+    "item.dagger.attack.crit": {
+        "sounds": [
+            {
+                "name": "enderscape:item/dagger/crit1",
+                "volume": 0.9
+            },
+            {
+                "name": "enderscape:item/dagger/crit2",
+                "volume": 0.9
+            },
+            {
+                "name": "enderscape:item/dagger/crit3",
+                "volume": 0.9
+            },
+            {
+                "name": "enderscape:item/dagger/crit4",
+                "volume": 0.9
+            }
+        ],
+        "subtitle": "subtitles.entity.player.attack.crit"
+    },
+    "item.dagger.attack.knockback": {
+        "sounds": [
+            {
+                "name": "enderscape:item/dagger/knockback1",
+                "volume": 0.6
+            },
+            {
+                "name": "enderscape:item/dagger/knockback2",
+                "volume": 0.6
+            },
+            {
+                "name": "enderscape:item/dagger/knockback3",
+                "volume": 0.6
+            },
+            {
+                "name": "enderscape:item/dagger/knockback4",
+                "volume": 0.6
+            }
+        ],
+        "subtitle": "subtitles.entity.player.attack.knockback"
+    },
+    "item.dagger.attack.strong": {
+        "sounds": [
+            {
+                "name": "enderscape:item/dagger/strong1",
+                "volume": 0.6
+            },
+            {
+                "name": "enderscape:item/dagger/strong2",
+                "volume": 0.6
+            },
+            {
+                "name": "enderscape:item/dagger/strong3",
+                "volume": 0.6
+            },
+            {
+                "name": "enderscape:item/dagger/strong4",
+                "volume": 0.6
+            }
+        ],
+        "subtitle": "subtitles.entity.player.attack.strong"
+    },
+    "item.dagger.backstab": {
+        "sounds": [
+            {
+                "name": "enderscape:item/dagger/backstab1",
+                "pitch": 1.2,
+                "volume": 0.2
+            },
+            {
+                "name": "enderscape:item/dagger/backstab2",
+                "pitch": 1.2,
+                "volume": 0.2
+            },
+            {
+                "name": "enderscape:item/dagger/backstab3",
+                "pitch": 1.2,
+                "volume": 0.2
+            },
+            {
+                "name": "enderscape:item/dagger/backstab4",
+                "pitch": 1.2,
+                "volume": 0.2
+            }
+        ],
+        "subtitle": "subtitles.dagger.backstab"
+    },
+    "item.dagger.stun": {
+        "sounds": [
+            "enderscape:item/dagger/stun1",
+            "enderscape:item/dagger/stun2",
+            "enderscape:item/dagger/stun3",
+            "enderscape:item/dagger/stun4"
+        ],
+        "subtitle": "subtitles.dagger.stun"
     },
     "item.drift_jelly_bottle.drink": {
         "sounds": [
@@ -8672,6 +8697,71 @@
         ],
         "subtitle": "subtitles.rustle_bucket.fill"
     },
+    "item.shadoline_armor.equip": {
+        "sounds": [
+            {
+                "name": "enderscape:item/shadoline_armor/equip1",
+                "pitch": 0.95,
+                "volume": 0.9
+            },
+            {
+                "name": "enderscape:item/shadoline_armor/equip1",
+                "pitch": 1.05,
+                "volume": 0.9
+            },
+            {
+                "name": "enderscape:item/shadoline_armor/equip2",
+                "pitch": 0.95,
+                "volume": 0.9
+            },
+            {
+                "name": "enderscape:item/shadoline_armor/equip2",
+                "pitch": 1.05,
+                "volume": 0.9
+            },
+            {
+                "name": "enderscape:item/shadoline_armor/equip3",
+                "pitch": 0.95,
+                "volume": 0.9
+            },
+            {
+                "name": "enderscape:item/shadoline_armor/equip3",
+                "pitch": 1.05,
+                "volume": 0.9
+            },
+            {
+                "name": "enderscape:item/shadoline_armor/equip4",
+                "pitch": 0.95,
+                "volume": 0.9
+            },
+            {
+                "name": "enderscape:item/shadoline_armor/equip4",
+                "pitch": 1.05,
+                "volume": 0.9
+            },
+            {
+                "name": "enderscape:item/shadoline_armor/equip5",
+                "pitch": 0.95,
+                "volume": 0.9
+            },
+            {
+                "name": "enderscape:item/shadoline_armor/equip5",
+                "pitch": 1.05,
+                "volume": 0.9
+            },
+            {
+                "name": "enderscape:item/shadoline_armor/equip6",
+                "pitch": 0.95,
+                "volume": 0.9
+            },
+            {
+                "name": "enderscape:item/shadoline_armor/equip6",
+                "pitch": 1.05,
+                "volume": 0.9
+            }
+        ],
+        "subtitle": "subtitles.shadoline_armor.equip"
+    },
     "item.shulker_shell.equip": {
         "sounds": [
             {
@@ -8849,6 +8939,15 @@
             },
             {
                 "name": "enderscape:music/structure/end_city/mystique",
+                "stream": true,
+                "weight": 20
+            }
+        ]
+    },
+    "music.enderscape.structure.stronghold": {
+        "sounds": [
+            {
+                "name": "enderscape:music/structure/stronghold/prelude",
                 "stream": true,
                 "weight": 20
             }

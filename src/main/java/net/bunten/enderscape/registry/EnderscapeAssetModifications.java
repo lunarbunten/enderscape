@@ -20,7 +20,8 @@ public final class EnderscapeAssetModifications  {
             ResourceLocation.withDefaultNamespace("iron"),
             ResourceLocation.withDefaultNamespace("golden"),
             ResourceLocation.withDefaultNamespace("diamond"),
-            ResourceLocation.withDefaultNamespace("netherite")
+            ResourceLocation.withDefaultNamespace("netherite"),
+            Enderscape.id("shadoline")
     );
 
     static {

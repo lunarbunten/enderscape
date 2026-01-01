@@ -1,0 +1,14 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/spawner/skeleton",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 20
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

@@ -1,9 +1,11 @@
 package net.bunten.enderscape.registry;
 
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.block.dispenser.MirrorDispenserBehavior;
+import net.bunten.enderscape.EnderscapeConfig;
+import net.bunten.enderscape.block.dispenser.LodestoneTeleportationDispenserBehavior;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistrySetupCallback;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistryView;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
@@ -23,6 +25,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 import java.util.Optional;
 
@@ -34,6 +41,8 @@ import static net.minecraft.world.level.block.Blocks.CHORUS_PLANT;
 
 public class EnderscapeCompatibility {
 
+    private static final EnderscapeConfig CONFIG = EnderscapeConfig.getInstance();
+
     static {
         registerAliases();
         registerCompostables();
@@ -43,11 +52,29 @@ public class EnderscapeCompatibility {
         registerStrippables();
 
         LandPathNodeTypesRegistry.register(DRIFT_JELLY_BLOCK, (state, neighbor) -> PathType.DAMAGE_OTHER);
+
+        LootTableEvents.MODIFY.register(Enderscape.id("inject_supplemental_loot_tables"), (key, builder, source, registries) -> {
+            addLootTableInjection(
+                    CONFIG.supplementVanillaStrongholdLibraryLoot,
+                    BuiltInLootTables.STRONGHOLD_LIBRARY,
+                    EnderscapeLootTables.STRONGHOLD_LIBRARY_CHEST_SUPPLEMENTS,
+                    key,
+                    builder
+            );
+        });
+    }
+
+    private static void addLootTableInjection(boolean allowed, ResourceKey<LootTable> original, ResourceKey<LootTable> injection, ResourceKey<LootTable> key, LootTable.Builder builder) {
+        if (allowed && key.equals(original)) {
+            builder.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(NestedLootTable.lootTableReference(injection).setWeight(1)));
+        }
     }
 
     private static void registerAliases() {
         DynamicRegistrySetupCallback.EVENT.register((registryView) -> {
-            dynamicRegistryAlias(registryView, Registries.BIOME, "magnia_crags", "magnia_fields");
+            dynamicRegistryAlias(registryView, Registries.BIOME, "magnia_crags", EnderscapeBiomes.MAGNIA_FIELDS.location().getPath());
+            dynamicRegistryAlias(registryView, Registries.DATA_COMPONENT_TYPE, "current_nebulite_fuel", "current_fuel");
+            dynamicRegistryAlias(registryView, Registries.ENCHANTMENT, "lightspeed", EnderscapeEnchantments.RESONANCE.location().getPath());
         });
 
         blockAndItemAlias("celestial_path_block", "celestial_path");
@@ -58,9 +85,7 @@ public class EnderscapeCompatibility {
 
     private static <T> void dynamicRegistryAlias(DynamicRegistryView view, ResourceKey<Registry<T>> registry, String old_name, String new_name) {
         Optional<Registry<T>> optional = view.getOptional(registry);
-        optional.ifPresent(value -> {
-            value.addAlias(Enderscape.id(old_name), Enderscape.id(new_name));
-        });
+        optional.ifPresent(value -> value.addAlias(Enderscape.id(old_name), Enderscape.id(new_name)));
     }
 
     private static void blockAndItemAlias(String previous, String current) {
@@ -110,7 +135,7 @@ public class EnderscapeCompatibility {
             }
         });
 
-        DispenserBlock.registerBehavior(MIRROR, new MirrorDispenserBehavior());
+        DispenserBlock.registerBehavior(MIRROR, new LodestoneTeleportationDispenserBehavior());
     }
 
     private static void registerFlammableBlocks() {
@@ -177,6 +202,8 @@ public class EnderscapeCompatibility {
         FlammableBlockRegistry.getDefaultInstance().add(BLINKLIGHT_VINES_BODY, 15, 60);
         FlammableBlockRegistry.getDefaultInstance().add(BLINKLIGHT_VINES_HEAD, 15, 60);
         FlammableBlockRegistry.getDefaultInstance().add(MURUBLIGHT_BRACKET, 60, 100);
+
+        FlammableBlockRegistry.getDefaultInstance().add(VOID_SHALE, 5, 5);
     }
 
     private static void registerFuelItems() {

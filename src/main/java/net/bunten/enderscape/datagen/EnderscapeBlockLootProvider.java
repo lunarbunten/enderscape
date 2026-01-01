@@ -14,6 +14,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -82,6 +83,8 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropPottedContents(POTTED_BULB_FLOWER);
 
         dropSelf(END_LAMP);
+        dropOther(VOID_TORCH, VOID_TORCH_ITEM);
+        dropSelf(VOID_LANTERN);
         dropSelf(BULB_LANTERN);
         dropSelf(BLINKLAMP);
 
@@ -270,6 +273,8 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(CUT_SHADOLINE_WALL);
         dropSelf(CHISELED_SHADOLINE);
         dropSelf(SHADOLINE_PILLAR);
+        dropSelf(SHADOLINE_BARS);
+        dropSelf(SHADOLINE_CHAIN);
 
         dropSelf(END_STONE_STAIRS);
         dropSelf(END_STONE_SLAB);
