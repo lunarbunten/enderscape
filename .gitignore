@@ -41,3 +41,4 @@ logs/
 # bunten
 *.py
 run
+run_server

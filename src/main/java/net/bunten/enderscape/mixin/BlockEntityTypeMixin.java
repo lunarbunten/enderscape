@@ -2,10 +2,7 @@ package net.bunten.enderscape.mixin;
 
 import net.bunten.enderscape.Enderscape;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.ShelfBlock;
-import net.minecraft.world.level.block.SignBlock;
-import net.minecraft.world.level.block.TrialSpawnerBlock;
-import net.minecraft.world.level.block.VaultBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-import static net.bunten.enderscape.registry.EnderscapeBlocks.END_TRIAL_SPAWNER;
-import static net.bunten.enderscape.registry.EnderscapeBlocks.END_VAULT;
+import static net.bunten.enderscape.registry.EnderscapeBlocks.*;
 
 @Mixin(BlockEntityType.class)
 public abstract class BlockEntityTypeMixin {
@@ -38,6 +34,7 @@ public abstract class BlockEntityTypeMixin {
 
     @Inject(method = "isValid", at = @At("HEAD"), cancellable = true)
     private void isValid(BlockState state, CallbackInfoReturnable<Boolean> info) {
+        if (state.getBlock() instanceof CampfireBlock && state.getBlock().equals(VOID_CAMPFIRE)) info.setReturnValue(true);
         if (state.getBlock() instanceof ShelfBlock && VALID_SHELVES.contains(state.getBlock().builtInRegistryHolder().key().location())) info.setReturnValue(true);
         if (state.getBlock() instanceof SignBlock sign && VALID_WOOD_TYPES.contains(ResourceLocation.tryParse(sign.type().name()))) info.setReturnValue(true);
         if (state.getBlock() instanceof TrialSpawnerBlock && state.is(END_TRIAL_SPAWNER)) info.setReturnValue(true);

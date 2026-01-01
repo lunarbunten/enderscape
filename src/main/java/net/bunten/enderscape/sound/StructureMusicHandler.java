@@ -65,6 +65,7 @@ public class StructureMusicHandler {
     }
 
     private static void removeFromAll(ServerPlayer player) {
+        sendStructureToClient(player, NONE);
         playerStructures.remove(player);
         playerTimers.remove(player);
     }

@@ -1,5 +1,6 @@
 package net.bunten.enderscape.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.bunten.enderscape.EnderscapeConfig;
@@ -7,14 +8,9 @@ import net.bunten.enderscape.entity.DashJumpUser;
 import net.bunten.enderscape.entity.EndTrialSpawnable;
 import net.bunten.enderscape.entity.magnia.MagniaMoveable;
 import net.bunten.enderscape.entity.magnia.MagniaProperties;
-import net.bunten.enderscape.item.MagniaAttractorItem;
-import net.bunten.enderscape.item.NebuliteToolContext;
-import net.bunten.enderscape.item.NebuliteToolItem;
+import net.bunten.enderscape.item.component.EntityMagnet;
 import net.bunten.enderscape.particle.DashJumpShockwaveParticleOptions;
-import net.bunten.enderscape.registry.EnderscapeItemSounds;
-import net.bunten.enderscape.registry.EnderscapeItems;
-import net.bunten.enderscape.registry.EnderscapeMobEffects;
-import net.bunten.enderscape.registry.EnderscapeParticles;
+import net.bunten.enderscape.registry.*;
 import net.bunten.enderscape.registry.tag.EnderscapeEntityTags;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
@@ -25,11 +21,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -42,6 +36,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -127,11 +123,44 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
         return SPAWNED_FROM_END_TRIAL_SPAWNER_DATA;
     }
 
+    @Inject(at = @At("HEAD"), method = "canAttack(Lnet/minecraft/world/entity/LivingEntity;)Z", cancellable = true)
+    public void Enderscape$canAttack(LivingEntity target, CallbackInfoReturnable<Boolean> info) {
+        if (EnderscapeMobEffects.isStunned(mob)) info.setReturnValue(false);
+    }
+
     @Inject(at = @At("TAIL"), method = "defineSynchedData")
     public void Enderscape$addAdditionalSaveData(SynchedEntityData.Builder builder, CallbackInfo ci) {
         defineMagniaData(builder);
         defineDashJumpData(builder);
         defineEndTrialSpawnableData(builder);
+    }
+
+    @Unique
+    private Vec3 Enderscape$tryCancelMovementVec(Vec3 vec3) {
+        if (EnderscapeMobEffects.isStunned(this)) return Vec3.ZERO;
+        return vec3;
+    }
+
+    @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;travelInFluid(Lnet/minecraft/world/phys/Vec3;)V"))
+    private Vec3 Enderscape$modifyFluidVec(Vec3 vec3) {
+        return Enderscape$tryCancelMovementVec(vec3);
+    }
+
+    @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;travelFallFlying(Lnet/minecraft/world/phys/Vec3;)V"))
+    private Vec3 Enderscape$modifyFallFlyingVec(Vec3 vec3) {
+        return Enderscape$tryCancelMovementVec(vec3);
+    }
+
+    @ModifyArg(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;travelInAir(Lnet/minecraft/world/phys/Vec3;)V"))
+    private Vec3 Enderscape$modifyAirVec(Vec3 vec3) {
+        return Enderscape$tryCancelMovementVec(vec3);
+    }
+
+    @Inject(at = @At("TAIL"), method = "travel")
+    public void Enderscape$travel(Vec3 vec3, CallbackInfo ci) {
+        if (EnderscapeMobEffects.isStunned(this) && mob instanceof Mob m) {
+            if (m.getNavigation().getPath() != null) m.getNavigation().stop();
+        }
     }
 
     @Inject(at = @At("TAIL"), method = "canStandOnFluid", cancellable = true)
@@ -163,14 +192,8 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
     @Inject(at = @At("HEAD"), method = "take")
     private void Enderscape$take(Entity entity, int i, CallbackInfo ci) {
         if (isAlive() && !isSpectator() && MagniaMoveable.wasMovedByMagnia(entity) && mob instanceof Player player) {
-            ItemStack stack = MagniaAttractorItem.getValidAttractor(player.getInventory());
-            if (!stack.isEmpty()) {
-                NebuliteToolContext context = new NebuliteToolContext(stack, level(), player);
-                if (stack.getItem() instanceof MagniaAttractorItem && NebuliteToolItem.fuelExceedsCost(context)) {
-                    MagniaAttractorItem.incrementEntitiesPulled(stack, 1);
-                    MagniaAttractorItem.tryUseFuel(context, 1 - MagniaAttractorItem.getTotalEntitiesPulledToUseFuel(stack, mob));
-                }
-            }
+            ItemStack stack = EntityMagnet.getFirstUsableMagnet(player.getInventory());
+            if (!stack.isEmpty() && EntityMagnet.is(stack)) stack.hurtAndBreak(1, mob, mob.getEquipmentSlotForItem(stack));
         }
     }
 
@@ -210,6 +233,16 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
             DashJumpUser.setDashTicks(mob, ticks - 1);
             if (ticks <= 0 || (ticks < 50 && vel.lengthSqr() < 0.6)) DashJumpUser.setDashed(mob, false);
         }
+    }
+
+    @ModifyReturnValue(method = "createLivingAttributes", at = @At(value = "RETURN"))
+    private static AttributeSupplier.Builder Enderscape$createLivingAttributes(AttributeSupplier.Builder builder) {
+        return builder.add(EnderscapeAttributes.BACKSTAB_DAMAGE).add(EnderscapeAttributes.STEALTH);
+    }
+
+    @ModifyVariable(method = "getVisibilityPercent", at = @At(value = "STORE"), ordinal = 0)
+    public double Enderscape$getVisibilityPercent(double original) {
+        return original * EnderscapeAttributes.getStealthMultiplier(mob);
     }
 
     @Inject(at = @At("HEAD"), method = "handleFallFlyingCollisions")
@@ -266,8 +299,8 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
         return false;
     }
 
-    @Inject(at = @At("HEAD"), method = "stopFallFlying")
+    @Inject(at = @At("TAIL"), method = "stopFallFlying")
     public void Enderscape$stopFallFlying(CallbackInfo info) {
-        if (EnderscapeConfig.getInstance().elytraAddOpenCloseSounds && mob.isFallFlying() && getItemBySlot(EquipmentSlot.CHEST).is(Items.ELYTRA)) playSound(EnderscapeItemSounds.ELYTRA_STOP_GLIDING, 1, Mth.nextFloat(getRandom(), 0.8F, 1.2F));
+        if (EnderscapeConfig.getInstance().elytraAddOpenCloseSounds && getItemBySlot(EquipmentSlot.CHEST).is(Items.ELYTRA)) playSound(EnderscapeItemSounds.ELYTRA_STOP_GLIDING, 1, Mth.nextFloat(getRandom(), 0.8F, 1.2F));
     }
 }

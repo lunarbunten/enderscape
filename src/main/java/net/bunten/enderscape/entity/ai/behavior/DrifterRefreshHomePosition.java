@@ -6,7 +6,6 @@ import net.bunten.enderscape.entity.drifter.AbstractDrifter;
 import net.bunten.enderscape.entity.drifter.DrifterAI;
 import net.bunten.enderscape.registry.tag.EnderscapePoiTags;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.GlobalPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.ai.behavior.Behavior;
@@ -39,7 +38,7 @@ public class DrifterRefreshHomePosition extends Behavior<AbstractDrifter> {
 
     protected void updateOtherDrifters(ServerLevel level, AbstractDrifter mob) {
         level.getEntitiesOfClass(AbstractDrifter.class, new AABB(mob.blockPosition()).inflate(HORIZONTAL_UPDATE_RANGE, VERTICAL_UPDATE_RANGE, HORIZONTAL_UPDATE_RANGE)).forEach((other -> {
-            DrifterAI.setHome(other, DrifterAI.getHome(mob));
+            other.setHomeTo(mob.getHomePosition(), DrifterAI.HOME_RADIUS);
             other.getBrain().setMemory(EnderscapeMemory.DRIFTER_FIND_HOME_COOLDOWN, sampleNextCooldown(mob));
         }));
     }
@@ -57,10 +56,10 @@ public class DrifterRefreshHomePosition extends Behavior<AbstractDrifter> {
     @Override
     protected void start(ServerLevel level, AbstractDrifter mob, long l) {
         Optional<BlockPos> newHome = findNewHome(level, mob);
-        if (newHome.isPresent()) {
-            DrifterAI.setHome(mob, GlobalPos.of(level.dimension(), newHome.get()));
+        newHome.ifPresent((pos) -> {
+            mob.setHomeTo(pos, DrifterAI.HOME_RADIUS);
             updateOtherDrifters(level, mob);
-        }
+        });
         mob.getBrain().setMemory(EnderscapeMemory.DRIFTER_FIND_HOME_COOLDOWN, sampleNextCooldown(mob));
     }
 }

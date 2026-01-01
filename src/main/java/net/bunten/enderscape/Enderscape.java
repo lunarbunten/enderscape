@@ -56,6 +56,7 @@ public class Enderscape implements ModInitializer {
                 EnderscapeItems.class,
                 EnderscapeBlocks.class,
                 EnderscapePotions.class,
+                EnderscapeAttributes.class,
                 EnderscapeStructureMusic.class,
                 EnderscapeFeatures.class,
                 EnderscapeConfiguredFeatures.class,
@@ -88,6 +89,7 @@ public class Enderscape implements ModInitializer {
                 EnderscapeDataComponents.class,
                 EnderscapeDensityFunctionTypes.class,
                 EnderscapeSpawnConditionTypes.class,
+                EnderscapeRecipeSerializers.class,
                 StructureMusicHandler.class
         );
 
@@ -102,6 +104,7 @@ public class Enderscape implements ModInitializer {
             ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("fix_levitation_advancement"), container, Component.translatable("pack.enderscape.fix_levitation_advancement"), getActivationType(config.defaultDataPackFixLevitationAdvancement));
             ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("fix_vanilla_recipes"), container, Component.translatable("pack.enderscape.fix_vanilla_recipes"), getActivationType(config.defaultDataPackFixVanillaRecipes));
             ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("new_end_cities"), container, Component.translatable("pack.enderscape.new_end_cities"), getActivationType(config.defaultDataPackNewEndCities));
+            ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("new_strongholds"), container, Component.translatable("pack.enderscape.new_strongholds"), getActivationType(config.defaultDataPackNewStrongholds));
             ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("new_terrain"), container, Component.translatable("pack.enderscape.new_terrain"), getActivationType(config.defaultDataPackNewTerrain));
         });
 

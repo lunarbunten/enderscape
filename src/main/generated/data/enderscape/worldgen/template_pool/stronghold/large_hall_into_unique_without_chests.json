@@ -1,0 +1,41 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/large_hall/broken_floor",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 40
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/large_hall/split_left",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/large_hall/split_right",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/large_hall/thin",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    }
+  ],
+  "fallback": "enderscape:stronghold/large_hall_fallback"
+}

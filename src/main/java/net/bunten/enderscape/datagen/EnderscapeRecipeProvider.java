@@ -2,21 +2,22 @@ package net.bunten.enderscape.datagen;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
+import net.bunten.enderscape.item.crafting.ToolFuelingRecipe;
 import net.bunten.enderscape.registry.EnderscapeTrimPatterns;
 import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.*;
 import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
 import net.minecraft.world.level.ItemLike;
@@ -63,6 +64,8 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 SuspiciousEffectHolder holder = SuspiciousEffectHolder.tryGet(BULB_FLOWER.asItem());
                 if (holder != null) suspiciousStew(BULB_FLOWER.asItem(), holder);
 
+                SpecialRecipeBuilder.special(ToolFuelingRecipe::new).save(output, "tool_fueling");
+
                 shaped(RecipeCategory.MISC, MUSIC_DISC_BLISS)
                         .define('D', MUSIC_DISC_DECAY)
                         .define('N', NEBULITE_SHARDS)
@@ -94,6 +97,129 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_drift_jelly_bottle", has(DRIFT_JELLY_BOTTLE))
                         .save(output);
 
+                shaped(RecipeCategory.COMBAT, DAGGER)
+                        .define('X', SHADOLINE_INGOT)
+                        .define('S', STICK)
+                        .pattern(" X")
+                        .pattern("XX")
+                        .pattern("S ")
+                        .unlockedBy("has_shadoline_ingot", has(SHADOLINE_INGOT))
+                        .save(output);
+
+                shaped(RecipeCategory.COMBAT, SHADOLINE_HELMET)
+                        .define('X', SHADOLINE_INGOT)
+                        .define('C', RUBBLE_CHITIN)
+                        .pattern("XXX")
+                        .pattern("C C")
+                        .unlockedBy("has_shadoline_ingot", has(SHADOLINE_INGOT))
+                        .save(output);
+
+                shaped(RecipeCategory.COMBAT, SHADOLINE_CHESTPLATE)
+                        .define('X', SHADOLINE_INGOT)
+                        .define('C', RUBBLE_CHITIN)
+                        .pattern("X X")
+                        .pattern("XXX")
+                        .pattern("CCC")
+                        .unlockedBy("has_shadoline_ingot", has(SHADOLINE_INGOT))
+                        .save(output);
+
+                shaped(RecipeCategory.COMBAT, SHADOLINE_LEGGINGS)
+                        .define('X', SHADOLINE_INGOT)
+                        .define('C', RUBBLE_CHITIN)
+                        .pattern("XXX")
+                        .pattern("X X")
+                        .pattern("C C")
+                        .unlockedBy("has_shadoline_ingot", has(SHADOLINE_INGOT))
+                        .save(output);
+
+                shaped(RecipeCategory.COMBAT, SHADOLINE_BOOTS)
+                        .define('X', SHADOLINE_INGOT)
+                        .define('C', RUBBLE_CHITIN)
+                        .pattern("C C")
+                        .pattern("X X")
+                        .unlockedBy("has_shadoline_ingot", has(SHADOLINE_INGOT))
+                        .save(output);
+
+                SimpleCookingRecipeBuilder.smelting(
+                                Ingredient.of(
+                                        SHADOLINE_HELMET,
+                                        SHADOLINE_CHESTPLATE,
+                                        SHADOLINE_LEGGINGS,
+                                        SHADOLINE_BOOTS
+                                ),
+                                RecipeCategory.MISC,
+                                SHADOLINE_NUGGET,
+                                0.1F,
+                                200
+                        )
+                        .unlockedBy("has_shadoline_helmet", has(SHADOLINE_HELMET))
+                        .unlockedBy("has_shadoline_chestplate", has(SHADOLINE_CHESTPLATE))
+                        .unlockedBy("has_shadoline_leggings", has(SHADOLINE_LEGGINGS))
+                        .unlockedBy("has_shadoline_boots", has(SHADOLINE_BOOTS))
+                        .save(output, getSmeltingRecipeName(SHADOLINE_NUGGET));
+
+                SimpleCookingRecipeBuilder.blasting(
+                                Ingredient.of(
+                                        SHADOLINE_HELMET,
+                                        SHADOLINE_CHESTPLATE,
+                                        SHADOLINE_LEGGINGS,
+                                        SHADOLINE_BOOTS
+                                ),
+                                RecipeCategory.MISC,
+                                SHADOLINE_NUGGET,
+                                0.1F,
+                                100
+                        )
+                        .unlockedBy("has_shadoline_helmet", has(SHADOLINE_HELMET))
+                        .unlockedBy("has_shadoline_chestplate", has(SHADOLINE_CHESTPLATE))
+                        .unlockedBy("has_shadoline_leggings", has(SHADOLINE_LEGGINGS))
+                        .unlockedBy("has_shadoline_boots", has(SHADOLINE_BOOTS))
+                        .save(output, getBlastingRecipeName(SHADOLINE_NUGGET));
+
+                shaped(RecipeCategory.DECORATIONS, SHADOLINE_CHAIN)
+                        .define('I', SHADOLINE_INGOT)
+                        .define('N', SHADOLINE_NUGGET)
+                        .pattern("N")
+                        .pattern("I")
+                        .pattern("N")
+                        .unlockedBy("has_shadoline_nugget", has(SHADOLINE_NUGGET))
+                        .unlockedBy("has_shadoline_ingot", has(SHADOLINE_INGOT))
+                        .save(output);
+
+                shaped(RecipeCategory.DECORATIONS, SHADOLINE_BARS, 16)
+                        .define('#', SHADOLINE_INGOT)
+                        .pattern("###")
+                        .pattern("###")
+                        .unlockedBy("has_shadoline_ingot", has(SHADOLINE_INGOT))
+                        .save(output);
+
+                shaped(RecipeCategory.DECORATIONS, VOID_TORCH_ITEM, 4)
+                        .define('V', VOID_SHALE)
+                        .define('#', STICK)
+                        .pattern("V")
+                        .pattern("#")
+                        .unlockedBy("has_void_shale", has(VOID_SHALE))
+                        .save(output);
+
+                shaped(RecipeCategory.DECORATIONS, VOID_LANTERN)
+                        .define('#', SHADOLINE_NUGGET)
+                        .define('@', VOID_TORCH_ITEM)
+                        .pattern("###")
+                        .pattern("#@#")
+                        .pattern("###")
+                        .unlockedBy("has_void_shale", has(VOID_SHALE))
+                        .save(output);
+
+                shaped(RecipeCategory.DECORATIONS, VOID_CAMPFIRE)
+                        .define('L', ItemTags.LOGS)
+                        .define('S', STICK)
+                        .define('V', VOID_SHALE)
+                        .pattern(" S ")
+                        .pattern("SVS")
+                        .pattern("LLL")
+                        .unlockedBy("has_void_shale", has(VOID_SHALE))
+                        .save(output);
+                
                 rubbleShield(END_STONE, END_STONE_RUBBLE_SHIELD);
                 rubbleShield(VERADITE, VERADITE_RUBBLE_SHIELD);
                 rubbleShield(MIRESTONE, MIRESTONE_RUBBLE_SHIELD);

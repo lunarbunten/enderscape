@@ -66,7 +66,7 @@ public class EnderscapeEntityLootProvider extends SimpleFabricLootTableProvider 
                                                     LootItem.lootTableItem(RUBBLE_CHITIN)
                                                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                                                             .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup.get(), UniformGenerator.between(0, 1)))
-                                                            .when(LootItemRandomChanceCondition.randomChance(0.25F))
+                                                            .when(LootItemRandomChanceCondition.randomChance(0.65F))
                                             )
                                             .when(LootItemKilledByPlayerCondition.killedByPlayer())
                             )

@@ -27,5 +27,6 @@ public class EnderscapeTemplatePools {
     }
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
+        StrongholdTemplatePools.bootstrap(context);
     }
 }

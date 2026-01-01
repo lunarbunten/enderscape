@@ -2,11 +2,13 @@ package net.bunten.enderscape.mixin;
 
 import com.mojang.authlib.GameProfile;
 import net.bunten.enderscape.entity.DashJumpUser;
+import net.bunten.enderscape.item.component.DashJump;
 import net.bunten.enderscape.registry.EnderscapeDataComponents;
 import net.bunten.enderscape.registry.EnderscapeStats;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -34,9 +36,8 @@ public abstract class ServerPlayerMixin extends Player {
 
     @Inject(at = @At("HEAD"), method = "jumpFromGround")
     public void Enderscape$jumpFromGround(CallbackInfo info) {
-        if (player.isUsingItem() && player.getUseItem().has(EnderscapeDataComponents.DASH_JUMP)) {
-            player.getUseItem().get(EnderscapeDataComponents.DASH_JUMP).apply(level(), player, player.getUseItem(), player.getUseItem().get(EnderscapeDataComponents.DASH_JUMP));
-        }
+        ItemStack item = player.getUseItem();
+        if (player.isUsingItem() && item.has(EnderscapeDataComponents.DASH_JUMP)) DashJump.apply(level(), player, item);
     }
 
     @Inject(at = @At("TAIL"), method = "checkMovementStatistics")

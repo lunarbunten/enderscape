@@ -5,8 +5,8 @@
       "weight": 1
     }
   ],
-  "simultaneous_mobs": 6.0,
-  "simultaneous_mobs_added_per_player": 3.0,
+  "simultaneous_mobs": 4.0,
+  "simultaneous_mobs_added_per_player": 1.5,
   "spawn_potentials": [
     {
       "data": {
@@ -14,7 +14,7 @@
           "id": "minecraft:endermite"
         }
       },
-      "weight": 1
+      "weight": 2
     },
     {
       "data": {
@@ -25,6 +25,6 @@
       "weight": 1
     }
   ],
-  "ticks_between_spawn": 5,
+  "ticks_between_spawn": 10,
   "total_mobs": 18.0
 }

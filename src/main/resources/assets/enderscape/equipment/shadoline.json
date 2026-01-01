@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "enderscape:shadoline"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "enderscape:shadoline"
+      }
+    ]
+  }
+}

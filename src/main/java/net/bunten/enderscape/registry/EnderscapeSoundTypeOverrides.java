@@ -1,9 +1,8 @@
 package net.bunten.enderscape.registry;
 
-import net.bunten.enderscape.sound.SoundTypeOverride;
 import net.bunten.enderscape.EnderscapeConfig;
+import net.bunten.enderscape.sound.SoundTypeOverride;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -43,18 +42,96 @@ public class EnderscapeSoundTypeOverrides {
 
 	static {
 		Map<SoundType, Predicate<BlockState>> overrides = Map.of(
-				EnderscapeSoundTypes.CHORUS_PLANT, (state) -> CONFIG.blocksSoundUpdateChorus && getNameOf(state).equals("chorus_plant"),
-				EnderscapeSoundTypes.CHORUS_FLOWER, (state) -> CONFIG.blocksSoundUpdateChorus && getNameOf(state).equals("chorus_flower"),
-				EnderscapeSoundTypes.PURPUR, (state) -> CONFIG.blocksSoundUpdatePurpur && getNameOf(state).contains("purpur") && !getNameOf(state).contains("dusk"),
-				EnderscapeSoundTypes.END_PORTAL_FRAME, (state) -> CONFIG.blockSoundUpdateEndPortalFrame && getNameOf(state).equals("end_portal_frame"),
-				EnderscapeSoundTypes.END_PORTAL, (state) -> CONFIG.blockSoundUpdateEndPortals && getNameOf(state).equals("end_portal"),
-				EnderscapeSoundTypes.END_GATEWAY, (state) -> CONFIG.blockSoundUpdateEndPortals && getNameOf(state).equals("end_gateway"),
-				EnderscapeSoundTypes.END_ROD, (state) -> CONFIG.blockSoundsUpdateEndRods && getNameOf(state).equals("end_rod"),
-				EnderscapeSoundTypes.END_STONE, (state) -> CONFIG.blockSoundUpdateEndStone && getNameOf(state).contains("end_stone") && !getNameOf(state).contains("brick") && !getNameOf(state).contains("chiseled")&& !getNameOf(state).contains("veiled"),
-				EnderscapeSoundTypes.END_STONE_BRICKS, (state) -> CONFIG.blockSoundUpdateEndStoneBricks && getNameOf(state).contains("end_stone") && (getNameOf(state).contains("brick") || getNameOf(state).contains("chiseled")),
-				EnderscapeSoundTypes.SHULKER_BOX, (state) -> CONFIG.blockSoundUpdateShulkerBoxes && state.getBlock() instanceof ShulkerBoxBlock
+				EnderscapeSoundTypes.CHORUS_PLANT, (state) -> canApplyOverride(
+						state,
+						CONFIG.blocksSoundUpdateChorus,
+						List.of("chorus_plant"),
+						List.of(),
+						true
+				),
+				EnderscapeSoundTypes.CHORUS_FLOWER, (state) -> canApplyOverride(
+						state,
+						CONFIG.blocksSoundUpdateChorus,
+						List.of("chorus_flower"),
+						List.of(),
+						true
+				),
+				EnderscapeSoundTypes.PURPUR, (state) -> canApplyOverride(
+						state,
+						CONFIG.blocksSoundUpdatePurpur,
+						List.of("purpur"),
+						List.of("dusk")
+				),
+				EnderscapeSoundTypes.END_PORTAL_FRAME, (state) -> canApplyOverride(
+						state,
+						CONFIG.blockSoundUpdateEndPortalFrame,
+						List.of("end_portal_frame"),
+						List.of(),
+						true
+				),
+				EnderscapeSoundTypes.END_PORTAL, (state) -> canApplyOverride(
+						state,
+						CONFIG.blockSoundUpdateEndPortals,
+						List.of("end_portal"),
+						List.of("frame"),
+						true
+				),
+				EnderscapeSoundTypes.END_GATEWAY, (state) -> canApplyOverride(
+						state,
+						CONFIG.blockSoundUpdateEndPortals,
+						List.of("end_gateway"),
+						List.of(),
+						true
+				),
+				EnderscapeSoundTypes.END_ROD, (state) -> canApplyOverride(
+						state,
+						CONFIG.blockSoundsUpdateEndRods,
+						List.of("end_rod"),
+						List.of(),
+						true
+				),
+				EnderscapeSoundTypes.END_STONE, (state) -> canApplyOverride(
+						state,
+						CONFIG.blockSoundUpdateEndStone,
+						List.of("end_stone"),
+						List.of("brick", "veiled")
+				),
+				EnderscapeSoundTypes.END_STONE_BRICKS, (state) -> canApplyOverride(
+						state,
+						CONFIG.blockSoundUpdateEndStoneBricks,
+						List.of("end_stone", "brick"),
+						List.of("chiseled"),
+						true
+				),
+				EnderscapeSoundTypes.SHULKER_BOX, (state) -> canApplyOverride(
+						state,
+						CONFIG.blockSoundUpdateShulkerBoxes,
+						List.of("shulker", "box"),
+						List.of(),
+						true
+				)
 		);
 
 		overrides.forEach((sound, condition) -> register(new SoundTypeOverride(sound, condition)));
+	}
+
+	private static boolean canApplyOverride(BlockState state, boolean condition, List<String> allowed, List<String> disallowed) {
+		return canApplyOverride(state, condition, allowed, disallowed, false);
+	}
+
+	private static boolean canApplyOverride(BlockState state, boolean condition, List<String> allowed, List<String> disallowed, boolean requireAllAlloweds) {
+		if (!condition) return false;
+		String name = getNameOf(state);
+
+		for (String string : disallowed) if (name.contains(string)) return false;
+
+		if (requireAllAlloweds) {
+			for (String string : allowed) if (!name.contains(string)) return false;
+			return true;
+		}
+
+		for (String string : allowed) if (name.contains(string)) return true;
+
+		return false;
 	}
 }

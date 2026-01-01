@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 public class EnderscapeMusic {
 
     public static final Music STRUCTURE_END_CITY = createStructureMusic("end_city");
+    public static final Music STRUCTURE_STRONGHOLD = createStructureMusic("stronghold");
 
     @NotNull
     private static Music createStructureMusic(String name) {

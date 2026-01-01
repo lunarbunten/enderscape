@@ -6,12 +6,12 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import net.bunten.enderscape.entity.ai.EnderscapeMemory;
 import net.bunten.enderscape.entity.ai.EnderscapeSensors;
-import net.bunten.enderscape.entity.ai.behavior.*;
+import net.bunten.enderscape.entity.ai.behavior.CalmDownFromAttacker;
+import net.bunten.enderscape.entity.ai.behavior.CalmDownFromIntimidator;
+import net.bunten.enderscape.entity.ai.behavior.DrifterRefreshHomePosition;
+import net.bunten.enderscape.entity.ai.behavior.DrifterStartOrStopLeakingJelly;
 import net.bunten.enderscape.registry.EnderscapeEntities;
 import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
-import net.bunten.enderscape.registry.tag.EnderscapePoiTags;
-import net.minecraft.core.GlobalPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.Brain;
@@ -34,7 +34,6 @@ public class DrifterAI {
             EnderscapeMemory.CANT_REACH_WALK_TARGET_SINCE,
             EnderscapeMemory.DRIFTER_FIND_HOME_COOLDOWN,
             EnderscapeMemory.DRIFTER_JELLY_CHANGE_COOLDOWN,
-            EnderscapeMemory.HOME,
             EnderscapeMemory.HURT_BY_ENTITY,
             EnderscapeMemory.IS_PANICKING,
             EnderscapeMemory.IS_TEMPTED,
@@ -61,19 +60,7 @@ public class DrifterAI {
             EnderscapeSensors.NEAREST_PLAYERS
     );
 
-    public static GlobalPos getHome(AbstractDrifter mob) {
-        return mob.getBrain().getMemory(EnderscapeMemory.HOME).get();
-    }
-
-    public static void setHome(AbstractDrifter mob, GlobalPos value) {
-        if (mob.level() instanceof ServerLevel level) {
-            level.getPoiManager().getType(value.pos()).ifPresent(type -> {
-                level.getPoiManager().take(poi -> poi.is(EnderscapePoiTags.DRIFTER_HOME), (type2, pos) -> pos.equals(value.pos()), value.pos(), 1);
-                level.debugSynchronizers().updatePoi(value.pos());
-            });
-        }
-        mob.getBrain().setMemory(EnderscapeMemory.HOME, value);
-    }
+    public static final int HOME_RADIUS = 64;
 
     public static Brain<?> makeBrain(Brain<AbstractDrifter> brain) {
         initCoreActivity(brain);
@@ -118,7 +105,7 @@ public class DrifterAI {
             Pair.of(8, new RunOne<>(
                     ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
                     ImmutableList.of(
-                            Pair.of(DrifterWanderAround.create(), 3),
+                            Pair.of(RandomStroll.fly(1.0F), 3),
                             Pair.of(new DoNothing(30, 60), 3)
                         )
                     )

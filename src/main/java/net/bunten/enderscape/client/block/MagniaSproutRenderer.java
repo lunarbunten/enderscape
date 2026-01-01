@@ -1,11 +1,11 @@
 package net.bunten.enderscape.client.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.block.MagniaSproutBlock;
 import net.bunten.enderscape.block.MagniaSproutBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShapeRenderer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -17,10 +17,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
+import static net.bunten.enderscape.client.registry.EnderscapeDebugScreenEntries.MAGNIA_SPROUT_RANGE;
+
 @Environment(EnvType.CLIENT)
 public class MagniaSproutRenderer implements BlockEntityRenderer<MagniaSproutBlockEntity, MagniaSproutState> {
 
     public MagniaSproutRenderer(BlockEntityRendererProvider.Context context) {}
+
+    private final Minecraft minecraft = Minecraft.getInstance();
 
     @Override
     public MagniaSproutState createRenderState() {
@@ -41,7 +45,7 @@ public class MagniaSproutRenderer implements BlockEntityRenderer<MagniaSproutBlo
 
     @Override
     public void submit(MagniaSproutState state, PoseStack pose, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
-        if (EnderscapeConfig.getInstance().debugMagniaSproutHitboxes) {
+        if (minecraft.debugEntries.isCurrentlyEnabled(MAGNIA_SPROUT_RANGE)) {
             if (state.range == null) return;
             submitNodeCollector.submitCustomGeometry(pose, RenderType.lines(), (pose1, vertexConsumer) -> {
                 ShapeRenderer.renderLineBox(pose1, vertexConsumer, state.range, (float) state.color.x, (float) state.color.y, (float) state.color.z, state.intensity);

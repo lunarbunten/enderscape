@@ -5,13 +5,20 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 
 public class EnderscapeItemTags {
 
-    public static final TagKey<Item> WEAK_MAGNETISM_WHEN_WORN = register("weak_magnetism_when_worn");
-    public static final TagKey<Item> AVERAGE_MAGNETISM_WHEN_WORN = register("medium_magnetism_when_worn");
-    public static final TagKey<Item> STRONG_MAGNETISM_WHEN_WORN = register("strong_magnetism_when_worn");
+    public static final TagKey<Item> DAGGER_ENCHANTABLE = register("enchantable/dagger");
+    public static final TagKey<Item> ELYTRA_ENCHANTABLE = register("enchantable/elytra");
+    public static final TagKey<Item> MAGNIA_ATTRACTOR_ENCHANTABLE = register("enchantable/magnia_attractor");
+    public static final TagKey<Item> MIRROR_ENCHANTABLE = register("enchantable/mirror");
+    public static final TagKey<Item> NEBULITE_TOOL_ENCHANTABLE = register("enchantable/nebulite_tool");
+
+    public static final TagKey<Item> SWEEPING_EDGE_INCOMPATIBLE = register("incompatible/sweeping_edge");
+
+    public static final TagKey<Item> WEAK_MAGNIA_STRENGTH = register("magnia_strength/weak");
+    public static final TagKey<Item> AVERAGE_MAGNIA_STRENGTH = register("magnia_strength/medium");
+    public static final TagKey<Item> STRONG_MAGNIA_STRENGTH = register("magnia_strength/strong");
 
     public static final TagKey<Item> ALL_ETCHED_MAGNIA_BLOCKS = register("all_etched_magnia_blocks");
     public static final TagKey<Item> CELESTIAL_BRICK_BLOCKS = register("celestial_brick_blocks");
@@ -21,28 +28,25 @@ public class EnderscapeItemTags {
     public static final TagKey<Item> CHANTERELLE_CAP_BLOCKS = register("chanterelle_cap_blocks");
     public static final TagKey<Item> DRIFTER_FOOD = register("drifter_food");
     public static final TagKey<Item> DUSK_PURPUR_BLOCKS = register("dusk_purpur_blocks");
-    public static final TagKey<Item> ELYTRA_ENCHANTABLE = register("enchantable/elytra");
     public static final TagKey<Item> END_ORE_BLOCKS = register("end_ore_blocks");
     public static final TagKey<Item> ETCHED_ALLURING_MAGNIA_BLOCKS = register("etched_alluring_magnia_blocks");
     public static final TagKey<Item> ETCHED_REPULSIVE_MAGNIA_BLOCKS = register("etched_repulsive_magnia_blocks");
     public static final TagKey<Item> KURODITE_BLOCKS = register("kurodite_blocks");
-    public static final TagKey<Item> MAGNIA_ATTRACTOR_ENCHANTABLE = register("enchantable/magnia_attractor");
     public static final TagKey<Item> MAGNIA_BLOCKS = register("magnia_blocks");
     public static final TagKey<Item> MAGNIA_SPROUTS = register("magnia_sprouts");
     public static final TagKey<Item> MIRESTONE_BLOCKS = register("mirestone_blocks");
-    public static final TagKey<Item> MIRROR_ENCHANTABLE = register("enchantable/mirror");
     public static final TagKey<Item> MURUBLIGHT_BRICK_BLOCKS = register("murublight_brick_blocks");
     public static final TagKey<Item> MURUBLIGHT_STEMS = register("murublight_stems");
     public static final TagKey<Item> MURUBLIGHT_WOOD_ITEMS = register("murublight_wood_items");
     public static final TagKey<Item> NEBULITE_TOOLS = register("nebulite_tools");
-    public static final TagKey<Item> NEBULITE_TOOL_ENCHANTABLE = register("enchantable/nebulite_tool");
+    public static final TagKey<Item> NEBULITE_TOOL_FUELS = register("nebulite_tool_fuels");
     public static final TagKey<Item> NEW_END_STONE_BLOCKS = register("new_end_stone_blocks");
     public static final TagKey<Item> NEW_PURPUR_BLOCKS = register("new_purpur_blocks");
     public static final TagKey<Item> OVERGROWTH_BLOCKS = register("overgrowth_blocks");
-    public static final TagKey<Item> POWERS_MAGNIA_WHEN_MINED_WITH = register("powers_magnia_when_mined_with");
     public static final TagKey<Item> PURPUR_TILE_BLOCKS = register("purpur_tile_blocks");
     public static final TagKey<Item> REPAIRS_DRIFT_LEGGINGS = register("repairs_drift_leggings");
     public static final TagKey<Item> REPAIRS_RUBBLE_SHIELDS = register("repairs_rubble_shields");
+    public static final TagKey<Item> REPAIRS_SHADOLINE_ARMOR = register("repairs_shadoline_armor");
     public static final TagKey<Item> RUBBLE_SHIELDS = register("rubble_shields");
     public static final TagKey<Item> RUSTLE_FOOD = register("rustle_food");
     public static final TagKey<Item> SHADOLINE_BLOCKS = register("shadoline_blocks");

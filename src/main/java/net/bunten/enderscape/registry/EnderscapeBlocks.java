@@ -335,13 +335,62 @@ public class EnderscapeBlocks {
     public static final Block SHADOLINE_BLOCK_SLAB = register(true, "shadoline_block_slab", SlabBlock::new, Properties.ofLegacyCopy(SHADOLINE_BLOCK));
     public static final Block SHADOLINE_BLOCK_WALL = register(true, "shadoline_block_wall", WallBlock::new, Properties.ofLegacyCopy(SHADOLINE_BLOCK));
 
-    public static final Block CUT_SHADOLINE = register(true, "cut_shadoline", Block::new, Properties.ofLegacyCopy(SHADOLINE_BLOCK).sound(EnderscapeSoundTypes.CUT_SHADOLINE));
+    public static final Block CUT_SHADOLINE = register(true, "cut_shadoline", Block::new, Properties.ofLegacyCopy(SHADOLINE_BLOCK).sound(EnderscapeSoundTypes.SHADOLINE));
     public static final Block CUT_SHADOLINE_STAIRS = registerStair("cut_shadoline_stairs", CUT_SHADOLINE);
     public static final Block CUT_SHADOLINE_SLAB = register(true, "cut_shadoline_slab", SlabBlock::new, Properties.ofLegacyCopy(CUT_SHADOLINE));
     public static final Block CUT_SHADOLINE_WALL = register(true, "cut_shadoline_wall", WallBlock::new, Properties.ofLegacyCopy(CUT_SHADOLINE));
 
     public static final Block CHISELED_SHADOLINE = register(true, "chiseled_shadoline", Block::new, Properties.ofLegacyCopy(CUT_SHADOLINE));
     public static final Block SHADOLINE_PILLAR = register(true, "shadoline_pillar", RotatedPillarBlock::new, Properties.ofLegacyCopy(SHADOLINE_BLOCK));
+
+    public static final Block SHADOLINE_BARS = register(
+            true,
+            "shadoline_bars",
+            IronBarsBlock::new,
+            BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(6.0F, 9.0F).sound(EnderscapeSoundTypes.SHADOLINE).noOcclusion()
+    );
+
+    public static final Block SHADOLINE_CHAIN = register(
+            true,
+            "shadoline_chain",
+            ChainBlock::new,
+            BlockBehaviour.Properties.of().forceSolidOn().requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(SoundType.CHAIN).noOcclusion()
+    );
+
+    public static final Block VOID_TORCH = register(
+            false,
+            "void_torch",
+            properties -> new TorchBlock(EnderscapeParticles.VOID_FIRE_FLAME, properties),
+            BlockBehaviour.Properties.of().noCollision().instabreak().lightLevel(state -> 12).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY)
+    );
+
+    public static final Block VOID_WALL_TORCH = register(
+            false,
+            "void_wall_torch",
+            properties -> new WallTorchBlock(EnderscapeParticles.VOID_FIRE_FLAME, properties),
+            wallVariant(VOID_TORCH, true).noCollision().instabreak().lightLevel(state -> 12).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY)
+    );
+
+    public static final Block VOID_LANTERN = register(
+            true,
+            "void_lantern",
+            LanternBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.TERRACOTTA_GREEN)
+                    .forceSolidOn()
+                    .strength(3.5F)
+                    .sound(SoundType.LANTERN)
+                    .lightLevel(state -> 12)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)
+    );
+
+    public static final Block VOID_CAMPFIRE = register(
+            true,
+            "void_campfire",
+            properties -> new CampfireBlock(false, 1, properties),
+            BlockBehaviour.Properties.of().mapColor(MapColor.PODZOL).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).lightLevel(litBlockEmission(12)).noOcclusion().ignitedByLava()
+    );
 
     public static final Block NEBULITE_ORE = register(true, "nebulite_ore", NebuliteOreBlock::new, Properties.ofFullCopy(END_STONE).sound(EnderscapeSoundTypes.NEBULITE_ORE).randomTicks());
     public static final Block MIRESTONE_NEBULITE_ORE = register(true, "mirestone_nebulite_ore", NebuliteOreBlock::new, Properties.ofFullCopy(MIRESTONE).sound(EnderscapeSoundTypes.MIRESTONE_NEBULITE_ORE).randomTicks());

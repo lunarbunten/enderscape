@@ -28,11 +28,13 @@ public class EnderscapeEntityTagProvider extends FabricTagProvider.EntityTypeTag
         valueLookupBuilder(CREATES_VOID_PARTICLES_UPON_DEATH).add(ENDERMAN, ENDERMITE, RUBBLEMITE);
         valueLookupBuilder(DRIFTERS).add(DRIFTER, DRIFTLET);
         valueLookupBuilder(DRIFTERS_INTIMIDATED_BY).add(RUBBLEMITE, SLIME);
+        valueLookupBuilder(EXEMPT_FROM_MAGNIA_ATTRACTOR_ABUSE_COST).add(EXPERIENCE_ORB);
+        valueLookupBuilder(PULLED_BY_MAGNIA_ATTRACTOR).add(ITEM, EXPERIENCE_ORB);
         valueLookupBuilder(RUBBLEMITE_HOSTILE_TOWARDS).add(IRON_GOLEM);
 
         valueLookupBuilder(EntityTypeTags.ARTHROPOD).add(RUBBLEMITE);
         valueLookupBuilder(EntityTypeTags.FALL_DAMAGE_IMMUNE).addTag(DRIFTERS);
-        valueLookupBuilder(EntityTypeTags.POWDER_SNOW_WALKABLE_MOBS).add(RUBBLEMITE);
+        valueLookupBuilder(EntityTypeTags.FOLLOWABLE_FRIENDLY_MOBS).add(DRIFTER);
 
         valueLookupBuilder(externalKey("supplementaries", "ash_blacklist")).add(ENDERMAN, ENDERMITE, ENDER_DRAGON, SHULKER, RUBBLEMITE).addTag(DRIFTERS);
     }

@@ -1,0 +1,7 @@
+{
+    "parent": "minecraft:block/template_bars_side",
+    "textures": {
+        "bars": "enderscape:block/shadoline_bars",
+        "edge": "enderscape:block/shadoline_bars"
+    }
+}

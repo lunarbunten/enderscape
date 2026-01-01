@@ -1,7 +1,10 @@
 package net.bunten.enderscape.client.registry;
 
 import net.bunten.enderscape.client.EnderscapeClient;
-import net.bunten.enderscape.client.hud.*;
+import net.bunten.enderscape.client.hud.HudElement;
+import net.bunten.enderscape.client.hud.LodestoneTeleportationScreenEffect;
+import net.bunten.enderscape.client.hud.FueledToolHud;
+import net.bunten.enderscape.client.hud.StareScreenEffect;
 
 import java.util.Objects;
 
@@ -17,9 +20,8 @@ public class EnderscapeHudElements {
     }
 
     static {
-        EnderscapeHudElements.register(new DebugHud());
-        EnderscapeHudElements.register(new MirrorScreenEffect());
-        EnderscapeHudElements.register(new NebuliteToolHud());
+        EnderscapeHudElements.register(new LodestoneTeleportationScreenEffect());
+        EnderscapeHudElements.register(new FueledToolHud());
         EnderscapeHudElements.register(new StareScreenEffect());
     }
 }

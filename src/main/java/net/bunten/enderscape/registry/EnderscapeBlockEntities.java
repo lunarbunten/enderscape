@@ -1,8 +1,8 @@
 package net.bunten.enderscape.registry;
 
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.block.MagniaSproutBlockEntity;
 import net.bunten.enderscape.block.MagniaRadioBlockEntity;
+import net.bunten.enderscape.block.MagniaSproutBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;

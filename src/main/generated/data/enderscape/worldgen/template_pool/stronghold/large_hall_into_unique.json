@@ -1,0 +1,153 @@
+{
+  "elements": [
+    {
+      "element": {
+        "count": 1,
+        "delegate": {
+          "element_type": "minecraft:single_pool_element",
+          "location": "enderscape:stronghold/end_portal",
+          "processors": "enderscape:stronghold/portal_room_degradation",
+          "projection": "rigid"
+        },
+        "element_type": "lithostitched:guaranteed"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/monster_room/fabric",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/monster_room/forge",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/monster_room/mansion",
+        "processors": "enderscape:stronghold/library_degradation",
+        "projection": "rigid"
+      },
+      "weight": 120
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/monster_room/silverfish_spawner",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/large_hall/broken_floor",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 40
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/large_hall/split_left",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/large_hall/split_left_chests1",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 20
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/large_hall/split_left_chests2",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 20
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/large_hall/split_left_chest",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 60
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/large_hall/split_right",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/large_hall/split_right_chests1",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 20
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/large_hall/split_right_chests2",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 20
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/large_hall/split_right_chest",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 60
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/large_hall/thin",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/large_hall/thin_chest",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 60
+    }
+  ],
+  "fallback": "enderscape:stronghold/large_hall_fallback"
+}

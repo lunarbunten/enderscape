@@ -31,6 +31,9 @@ public class EnderscapeMemory extends MemoryModuleType<Object> {
 
     // Rubblemite
 
+    public static final MemoryModuleType<Boolean> RUBBLEMITE_PREPARING_DASH = register("rubblemite_preparing_dash", Codec.BOOL);
+    public static final MemoryModuleType<Integer> RUBBLEMITE_PREPARING_DASH_TIME = register("rubblemite_preparing_dash_time", Codec.INT);
+
     public static final MemoryModuleType<Boolean> RUBBLEMITE_DASH_ON_COOLDOWN = register("rubblemite_dash_on_cooldown", Codec.BOOL);
     public static final MemoryModuleType<Boolean> RUBBLEMITE_HIDING_ON_COOLDOWN = register("rubblemite_hiding_on_cooldown", Codec.BOOL);
     public static final MemoryModuleType<Integer> RUBBLEMITE_HIDING_DURATION = register("rubblemite_hiding_duration", Codec.INT);

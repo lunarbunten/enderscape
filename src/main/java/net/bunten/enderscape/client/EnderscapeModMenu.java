@@ -15,8 +15,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static net.bunten.enderscape.Enderscape.IS_DEBUG;
-
 @Environment(EnvType.CLIENT)
 public class EnderscapeModMenu implements ModMenuApi {
 
@@ -56,7 +54,9 @@ public class EnderscapeModMenu implements ModMenuApi {
 
         ConfigCategory.Builder main = ConfigCategory.createBuilder().name(Component.translatable("option.enderscape.category.serverside"));
 
+        addCreativeModeOptions(config, main);
         addDataPackOptions(config, main);
+        addLootTableOptions(config, main);
         addServersideAmbienceOptions(config, main);
         addServersideBlockOptions(config, main);
         addServersideEntityOptions(config, main);
@@ -69,66 +69,62 @@ public class EnderscapeModMenu implements ModMenuApi {
 
         ConfigCategory.Builder main = ConfigCategory.createBuilder().name(Component.translatable("option.enderscape.category.clientside"));
 
-        if (IS_DEBUG) addDebugOptions(config, main);
         addClientsideAmbienceOptions(config, main);
         addClientsideBlockOptions(config, main);
         addClientsideEntityOptions(config, main);
         addClientsideItemOptions(config, main);
-        if (!IS_DEBUG) addDebugOptions(config, main);
 
         return main.build();
     }
 
-    private static void addDebugOptions(EnderscapeConfig config, ConfigCategory.Builder builder) {
-        Option<?> debugHudEnabled = boolOption(
-                "debug_hud_enabled",
-                false,
-                () -> config.debugHudEnabled,
-                value -> config.debugHudEnabled = value,
-                TickBoxControllerBuilder::create
-        );
-
-        Option<?> debugHudClientInfo = boolOption(
-                "debug_hud_client_info",
+    private static void addCreativeModeOptions(EnderscapeConfig config, ConfigCategory.Builder builder) {
+        Option<?> creativeTabEnabled = boolOption(
+                "creative_tab_enabled",
                 true,
-                () -> config.debugHudClientInfo,
-                value -> config.debugHudClientInfo = value,
+                () -> config.creativeTabEnabled,
+                value -> config.creativeTabEnabled = value,
                 TickBoxControllerBuilder::create
         );
 
-        Option<?> debugHudMusicInfo = boolOption(
-                "debug_hud_music_info",
+        Option<?> includeItemsInVanillaCreativeTabs = boolOption(
+                "include_items_in_vanilla_creative_tabs",
                 true,
-                () -> config.debugHudMusicInfo,
-                value -> config.debugHudMusicInfo = value,
-                TickBoxControllerBuilder::create
-        );
-
-        Option<?> debugHudPlayerInfo = boolOption(
-                "debug_hud_player_info",
-                true,
-                () -> config.debugHudPlayerInfo,
-                value -> config.debugHudPlayerInfo = value,
-                TickBoxControllerBuilder::create
-        );
-
-        Option<?> debugMagniaSproutHitboxes = boolOption(
-                "debug_magnia_sprout_hitboxes",
-                false,
-                () -> config.debugMagniaSproutHitboxes,
-                value -> config.debugMagniaSproutHitboxes = value,
+                () -> config.includeItemsInVanillaCreativeTabs,
+                value -> config.includeItemsInVanillaCreativeTabs = value,
                 TickBoxControllerBuilder::create
         );
 
         builder.group(OptionGroup.createBuilder()
-                .name(Component.translatable("option.group.enderscape.debug"))
+                .name(Component.translatable("option.group.enderscape.creative_mode"))
 
-                .option(debugHudEnabled)
-                .option(debugHudClientInfo)
-                .option(debugHudMusicInfo)
-                .option(debugHudPlayerInfo)
-                .option(debugMagniaSproutHitboxes)
+                .option(creativeTabEnabled)
+                .option(includeItemsInVanillaCreativeTabs)
+                .build()
+        );
+    }
 
+    private static void addLootTableOptions(EnderscapeConfig config, ConfigCategory.Builder builder) {
+        Option<?> supplementVanillaStrongholdLibraryLoot = boolOption(
+                "supplement_vanilla_stronghold_library_loot",
+                true,
+                () -> config.supplementVanillaStrongholdLibraryLoot,
+                value -> config.supplementVanillaStrongholdLibraryLoot = value,
+                TickBoxControllerBuilder::create
+        );
+
+        Option<?> supplementVanillaEndCityTreasureLoot = boolOption(
+                "supplement_vanilla_end_city_treasure_loot",
+                true,
+                () -> config.supplementVanillaEndCityTreasureLoot,
+                value -> config.supplementVanillaEndCityTreasureLoot = value,
+                TickBoxControllerBuilder::create
+        );
+
+        builder.group(OptionGroup.createBuilder()
+                .name(Component.translatable("option.group.enderscape.loot_tables"))
+
+                .option(supplementVanillaStrongholdLibraryLoot)
+                .option(supplementVanillaEndCityTreasureLoot)
                 .build()
         );
     }
@@ -150,14 +146,6 @@ public class EnderscapeModMenu implements ModMenuApi {
                 TickBoxControllerBuilder::create
         );
 
-        Option<?> defaultDataPackNewEndCities = boolOption(
-                "default_data_pack_new_end_cities",
-                true,
-                () -> config.defaultDataPackNewEndCities,
-                value -> config.defaultDataPackNewEndCities = value,
-                TickBoxControllerBuilder::create
-        );
-
         Option<?> defaultDataPackNewTerrain = boolOption(
                 "default_data_pack_new_terrain",
                 true,
@@ -166,13 +154,30 @@ public class EnderscapeModMenu implements ModMenuApi {
                 TickBoxControllerBuilder::create
         );
 
+        Option<?> defaultDataPackNewEndCities = boolOption(
+                "default_data_pack_new_end_cities",
+                true,
+                () -> config.defaultDataPackNewEndCities,
+                value -> config.defaultDataPackNewEndCities = value,
+                TickBoxControllerBuilder::create
+        );
+
+        Option<?> defaultDataPackNewStrongholds = boolOption(
+                "default_data_pack_new_strongholds",
+                true,
+                () -> config.defaultDataPackNewStrongholds,
+                value -> config.defaultDataPackNewStrongholds = value,
+                TickBoxControllerBuilder::create
+        );
+
         builder.group(OptionGroup.createBuilder()
                 .name(Component.translatable("option.group.enderscape.data_packs"))
 
                 .option(defaultDataPackFixLevitationAdvancement)
                 .option(defaultDataPackFixVanillaRecipes)
-                .option(defaultDataPackNewEndCities)
                 .option(defaultDataPackNewTerrain)
+                .option(defaultDataPackNewEndCities)
+                .option(defaultDataPackNewStrongholds)
                 .build()
         );
     }
@@ -521,6 +526,14 @@ public class EnderscapeModMenu implements ModMenuApi {
                 TickBoxControllerBuilder::create
         );
 
+        Option<?> endermiteNaturalSpawnsObeyLightLevel = boolOption(
+                "endermite_natural_spawns_obey_light_level",
+                true,
+                () -> config.endermiteNaturalSpawnsObeyLightLevel,
+                value -> config.endermiteNaturalSpawnsObeyLightLevel = value,
+                TickBoxControllerBuilder::create
+        );
+
         Option<?> endermiteExpandHitRange = boolOption(
                 "endermite_expand_hit_range",
                 true,
@@ -599,11 +612,27 @@ public class EnderscapeModMenu implements ModMenuApi {
                 TickBoxControllerBuilder::create
         );
 
+        Option<?> silverfishDelayBeforeInfestingStone = boolOption(
+                "silverfish_delay_before_infesting_stone",
+                true,
+                () -> config.silverfishDelayBeforeInfestingStone,
+                value -> config.silverfishDelayBeforeInfestingStone = value,
+                TickBoxControllerBuilder::create
+        );
+
         Option<?> silverfishExpandHitRange = boolOption(
                 "silverfish_expand_hit_range",
                 true,
                 () -> config.silverfishExpandHitRange,
                 value -> config.silverfishExpandHitRange = value,
+                TickBoxControllerBuilder::create
+        );
+
+        Option<?> silverfishNaturalSpawnsObeyLightLevel = boolOption(
+                "silverfish_natural_spawns_obey_light_level",
+                true,
+                () -> config.silverfishNaturalSpawnsObeyLightLevel,
+                value -> config.silverfishNaturalSpawnsObeyLightLevel = value,
                 TickBoxControllerBuilder::create
         );
 
@@ -620,6 +649,7 @@ public class EnderscapeModMenu implements ModMenuApi {
 
                 .option(endermanStereoStareSound)
                 .option(endermiteExpandHitRange)
+                .option(endermiteNaturalSpawnsObeyLightLevel)
                 .option(endermiteUpdateSounds)
                 .option(rubblemiteExpandHitRange)
                 .option(shulkerBulletEnforceCountLimit)
@@ -628,7 +658,9 @@ public class EnderscapeModMenu implements ModMenuApi {
                 .option(shulkerBulletEnforceTimeLimit)
                 .option(shulkerBulletRebalanceLevitation)
                 .option(shulkerHurtByPiercing)
+                .option(silverfishDelayBeforeInfestingStone)
                 .option(silverfishExpandHitRange)
+                .option(silverfishNaturalSpawnsObeyLightLevel)
                 .option(voidPoofParticlesUponDeath)
 
                 .build()
@@ -875,11 +907,11 @@ public class EnderscapeModMenu implements ModMenuApi {
 
         Option<?> nebuliteToolHudOffset = intOption(
                 "nebulite_tool_hud_offset",
-                0,
+                13,
                 () -> config.nebuliteToolHudOffset,
                 value -> config.nebuliteToolHudOffset = value,
-                0,
-                50,
+                -25,
+                25,
                 1
         );
 

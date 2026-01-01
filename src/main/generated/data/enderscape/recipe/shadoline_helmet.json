@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "enderscape:rubble_chitin",
+    "X": "enderscape:shadoline_ingot"
+  },
+  "pattern": [
+    "XXX",
+    "C C"
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:shadoline_helmet"
+  }
+}

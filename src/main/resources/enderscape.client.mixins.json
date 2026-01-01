@@ -15,6 +15,7 @@
         "GameRendererMixin",
         "LevelEventHandlerMixin",
         "LightTextureMixin",
+        "LocalPlayerMixin",
         "MinecraftMixin",
         "MusicManagerAccess",
         "MusicManagerMixin",

@@ -12,6 +12,8 @@ public class EnderscapeEntityTags {
     public static final TagKey<EntityType<?>> CREATES_VOID_PARTICLES_UPON_DEATH = register("creates_void_particles_upon_death");
     public static final TagKey<EntityType<?>> DRIFTERS = register("drifters");
     public static final TagKey<EntityType<?>> DRIFTERS_INTIMIDATED_BY = register("drifters_intimidated_by");
+    public static final TagKey<EntityType<?>> EXEMPT_FROM_MAGNIA_ATTRACTOR_ABUSE_COST = register("exempt_from_magnia_attractor_abuse_cost");
+    public static final TagKey<EntityType<?>> PULLED_BY_MAGNIA_ATTRACTOR = register("pulled_by_magnia_attractor");
     public static final TagKey<EntityType<?>> RUBBLEMITE_HOSTILE_TOWARDS = register("rubblemite_hostile_towards");
 
     private static TagKey<EntityType<?>> register(String name) {

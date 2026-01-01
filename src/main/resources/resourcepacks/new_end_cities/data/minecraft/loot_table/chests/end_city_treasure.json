@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "enderscape:end_city/chest"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

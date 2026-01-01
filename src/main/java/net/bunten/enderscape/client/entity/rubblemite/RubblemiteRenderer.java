@@ -16,6 +16,11 @@ public class RubblemiteRenderer extends MobRenderer<Rubblemite, RubblemiteRender
     }
 
     @Override
+    protected float getFlipDegrees() {
+        return 180.0F;
+    }
+
+    @Override
     public RubblemiteRenderState createRenderState() {
         return new RubblemiteRenderState();
     }
@@ -23,9 +28,12 @@ public class RubblemiteRenderer extends MobRenderer<Rubblemite, RubblemiteRender
     @Override
     public void extractRenderState(Rubblemite mob, RubblemiteRenderState state, float f) {
         super.extractRenderState(mob, state, f);
-        state.insideShell = mob.isInsideShell();
         state.isDashing = mob.isDashing();
         state.texture = mob.getTexture();
+
+        state.insideShellAnimationState.copyFrom(mob.insideShellAnimationState);
+        state.prepareDashAnimationState.copyFrom(mob.prepareDashAnimationState);
+        state.dashAnimationState.copyFrom(mob.dashAnimationState);
     }
 
     @Override

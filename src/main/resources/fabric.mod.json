@@ -13,15 +13,15 @@
   ],
   "contact": {
     "homepage": "https://modrinth.com/mod/enderscape",
-    "sources": "https://github.com/they-made-enderscape/enderscape",
-    "issues": "https://github.com/they-made-enderscape/enderscape/issues"
+    "sources": "https://github.com/Penumbra-MC/Enderscape",
+    "issues": "https://github.com/Penumbra-MC/Enderscape/issues"
   },
   "custom": {
     "modmenu": {
       "links": {
-        "enderscape.external_link.credits": "https://github.com/they-made-enderscape/enderscape/wiki/credits",
+        "enderscape.external_link.credits": "https://github.com/Penumbra-MC/Enderscape/wiki/credits",
         "enderscape.external_link.discord": "https://discord.gg/bksj9aqqgb",
-        "enderscape.external_link.wiki": "https://github.com/they-made-enderscape/enderscape/wiki"
+        "enderscape.external_link.wiki": "https://github.com/Penumbra-MC/Enderscape/wiki"
       }
     }
   },
@@ -54,6 +54,7 @@
     "fabricloader": ">=0.17.0",
     "fabric": ">=0.127.0",
     "mixson": ">=1.3.1",
+    "lithostitched": ">=1.5.2",
     "yet_another_config_lib_v3": ">=3.6.6"
   },
   "accessWidener": "enderscape.accesswidener"

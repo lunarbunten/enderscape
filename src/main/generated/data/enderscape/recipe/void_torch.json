@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:stick",
+    "V": "enderscape:void_shale"
+  },
+  "pattern": [
+    "V",
+    "#"
+  ],
+  "result": {
+    "count": 4,
+    "id": "enderscape:void_torch"
+  }
+}
