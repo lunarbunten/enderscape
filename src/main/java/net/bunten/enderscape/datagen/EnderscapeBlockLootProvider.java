@@ -13,7 +13,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -111,7 +110,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
 
         dropSelf(VEILED_PLANKS);
         dropSelf(VEILED_STAIRS);
-        dropSelf(VEILED_SLAB);
+        add(VEILED_SLAB, this::createSlabItemTable);
         dropSelf(VEILED_FENCE);
         dropSelf(VEILED_FENCE_GATE);
         add(VEILED_DOOR, this::createDoorTable);
@@ -130,19 +129,19 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(CELESTIAL_CAP);
         dropSelf(CELESTIAL_BRICKS);
         dropSelf(CELESTIAL_BRICK_STAIRS);
-        dropSelf(CELESTIAL_BRICK_SLAB);
+        add(CELESTIAL_BRICK_SLAB, this::createSlabItemTable);
         dropSelf(CELESTIAL_BRICK_WALL);
 
         dropSelf(DUSK_PURPUR_BLOCK);
         dropSelf(DUSK_PURPUR_PILLAR);
         dropSelf(DUSK_PURPUR_STAIRS);
-        dropSelf(DUSK_PURPUR_SLAB);
+        add(DUSK_PURPUR_SLAB, this::createSlabItemTable);
         dropSelf(DUSK_PURPUR_WALL);
         dropSelf(CHISELED_DUSK_PURPUR);
 
         dropSelf(PURPUR_TILES);
         dropSelf(PURPUR_TILE_STAIRS);
-        dropSelf(PURPUR_TILE_SLAB);
+        add(PURPUR_TILE_SLAB, this::createSlabItemTable);
 
         dropSelf(CELESTIAL_STEM);
         dropSelf(STRIPPED_CELESTIAL_STEM);
@@ -150,7 +149,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(STRIPPED_CELESTIAL_HYPHAE);
         dropSelf(CELESTIAL_PLANKS);
         dropSelf(CELESTIAL_STAIRS);
-        dropSelf(CELESTIAL_SLAB);
+        add(CELESTIAL_SLAB, this::createSlabItemTable);
         dropSelf(CELESTIAL_FENCE);
         dropSelf(CELESTIAL_FENCE_GATE);
         add(CELESTIAL_DOOR, this::createDoorTable);
@@ -171,7 +170,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(MURUBLIGHT_CAP);
         dropSelf(MURUBLIGHT_BRICKS);
         dropSelf(MURUBLIGHT_BRICK_STAIRS);
-        dropSelf(MURUBLIGHT_BRICK_SLAB);
+        add(MURUBLIGHT_BRICK_SLAB, this::createSlabItemTable);
         dropSelf(MURUBLIGHT_BRICK_WALL);
 
         dropSelf(MURUBLIGHT_STEM);
@@ -180,7 +179,7 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(STRIPPED_MURUBLIGHT_HYPHAE);
         dropSelf(MURUBLIGHT_PLANKS);
         dropSelf(MURUBLIGHT_STAIRS);
-        dropSelf(MURUBLIGHT_SLAB);
+        add(MURUBLIGHT_SLAB, this::createSlabItemTable);
         dropSelf(MURUBLIGHT_FENCE);
         dropSelf(MURUBLIGHT_FENCE_GATE);
         add(MURUBLIGHT_DOOR, this::createDoorTable);
@@ -203,12 +202,12 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
 
         dropSelf(ETCHED_ALLURING_MAGNIA);
         dropSelf(ETCHED_ALLURING_MAGNIA_STAIRS);
-        dropSelf(ETCHED_ALLURING_MAGNIA_SLAB);
+        add(ETCHED_ALLURING_MAGNIA_SLAB, this::createSlabItemTable);
         dropSelf(ETCHED_ALLURING_MAGNIA_WALL);
 
         dropSelf(ETCHED_REPULSIVE_MAGNIA);
         dropSelf(ETCHED_REPULSIVE_MAGNIA_STAIRS);
-        dropSelf(ETCHED_REPULSIVE_MAGNIA_SLAB);
+        add(ETCHED_REPULSIVE_MAGNIA_SLAB, this::createSlabItemTable);
         dropSelf(ETCHED_REPULSIVE_MAGNIA_WALL);
 
         dropSelf(MAGNIA_RADIO);
@@ -267,11 +266,11 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(RAW_SHADOLINE_BLOCK);
         dropSelf(SHADOLINE_BLOCK);
         dropSelf(SHADOLINE_BLOCK_STAIRS);
-        dropSelf(SHADOLINE_BLOCK_SLAB);
+        add(SHADOLINE_BLOCK_SLAB, this::createSlabItemTable);
         dropSelf(SHADOLINE_BLOCK_WALL);
         dropSelf(CUT_SHADOLINE);
         dropSelf(CUT_SHADOLINE_STAIRS);
-        dropSelf(CUT_SHADOLINE_SLAB);
+        add(CUT_SHADOLINE_SLAB, this::createSlabItemTable);
         dropSelf(CUT_SHADOLINE_WALL);
         dropSelf(CHISELED_SHADOLINE);
         dropSelf(SHADOLINE_PILLAR);
@@ -279,11 +278,11 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(SHADOLINE_CHAIN);
 
         dropSelf(END_STONE_STAIRS);
-        dropSelf(END_STONE_SLAB);
+        add(END_STONE_SLAB, this::createSlabItemTable);
         dropSelf(END_STONE_WALL);
         dropSelf(POLISHED_END_STONE);
         dropSelf(POLISHED_END_STONE_STAIRS);
-        dropSelf(POLISHED_END_STONE_SLAB);
+        add(POLISHED_END_STONE_SLAB, this::createSlabItemTable);
         dropSelf(POLISHED_END_STONE_WALL);
         dropSelf(POLISHED_END_STONE_BUTTON);
         dropSelf(POLISHED_END_STONE_PRESSURE_PLATE);
@@ -294,49 +293,49 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
 
         dropSelf(MIRESTONE);
         dropSelf(MIRESTONE_STAIRS);
-        dropSelf(MIRESTONE_SLAB);
+        add(MIRESTONE_SLAB, this::createSlabItemTable);
         dropSelf(MIRESTONE_WALL);
         dropSelf(POLISHED_MIRESTONE);
         dropSelf(POLISHED_MIRESTONE_STAIRS);
-        dropSelf(POLISHED_MIRESTONE_SLAB);
+        add(POLISHED_MIRESTONE_SLAB, this::createSlabItemTable);
         dropSelf(POLISHED_MIRESTONE_WALL);
         dropSelf(POLISHED_MIRESTONE_BUTTON);
         dropSelf(POLISHED_MIRESTONE_PRESSURE_PLATE);
         dropSelf(MIRESTONE_BRICKS);
         dropSelf(MIRESTONE_BRICK_STAIRS);
-        dropSelf(MIRESTONE_BRICK_SLAB);
+        add(MIRESTONE_BRICK_SLAB, this::createSlabItemTable);
         dropSelf(MIRESTONE_BRICK_WALL);
         dropSelf(CHISELED_MIRESTONE);
 
         dropSelf(VERADITE);
         dropSelf(VERADITE_STAIRS);
-        dropSelf(VERADITE_SLAB);
+        add(VERADITE_SLAB, this::createSlabItemTable);
         dropSelf(VERADITE_WALL);
         dropSelf(POLISHED_VERADITE);
         dropSelf(POLISHED_VERADITE_STAIRS);
-        dropSelf(POLISHED_VERADITE_SLAB);
+        add(POLISHED_VERADITE_SLAB, this::createSlabItemTable);
         dropSelf(POLISHED_VERADITE_WALL);
         dropSelf(POLISHED_VERADITE_BUTTON);
         dropSelf(POLISHED_VERADITE_PRESSURE_PLATE);
         dropSelf(VERADITE_BRICKS);
         dropSelf(VERADITE_BRICK_STAIRS);
-        dropSelf(VERADITE_BRICK_SLAB);
+        add(VERADITE_BRICK_SLAB, this::createSlabItemTable);
         dropSelf(VERADITE_BRICK_WALL);
         dropSelf(CHISELED_VERADITE);
 
         dropSelf(KURODITE);
         dropSelf(KURODITE_STAIRS);
-        dropSelf(KURODITE_SLAB);
+        add(KURODITE_SLAB, this::createSlabItemTable);
         dropSelf(KURODITE_WALL);
         dropSelf(POLISHED_KURODITE);
         dropSelf(POLISHED_KURODITE_STAIRS);
-        dropSelf(POLISHED_KURODITE_SLAB);
+        add(POLISHED_KURODITE_SLAB, this::createSlabItemTable);
         dropSelf(POLISHED_KURODITE_WALL);
         dropSelf(POLISHED_KURODITE_BUTTON);
         dropSelf(POLISHED_KURODITE_PRESSURE_PLATE);
         dropSelf(KURODITE_BRICKS);
         dropSelf(KURODITE_BRICK_STAIRS);
-        dropSelf(KURODITE_BRICK_SLAB);
+        add(KURODITE_BRICK_SLAB, this::createSlabItemTable);
         dropSelf(KURODITE_BRICK_WALL);
         dropSelf(CHISELED_KURODITE);
     }
