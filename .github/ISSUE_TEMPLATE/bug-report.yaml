@@ -1,0 +1,45 @@
+name: Bug Report
+description: File a bug report.
+title: ""
+labels: ["⚠️ bug"]
+type: bug
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      value: ""
+    validations:
+      required: true
+  - type: dropdown
+    id: modloader
+    attributes:
+      label: Mod Loader
+      options:
+        - Fabric
+        - NeoForge
+      default: 0
+    validations:
+      required: true
+  - type: dropdown
+    id: minecraftversion
+    attributes:
+      label: Minecraft Version
+      options:
+        - 1.21.1
+        - 1.21.10
+        - 1.21.11
+      default: 0
+    validations:
+      required: true
+  - type: input
+    id: enderscapeversion
+    attributes:
+      label: Enderscape Version
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Game Log / Crash Report
+      render: shell
