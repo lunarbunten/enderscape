@@ -369,6 +369,7 @@
     "item.enderscape.lodestone_teleportation.message.wrong_coordinate_scale": "Cannot align with Lodestone",
     "item.enderscape.lodestone_teleportation.message.wrong_dimension": "Cannot see Lodestone",
     "item.enderscape.magnia_attractor": "Magnia Attractor",
+    "item.enderscape.magnia_attractor.desc": "Attracts items and experience orbs when powered in any inventory slot",
     "item.enderscape.mirestone_rubble_shield": "Rubble Shield",
     "item.enderscape.mirestone_rubble_shield.desc": "Allows dashing by jumping when raised",
     "item.enderscape.mirror": "Mirror",
