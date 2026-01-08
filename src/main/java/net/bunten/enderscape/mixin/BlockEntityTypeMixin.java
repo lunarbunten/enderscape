@@ -35,8 +35,8 @@ public abstract class BlockEntityTypeMixin {
     @Inject(method = "isValid", at = @At("HEAD"), cancellable = true)
     private void isValid(BlockState state, CallbackInfoReturnable<Boolean> info) {
         if (state.getBlock() instanceof CampfireBlock && state.getBlock().equals(VOID_CAMPFIRE)) info.setReturnValue(true);
-        if (state.getBlock() instanceof ShelfBlock && VALID_SHELVES.contains(state.getBlock().builtInRegistryHolder().key().location())) info.setReturnValue(true);
-        if (state.getBlock() instanceof SignBlock sign && VALID_WOOD_TYPES.contains(ResourceLocation.tryParse(sign.type().name()))) info.setReturnValue(true);
+        if (state.getBlock() instanceof ShelfBlock && VALID_SHELVES != null && VALID_SHELVES.contains(state.getBlock().builtInRegistryHolder().key().location())) info.setReturnValue(true);
+        if (state.getBlock() instanceof SignBlock sign && VALID_WOOD_TYPES != null && VALID_WOOD_TYPES.contains(ResourceLocation.tryParse(sign.type().name()))) info.setReturnValue(true);
         if (state.getBlock() instanceof TrialSpawnerBlock && state.is(END_TRIAL_SPAWNER)) info.setReturnValue(true);
         if (state.getBlock() instanceof VaultBlock && state.is(END_VAULT)) info.setReturnValue(true);
     }
