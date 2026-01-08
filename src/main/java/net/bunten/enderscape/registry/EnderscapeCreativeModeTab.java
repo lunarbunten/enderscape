@@ -34,7 +34,6 @@ public class EnderscapeCreativeModeTab {
         output.accept(SHULKER_SPAWN_EGG);
         output.accept(RUSTLE_SPAWN_EGG);
         output.accept(DRIFTER_SPAWN_EGG);
-        output.accept(DRIFTLET_SPAWN_EGG);
 
         output.accept(DRAGON_BREATH);
         output.accept(RUBBLE_CHITIN);
@@ -608,7 +607,7 @@ public class EnderscapeCreativeModeTab {
 
             entries.addBefore(CREAKING_HEART, END_TRIAL_SPAWNER);
             entries.addAfter(ENDERMITE_SPAWN_EGG, RUBBLEMITE_SPAWN_EGG);
-            entries.addAfter(SHULKER_SPAWN_EGG, RUSTLE_SPAWN_EGG, DRIFTER_SPAWN_EGG, DRIFTLET_SPAWN_EGG);
+            entries.addAfter(SHULKER_SPAWN_EGG, RUSTLE_SPAWN_EGG, DRIFTER_SPAWN_EGG);
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.OP_BLOCKS).register(entries -> {

@@ -2,7 +2,7 @@ package net.bunten.enderscape.entity.ai.behavior;
 
 import com.google.common.collect.ImmutableMap;
 import net.bunten.enderscape.entity.ai.EnderscapeMemory;
-import net.bunten.enderscape.entity.drifter.AbstractDrifter;
+import net.bunten.enderscape.entity.drifter.Drifter;
 import net.bunten.enderscape.entity.drifter.DrifterAI;
 import net.bunten.enderscape.registry.tag.EnderscapePoiTags;
 import net.minecraft.core.BlockPos;
@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class DrifterRefreshHomePosition extends Behavior<AbstractDrifter> {
+public class DrifterRefreshHomePosition extends Behavior<Drifter> {
 
     private static final UniformInt NEXT_COOLDOWN_RANGE = UniformInt.of(60, 120);
 
@@ -32,29 +32,29 @@ public class DrifterRefreshHomePosition extends Behavior<AbstractDrifter> {
         super(ImmutableMap.of(EnderscapeMemory.DRIFTER_FIND_HOME_COOLDOWN, MemoryStatus.VALUE_ABSENT));
     }
 
-    protected int sampleNextCooldown(AbstractDrifter mob) {
+    protected int sampleNextCooldown(Drifter mob) {
         return NEXT_COOLDOWN_RANGE.sample(mob.getRandom()) * 20;
     }
 
-    protected void updateOtherDrifters(ServerLevel level, AbstractDrifter mob) {
-        level.getEntitiesOfClass(AbstractDrifter.class, new AABB(mob.blockPosition()).inflate(HORIZONTAL_UPDATE_RANGE, VERTICAL_UPDATE_RANGE, HORIZONTAL_UPDATE_RANGE)).forEach((other -> {
+    protected void updateOtherDrifters(ServerLevel level, Drifter mob) {
+        level.getEntitiesOfClass(Drifter.class, new AABB(mob.blockPosition()).inflate(HORIZONTAL_UPDATE_RANGE, VERTICAL_UPDATE_RANGE, HORIZONTAL_UPDATE_RANGE)).forEach((other -> {
             other.setHomeTo(mob.getHomePosition(), DrifterAI.HOME_RADIUS);
             other.getBrain().setMemory(EnderscapeMemory.DRIFTER_FIND_HOME_COOLDOWN, sampleNextCooldown(mob));
         }));
     }
 
-    protected List<BlockPos> findPossibleHomes(ServerLevel level, AbstractDrifter mob) {
+    protected List<BlockPos> findPossibleHomes(ServerLevel level, Drifter mob) {
         Stream<PoiRecord> stream = level.getPoiManager().getInRange(holder -> holder.is(EnderscapePoiTags.DRIFTER_HOME), mob.blockPosition(), MAX_HOME_SEARCH_DISTANCE, Occupancy.ANY);
         return stream.map(PoiRecord::getPos).collect(Collectors.toList());
     }
 
-    protected Optional<BlockPos> findNewHome(ServerLevel level, AbstractDrifter mob) {
+    protected Optional<BlockPos> findNewHome(ServerLevel level, Drifter mob) {
         List<BlockPos> possibles = findPossibleHomes(level, mob);
         return possibles.isEmpty() ? Optional.empty() : possibles.stream().findAny();
     }
 
     @Override
-    protected void start(ServerLevel level, AbstractDrifter mob, long l) {
+    protected void start(ServerLevel level, Drifter mob, long l) {
         Optional<BlockPos> newHome = findNewHome(level, mob);
         newHome.ifPresent((pos) -> {
             mob.setHomeTo(pos, DrifterAI.HOME_RADIUS);

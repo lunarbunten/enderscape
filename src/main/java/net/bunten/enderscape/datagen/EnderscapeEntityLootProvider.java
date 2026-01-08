@@ -52,11 +52,6 @@ public class EnderscapeEntityLootProvider extends SimpleFabricLootTableProvider 
             );
 
             consumer.accept(
-                    getLootTable(DRIFTLET),
-                    LootTable.lootTable()
-            );
-
-            consumer.accept(
                     getLootTable(RUBBLEMITE),
                     LootTable.lootTable()
                             .withPool(

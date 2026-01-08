@@ -2,14 +2,13 @@ package net.bunten.enderscape.entity.ai.behavior;
 
 import com.google.common.collect.ImmutableMap;
 import net.bunten.enderscape.entity.ai.EnderscapeMemory;
-import net.bunten.enderscape.entity.drifter.AbstractDrifter;
 import net.bunten.enderscape.entity.drifter.Drifter;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
-public class DrifterStartOrStopLeakingJelly extends Behavior<AbstractDrifter> {
+public class DrifterStartOrStopLeakingJelly extends Behavior<Drifter> {
 
     public DrifterStartOrStopLeakingJelly() {
         super(ImmutableMap.of(EnderscapeMemory.DRIFTER_JELLY_CHANGE_COOLDOWN, MemoryStatus.VALUE_ABSENT));
@@ -22,15 +21,13 @@ public class DrifterStartOrStopLeakingJelly extends Behavior<AbstractDrifter> {
     }
     
     @Override
-    protected boolean checkExtraStartConditions(ServerLevel level, AbstractDrifter mob) {
-        return mob instanceof Drifter;
+    protected boolean checkExtraStartConditions(ServerLevel level, Drifter mob) {
+        return !mob.isBaby();
     }
 
     @Override
-    protected void start(ServerLevel level, AbstractDrifter mob, long l) {
-        if (mob instanceof Drifter drifter) {
-            drifter.setDrippingJelly(!drifter.isDrippingJelly());
-            refreshCooldown(drifter);
-        }
+    protected void start(ServerLevel level, Drifter mob, long l) {
+        mob.setDrippingJelly(!mob.isDrippingJelly());
+        refreshCooldown(mob);
     }
 }
