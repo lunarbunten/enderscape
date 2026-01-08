@@ -2,34 +2,30 @@ package net.bunten.enderscape.client.entity.drifter;
 
 import com.google.common.collect.ImmutableList;
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.client.registry.EnderscapeEntityRenderData;
+import net.bunten.enderscape.client.registry.EnderscapeModelLayers;
 import net.bunten.enderscape.entity.drifter.Drifter;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
-import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.AgeableMobRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.HitboxRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.AABB;
 
-@Environment(EnvType.CLIENT)
-public class DrifterRenderer extends MobRenderer<Drifter, DrifterRenderState, DrifterModel> {
+public class DrifterRenderer extends AgeableMobRenderer<Drifter, DrifterRenderState, DrifterModel> {
 
-    public DrifterRenderer(Context context) {
-        super(context, new DrifterModel(EnderscapeEntityRenderData.DRIFTER.bakeLayer(context)), 1);
+    public static final ResourceLocation DRIFTER_TEXTURE = Enderscape.id("textures/entity/drifter/drifter.png");
+    public static final ResourceLocation DRIFTLET_TEXTURE = Enderscape.id("textures/entity/drifter/driftlet.png");
+
+    public DrifterRenderer(EntityRendererProvider.Context context) {
+        super(context, new DrifterModel(context.bakeLayer(EnderscapeModelLayers.DRIFTER)), new DrifterModel(context.bakeLayer(EnderscapeModelLayers.DRIFTLET)), 1.0F);
         addLayer(new DrifterJellyLayer(this));
     }
 
     @Override
     public DrifterRenderState createRenderState() {
         return new DrifterRenderState();
-    }
-
-    @Override
-    protected int getBlockLightLevel(Drifter mob, BlockPos pos) {
-        return Math.max(3, super.getBlockLightLevel(mob, pos));
     }
 
     @Override
@@ -67,6 +63,16 @@ public class DrifterRenderer extends MobRenderer<Drifter, DrifterRenderState, Dr
 
     @Override
     public ResourceLocation getTextureLocation(DrifterRenderState state) {
-        return Enderscape.id("textures/entity/drifter/drifter.png");
+        return state.isBaby ? DRIFTLET_TEXTURE : DRIFTER_TEXTURE;
+    }
+
+    @Override
+    protected int getBlockLightLevel(Drifter mob, BlockPos pos) {
+        return Math.max(3, super.getBlockLightLevel(mob, pos));
+    }
+
+    @Override
+    protected RenderType getRenderType(DrifterRenderState mob, boolean showBody, boolean translucent, boolean showOutline) {
+        return showBody ? RenderType.entityTranslucent(getTextureLocation(mob)) : super.getRenderType(mob, showBody, translucent, showOutline);
     }
 }

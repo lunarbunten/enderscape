@@ -87,10 +87,6 @@ public class RustleModel extends EntityModel<RustleRenderState> {
 
 		sleepingAnimation.apply(state.sleepingAnimationState, age);
 
-		head.xScale = state.isBaby ? 1.25F : 1;
-		head.yScale = state.isBaby ? 1.25F : 1;
-		head.zScale = state.isBaby ? 1.25F : 1;
-
-		crossSpines.visible = !state.isBaby && !state.isSheared;
+		crossSpines.visible = !state.isSheared;
     }
 }

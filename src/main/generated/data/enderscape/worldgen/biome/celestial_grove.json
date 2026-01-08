@@ -81,12 +81,6 @@
         "maxCount": 6,
         "minCount": 3,
         "weight": 6
-      },
-      {
-        "type": "enderscape:driftlet",
-        "maxCount": 3,
-        "minCount": 2,
-        "weight": 2
       }
     ],
     "misc": [],

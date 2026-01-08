@@ -1,7 +1,10 @@
 package net.bunten.enderscape.entity.ai;
 
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.entity.ai.sensing.*;
+import net.bunten.enderscape.entity.ai.sensing.NearestEnemiesSensor;
+import net.bunten.enderscape.entity.ai.sensing.NearestIntimidatorSensor;
+import net.bunten.enderscape.entity.ai.sensing.RustleNearestFoodSensor;
+import net.bunten.enderscape.entity.ai.sensing.RustleNearestSleepingSpotSensor;
 import net.bunten.enderscape.entity.drifter.DrifterAI;
 import net.bunten.enderscape.entity.rustle.RustleAI;
 import net.bunten.enderscape.registry.tag.EnderscapeEntityTags;
@@ -22,7 +25,6 @@ public class EnderscapeSensors extends SensorType<DummySensor> {
 
     // Drifter
 
-    public static final SensorType<AdultDrifterSensor> NEAREST_ADULT_DRIFTER = register("nearest_adult_drifter", AdultDrifterSensor::new);
     public static final SensorType<NearestIntimidatorSensor> NEAREST_INTIMIDATOR = register("nearest_intimidator", NearestIntimidatorSensor::new);
     public static final SensorType<TemptingSensor> DRIFTER_TEMPTATIONS = register("drifter_temptations", () -> new TemptingSensor(DrifterAI.getTemptations()));
 
