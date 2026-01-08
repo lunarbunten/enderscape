@@ -1,0 +1,14 @@
+name: Feature
+description: Suggest a new feature.
+labels: ["💫 enhancement"]
+type: feature
+body:
+  - type: markdown
+    attributes:
+      value: "Please understand Enderscape has a specific vision and design philosphy, and conflicting suggestions may not be accepted."
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+    validations:
+      required: true
