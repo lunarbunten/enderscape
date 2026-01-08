@@ -36,7 +36,8 @@ public class EnderscapeSoundEventTagProvider extends FabricTagProvider<SoundEven
         );
 
         tag(STRUCTURE_MUSIC).add(
-                EnderscapeMusic.STRUCTURE_END_CITY.sound().unwrapKey().get()
+                EnderscapeMusic.STRUCTURE_END_CITY.sound().unwrapKey().get(),
+                EnderscapeMusic.STRUCTURE_STRONGHOLD.sound().unwrapKey().get()
         );
     }
 }
