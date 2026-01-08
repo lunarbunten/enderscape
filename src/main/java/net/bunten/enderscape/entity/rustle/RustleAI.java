@@ -117,7 +117,7 @@ public class RustleAI {
                 Pair.of(0, new AnimalMakeLove(EnderscapeEntities.RUSTLE, 1.25F, 1)),
                 Pair.of(1, new FollowTemptation(mob -> 1.25F)),
                 Pair.of(2, new RustleEatWhenSheared(1.25F)),
-                Pair.of(3, BabyFollowAdult.create(UniformInt.of(2, 16), 1.25F)),
+                Pair.of(3, BabyFollowAdult.create(UniformInt.of(1, 4), 1.25F)),
                 Pair.of(4, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 1.5F, UniformInt.of(30, 60))),
                 Pair.of(8, new RunOne<>(
                         ImmutableMap.of(EnderscapeMemory.WALK_TARGET, MemoryStatus.VALUE_ABSENT, EnderscapeMemory.HURT_BY_ENTITY, MemoryStatus.VALUE_ABSENT),

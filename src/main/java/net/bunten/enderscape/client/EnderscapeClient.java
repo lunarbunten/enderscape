@@ -61,7 +61,8 @@ public class EnderscapeClient implements ClientModInitializer {
         Reflection.initialize(
                 EnderscapeClientNetworking.class,
                 EnderscapeParticleProviders.class,
-                EnderscapeEntityRenderData.class,
+                EnderscapeModelLayers.class,
+                EnderscapeEntityRenderers.class,
                 EnderscapeBlockRenderLayerMap.class,
                 EnderscapeBlockColorProviders.class,
                 EnderscapeHudElements.class

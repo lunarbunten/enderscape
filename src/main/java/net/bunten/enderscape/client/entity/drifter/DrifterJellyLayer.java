@@ -12,16 +12,17 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
 public class DrifterJellyLayer extends RenderLayer<Drifter, DrifterModel> {
+
     public DrifterJellyLayer(RenderLayerParent<Drifter, DrifterModel> parent) {
         super(parent);
     }
 
-    private final ResourceLocation JELLY_LAYER_TEXTURE = Enderscape.id("textures/entity/drifter/jelly.png");
+    private final ResourceLocation JELLY_OVERLAY = Enderscape.id("textures/entity/drifter/jelly.png");
 
     @Override
     public void render(PoseStack pose, MultiBufferSource source, int i, Drifter mob, float f, float g, float h, float j, float k, float l) {
         if (mob.isDrippingJelly()) {
-            VertexConsumer vertex = source.getBuffer(RenderType.entityCutoutNoCull(JELLY_LAYER_TEXTURE));
+            VertexConsumer vertex = source.getBuffer(RenderType.entityCutoutNoCull(JELLY_OVERLAY));
             getParentModel().renderToBuffer(pose, vertex, i, OverlayTexture.NO_OVERLAY);
         }
     }

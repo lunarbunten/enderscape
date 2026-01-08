@@ -4,9 +4,7 @@ import com.google.common.reflect.Reflection;
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.entity.ai.EnderscapeMemory;
 import net.bunten.enderscape.entity.ai.EnderscapeSensors;
-import net.bunten.enderscape.entity.drifter.AbstractDrifter;
 import net.bunten.enderscape.entity.drifter.Drifter;
-import net.bunten.enderscape.entity.drifter.Driftlet;
 import net.bunten.enderscape.entity.rubblemite.Rubblemite;
 import net.bunten.enderscape.entity.rustle.Rustle;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -23,14 +21,6 @@ public class EnderscapeEntities {
             .sized(1.9F, 2.9F)
             .eyeHeight(1.08F)
             .passengerAttachments(3.0F)
-            .ridingOffset(0.1F)
-            .clientTrackingRange(8)
-    );
-
-    public static final EntityType<Driftlet> DRIFTLET = register("driftlet", EntityType.Builder.of(Driftlet::new, MobCategory.CREATURE)
-            .sized(1.15F, 1.3F)
-            .eyeHeight(0.5F)
-            .passengerAttachments(2.5F)
             .ridingOffset(0.1F)
             .clientTrackingRange(8)
     );
@@ -57,13 +47,11 @@ public class EnderscapeEntities {
                 EnderscapeSensors.class
         );
 
-        SpawnPlacements.register(DRIFTER, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDrifter::canSpawn);
-        SpawnPlacements.register(DRIFTLET, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDrifter::canSpawn);
+        SpawnPlacements.register(DRIFTER, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Drifter::canSpawn);
         SpawnPlacements.register(RUBBLEMITE, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Rubblemite::canSpawn);
         SpawnPlacements.register(RUSTLE, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Rustle::canSpawn);
 
         FabricDefaultAttributeRegistry.register(DRIFTER, Drifter.createAttributes());
-        FabricDefaultAttributeRegistry.register(DRIFTLET, Driftlet.createAttributes());
         FabricDefaultAttributeRegistry.register(RUBBLEMITE, Rubblemite.createAttributes());
         FabricDefaultAttributeRegistry.register(RUSTLE, Rustle.createAttributes());
     }

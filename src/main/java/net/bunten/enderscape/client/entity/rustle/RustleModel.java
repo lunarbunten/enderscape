@@ -85,10 +85,6 @@ public class RustleModel extends HierarchicalModel<Rustle> {
 
 		animate(mob.sleepingAnimationState, RustleAnimations.SLEEPING, age, 1.0F);
 
-		head.xScale = mob.isBaby() ? 1.25F : 1;
-		head.yScale = mob.isBaby() ? 1.25F : 1;
-		head.zScale = mob.isBaby() ? 1.25F : 1;
-
-		crossSpines.visible = !mob.isBaby() && !mob.isSheared();
-	}
+		crossSpines.visible = !mob.isSheared();
+    }
 }

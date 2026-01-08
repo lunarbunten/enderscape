@@ -52,21 +52,21 @@ public class DrifterAI {
             EnderscapeMemory.WALK_TARGET
     );
 
-    public static final ImmutableList<SensorType<? extends Sensor<? super AbstractDrifter>>> SENSOR_TYPES = ImmutableList.of(
+    public static final ImmutableList<SensorType<? extends Sensor<? super Drifter>>> SENSOR_TYPES = ImmutableList.of(
             EnderscapeSensors.DRIFTER_TEMPTATIONS,
             EnderscapeSensors.HURT_BY,
             EnderscapeSensors.IS_IN_WATER,
-            EnderscapeSensors.NEAREST_ADULT_DRIFTER,
+            EnderscapeSensors.NEAREST_ADULT,
             EnderscapeSensors.NEAREST_INTIMIDATOR,
             EnderscapeSensors.NEAREST_LIVING_ENTITIES,
             EnderscapeSensors.NEAREST_PLAYERS
     );
 
-    public static GlobalPos getHome(AbstractDrifter mob) {
+    public static GlobalPos getHome(Drifter mob) {
         return mob.getBrain().getMemory(EnderscapeMemory.HOME).get();
     }
 
-    public static void setHome(AbstractDrifter mob, GlobalPos value) {
+    public static void setHome(Drifter mob, GlobalPos value) {
         if (mob.level() instanceof ServerLevel level) {
             level.getPoiManager().getType(value.pos()).ifPresent(type -> {
                 level.getPoiManager().take(poi -> poi.is(EnderscapePoiTags.DRIFTER_HOME), (type2, pos) -> pos.equals(value.pos()), value.pos(), 1);
@@ -76,7 +76,7 @@ public class DrifterAI {
         mob.getBrain().setMemory(EnderscapeMemory.HOME, value);
     }
 
-    public static Brain<?> makeBrain(Brain<AbstractDrifter> brain) {
+    public static Brain<?> makeBrain(Brain<Drifter> brain) {
         initCoreActivity(brain);
         initIdleActivity(brain);
 
@@ -87,7 +87,7 @@ public class DrifterAI {
         return brain;
     }
 
-    private static void initCoreActivity(Brain<AbstractDrifter> brain) {
+    private static void initCoreActivity(Brain<Drifter> brain) {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new CalmDownFromAttacker(24),
                 new CalmDownFromIntimidator(24),
@@ -108,14 +108,13 @@ public class DrifterAI {
         );
     }
 
-    private static void initIdleActivity(Brain<AbstractDrifter> brain) {
+    private static void initIdleActivity(Brain<Drifter> brain) {
         brain.addActivity(Activity.IDLE, ImmutableList.of(
             Pair.of(0, new AnimalMakeLove(EnderscapeEntities.DRIFTER)),
             Pair.of(1, new FollowTemptation(mob -> 1.25F)),
             Pair.of(2, BabyFollowAdult.create(UniformInt.of(4, 16), 2)),
             Pair.of(3, SetWalkTargetAwayFrom.entity(EnderscapeMemory.NEAREST_INTIMIDATOR, 1, 12, true)),
             Pair.of(4, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(30, 60))),
-            Pair.of(5, SetEntityLookTargetSometimes.create(EnderscapeEntities.DRIFTLET, 6.0f, UniformInt.of(30, 60))),
             Pair.of(8, new RunOne<>(
                     ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
                     ImmutableList.of(
@@ -128,7 +127,7 @@ public class DrifterAI {
         );
     }
 
-    public static void updateActivity(AbstractDrifter entity) {
+    public static void updateActivity(Drifter entity) {
         entity.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.IDLE));
     }
 

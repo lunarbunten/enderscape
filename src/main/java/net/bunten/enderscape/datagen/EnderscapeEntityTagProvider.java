@@ -11,7 +11,8 @@ import net.minecraft.world.entity.EntityType;
 
 import java.util.concurrent.CompletableFuture;
 
-import static net.bunten.enderscape.registry.EnderscapeEntities.*;
+import static net.bunten.enderscape.registry.EnderscapeEntities.DRIFTER;
+import static net.bunten.enderscape.registry.EnderscapeEntities.RUBBLEMITE;
 import static net.bunten.enderscape.registry.tag.EnderscapeEntityTags.*;
 import static net.minecraft.world.entity.EntityType.*;
 
@@ -26,16 +27,15 @@ public class EnderscapeEntityTagProvider extends FabricTagProvider<EntityType<?>
         getOrCreateTagBuilder(AFFECTED_BY_MAGNIA).add(IRON_GOLEM, MINECART);
         getOrCreateTagBuilder(BLACKLISTED_FROM_MIRROR_IN_DISPENSER_TELEPORTATION).add(ELDER_GUARDIAN, ENDER_DRAGON, GHAST, RAVAGER, WARDEN, WITHER);
         getOrCreateTagBuilder(CREATES_VOID_PARTICLES_UPON_DEATH).add(ENDERMAN, ENDERMITE, RUBBLEMITE);
-        getOrCreateTagBuilder(DRIFTERS).add(DRIFTER, DRIFTLET);
         getOrCreateTagBuilder(DRIFTERS_INTIMIDATED_BY).add(RUBBLEMITE, SLIME);
         getOrCreateTagBuilder(EXEMPT_FROM_MAGNIA_ATTRACTOR_ABUSE_COST).add(EXPERIENCE_ORB);
         getOrCreateTagBuilder(PULLED_BY_MAGNIA_ATTRACTOR).add(ITEM, EXPERIENCE_ORB);
         getOrCreateTagBuilder(RUBBLEMITE_HOSTILE_TOWARDS).add(IRON_GOLEM);
 
         getOrCreateTagBuilder(EntityTypeTags.ARTHROPOD).add(RUBBLEMITE);
-        getOrCreateTagBuilder(EntityTypeTags.FALL_DAMAGE_IMMUNE).addTag(DRIFTERS);
+        getOrCreateTagBuilder(EntityTypeTags.FALL_DAMAGE_IMMUNE).add(DRIFTER);
 
-        getOrCreateTagBuilder(externalKey("supplementaries", "ash_blacklist")).add(ENDERMAN, ENDERMITE, ENDER_DRAGON, SHULKER, RUBBLEMITE).forceAddTag(DRIFTERS);
+        getOrCreateTagBuilder(externalKey("supplementaries", "ash_blacklist")).add(ENDERMAN, ENDERMITE, ENDER_DRAGON, SHULKER, RUBBLEMITE, DRIFTER);
     }
 
     private TagKey<EntityType<?>> externalKey(String namespace, String path) {

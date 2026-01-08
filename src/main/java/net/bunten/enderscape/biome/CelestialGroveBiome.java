@@ -20,9 +20,7 @@ public class CelestialGroveBiome {
         HolderGetter<PlacedFeature> features = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<ConfiguredWorldCarver<?>> carvers = context.lookup(Registries.CONFIGURED_CARVER);
 
-        MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder()
-                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EnderscapeEntities.DRIFTER, 6, 3, 6))
-                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EnderscapeEntities.DRIFTLET, 2, 2, 3));
+        MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder().addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EnderscapeEntities.DRIFTER, 6, 3, 6));
 
         BiomeDefaultFeatures.endSpawns(spawns);
 
