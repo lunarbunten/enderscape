@@ -10,6 +10,7 @@ import net.bunten.enderscape.item.component.value.FuelSounds;
 import net.bunten.enderscape.item.component.value.FuelTooltip;
 import net.bunten.enderscape.registry.EnderscapeDataComponents;
 import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -17,9 +18,12 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.item.Item;
@@ -177,10 +181,16 @@ public record FueledTool(
 
             if (!hasCounter || ThresholdCounter.pastThreshold(context.serverLevel(), stack)) {
                 setFuel(stack, currentFuel(stack) - FueledTool.fuelCost(context));
-                if (hasCounter) ThresholdCounter.set(stack, 0);
 
+                if (hasCounter) ThresholdCounter.set(stack, 0);
                 if (Enabled.is(stack)) Enabled.set(stack, true);
-                context.level().playSound(null, context.user().getX(), context.user().getY(), context.user().getZ(), get(stack).sounds().useFuel().value(), context.user().getSoundSource(), 1, 1);
+
+                LivingEntity user = context.user();
+                Holder<SoundEvent> useFuelSound = get(stack).sounds().useFuel();
+
+                if (useFuelSound.value() != SoundEvents.EMPTY && user != null) {
+                    context.level().playSound(null, user.getX(), user.getY(), user.getZ(), useFuelSound.value(), user.getSoundSource(), 1, 1);
+                }
 
                 return true;
             }
