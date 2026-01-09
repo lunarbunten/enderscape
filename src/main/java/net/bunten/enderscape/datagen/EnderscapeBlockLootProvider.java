@@ -84,6 +84,16 @@ public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
         dropSelf(END_LAMP);
         dropOther(VOID_TORCH, VOID_TORCH_ITEM);
         dropSelf(VOID_LANTERN);
+        add(
+                VOID_CAMPFIRE,
+                block -> createSilkTouchDispatchTable(
+                        block,
+                        applyExplosionCondition(
+                                block, LootItem.lootTableItem(VOID_SHALE).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                        )
+                )
+        );
+        
         dropSelf(BULB_LANTERN);
         dropSelf(BLINKLAMP);
 
