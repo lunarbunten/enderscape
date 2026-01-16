@@ -77,6 +77,8 @@ public class EnderscapeCompatibility {
             dynamicRegistryAlias(registryView, Registries.ENCHANTMENT, "lightspeed", EnderscapeEnchantments.RESONANCE.location().getPath());
         });
 
+        BuiltInRegistries.ENTITY_TYPE.addAlias(Enderscape.id("driftlet"), Enderscape.id("drifter"));
+
         blockAndItemAlias("celestial_path_block", "celestial_path");
         blockAndItemAlias("corrupt_path_block", "corrupt_path");
 
