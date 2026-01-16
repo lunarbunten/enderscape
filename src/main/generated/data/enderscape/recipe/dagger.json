@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": "minecraft:stick",
+    "X": "enderscape:shadoline_ingot"
+  },
+  "pattern": [
+    " X",
+    "XX",
+    "S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:dagger"
+  }
+}

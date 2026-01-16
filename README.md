@@ -1,6 +1,8 @@
 <div align="center">
-  <img src="https://i.imgur.com/76Cxl9W.png">
-  <h4>ℹ️ Requires <a href="https://modrinth.com/mod/fabric-api">Fabric API</a> and <a href="https://modrinth.com/mod/yacl">YetAnotherConfigLib</a>.<br><br>💖 Features subject to change. <a href="https://github.com/lunarbunten/enderscape/issues">Please report any issues.</a></h4>
+  <img src="https://cdn.modrinth.com/data/cached_images/1449d27b604d9d8fd7fa9c5225ea15500501c43f.webp">
+  <h4>🔹 Requires <a href="https://modrinth.com/mod/fabric-api">Fabric API</a>, <a href="https://modrinth.com/mod/yacl">YetAnotherConfigLib</a>, and <a href="https://modrinth.com/mod/lithostitched">Lithostitched</a>🔹
+  <br><br>💖 In active development, features subject to change. <a href="https://github.com/lunarbunten/enderscape/issues">Please report any issues.</a> 💖
+  <br><br>🏙️ Join the <a href="https://discord.gg/bksj9aqqgb"><strong>Penumbra</strong></a> Discord server for development updates! 🏙️</h4>
   <h2>🔹There's <i>far</i> more waiting for you beyond "The End"🔹</h2>
 </div>
 
@@ -8,10 +10,42 @@ Enderscape is a total overhaul of the End dimension, featuring **new world gener
 
 We've put a lot of care into sound design and ambience, so Enderscape features hundreds of unique sounds for biomes, blocks, items, mobs, as well as an [**expanded soundtrack!**](https://lunarbunten.bandcamp.com/album/enderscape-2) Visuals are also important, so we have revamped End lighting, a revamped skybox, and biome-specific fog.
 
-![Atlas](https://i.imgur.com/hjEc744.png)
+<div align="center"><h2>🔹New in Enderscape 2.0 🔹</h2></div>
+
+- Overhauled Strongholds: Improved room variety, loot quality, and more!
+- New Shadoline Armor: Grants added stealth to prevent mobs from detecting you.
+- New Dagger weapon: High attack speed, high backstab damage! Stuns mobs when fueled with Nebulite.
+- Lightspeed changed to Resonance. Now applies to all Nebulite tools to enhance efficiency!
+- New building blocks: Shadoline Chain, Shadoline Bars, Void Torches, Void Lanterns, and more.
+- There's more, so [**check out the changelog!**](https://modrinth.com/mod/enderscape/changelog)
+
+###
+
+<div align="center">
+<h2>🔹Usage and Compatibility🔹</h2>
+</div>
+
+Being such a comprehensive overhaul, it can be somewhat invasive and compatibility with other mods is not guaranteed. Features that may conflict or overlap with other mods include:
+- Additional End building blocks
+  - Polished End Stone
+  - End Stone Slabs, Stairs, and Walls
+  - Purpur Walls and Chiseled Purpur
+- "Rebound" enchantment (elytra bouncing)
+- Dagger (with additional backstab damage)
+- Mirror (recall and "fast travel" item)
+- Magnia Attractor (item and experience orb magnet)
+- Overhauled End world generation, including biome distribution*|
+- Overhauled Strongholds*
+- Overhauled End Cities, including Vaults*
+
+*Can be disabled during world creation, but not recommended.
 
 <div align="center">
 <h2>🔹Detailed Information🔹</h2>
+</div>
+
+<div align="center">
+  <h4><a href="https://github.com/Penumbra-MC/Enderscape/wiki">This information is being moved to a GitHub wiki.</a></h4>
 </div>
 
 <details>
@@ -90,29 +124,3 @@ We've put a lot of care into sound design and ambience, so Enderscape features h
 | **Rubble Shields** are combat and mobility tools crafted with **five Rubble Chitin**, **one Shadoline Ingot**, and **one of any End stone**.<br><br>They have the same durability as regular Shields and can block damage all the same. Their appearance depends on what stone they were crafted with.<br><br>When blocking with a Rubble Shield, you can perform a dash by walking in any direction and jumping. Dashing gives you a significant horizontal speed boost, allowing you to evade enemies or cross gaps, at the cost of durability. | <img src="https://i.imgur.com/fcjkORa.png" width="100"> |
 
 </details>
-
-<div align="center">
-<h2>🔹Usage and Compatibility🔹</h2>
-</div>
-
-Enderscape is best without shaders—each biome was designed with a unique feel that shaders often override.
-
-Enderscape has features that may conflict or overlap with other mods, such as:
-- Additional End building blocks
-  - Polished End Stone
-  - End Stone Slabs, Stairs, and Walls
-  - Purpur Walls and Chiseled Purpur
-- "Rebound" enchantment (elytra bouncing)
-- Mirror (recall and "fast travel" item)
-- Magnia Attractor (item and experience orb magnet)
-- Overhauled world generation, including biome distribution*
-- Overhauled End Cities, including Vaults*
-
-*Can be disabled during world creation, but not recommended.
-
-##
-
-<div align="center">
-  <h4>💻 Join the <a href="https://discord.gg/bksj9aqqgb"><strong>lunarbunten mods</strong></a> Discord server to learn about upcoming updates and mods!</h4>
-  <h4>🛜 <a href="https://bisecthosting.com/bunten"><strong>25% off Bisect Hosting with code "bunten"</strong></a></h4>
-</div>

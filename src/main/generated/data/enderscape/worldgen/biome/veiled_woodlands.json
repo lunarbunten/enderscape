@@ -1,42 +1,52 @@
 {
+  "attributes": {
+    "enderscape:visual/enderscape/fog_end_density": 0.75,
+    "enderscape:visual/enderscape/nebula_alpha": {
+      "argument": 0.75,
+      "modifier": "multiply"
+    },
+    "enderscape:visual/enderscape/nebula_color": "#969baa",
+    "enderscape:visual/enderscape/star_color": "#b493ff",
+    "minecraft:audio/ambient_sounds": {
+      "additions": {
+        "sound": "enderscape:ambient.veiled_woodlands.additions",
+        "tick_chance": 6.0E-4
+      },
+      "loop": "enderscape:ambient.veiled_woodlands.loop",
+      "mood": {
+        "block_search_extent": 8,
+        "offset": 2.0,
+        "sound": "enderscape:ambient.veiled_woodlands.mood",
+        "tick_delay": 6000
+      }
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "max_delay": 24000,
+        "min_delay": 12000,
+        "sound": "enderscape:music.enderscape.biome.veiled_woodlands"
+      }
+    },
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "enderscape:void_stars"
+        },
+        "probability": 0.003
+      }
+    ],
+    "minecraft:visual/cloud_color": "#00000000",
+    "minecraft:visual/fog_color": "#101017",
+    "minecraft:visual/sky_color": "#161621",
+    "minecraft:visual/sky_light_color": "#242035",
+    "minecraft:visual/water_fog_color": "#464d59"
+  },
   "carvers": [],
   "downfall": 0.5,
   "effects": {
-    "additions_sound": {
-      "sound": "enderscape:ambient.veiled_woodlands.additions",
-      "tick_chance": 6.0E-4
-    },
-    "ambient_sound": "enderscape:ambient.veiled_woodlands.loop",
-    "fog_color": 6974105,
-    "foliage_color": 10597016,
-    "grass_color": 10597016,
-    "mood_sound": {
-      "block_search_extent": 8,
-      "offset": 2.0,
-      "sound": "enderscape:ambient.veiled_woodlands.mood",
-      "tick_delay": 6000
-    },
-    "music": [
-      {
-        "data": {
-          "max_delay": 24000,
-          "min_delay": 12000,
-          "replace_current_music": false,
-          "sound": "enderscape:music.enderscape.biome.veiled_woodlands"
-        },
-        "weight": 1
-      }
-    ],
-    "music_volume": 1.0,
-    "particle": {
-      "options": {
-        "type": "enderscape:void_stars"
-      },
-      "probability": 0.003
-    },
-    "sky_color": 1447457,
-    "water_color": 9872305,
-    "water_fog_color": 4607321
+    "foliage_color": "#a1b298",
+    "grass_color": "#a1b298",
+    "water_color": "#96a3b1"
   },
   "features": [
     [],

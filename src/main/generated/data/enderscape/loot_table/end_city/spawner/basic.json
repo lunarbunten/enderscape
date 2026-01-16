@@ -18,7 +18,7 @@
             }
           ],
           "name": "minecraft:bread",
-          "weight": 8
+          "weight": 12
         },
         {
           "type": "minecraft:item",
@@ -59,7 +59,7 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 2
+          "weight": 3
         },
         {
           "type": "minecraft:item",

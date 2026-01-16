@@ -4,15 +4,15 @@ import com.google.common.reflect.Reflection;
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.entity.ai.EnderscapeMemory;
 import net.bunten.enderscape.entity.ai.EnderscapeSensors;
-import net.bunten.enderscape.entity.drifter.AbstractDrifter;
 import net.bunten.enderscape.entity.drifter.Drifter;
-import net.bunten.enderscape.entity.drifter.Driftlet;
 import net.bunten.enderscape.entity.rubblemite.Rubblemite;
 import net.bunten.enderscape.entity.rustle.Rustle;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricTrackedDataRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -27,20 +27,13 @@ public class EnderscapeEntities {
             .clientTrackingRange(8)
     );
 
-    public static final EntityType<Driftlet> DRIFTLET = register("driftlet", EntityType.Builder.of(Driftlet::new, MobCategory.CREATURE)
-            .sized(1.15F, 1.3F)
-            .eyeHeight(0.5F)
-            .passengerAttachments(2.5F)
-            .ridingOffset(0.1F)
-            .clientTrackingRange(8)
-    );
-
     public static final EntityType<Rubblemite> RUBBLEMITE = register("rubblemite", EntityType.Builder.of(Rubblemite::new, MobCategory.MONSTER)
             .sized(0.55F, 0.4F)
             .eyeHeight(0.13F)
             .passengerAttachments(0.3F)
             .ridingOffset(0.1F)
             .clientTrackingRange(8)
+            .notInPeaceful()
     );
 
     public static final EntityType<Rustle> RUSTLE = register("rustle", EntityType.Builder.of(Rustle::new, MobCategory.CREATURE)
@@ -51,21 +44,23 @@ public class EnderscapeEntities {
             .clientTrackingRange(8)
     );
 
+    public static final EntityDataSerializer<Rubblemite.State> RUBBLEMITE_STATE = EntityDataSerializer.forValueType(Rubblemite.State.STREAM_CODEC);
+
     static {
         Reflection.initialize(
                 EnderscapeMemory.class,
                 EnderscapeSensors.class
         );
 
-        SpawnPlacements.register(DRIFTER, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDrifter::canSpawn);
-        SpawnPlacements.register(DRIFTLET, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDrifter::canSpawn);
+        SpawnPlacements.register(DRIFTER, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Drifter::canSpawn);
         SpawnPlacements.register(RUBBLEMITE, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Rubblemite::canSpawn);
         SpawnPlacements.register(RUSTLE, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Rustle::canSpawn);
 
         FabricDefaultAttributeRegistry.register(DRIFTER, Drifter.createAttributes());
-        FabricDefaultAttributeRegistry.register(DRIFTLET, Driftlet.createAttributes());
         FabricDefaultAttributeRegistry.register(RUBBLEMITE, Rubblemite.createAttributes());
         FabricDefaultAttributeRegistry.register(RUSTLE, Rustle.createAttributes());
+
+        FabricTrackedDataRegistry.register(Enderscape.id("rubblemite_state"), RUBBLEMITE_STATE);
     }
 
     private static <T extends Entity> EntityType<T> register(String name, EntityType.Builder<T> builder) {

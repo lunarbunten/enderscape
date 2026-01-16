@@ -1,20 +1,19 @@
 package net.bunten.enderscape.datagen;
 
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.criteria.BounceOnDrifterCriterion;
-import net.bunten.enderscape.criteria.HearMagniaRadioSongCriterion;
-import net.bunten.enderscape.criteria.MirrorTeleportCriterion;
-import net.bunten.enderscape.criteria.PullEntityCriterion;
+import net.bunten.enderscape.criteria.*;
 import net.bunten.enderscape.registry.EnderscapeBiomes;
 import net.bunten.enderscape.registry.EnderscapeDataComponents;
 import net.bunten.enderscape.registry.EnderscapeEntities;
+import net.bunten.enderscape.registry.tag.EnderscapeBlockTags;
+import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.critereon.*;
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
@@ -22,7 +21,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -41,6 +40,7 @@ import java.util.function.Consumer;
 import static net.bunten.enderscape.registry.EnderscapeBlocks.*;
 import static net.bunten.enderscape.registry.EnderscapeCriteria.*;
 import static net.bunten.enderscape.registry.EnderscapeItems.*;
+import static net.minecraft.advancements.CriteriaTriggers.FALL_FROM_HEIGHT;
 import static net.minecraft.world.item.Items.BUCKET;
 import static net.minecraft.world.item.Items.FIREWORK_ROCKET;
 
@@ -67,15 +67,63 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
         HolderGetter<Block> blockRegistry = provider.lookupOrThrow(Registries.BLOCK);
         HolderLookup.RegistryLookup<EntityType<?>> entityRegistry = provider.lookupOrThrow(Registries.ENTITY_TYPE);
 
-        ResourceKey<Advancement> endGatewayKey = ResourceKey.create(Registries.ADVANCEMENT, ResourceLocation.withDefaultNamespace("end/enter_end_gateway"));
-        ResourceKey<Advancement> findEndCityKey = ResourceKey.create(Registries.ADVANCEMENT, ResourceLocation.withDefaultNamespace("end/find_end_city"));
-        ResourceKey<Advancement> elytraKey = ResourceKey.create(Registries.ADVANCEMENT, ResourceLocation.withDefaultNamespace("end/elytra"));
+        ResourceKey<Advancement> endGatewayKey = ResourceKey.create(Registries.ADVANCEMENT, Identifier.withDefaultNamespace("end/enter_end_gateway"));
+        ResourceKey<Advancement> findEndCityKey = ResourceKey.create(Registries.ADVANCEMENT, Identifier.withDefaultNamespace("end/find_end_city"));
+        ResourceKey<Advancement> elytraKey = ResourceKey.create(Registries.ADVANCEMENT, Identifier.withDefaultNamespace("end/elytra"));
 
         ItemStack glintMirror = MIRROR.getDefaultInstance();
         glintMirror.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
 
+        Advancement.Builder.advancement()
+                .parent(endGatewayKey.identifier())
+                .display(
+                        CELESTIAL_CAP,
+                        Component.translatable("advancement.enderscape.fall_onto_chanterelle_cap"),
+                        Component.translatable("advancement.enderscape.fall_onto_chanterelle_cap.description"),
+                        null,
+                        AdvancementType.TASK,
+                        true, true, false
+                )
+                .addCriterion(
+                        "fall_onto_cap",
+                        FALL_FROM_HEIGHT.createCriterion(new DistanceTrigger.TriggerInstance(
+                                Optional.of(ContextAwarePredicate.create(
+                                        LootItemEntityPropertyCondition.hasProperties(
+                                                LootContext.EntityTarget.THIS,
+                                                EntityPredicate.Builder
+                                                        .entity()
+                                                        .steppingOn(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blockRegistry, EnderscapeBlockTags.CHANTERELLE_CAP_BLOCKS)))
+                                                        .flags(EntityFlagsPredicate.Builder.flags().setIsFlying(false).setSwimming(false).setOnGround(true))
+                                        ).build()
+                                )),
+                                Optional.empty(),
+                                Optional.of(DistancePredicate.vertical(MinMaxBounds.Doubles.atLeast(50))))
+                        )
+                )
+                .save(consumer, Enderscape.id("fall_onto_chanterelle_cap").toString());
+
+        AdvancementHolder rubbleShieldDash = Advancement.Builder.advancement()
+                .parent(endGatewayKey.identifier())
+                .display(
+                        END_STONE_RUBBLE_SHIELD,
+                        Component.translatable("advancement.enderscape.rubble_shield_dash"),
+                        Component.translatable("advancement.enderscape.rubble_shield_dash.description"),
+                        null,
+                        AdvancementType.TASK,
+                        true, true, false
+                )
+                .addCriterion(
+                        "rubble_shield_dash",
+                        DASH_JUMP.createCriterion(new DashJumpCriterion.Conditions(
+                                Optional.empty(),
+                                Optional.of(ItemPredicate.Builder.item().of(itemRegistry, EnderscapeItemTags.RUBBLE_SHIELDS).build()),
+                                Optional.empty()
+                        ))
+                )
+                .save(consumer, Enderscape.id("rubble_shield_dash").toString());
+
         AdvancementHolder rustleBucket = Advancement.Builder.advancement()
-                .parent(endGatewayKey.location())
+                .parent(endGatewayKey.identifier())
                 .display(
                         RUSTLE_BUCKET,
                         Component.translatable("advancement.enderscape.rustle_bucket"),
@@ -95,7 +143,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                 .save(consumer, Enderscape.id("rustle_bucket").toString());
 
         AdvancementHolder unlockEndVault = Advancement.Builder.advancement()
-                .parent(findEndCityKey.location())
+                .parent(findEndCityKey.identifier())
                 .display(
                         END_CITY_KEY,
                         Component.translatable("advancement.enderscape.unlock_end_vault"),
@@ -114,8 +162,8 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                 .save(consumer, Enderscape.id("unlock_end_vault").toString());
 
         Advancement.Builder exploreEnd = Advancement.Builder.advancement()
-                .parent(endGatewayKey.location())
-                .display(CELESTIAL_OVERGROWTH,
+                .parent(endGatewayKey.identifier())
+                .display(SHADOLINE_BOOTS,
                         Component.translatable("advancement.enderscape.explore_end"),
                         Component.translatable("advancement.enderscape.explore_end.description"),
                         null,
@@ -125,7 +173,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
 
         EXPLORE_END_BIOMES.forEach(biome ->
                 exploreEnd.addCriterion(
-                        biome.location().toString(),
+                        biome.identifier().toString(),
                         PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(provider.lookupOrThrow(Registries.BIOME).getOrThrow(biome)))
                 )
         );
@@ -133,7 +181,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
         exploreEnd.save(consumer, Enderscape.id("explore_end").toString());
 
         AdvancementHolder obtainNebulite = Advancement.Builder.advancement()
-                .parent(endGatewayKey.location())
+                .parent(endGatewayKey.identifier())
                 .display(
                         NEBULITE,
                         Component.translatable("advancement.enderscape.obtain_nebulite"),
@@ -146,7 +194,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                 .save(consumer, Enderscape.id("craft_nebulite").toString());
 
         AdvancementHolder bottleDriftJelly = Advancement.Builder.advancement()
-                .parent(endGatewayKey.location())
+                .parent(endGatewayKey.identifier())
                 .display(
                         DRIFT_JELLY_BOTTLE,
                         Component.translatable("advancement.enderscape.bottle_drift_jelly"),
@@ -198,6 +246,8 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                 )))
                 .save(consumer, Enderscape.id("glide_onto_drifter").toString());
 
+        Optional<ItemPredicate> mirrorItemPredicate = Optional.of(ItemPredicate.Builder.item().of(itemRegistry, MIRROR).build());
+
         AdvancementHolder mirrorTeleport = Advancement.Builder.advancement()
                 .parent(obtainNebulite)
                 .display(
@@ -208,9 +258,9 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                         AdvancementType.TASK,
                         true, true, false
                 )
-                .addCriterion("teleported", MIRROR_TELEPORT.createCriterion(new MirrorTeleportCriterion.Conditions(
+                .addCriterion("teleported", LODESTONE_TELEPORTATION.createCriterion(new LodestoneTeleportationCriterion.Conditions(
                         Optional.empty(),
-                        Optional.empty(),
+                        mirrorItemPredicate,
                         Optional.empty(),
                         Optional.empty(),
                         Optional.empty(),
@@ -229,9 +279,9 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                         true, true, false
                 )
                 .rewards(AdvancementRewards.Builder.experience(50))
-                .addCriterion("teleported", MIRROR_TELEPORT.createCriterion(new MirrorTeleportCriterion.Conditions(
+                .addCriterion("teleported", LODESTONE_TELEPORTATION.createCriterion(new LodestoneTeleportationCriterion.Conditions(
                         Optional.empty(),
-                        Optional.empty(),
+                        mirrorItemPredicate,
                         Optional.empty(),
                         Optional.empty(),
                         Optional.of(
@@ -252,9 +302,9 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                         true, true, false
                 )
                 .rewards(AdvancementRewards.Builder.experience(100))
-                .addCriterion("teleported", MIRROR_TELEPORT.createCriterion(new MirrorTeleportCriterion.Conditions(
+                .addCriterion("teleported", LODESTONE_TELEPORTATION.createCriterion(new LodestoneTeleportationCriterion.Conditions(
                         Optional.empty(),
-                        Optional.empty(),
+                        mirrorItemPredicate,
                         Optional.empty(),
                         Optional.empty(),
                         Optional.empty(),
@@ -263,7 +313,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                 .save(consumer, Enderscape.id("transdimensional").toString());
 
         ItemStack attractor = MAGNIA_ATTRACTOR.getDefaultInstance();
-        attractor.set(EnderscapeDataComponents.CURRENT_NEBULITE_FUEL, 1);
+        attractor.set(EnderscapeDataComponents.CURRENT_FUEL, 1);
 
         AdvancementHolder pullItemWithAttractor = Advancement.Builder.advancement()
                 .parent(obtainNebulite)
@@ -282,8 +332,33 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                 )))
                 .save(consumer, Enderscape.id("pull_item_with_attractor").toString());
 
+        ItemStack dagger = DAGGER.getDefaultInstance();
+        dagger.set(EnderscapeDataComponents.CURRENT_FUEL, 1);
+
+        AdvancementHolder stunAttack = Advancement.Builder.advancement()
+                .parent(obtainNebulite)
+                .display(
+                        dagger,
+                        Component.translatable("advancement.enderscape.stun_attack"),
+                        Component.translatable("advancement.enderscape.stun_attack.description"),
+                        null,
+                        AdvancementType.TASK,
+                        true, true, false
+                )
+                .addCriterion(
+                        "stun_attack",
+                        STUN_ATTACK.createCriterion(new StunAttackCriterion.Conditions(
+                                Optional.empty(),
+                                Optional.empty(),
+                                Optional.empty(),
+                                Optional.empty(),
+                                Optional.of(true)
+                        ))
+                )
+                .save(consumer, Enderscape.id("stun_attack").toString());
+
 //        Advancement.Builder hearMagniaRadioSongs = Advancement.Builder.advancement()
-//                .parent(endGatewayKey.location())
+//                .parent(endGatewayKey.identifier())
 //                .display(MAGNIA_RADIO,
 //                        Component.translatable("advancement.enderscape.hear_magnia_radio_songs"),
 //                        Component.translatable("advancement.enderscape.hear_magnia_radio_songs.description"),
@@ -294,7 +369,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
 //
 //        ALL_DIMENSION_TYPES.forEach(dimension ->
 //                hearMagniaRadioSongs.addCriterion(
-//                        dimension.location().toString(),
+//                        dimension.identifier().toString(),
 //                        HEAR_MAGNIA_RADIO_SONG.createCriterion(new HearMagniaRadioSongCriterion.Conditions(Optional.empty(), Optional.of(LocationPredicate.Builder.inDimension(dimension).build()), Optional.empty()))
 //                )
 //        );

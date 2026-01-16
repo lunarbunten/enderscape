@@ -44,6 +44,8 @@ public class EnderscapeParticles {
     public static final SimpleParticleType RUSTLE_SLEEPING_BUBBLE = register("rustle_sleeping_bubble", true);
     public static final SimpleParticleType RUSTLE_SLEEPING_BUBBLE_POP = register("rustle_sleeping_bubble_pop", true);
     public static final SimpleParticleType VEILED_LEAVES = register("veiled_leaves", false);
+
+    public static final SimpleParticleType VOID_FIRE_FLAME = register("void_fire_flame", false);
     public static final SimpleParticleType VOID_POOF = register("void_poof", true);
     public static final SimpleParticleType VOID_STARS = register("void_stars", false);
 

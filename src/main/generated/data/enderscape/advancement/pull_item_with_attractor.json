@@ -16,7 +16,7 @@
     },
     "icon": {
       "components": {
-        "enderscape:current_nebulite_fuel": 1
+        "enderscape:current_fuel": 1
       },
       "count": 1,
       "id": "enderscape:magnia_attractor"

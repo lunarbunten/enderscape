@@ -2,7 +2,12 @@
   "parent": "enderscape:craft_nebulite",
   "criteria": {
     "teleported": {
-      "trigger": "enderscape:mirror_teleport"
+      "conditions": {
+        "item": {
+          "items": "enderscape:mirror"
+        }
+      },
+      "trigger": "enderscape:lodestone_teleportation"
     }
   },
   "display": {

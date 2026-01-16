@@ -48,6 +48,10 @@ public class EnderscapeBlockRenderLayerMap {
                 POTTED_VEILED_SAPLING,
                 POTTED_WISP_GROWTH,
                 REPULSIVE_MAGNIA_SPROUT,
+                SHADOLINE_BARS,
+                SHADOLINE_CHAIN,
+                VOID_CAMPFIRE,
+                VOID_LANTERN,
                 VEILED_DOOR,
                 VEILED_SAPLING,
                 VEILED_TRAPDOOR,
@@ -55,10 +59,7 @@ public class EnderscapeBlockRenderLayerMap {
                 VOID_SHALE,
                 WISP_FLOWER,
                 WISP_GROWTH,
-                WISP_SPROUTS
-        );
-
-        BlockRenderLayerMap.putBlocks(ChunkSectionLayer.CUTOUT_MIPPED,
+                WISP_SPROUTS,
                 VEILED_LEAVES,
                 VEILED_LEAF_PILE
         );

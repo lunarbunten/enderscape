@@ -1,14 +1,30 @@
 package net.bunten.enderscape.block.properties;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class DirectionSet {
-    public static final Codec<DirectionSet> CODEC = Codec.unit(DirectionSet::create);
+    public static final Codec<DirectionSet> CODEC = Direction.CODEC
+            .listOf()
+            .xmap(
+                    list -> {
+                        DirectionSet set = DirectionSet.create();
+                        for (Direction dir : list) set.add(dir);
+                        return set;
+                    },
+                    set -> {
+                        List<Direction> list = new ArrayList<>();
+                        for (Direction dir : Direction.values()) {
+                            if (set.supports(dir)) list.add(dir);
+                        }
+                        return list;
+                    }
+            );
+
     private final List<Direction> list = new ArrayList<>();;
     
     public static DirectionSet create() {

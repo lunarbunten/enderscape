@@ -1,5 +1,6 @@
 package net.bunten.enderscape.datagen;
 
+import net.bunten.enderscape.registry.EnderscapeMusic;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
@@ -12,6 +13,7 @@ import net.minecraft.tags.TagKey;
 import java.util.concurrent.CompletableFuture;
 
 import static net.bunten.enderscape.registry.tag.EnderscapeSoundEventTags.AMBIENCE_REPLACEABLE_BY_ENDERSCAPE;
+import static net.bunten.enderscape.registry.tag.EnderscapeSoundEventTags.STRUCTURE_MUSIC;
 import static net.minecraft.sounds.SoundEvents.*;
 
 public class EnderscapeSoundEventTagProvider extends FabricTagProvider<SoundEvent> {
@@ -31,6 +33,11 @@ public class EnderscapeSoundEventTagProvider extends FabricTagProvider<SoundEven
                 AMBIENT_WARPED_FOREST_ADDITIONS.key(),
                 AMBIENT_WARPED_FOREST_LOOP.key(),
                 AMBIENT_WARPED_FOREST_MOOD.key()
+        );
+
+        tag(STRUCTURE_MUSIC).add(
+                EnderscapeMusic.STRUCTURE_END_CITY.sound().unwrapKey().get(),
+                EnderscapeMusic.STRUCTURE_STRONGHOLD.sound().unwrapKey().get()
         );
     }
 }

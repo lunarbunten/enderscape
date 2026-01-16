@@ -31,6 +31,7 @@ public class EnderscapeProcessorLists {
     }
 
     public static void bootstrap(BootstrapContext<StructureProcessorList> context) {
+        StrongholdProcessorLists.bootstrap(context);
     }
 
     public static void addSlabReplacements(List<ProcessorRule> rules, Block original, Block replacement) {

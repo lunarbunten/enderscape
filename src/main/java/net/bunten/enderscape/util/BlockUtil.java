@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockUtil extends net.minecraft.BlockUtil {
+public class BlockUtil extends net.minecraft.util.BlockUtil {
 
     public static boolean place(LevelAccessor level, BlockPos pos, BlockState state) {
         if (!isInvulnerable(level.getBlockState(pos), level, pos)) return level.setBlock(pos, state, 2);

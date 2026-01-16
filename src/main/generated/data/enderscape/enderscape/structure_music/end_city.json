@@ -1,9 +1,10 @@
 {
   "music": {
-    "max_delay": 6000,
-    "min_delay": 0,
-    "replace_current_music": false,
-    "sound": "enderscape:music.enderscape.structure.end_city"
+    "default": {
+      "max_delay": 6000,
+      "min_delay": 0,
+      "sound": "enderscape:music.enderscape.structure.end_city"
+    }
   },
   "permitted_structures": [
     "minecraft:end_city",

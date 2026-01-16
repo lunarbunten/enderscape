@@ -1,42 +1,49 @@
 {
+  "attributes": {
+    "enderscape:visual/enderscape/ambient_light_factor": 0.5,
+    "enderscape:visual/enderscape/fog_end_density": 0.3,
+    "enderscape:visual/enderscape/nebula_color": "#2b1f37",
+    "enderscape:visual/enderscape/star_color": "#512f59",
+    "minecraft:audio/ambient_sounds": {
+      "additions": {
+        "sound": "enderscape:ambient.void_skies.additions",
+        "tick_chance": 6.0E-4
+      },
+      "loop": "enderscape:ambient.void_skies.loop",
+      "mood": {
+        "block_search_extent": 8,
+        "offset": 2.0,
+        "sound": "enderscape:ambient.void_skies.mood",
+        "tick_delay": 6000
+      }
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "max_delay": 24000,
+        "min_delay": 12000,
+        "sound": "enderscape:music.enderscape.biome.void_skies"
+      }
+    },
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "enderscape:void_stars"
+        },
+        "probability": 0.006
+      }
+    ],
+    "minecraft:visual/cloud_color": "#00000000",
+    "minecraft:visual/fog_color": "#050408",
+    "minecraft:visual/fog_start_distance": -40.0,
+    "minecraft:visual/sky_color": "#08060b",
+    "minecraft:visual/sky_light_color": "#000000"
+  },
   "carvers": [],
   "downfall": 0.5,
   "effects": {
-    "additions_sound": {
-      "sound": "enderscape:ambient.void_skies.additions",
-      "tick_chance": 6.0E-4
-    },
-    "ambient_sound": "enderscape:ambient.void_skies.loop",
-    "fog_color": 2563640,
-    "foliage_color": 10598275,
-    "grass_color": 10598275,
-    "mood_sound": {
-      "block_search_extent": 8,
-      "offset": 2.0,
-      "sound": "enderscape:ambient.void_skies.mood",
-      "tick_delay": 6000
-    },
-    "music": [
-      {
-        "data": {
-          "max_delay": 24000,
-          "min_delay": 12000,
-          "replace_current_music": false,
-          "sound": "enderscape:music.enderscape.biome.void_skies"
-        },
-        "weight": 1
-      }
-    ],
-    "music_volume": 1.0,
-    "particle": {
-      "options": {
-        "type": "enderscape:void_stars"
-      },
-      "probability": 0.006
-    },
-    "sky_color": 525835,
-    "water_color": 7961249,
-    "water_fog_color": 3684693
+    "foliage_color": "#a1b783",
+    "grass_color": "#a1b783",
+    "water_color": "#797aa1"
   },
   "features": [
     [],

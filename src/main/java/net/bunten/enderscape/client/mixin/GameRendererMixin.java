@@ -40,7 +40,9 @@ public abstract class GameRendererMixin {
     )
     public void render(DeltaTracker tracker, boolean bl, CallbackInfo ci) {
         EnderscapeClient.HUD_ELEMENTS.stream().filter((element) -> element.phase == HudElement.RenderPhase.BEFORE_HUD).forEach((element) -> {
-            element.render(new GuiGraphics(minecraft, guiRenderState), tracker);
+            int x = (int )minecraft.mouseHandler.getScaledXPos(minecraft.getWindow());
+            int y = (int) minecraft.mouseHandler.getScaledYPos(minecraft.getWindow());
+            element.render(new GuiGraphics(minecraft, guiRenderState, x, y), tracker);
         });
     }
 }

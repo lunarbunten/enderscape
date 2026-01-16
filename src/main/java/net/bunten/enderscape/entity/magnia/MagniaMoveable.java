@@ -71,9 +71,9 @@ public interface MagniaMoveable {
             for (EquipmentSlot slot : EquipmentSlot.VALUES.stream().filter(EquipmentSlot::isArmor).toList()) {
                 ItemStack stack = mob.getItemBySlot(slot);
                 if (stack.has(DataComponents.EQUIPPABLE)) {
-                    if (stack.is(EnderscapeItemTags.WEAK_MAGNETISM_WHEN_WORN)) weak++;
-                    else if (stack.is(EnderscapeItemTags.AVERAGE_MAGNETISM_WHEN_WORN)) average++;
-                    else if (stack.is(EnderscapeItemTags.STRONG_MAGNETISM_WHEN_WORN)) strong++;
+                    if (stack.is(EnderscapeItemTags.WEAK_MAGNIA_STRENGTH)) weak++;
+                    else if (stack.is(EnderscapeItemTags.AVERAGE_MAGNIA_STRENGTH)) average++;
+                    else if (stack.is(EnderscapeItemTags.STRONG_MAGNIA_STRENGTH)) strong++;
                 }
             }
 

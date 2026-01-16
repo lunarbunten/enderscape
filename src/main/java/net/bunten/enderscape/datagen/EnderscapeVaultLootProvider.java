@@ -1,9 +1,8 @@
 package net.bunten.enderscape.datagen;
 
-import net.bunten.enderscape.registry.EnderscapeBiomes;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
-import net.minecraft.advancements.critereon.LocationPredicate;
+import net.minecraft.advancements.criterion.LocationPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
@@ -67,18 +66,19 @@ public class EnderscapeVaultLootProvider extends SimpleFabricLootTableProvider {
             return LootTable.lootTable()
                     .withPool(
                             LootPool.lootPool()
-                                    .setRolls(UniformGenerator.between(1, 3))
+                                    .setRolls(UniformGenerator.between(0, 2))
 
                                     .add(createItem(DIAMOND_SWORD, 20).apply(toolEnchantments).apply(toolDamage))
+                                    .add(createItem(DIAMOND_SPEAR, 20).apply(toolEnchantments).apply(toolDamage))
                                     .add(createItem(DIAMOND_PICKAXE, 20).apply(toolEnchantments).apply(toolDamage))
                                     .add(createItem(DIAMOND_AXE, 20).apply(toolEnchantments).apply(toolDamage))
                                     .add(createItem(DIAMOND_SHOVEL, 20).apply(toolEnchantments).apply(toolDamage))
                                     .add(createItem(DIAMOND_HOE, 20).apply(toolEnchantments).apply(toolDamage))
 
-                                    .add(createItem(DIAMOND_HELMET, 25).apply(toolEnchantments).apply(toolDamage))
-                                    .add(createItem(DIAMOND_CHESTPLATE, 25).apply(toolEnchantments).apply(toolDamage))
-                                    .add(createItem(DIAMOND_LEGGINGS, 25).apply(toolEnchantments).apply(toolDamage))
-                                    .add(createItem(DIAMOND_BOOTS, 25).apply(toolEnchantments).apply(toolDamage))
+                                    .add(createItem(DIAMOND_HELMET, 30).apply(toolEnchantments).apply(toolDamage))
+                                    .add(createItem(DIAMOND_CHESTPLATE, 30).apply(toolEnchantments).apply(toolDamage))
+                                    .add(createItem(DIAMOND_LEGGINGS, 30).apply(toolEnchantments).apply(toolDamage))
+                                    .add(createItem(DIAMOND_BOOTS, 30).apply(toolEnchantments).apply(toolDamage))
                     )
                     .withPool(
                             LootPool.lootPool()
@@ -93,11 +93,9 @@ public class EnderscapeVaultLootProvider extends SimpleFabricLootTableProvider {
                     )
                     .withPool(
                             LootPool.lootPool()
-                                    .setRolls(UniformGenerator.between(1, 2))
+                                    .setRolls(UniformGenerator.between(0, 1))
 
-                                    .add(EmptyLootItem.emptyItem().setWeight(60))
-
-                                    .add(createItem(GOLDEN_CARROT, 40).apply(countBetween(1, 8)))
+                                    .add(createItem(GOLDEN_CARROT, 40).apply(countBetween(4, 12)))
                                     .add(createItem(GOLDEN_APPLE, 10).apply(countBetween(1, 2)))
                                     .add(createItem(ENCHANTED_GOLDEN_APPLE, 1))
                     )
@@ -105,21 +103,21 @@ public class EnderscapeVaultLootProvider extends SimpleFabricLootTableProvider {
                             LootPool.lootPool()
                                     .setRolls(ConstantValue.exactly(1))
 
-                                    .add(EmptyLootItem.emptyItem().setWeight(60))
+                                    .add(EmptyLootItem.emptyItem().setWeight(40))
 
-                                    .add(createItem(MUSIC_DISC_GLARE, 6))
                                     .add(createItem(MIRROR, 6))
                                     .add(createItem(SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE, 6))
 
-                                    .add(createItem(CRESCENT_BANNER_PATTERN, 4))
-                                    .add(createItem(STASIS_ARMOR_TRIM_SMITHING_TEMPLATE, 4))
+                                    .add(createItem(MUSIC_DISC_GLARE, 3))
+                                    .add(createItem(CRESCENT_BANNER_PATTERN, 3))
+                                    .add(createItem(STASIS_ARMOR_TRIM_SMITHING_TEMPLATE, 3))
                     )
                     .withPool(
                             LootPool.lootPool()
                                     .setRolls(ConstantValue.exactly(2))
-                                    .add(EmptyLootItem.emptyItem().setWeight(100))
+                                    .add(EmptyLootItem.emptyItem().setWeight(192))
 
-                                    .add(createItem(BOOK, 50).apply(
+                                    .add(createItem(BOOK, 48).apply(
                                                     new EnchantRandomlyFunction.Builder()
                                                             .withOneOf(
                                                                     HolderSet.direct(
@@ -140,20 +138,18 @@ public class EnderscapeVaultLootProvider extends SimpleFabricLootTableProvider {
                                             )
                                     )
 
-                                    .add(createEnchantedBook(LIGHTSPEED, 10))
-
-                                    .add(createItem(BOOK, 10).apply(
+                                    .add(createItem(BOOK, 16).apply(
                                                     new EnchantRandomlyFunction.Builder()
                                                             .withOneOf(
                                                                     HolderSet.direct(
-                                                                            getEnchantmentReference(BUNDLING),
-                                                                            getEnchantmentReference(REBOUND)
+                                                                            getEnchantmentReference(REBOUND),
+                                                                            getEnchantmentReference(RESONANCE)
                                                                     )
                                                             )
                                             )
                                     )
 
-                                    .add(createItem(BOOK, 4).apply(
+                                    .add(createItem(BOOK, 8).apply(
                                                     new EnchantRandomlyFunction.Builder()
                                                             .withOneOf(
                                                                     HolderSet.direct(

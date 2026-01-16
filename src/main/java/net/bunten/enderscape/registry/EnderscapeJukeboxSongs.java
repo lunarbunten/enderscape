@@ -27,7 +27,7 @@ public class EnderscapeJukeboxSongs {
     }
 
     private static void register(BootstrapContext<JukeboxSong> context, ResourceKey<JukeboxSong> key, Holder<SoundEvent> soundEvent, float length, int output) {
-        context.register(key, new JukeboxSong(soundEvent, Component.translatable("jukebox_song.enderscape." + key.location().getPath()), length, output));
+        context.register(key, new JukeboxSong(soundEvent, Component.translatable("jukebox_song.enderscape." + key.identifier().getPath()), length, output));
     }
 
     private static ResourceKey<JukeboxSong> register(String name) {

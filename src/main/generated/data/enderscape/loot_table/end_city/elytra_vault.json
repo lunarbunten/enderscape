@@ -51,6 +51,31 @@
               "function": "minecraft:set_damage"
             }
           ],
+          "name": "minecraft:diamond_spear",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "type": "minecraft:uniform",
+                "max": 40.0,
+                "min": 20.0
+              },
+              "options": "#minecraft:on_random_loot"
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.4
+              },
+              "function": "minecraft:set_damage"
+            }
+          ],
           "name": "minecraft:diamond_pickaxe",
           "weight": 20
         },
@@ -152,7 +177,7 @@
             }
           ],
           "name": "minecraft:diamond_helmet",
-          "weight": 25
+          "weight": 30
         },
         {
           "type": "minecraft:item",
@@ -177,7 +202,7 @@
             }
           ],
           "name": "minecraft:diamond_chestplate",
-          "weight": 25
+          "weight": 30
         },
         {
           "type": "minecraft:item",
@@ -202,7 +227,7 @@
             }
           ],
           "name": "minecraft:diamond_leggings",
-          "weight": 25
+          "weight": 30
         },
         {
           "type": "minecraft:item",
@@ -227,13 +252,13 @@
             }
           ],
           "name": "minecraft:diamond_boots",
-          "weight": 25
+          "weight": 30
         }
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 3.0,
-        "min": 1.0
+        "max": 2.0,
+        "min": 0.0
       }
     },
     {
@@ -346,18 +371,14 @@
       "bonus_rolls": 0.0,
       "entries": [
         {
-          "type": "minecraft:empty",
-          "weight": 60
-        },
-        {
           "type": "minecraft:item",
           "functions": [
             {
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 8.0,
-                "min": 1.0
+                "max": 12.0,
+                "min": 4.0
               },
               "function": "minecraft:set_count"
             }
@@ -388,8 +409,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 2.0,
-        "min": 1.0
+        "max": 1.0,
+        "min": 0.0
       }
     },
     {
@@ -397,12 +418,7 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 60
-        },
-        {
-          "type": "minecraft:item",
-          "name": "enderscape:music_disc_glare",
-          "weight": 6
+          "weight": 40
         },
         {
           "type": "minecraft:item",
@@ -416,13 +432,18 @@
         },
         {
           "type": "minecraft:item",
+          "name": "enderscape:music_disc_glare",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
           "name": "enderscape:crescent_banner_pattern",
-          "weight": 4
+          "weight": 3
         },
         {
           "type": "minecraft:item",
           "name": "enderscape:stasis_armor_trim_smithing_template",
-          "weight": 4
+          "weight": 3
         }
       ],
       "rolls": 1.0
@@ -432,7 +453,7 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 100
+          "weight": 192
         },
         {
           "type": "minecraft:item",
@@ -456,21 +477,7 @@
             }
           ],
           "name": "minecraft:book",
-          "weight": 50
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "enchantments": {
-                "enderscape:lightspeed": 1.0
-              },
-              "function": "minecraft:set_enchantments"
-            }
-          ],
-          "name": "minecraft:book",
-          "weight": 10
+          "weight": 48
         },
         {
           "type": "minecraft:item",
@@ -478,13 +485,13 @@
             {
               "function": "minecraft:enchant_randomly",
               "options": [
-                "enderscape:bundling",
-                "enderscape:rebound"
+                "enderscape:rebound",
+                "enderscape:resonance"
               ]
             }
           ],
           "name": "minecraft:book",
-          "weight": 10
+          "weight": 16
         },
         {
           "type": "minecraft:item",
@@ -498,7 +505,7 @@
             }
           ],
           "name": "minecraft:book",
-          "weight": 4
+          "weight": 8
         }
       ],
       "rolls": 2.0

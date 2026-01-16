@@ -6,14 +6,18 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SingleQuadParticle;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.renderer.state.QuadParticleRenderState;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
+import org.joml.Vector3fc;
 
 @Environment(EnvType.CLIENT)
 public class DashJumpShockwaveParticle extends SingleQuadParticle {
@@ -29,7 +33,7 @@ public class DashJumpShockwaveParticle extends SingleQuadParticle {
         this.sprites = sprites;
         this.options = options;
 
-        Vector3f velocity = options.velocity();
+        Vector3fc velocity = options.velocity();
         xd = velocity.x();
         yd = velocity.y();
         zd = velocity.z();
@@ -40,11 +44,11 @@ public class DashJumpShockwaveParticle extends SingleQuadParticle {
 
         alpha = 1;
 
-        Vec3 color = Vec3.fromRGB24(0xA3FFFF);
+        Vector3f color = ARGB.vector3fFromRGB24(0xA3FFFF);
 
-        rCol = (float) color.x;
-        gCol = (float) color.y;
-        bCol = (float) color.z;
+        rCol = color.x;
+        gCol = color.y;
+        bCol = color.z;
 
         lifetime = 30;
         quadSize = 3 * options.scale();

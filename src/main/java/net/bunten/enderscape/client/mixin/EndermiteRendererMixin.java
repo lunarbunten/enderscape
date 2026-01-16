@@ -4,7 +4,7 @@ import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.client.entity.EndermiteEyesLayer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.EndermiteModel;
+import net.minecraft.client.model.monster.endermite.EndermiteModel;
 import net.minecraft.client.renderer.entity.EndermiteRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;

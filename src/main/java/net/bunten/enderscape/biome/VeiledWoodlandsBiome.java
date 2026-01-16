@@ -6,11 +6,18 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.EndPlacements;
-import net.minecraft.sounds.Musics;
+import net.minecraft.world.attribute.*;
+import net.minecraft.world.attribute.modifier.FloatModifier;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.biome.*;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+
+import java.util.List;
+import java.util.Optional;
 
 import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.*;
 
@@ -50,18 +57,30 @@ public class VeiledWoodlandsBiome {
                 .hasPrecipitation(false)
                 .temperature(0.5F)
                 .downfall(0.5F)
+                .putAttributes(EnvironmentAttributeMap.builder()
+                        .set(EnderscapeEnvironmentAttributes.NEBULA_COLOR, 0x969BAA)
+                        .modify(EnderscapeEnvironmentAttributes.NEBULA_ALPHA, FloatModifier.MULTIPLY, 0.75F)
+                        .set(EnderscapeEnvironmentAttributes.STAR_COLOR, 0xB493FF)
+
+                        .set(EnvironmentAttributes.SKY_COLOR, 0x161621)
+                        .set(EnvironmentAttributes.SKY_LIGHT_COLOR, 0x242035)
+                        .set(EnvironmentAttributes.FOG_COLOR, 0x101017)
+                        .set(EnderscapeEnvironmentAttributes.FOG_END_DENSITY, 0.75F)
+                        .set(EnvironmentAttributes.CLOUD_COLOR, EnderscapeBiomes.DEFAULT_CLOUD_COLOR)
+
+                        .set(EnvironmentAttributes.WATER_FOG_COLOR, 0x464d59)
+                        .set(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(EnderscapeParticles.VOID_STARS, 0.003F))
+                        .set(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
+                                Optional.of(EnderscapeBiomeSounds.VEILED_WOODLANDS.loop()),
+                                Optional.of(new AmbientMoodSettings(EnderscapeBiomeSounds.VEILED_WOODLANDS.mood(), 6000, 8, 2)),
+                                List.of(new AmbientAdditionsSettings(EnderscapeBiomeSounds.VEILED_WOODLANDS.additions(), 0.0006))
+                        ))
+                        .set(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(EnderscapeBiomeSounds.VEILED_WOODLANDS.music()))
+                        .build())
                 .specialEffects(new BiomeSpecialEffects.Builder()
-                        .skyColor(0x161621)
-                        .fogColor(EnderscapeBiomes.lightenFogColor(0x101017))
                         .waterColor(0x96a3b1)
-                        .waterFogColor(0x464d59)
                         .foliageColorOverride(0xa1b298)
                         .grassColorOverride(0xa1b298)
-                        .ambientParticle(new AmbientParticleSettings(EnderscapeParticles.VOID_STARS, 0.003F))
-                        .ambientLoopSound(EnderscapeBiomeSounds.VEILED_WOODLANDS.loop())
-                        .ambientAdditionsSound(new AmbientAdditionsSettings(EnderscapeBiomeSounds.VEILED_WOODLANDS.additions(), 0.0006))
-                        .ambientMoodSound(new AmbientMoodSettings(EnderscapeBiomeSounds.VEILED_WOODLANDS.mood(), 6000, 8, 2))
-                        .backgroundMusic(Musics.createGameMusic(EnderscapeBiomeSounds.VEILED_WOODLANDS.music()))
                         .build()
                 )
 

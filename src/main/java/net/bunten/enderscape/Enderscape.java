@@ -5,15 +5,15 @@ import net.bunten.enderscape.registry.*;
 import net.bunten.enderscape.sound.StructureMusicHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.TheEndBiomes;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
+import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.biome.Biome;
 import org.apache.logging.log4j.LogManager;
@@ -27,17 +27,17 @@ public class Enderscape implements ModInitializer {
 
     public static final boolean IS_DEBUG = FabricLoader.getInstance().isDevelopmentEnvironment();
 
-    public static ResourceLocation id(String path) {
-        return ResourceLocation.tryBuild(MOD_ID, path);
+    public static Identifier id(String path) {
+        return Identifier.tryBuild(MOD_ID, path);
     }
 
     public static SoundEvent registerSoundEvent(String name) {
-        ResourceLocation id = id(name);
+        Identifier id = id(name);
         return Registry.register(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
     }
 
     public static Holder.Reference<SoundEvent> registerSoundEventHolder(String name) {
-        ResourceLocation location = id(name);
+        Identifier location = id(name);
         return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, location, SoundEvent.createVariableRangeEvent(location));
     }
 
@@ -53,9 +53,11 @@ public class Enderscape implements ModInitializer {
         Reflection.initialize(
                 EnderscapeConfig.class,
                 EnderscapeRegistries.class,
+                EnderscapeEnvironmentAttributes.class,
                 EnderscapeItems.class,
                 EnderscapeBlocks.class,
                 EnderscapePotions.class,
+                EnderscapeAttributes.class,
                 EnderscapeStructureMusic.class,
                 EnderscapeFeatures.class,
                 EnderscapeConfiguredFeatures.class,
@@ -88,6 +90,7 @@ public class Enderscape implements ModInitializer {
                 EnderscapeDataComponents.class,
                 EnderscapeDensityFunctionTypes.class,
                 EnderscapeSpawnConditionTypes.class,
+                EnderscapeRecipeSerializers.class,
                 StructureMusicHandler.class
         );
 
@@ -99,17 +102,18 @@ public class Enderscape implements ModInitializer {
         EnderscapeConfig config = EnderscapeConfig.getInstance();
 
         FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(container -> {
-            ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("fix_levitation_advancement"), container, Component.translatable("pack.enderscape.fix_levitation_advancement"), getActivationType(config.defaultDataPackFixLevitationAdvancement));
-            ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("fix_vanilla_recipes"), container, Component.translatable("pack.enderscape.fix_vanilla_recipes"), getActivationType(config.defaultDataPackFixVanillaRecipes));
-            ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("new_end_cities"), container, Component.translatable("pack.enderscape.new_end_cities"), getActivationType(config.defaultDataPackNewEndCities));
-            ResourceManagerHelper.registerBuiltinResourcePack(Enderscape.id("new_terrain"), container, Component.translatable("pack.enderscape.new_terrain"), getActivationType(config.defaultDataPackNewTerrain));
+            ResourceLoader.registerBuiltinPack(Enderscape.id("fix_levitation_advancement"), container, Component.translatable("pack.enderscape.fix_levitation_advancement"), getActivationType(config.defaultDataPackFixLevitationAdvancement));
+            ResourceLoader.registerBuiltinPack(Enderscape.id("fix_vanilla_recipes"), container, Component.translatable("pack.enderscape.fix_vanilla_recipes"), getActivationType(config.defaultDataPackFixVanillaRecipes));
+            ResourceLoader.registerBuiltinPack(Enderscape.id("new_end_cities"), container, Component.translatable("pack.enderscape.new_end_cities"), getActivationType(config.defaultDataPackNewEndCities));
+            ResourceLoader.registerBuiltinPack(Enderscape.id("new_strongholds"), container, Component.translatable("pack.enderscape.new_strongholds"), getActivationType(config.defaultDataPackNewStrongholds));
+            ResourceLoader.registerBuiltinPack(Enderscape.id("new_terrain"), container, Component.translatable("pack.enderscape.new_terrain"), getActivationType(config.defaultDataPackNewTerrain));
         });
 
         LOGGER.info("Enderscape initialized!");
     }
 
     @NotNull
-    private static ResourcePackActivationType getActivationType(boolean value) {
-        return value ? ResourcePackActivationType.DEFAULT_ENABLED : ResourcePackActivationType.NORMAL;
+    private static PackActivationType getActivationType(boolean value) {
+        return value ? PackActivationType.DEFAULT_ENABLED : PackActivationType.NORMAL;
     }
 }

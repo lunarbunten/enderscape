@@ -7,6 +7,7 @@ import net.minecraft.tags.TagKey;
 
 public class EnderscapeSoundEventTags {
     public static final TagKey<SoundEvent> AMBIENCE_REPLACEABLE_BY_ENDERSCAPE = register("ambience_replaceable_by_enderscape");
+    public static final TagKey<SoundEvent> STRUCTURE_MUSIC = register("structure_music");
 
     private static TagKey<SoundEvent> register(String name) {
         return TagKey.create(Registries.SOUND_EVENT, Enderscape.id(name));

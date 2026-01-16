@@ -2,7 +2,7 @@
 	"variants": {
 		"facing=east": [
 			{
-				"model": "enderscape:block/murublight_bracket",
+				"model": "enderscape:block/murublight_bracket_1",
 				"x": 90,
 				"y": 90
 			},
@@ -24,7 +24,7 @@
 		],
 		"facing=north": [
 			{
-				"model": "enderscape:block/murublight_bracket",
+				"model": "enderscape:block/murublight_bracket_1",
 				"x": 90
 			},
 			{
@@ -42,7 +42,7 @@
 		],
 		"facing=south": [
 			{
-				"model": "enderscape:block/murublight_bracket",
+				"model": "enderscape:block/murublight_bracket_1",
 				"x": 90,
 				"y": 180
 			},
@@ -64,7 +64,7 @@
 		],
 		"facing=west": [
 			{
-				"model": "enderscape:block/murublight_bracket",
+				"model": "enderscape:block/murublight_bracket_1",
 				"x": 90,
 				"y": 270
 			},
@@ -86,7 +86,7 @@
 		],
 		"facing=down": [
 			{
-				"model": "enderscape:block/murublight_bracket",
+				"model": "enderscape:block/murublight_bracket_1",
 				"x": 180
 			},
 			{
@@ -104,7 +104,7 @@
 		],
 		"facing=up": [
 			{
-				"model": "enderscape:block/murublight_bracket"
+				"model": "enderscape:block/murublight_bracket_1"
 			},
 			{
 				"model": "enderscape:block/murublight_bracket_2"

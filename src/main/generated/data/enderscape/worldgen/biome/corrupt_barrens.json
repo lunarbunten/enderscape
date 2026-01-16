@@ -1,42 +1,61 @@
 {
+  "attributes": {
+    "enderscape:visual/enderscape/ambient_light_factor": 0.75,
+    "enderscape:visual/enderscape/fog_end_density": {
+      "argument": 0.5,
+      "modifier": "multiply"
+    },
+    "enderscape:visual/enderscape/nebula_alpha": {
+      "argument": 0.8,
+      "modifier": "multiply"
+    },
+    "enderscape:visual/enderscape/nebula_color": "#555189",
+    "enderscape:visual/enderscape/star_alpha": {
+      "argument": 0.7,
+      "modifier": "multiply"
+    },
+    "enderscape:visual/enderscape/star_color": "#9f89ff",
+    "minecraft:audio/ambient_sounds": {
+      "additions": {
+        "sound": "enderscape:ambient.corrupt_barrens.additions",
+        "tick_chance": 0.0015
+      },
+      "loop": "enderscape:ambient.corrupt_barrens.loop",
+      "mood": {
+        "block_search_extent": 8,
+        "offset": 2.0,
+        "sound": "enderscape:ambient.corrupt_barrens.mood",
+        "tick_delay": 6000
+      }
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "max_delay": 24000,
+        "min_delay": 12000,
+        "sound": "enderscape:music.enderscape.biome.corrupt_barrens"
+      }
+    },
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "enderscape:corrupt_spores"
+        },
+        "probability": 0.03
+      }
+    ],
+    "minecraft:visual/cloud_color": "#00000000",
+    "minecraft:visual/fog_color": "#0b090f",
+    "minecraft:visual/fog_start_distance": -40.0,
+    "minecraft:visual/sky_color": "#0f0c15",
+    "minecraft:visual/sky_light_color": "#242035",
+    "minecraft:visual/water_fog_color": "#544f63"
+  },
   "carvers": [],
   "downfall": 0.5,
   "effects": {
-    "additions_sound": {
-      "sound": "enderscape:ambient.corrupt_barrens.additions",
-      "tick_chance": 0.0015
-    },
-    "ambient_sound": "enderscape:ambient.corrupt_barrens.loop",
-    "fog_color": 4799331,
-    "foliage_color": 8682641,
-    "grass_color": 8682641,
-    "mood_sound": {
-      "block_search_extent": 8,
-      "offset": 2.0,
-      "sound": "enderscape:ambient.corrupt_barrens.mood",
-      "tick_delay": 6000
-    },
-    "music": [
-      {
-        "data": {
-          "max_delay": 24000,
-          "min_delay": 12000,
-          "replace_current_music": false,
-          "sound": "enderscape:music.enderscape.biome.corrupt_barrens"
-        },
-        "weight": 1
-      }
-    ],
-    "music_volume": 1.0,
-    "particle": {
-      "options": {
-        "type": "enderscape:corrupt_spores"
-      },
-      "probability": 0.03
-    },
-    "sky_color": 986133,
-    "water_color": 6972541,
-    "water_fog_color": 5525347
+    "foliage_color": "#847c91",
+    "grass_color": "#847c91",
+    "water_color": "#6a647d"
   },
   "features": [
     [],

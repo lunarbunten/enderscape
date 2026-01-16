@@ -25,7 +25,6 @@ public class EnderscapeSoundTypes {
     public static final SoundType CHORUS_SPROUTS = registerSoundType("chorus_sprouts", 1, 1.15F);
     public static final SoundType CORRUPT_GROWTH = registerSoundType("corrupt_growth", 0.5F, 1);
     public static final SoundType CORRUPT_OVERGROWTH = registerSoundType("corrupt_overgrowth", 1, 1.1F);
-    public static final SoundType CUT_SHADOLINE = registerSoundType("cut_shadoline", 1.1F, 1.2F);
     public static final SoundType DRIFT_JELLY_BLOCK = registerSoundType("drift_jelly", 1, 1);
     public static final SoundType DRY_END_GROWTH = registerSoundType("dry_end_growth", 1, 1.15F);
     public static final SoundType DUSK_PURPUR = registerSoundType("dusk_purpur", 0.7F, 1.1F);

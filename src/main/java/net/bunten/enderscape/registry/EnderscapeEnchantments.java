@@ -2,6 +2,7 @@ package net.bunten.enderscape.registry;
 
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
+import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -13,7 +14,9 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.LevelBasedValue;
 import net.minecraft.world.item.enchantment.effects.AddValue;
+import net.minecraft.world.item.enchantment.effects.SetValue;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +26,8 @@ public class EnderscapeEnchantments {
     public static final List<ResourceKey<Enchantment>> ENCHANTMENTS = new ArrayList<>();
 
     public static final ResourceKey<Enchantment> BUNDLING = register("bundling");
-    public static final ResourceKey<Enchantment> LIGHTSPEED = register("lightspeed");
     public static final ResourceKey<Enchantment> REBOUND = register("rebound");
+    public static final ResourceKey<Enchantment> RESONANCE = register("resonance");
     public static final ResourceKey<Enchantment> TRANSDIMENSIONAL = register("transdimensional");
 
     public static void bootstrap(BootstrapContext<Enchantment> context) {
@@ -33,26 +36,30 @@ public class EnderscapeEnchantments {
         register(context, BUNDLING,
                 Enchantment.enchantment(
                         Enchantment.definition(
-                                items.getOrThrow(EnderscapeItemTags.MAGNIA_ATTRACTOR_ENCHANTABLE), 1, 1, Enchantment.constantCost(20), Enchantment.constantCost(50), 8, EquipmentSlotGroup.ANY
-                        )
-                )
-        );
-
-        register(context, LIGHTSPEED,
-                Enchantment.enchantment(
-                        Enchantment.definition(
-                                items.getOrThrow(EnderscapeItemTags.MIRROR_ENCHANTABLE), 1, 3, Enchantment.constantCost(20), Enchantment.constantCost(50), 8, EquipmentSlotGroup.HAND
+                                items.getOrThrow(EnderscapeItemTags.MAGNIA_ATTRACTOR_ENCHANTABLE),
+                                4,
+                                1,
+                                Enchantment.constantCost(30),
+                                Enchantment.constantCost(50),
+                                8,
+                                EquipmentSlotGroup.ANY
                         )
                 ).withSpecialEffect(
-                        EnderscapeEnchantmentEffectComponents.MIRROR_DISTANCE_FOR_COST_INCREASE,
-                        new AddValue(LevelBasedValue.perLevel(250))
+                        EnderscapeEnchantmentEffectComponents.MAGNET_ENABLE_DEPOSIT_INTO_BUNDLES,
+                        new SetValue(LevelBasedValue.constant(1))
                 )
         );
 
         register(context, REBOUND,
                 Enchantment.enchantment(
                         Enchantment.definition(
-                                items.getOrThrow(EnderscapeItemTags.ELYTRA_ENCHANTABLE), 1, 1, Enchantment.constantCost(20), Enchantment.constantCost(50), 8, EquipmentSlotGroup.CHEST
+                                items.getOrThrow(EnderscapeItemTags.ELYTRA_ENCHANTABLE),
+                                2,
+                                1,
+                                Enchantment.constantCost(30),
+                                Enchantment.constantCost(80),
+                                8,
+                                EquipmentSlotGroup.CHEST
                         )
                 )
         );
@@ -60,14 +67,48 @@ public class EnderscapeEnchantments {
         register(context, TRANSDIMENSIONAL,
                 Enchantment.enchantment(
                         Enchantment.definition(
-                                items.getOrThrow(EnderscapeItemTags.MIRROR_ENCHANTABLE), 1, 1, Enchantment.constantCost(20), Enchantment.constantCost(50), 8, EquipmentSlotGroup.HAND
+                                items.getOrThrow(EnderscapeItemTags.MIRROR_ENCHANTABLE),
+                                1,
+                                1,
+                                Enchantment.constantCost(30),
+                                Enchantment.constantCost(80),
+                                8,
+                                EquipmentSlotGroup.HAND
                         )
+                ).withSpecialEffect(
+                        EnderscapeEnchantmentEffectComponents.LODESTONE_TELEPORTATION_ENABLE_TRANSDIMENSIONAL,
+                        new SetValue(LevelBasedValue.constant(1))
+                )
+        );
+
+        register(context, RESONANCE,
+                Enchantment.enchantment(
+                        Enchantment.definition(
+                                items.getOrThrow(EnderscapeItemTags.NEBULITE_TOOL_ENCHANTABLE),
+                                10,
+                                3,
+                                Enchantment.dynamicCost(1, 15),
+                                Enchantment.dynamicCost(20, 40),
+                                2,
+                                EquipmentSlotGroup.ANY
+                        )
+                ).withSpecialEffect(
+                        EnderscapeEnchantmentEffectComponents.LODESTONE_TELEPORTATION_DISTANCE_TO_INCREASE_COST,
+                        new AddValue(LevelBasedValue.perLevel(250))
+                ).withEffect(
+                        EnderscapeEnchantmentEffectComponents.INTEGER_COUNTER_THRESHOLD,
+                        new AddValue(LevelBasedValue.perLevel(100)),
+                        MatchTool.toolMatches(ItemPredicate.Builder.item().of(items, EnderscapeItems.MAGNIA_ATTRACTOR))
+                ).withEffect(
+                        EnderscapeEnchantmentEffectComponents.INTEGER_COUNTER_THRESHOLD,
+                        new AddValue(LevelBasedValue.perLevel(2)),
+                        MatchTool.toolMatches(ItemPredicate.Builder.item().of(items, EnderscapeItems.DAGGER))
                 )
         );
     }
 
     private static void register(BootstrapContext<Enchantment> context, ResourceKey<Enchantment> key, Enchantment.Builder builder) {
-        context.register(key, builder.build(key.location()));
+        context.register(key, builder.build(key.identifier()));
     }
 
     private static ResourceKey<Enchantment> register(String name) {

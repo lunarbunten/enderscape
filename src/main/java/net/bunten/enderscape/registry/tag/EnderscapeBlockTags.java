@@ -2,7 +2,7 @@ package net.bunten.enderscape.registry.tag;
 
 import net.bunten.enderscape.Enderscape;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
@@ -54,7 +54,6 @@ public class EnderscapeBlockTags {
     public static final TagKey<Block> RUSTLE_PREFERRED = register("rustle_preferred");
     public static final TagKey<Block> RUSTLE_SPAWNABLE_ON = register("rustle_spawnable_on");
     public static final TagKey<Block> SHADOLINE_BLOCKS = register("shadoline_blocks");
-    public static final TagKey<Block> SUPPORTS_END_CRYSTAL = register("supports_end_crystal");
     public static final TagKey<Block> VEILED_LOGS = register("veiled_logs");
     public static final TagKey<Block> VEILED_SAPLING_MATURES_ON = register("veiled_sapling_matures_on");
     public static final TagKey<Block> VEILED_WOODLANDS_VEGETATION_PLANTABLE_ON = register("veiled_woodlands_vegetation_plantable_on");
@@ -70,6 +69,6 @@ public class EnderscapeBlockTags {
     }
 
     private static TagKey<Block> common(String name) {
-        return TagKey.create(Registries.BLOCK, ResourceLocation.tryBuild("c", name));
+        return TagKey.create(Registries.BLOCK, Identifier.tryBuild("c", name));
     }
 }

@@ -6,11 +6,18 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.EndPlacements;
-import net.minecraft.sounds.Musics;
+import net.minecraft.world.attribute.*;
+import net.minecraft.world.attribute.modifier.FloatModifier;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.biome.*;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+
+import java.util.List;
+import java.util.Optional;
 
 import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.*;
 
@@ -20,9 +27,7 @@ public class CelestialGroveBiome {
         HolderGetter<PlacedFeature> features = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<ConfiguredWorldCarver<?>> carvers = context.lookup(Registries.CONFIGURED_CARVER);
 
-        MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder()
-                .addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(EnderscapeEntities.DRIFTER, 3, 6))
-                .addSpawn(MobCategory.CREATURE, 2, new MobSpawnSettings.SpawnerData(EnderscapeEntities.DRIFTLET, 2, 3));
+        MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder().addSpawn(MobCategory.CREATURE, 6, new MobSpawnSettings.SpawnerData(EnderscapeEntities.DRIFTER, 3, 6));
 
         BiomeDefaultFeatures.endSpawns(spawns);
 
@@ -51,18 +56,30 @@ public class CelestialGroveBiome {
                 .hasPrecipitation(false)
                 .temperature(0.5F)
                 .downfall(0.5F)
+                .putAttributes(EnvironmentAttributeMap.builder()
+                        .set(EnderscapeEnvironmentAttributes.NEBULA_COLOR, 0x875643)
+                        .modify(EnderscapeEnvironmentAttributes.NEBULA_ALPHA, FloatModifier.MULTIPLY, 1.15F)
+                        .set(EnderscapeEnvironmentAttributes.STAR_COLOR, 0xFFA589)
+                        .modify(EnderscapeEnvironmentAttributes.STAR_ALPHA, FloatModifier.MULTIPLY, 1.4F)
+
+                        .set(EnvironmentAttributes.SKY_LIGHT_COLOR, 0x6B3D4D)
+                        .set(EnvironmentAttributes.FOG_COLOR, 0x120D14)
+                        .set(EnderscapeEnvironmentAttributes.FOG_END_DENSITY, 0.85F)
+                        .set(EnvironmentAttributes.CLOUD_COLOR, EnderscapeBiomes.DEFAULT_CLOUD_COLOR)
+
+                        .set(EnvironmentAttributes.WATER_FOG_COLOR, 0x3d7363)
+                        .set(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(EnderscapeParticles.CELESTIAL_SPORES, 0.012F))
+                        .set(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
+                                Optional.of(EnderscapeBiomeSounds.CELESTIAL_GROVE.loop()),
+                                Optional.of(new AmbientMoodSettings(EnderscapeBiomeSounds.CELESTIAL_GROVE.mood(), 6000, 8, 2)),
+                                List.of(new AmbientAdditionsSettings(EnderscapeBiomeSounds.CELESTIAL_GROVE.additions(), 0.0015))
+                        ))
+                        .set(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(EnderscapeBiomeSounds.CELESTIAL_GROVE.music()))
+                        .build())
                 .specialEffects(new BiomeSpecialEffects.Builder()
-                        .skyColor(EnderscapeBiomes.DEFAULT_SKY_COLOR)
-                        .fogColor(EnderscapeBiomes.lightenFogColor(0x120D14))
                         .waterColor(0x4ec7ab)
-                        .waterFogColor(0x3d7363)
                         .foliageColorOverride(0xB6DB62)
                         .grassColorOverride(0xB6DB61)
-                        .ambientParticle(new AmbientParticleSettings(EnderscapeParticles.CELESTIAL_SPORES, 0.012F))
-                        .ambientLoopSound(EnderscapeBiomeSounds.CELESTIAL_GROVE.loop())
-                        .ambientAdditionsSound(new AmbientAdditionsSettings(EnderscapeBiomeSounds.CELESTIAL_GROVE.additions(), 0.0015))
-                        .ambientMoodSound(new AmbientMoodSettings(EnderscapeBiomeSounds.CELESTIAL_GROVE.mood(), 6000, 8, 2))
-                        .backgroundMusic(Musics.createGameMusic(EnderscapeBiomeSounds.CELESTIAL_GROVE.music()))
                         .build()
                 )
 

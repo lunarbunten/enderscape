@@ -6,11 +6,18 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.EndPlacements;
-import net.minecraft.sounds.Musics;
+import net.minecraft.world.attribute.*;
+import net.minecraft.world.attribute.modifier.FloatModifier;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.biome.*;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+
+import java.util.List;
+import java.util.Optional;
 
 import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.*;
 
@@ -52,18 +59,30 @@ public class MagniaCragsBiome {
                 .hasPrecipitation(false)
                 .temperature(0.5F)
                 .downfall(0.5F)
+                .putAttributes(EnvironmentAttributeMap.builder()
+                        .set(EnderscapeEnvironmentAttributes.NEBULA_COLOR, 0x96AD9E)
+                        .modify(EnderscapeEnvironmentAttributes.NEBULA_ALPHA, FloatModifier.MULTIPLY, 0.5F)
+                        .set(EnderscapeEnvironmentAttributes.STAR_COLOR, 0x89FFD5)
+                        .modify(EnderscapeEnvironmentAttributes.STAR_ALPHA, FloatModifier.MULTIPLY, 0.85F)
+
+                        .set(EnvironmentAttributes.SKY_COLOR, 0x151616)
+                        .set(EnvironmentAttributes.SKY_LIGHT_COLOR, 0x374745)
+                        .set(EnvironmentAttributes.FOG_COLOR, 0x0F1010)
+                        .set(EnvironmentAttributes.CLOUD_COLOR, EnderscapeBiomes.DEFAULT_CLOUD_COLOR)
+
+                        .set(EnvironmentAttributes.WATER_FOG_COLOR, 0x5e656e)
+                        .set(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(EnderscapeParticles.VOID_STARS, 0.003F))
+                        .set(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
+                                Optional.of(EnderscapeBiomeSounds.MAGNIA_FIELDS.loop()),
+                                Optional.of(new AmbientMoodSettings(EnderscapeBiomeSounds.MAGNIA_FIELDS.mood(), 6000, 8, 2)),
+                                List.of(new AmbientAdditionsSettings(EnderscapeBiomeSounds.MAGNIA_FIELDS.additions(), 0.0015))
+                        ))
+                        .set(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(EnderscapeBiomeSounds.MAGNIA_FIELDS.music()))
+                        .build())
                 .specialEffects(new BiomeSpecialEffects.Builder()
-                        .skyColor(0x151616)
-                        .fogColor(EnderscapeBiomes.lightenFogColor(0x0F1010))
                         .waterColor(0x89919c)
-                        .waterFogColor(0x5e656e)
                         .foliageColorOverride(0x919c8c)
                         .grassColorOverride(0x919c8c)
-                        .ambientParticle(new AmbientParticleSettings(EnderscapeParticles.VOID_STARS, 0.003F))
-                        .ambientLoopSound(EnderscapeBiomeSounds.MAGNIA_FIELDS.loop())
-                        .ambientAdditionsSound(new AmbientAdditionsSettings(EnderscapeBiomeSounds.MAGNIA_FIELDS.additions(), 0.0015))
-                        .ambientMoodSound(new AmbientMoodSettings(EnderscapeBiomeSounds.MAGNIA_FIELDS.mood(), 6000, 8, 2))
-                        .backgroundMusic(Musics.createGameMusic(EnderscapeBiomeSounds.MAGNIA_FIELDS.music()))
                         .build()
                 )
 

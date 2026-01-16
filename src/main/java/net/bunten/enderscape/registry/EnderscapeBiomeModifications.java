@@ -10,25 +10,30 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.placement.EndPlacements;
-import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.util.random.WeightedList;
+import net.minecraft.world.attribute.*;
+import net.minecraft.world.attribute.modifier.FloatModifier;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.biome.*;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
+
+import static net.bunten.enderscape.registry.EnderscapeEnvironmentAttributes.FOG_END_DENSITY;
+import static net.minecraft.world.attribute.EnvironmentAttributes.*;
 
 public class EnderscapeBiomeModifications {
 
     private static final EnderscapeConfig CONFIG = EnderscapeConfig.getInstance();
 
     private static final Predicate<BiomeSelectionContext> IS_END = (selection) -> selection.getBiomeRegistryEntry().is(BiomeTags.IS_END);
-    private static final WeightedList<Music> DEFAULT_END_MUSIC_POOL = WeightedList.of(Musics.END);
+    private static final BackgroundMusic DEFAULT_END_BGM = new BackgroundMusic(Musics.END);
 
     static {
         registerAmbienceModifications();
@@ -36,24 +41,42 @@ public class EnderscapeBiomeModifications {
     }
 
     private static void registerAmbienceModifications() {
+
+        conditionalAmbienceModification(
+                CONFIG.flashUpdatedVisuals,
+                "update_end_biome_sky_light_color_when_default",
+                selection -> !selection.getBiome().getAttributes().contains(SKY_LIGHT_COLOR),
+                (selection, modification) -> modification.getAttributes().set(SKY_LIGHT_COLOR, 0x654B82)
+        );
+
+        conditionalAmbienceModification(
+                CONFIG.ambienceUpdateFogDensity,
+                "update_end_biome_fog_density_when_default",
+                selection -> !selection.getBiome().getAttributes().contains(FOG_START_DISTANCE) && !selection.getBiome().getAttributes().contains(FOG_END_DISTANCE),
+                (selection, modification) -> {
+                    modification.getAttributes().set(FOG_START_DISTANCE, -20.0F);
+                    modification.getAttributes().setModifier(FOG_END_DENSITY, FloatModifier.MULTIPLY, 0.9F);
+                }
+        );
+
         conditionalAmbienceModification(
                 CONFIG.ambienceUpdateMusicPools,
                 "update_end_biome_music_when_default",
-                selection -> selection.getBiome().getBackgroundMusic().isPresent() && selection.getBiome().getBackgroundMusic().get().equals(DEFAULT_END_MUSIC_POOL),
-                (selection, modification) -> modification.getEffects().setMusic(new Music(EnderscapeBiomeSounds.DEFAULT_END.music(), 12000, 24000, false))
+                selection -> !selection.getBiome().getAttributes().contains(BACKGROUND_MUSIC) || selection.getBiome().getAttributes().get(BACKGROUND_MUSIC).argument().equals(DEFAULT_END_BGM),
+                (selection, modification) -> modification.getAttributes().set(BACKGROUND_MUSIC, new BackgroundMusic(EnderscapeBiomeSounds.DEFAULT_END.music()))
         );
 
         conditionalAmbienceModification(
                 CONFIG.ambienceUpdateGrassColors,
                 "update_end_biome_grass_color_when_default",
-                selection -> selection.getBiome().getSpecialEffects().getGrassColorOverride().isEmpty(),
+                selection -> selection.getBiome().getSpecialEffects().grassColorOverride().isEmpty(),
                 (selection, modification) -> modification.getEffects().setGrassColor(EnderscapeBiomes.DEFAULT_GRASS_COLOR)
         );
 
         conditionalAmbienceModification(
                 CONFIG.ambienceUpdateFoliageColors,
                 "update_end_biome_foliage_color_when_default",
-                selection -> selection.getBiome().getSpecialEffects().getFoliageColorOverride().isEmpty(),
+                selection -> selection.getBiome().getSpecialEffects().foliageColorOverride().isEmpty(),
                 (selection, modification) -> modification.getEffects().setFoliageColor(EnderscapeBiomes.DEFAULT_FOLIAGE_COLOR)
         );
 
@@ -67,59 +90,64 @@ public class EnderscapeBiomeModifications {
         conditionalAmbienceModification(
                 CONFIG.ambienceUpdateWaterFogColors,
                 "update_end_biome_water_fog_color_when_default",
-                selection -> selection.getBiome().getWaterFogColor() == 329011,
+                selection -> !selection.getBiome().getAttributes().contains(WATER_FOG_COLOR) || selection.getBiome().getAttributes().get(WATER_FOG_COLOR).argument().equals(329011),
                 (selection, modification) -> modification.getEffects().setWaterFogColor(EnderscapeBiomes.DEFAULT_WATER_FOG_COLOR)
         );
 
         conditionalAmbienceModification(
                 CONFIG.ambienceUpdateParticles,
                 "update_end_biome_particles_when_missing",
-                selection -> selection.getBiome().getAmbientParticle().isEmpty(),
-                (selection, modification) -> modification.getEffects().setParticleConfig(new AmbientParticleSettings(EnderscapeParticles.VOID_STARS, 0.003F))
+                selection -> !selection.getBiome().getAttributes().contains(AMBIENT_PARTICLES),
+                (selection, modification) -> modification.getAttributes().set(AMBIENT_PARTICLES, AmbientParticle.of(EnderscapeParticles.VOID_STARS, 0.003F))
         );
 
         conditionalAmbienceModification(
                 CONFIG.ambienceUpdateSkyColors,
                 "update_end_biome_sky_colors_when_default",
-                selection -> selection.getBiome().getSkyColor() == 0,
-                (selection, modification) -> modification.getEffects().setSkyColor(EnderscapeBiomes.DEFAULT_SKY_COLOR)
+                selection -> !selection.getBiome().getAttributes().contains(SKY_COLOR),
+                (selection, modification) -> modification.getAttributes().set(SKY_COLOR, EnderscapeBiomes.DEFAULT_SKY_COLOR)
         );
 
         conditionalAmbienceModification(
                 CONFIG.ambienceUpdateFogColors,
                 "update_end_biome_fog_colors_when_default",
-                selection -> selection.getBiome().getSkyColor() == 10518688,
-                (selection, modification) -> modification.getEffects().setFogColor(EnderscapeBiomes.DEFAULT_FOG_COLOR)
+                selection -> !selection.getBiome().getAttributes().contains(FOG_COLOR),
+                (selection, modification) -> {
+                    modification.getAttributes().set(FOG_COLOR, EnderscapeBiomes.DEFAULT_FOG_COLOR);
+                    modification.getAttributes().set(CLOUD_COLOR, EnderscapeBiomes.DEFAULT_CLOUD_COLOR);
+                }
         );
 
         conditionalAmbienceModification(
                 CONFIG.ambienceUpdateLoopSounds,
-                "update_end_biome_ambient_loop_when_missing_or_replaceable",
-                selection -> {
-                    Optional<Holder<SoundEvent>> loop = selection.getBiome().getAmbientLoop();
-                    return loop.isEmpty() || loop.get().is(EnderscapeSoundEventTags.AMBIENCE_REPLACEABLE_BY_ENDERSCAPE);
-                },
-                (selection, modification) -> modification.getEffects().setAmbientSound(EnderscapeBiomeSounds.DEFAULT_END.loop())
-        );
+                "update_end_biome_ambience_when_missing_or_replaceable",
+                selection -> true,
+                (selection, modification) -> {
+                    Optional<Holder<SoundEvent>> loop = Optional.of(EnderscapeBiomeSounds.DEFAULT_END.loop());
+                    Optional<AmbientMoodSettings> mood = Optional.of(new AmbientMoodSettings(EnderscapeBiomeSounds.DEFAULT_END.mood(), 6000, 8, 2));
+                    List<AmbientAdditionsSettings> additions = List.of(new AmbientAdditionsSettings(EnderscapeBiomeSounds.DEFAULT_END.additions(), 0.00075));
 
-        conditionalAmbienceModification(
-                CONFIG.ambienceUpdateAdditionSounds,
-                "update_end_biome_ambient_additions_when_missing_or_replaceable",
-                selection -> {
-                    Optional<AmbientAdditionsSettings> additions = selection.getBiome().getAmbientAdditions();
-                    return additions.isEmpty() || additions.get().getSoundEvent().is(EnderscapeSoundEventTags.AMBIENCE_REPLACEABLE_BY_ENDERSCAPE);
-                },
-                (selection, modification) -> modification.getEffects().setAdditionsSound(new AmbientAdditionsSettings(EnderscapeBiomeSounds.DEFAULT_END.additions(), 0.00075))
-        );
-
-        conditionalAmbienceModification(
-                CONFIG.ambienceUpdateMoodSounds,
-                "update_end_biome_ambience_mood_when_missing_or_replaceable",
-                selection -> {
-                    Optional<AmbientMoodSettings> additions = selection.getBiome().getAmbientMood();
-                    return additions.isEmpty() || additions.get().getSoundEvent().is(EnderscapeSoundEventTags.AMBIENCE_REPLACEABLE_BY_ENDERSCAPE);
-                },
-                (selection, modification) -> modification.getEffects().setMoodSound(new AmbientMoodSettings(EnderscapeBiomeSounds.DEFAULT_END.mood(), 6000, 8, 2))
+                    if (selection.getBiome().getAttributes().contains(AMBIENT_SOUNDS)) {
+                        AmbientSounds sounds = (AmbientSounds) selection.getBiome().getAttributes().get(AMBIENT_SOUNDS).argument();
+                        modification.getAttributes().set(AMBIENT_SOUNDS, new AmbientSounds(
+                                 sounds.loop().isEmpty() || sounds.loop().get().is(EnderscapeSoundEventTags.AMBIENCE_REPLACEABLE_BY_ENDERSCAPE) ?
+                                        loop :
+                                        sounds.loop(),
+                                sounds.mood().isEmpty() || sounds.mood().get().soundEvent().is(EnderscapeSoundEventTags.AMBIENCE_REPLACEABLE_BY_ENDERSCAPE) ?
+                                        mood :
+                                        sounds.mood(),
+                                sounds.additions().isEmpty() ?
+                                        additions :
+                                        sounds.additions()
+                        ));
+                    } else {
+                        modification.getAttributes().set(AMBIENT_SOUNDS, new AmbientSounds(
+                                loop,
+                                mood,
+                                additions
+                        ));
+                    }
+                }
         );
     }
 

@@ -1,0 +1,51 @@
+{
+  "parent": "minecraft:end/enter_end_gateway",
+  "criteria": {
+    "fall_onto_cap": {
+      "conditions": {
+        "distance": {
+          "y": {
+            "min": 50.0
+          }
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "flags": {
+                "is_flying": false,
+                "is_on_ground": true,
+                "is_swimming": false
+              },
+              "stepping_on": {
+                "block": {
+                  "blocks": "#enderscape:chanterelle_cap_blocks"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:fall_from_height"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.enderscape.fall_onto_chanterelle_cap.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "enderscape:celestial_cap"
+    },
+    "title": {
+      "translate": "advancement.enderscape.fall_onto_chanterelle_cap"
+    }
+  },
+  "requirements": [
+    [
+      "fall_onto_cap"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

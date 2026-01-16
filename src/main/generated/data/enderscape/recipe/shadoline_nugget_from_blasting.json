@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "ingredient": [
+    "enderscape:shadoline_helmet",
+    "enderscape:shadoline_chestplate",
+    "enderscape:shadoline_leggings",
+    "enderscape:shadoline_boots"
+  ],
+  "result": {
+    "id": "enderscape:shadoline_nugget"
+  }
+}

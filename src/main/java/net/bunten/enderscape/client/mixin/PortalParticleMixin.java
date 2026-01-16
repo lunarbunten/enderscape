@@ -1,6 +1,7 @@
 package net.bunten.enderscape.client.mixin;
 
 import net.bunten.enderscape.EnderscapeConfig;
+import net.bunten.enderscape.client.registry.EnderscapeParticleProviders;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -21,6 +22,6 @@ public abstract class PortalParticleMixin extends SingleQuadParticle {
 
     @Inject(method = "getLightColor", at = @At("RETURN"), cancellable = true)
     private void setupColor(float f, CallbackInfoReturnable<Integer> cir) {
-        if (EnderscapeConfig.getInstance().portalParticleEmissive) cir.setReturnValue(Math.min(160, cir.getReturnValueI()));
+        if (EnderscapeConfig.getInstance().portalParticleEmissive) cir.setReturnValue(Math.max(EnderscapeParticleProviders.scaledLight(0.6F), cir.getReturnValueI()));
     }
 }

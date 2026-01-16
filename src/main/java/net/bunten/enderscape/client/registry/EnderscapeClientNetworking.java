@@ -20,15 +20,18 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.Optional;
 
 import static net.bunten.enderscape.client.EnderscapeClient.*;
 
@@ -38,6 +41,7 @@ public class EnderscapeClientNetworking {
     private static void receiveDashJumpPayload(ClientboundDashJumpPayload payload, ClientPlayNetworking.Context context) {
         Minecraft client = context.client();
         LocalPlayer player = client.player;
+        Vec2 power = payload.power();
 
         client.execute(() -> {
             if (player == null || !player.isAlive() || player.isSpectator()) return;
@@ -46,10 +50,8 @@ public class EnderscapeClientNetworking {
 
             float sinYRot = Mth.sin(player.getYRot() * (Mth.PI / 180));
             float cosYRot = Mth.cos(player.getYRot() * (Mth.PI / 180));
-            float hozPower = player.isFallFlying() ? payload.horizontalPower() * payload.glideVelocityFactor() : payload.horizontalPower();
-            float verPower = player.isFallFlying() ? payload.verticalPower() * payload.glideVelocityFactor() : payload.verticalPower();
 
-            player.setDeltaMovement(new Vec3(travel.x * hozPower * cosYRot - travel.z * hozPower * sinYRot, verPower, travel.z * hozPower * cosYRot + travel.x * hozPower * sinYRot));
+            player.setDeltaMovement(new Vec3(travel.x * power.x * cosYRot - travel.z * power.x * sinYRot, power.y, travel.z * power.x * cosYRot + travel.x * power.x * sinYRot));
         });
     }
 
@@ -69,10 +71,12 @@ public class EnderscapeClientNetworking {
         });
     }
 
-    private static void receiveMirrorTeleportPayload(ClientboundMirrorTeleportInfoPayload payload, ClientPlayNetworking.Context context) {
+    private static void receiveLodestoneTeleportationInfoPayload(ClientboundLodestoneTeleportationInfoPayload payload, ClientPlayNetworking.Context context) {
         Minecraft client = context.client();
         client.execute(() -> {
-            EnderscapeClient.postMirrorUseTicks = 60;
+            lodestoneTeleportationOverlayTexture = Optional.of(payload.overlayTexture());
+            lodestoneTeleportationVignetteTexture = Optional.of(payload.vignetteTexture());
+            lodestoneTeleportationTicks = MAX_LODESTONE_TELEPORTATION_TICKS;
         });
     }
 
@@ -130,25 +134,38 @@ public class EnderscapeClientNetworking {
 
     private static void receiveStructureChangedPayload(ClientboundStructureChangedPayload payload, ClientPlayNetworking.Context context) {
         Minecraft client = context.client();
-        ResourceLocation location = payload.location();
+        Identifier location = payload.location();
+        LocalPlayer player = client.player;
 
         client.execute(() -> {
-            if (client.level == null) return;
-
+            if (client.level == null || player == null) return;
             Registry<StructureMusic> registry = client.level.registryAccess().lookupOrThrow(EnderscapeRegistries.STRUCTURE_MUSIC);
-            EnderscapeClient.structureMusic = registry.stream().filter(music -> music.permittedStructures().contains(location)).map(StructureMusic::music).findFirst();
+            boolean creative = player.getAbilities().instabuild && player.getAbilities().mayfly;
+
+            EnderscapeClient.structureMusic = registry.stream()
+                    .filter(music -> music.permittedStructures().contains(location))
+                    .map(mus -> mus.music().select(creative, player.isUnderWater()))
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .findFirst();
         });
     }
 
     private static void receiveTransdimensionalTravelSoundPayload(ClientboundTransdimensionalTravelSoundPayload payload, ClientPlayNetworking.Context context) {
         Minecraft client = context.client();
-        client.execute(() -> client.getSoundManager().play(SimpleSoundInstance.forLocalAmbience(EnderscapeItemSounds.MIRROR_TRANSDIMENSIONAL_TRAVEL, 1.0F, 0.4F)));
+        client.execute(() -> {
+            SoundEvent soundEvent = client.level.registryAccess()
+                    .lookupOrThrow(Registries.SOUND_EVENT)
+                    .getOrThrow(ResourceKey.create(Registries.SOUND_EVENT, payload.soundEvent()))
+                    .value();
+            client.getSoundManager().play(SimpleSoundInstance.forLocalAmbience(soundEvent, 1.0F, 0.4F));
+        });
     }
 
     static {
         ClientPlayNetworking.registerGlobalReceiver(ClientboundDashJumpPayload.TYPE, EnderscapeClientNetworking::receiveDashJumpPayload);
         ClientPlayNetworking.registerGlobalReceiver(ClientboundDashJumpSoundPayload.TYPE, EnderscapeClientNetworking::receiveDashJumpSoundPayload);
-        ClientPlayNetworking.registerGlobalReceiver(ClientboundMirrorTeleportInfoPayload.TYPE, EnderscapeClientNetworking::receiveMirrorTeleportPayload);
+        ClientPlayNetworking.registerGlobalReceiver(ClientboundLodestoneTeleportationInfoPayload.TYPE, EnderscapeClientNetworking::receiveLodestoneTeleportationInfoPayload);
         ClientPlayNetworking.registerGlobalReceiver(ClientboundNebuliteOreSoundPayload.TYPE, EnderscapeClientNetworking::receiveNebuliteOreSoundPayload);
         ClientPlayNetworking.registerGlobalReceiver(ClientboundRubbleShieldCooldownSoundPayload.TYPE, EnderscapeClientNetworking::receiveRubbleShieldCooldownSoundPayload);
         ClientPlayNetworking.registerGlobalReceiver(ClientboundStareOverlayPayload.TYPE, EnderscapeClientNetworking::receiveStareOverlayPayload);

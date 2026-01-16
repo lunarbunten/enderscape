@@ -1,11 +1,8 @@
 package net.bunten.enderscape.mixin;
 
 import net.bunten.enderscape.Enderscape;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.ShelfBlock;
-import net.minecraft.world.level.block.SignBlock;
-import net.minecraft.world.level.block.TrialSpawnerBlock;
-import net.minecraft.world.level.block.VaultBlock;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,21 +13,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-import static net.bunten.enderscape.registry.EnderscapeBlocks.END_TRIAL_SPAWNER;
-import static net.bunten.enderscape.registry.EnderscapeBlocks.END_VAULT;
+import static net.bunten.enderscape.registry.EnderscapeBlocks.*;
 
 @Mixin(BlockEntityType.class)
 public abstract class BlockEntityTypeMixin {
 
     @Unique
-    private static final List<ResourceLocation> VALID_WOOD_TYPES = List.of(
+    private static final List<Identifier> VALID_WOOD_TYPES = List.of(
             Enderscape.id("veiled"),
             Enderscape.id("celestial"),
             Enderscape.id("murublight")
     );
 
     @Unique
-    private static final List<ResourceLocation> VALID_SHELVES = List.of(
+    private static final List<Identifier> VALID_SHELVES = List.of(
             Enderscape.id("veiled_shelf"),
             Enderscape.id("celestial_shelf"),
             Enderscape.id("murublight_shelf")
@@ -38,8 +34,9 @@ public abstract class BlockEntityTypeMixin {
 
     @Inject(method = "isValid", at = @At("HEAD"), cancellable = true)
     private void isValid(BlockState state, CallbackInfoReturnable<Boolean> info) {
-        if (state.getBlock() instanceof ShelfBlock && VALID_SHELVES.contains(state.getBlock().builtInRegistryHolder().key().location())) info.setReturnValue(true);
-        if (state.getBlock() instanceof SignBlock sign && VALID_WOOD_TYPES.contains(ResourceLocation.tryParse(sign.type().name()))) info.setReturnValue(true);
+        if (state.getBlock() instanceof CampfireBlock && state.getBlock().equals(VOID_CAMPFIRE)) info.setReturnValue(true);
+        if (state.getBlock() instanceof ShelfBlock && VALID_SHELVES != null && VALID_SHELVES.contains(state.getBlock().builtInRegistryHolder().key().identifier())) info.setReturnValue(true);
+        if (state.getBlock() instanceof SignBlock sign && VALID_WOOD_TYPES != null && VALID_WOOD_TYPES.contains(Identifier.tryParse(sign.type().name()))) info.setReturnValue(true);
         if (state.getBlock() instanceof TrialSpawnerBlock && state.is(END_TRIAL_SPAWNER)) info.setReturnValue(true);
         if (state.getBlock() instanceof VaultBlock && state.is(END_VAULT)) info.setReturnValue(true);
     }

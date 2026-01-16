@@ -5,6 +5,7 @@ import net.bunten.enderscape.mixin.LevelLightEngineAccessor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.FlyTowardsPositionParticle;
 import net.minecraft.client.particle.TrialSpawnerDetectionParticle;
 import net.minecraft.core.BlockPos;
@@ -38,6 +39,7 @@ public class EnderscapeParticleProviders {
         ParticleFactoryRegistry.getInstance().register(RUSTLE_SLEEPING_BUBBLE, RustleSleepingBubbleParticle.Provider::new);
         ParticleFactoryRegistry.getInstance().register(RUSTLE_SLEEPING_BUBBLE_POP, RustleSleepingBubblePopParticle.Provider::new);
         ParticleFactoryRegistry.getInstance().register(VEILED_LEAVES, VeiledLeavesParticle.Provider::new);
+        ParticleFactoryRegistry.getInstance().register(VOID_FIRE_FLAME, FlameParticle.Provider::new);
         ParticleFactoryRegistry.getInstance().register(VOID_POOF, VoidPoofParticle.Provider::new);
         ParticleFactoryRegistry.getInstance().register(VOID_STARS, VoidStarParticle.Provider::new);
     }

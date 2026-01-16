@@ -1,12 +1,12 @@
 package net.bunten.enderscape.registry;
 
 import net.bunten.enderscape.Enderscape;
-import net.minecraft.Util;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.Util;
 import net.minecraft.world.item.equipment.trim.MaterialAssetGroup;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 
@@ -31,8 +31,8 @@ public class EnderscapeTrimMaterials {
     }
 
     private static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> key, Style style) {
-        Component component = Component.translatable(Util.makeDescriptionId("trim_material", key.location())).withStyle(style);
-        context.register(key, new TrimMaterial(MaterialAssetGroup.create(key.location().getPath()), component));
+        Component component = Component.translatable(Util.makeDescriptionId("trim_material", key.identifier())).withStyle(style);
+        context.register(key, new TrimMaterial(MaterialAssetGroup.create(key.identifier().getPath()), component));
     }
 
     private static ResourceKey<TrimMaterial> register(String name) {

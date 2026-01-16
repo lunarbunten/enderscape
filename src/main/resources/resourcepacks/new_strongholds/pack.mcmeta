@@ -1,0 +1,12 @@
+{
+    "pack": {
+        "description": {
+            "translate": "pack.enderscape.new_strongholds.description"
+        },
+        "max_format": 9999,
+        "min_format": [
+            83,
+            1
+        ]
+    }
+}

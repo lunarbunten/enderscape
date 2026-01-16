@@ -4,9 +4,8 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
@@ -154,7 +153,9 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider.BlockTagProvid
                 SHADOLINE_BLOCK_SLAB,
                 SHADOLINE_BLOCK_STAIRS,
                 SHADOLINE_BLOCK_WALL,
-                SHADOLINE_PILLAR
+                SHADOLINE_PILLAR,
+                SHADOLINE_BARS,
+                SHADOLINE_CHAIN
         );
 
         valueLookupBuilder(VEILED_LOGS).add(VEILED_LOG, STRIPPED_VEILED_LOG, VEILED_WOOD, STRIPPED_VEILED_WOOD);
@@ -200,7 +201,7 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider.BlockTagProvid
 
         valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE)
                 .forceAddTag(CELESTIAL_WOOD_BLOCKS).forceAddTag(MURUBLIGHT_WOOD_BLOCKS).forceAddTag(VEILED_WOOD_BLOCKS)
-                .add(VEILED_VINES, FLANGER_BERRY_VINE, BLINKLIGHT_VINES_BODY, BLINKLIGHT_VINES_HEAD);
+                .add(VEILED_VINES, FLANGER_BERRY_VINE, BLINKLIGHT_VINES_BODY, BLINKLIGHT_VINES_HEAD, VOID_CAMPFIRE);
 
         valueLookupBuilder(BlockTags.MINEABLE_WITH_HOE)
                 .forceAddTag(CHANTERELLE_CAP_BLOCKS)
@@ -233,7 +234,8 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider.BlockTagProvid
                         NEBULITE_BLOCK,
                         RAW_SHADOLINE_BLOCK,
                         VEILED_END_STONE,
-                        VOID_SHALE
+                        VOID_SHALE,
+                        VOID_LANTERN
                 );
 
         valueLookupBuilder(BlockTags.DRAGON_IMMUNE)
@@ -250,14 +252,18 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider.BlockTagProvid
                 .forceAddTag(SHADOLINE_BLOCKS)
                 .forceAddTag(VERADITE_BLOCKS);
 
+        valueLookupBuilder(BlockTags.BARS).add(SHADOLINE_BARS);
         valueLookupBuilder(BlockTags.BEACON_BASE_BLOCKS).add(NEBULITE_BLOCK);
+        valueLookupBuilder(BlockTags.CAMPFIRES).add(VOID_CAMPFIRE);
         valueLookupBuilder(BlockTags.CEILING_HANGING_SIGNS).add(VEILED_HANGING_SIGN, CELESTIAL_HANGING_SIGN, MURUBLIGHT_HANGING_SIGN);
+        valueLookupBuilder(BlockTags.CHAINS).add(SHADOLINE_CHAIN);
         valueLookupBuilder(BlockTags.CLIMBABLE).add(BLINKLIGHT_VINES_BODY, BLINKLIGHT_VINES_HEAD, FLANGER_BERRY_VINE, MURUBLIGHT_BRACKET, VEILED_VINES);
         valueLookupBuilder(BlockTags.COMBINATION_STEP_SOUND_BLOCKS).add(VEILED_LEAF_PILE);
         valueLookupBuilder(BlockTags.FALL_DAMAGE_RESETTING).add(VEILED_LEAF_PILE);
         valueLookupBuilder(BlockTags.FEATURES_CANNOT_REPLACE).add(END_TRIAL_SPAWNER, END_VAULT);
         valueLookupBuilder(BlockTags.FENCE_GATES).add(VEILED_FENCE_GATE, CELESTIAL_FENCE_GATE, MURUBLIGHT_FENCE_GATE);
         valueLookupBuilder(BlockTags.FLOWERS).add(WISP_FLOWER, FLANGER_BERRY_FLOWER);
+        valueLookupBuilder(BlockTags.LANTERNS).add(BULB_LANTERN, VOID_LANTERN);
 
         valueLookupBuilder(BlockTags.FLOWER_POTS).add(
                 POTTED_ALLURING_MAGNIA_SPROUT,
@@ -283,6 +289,7 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider.BlockTagProvid
         valueLookupBuilder(BlockTags.REPLACEABLE).add(DRY_END_GROWTH, WISP_SPROUTS, WISP_GROWTH);
         valueLookupBuilder(BlockTags.SAPLINGS).add(VEILED_SAPLING);
         valueLookupBuilder(BlockTags.SMALL_FLOWERS).add(BULB_FLOWER);
+        valueLookupBuilder(BlockTags.WALL_POST_OVERRIDE).add(VOID_TORCH);
         valueLookupBuilder(BlockTags.WOODEN_SHELVES).add(VEILED_SHELF, CELESTIAL_SHELF, MURUBLIGHT_SHELF);
 
         valueLookupBuilder(BlockTags.SLABS).add(
@@ -370,10 +377,11 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider.BlockTagProvid
         valueLookupBuilder(BlockTags.WOODEN_STAIRS).add(VEILED_STAIRS, CELESTIAL_STAIRS, MURUBLIGHT_STAIRS);
         valueLookupBuilder(BlockTags.WOODEN_TRAPDOORS).add(VEILED_TRAPDOOR, CELESTIAL_TRAPDOOR, MURUBLIGHT_TRAPDOOR);
 
+        valueLookupBuilder(CHAINS).add(SHADOLINE_CHAIN);
         valueLookupBuilder(STRIPPED_LOGS).add(STRIPPED_VEILED_LOG, STRIPPED_CELESTIAL_STEM, STRIPPED_MURUBLIGHT_STEM);
         valueLookupBuilder(STRIPPED_WOODS).add(STRIPPED_VEILED_WOOD, STRIPPED_CELESTIAL_HYPHAE, STRIPPED_MURUBLIGHT_HYPHAE);
         valueLookupBuilder(ORES).add(NEBULITE_ORE, SHADOLINE_ORE, MIRESTONE_NEBULITE_ORE, MIRESTONE_SHADOLINE_ORE);
-        valueLookupBuilder(STORAGE_BLOCKS).add(SHADOLINE_BLOCK, NEBULITE_BLOCK, DRIFT_JELLY_BLOCK);
+        valueLookupBuilder(STORAGE_BLOCKS).add(SHADOLINE_BLOCK, NEBULITE_BLOCK);
 
         valueLookupBuilder(NEBULITE_ORES).add(NEBULITE_ORE, MIRESTONE_NEBULITE_ORE);
         valueLookupBuilder(NEBULITE_STORAGE_BLOCKS).add(NEBULITE_BLOCK);
@@ -396,6 +404,6 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider.BlockTagProvid
     }
 
     private TagKey<Block> externalKey(String namespace, String path) {
-        return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(namespace, path));
+        return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(namespace, path));
     }
 }

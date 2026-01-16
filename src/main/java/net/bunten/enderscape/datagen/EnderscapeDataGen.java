@@ -41,7 +41,6 @@ public class EnderscapeDataGen implements DataGeneratorEntrypoint {
 		pack.addProvider(EnderscapeProcessorListProvider::new);
 		pack.addProvider(EnderscapeRecipeProvider::new);
 		pack.addProvider(EnderscapeRubblemiteVariantProvider::new);
-		pack.addProvider(EnderscapeBiomeParamatersProviders::new);
 		pack.addProvider(EnderscapeSoundEventTagProvider::new);
 		pack.addProvider(EnderscapeStructureMusicProvider::new);
 		pack.addProvider(EnderscapeStructureProvider::new);
@@ -73,7 +72,6 @@ public class EnderscapeDataGen implements DataGeneratorEntrypoint {
 
 		builder.add(EnderscapeRegistries.MAGNIA_RADIO_SONG, EnderscapeMagniaRadioSongs::bootstrap);
 		builder.add(EnderscapeRegistries.RUBBLEMITE_VARIANT, EnderscapeRubblemiteVariants::bootstrap);
-		builder.add(EnderscapeRegistries.BIOME_PARAMETERS, EnderscapeBiomeParameters::bootstrap);
 		builder.add(EnderscapeRegistries.STRUCTURE_MUSIC, EnderscapeStructureMusic::bootstrap);
 	}
 }

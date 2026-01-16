@@ -21,7 +21,7 @@ public class EnderscapeMagniaRadioSongs {
     }
 
     private static void register(BootstrapContext<MagniaRadioSong> context, ResourceKey<MagniaRadioSong> key, Holder<SoundEvent> soundEvent, float length, int exclusiveSignal, TagKey<Biome> biomes) {
-        context.register(key, new MagniaRadioSong(soundEvent, Component.translatable("magnia_radio_song.enderscape." + key.location().getPath()), length, exclusiveSignal, biomes));
+        context.register(key, new MagniaRadioSong(soundEvent, Component.translatable("magnia_radio_song.enderscape." + key.identifier().getPath()), length, exclusiveSignal, biomes));
     }
 
     private static ResourceKey<MagniaRadioSong> register(String name) {

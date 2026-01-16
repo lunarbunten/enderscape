@@ -1,0 +1,10 @@
+{
+	"variants": {
+	  "hanging=false": {
+		"model": "enderscape:block/void_lantern"
+	  },
+	  "hanging=true": {
+		"model": "enderscape:block/void_lantern_hanging"
+	  }
+	}
+  }

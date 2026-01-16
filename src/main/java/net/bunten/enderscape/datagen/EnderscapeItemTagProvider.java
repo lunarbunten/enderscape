@@ -2,9 +2,11 @@ package net.bunten.enderscape.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -26,19 +28,39 @@ public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider
 
     @Override
     protected void addTags(HolderLookup.Provider lookup) {
-        valueLookupBuilder(WEAK_MAGNETISM_WHEN_WORN).add(CHAINMAIL_HELMET, CHAINMAIL_CHESTPLATE, CHAINMAIL_LEGGINGS, CHAINMAIL_BOOTS, NETHERITE_HELMET, NETHERITE_CHESTPLATE, NETHERITE_LEGGINGS, NETHERITE_BOOTS);
-        valueLookupBuilder(AVERAGE_MAGNETISM_WHEN_WORN).add(IRON_HELMET, IRON_CHESTPLATE, IRON_LEGGINGS, IRON_BOOTS);
-        valueLookupBuilder(STRONG_MAGNETISM_WHEN_WORN);
-        valueLookupBuilder(POWERS_MAGNIA_WHEN_MINED_WITH);
+        valueLookupBuilder(WEAK_MAGNIA_STRENGTH).add(
+                CHAINMAIL_HELMET,
+                CHAINMAIL_CHESTPLATE,
+                CHAINMAIL_LEGGINGS,
+                CHAINMAIL_BOOTS,
+                NETHERITE_HELMET,
+                NETHERITE_CHESTPLATE,
+                NETHERITE_LEGGINGS,
+                NETHERITE_BOOTS
+        );
 
+        valueLookupBuilder(AVERAGE_MAGNIA_STRENGTH).add(
+                IRON_HELMET,
+                IRON_CHESTPLATE,
+                IRON_LEGGINGS,
+                IRON_BOOTS,
+                IRON_HORSE_ARMOR
+        );
+
+        valueLookupBuilder(STRONG_MAGNIA_STRENGTH);
+
+        valueLookupBuilder(DAGGER_ENCHANTABLE).add(DAGGER);
         valueLookupBuilder(DRIFTER_FOOD).add(CHORUS_FRUIT, FLANGER_BERRY);
         valueLookupBuilder(ELYTRA_ENCHANTABLE).add(ELYTRA);
+        valueLookupBuilder(LANTERNS).add(BULB_LANTERN.asItem(), VOID_LANTERN.asItem());
         valueLookupBuilder(MAGNIA_ATTRACTOR_ENCHANTABLE).add(MAGNIA_ATTRACTOR);
         valueLookupBuilder(MIRROR_ENCHANTABLE).add(MIRROR);
-        valueLookupBuilder(NEBULITE_TOOLS).add(MIRROR, MAGNIA_ATTRACTOR);
+        valueLookupBuilder(NEBULITE_TOOLS).add(DAGGER, MIRROR, MAGNIA_ATTRACTOR);
         valueLookupBuilder(NEBULITE_TOOL_ENCHANTABLE).forceAddTag(NEBULITE_TOOLS);
+        valueLookupBuilder(NEBULITE_TOOL_FUELS).add(NEBULITE);
         valueLookupBuilder(REPAIRS_DRIFT_LEGGINGS).add(DRIFT_JELLY_BOTTLE);
         valueLookupBuilder(REPAIRS_RUBBLE_SHIELDS).add(RUBBLE_CHITIN);
+        valueLookupBuilder(REPAIRS_SHADOLINE_ARMOR).add(SHADOLINE_INGOT);
         valueLookupBuilder(RUBBLE_SHIELDS).add(END_STONE_RUBBLE_SHIELD, MIRESTONE_RUBBLE_SHIELD, VERADITE_RUBBLE_SHIELD, KURODITE_RUBBLE_SHIELD);
         valueLookupBuilder(RUSTLE_FOOD).add(MURUBLIGHT_BRACKET_ITEM);
 
@@ -191,7 +213,9 @@ public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider
                 SHADOLINE_BLOCK_SLAB.asItem(),
                 SHADOLINE_BLOCK_STAIRS.asItem(),
                 SHADOLINE_BLOCK_WALL.asItem(),
-                SHADOLINE_PILLAR.asItem()
+                SHADOLINE_PILLAR.asItem(),
+                SHADOLINE_BARS.asItem(),
+                SHADOLINE_CHAIN.asItem()
         );
 
         valueLookupBuilder(ALL_ETCHED_MAGNIA_BLOCKS).addTag(ETCHED_ALLURING_MAGNIA_BLOCKS).addTag(ETCHED_REPULSIVE_MAGNIA_BLOCKS);
@@ -213,31 +237,39 @@ public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider
         valueLookupBuilder(MAGNIA_BLOCKS).add(ALLURING_MAGNIA.asItem(), REPULSIVE_MAGNIA.asItem());
         valueLookupBuilder(MAGNIA_SPROUTS).add(ALLURING_MAGNIA_SPROUT.asItem(), REPULSIVE_MAGNIA_SPROUT.asItem());
 
+        valueLookupBuilder(BARS).add(SHADOLINE_BARS.asItem());
         valueLookupBuilder(BEACON_PAYMENT_ITEMS).add(NEBULITE);
+        valueLookupBuilder(ItemTags.CHAINS).add(SHADOLINE_CHAIN.asItem());
+        valueLookupBuilder(CHEST_ARMOR).add(SHADOLINE_CHESTPLATE);
         valueLookupBuilder(DURABILITY_ENCHANTABLE).add(END_STONE_RUBBLE_SHIELD, MIRESTONE_RUBBLE_SHIELD, VERADITE_RUBBLE_SHIELD, KURODITE_RUBBLE_SHIELD);
         valueLookupBuilder(EQUIPPABLE_ENCHANTABLE).add(SHULKER_SHELL);
-        valueLookupBuilder(ItemTags.FLOWERS).add(WISP_FLOWER.asItem(), FLANGER_BERRY_FLOWER.asItem());
-        valueLookupBuilder(ItemTags.FENCE_GATES).add(CELESTIAL_FENCE_GATE.asItem(), MURUBLIGHT_FENCE_GATE.asItem());
+        valueLookupBuilder(FIRE_ASPECT_ENCHANTABLE).add(DAGGER);
+        valueLookupBuilder(FOOT_ARMOR).add(SHADOLINE_BOOTS);
         valueLookupBuilder(HANGING_SIGNS).add(VEILED_HANGING_SIGN_ITEM.asItem(), CELESTIAL_HANGING_SIGN_ITEM, MURUBLIGHT_HANGING_SIGN_ITEM);
-        valueLookupBuilder(LEAVES).add(VEILED_LEAVES.asItem());
-        valueLookupBuilder(LEG_ARMOR).add(DRIFT_LEGGINGS);
+        valueLookupBuilder(HEAD_ARMOR).add(SHADOLINE_HELMET);
+        valueLookupBuilder(ItemTags.FENCE_GATES).add(CELESTIAL_FENCE_GATE.asItem(), MURUBLIGHT_FENCE_GATE.asItem());
+        valueLookupBuilder(ItemTags.FLOWERS).add(WISP_FLOWER.asItem(), FLANGER_BERRY_FLOWER.asItem());
         valueLookupBuilder(ItemTags.SMALL_FLOWERS).add(BULB_FLOWER.asItem());
+        valueLookupBuilder(ItemTags.WOODEN_FENCES).add(VEILED_FENCE.asItem(), CELESTIAL_FENCE.asItem(), MURUBLIGHT_FENCE.asItem());
+        valueLookupBuilder(LEAVES).add(VEILED_LEAVES.asItem());
+        valueLookupBuilder(LEG_ARMOR).add(SHADOLINE_LEGGINGS, DRIFT_LEGGINGS);
         valueLookupBuilder(LOGS_THAT_BURN).forceAddTag(VEILED_LOGS).forceAddTag(CELESTIAL_STEMS).forceAddTag(MURUBLIGHT_STEMS);
         valueLookupBuilder(PLANKS).add(VEILED_PLANKS.asItem(), CELESTIAL_PLANKS.asItem(), MURUBLIGHT_PLANKS.asItem());
         valueLookupBuilder(SAPLINGS).add(VEILED_SAPLING.asItem());
+        valueLookupBuilder(SHARP_WEAPON_ENCHANTABLE).add(DAGGER);
         valueLookupBuilder(SIGNS).add(VEILED_SIGN_ITEM.asItem(), CELESTIAL_SIGN_ITEM, MURUBLIGHT_SIGN_ITEM);
         valueLookupBuilder(SLABS).add(ETCHED_ALLURING_MAGNIA_SLAB.asItem(), ETCHED_REPULSIVE_MAGNIA_SLAB.asItem(), VEILED_SLAB.asItem(), CELESTIAL_SLAB.asItem(), CELESTIAL_BRICK_SLAB.asItem(), MURUBLIGHT_SLAB.asItem(), MURUBLIGHT_BRICK_SLAB.asItem(), VERADITE_SLAB.asItem(), POLISHED_VERADITE_SLAB.asItem(), VERADITE_BRICK_SLAB.asItem(), KURODITE_SLAB.asItem(), POLISHED_KURODITE_SLAB.asItem(), KURODITE_BRICK_SLAB.asItem(), SHADOLINE_BLOCK_SLAB.asItem(), CUT_SHADOLINE_SLAB.asItem());
         valueLookupBuilder(STAIRS).add(ETCHED_ALLURING_MAGNIA_SLAB.asItem(), ETCHED_REPULSIVE_MAGNIA_STAIRS.asItem(), VEILED_STAIRS.asItem(), CELESTIAL_STAIRS.asItem(), CELESTIAL_BRICK_STAIRS.asItem(), MURUBLIGHT_STAIRS.asItem(), MURUBLIGHT_BRICK_STAIRS.asItem(), VERADITE_STAIRS.asItem(), POLISHED_VERADITE_STAIRS.asItem(), VERADITE_BRICK_STAIRS.asItem(), KURODITE_STAIRS.asItem(), POLISHED_KURODITE_STAIRS.asItem(), KURODITE_BRICK_STAIRS.asItem(), SHADOLINE_BLOCK_STAIRS.asItem(), CUT_SHADOLINE_STAIRS.asItem());
         valueLookupBuilder(STONE_BUTTONS).add(POLISHED_VERADITE_BUTTON.asItem(), POLISHED_KURODITE_BUTTON.asItem());
         valueLookupBuilder(STONE_CRAFTING_MATERIALS).add(END_STONE.asItem(), VERADITE.asItem(), MIRESTONE.asItem(), KURODITE.asItem());
         valueLookupBuilder(STONE_TOOL_MATERIALS).add(END_STONE.asItem(), VERADITE.asItem(), MIRESTONE.asItem(), KURODITE.asItem());
-        valueLookupBuilder(TRIMMABLE_ARMOR).add(DRIFT_LEGGINGS);
+        valueLookupBuilder(MELEE_WEAPON_ENCHANTABLE).add(DAGGER);
+        valueLookupBuilder(TRIMMABLE_ARMOR).add(SHADOLINE_HELMET, SHADOLINE_CHESTPLATE, SHADOLINE_LEGGINGS, SHADOLINE_BOOTS, DRIFT_LEGGINGS);
         valueLookupBuilder(TRIM_MATERIALS).add(NEBULITE, SHADOLINE_INGOT);
         valueLookupBuilder(VANISHING_ENCHANTABLE).add(MIRROR, SHULKER_SHELL);
         valueLookupBuilder(WALLS).add(ETCHED_ALLURING_MAGNIA_WALL.asItem(), ETCHED_REPULSIVE_MAGNIA_WALL.asItem(), VERADITE_WALL.asItem(), POLISHED_VERADITE_WALL.asItem(), VERADITE_BRICK_WALL.asItem(), SHADOLINE_BLOCK_WALL.asItem(), KURODITE_WALL.asItem(), POLISHED_KURODITE_WALL.asItem(), KURODITE_BRICK_WALL.asItem(), CUT_SHADOLINE_WALL.asItem(), CELESTIAL_BRICK_WALL.asItem(), MURUBLIGHT_BRICK_WALL.asItem());
         valueLookupBuilder(WOODEN_BUTTONS).add(VEILED_BUTTON.asItem(), CELESTIAL_BUTTON.asItem(), MURUBLIGHT_BUTTON.asItem());
         valueLookupBuilder(WOODEN_DOORS).add(VEILED_DOOR.asItem(), CELESTIAL_DOOR.asItem(), MURUBLIGHT_DOOR.asItem());
-        valueLookupBuilder(ItemTags.WOODEN_FENCES).add(VEILED_FENCE.asItem(), CELESTIAL_FENCE.asItem(), MURUBLIGHT_FENCE.asItem());
         valueLookupBuilder(WOODEN_PRESSURE_PLATES).add(VEILED_PRESSURE_PLATE.asItem(), CELESTIAL_PRESSURE_PLATE.asItem(), MURUBLIGHT_PRESSURE_PLATE.asItem());
         valueLookupBuilder(ItemTags.WOODEN_SHELVES).add(VEILED_SHELF_ITEM, CELESTIAL_SHELF_ITEM, MURUBLIGHT_SHELF_ITEM);
         valueLookupBuilder(WOODEN_SLABS).add(VEILED_SLAB.asItem(), CELESTIAL_SLAB.asItem(), MURUBLIGHT_SLAB.asItem());
@@ -252,6 +284,7 @@ public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider
 
         valueLookupBuilder(BERRY_FOODS).add(FLANGER_BERRY);
         valueLookupBuilder(BUCKETS).add(RUSTLE_BUCKET);
+        valueLookupBuilder(ConventionalItemTags.CHAINS).add(SHADOLINE_CHAIN.asItem());
         valueLookupBuilder(DRIFT_JELLY_DRINKS).add(DRIFT_JELLY_BOTTLE);
         valueLookupBuilder(DRINKS).add(DRIFT_JELLY_BOTTLE);
         valueLookupBuilder(DRINK_CONTAINING_BOTTLE).add(DRIFT_JELLY_BOTTLE);
@@ -281,6 +314,6 @@ public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider
     }
 
     private TagKey<Item> externalKey(String namespace, String path) {
-        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(namespace, path));
+        return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(namespace, path));
     }
 }

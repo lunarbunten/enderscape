@@ -3,18 +3,24 @@
   "description": {
     "translate": "enchantment.enderscape.bundling"
   },
+  "effects": {
+    "enderscape:magnet_enable_deposit_into_bundles": {
+      "type": "minecraft:set",
+      "value": 1.0
+    }
+  },
   "max_cost": {
     "base": 50,
     "per_level_above_first": 0
   },
   "max_level": 1,
   "min_cost": {
-    "base": 20,
+    "base": 30,
     "per_level_above_first": 0
   },
   "slots": [
     "any"
   ],
   "supported_items": "#enderscape:enchantable/magnia_attractor",
-  "weight": 1
+  "weight": 4
 }

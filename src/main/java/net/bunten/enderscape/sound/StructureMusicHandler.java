@@ -10,7 +10,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,14 +28,14 @@ import java.util.Map;
 public class StructureMusicHandler {
 
     private static final Map<ServerPlayer, Integer> playerTimers = new HashMap<>();
-    private static final Map<ServerPlayer, ResourceLocation> playerStructures = new HashMap<>();
+    private static final Map<ServerPlayer, Identifier> playerStructures = new HashMap<>();
 
-    public static final ResourceLocation NONE = ResourceLocation.withDefaultNamespace("none");
+    public static final Identifier NONE = Identifier.withDefaultNamespace("none");
 
     private static int structureChangeTimer = 0;
 
-    private static void tryStructureChange(ServerPlayer player, ResourceLocation structure) {
-        ResourceLocation currentStructure = playerStructures.get(player);
+    private static void tryStructureChange(ServerPlayer player, Identifier structure) {
+        Identifier currentStructure = playerStructures.get(player);
 
         if (currentStructure == null || !currentStructure.equals(structure)) {
             playerStructures.put(player, structure);
@@ -43,7 +43,7 @@ public class StructureMusicHandler {
         }
     }
 
-    private static ResourceLocation getStructure(ServerLevel level, ServerPlayer player) {
+    private static Identifier getStructure(ServerLevel level, ServerPlayer player) {
         if (level != null && player != null) {
             Registry<Structure> registry = level.registryAccess().lookupOrThrow(Registries.STRUCTURE);
             List<Structure> structures = registry.stream().toList();
@@ -58,13 +58,14 @@ public class StructureMusicHandler {
         return NONE;
     }
 
-    private static void sendStructureToClient(ServerPlayer player, ResourceLocation structure) {
+    private static void sendStructureToClient(ServerPlayer player, Identifier structure) {
         if (player != null) {
             ServerPlayNetworking.send(player, new ClientboundStructureChangedPayload(structure));
         }
     }
 
     private static void removeFromAll(ServerPlayer player) {
+        sendStructureToClient(player, NONE);
         playerStructures.remove(player);
         playerTimers.remove(player);
     }
@@ -86,7 +87,7 @@ public class StructureMusicHandler {
 
                     if (newTimer <= 0) {
                         ServerPlayer player = entry.getKey();
-                        ResourceLocation queued = playerStructures.get(player);
+                        Identifier queued = playerStructures.get(player);
 
                         if (player.isAlive() && getStructure(level, player).equals(queued)) {
                             sendStructureToClient(player, queued);
