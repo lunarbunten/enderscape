@@ -1,6 +1,18 @@
+## Assets License (All Rights Reserved)
+
+All Rights Reserved (ARR)
+
+Copyright (c) 2026 Penumbra
+
+This license applies to any files under the following directories:
+
+- ./src/main/resources/assets/
+
+## Code License (MIT)
+
 MIT License
 
-Copyright (c) 2021 bunten
+Copyright (c) 2026 Penumbra
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
