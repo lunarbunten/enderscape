@@ -49,6 +49,8 @@ public class EnderscapeBlockRenderLayerMap {
                 REPULSIVE_MAGNIA_SPROUT,
                 SHADOLINE_BARS,
                 SHADOLINE_CHAIN,
+                VOID_TORCH,
+                VOID_WALL_TORCH,
                 VOID_CAMPFIRE,
                 VOID_LANTERN,
                 VEILED_DOOR,
