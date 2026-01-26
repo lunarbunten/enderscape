@@ -401,6 +401,8 @@ public class EnderscapeBlockTagProvider extends FabricTagProvider.BlockTagProvid
                 POLARIZED_MAGNIA,
                 REPULSIVE_MAGNIA_SPROUT
         );
+
+        valueLookupBuilder(externalKey("farmersdelight", "mineable/knife")).add(CHORUS_CAKE_ROLL);
     }
 
     private TagKey<Block> externalKey(String namespace, String path) {
