@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://i.imgur.com/76Cxl9W.png">
+  <img src="https://cdn.modrinth.com/data/cached_images/1449d27b604d9d8fd7fa9c5225ea15500501c43f.webp">
   <h4>ℹ️ Requires <a href="https://modrinth.com/mod/trimmed">Trimmed</a>, <a href="https://modrinth.com/mod/yacl">YetAnotherConfigLib</a> and <a href="https://modrinth.com/mod/lithostitched">Lithostitched</a><br><br>💖 Features subject to change. <a href="https://github.com/lunarbunten/enderscape/issues">Please report any issues.</a></h4>
   <h2>🔹There's <i>far</i> more waiting for you beyond "The End"🔹</h2>
 </div>
