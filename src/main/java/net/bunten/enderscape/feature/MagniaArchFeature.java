@@ -1,6 +1,8 @@
 package net.bunten.enderscape.feature;
 
+import net.bunten.enderscape.block.BlisteredMagniaBlock;
 import net.bunten.enderscape.block.MagniaSproutBlock;
+import net.bunten.enderscape.block.state.StateProperties;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.tag.EnderscapeBlockTags;
 import net.bunten.enderscape.util.BlockUtil;
@@ -10,6 +12,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
@@ -84,8 +87,16 @@ public class MagniaArchFeature extends Feature<NoneFeatureConfiguration> {
     private void placeMagniaSprouts(Set<BlockPos> decorations, RandomSource random, WorldGenLevel level) {
         decorations.forEach(pos -> {
             for (Direction dir : Direction.values()) {
-                if (random.nextInt(15) == 0 && level.getBlockState(pos).is(EnderscapeBlocks.ALLURING_MAGNIA.get()) && level.getBlockState(pos.relative(dir)).canBeReplaced()) {
-                    level.setBlock(pos.relative(dir), EnderscapeBlocks.ALLURING_MAGNIA_SPROUT.get().defaultBlockState().setValue(MagniaSproutBlock.FACING, dir), 2);
+                BlockPos relative = pos.relative(dir);
+
+                if (random.nextInt(15) == 0 && level.getBlockState(pos).is(EnderscapeBlocks.ALLURING_MAGNIA.get()) && level.getBlockState(relative).canBeReplaced() && level.getBlockState(pos.relative(dir, 2)).canBeReplaced()) {
+                    if (random.nextInt(200) == 0) {
+                        BlockState state = EnderscapeBlocks.BLISTERED_MAGNIA.get().defaultBlockState().setValue(StateProperties.OPTIONAL_MAGNIA_POLARITY, BlisteredMagniaBlock.selectPolarity(level, relative));
+                        level.setBlock(relative, state, 2);
+                        level.scheduleTick(relative, state.getBlock(), 1);
+                    } else {
+                        level.setBlock(relative, EnderscapeBlocks.ALLURING_MAGNIA_SPROUT.get().defaultBlockState().setValue(MagniaSproutBlock.FACING, dir), 2);
+                    }
                 }
             }
         });

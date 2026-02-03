@@ -3,18 +3,20 @@ package net.bunten.enderscape.client.registry;
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.client.EnderscapeClient;
-import net.bunten.enderscape.client.entity.EndermanStareSoundInstance;
-import net.bunten.enderscape.client.entity.EndermanStaticSoundInstance;
+import net.bunten.enderscape.client.sound.EndermanStareSoundInstance;
+import net.bunten.enderscape.client.sound.EndermanStaticSoundInstance;
 import net.bunten.enderscape.network.*;
 import net.bunten.enderscape.registry.EnderscapeBlockSounds;
 import net.bunten.enderscape.registry.EnderscapeItemSounds;
-import net.bunten.enderscape.registry.EnderscapeMusic;
+import net.bunten.enderscape.registry.EnderscapeRegistries;
+import net.bunten.enderscape.sound.StructureMusic;
 import net.bunten.enderscape.util.BlockUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -24,19 +26,20 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.Optional;
 
-import static net.bunten.enderscape.client.EnderscapeClient.MAX_STARE_STICKS;
-import static net.bunten.enderscape.client.EnderscapeClient.staticSoundInstance;
+import static net.bunten.enderscape.client.EnderscapeClient.*;
 
 public class EnderscapeClientNetworking {
 
     public static void receiveDashJumpPayload(ClientboundDashJumpPayload payload, IPayloadContext context) {
         Minecraft client = Minecraft.getInstance();
         LocalPlayer player = client.player;
+        Vec2 power = payload.power();
 
         client.execute(() -> {
             if (player == null || !player.isAlive() || player.isSpectator()) return;
@@ -45,10 +48,8 @@ public class EnderscapeClientNetworking {
 
             float sinYRot = Mth.sin(player.getYRot() * (Mth.PI / 180));
             float cosYRot = Mth.cos(player.getYRot() * (Mth.PI / 180));
-            float hozPower = player.isFallFlying() ? payload.horizontalPower() * payload.glideVelocityFactor() : payload.horizontalPower();
-            float verPower = player.isFallFlying() ? payload.verticalPower() * payload.glideVelocityFactor() : payload.verticalPower();
 
-            player.setDeltaMovement(new Vec3(travel.x * hozPower * cosYRot - travel.z * hozPower * sinYRot, verPower, travel.z * hozPower * cosYRot + travel.x * hozPower * sinYRot));
+            player.setDeltaMovement(new Vec3(travel.x * power.x * cosYRot - travel.z * power.x * sinYRot, power.y, travel.z * power.x * cosYRot + travel.x * power.x * sinYRot));
         });
     }
 
@@ -68,10 +69,12 @@ public class EnderscapeClientNetworking {
         });
     }
 
-    public static void receiveMirrorTeleportPayload(ClientboundMirrorTeleportInfoPayload payload, IPayloadContext context) {
+    public static void receiveLodestoneTeleportationInfoPayload(ClientboundLodestoneTeleportationInfoPayload payload, IPayloadContext context) {
         Minecraft client = Minecraft.getInstance();
         client.execute(() -> {
-            EnderscapeClient.postMirrorUseTicks = 60;
+            lodestoneTeleportationOverlayTexture = Optional.of(payload.overlayTexture());
+            lodestoneTeleportationVignetteTexture = Optional.of(payload.vignetteTexture());
+            lodestoneTeleportationTicks = MAX_LODESTONE_TELEPORTATION_TICKS;
         });
     }
 
@@ -122,7 +125,9 @@ public class EnderscapeClientNetworking {
     public static void receiveStareSoundPayload(ClientboundStareSoundPayload payload, IPayloadContext context) {
         Minecraft client = Minecraft.getInstance();
         int entityId = payload.entityId();
-        client.execute(() -> client.getSoundManager().play(new EndermanStareSoundInstance(client, entityId)));
+        client.execute(() -> {
+            if ((stareSoundInstance == null || !client.getSoundManager().isActive(stareSoundInstance))) client.getSoundManager().play(stareSoundInstance = new EndermanStareSoundInstance(client, entityId));
+        });
     }
 
     public static void receiveStructureChangedPayload(ClientboundStructureChangedPayload payload, IPayloadContext context) {
@@ -130,12 +135,21 @@ public class EnderscapeClientNetworking {
         ResourceLocation location = payload.location();
 
         client.execute(() -> {
-            EnderscapeClient.structureMusic = location.equals(Enderscape.END_CITY_RESOURCE_KEY.location()) ? Optional.of(EnderscapeMusic.MUSIC_END_CITY) : Optional.empty();
+            if (client.level == null) return;
+
+            Registry<StructureMusic> registry = client.level.registryAccess().registryOrThrow(EnderscapeRegistries.STRUCTURE_MUSIC);
+            EnderscapeClient.structureMusic = registry.stream().filter(music -> music.permittedStructures().contains(location)).map(StructureMusic::music).findFirst();
         });
     }
 
     public static void receiveTransdimensionalTravelSoundPayload(ClientboundTransdimensionalTravelSoundPayload payload, IPayloadContext context) {
         Minecraft client = Minecraft.getInstance();
-        client.execute(() -> client.getSoundManager().play(SimpleSoundInstance.forLocalAmbience(EnderscapeItemSounds.MIRROR_TRANSDIMENSIONAL_TRAVEL.get(), 1.0F, 0.4F)));
+        client.execute(() -> {
+            SoundEvent soundEvent = client.level.registryAccess()
+                    .lookupOrThrow(Registries.SOUND_EVENT)
+                    .getOrThrow(ResourceKey.create(Registries.SOUND_EVENT, payload.soundEvent()))
+                    .value();
+            client.getSoundManager().play(SimpleSoundInstance.forLocalAmbience(soundEvent, 1.0F, 0.4F));
+        });
     }
 }

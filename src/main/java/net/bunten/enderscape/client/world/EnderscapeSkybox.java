@@ -15,6 +15,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.*;
 
 import java.lang.Math;
@@ -31,6 +33,7 @@ public class EnderscapeSkybox {
     public static float fogEndDensity = 1.0F;
     public static Vector4f nebulaColor = new Vector4f(0, 0, 0, 0);
     public static Vector4f starColor = new Vector4f(0, 0, 0, 0);
+    public static Vector4f flashColor = new Vector4f(0, 0, 0, 0);
 
     private static final VertexBuffer nebula1 = createNebulaeBuffer(16, 64, 60, 2);
     private static final VertexBuffer nebula2 = createNebulaeBuffer(16, 64, 60, 3);

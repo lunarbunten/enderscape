@@ -1,7 +1,7 @@
 package net.bunten.enderscape.registry;
 
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.block.properties.StateProperties;
+import net.bunten.enderscape.block.state.StateProperties;
 import net.bunten.enderscape.feature.*;
 import net.bunten.enderscape.registry.tag.EnderscapeBlockTags;
 import net.minecraft.core.Direction;
@@ -33,10 +33,7 @@ import static net.minecraft.data.worldgen.features.FeatureUtils.register;
 import static net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider.simple;
 
 public class EnderscapeConfiguredFeatures {
-    public EnderscapeConfiguredFeatures() {
-        RegistryHelper.checkAllReady();
-    }
-    
+
     public static final List<ResourceKey<ConfiguredFeature<?, ?>>> CONFIGURED_FEATURES = new ArrayList<>();
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLINKLIGHT_VINES = registerKey("blinklight_vines");
@@ -48,18 +45,20 @@ public class EnderscapeConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> CORRUPT_BARRENS_VEGETATION = registerKey("corrupt_barrens_vegetation");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DOWNWARD_CORRUPT_GROWTH = registerKey("downward_corrupt_growth");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DOWNWARD_LARGE_MURUBLIGHT_CHANTERELLE = registerKey("downward_large_murublight_chanterelle");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DOWNWARD_REPULSIVE_MAGNIA_SPROUT = registerKey("downward_repulsive_magnia_sprout");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DOWNWARD_TALL_CORRUPT_GROWTH = registerKey("downward_tall_corrupt_growth");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DRY_END_GROWTH = registerKey("dry_end_growth");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ENDERSCAPE_ISLAND = registerKey("enderscape_island");
     public static final ResourceKey<ConfiguredFeature<?, ?>> KURODITE = registerKey("kurodite");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_CELESTIAL_CHANTERELLE = registerKey("large_celestial_chanterelle");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_MAGNIA_SPIKE = registerKey("large_magnia_spike");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNIA_ARCH = registerKey("magnia_arch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNIA_SPIKE = registerKey("magnia_spike");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNIA_TOWER = registerKey("magnia_tower");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MIRESTONE_BLOB = registerKey("mirestone_blob");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MIRESTONE_PILLARS = registerKey("mirestone_pillars");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> MURUBLIGHT_SHELF = registerKey("murublight_shelf");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MURUBLIGHT_BRACKET = registerKey("murublight_bracket");
     public static final ResourceKey<ConfiguredFeature<?, ?>> NEBULITE_ORE = registerKey("nebulite_ore");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> DOWNWARD_REPULSIVE_MAGNIA_SPROUT = registerKey("downward_repulsive_magnia_sprout");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SCATTERED_SHADOLINE_ORE = registerKey("scattered_shadoline_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHADOLINE_ORE = registerKey("shadoline_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> UPWARD_ALLURING_MAGNIA_SPROUT = registerKey("upward_alluring_magnia_sprout");
@@ -78,29 +77,29 @@ public class EnderscapeConfiguredFeatures {
             OreConfiguration.target(new TagMatchTest(EnderscapeBlockTags.ORE_REPLACEABLE), EnderscapeBlocks.KURODITE.get().defaultBlockState())
     );
 
-    private final List<OreConfiguration.TargetBlockState> nebuliteOreTargets = List.of(
+    private final List<OreConfiguration.TargetBlockState> NEBULITE_ORE_TARGETS = List.of(
             OreConfiguration.target(new BlockMatchTest(Blocks.END_STONE), EnderscapeBlocks.NEBULITE_ORE.get().defaultBlockState()),
             OreConfiguration.target(new BlockMatchTest(EnderscapeBlocks.MIRESTONE.get()), EnderscapeBlocks.MIRESTONE_NEBULITE_ORE.get().defaultBlockState())
     );
 
-    private final List<OreConfiguration.TargetBlockState> shadolineOreTargets = List.of(
+    private final List<OreConfiguration.TargetBlockState> SHADOLINE_ORE_TARGETS = List.of(
             OreConfiguration.target(new BlockMatchTest(Blocks.END_STONE), EnderscapeBlocks.SHADOLINE_ORE.get().defaultBlockState()),
             OreConfiguration.target(new BlockMatchTest(EnderscapeBlocks.MIRESTONE.get()), EnderscapeBlocks.MIRESTONE_SHADOLINE_ORE.get().defaultBlockState())
     );
 
-    private final List<OreConfiguration.TargetBlockState> veraditeTargets = List.of(
+    private final List<OreConfiguration.TargetBlockState> VERADITE_TARGETS = List.of(
             OreConfiguration.target(new TagMatchTest(EnderscapeBlockTags.ORE_REPLACEABLE), EnderscapeBlocks.VERADITE.get().defaultBlockState())
     );
 
-    private final List<OreConfiguration.TargetBlockState> voidShaleTargets = List.of(
+    private final List<OreConfiguration.TargetBlockState> VOID_SHALE_TARGETS = List.of(
             OreConfiguration.target(new BlockMatchTest(EnderscapeBlocks.MIRESTONE.get()), EnderscapeBlocks.VOID_SHALE.get().defaultBlockState())
     );
 
-    private final List<OreConfiguration.TargetBlockState> voidShaleBlobsTargets = List.of(
+    private final List<OreConfiguration.TargetBlockState> VOID_SHALE_BLOBS_TARGETS = List.of(
             OreConfiguration.target(new TagMatchTest(EnderscapeBlockTags.ORE_REPLACEABLE), EnderscapeBlocks.VOID_SHALE.get().defaultBlockState())
     );
 
-    private final List<OreConfiguration.TargetBlockState> mirestoneBlobTargets = List.of(
+    private final List<OreConfiguration.TargetBlockState> MIRESTONE_BLOB_TARGETS = List.of(
             OreConfiguration.target(new BlockMatchTest(Blocks.END_STONE), EnderscapeBlocks.MIRESTONE.get().defaultBlockState())
     );
 
@@ -114,20 +113,20 @@ public class EnderscapeConfiguredFeatures {
 
         register(context, CHORUS_SPROUTS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(simple(EnderscapeBlocks.CHORUS_SPROUTS.get())));
         register(context, DRY_END_GROWTH, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(simple(EnderscapeBlocks.DRY_END_GROWTH.get())));
-        register(context, MURUBLIGHT_SHELF, EnderscapeFeatures.MURUBLIGHT_SHELF.get(), NoneFeatureConfiguration.NONE);
+        register(context, MURUBLIGHT_BRACKET, EnderscapeFeatures.MURUBLIGHT_BRACKET.get(), NoneFeatureConfiguration.NONE);
 
-        register(context, NEBULITE_ORE, Feature.ORE, new OreConfiguration(nebuliteOreTargets, 4));
-        register(context, CEILING_NEBULITE_ORE, EnderscapeFeatures.CEILING_ORE.get(), new CeilingOreConfig(nebuliteOreTargets, ConstantInt.of(8)));
+        register(context, NEBULITE_ORE, Feature.ORE, new OreConfiguration(NEBULITE_ORE_TARGETS, 4));
+        register(context, CEILING_NEBULITE_ORE, EnderscapeFeatures.CEILING_ORE.get(), new CeilingOreConfig(NEBULITE_ORE_TARGETS, ConstantInt.of(8)));
 
-        register(context, SHADOLINE_ORE, Feature.ORE, new OreConfiguration(shadolineOreTargets, 10));
-        register(context, SCATTERED_SHADOLINE_ORE, EnderscapeFeatures.SCATTERED_ORE.get(), new ScatteredOreConfig(shadolineOreTargets, UniformInt.of(70, 90), UniformInt.of(-1, 1), ConstantInt.of(1)));
+        register(context, SHADOLINE_ORE, Feature.ORE, new OreConfiguration(SHADOLINE_ORE_TARGETS, 10));
+        register(context, SCATTERED_SHADOLINE_ORE, EnderscapeFeatures.SCATTERED_ORE.get(), new ScatteredOreConfig(SHADOLINE_ORE_TARGETS, UniformInt.of(70, 90), UniformInt.of(-1, 1), ConstantInt.of(1)));
 
-        register(context, VERADITE, Feature.ORE, new OreConfiguration(veraditeTargets, 28));
+        register(context, VERADITE, Feature.ORE, new OreConfiguration(VERADITE_TARGETS, 28));
 
-        register(context, VOID_SHALE, EnderscapeFeatures.VOID_SHALE.get(), new VoidShaleConfig(voidShaleTargets, ConstantInt.of(5)));
-        register(context, VOID_SHALE_BLOB, Feature.ORE, new OreConfiguration(voidShaleBlobsTargets, 16, 1));
+        register(context, VOID_SHALE, EnderscapeFeatures.VOID_SHALE.get(), new VoidShaleConfig(VOID_SHALE_TARGETS, ConstantInt.of(5)));
+        register(context, VOID_SHALE_BLOB, Feature.ORE, new OreConfiguration(VOID_SHALE_BLOBS_TARGETS, 16, 1));
 
-        register(context, MIRESTONE_BLOB, Feature.ORE, new OreConfiguration(mirestoneBlobTargets, 16, 0.5F));
+        register(context, MIRESTONE_BLOB, Feature.ORE, new OreConfiguration(MIRESTONE_BLOB_TARGETS, 16, 0.5F));
     }
 
     private void registerVeiledWoodlands(BootstrapContext<ConfiguredFeature<?, ?>> context) {
@@ -183,11 +182,34 @@ public class EnderscapeConfiguredFeatures {
 
         register(context, DOWNWARD_REPULSIVE_MAGNIA_SPROUT, Feature.BLOCK_COLUMN,
                 new BlockColumnConfiguration(List.of(
-                        BlockColumnConfiguration.layer(ConstantInt.of(1), simple(EnderscapeBlocks.REPULSIVE_MAGNIA_SPROUT.get().defaultBlockState().setValue(StateProperties.FACING, Direction.DOWN)))
+                        BlockColumnConfiguration.layer(
+                                ConstantInt.of(1),
+                                simple(EnderscapeBlocks.REPULSIVE_MAGNIA_SPROUT.get().defaultBlockState().setValue(StateProperties.FACING, Direction.DOWN))
+                        )
                 ), Direction.DOWN, BlockPredicate.ONLY_IN_AIR_PREDICATE, true));
 
         register(context, MAGNIA_ARCH, EnderscapeFeatures.MAGNIA_ARCH.get(), new NoneFeatureConfiguration());
-        register(context, MAGNIA_TOWER, EnderscapeFeatures.MAGNIA_TOWER.get(), new MagniaTowerConfig(UniformFloat.of(6.0F, 8.0F), UniformInt.of(12, 18), ConstantInt.of(3), ConstantInt.of(7), ConstantFloat.of(0.06F)));
+
+        register(context, MAGNIA_TOWER, EnderscapeFeatures.MAGNIA_TOWER.get(), new MagniaTowerConfig(
+                UniformFloat.of(6.0F, 8.0F),
+                UniformInt.of(12, 18),
+                ConstantInt.of(3),
+                ConstantInt.of(7),
+                ConstantFloat.of(0.025F),
+                ConstantFloat.of(0.05F))
+        );
+
+        register(context, MAGNIA_SPIKE, EnderscapeFeatures.MAGNIA_SPIKE.get(), new MagniaSpikeConfig(
+                UniformInt.of(3, 8),
+                ConstantFloat.of(0.05F),
+                2)
+        );
+
+        register(context, LARGE_MAGNIA_SPIKE, EnderscapeFeatures.MAGNIA_SPIKE.get(), new MagniaSpikeConfig(
+                UniformInt.of(6, 12),
+                ConstantFloat.of(0.05F),
+                6)
+        );
     }
 
     private void registerCelestialGrove(BootstrapContext<ConfiguredFeature<?, ?>> context) {

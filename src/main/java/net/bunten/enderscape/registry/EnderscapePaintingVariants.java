@@ -1,18 +1,18 @@
 package net.bunten.enderscape.registry;
 
 import net.bunten.enderscape.Enderscape;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class EnderscapePaintingVariants {
-    public EnderscapePaintingVariants() {
-        RegistryHelper.checkAllReady();
-    }
 
     public static final List<ResourceKey<PaintingVariant>> PAINTING_VARIANTS = new ArrayList<>();
 
@@ -22,7 +22,7 @@ public class EnderscapePaintingVariants {
         register(context, GRAPE_STATIC, 3, 3);
     }
 
-    private void register(BootstrapContext<PaintingVariant> context, ResourceKey<PaintingVariant> key, int width, int height) {
+    private static void register(BootstrapContext<PaintingVariant> context, ResourceKey<PaintingVariant> key, int width, int height) {
         context.register(key, new PaintingVariant(
                 width,
                 height,

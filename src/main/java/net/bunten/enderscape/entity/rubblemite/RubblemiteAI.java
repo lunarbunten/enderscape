@@ -8,9 +8,7 @@ import com.mojang.datafixers.util.Pair;
 import net.bunten.enderscape.entity.ai.EnderscapeAI;
 import net.bunten.enderscape.entity.ai.EnderscapeMemory;
 import net.bunten.enderscape.entity.ai.EnderscapeSensors;
-import net.bunten.enderscape.entity.ai.behavior.RubblemiteDashDuringCombat;
-import net.bunten.enderscape.entity.ai.behavior.RubblemiteManageFlags;
-import net.bunten.enderscape.entity.ai.behavior.RubblemiteShellCooldown;
+import net.bunten.enderscape.entity.ai.behavior.*;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.Brain;
@@ -23,7 +21,6 @@ import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.schedule.Activity;
 
 import java.util.Optional;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
@@ -45,6 +42,8 @@ public class RubblemiteAI {
             EnderscapeMemory.NEAREST_VISIBLE_LIVING_ENTITIES,
             EnderscapeMemory.NEAREST_VISIBLE_PLAYER,
             EnderscapeMemory.PATH,
+            EnderscapeMemory.RUBBLEMITE_PREPARING_DASH.get(),
+            EnderscapeMemory.RUBBLEMITE_PREPARING_DASH_TIME.get(),
             EnderscapeMemory.RUBBLEMITE_DASH_ON_COOLDOWN.get(),
             EnderscapeMemory.RUBBLEMITE_HIDING_DURATION.get(),
             EnderscapeMemory.RUBBLEMITE_HIDING_ON_COOLDOWN.get(),
@@ -66,7 +65,7 @@ public class RubblemiteAI {
             Optional<Boolean> cooling = brain.getMemory(EnderscapeMemory.RUBBLEMITE_HIDING_ON_COOLDOWN.get());
             return cooling.orElse(false);
         }
-        
+
         return false;
     }
 
@@ -89,9 +88,10 @@ public class RubblemiteAI {
     private static void initCoreActivity(Brain<Rubblemite> brain) {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new MoveToTargetSink(),
-                new LookAtTargetSink(45, 90),
+                new CountDownCooldownTicks(EnderscapeMemory.RUBBLEMITE_PREPARING_DASH_TIME.get()),
+                new ConditionalLookAtTargetSink<>(rubblemite -> rubblemite.isDashing() || rubblemite.isInsideShell(), 45, 90),
                 new RubblemiteShellCooldown(),
-                new RubblemiteManageFlags(),
+                new RubblemiteManageState(),
                 StopBeingAngryIfTargetDead.create()
             )
         );
@@ -115,9 +115,10 @@ public class RubblemiteAI {
 
     private static void initFightActivity(Brain<Rubblemite> brain) {
         brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
-            new RubblemiteDashDuringCombat(),
+            new RubblemiteDashAfterPreparing(),
+            new RubblemitePrepareDashDuringCombat(),
             SetWalkTargetFromAttackTargetIfTargetOutOfReach.create(1),
-            BehaviorBuilder.triggerIf(Predicate.not(Rubblemite::isDashing), MeleeAttack.create(15)),
+            BehaviorBuilder.triggerIf(mob -> mob.getState() == Rubblemite.State.IDLING, MeleeAttack.create(15)),
             StopAttackingIfTargetInvalid.create()
         ), EnderscapeMemory.ATTACK_TARGET);
     }

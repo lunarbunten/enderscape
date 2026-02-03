@@ -36,7 +36,7 @@ public class CorruptBarrensBiome {
                 .addFeature(UNDERGROUND_ORES, EnderscapePlacedFeatures.SHADOLINE_ORE)
                 .addFeature(UNDERGROUND_ORES, EnderscapePlacedFeatures.SCATTERED_SHADOLINE_ORE)
                 .addFeature(UNDERGROUND_ORES, EnderscapePlacedFeatures.NEBULITE_ORE)
-                .addFeature(UNDERGROUND_ORES, EnderscapePlacedFeatures.COMMMON_CEILING_NEBULITE_ORE)
+                .addFeature(UNDERGROUND_ORES, EnderscapePlacedFeatures.COMMON_CEILING_NEBULITE_ORE)
                 .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.LARGE_MURUBLIGHT_CHANTERELLES)
                 .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.BLINKLIGHT_VINES)
                 .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.DOWNWARD_CORRUPT_GROWTH)
@@ -44,7 +44,7 @@ public class CorruptBarrensBiome {
                 .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.UPWARD_CORRUPT_GROWTH)
                 .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.UPWARD_TALL_CORRUPT_GROWTH)
                 .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.CORRUPT_BARRENS_VEGETATION)
-                .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.MURUBLIGHT_SHELF);
+                .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.MURUBLIGHT_BRACKET);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)
@@ -52,7 +52,7 @@ public class CorruptBarrensBiome {
                 .downfall(0.5F)
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .skyColor(RGBA.darkenColor(EnderscapeBiomes.DEFAULT_SKY_COLOR, EnderscapeBiomes.CORRUPT_BARRENS_DARKENING_FACTOR))
-                        .fogColor(RGBA.darkenColor(EnderscapeBiomes.DEFAULT_FOG_COLOR, EnderscapeBiomes.CORRUPT_BARRENS_DARKENING_FACTOR))
+                        .fogColor(EnderscapeBiomes.lightenFogColor(0x0B090F))
                         .waterColor(0x6a647d)
                         .waterFogColor(0x544f63)
                         .foliageColorOverride(0x847c91)

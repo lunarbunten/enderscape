@@ -1,7 +1,7 @@
 package net.bunten.enderscape.block;
 
-import net.bunten.enderscape.block.properties.DirectionProperties;
-import net.bunten.enderscape.block.properties.StateProperties;
+import net.bunten.enderscape.block.properties.DirectionSet;
+import net.bunten.enderscape.block.state.StateProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -16,11 +16,11 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class DirectionalPlantBlock extends BushBlock {
     public static final EnumProperty<Direction> FACING = StateProperties.FACING;
-    public final DirectionProperties directionProperties;
+    public final DirectionSet directionSet;
 
-    public DirectionalPlantBlock(DirectionProperties directionProperties, Properties properties) {
+    public DirectionalPlantBlock(DirectionSet directionSet, Properties properties) {
         super(properties);
-        this.directionProperties = directionProperties;
+        this.directionSet = directionSet;
         registerDefaultState(defaultBlockState().setValue(FACING, Direction.UP));
     }
 
@@ -47,7 +47,7 @@ public abstract class DirectionalPlantBlock extends BushBlock {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         for (Direction dir : context.getNearestLookingDirections()) {
             BlockState state = defaultBlockState().setValue(FACING, dir.getOpposite());
-            if (directionProperties.supports(dir.getOpposite()) && state.canSurvive(context.getLevel(), context.getClickedPos())) {
+            if (directionSet.supports(dir.getOpposite()) && state.canSurvive(context.getLevel(), context.getClickedPos())) {
                 return state;
             }
         }

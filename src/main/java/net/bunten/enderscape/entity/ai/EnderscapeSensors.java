@@ -1,19 +1,30 @@
 package net.bunten.enderscape.entity.ai;
 
+import com.mojang.serialization.Codec;
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.entity.ai.sensing.*;
+import net.bunten.enderscape.entity.ai.sensing.NearestEnemiesSensor;
+import net.bunten.enderscape.entity.ai.sensing.NearestIntimidatorSensor;
+import net.bunten.enderscape.entity.ai.sensing.RustleNearestFoodSensor;
+import net.bunten.enderscape.entity.ai.sensing.RustleNearestSleepingSpotSensor;
 import net.bunten.enderscape.entity.drifter.DrifterAI;
 import net.bunten.enderscape.entity.rustle.RustleAI;
 import net.bunten.enderscape.registry.RegistryHelper;
 import net.bunten.enderscape.registry.tag.EnderscapeEntityTags;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.DummySensor;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.ai.sensing.TemptingSensor;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.Optional;
 import java.util.function.Supplier;
+
+import static net.bunten.enderscape.Enderscape.MOD_ID;
 
 public class EnderscapeSensors extends SensorType<DummySensor> {
 
@@ -23,7 +34,6 @@ public class EnderscapeSensors extends SensorType<DummySensor> {
 
     // Drifter
 
-    public static final Supplier<SensorType<AdultDrifterSensor>> NEAREST_ADULT_DRIFTER = register("nearest_adult_drifter", AdultDrifterSensor::new);
     public static final Supplier<SensorType<NearestIntimidatorSensor>> NEAREST_INTIMIDATOR = register("nearest_intimidator", NearestIntimidatorSensor::new);
     public static final Supplier<SensorType<TemptingSensor>> DRIFTER_TEMPTATIONS = register("drifter_temptations", () -> new TemptingSensor(DrifterAI.getTemptations()));
 

@@ -1,6 +1,6 @@
 package net.bunten.enderscape.mixin;
 
-import net.bunten.enderscape.entity.drifter.AbstractDrifter;
+import net.bunten.enderscape.entity.drifter.Drifter;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.PathfinderMob;
@@ -30,8 +30,8 @@ public abstract class TemptingSensorMixin {
 
     @Inject(method = "doTick(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/PathfinderMob;)V", at = @At("HEAD"), cancellable = true)
     private void Enderscape$modifyDrifterTemptDistance(ServerLevel level, PathfinderMob mob, CallbackInfo info) {
-        if (mob instanceof AbstractDrifter drifter) {
-            Brain<AbstractDrifter> brain = drifter.getBrain();
+        if (mob instanceof Drifter drifter) {
+            Brain<Drifter> brain = drifter.getBrain();
             List<Player> list = level.players()
                     .stream()
                     .filter(EntitySelector.NO_SPECTATORS)

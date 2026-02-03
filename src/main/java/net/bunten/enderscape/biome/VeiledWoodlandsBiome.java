@@ -22,7 +22,7 @@ public class VeiledWoodlandsBiome {
 
         MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder()
                 .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUSTLE.get(), 20, 2, 3))
-                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUBBLEMITE.get(), 4, 2, 3));
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUBBLEMITE.get(), 2, 2, 3));
 
         BiomeDefaultFeatures.endSpawns(spawns);
 
@@ -44,7 +44,7 @@ public class VeiledWoodlandsBiome {
                 .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.VEILED_TREES)
                 .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.VEILED_WOODLANDS_VEGETATION)
                 .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.WISP_FLOWER_PATCHES)
-                .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.MURUBLIGHT_SHELF);
+                .addFeature(VEGETAL_DECORATION, EnderscapePlacedFeatures.MURUBLIGHT_BRACKET);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false)
@@ -52,7 +52,7 @@ public class VeiledWoodlandsBiome {
                 .downfall(0.5F)
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .skyColor(0x161621)
-                        .fogColor(0x101017)
+                        .fogColor(EnderscapeBiomes.lightenFogColor(0x101017))
                         .waterColor(0x96a3b1)
                         .waterFogColor(0x464d59)
                         .foliageColorOverride(0xa1b298)

@@ -10,9 +10,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import static net.bunten.enderscape.client.EnderscapeClient.MAX_STARE_STICKS;
 
+@OnlyIn(Dist.CLIENT)
 public class StareScreenEffect extends HudElement {
 
     public static final ResourceLocation STATIC_TEXTURE = Enderscape.id("textures/misc/static.png");
@@ -21,21 +24,21 @@ public class StareScreenEffect extends HudElement {
         super(Enderscape.id("stare_screen"), RenderPhase.BEFORE_HUD);
     }
 
-    public void render(GuiGraphics graphics, DeltaTracker delta) {
+    private float alpha = 0, previousAlpha = 0;
+
+    public void render(GuiGraphics graphics, DeltaTracker tracker) {
         if (Minecraft.getInstance().player == null || Minecraft.getInstance().options.hideGui || !Minecraft.getInstance().options.getCameraType().isFirstPerson() || Minecraft.getInstance().player.isSpectator() || EnderscapeClient.stareTicks <= 0 || !EnderscapeConfig.getInstance().endermanStaticOverlay) {
             return;
         }
 
         graphics.pose().pushPose();
 
-        float alpha = Mth.clamp((float) EnderscapeClient.stareTicks / MAX_STARE_STICKS, 0.0F, 0.25F);
-
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_CONSTANT_ALPHA);
 
-        graphics.setColor(1, 1, 1, alpha);
+        graphics.setColor(1, 1, 1, Mth.lerp(tracker.getGameTimeDeltaPartialTick(false), previousAlpha, alpha));
         graphics.blit(
                 STATIC_TEXTURE,
                 0,
@@ -57,6 +60,10 @@ public class StareScreenEffect extends HudElement {
 
     public void tick() {
         super.tick();
-        if (EnderscapeClient.stareTicks > 0 && !Minecraft.getInstance().isPaused()) EnderscapeClient.stareTicks--;
+
+        if (EnderscapeClient.stareTicks > 0 && !Minecraft.getInstance().isPaused()) {
+            previousAlpha = alpha;
+            alpha = Mth.clamp((float) EnderscapeClient.stareTicks-- / MAX_STARE_STICKS, 0.0F, 0.25F);
+        }
     }
 }
