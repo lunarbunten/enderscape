@@ -1,5 +1,7 @@
 package net.bunten.enderscape.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.bunten.enderscape.registry.EnderscapeBlockSounds;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.EnderscapeParticles;
@@ -21,7 +23,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Set;
@@ -70,21 +71,21 @@ public abstract class VaultBlockEntityClientMixin {
         }
     }
 
-    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/vault/VaultBlockEntity$Client;emitIdleParticles(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/entity/vault/VaultSharedData;Lnet/minecraft/core/particles/ParticleOptions;)V"))
-    private static void getStateWithConnections(Level level, BlockPos pos, VaultSharedData data, ParticleOptions options) {
+    @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/entity/vault/VaultBlockEntity$Client;emitIdleParticles(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/entity/vault/VaultSharedData;Lnet/minecraft/core/particles/ParticleOptions;)V"))
+    private static void getStateWithConnections(Level level, BlockPos pos, VaultSharedData data, ParticleOptions options, Operation<Void> original) {
         if (level.getBlockState(pos).is(EnderscapeBlocks.END_VAULT.get())) {
-            emitIdleParticles(level, pos, data, EnderscapeParticles.VOID_STARS.get());
+            original.call(level, pos, data, EnderscapeParticles.VOID_STARS.get());
         } else {
-            emitIdleParticles(level, pos, data, options);
+            original.call(level, pos, data, options);
         }
     }
 
-    @Redirect(method = "playIdleSounds", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;playLocalSound(Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V"))
-    private static void getStateWithConnections(Level level, BlockPos pos, SoundEvent sound, SoundSource source, float f, float g, boolean bl) {
+    @WrapOperation(method = "playIdleSounds", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;playLocalSound(Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FFZ)V"))
+    private static void getStateWithConnections(Level level, BlockPos pos, SoundEvent sound, SoundSource source, float f, float g, boolean bl, Operation<Void> original) {
         if (level.getBlockState(pos).is(EnderscapeBlocks.END_VAULT.get())) {
-            level.playLocalSound(pos, EnderscapeBlockSounds.END_VAULT_AMBIENT, source, f, g, bl);
+            original.call(level, pos, EnderscapeBlockSounds.END_VAULT_AMBIENT, source, f, g, bl);
         } else {
-            level.playLocalSound(pos, sound, source, f, g, bl);
+            original.call(level, pos, sound, source, f, g, bl);
         }
     }
 }

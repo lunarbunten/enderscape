@@ -29,6 +29,7 @@ public class EnderscapeEntitySounds {
     public static final Supplier<SoundEvent> RUBBLEMITE_DEATH = register("rubblemite.death");
     public static final Supplier<SoundEvent> RUBBLEMITE_EXTRUDE = register("rubblemite.extrude");
     public static final Supplier<SoundEvent> RUBBLEMITE_HOP = register("rubblemite.hop");
+    public static final Supplier<SoundEvent> RUBBLEMITE_PREPARE_DASH = register("rubblemite.prepare_dash");
     public static final Supplier<SoundEvent> RUBBLEMITE_HURT = register("rubblemite.hurt");
     public static final Supplier<SoundEvent> RUBBLEMITE_SHIELD = register("rubblemite.shield");
     public static final Supplier<SoundEvent> RUBBLEMITE_STEP = register("rubblemite.step");

@@ -4,7 +4,10 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class EndPortalStarParticle extends RisingParticle {
 
     private EndPortalStarParticle(ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
@@ -48,7 +51,8 @@ public class EndPortalStarParticle extends RisingParticle {
         return Math.max(160, super.getLightColor(delta));
     }
 
-        public static class Provider implements ParticleProvider<SimpleParticleType> {
+    @OnlyIn(Dist.CLIENT)
+    public static class Provider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprites;
 
         public Provider(SpriteSet sprites) {

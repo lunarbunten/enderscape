@@ -1,8 +1,8 @@
 package net.bunten.enderscape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.bunten.enderscape.block.properties.DirectionProperties;
-import net.bunten.enderscape.block.properties.StateProperties;
+import net.bunten.enderscape.block.properties.DirectionSet;
+import net.bunten.enderscape.block.state.StateProperties;
 import net.bunten.enderscape.registry.EnderscapeBlockSounds;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.minecraft.core.BlockPos;
@@ -17,7 +17,7 @@ public class CorruptOvergrowthBlock extends AbstractOvergrowthBlock {
     public static final MapCodec<CorruptOvergrowthBlock> CODEC = simpleCodec(CorruptOvergrowthBlock::new);
 
     public CorruptOvergrowthBlock(BlockBehaviour.Properties settings) {
-        super(false, EnderscapeBlocks.MIRESTONE.get(), EnderscapeBlocks.CORRUPT_PATH_BLOCK.get(), EnderscapeBlockSounds.CORRUPT_OVERGROWTH_FLATTEN, DirectionProperties.create().all(), settings);
+        super(false, EnderscapeBlocks.MIRESTONE.get(), EnderscapeBlocks.CORRUPT_PATH.get(), EnderscapeBlockSounds.CORRUPT_OVERGROWTH_FLATTEN, DirectionSet.create().all(), settings);
     }
 
     @Override

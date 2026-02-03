@@ -1,7 +1,7 @@
 package net.bunten.enderscape.registry;
 
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.block.dispenser.MirrorDispenserBehavior;
+import net.bunten.enderscape.block.dispenser.LodestoneTeleportationDispenserBehavior;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
@@ -96,7 +96,7 @@ public class EnderscapeModifications {
             ((FireBlock) Blocks.FIRE).setFlammable(CORRUPT_GROWTH.get(), 60, 100);
             ((FireBlock) Blocks.FIRE).setFlammable(BLINKLIGHT_VINES_BODY.get(), 15, 60);
             ((FireBlock) Blocks.FIRE).setFlammable(BLINKLIGHT_VINES_HEAD.get(), 15, 60);
-            ((FireBlock) Blocks.FIRE).setFlammable(MURUBLIGHT_SHELF.get(), 60, 100);
+            ((FireBlock) Blocks.FIRE).setFlammable(MURUBLIGHT_BRACKET.get(), 60, 100);
             
             GameBusHandlers.STATES.put(VEILED_LOG.get(), STRIPPED_VEILED_LOG.get());
             GameBusHandlers.STATES.put(VEILED_WOOD.get(), STRIPPED_VEILED_WOOD.get());
@@ -123,7 +123,7 @@ public class EnderscapeModifications {
                 }
             });
 
-            DispenserBlock.registerBehavior(MIRROR.get(), new MirrorDispenserBehavior());
+            DispenserBlock.registerBehavior(MIRROR.get(), new LodestoneTeleportationDispenserBehavior());
         });
     }
 

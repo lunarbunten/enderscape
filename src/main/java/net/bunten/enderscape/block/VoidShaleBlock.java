@@ -1,8 +1,11 @@
 package net.bunten.enderscape.block;
 
 import net.bunten.enderscape.registry.EnderscapeBlockSounds;
+import net.bunten.enderscape.registry.EnderscapeParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -18,6 +21,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.Vec3;
+
+import static net.bunten.enderscape.registry.EnderscapeBlockSounds.*;
 
 public class VoidShaleBlock extends Block {
 
@@ -79,15 +85,22 @@ public class VoidShaleBlock extends Block {
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
         if (entity instanceof LivingEntity living && !living.hasEffect(MobEffects.SLOW_FALLING) && !onCooldown(state) && !isAttachedToBlock(level, pos)) {
             int stress = getStress(state);
-            playShatterSound(level, pos, stress);
-            level.setBlock(pos, state.setValue(STRESS, Math.min(MAX_STRESS, stress + 1)).setValue(COOLDOWN, true).setValue(ITERATION, 0), 2);
+            BlockState updated = state.setValue(STRESS, Math.min(MAX_STRESS, stress + 1)).setValue(COOLDOWN, true).setValue(ITERATION, 0);
+
+            playShatterEffects(level, pos, updated, stress);
+            level.setBlock(pos, updated, 2);
             level.scheduleTick(pos, this, living.isCrouching() ? 30 : 15);
         }
     }
 
-    private void playShatterSound(Level level, BlockPos pos, int stress) {
-        SoundEvent sound = EnderscapeBlockSounds.VOID_SHALE_SHATTER_SOUNDS.get(Math.min(3, stress));
+    private void playShatterEffects(Level level, BlockPos pos, BlockState state, int stress) {
+        SoundEvent sound = EnderscapeBlockSounds.VOID_SHALE_SHATTER_SOUNDS[Math.min(3, stress)];
         if (sound != SoundEvents.EMPTY) level.playSound(null, pos, sound, SoundSource.BLOCKS, 1, 1);
+
+        if (level instanceof ServerLevel server) {
+            Vec3 top = pos.getCenter().add(0, 0.5125, 0);
+            server.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), top.x(), top.y(), top.z(), 6, 0.1F, 0.1F, 0.1F, 0);
+        }
     }
 
     private boolean canAttach(Level level, Direction dir, BlockState state, BlockPos relative) {

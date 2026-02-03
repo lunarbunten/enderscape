@@ -50,7 +50,7 @@ public class RustleBucketItem extends Item implements DispensibleContainerItem {
                 BlockPos relative = pos.relative(result.getDirection());
                 if (emptyContents(player, level, relative, result)) {
                     checkExtraContent(player, level, stack, relative);
-                    level.playSound(player, pos, EnderscapeItemSounds.RUSTLE_BUCKET_EMPTY.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
+                    level.playSound(player, pos, EnderscapeItemSounds.RUSTLE_BUCKET_EMPTY, SoundSource.NEUTRAL, 1.0F, 1.0F);
                     player.awardStat(Stats.ITEM_USED.get(this));
                     return InteractionResultHolder.success(ItemUtils.createFilledResult(stack, player, !player.hasInfiniteMaterials() ? new ItemStack(Items.BUCKET) : stack));
                 }

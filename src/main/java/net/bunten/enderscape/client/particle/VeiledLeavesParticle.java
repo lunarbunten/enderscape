@@ -3,7 +3,10 @@ package net.bunten.enderscape.client.particle;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class VeiledLeavesParticle extends TextureSheetParticle {
     private float rotSpeed;
     private final float spinAcceleration;
@@ -91,7 +94,8 @@ public class VeiledLeavesParticle extends TextureSheetParticle {
         }
     }
 
-        public static class Provider implements ParticleProvider<SimpleParticleType> {
+    @OnlyIn(Dist.CLIENT)
+    public static class Provider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprites;
 
         public Provider(SpriteSet sprites) {

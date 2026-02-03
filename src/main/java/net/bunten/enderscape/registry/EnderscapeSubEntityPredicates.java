@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.entity.rubblemite.RubblemiteVariantPredicate;
 import net.minecraft.advancements.critereon.EntitySubPredicate;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 
 public class EnderscapeSubEntityPredicates {

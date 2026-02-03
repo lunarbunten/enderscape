@@ -2,7 +2,6 @@ package net.bunten.enderscape.item;
 
 import net.bunten.enderscape.Enderscape;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -15,7 +14,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 
 public class HealingItem extends Item {
-    public HealingItem(Item.Properties settings) {
+    public HealingItem(Properties settings) {
         super(settings.stacksTo(1).rarity(Rarity.EPIC).attributes(ItemAttributeModifiers.builder().add(Attributes.ATTACK_DAMAGE, new AttributeModifier(Enderscape.id("healing_attack_damage"), 999, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build()));
     }
 

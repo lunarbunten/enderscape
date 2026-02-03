@@ -14,14 +14,13 @@ import net.minecraft.world.level.Level;
 
 public class DriftJellyBottleItem extends Item {
 
-    public DriftJellyBottleItem(Item.Properties properties) {
+    public DriftJellyBottleItem(Properties properties) {
         super(properties);
     }
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
         super.finishUsingItem(stack, level, user);
-        user.playSound(EnderscapeItemSounds.DRIFT_JELLY_BOTTLE_FINISH.value(), 1, 1);
 
         if (user instanceof ServerPlayer player) {
             CriteriaTriggers.CONSUME_ITEM.trigger(player, stack);

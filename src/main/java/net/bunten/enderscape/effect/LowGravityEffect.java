@@ -5,6 +5,6 @@ import net.minecraft.world.effect.MobEffectCategory;
 
 public class LowGravityEffect extends MobEffect {
     public LowGravityEffect() {
-        super(MobEffectCategory.BENEFICIAL, 0x23AFA4);
+        super(MobEffectCategory.NEUTRAL, 0xFFA6F9);
     }
 }

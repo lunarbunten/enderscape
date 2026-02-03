@@ -124,7 +124,7 @@
           }
         },
         {
-          "biome": "enderscape:magnia_crags",
+          "biome": "enderscape:magnia_fields",
           "parameters": {
             "continentalness": [
               -0.55,

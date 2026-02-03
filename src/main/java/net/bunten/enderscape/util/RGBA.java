@@ -1,6 +1,6 @@
 package net.bunten.enderscape.util;
 
-import net.bunten.enderscape.biome.util.SkyParameters;
+import net.bunten.enderscape.biome.util.BiomeParameters;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.biome.BiomeManager;
 import net.minecraft.world.phys.Vec3;
@@ -23,13 +23,13 @@ public record RGBA(int color, float alpha) {
 
     public static final double[] GAUSSIAN_SAMPLE_KERNEL = generateGaussianKernel(2);
 
-    public static float sampleFloat(BiomeManager manager, Vec3 pos, Function<SkyParameters, Float> provided, float defaults) {
-        return sampleFloat(pos, (x, y, z) -> SkyParameters.getSkyParametersFor(manager.getNoiseBiomeAtQuart(x, y, z)).map(provided).orElse(defaults));
+    public static float sampleFloat(BiomeManager manager, Vec3 pos, Function<BiomeParameters, Float> provided, float defaults) {
+        return sampleFloat(pos, (x, y, z) -> BiomeParameters.findFor(manager.getNoiseBiomeAtQuart(x, y, z)).map(provided).orElse(defaults));
     }
 
-    public static Vector4f sampleVector4f(BiomeManager manager, Vec3 pos, Function<SkyParameters, RGBA> provided, RGBA defaults) {
+    public static Vector4f sampleVector4f(BiomeManager manager, Vec3 pos, Function<BiomeParameters, RGBA> provided, RGBA defaults) {
         return sampleVector4f(pos, (x, y, z) -> {
-            RGBA rgba = SkyParameters.getSkyParametersFor(manager.getNoiseBiomeAtQuart(x, y, z)).map(provided).orElse(defaults);
+            RGBA rgba = BiomeParameters.findFor(manager.getNoiseBiomeAtQuart(x, y, z)).map(provided).orElse(defaults);
             Vec3 color = Vec3.fromRGB24(rgba.color());
             return new Vector4f((float) color.x, (float) color.y, (float) color.z, rgba.alpha());
         });

@@ -27,7 +27,7 @@ public abstract class ThrownEnderpearlMixin extends ThrowableItemProjectile {
 
     @ModifyArgs(method = "playSound", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;)V"))
     private void Enderscape$playSound(Args args) {
-        if (EnderscapeConfig.getInstance().enderPearlUpdateTeleportSound) args.set(4, EnderscapeItemSounds.ENDER_PEARL_LAND.get());
+        if (EnderscapeConfig.getInstance().enderPearlUpdateTeleportSound) args.set(4, EnderscapeItemSounds.ENDER_PEARL_LAND);
     }
 
     @Inject(at = @At("TAIL"), method = "playSound")
@@ -39,7 +39,7 @@ public abstract class ThrownEnderpearlMixin extends ThrowableItemProjectile {
 
     @Inject(at = @At("TAIL"), method = "tick")
     public void Enderscape$tick(CallbackInfo info) {
-        if (level().isClientSide() && EnderscapeConfig.getInstance().enderPearlAddParticles) {
+        if (EnderscapeConfig.getInstance().enderPearlAddParticles && level().isClientSide()) {
             Vec3 vel = getDeltaMovement().scale(0.5F).scale(-1.0F);
 
             double x = random.nextGaussian() * 0.02 + vel.x;

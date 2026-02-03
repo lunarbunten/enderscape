@@ -1,17 +1,14 @@
 package net.bunten.enderscape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.bunten.enderscape.block.properties.DirectionProperties;
-import net.bunten.enderscape.block.properties.StateProperties;
+import net.bunten.enderscape.block.properties.DirectionSet;
+import net.bunten.enderscape.block.state.StateProperties;
 import net.bunten.enderscape.registry.EnderscapeBlockSounds;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
-import net.bunten.enderscape.registry.EnderscapeConfiguredFeatures;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -20,7 +17,7 @@ public class CelestialOvergrowthBlock extends AbstractOvergrowthBlock {
     public static final MapCodec<CelestialOvergrowthBlock> CODEC = simpleCodec(CelestialOvergrowthBlock::new);
 
     public CelestialOvergrowthBlock(Properties settings) {
-        super(true, Blocks.END_STONE, EnderscapeBlocks.CELESTIAL_PATH_BLOCK.get(), EnderscapeBlockSounds.CELESTIAL_OVERGROWTH_FLATTEN, DirectionProperties.create().up(), settings);
+        super(true, Blocks.END_STONE, EnderscapeBlocks.CELESTIAL_PATH.get(), EnderscapeBlockSounds.CELESTIAL_OVERGROWTH_FLATTEN, DirectionSet.create().up(), settings);
     }
 
     @Override

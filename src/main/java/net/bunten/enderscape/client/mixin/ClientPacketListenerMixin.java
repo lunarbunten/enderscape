@@ -1,8 +1,8 @@
 package net.bunten.enderscape.client.mixin;
 
 import net.bunten.enderscape.EnderscapeConfig;
-import net.bunten.enderscape.client.entity.ElytraSoundInstance;
-import net.bunten.enderscape.client.entity.ShulkerBulletSoundInstance;
+import net.bunten.enderscape.client.sound.ElytraSoundInstance;
+import net.bunten.enderscape.client.sound.ShulkerBulletSoundInstance;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientCommonPacketListenerImpl;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -13,12 +13,15 @@ import net.minecraft.network.protocol.game.ClientboundEntityEventPacket;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@OnlyIn(Dist.CLIENT)
 @Mixin(ClientPacketListener.class)
 public abstract class ClientPacketListenerMixin extends ClientCommonPacketListenerImpl  {
 

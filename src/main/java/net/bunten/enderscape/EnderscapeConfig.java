@@ -19,26 +19,31 @@ public class EnderscapeConfig {
     public static EnderscapeConfig getInstance() {
         return HANDLER.instance();
     }
+    @SerialEntry public boolean defaultDataPackFixLevitationAdvancement = true;
+    @SerialEntry public boolean defaultDataPackFixVanillaRecipes = true;
+    @SerialEntry public boolean defaultDataPackNewEndCities = true;
+    @SerialEntry public boolean defaultDataPackNewStrongholds = true;
+    @SerialEntry public boolean defaultDataPackNewTerrain = true;
 
-    @SerialEntry public boolean ambienceUpdateDefaultAdditions = true;
-    @SerialEntry public boolean ambienceUpdateDefaultFogColor = true;
-    @SerialEntry public boolean ambienceUpdateDefaultFoliageColor = true;
-    @SerialEntry public boolean ambienceUpdateDefaultGrassColor = true;
-    @SerialEntry public boolean ambienceUpdateDefaultLoop = true;
-    @SerialEntry public boolean ambienceUpdateDefaultMood = true;
-    @SerialEntry public boolean ambienceUpdateDefaultMusic = true;
-    @SerialEntry public boolean ambienceUpdateDefaultParticles = true;
-    @SerialEntry public boolean ambienceUpdateDefaultSkyColor = true;
-    @SerialEntry public boolean ambienceUpdateDefaultWaterColor = true;
-    @SerialEntry public boolean ambienceUpdateDefaultWaterFogColor = true;
-    @SerialEntry public boolean blockSoundUpdateEndRods = true;
+    @SerialEntry public boolean ambienceUpdateAdditionSounds = true;
+    @SerialEntry public boolean ambienceUpdateFogColors = true;
+    @SerialEntry public boolean ambienceUpdateFoliageColors = true;
+    @SerialEntry public boolean ambienceUpdateGrassColors = true;
+    @SerialEntry public boolean ambienceUpdateLoopSounds = true;
+    @SerialEntry public boolean ambienceUpdateMoodSounds = true;
+    @SerialEntry public boolean ambienceUpdateMusicPools = true;
+    @SerialEntry public boolean ambienceUpdateParticles = true;
+    @SerialEntry public boolean ambienceUpdateSkyColors = true;
+    @SerialEntry public boolean ambienceUpdateWaterColors = true;
+    @SerialEntry public boolean ambienceUpdateWaterFogColors = true;
+    @SerialEntry public boolean blockSoundsUpdateEndRods = true;
     @SerialEntry public boolean blockSoundUpdateEndPortalFrame = true;
     @SerialEntry public boolean blockSoundUpdateEndPortals = true;
     @SerialEntry public boolean blockSoundUpdateEndStone = true;
     @SerialEntry public boolean blockSoundUpdateEndStoneBricks = true;
     @SerialEntry public boolean blockSoundUpdateShulkerBoxes = true;
-    @SerialEntry public boolean blockSoundUpdateChorus = true;
-    @SerialEntry public boolean blockSoundUpdatePurpur = true;
+    @SerialEntry public boolean blocksSoundUpdateChorus = true;
+    @SerialEntry public boolean blocksSoundUpdatePurpur = true;
     @SerialEntry public boolean chorusFlowerHumming = true;
     @SerialEntry public boolean chorusFlowerPollen = true;
     @SerialEntry public boolean debugHudClientInfo = true;
@@ -56,6 +61,7 @@ public class EnderscapeConfig {
     @SerialEntry public boolean endermanStereoStareSound = true;
     @SerialEntry public boolean endermiteEmissiveEyes = true;
     @SerialEntry public boolean endermiteExpandHitRange = true;
+    @SerialEntry public boolean endermiteNaturalSpawnsObeyLightLevel = true;
     @SerialEntry public boolean endermiteUpdateSounds = true;
     @SerialEntry public boolean enderPearlAddParticles = true;
     @SerialEntry public boolean enderPearlBreakParticles = true;
@@ -76,7 +82,9 @@ public class EnderscapeConfig {
     @SerialEntry public boolean shulkerBulletLoopSound = true;
     @SerialEntry public boolean shulkerBulletRebalanceLevitation = true;
     @SerialEntry public boolean shulkerHurtByPiercing = true;
+    @SerialEntry public boolean silverfishDelayBeforeInfestingStone = true;
     @SerialEntry public boolean silverfishExpandHitRange = true;
+    @SerialEntry public boolean silverfishNaturalSpawnsObeyLightLevel = true;
     @SerialEntry public boolean skyboxAddDynamicFogDensity = true;
     @SerialEntry public boolean skyboxScalesBrightnessWithGamma = true;
     @SerialEntry public boolean skyboxUpdateEnabled = true;
@@ -86,7 +94,7 @@ public class EnderscapeConfig {
     @SerialEntry public int elytraFovEffectIntensity = 100;
     @SerialEntry public int mirrorScreenEffectOverlayIntensity = 50;
     @SerialEntry public int mirrorScreenEffectVignetteIntensity = 50;
-    @SerialEntry public int nebuliteToolHudOffset = 0;
+    @SerialEntry public int nebuliteToolHudOffset = 13;
     @SerialEntry public int nebuliteToolHudOpacity = 100;
     @SerialEntry public int shulkerBulletEnforceCountLimit = 3;
     @SerialEntry public int shulkerBulletEnforceDistanceLimit = 30;

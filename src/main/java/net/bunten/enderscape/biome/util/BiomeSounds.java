@@ -2,7 +2,6 @@ package net.bunten.enderscape.biome.util;
 
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
-
 import static net.bunten.enderscape.Enderscape.registerSoundEventHolder;
 
 public record BiomeSounds(String name, Holder<SoundEvent> loop, Holder<SoundEvent> additions, Holder<SoundEvent> mood, Holder<SoundEvent> music) {

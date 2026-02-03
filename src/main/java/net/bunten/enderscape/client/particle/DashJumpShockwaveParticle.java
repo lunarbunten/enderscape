@@ -7,10 +7,13 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
+@OnlyIn(Dist.CLIENT)
 public class DashJumpShockwaveParticle extends TextureSheetParticle {
     private final SpriteSet sprites;
     private final DashJumpShockwaveParticleOptions options;
@@ -86,7 +89,8 @@ public class DashJumpShockwaveParticle extends TextureSheetParticle {
         return Math.max(50, super.getLightColor(tint));
     }
 
-        public static class Provider implements ParticleProvider<DashJumpShockwaveParticleOptions> {
+    @OnlyIn(Dist.CLIENT)
+    public static class Provider implements ParticleProvider<DashJumpShockwaveParticleOptions> {
         private final SpriteSet sprites;
 
         public Provider(SpriteSet sprites) {

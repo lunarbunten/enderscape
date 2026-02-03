@@ -13,7 +13,6 @@
     "ChorusPlantFeatureMixin",
     "DispenseItemBehaviorMixin",
     "ElytraItemMixin",
-    "EndCrystalItemMixin",
     "EnderManMixin",
     "EndermiteMixin",
     "EnderpearlItemMixin",

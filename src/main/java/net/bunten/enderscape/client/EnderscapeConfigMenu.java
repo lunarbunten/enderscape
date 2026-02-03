@@ -48,6 +48,7 @@ public class EnderscapeConfigMenu {
 
         ConfigCategory.Builder main = ConfigCategory.createBuilder().name(Component.translatable("option.enderscape.category.serverside"));
 
+        addDataPackOptions(config, main);
         addServersideAmbienceOptions(config, main);
         addServersideBlockOptions(config, main);
         addServersideEntityOptions(config, main);
@@ -124,6 +125,59 @@ public class EnderscapeConfigMenu {
         );
     }
 
+    private static void addDataPackOptions(EnderscapeConfig config, ConfigCategory.Builder builder) {
+        Option<?> defaultDataPackFixLevitationAdvancement = boolOption(
+                "default_data_pack_fix_levitation_advancement",
+                true,
+                () -> config.defaultDataPackFixLevitationAdvancement,
+                value -> config.defaultDataPackFixLevitationAdvancement = value,
+                TickBoxControllerBuilder::create
+        );
+
+        Option<?> defaultDataPackFixVanillaRecipes = boolOption(
+                "default_data_pack_fix_vanilla_recipes",
+                true,
+                () -> config.defaultDataPackFixVanillaRecipes,
+                value -> config.defaultDataPackFixVanillaRecipes = value,
+                TickBoxControllerBuilder::create
+        );
+
+        Option<?> defaultDataPackNewTerrain = boolOption(
+                "default_data_pack_new_terrain",
+                true,
+                () -> config.defaultDataPackNewTerrain,
+                value -> config.defaultDataPackNewTerrain = value,
+                TickBoxControllerBuilder::create
+        );
+
+        Option<?> defaultDataPackNewEndCities = boolOption(
+                "default_data_pack_new_end_cities",
+                true,
+                () -> config.defaultDataPackNewEndCities,
+                value -> config.defaultDataPackNewEndCities = value,
+                TickBoxControllerBuilder::create
+        );
+
+        Option<?> defaultDataPackNewStrongholds = boolOption(
+                "default_data_pack_new_strongholds",
+                true,
+                () -> config.defaultDataPackNewStrongholds,
+                value -> config.defaultDataPackNewStrongholds = value,
+                TickBoxControllerBuilder::create
+        );
+
+        builder.group(OptionGroup.createBuilder()
+                .name(Component.translatable("option.group.enderscape.data_packs"))
+
+                .option(defaultDataPackFixLevitationAdvancement)
+                .option(defaultDataPackFixVanillaRecipes)
+                .option(defaultDataPackNewTerrain)
+                .option(defaultDataPackNewEndCities)
+                .option(defaultDataPackNewStrongholds)
+                .build()
+        );
+    }
+
     private static void addClientsideAmbienceOptions(EnderscapeConfig config, ConfigCategory.Builder builder) {
         Option<?> skyboxUpdateEnabled = boolOption(
                 "skybox_update_enabled",
@@ -181,90 +235,90 @@ public class EnderscapeConfigMenu {
 
     private static void addServersideAmbienceOptions(EnderscapeConfig config, ConfigCategory.Builder builder) {
         Option<?> updateDefaultEndMusic = boolOption(
-                "ambience_update_default_music",
+                "ambience_update_music_pools",
                 true,
-                () -> config.ambienceUpdateDefaultMusic,
-                value -> config.ambienceUpdateDefaultMusic = value,
+                () -> config.ambienceUpdateMusicPools,
+                value -> config.ambienceUpdateMusicPools = value,
                 TickBoxControllerBuilder::create
         );
 
         Option<?> updateDefaultEndLoop = boolOption(
-                "ambience_update_default_loop",
+                "ambience_update_loop_sounds",
                 true,
-                () -> config.ambienceUpdateDefaultLoop,
-                value -> config.ambienceUpdateDefaultLoop = value,
+                () -> config.ambienceUpdateLoopSounds,
+                value -> config.ambienceUpdateLoopSounds = value,
                 TickBoxControllerBuilder::create
         );
 
         Option<?> updateDefaultEndAdditions = boolOption(
-                "ambience_update_default_additions",
+                "ambience_update_addition_sounds",
                 true,
-                () -> config.ambienceUpdateDefaultAdditions,
-                value -> config.ambienceUpdateDefaultAdditions = value,
+                () -> config.ambienceUpdateAdditionSounds,
+                value -> config.ambienceUpdateAdditionSounds = value,
                 TickBoxControllerBuilder::create
         );
 
         Option<?> updateDefaultEndMood = boolOption(
-                "ambience_update_default_mood",
+                "ambience_update_mood_sounds",
                 true,
-                () -> config.ambienceUpdateDefaultMood,
-                value -> config.ambienceUpdateDefaultMood = value,
+                () -> config.ambienceUpdateMoodSounds,
+                value -> config.ambienceUpdateMoodSounds = value,
                 TickBoxControllerBuilder::create
         );
 
         Option<?> updateDefaultEndParticles = boolOption(
-                "ambience_update_default_particles",
+                "ambience_update_particles",
                 true,
-                () -> config.ambienceUpdateDefaultParticles,
-                value -> config.ambienceUpdateDefaultParticles = value,
+                () -> config.ambienceUpdateParticles,
+                value -> config.ambienceUpdateParticles = value,
                 TickBoxControllerBuilder::create
         );
 
         Option<?> updateDefaultEndSkyColor = boolOption(
-                "ambience_update_default_sky_color",
+                "ambience_update_sky_colors",
                 true,
-                () -> config.ambienceUpdateDefaultSkyColor,
-                value -> config.ambienceUpdateDefaultSkyColor = value,
+                () -> config.ambienceUpdateSkyColors,
+                value -> config.ambienceUpdateSkyColors = value,
                 TickBoxControllerBuilder::create
         );
 
         Option<?> updateDefaultEndFogColor = boolOption(
-                "ambience_update_default_fog_color",
+                "ambience_update_fog_colors",
                 true,
-                () -> config.ambienceUpdateDefaultFogColor,
-                value -> config.ambienceUpdateDefaultFogColor = value,
+                () -> config.ambienceUpdateFogColors,
+                value -> config.ambienceUpdateFogColors = value,
                 TickBoxControllerBuilder::create
         );
 
         Option<?> updateDefaultEndGrassColor = boolOption(
-                "ambience_update_default_grass_color",
+                "ambience_update_grass_colors",
                 true,
-                () -> config.ambienceUpdateDefaultGrassColor,
-                value -> config.ambienceUpdateDefaultGrassColor = value,
+                () -> config.ambienceUpdateGrassColors,
+                value -> config.ambienceUpdateGrassColors = value,
                 TickBoxControllerBuilder::create
         );
 
         Option<?> updateDefaultEndFoliageColor = boolOption(
-                "ambience_update_default_foliage_color",
+                "ambience_update_foliage_colors",
                 true,
-                () -> config.ambienceUpdateDefaultFoliageColor,
-                value -> config.ambienceUpdateDefaultFoliageColor = value,
+                () -> config.ambienceUpdateFoliageColors,
+                value -> config.ambienceUpdateFoliageColors = value,
                 TickBoxControllerBuilder::create
         );
 
         Option<?> updateDefaultEndWaterColor = boolOption(
-                "ambience_update_default_water_color",
+                "ambience_update_water_colors",
                 true,
-                () -> config.ambienceUpdateDefaultWaterColor,
-                value -> config.ambienceUpdateDefaultWaterColor = value,
+                () -> config.ambienceUpdateWaterColors,
+                value -> config.ambienceUpdateWaterColors = value,
                 TickBoxControllerBuilder::create
         );
 
         Option<?> updateDefaultEndWaterFogColor = boolOption(
-                "ambience_update_default_water_fog_color",
+                "ambience_update_water_fog_colors",
                 true,
-                () -> config.ambienceUpdateDefaultWaterFogColor,
-                value -> config.ambienceUpdateDefaultWaterFogColor = value,
+                () -> config.ambienceUpdateWaterFogColors,
+                value -> config.ambienceUpdateWaterFogColors = value,
                 TickBoxControllerBuilder::create
         );
 
@@ -275,13 +329,13 @@ public class EnderscapeConfigMenu {
                 .option(updateDefaultEndLoop)
                 .option(updateDefaultEndAdditions)
                 .option(updateDefaultEndMood)
+                .option(updateDefaultEndParticles)
                 .option(updateDefaultEndSkyColor)
                 .option(updateDefaultEndFogColor)
                 .option(updateDefaultEndGrassColor)
                 .option(updateDefaultEndFoliageColor)
                 .option(updateDefaultEndWaterColor)
                 .option(updateDefaultEndWaterFogColor)
-                .option(updateDefaultEndParticles)
 
                 .build()
         );
@@ -291,16 +345,16 @@ public class EnderscapeConfigMenu {
         Option<?> blockSoundsUpdateChorus = boolOption(
                 "block_sounds_update_chorus",
                 true,
-                () -> config.blockSoundUpdateChorus,
-                value -> config.blockSoundUpdateChorus = value,
+                () -> config.blocksSoundUpdateChorus,
+                value -> config.blocksSoundUpdateChorus = value,
                 TickBoxControllerBuilder::create
         );
 
         Option<?> blocksSoundUpdatePurpur = boolOption(
                 "block_sounds_update_purpur",
                 true,
-                () -> config.blockSoundUpdatePurpur,
-                value -> config.blockSoundUpdatePurpur = value,
+                () -> config.blocksSoundUpdatePurpur,
+                value -> config.blocksSoundUpdatePurpur = value,
                 TickBoxControllerBuilder::create
         );
 
@@ -323,8 +377,8 @@ public class EnderscapeConfigMenu {
         Option<?> blockSoundsUpdateEndRods = boolOption(
                 "block_sounds_update_end_rods",
                 true,
-                () -> config.blockSoundUpdateEndRods,
-                value -> config.blockSoundUpdateEndRods = value,
+                () -> config.blockSoundsUpdateEndRods,
+                value -> config.blockSoundsUpdateEndRods = value,
                 TickBoxControllerBuilder::create
         );
 
@@ -424,6 +478,14 @@ public class EnderscapeConfigMenu {
                 TickBoxControllerBuilder::create
         );
 
+        Option<?> endermiteNaturalSpawnsObeyLightLevel = boolOption(
+                "endermite_natural_spawns_obey_light_level",
+                true,
+                () -> config.endermiteNaturalSpawnsObeyLightLevel,
+                value -> config.endermiteNaturalSpawnsObeyLightLevel = value,
+                TickBoxControllerBuilder::create
+        );
+
         Option<?> endermiteExpandHitRange = boolOption(
                 "endermite_expand_hit_range",
                 true,
@@ -502,11 +564,27 @@ public class EnderscapeConfigMenu {
                 TickBoxControllerBuilder::create
         );
 
+        Option<?> silverfishDelayBeforeInfestingStone = boolOption(
+                "silverfish_delay_before_infesting_stone",
+                true,
+                () -> config.silverfishDelayBeforeInfestingStone,
+                value -> config.silverfishDelayBeforeInfestingStone = value,
+                TickBoxControllerBuilder::create
+        );
+
         Option<?> silverfishExpandHitRange = boolOption(
                 "silverfish_expand_hit_range",
                 true,
                 () -> config.silverfishExpandHitRange,
                 value -> config.silverfishExpandHitRange = value,
+                TickBoxControllerBuilder::create
+        );
+
+        Option<?> silverfishNaturalSpawnsObeyLightLevel = boolOption(
+                "silverfish_natural_spawns_obey_light_level",
+                true,
+                () -> config.silverfishNaturalSpawnsObeyLightLevel,
+                value -> config.silverfishNaturalSpawnsObeyLightLevel = value,
                 TickBoxControllerBuilder::create
         );
 
@@ -523,6 +601,7 @@ public class EnderscapeConfigMenu {
 
                 .option(endermanStereoStareSound)
                 .option(endermiteExpandHitRange)
+                .option(endermiteNaturalSpawnsObeyLightLevel)
                 .option(endermiteUpdateSounds)
                 .option(rubblemiteExpandHitRange)
                 .option(shulkerBulletEnforceCountLimit)
@@ -531,7 +610,9 @@ public class EnderscapeConfigMenu {
                 .option(shulkerBulletEnforceTimeLimit)
                 .option(shulkerBulletRebalanceLevitation)
                 .option(shulkerHurtByPiercing)
+                .option(silverfishDelayBeforeInfestingStone)
                 .option(silverfishExpandHitRange)
+                .option(silverfishNaturalSpawnsObeyLightLevel)
                 .option(voidPoofParticlesUponDeath)
 
                 .build()
@@ -778,11 +859,11 @@ public class EnderscapeConfigMenu {
 
         Option<?> nebuliteToolHudOffset = intOption(
                 "nebulite_tool_hud_offset",
-                0,
+                13,
                 () -> config.nebuliteToolHudOffset,
                 value -> config.nebuliteToolHudOffset = value,
-                0,
-                50,
+                -25,
+                25,
                 1
         );
 

@@ -2,8 +2,8 @@ package net.bunten.enderscape.block;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.bunten.enderscape.block.properties.DirectionProperties;
-import net.bunten.enderscape.block.properties.StateProperties;
+import net.bunten.enderscape.block.properties.DirectionSet;
+import net.bunten.enderscape.block.state.StateProperties;
 import net.bunten.enderscape.registry.EnderscapeBlockSounds;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.EnderscapeParticles;
@@ -43,7 +43,7 @@ public class CelestialChanterelleBlock extends DirectionalPlantBlock implements 
     private final ResourceKey<ConfiguredFeature<?, ?>> feature;
 
     public CelestialChanterelleBlock(ResourceKey<ConfiguredFeature<?, ?>> feature, BlockBehaviour.Properties properties) {
-        super(DirectionProperties.create().up(), properties);
+        super(DirectionSet.create().up(), properties);
         this.feature = feature;
 
         registerDefaultState(defaultBlockState().setValue(STAGE, 0));

@@ -6,7 +6,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
 public record ClientboundStareOverlayPayload() implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<ClientboundStareOverlayPayload> TYPE = new CustomPacketPayload.Type<>(Enderscape.id("clientbound_stare_overlay"));
+    public static final Type<ClientboundStareOverlayPayload> TYPE = new Type<>(Enderscape.id("clientbound_stare_overlay"));
     public static final StreamCodec<FriendlyByteBuf, ClientboundStareOverlayPayload> STREAM_CODEC = CustomPacketPayload.codec(ClientboundStareOverlayPayload::write, ClientboundStareOverlayPayload::new);
 
     private ClientboundStareOverlayPayload(FriendlyByteBuf buf) {

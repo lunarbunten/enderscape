@@ -11,10 +11,10 @@ public class EnderscapeLootProvider extends LootTableProvider {
 
     protected EnderscapeLootProvider(GatherDataEvent event) {
         super(event.getGenerator().getPackOutput(), Set.of(), List.of(
-                new LootTableProvider.SubProviderEntry(EnderscapeBlockLootSubProvider::new, LootContextParamSets.BLOCK),
-                new LootTableProvider.SubProviderEntry(EnderscapeChestLootSubProvider::new, LootContextParamSets.CHEST),
-                new LootTableProvider.SubProviderEntry(EnderscapeVaultLootSubProvider::new, LootContextParamSets.VAULT),
-                new LootTableProvider.SubProviderEntry(EnderscapeEntityLootSubProvider::new, LootContextParamSets.ENTITY)
+                new LootTableProvider.SubProviderEntry(EnderscapeBlockLootProvider::new, LootContextParamSets.BLOCK),
+                new LootTableProvider.SubProviderEntry(EnderscapeChestLootProvider::new, LootContextParamSets.CHEST),
+                new LootTableProvider.SubProviderEntry(EnderscapeVaultLootProvider::new, LootContextParamSets.VAULT),
+                new LootTableProvider.SubProviderEntry(EnderscapeEntityLootProvider::new, LootContextParamSets.ENTITY)
         ), event.getLookupProvider());
     }
 }
