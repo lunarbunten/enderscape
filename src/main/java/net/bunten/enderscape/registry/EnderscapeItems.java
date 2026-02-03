@@ -217,6 +217,8 @@ public class EnderscapeItems {
             .stacksTo(1)
             .component(EnderscapeDataComponents.MAXIMUM_FUEL, 5)
             .component(EnderscapeDataComponents.FUEL_PER_USE, 1)
+            .component(EnderscapeDataComponents.INCREASE_WITH_DISTANCE, true)
+            .component(EnderscapeDataComponents.DISTANCE_TO_INCREASE, 500)
             .rarity(Rarity.RARE)
     );
 

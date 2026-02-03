@@ -2,7 +2,6 @@ package net.bunten.enderscape.item;
 
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.EnderscapeConfig;
-import net.bunten.enderscape.item.component.value.LodestoneTeleportationCost;
 import net.bunten.enderscape.item.component.value.LodestoneTeleportationVisuals;
 import net.bunten.enderscape.network.ClientboundTransdimensionalTravelSoundPayload;
 import net.bunten.enderscape.registry.*;
@@ -50,6 +49,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import static net.bunten.enderscape.registry.EnderscapeDataComponents.DISTANCE_TO_INCREASE;
+import static net.bunten.enderscape.registry.EnderscapeDataComponents.INCREASE_WITH_DISTANCE;
 import static net.minecraft.core.component.DataComponents.LODESTONE_TRACKER;
 
 public class LodestoneTeleporter extends FueledTool {
@@ -248,7 +249,7 @@ public class LodestoneTeleporter extends FueledTool {
 
     static int getTotalDistanceForCostIncrease(ItemStackContext context) {
         ItemStack stack = context.stack();
-        return (int) getAddedDistanceToIncreaseCost(context.stack(), context.user(), LodestoneTeleportationCost.DEFAULT.distanceToIncrease());
+        return (int) getAddedDistanceToIncreaseCost(context.stack(), context.user(), stack.get(DISTANCE_TO_INCREASE));
     }
 
     public static float getAddedDistanceToIncreaseCost(ItemStack stack, LivingEntity user, float distanceToIncreaseCost) {
@@ -292,7 +293,7 @@ public class LodestoneTeleporter extends FueledTool {
                 }
 
                 if (config.mirrorTooltipDisplayDistance) {
-                    float step = LodestoneTeleportationCost.DEFAULT_DISTANCE_TO_INCREASE / 2.0F;
+                    float step = stack.get(DISTANCE_TO_INCREASE) / 2.0F;
                     int roundedDistance = (int) (Math.round(distanceBetweenPoints(user, linkedPos) / step) * step);
 
                     MutableComponent approximate = tooltip("distance.approximate_value", roundedDistance).withStyle(valueColor);

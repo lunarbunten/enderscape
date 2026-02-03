@@ -2,7 +2,6 @@ package net.bunten.enderscape.item;
 
 import net.bunten.enderscape.item.component.Enabled;
 import net.bunten.enderscape.item.component.ThresholdCounter;
-import net.bunten.enderscape.item.component.value.LodestoneTeleportationCost;
 import net.bunten.enderscape.item.tooltip.FueledToolComponent;
 import net.bunten.enderscape.registry.EnderscapeItemSounds;
 import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
@@ -77,7 +76,7 @@ public abstract class FueledTool extends Item {
             if (LodestoneTeleporter.isLinked(stack)) {
                 if (tracker.dimension() != tracker.linkedDimension()) {
                     return FueledTool.maxFuel(stack);
-                } else if (LodestoneTeleportationCost.DEFAULT_INCREASE_WITH_DISTANCE) {
+                } else if (stack.get(INCREASE_WITH_DISTANCE) == true) {
                     return stack.get(FUEL_PER_USE) + (distanceBetweenPoints(user.blockPosition(), tracker.linkedPos()) / getTotalDistanceForCostIncrease(context));
                 } else {
                     return stack.get(FUEL_PER_USE);

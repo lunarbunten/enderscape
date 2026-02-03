@@ -1,9 +1,0 @@
-{
-  "type": "neoforge:add_features",
-  "biomes": "#enderscape:includes_new_barrens_content",
-  "features": [
-    "enderscape:dry_end_growth",
-    "enderscape:murublight_shelf"
-  ],
-  "step": "vegetal_decoration"
-}

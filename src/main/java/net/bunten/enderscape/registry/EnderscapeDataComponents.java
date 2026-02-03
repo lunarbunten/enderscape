@@ -18,6 +18,7 @@ public class EnderscapeDataComponents {
     public static final DataComponentType<Togglable> TOGGLABLE = register("togglable", builder -> builder.persistent(Togglable.CODEC).networkSynchronized(Togglable.STREAM_CODEC));
 
     public static final DataComponentType<Boolean> ENABLED = register("enabled", builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
+    public static final DataComponentType<Boolean> INCREASE_WITH_DISTANCE = register("increase_with_distance", builder -> builder.persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL));
 
     public static final DataComponentType<Integer> BACKSTAB_ANGLE = register("backstab_angle", builder -> builder.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT));
 
@@ -28,6 +29,8 @@ public class EnderscapeDataComponents {
     public static final DataComponentType<Integer> CURRENT_FUEL = register("current_fuel", builder -> builder.persistent(ExtraCodecs.NON_NEGATIVE_INT).networkSynchronized(ByteBufCodecs.VAR_INT));
     public static final DataComponentType<Integer> MAXIMUM_FUEL = register("maximum_fuel", builder -> builder.persistent(ExtraCodecs.NON_NEGATIVE_INT).networkSynchronized(ByteBufCodecs.VAR_INT));
     public static final DataComponentType<Integer> FUEL_PER_USE = register("fuel_per_use", builder -> builder.persistent(ExtraCodecs.NON_NEGATIVE_INT).networkSynchronized(ByteBufCodecs.VAR_INT));
+
+    public static final DataComponentType<Integer> DISTANCE_TO_INCREASE = register("distance_to_increase", builder -> builder.persistent(ExtraCodecs.NON_NEGATIVE_INT).networkSynchronized(ByteBufCodecs.VAR_INT));
 
 
     private static <T> DataComponentType<T> register(String string, UnaryOperator<DataComponentType.Builder<T>> unaryOperator) {
