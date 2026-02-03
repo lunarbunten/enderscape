@@ -23,6 +23,6 @@ public record BiomeSounds(String name, Holder<SoundEvent> loop, Holder<SoundEven
     }
 
     public static Holder<SoundEvent> biomeMusic(String name) {
-        return registerSoundEventHolder("music.the_end.biome." + name);
+        return registerSoundEventHolder("music.enderscape.biome." + name);
     }
 }
