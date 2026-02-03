@@ -9,6 +9,8 @@
     "EndermiteRendererMixin",
     "EntityRenderDispatcherMixin",
     "FogRendererMixin",
+    "GameRendererMixin",
+    "KeyboardInputMixin",
     "LevelRendererMixin",
     "LightTextureMixin",
     "MinecraftMixin",

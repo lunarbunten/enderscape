@@ -7,7 +7,7 @@ import terrablender.api.EndBiomeRegistry;
 
 public class EnderscapeTerrablender {
     public static void initialize() {
-        addBiomeForVanillaWorldgen(EnderscapeBiomes.MAGNIA_CRAGS, 0.8);
+        addBiomeForVanillaWorldgen(EnderscapeBiomes.MAGNIA_FIELDS, 0.8);
         addBiomeForVanillaWorldgen(EnderscapeBiomes.VEILED_WOODLANDS, 0.7);
         addBiomeForVanillaWorldgen(EnderscapeBiomes.CORRUPT_BARRENS, 0.5);
         addBiomeForVanillaWorldgen(EnderscapeBiomes.CELESTIAL_GROVE, 0.3);

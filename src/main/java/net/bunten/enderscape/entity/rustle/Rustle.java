@@ -119,7 +119,7 @@ public class Rustle extends Animal implements Bucketable, Shearable {
             tag.putInt("Age", getAge());
 
             if (isSheared()) tag.putBoolean("Sheared", isSheared());
-            if (getBrain().hasMemoryValue(EnderscapeMemory.RUSTLE_HAIR_REGROWTH_COOLDOWN.get())) tag.putInt("HairRegrowthCooldownTicks", getBrain().getMemory(EnderscapeMemory.RUSTLE_HAIR_REGROWTH_COOLDOWN.get()).orElseThrow());
+            if (getBrain().hasMemoryValue(EnderscapeMemory.RUSTLE_HAIR_REGROWTH_COOLDOWN.get())) tag.putInt("HairRegrowthCooldownTicks", getBrain().getMemory(EnderscapeMemory.RUSTLE_HAIR_REGROWTH_COOLDOWN.get()).get());
         });
     }
 
@@ -139,7 +139,7 @@ public class Rustle extends Animal implements Bucketable, Shearable {
 
     @Override
     protected Brain.Provider<Rustle> brainProvider() {
-        return Brain.provider(RustleAI.MEMORY_TYPES.get(), RustleAI.SENSOR_TYPES.get());
+        return Brain.provider(RustleAI.MEMORY_TYPES, RustleAI.SENSOR_TYPES);
     }
 
     @Override
@@ -351,7 +351,7 @@ public class Rustle extends Animal implements Bucketable, Shearable {
 
     @Override
     public SoundEvent getPickupSound() {
-        return EnderscapeItemSounds.RUSTLE_BUCKET_FILL.get();
+        return EnderscapeItemSounds.RUSTLE_BUCKET_FILL;
     }
 
     @Override

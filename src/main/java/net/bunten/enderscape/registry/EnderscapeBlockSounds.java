@@ -4,9 +4,6 @@ import net.bunten.enderscape.Enderscape;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 
-import java.util.List;
-import java.util.function.Supplier;
-
 public class EnderscapeBlockSounds {
 
     public static final SoundEvent ALLURING_MAGNIA_IDLE = register("alluring_magnia.idle");
@@ -18,6 +15,8 @@ public class EnderscapeBlockSounds {
     public static final SoundEvent BLINKLAMP_INCREASE = register("blinklamp.increase");
     public static final SoundEvent BLINKLIGHT_VINES_BLINK = register("blinklight_vines.blink");
     public static final SoundEvent BLINKLIGHT_VINES_INBETWEEN = register("blinklight_vines.inbetween");
+    public static final SoundEvent BLISTERED_MAGNIA_POWER_OFF = register("blistered_magnia.power_off");
+    public static final SoundEvent BLISTERED_MAGNIA_POWER_ON = register("blistered_magnia.power_on");
     public static final SoundEvent CELESTIAL_BUTTON_CLICK_OFF = register("celestial_button.click_off");
     public static final SoundEvent CELESTIAL_BUTTON_CLICK_ON = register("celestial_button.click_on");
     public static final SoundEvent CELESTIAL_CHANTERELLE_CORRUPT = register("celestial_chanterelle.corrupt");
@@ -46,6 +45,9 @@ public class EnderscapeBlockSounds {
     public static final SoundEvent END_VAULT_INSERT_ITEM_FAIL = register("end_vault.insert_item_fail");
     public static final SoundEvent END_VAULT_OPEN_SHUTTER = register("end_vault.open_shutter");
     public static final SoundEvent END_VAULT_REJECT_REWARDED_PLAYER = register("end_vault.reject_rewarded_player");
+    public static final SoundEvent MAGNIA_RADIO_AMBIENT = register("magnia_radio.ambient");
+    public static final SoundEvent MAGNIA_RADIO_POWER_OFF = register("magnia_radio.power_off");
+    public static final SoundEvent MAGNIA_RADIO_POWER_ON = register("magnia_radio.power_on");
     public static final SoundEvent MURUBLIGHT_BUTTON_CLICK_OFF = register("murublight_button.click_off");
     public static final SoundEvent MURUBLIGHT_BUTTON_CLICK_ON = register("murublight_button.click_on");
     public static final SoundEvent MURUBLIGHT_CHANTERELLE_PURIFY = register("murublight_chanterelle.purify");
@@ -60,6 +62,7 @@ public class EnderscapeBlockSounds {
     public static final SoundEvent NEBULITE_ORE_IDLE = Enderscape.registerSoundEvent("block.nebulite_ore.idle");
     public static final SoundEvent NEBULITE_ORE_IDLE_FAR = Enderscape.registerSoundEvent("block.nebulite_ore.idle.far");
     public static final SoundEvent NEBULITE_ORE_IDLE_OBSTRUCTED = Enderscape.registerSoundEvent("block.nebulite_ore.idle.obstructed");
+    public static final SoundEvent POLARIZED_MAGNIA_SWAP_POLARITY = register("polarized_magnia.swap_polarity");
     public static final SoundEvent REPULSIVE_MAGNIA_IDLE = register("repulsive_magnia.idle");
     public static final SoundEvent REPULSIVE_MAGNIA_SPROUT_MOVE = register("repulsive_magnia_sprout.move");
     public static final SoundEvent REPULSIVE_MAGNIA_SPROUT_OVERHEAT = register("repulsive_magnia_sprout.overheat");
@@ -78,7 +81,7 @@ public class EnderscapeBlockSounds {
     public static final SoundEvent VOID_SHALE_SHATTER_HIGH = register("void_shale.shatter_high");
     public static final SoundEvent VOID_SHALE_SHATTER_LOW = register("void_shale.shatter_low");
     public static final SoundEvent VOID_SHALE_SHATTER_MEDIUM = register("void_shale.shatter_medium");
-    public static final List<SoundEvent> VOID_SHALE_SHATTER_SOUNDS = List.of(SoundEvents.EMPTY, VOID_SHALE_SHATTER_LOW, VOID_SHALE_SHATTER_MEDIUM, VOID_SHALE_SHATTER_HIGH);
+    public static final SoundEvent[] VOID_SHALE_SHATTER_SOUNDS = { SoundEvents.EMPTY, VOID_SHALE_SHATTER_LOW, VOID_SHALE_SHATTER_MEDIUM, VOID_SHALE_SHATTER_HIGH};
 
     private static SoundEvent register(String name) {
         return Enderscape.registerSoundEvent("block." + name);

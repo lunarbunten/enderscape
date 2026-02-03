@@ -14,6 +14,9 @@ repositories {
         url 'https://maven.isxander.dev/releases'
     }
     maven {
+        url "https://maven.su5ed.dev/releases"
+    }
+    maven {
         name = 'Kotlin for Forge'
         url = 'https://thedarkcolour.github.io/KotlinForForge/'
         content { includeGroup "thedarkcolour" }
@@ -96,6 +99,7 @@ configurations {
 
 dependencies {
     implementation("maven.modrinth:trimmed:1.21-${trimmed_version}+neoforge")
+    implementation("maven.modrinth:lithostitched:${project.lithostitched_version}-neoforge-1.21.1")
     implementation("dev.isxander:yet-another-config-lib:${project.yacl_version}") {
         // YACL depends on kotlin-for-forge which itself has transitive dependencies it shouldn't have on FML.
         exclude group: 'net.neoforged.fancymodloader', module: 'loader'
@@ -119,6 +123,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_description        : mod_description,
             trimmed_version        : trimmed_version,
             yacl_version           : yacl_version,
+            lithostitched_version  : lithostitched_version,
             terrablender_version   : terrablender_version,
     ]
     inputs.properties replaceProperties

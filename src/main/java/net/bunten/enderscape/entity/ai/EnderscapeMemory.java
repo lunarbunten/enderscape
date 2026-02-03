@@ -6,8 +6,11 @@ import net.bunten.enderscape.registry.RegistryHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +22,6 @@ public class EnderscapeMemory extends MemoryModuleType<Object> {
         super(Optional.empty());
     }
 
-    // General
 
     public static final Supplier<MemoryModuleType<List<LivingEntity>>> NEAREST_ENEMIES = register("rubblemite_nearest_enemies");
     public static final Supplier<MemoryModuleType<LivingEntity>> NEAREST_INTIMIDATOR = register("drifter_nearest_intimidator");
@@ -32,6 +34,9 @@ public class EnderscapeMemory extends MemoryModuleType<Object> {
     public static final Supplier<MemoryModuleType<Integer>> DRIFTER_JELLY_CHANGE_COOLDOWN = register("drifter_jelly_change_cooldown", Codec.INT);
 
     // Rubblemite
+
+    public static final Supplier<MemoryModuleType<Boolean>> RUBBLEMITE_PREPARING_DASH = register("rubblemite_preparing_dash", Codec.BOOL);
+    public static final Supplier<MemoryModuleType<Integer>> RUBBLEMITE_PREPARING_DASH_TIME = register("rubblemite_preparing_dash_time", Codec.INT);
 
     public static final Supplier<MemoryModuleType<Boolean>> RUBBLEMITE_DASH_ON_COOLDOWN = register("rubblemite_dash_on_cooldown", Codec.BOOL);
     public static final Supplier<MemoryModuleType<Boolean>> RUBBLEMITE_HIDING_ON_COOLDOWN = register("rubblemite_hiding_on_cooldown", Codec.BOOL);

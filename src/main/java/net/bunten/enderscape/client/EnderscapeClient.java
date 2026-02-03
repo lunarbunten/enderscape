@@ -3,25 +3,26 @@ package net.bunten.enderscape.client;
 import com.google.common.reflect.Reflection;
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.client.block.MagniaSproutRenderer;
-import net.bunten.enderscape.client.entity.EndermanStaticSoundInstance;
 import net.bunten.enderscape.client.entity.drifter.DrifterModel;
 import net.bunten.enderscape.client.entity.drifter.DrifterRenderer;
-import net.bunten.enderscape.client.entity.driftlet.DriftletModel;
-import net.bunten.enderscape.client.entity.driftlet.DriftletRenderer;
 import net.bunten.enderscape.client.entity.rubblemite.RubblemiteModel;
 import net.bunten.enderscape.client.entity.rubblemite.RubblemiteRenderer;
+import net.bunten.enderscape.client.entity.rustle.BabyRustleModel;
 import net.bunten.enderscape.client.entity.rustle.RustleModel;
 import net.bunten.enderscape.client.entity.rustle.RustleRenderer;
 import net.bunten.enderscape.client.hud.HudElement;
-import net.bunten.enderscape.client.item.NebuliteToolTooltip;
+import net.bunten.enderscape.client.item.FueledToolTooltip;
 import net.bunten.enderscape.client.registry.*;
-import net.bunten.enderscape.item.MagniaAttractorItem;
-import net.bunten.enderscape.item.NebuliteToolComponent;
-import net.bunten.enderscape.item.NebuliteToolContext;
-import net.bunten.enderscape.item.NebuliteToolItem;
+import net.bunten.enderscape.client.sound.EndermanStareSoundInstance;
+import net.bunten.enderscape.client.sound.EndermanStaticSoundInstance;
+import net.bunten.enderscape.item.FueledTool;
+import net.bunten.enderscape.item.ItemStackContext;
+import net.bunten.enderscape.item.component.Enabled;
+import net.bunten.enderscape.item.tooltip.FueledToolComponent;
 import net.bunten.enderscape.registry.EnderscapeBlockEntities;
 import net.bunten.enderscape.registry.EnderscapeEntities;
 import net.bunten.enderscape.registry.EnderscapeItems;
+import net.minecraft.client.renderer.blockentity.CampfireRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -54,34 +55,45 @@ public class EnderscapeClient {
     public static final int MAX_STARE_STICKS = 100;
     public static int stareTicks;
 
-    public static int postMirrorUseTicks;
+    public static Optional<ResourceLocation> lodestoneTeleportationOverlayTexture = Optional.empty();
+    public static Optional<ResourceLocation> lodestoneTeleportationVignetteTexture = Optional.empty();
+    public static final int MAX_LODESTONE_TELEPORTATION_TICKS = 60;
+    public static int lodestoneTeleportationTicks;
 
+    @Nullable public static EndermanStareSoundInstance stareSoundInstance = null;
     @Nullable public static EndermanStaticSoundInstance staticSoundInstance = null;
 
     public static void register(HudElement element) {
         Objects.requireNonNull(element);
         HUD_ELEMENTS.add(element);
 	}
-    
+
     public EnderscapeClient(IEventBus modBus, ModContainer container) {
         Reflection.initialize(
+                EnderscapeClientNetworking.class,
+                EnderscapeParticleProviders.class,
+                EnderscapeBlockRenderLayerMap.class,
+                EnderscapeBlockColorProviders.class,
                 EnderscapeHudElements.class
         );
 
         container.registerExtensionPoint(IConfigScreenFactory.class, EnderscapeConfigMenu::buildMenu);
         
         modBus.addListener(EntityRenderersEvent.RegisterLayerDefinitions.class, event -> {
-            event.registerLayerDefinition(EnderscapeEntityRenderData.DRIFTER, DrifterModel::createLayer);
-            event.registerLayerDefinition(EnderscapeEntityRenderData.DRIFTLET, DriftletModel::createLayer);
             event.registerLayerDefinition(EnderscapeEntityRenderData.RUBBLEMITE, RubblemiteModel::createLayer);
+
+            event.registerLayerDefinition(EnderscapeEntityRenderData.DRIFTER, DrifterModel::createDrifterLayer);
+            event.registerLayerDefinition(EnderscapeEntityRenderData.DRIFTLET, DrifterModel::createDriftletLayer);
+
             event.registerLayerDefinition(EnderscapeEntityRenderData.RUSTLE, RustleModel::createLayer);
+            event.registerLayerDefinition(EnderscapeEntityRenderData.BABY_RUSTLE, BabyRustleModel::createLayer);
         });
         
         modBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
             event.registerEntityRenderer(EnderscapeEntities.DRIFTER.get(), DrifterRenderer::new);
-            event.registerEntityRenderer(EnderscapeEntities.DRIFTLET.get(), DriftletRenderer::new);
             event.registerEntityRenderer(EnderscapeEntities.RUBBLEMITE.get(), RubblemiteRenderer::new);
             event.registerEntityRenderer(EnderscapeEntities.RUSTLE.get(), RustleRenderer::new);
+            event.registerBlockEntityRenderer(EnderscapeBlockEntities.VOID_CAMPFIRE.get(), CampfireRenderer::new);
         });
         
         modBus.register(EnderscapeParticleProviders.class);
@@ -93,7 +105,7 @@ public class EnderscapeClient {
         });
 
         modBus.addListener(RegisterClientTooltipComponentFactoriesEvent.class, event -> {
-            event.register(NebuliteToolComponent.class, tool -> new NebuliteToolTooltip(tool.stack()));
+            event.register(FueledToolComponent.class, tool -> new FueledToolTooltip(tool.stack()));
         });
 
         modBus.addListener(FMLCommonSetupEvent.class, event -> {
@@ -104,7 +116,7 @@ public class EnderscapeClient {
                 ItemProperties.register(EnderscapeItems.VERADITE_RUBBLE_SHIELD.get(), ResourceLocation.withDefaultNamespace("blocking"), shieldFunction);
                 ItemProperties.register(EnderscapeItems.KURODITE_RUBBLE_SHIELD.get(), ResourceLocation.withDefaultNamespace("blocking"), shieldFunction);
 
-                ItemProperties.register(EnderscapeItems.MAGNIA_ATTRACTOR.get(), Enderscape.id("enabled"), (stack, level, user, i) -> MagniaAttractorItem.isEnabled(stack) && NebuliteToolItem.fuelExceedsCost(new NebuliteToolContext(stack, level, user)) ? 1 : 0);
+                ItemProperties.register(EnderscapeItems.MAGNIA_ATTRACTOR.get(), Enderscape.id("enabled"), (stack, level, user, i) -> Enabled.get(stack) && FueledTool.fuelExceedsCost(new ItemStackContext(stack, level, user)) ? 1 : 0);
             });
         });
         

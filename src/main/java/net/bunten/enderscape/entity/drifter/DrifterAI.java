@@ -1,6 +1,5 @@
 package net.bunten.enderscape.entity.drifter;
 
-import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -26,12 +25,11 @@ import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
 public class DrifterAI {
 
-    public static final Supplier<ImmutableList<MemoryModuleType<? extends Object>>> MEMORY_TYPES = Suppliers.memoize(() -> ImmutableList.of(
+    public static final ImmutableList<MemoryModuleType<? extends Object>> MEMORY_TYPES = ImmutableList.of(
             EnderscapeMemory.AVOID_TARGET,
             EnderscapeMemory.BREED_TARGET,
             EnderscapeMemory.CANT_REACH_WALK_TARGET_SINCE,
@@ -52,23 +50,23 @@ public class DrifterAI {
             EnderscapeMemory.TEMPTATION_COOLDOWN_TICKS,
             EnderscapeMemory.TEMPTING_PLAYER,
             EnderscapeMemory.WALK_TARGET
-    ));
+    );
 
-    public static final Supplier<ImmutableList<SensorType<? extends Sensor<? super AbstractDrifter>>>> SENSOR_TYPES = Suppliers.memoize(() -> ImmutableList.of(
+    public static final ImmutableList<SensorType<? extends Sensor<? super Drifter>>> SENSOR_TYPES = ImmutableList.of(
             EnderscapeSensors.DRIFTER_TEMPTATIONS.get(),
             EnderscapeSensors.HURT_BY,
             EnderscapeSensors.IS_IN_WATER,
-            EnderscapeSensors.NEAREST_ADULT_DRIFTER.get(),
+            EnderscapeSensors.NEAREST_ADULT,
             EnderscapeSensors.NEAREST_INTIMIDATOR.get(),
             EnderscapeSensors.NEAREST_LIVING_ENTITIES,
             EnderscapeSensors.NEAREST_PLAYERS
-    ));
+    );
 
-    public static GlobalPos getHome(AbstractDrifter mob) {
+    public static GlobalPos getHome(Drifter mob) {
         return mob.getBrain().getMemory(EnderscapeMemory.HOME).get();
     }
 
-    public static void setHome(AbstractDrifter mob, GlobalPos value) {
+    public static void setHome(Drifter mob, GlobalPos value) {
         if (mob.level() instanceof ServerLevel level) {
             level.getPoiManager().getType(value.pos()).ifPresent(type -> {
                 level.getPoiManager().take(poi -> poi.is(EnderscapePoiTags.DRIFTER_HOME), (type2, pos) -> pos.equals(value.pos()), value.pos(), 1);
@@ -78,7 +76,7 @@ public class DrifterAI {
         mob.getBrain().setMemory(EnderscapeMemory.HOME, value);
     }
 
-    public static Brain<?> makeBrain(Brain<AbstractDrifter> brain) {
+    public static Brain<?> makeBrain(Brain<Drifter> brain) {
         initCoreActivity(brain);
         initIdleActivity(brain);
 
@@ -89,7 +87,7 @@ public class DrifterAI {
         return brain;
     }
 
-    private static void initCoreActivity(Brain<AbstractDrifter> brain) {
+    private static void initCoreActivity(Brain<Drifter> brain) {
         brain.addActivity(Activity.CORE, 0, ImmutableList.of(
                 new CalmDownFromAttacker(24),
                 new CalmDownFromIntimidator(24),
@@ -110,14 +108,13 @@ public class DrifterAI {
         );
     }
 
-    private static void initIdleActivity(Brain<AbstractDrifter> brain) {
+    private static void initIdleActivity(Brain<Drifter> brain) {
         brain.addActivity(Activity.IDLE, ImmutableList.of(
             Pair.of(0, new AnimalMakeLove(EnderscapeEntities.DRIFTER.get())),
             Pair.of(1, new FollowTemptation(mob -> 1.25F)),
             Pair.of(2, BabyFollowAdult.create(UniformInt.of(4, 16), 2)),
             Pair.of(3, SetWalkTargetAwayFrom.entity(EnderscapeMemory.NEAREST_INTIMIDATOR.get(), 1, 12, true)),
             Pair.of(4, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(30, 60))),
-            Pair.of(5, SetEntityLookTargetSometimes.create(EnderscapeEntities.DRIFTLET.get(), 6.0f, UniformInt.of(30, 60))),
             Pair.of(8, new RunOne<>(
                     ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
                     ImmutableList.of(
@@ -130,7 +127,7 @@ public class DrifterAI {
         );
     }
 
-    public static void updateActivity(AbstractDrifter entity) {
+    public static void updateActivity(Drifter entity) {
         entity.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.IDLE));
     }
 

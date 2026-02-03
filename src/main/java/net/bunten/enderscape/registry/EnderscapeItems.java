@@ -1,19 +1,13 @@
 package net.bunten.enderscape.registry;
 
+import com.google.common.collect.Maps;
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.item.CrackedMirrorItem;
-import net.bunten.enderscape.item.DriftJellyBottleItem;
-import net.bunten.enderscape.item.DriftLeggingsItem;
-import net.bunten.enderscape.item.HealingItem;
-import net.bunten.enderscape.item.MagniaAttractorItem;
-import net.bunten.enderscape.item.MirrorItem;
-import net.bunten.enderscape.item.NebuliteItem;
-import net.bunten.enderscape.item.RubbleShieldItem;
-import net.bunten.enderscape.item.RustleBucketItem;
-import net.bunten.enderscape.item.component.DashJump;
+import net.bunten.enderscape.item.*;
+import net.bunten.enderscape.item.component.*;
 import net.bunten.enderscape.registry.tag.EnderscapeBannerPatternTags;
 import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
 import net.minecraft.Util;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.component.DataComponents;
@@ -33,38 +27,29 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.BannerPatternItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.HangingSignItem;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.Item.Properties;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.JukeboxSong;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.SignItem;
-import net.minecraft.world.item.SmithingTemplateItem;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraft.world.level.block.entity.BannerPatternLayers;
 import net.minecraft.world.level.block.entity.BannerPatterns;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static net.bunten.enderscape.registry.EnderscapeBlocks.END_VAULT;
 import static net.minecraft.world.item.Items.MAGENTA_BANNER;
 
 public class EnderscapeItems {
@@ -73,9 +58,22 @@ public class EnderscapeItems {
             .add(Attributes.ARMOR, new AttributeModifier(Enderscape.id("drift_leggings_armor"), 4, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.LEGS)
             .add(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(Enderscape.id("drift_leggings_armor_toughness"), 2, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.LEGS)
             .add(Attributes.MOVEMENT_SPEED, new AttributeModifier(Enderscape.id("drift_leggings_movement_speed"), 0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), EquipmentSlotGroup.LEGS)
-            .add(Attributes.SAFE_FALL_DISTANCE, new AttributeModifier(Enderscape.id("drift_leggings_safe_fall_distance"), 0.6, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), EquipmentSlotGroup.LEGS)
-            .add(Attributes.GRAVITY, new AttributeModifier(Enderscape.id("drift_leggings_gravity"), -0.4, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), EquipmentSlotGroup.LEGS)
+            .add(Attributes.SAFE_FALL_DISTANCE, new AttributeModifier(Enderscape.id("drift_leggings_safe_fall_distance"), 0.3, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), EquipmentSlotGroup.LEGS)
+            .add(Attributes.GRAVITY, new AttributeModifier(Enderscape.id("drift_leggings_gravity"), -0.3, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), EquipmentSlotGroup.LEGS)
             .build();
+
+    private static final EnumMap<ArmorItem.Type, Integer> SHADOLINE_ARMOR_DEFENSE = Maps.newEnumMap(Map.of(ArmorItem.Type.BOOTS, 2, ArmorItem.Type.LEGGINGS, 5, ArmorItem.Type.CHESTPLATE, 6, ArmorItem.Type.HELMET, 2, ArmorItem.Type.BODY, 6));
+    private static final EnumMap<ArmorItem.Type, Double> SHADOLINE_STEALTH_BONUS = Maps.newEnumMap(Map.of(ArmorItem.Type.BOOTS, 0.15, ArmorItem.Type.LEGGINGS, 0.2, ArmorItem.Type.CHESTPLATE, 0.2, ArmorItem.Type.HELMET, 0.15, ArmorItem.Type.BODY, 0.4));
+
+    private static final Holder<ArmorMaterial> SHADOLINE_ARMOR_MATERIAL = registerArmorMaterial(
+            Enderscape.id("shadoline"),
+            SHADOLINE_ARMOR_DEFENSE,
+            15,
+            EnderscapeItemSounds.SHADOLINE_ARMOR_EQUIP,
+            0.0F,
+            0.0F,
+            () -> Ingredient.of(EnderscapeItemTags.REPAIRS_SHADOLINE_ARMOR)
+    );
 
     public static final Holder<ArmorMaterial> DRIFT_LEGGINGS_MATERIAL = registerArmorMaterial(
             Enderscape.id("drift_leggings"),
@@ -93,15 +91,33 @@ public class EnderscapeItems {
             () -> Ingredient.of(EnderscapeItemTags.REPAIRS_DRIFT_LEGGINGS)
     );
 
+    @NotNull
+    private static Properties shadolineArmorProperties(ArmorItem.Type type) {
+        ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
+        EquipmentSlotGroup group = EquipmentSlotGroup.bySlot(type.getSlot());
+        ResourceLocation location = Enderscape.id("armor." + type.getName());
+
+        builder.add(Attributes.ARMOR, new AttributeModifier(location, SHADOLINE_ARMOR_DEFENSE.getOrDefault(type, 0), AttributeModifier.Operation.ADD_VALUE), group);
+        builder.add(EnderscapeAttributes.STEALTH, new AttributeModifier(location, SHADOLINE_STEALTH_BONUS.getOrDefault(type, 0.0), AttributeModifier.Operation.ADD_MULTIPLIED_BASE), group);
+
+        ItemAttributeModifiers attributes = builder.build();
+
+        return new Properties().attributes(attributes).durability(type.getDurability(25));
+    }
+
+    @NotNull
+    private static Supplier<Item> shadolineArmor(String name, ArmorItem.Type type) {
+        return registerItem(name, properties -> new ArmorItem(SHADOLINE_ARMOR_MATERIAL, type, properties), shadolineArmorProperties(type));
+    }
+
     private static Holder<ArmorMaterial> registerArmorMaterial(ResourceLocation location, EnumMap<ArmorItem.Type, Integer> enumMap, int i, Holder<SoundEvent> holder, float f, float g, Supplier<Ingredient> supplier) {
         List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(location));
         return RegistryHelper.registerForHolder(BuiltInRegistries.ARMOR_MATERIAL, location, () -> new ArmorMaterial(enumMap, i, holder, supplier, list, f, g));
     }
 
-    //public static final Properties SHULKER_SHELL_PROPERTIES = new Item.Properties().component(DataComponents.EQUIPPABLE, Equippable.builder(ArmorType.HELMET.getSlot()).setEquipSound(EnderscapeItemSounds.SHULKER_SHELL_EQUIP).setAsset(ResourceKey.create(ROOT_ID, Enderscape.id("shulker_shell"))).build());
+    //public static final Properties SHULKER_SHELL_PROPERTIES = new Item.Properties().component(DataComponents.EQUIPPABLE, Equippable.builder(ArmorItem.Type.HELMET.getSlot()).setEquipSound(EnderscapeItemSounds.SHULKER_SHELL_EQUIP).setAsset(ResourceKey.create(ROOT_ID, Enderscape.id("shulker_shell"))).build());
 
     public static final Supplier<Item> DRIFTER_SPAWN_EGG = registerSpawnEgg(EnderscapeEntities.DRIFTER, 0xE97FFF, 0x7554A8);
-    public static final Supplier<Item> DRIFTLET_SPAWN_EGG = registerSpawnEgg(EnderscapeEntities.DRIFTLET, 0xFFAAF9, 0xE97FFF);
     public static final Supplier<Item> RUBBLEMITE_SPAWN_EGG = registerSpawnEgg(EnderscapeEntities.RUBBLEMITE, 0xF2FDBE, 0xC1B687);
     public static final Supplier<Item> RUSTLE_SPAWN_EGG = registerSpawnEgg(EnderscapeEntities.RUSTLE, 15131119, 11905990);
 
@@ -122,18 +138,22 @@ public class EnderscapeItems {
             .food(new FoodProperties.Builder().alwaysEdible().nutrition(6).saturationModifier(0.2F).effect(() -> new MobEffectInstance(EnderscapeMobEffects.LOW_GRAVITY, 400), 1.0F).build())
             .stacksTo(16)
     );
+
     public static final Supplier<Item> FLANGER_BERRY = registerItem("flanger_berry", properties -> new ItemNameBlockItem(EnderscapeBlocks.FLANGER_BERRY_VINE.get(), properties), new Properties().food(new FoodProperties.Builder().nutrition(5).saturationModifier(1.2F).build()));
-    public static final Supplier<Item> MURUBLIGHT_SHELF_ITEM = registerItem("murublight_shelf", properties -> new BlockItem(EnderscapeBlocks.MURUBLIGHT_SHELF.get(), properties), new Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(4).saturationModifier(0.3F).effect(new MobEffectInstance(MobEffects.POISON, 200), 1.0F).build()));
+    public static final Supplier<Item> MURUBLIGHT_BRACKET_ITEM = registerItem("murublight_bracket", properties -> new BlockItem(EnderscapeBlocks.MURUBLIGHT_BRACKET.get(), properties), new Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(4).saturationModifier(0.3F).effect(new MobEffectInstance(MobEffects.POISON, 200), 1.0F).build()));
+
+    public static final Supplier<Item> VOID_TORCH_ITEM = registerItem("void_torch", properties -> new StandingAndWallBlockItem(EnderscapeBlocks.VOID_TORCH.get(), EnderscapeBlocks.VOID_WALL_TORCH.get(), properties, Direction.DOWN), new Properties());
 
     public static final Supplier<Item> END_CITY_KEY = registerItem("end_city_key");
     public static final Supplier<Item> RUBBLE_CHITIN = registerItem("rubble_chitin");
-    public static final Supplier<Item> NEBULITE = registerItem("nebulite", NebuliteItem::new, new Properties());
+    public static final Supplier<Item> NEBULITE = registerItem("nebulite");
     public static final Supplier<Item> NEBULITE_SHARDS = registerItem("nebulite_shards");
     public static final Supplier<Item> RAW_SHADOLINE = registerItem("raw_shadoline");
     public static final Supplier<Item> SHADOLINE_INGOT = registerItem("shadoline_ingot");
+    public static final Supplier<Item> SHADOLINE_NUGGET = registerItem("shadoline_nugget");
 
     public static final Properties RUBBLE_SHIELD_PROPERTIES = new Properties()
-            .component(EnderscapeDataComponents.DASH_JUMP, new DashJump(60, 2.35F, 0.35F, 0.7F, EnderscapeItemSounds.RUBBLE_SHIELD_DASH, true))
+            .component(EnderscapeDataComponents.DASH_JUMP, DashJump.DEFAULT)
             .durability(336);
 
     public static final Supplier<Item> END_STONE_RUBBLE_SHIELD = registerItem("end_stone_rubble_shield", RubbleShieldItem::new, RUBBLE_SHIELD_PROPERTIES);
@@ -141,26 +161,63 @@ public class EnderscapeItems {
     public static final Supplier<Item> MIRESTONE_RUBBLE_SHIELD = registerItem("mirestone_rubble_shield", RubbleShieldItem::new, RUBBLE_SHIELD_PROPERTIES);
     public static final Supplier<Item> KURODITE_RUBBLE_SHIELD = registerItem("kurodite_rubble_shield", RubbleShieldItem::new, RUBBLE_SHIELD_PROPERTIES);
 
- //   public static final ResourceKey<EquipmentAsset> DRIFT_LEGGINGS_ASSET = ResourceKey.create(ROOT_ID, Enderscape.id("drift_leggings"));
-
     public static final Supplier<Item> DRIFT_LEGGINGS = registerItem("drift_leggings", DriftLeggingsItem::new, new Properties().attributes(DRIFT_LEGGINGS_ATTRIBUTES).durability(495));
 
+    public static final Supplier<Item> SHADOLINE_HELMET = shadolineArmor("shadoline_helmet", ArmorItem.Type.HELMET);
+    public static final Supplier<Item> SHADOLINE_CHESTPLATE = shadolineArmor("shadoline_chestplate", ArmorItem.Type.CHESTPLATE);
+    public static final Supplier<Item> SHADOLINE_LEGGINGS = shadolineArmor("shadoline_leggings", ArmorItem.Type.LEGGINGS);
+    public static final Supplier<Item> SHADOLINE_BOOTS = shadolineArmor("shadoline_boots", ArmorItem.Type.BOOTS);
+
+    public static final Supplier<Item> DAGGER = registerItem("dagger", DaggerItem::new, new Properties()
+            .stacksTo(1)
+            .attributes(ItemAttributeModifiers.builder()
+                    .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, 3.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                    .add(EnderscapeAttributes.BACKSTAB_DAMAGE, new AttributeModifier(EnderscapeAttributes.BASE_BACKSTAB_DAMAGE_ID, 3.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                    .add(Attributes.ATTACK_SPEED, new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, -1.5, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                    .build()
+            )
+            .component(EnderscapeDataComponents.ATTACK_SOUNDS, AttackSounds.Builder.create()
+                    .strong(EnderscapeItemSounds.DAGGER_ATTACK_STRONG)
+                    .crit(EnderscapeItemSounds.DAGGER_ATTACK_CRIT)
+                    .knockback(EnderscapeItemSounds.DAGGER_ATTACK_KNOCKBACK)
+                    .backstab(EnderscapeItemSounds.DAGGER_BACKSTAB)
+                    .build()
+            )
+            .component(
+                    DataComponents.TOOL,
+                    new Tool(
+                            List.of(
+                                    Tool.Rule.minesAndDrops(List.of(Blocks.COBWEB), 7.5F)
+                            ),
+                            1,
+                            2
+                    )
+            )
+            .component(EnderscapeDataComponents.THRESHOLD_COUNTER, ThresholdCounter.of(4))
+            .component(EnderscapeDataComponents.BACKSTAB_ANGLE, EnderscapeAttributes.DEFAULT_BACKSTAB_ANGLE)
+            .component(EnderscapeDataComponents.MAXIMUM_FUEL, 5)
+            .component(EnderscapeDataComponents.FUEL_PER_USE, 1)
+    );
+
     public static final Supplier<Item> MAGNIA_ATTRACTOR = registerItem("magnia_attractor", MagniaAttractorItem::new, new Properties()
+            .stacksTo(1)
             .component(EnderscapeDataComponents.ENABLED, true)
             .component(EnderscapeDataComponents.ENTITIES_PULLED, 0)
             .component(EnderscapeDataComponents.ENTITIES_PULLED_TO_USE_FUEL, 200)
             .component(EnderscapeDataComponents.ENTITY_PULL_RANGE, 10)
-            .component(EnderscapeDataComponents.MAXIMUM_NEBULITE_FUEL, 6)
-            .component(EnderscapeDataComponents.NEBULITE_FUEL_PER_USE, 1)
+            .component(EnderscapeDataComponents.MAXIMUM_FUEL, 6)
+            .component(EnderscapeDataComponents.FUEL_PER_USE, 1)
+            .component(EnderscapeDataComponents.THRESHOLD_COUNTER, ThresholdCounter.of(200))
+
     );
 
-    public static final Supplier<Item> CRACKED_MIRROR = registerItem("cracked_mirror", CrackedMirrorItem::new, new Properties().rarity(Rarity.EPIC).stacksTo(1));
+    public static final Supplier<Item> CRACKED_MIRROR = registerItem("cracked_mirror", CrackedMirrorItem::new, new Properties().rarity(Rarity.RARE).stacksTo(1));
 
     public static final Supplier<Item> MIRROR = registerItem("mirror", MirrorItem::new, new Properties()
-            .component(EnderscapeDataComponents.DISTANCE_FOR_COST_TO_INCREASE, 500)
-            .component(EnderscapeDataComponents.MAXIMUM_NEBULITE_FUEL, 5)
-            .component(EnderscapeDataComponents.NEBULITE_FUEL_PER_USE, 1)
-            .rarity(Rarity.EPIC)
+            .stacksTo(1)
+            .component(EnderscapeDataComponents.MAXIMUM_FUEL, 5)
+            .component(EnderscapeDataComponents.FUEL_PER_USE, 1)
+            .rarity(Rarity.RARE)
     );
 
     public static final Supplier<Item> CRESCENT_BANNER_PATTERN = registerItem("crescent_banner_pattern", properties -> new BannerPatternItem(EnderscapeBannerPatternTags.PATTERN_ITEM_CRESCENT, properties), new Properties().stacksTo(1).rarity(Rarity.RARE));
@@ -218,7 +275,7 @@ public class EnderscapeItems {
     }
 
     public static ItemStack getEndVaultInstance() {
-        ItemStack stack = new ItemStack(EnderscapeBlocks.END_VAULT.get());
+        ItemStack stack = new ItemStack(END_VAULT.get());
 
         CompoundTag keyItem = new CompoundTag();
 

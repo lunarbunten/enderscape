@@ -36,7 +36,7 @@ public abstract class ThrownTridentMixin extends AbstractArrow {
             dealtDamage = true;
             teleportTo(getOwner().getX(), getOwner().getY(), getOwner().getZ());
             setDeltaMovement(0, 0, 0);
-            playSound(EnderscapeItemSounds.TRIDENT_WARP.get());
+            playSound(EnderscapeItemSounds.TRIDENT_WARP);
         }
     }
 }

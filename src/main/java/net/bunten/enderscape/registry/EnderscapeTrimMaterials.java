@@ -32,7 +32,7 @@ public class EnderscapeTrimMaterials {
 
     private static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> key, Item item, Style style, float f) {
         ResourceLocation location = key.location();
-        TrimMaterial material = TrimMaterial.create(location.getNamespace() + "_" + location.getPath(), item, f, Component.translatable(Util.makeDescriptionId("trim_material", location)).withStyle(style), Map.of());
+        TrimMaterial material = TrimMaterial.create(location.getPath(), item, f, Component.translatable(Util.makeDescriptionId("trim_material", location)).withStyle(style), Map.of());
         context.register(key, material);
     }
 

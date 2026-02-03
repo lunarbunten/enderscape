@@ -3,6 +3,7 @@ package net.bunten.enderscape.registry;
 import com.mojang.serialization.MapCodec;
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.particle.DashJumpShockwaveParticleOptions;
+import net.bunten.enderscape.particle.MagniaParticleOptions;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -15,7 +16,6 @@ import java.util.function.Supplier;
 
 public class EnderscapeParticles {
 
-    public static final Supplier<SimpleParticleType> ALLURING_MAGNIA = register("alluring_magnia", true);
     public static final Supplier<SimpleParticleType> BLINKLIGHT_SPORES = register("blinklight_spores", false);
     public static final Supplier<SimpleParticleType> CELESTIAL_SPORES = register("celestial_spores", false);
     public static final Supplier<SimpleParticleType> CHORUS_POLLEN = register("chorus_pollen", false);
@@ -32,13 +32,19 @@ public class EnderscapeParticles {
     public static final Supplier<SimpleParticleType> END_TRIAL_SPAWNER_EXHALE = register("end_trial_spawner_exhale", true);
     public static final Supplier<SimpleParticleType> END_VAULT_CONNECTION = register("end_vault_connection", true);
     public static final Supplier<SimpleParticleType> END_PORTAL_STARS = register("end_portal_stars", false);
+
+    public static final Supplier<ParticleType<MagniaParticleOptions>> ENTITY_EFFECTED_BY_MAGNIA = register("entity_effected_by_magnia", false, MagniaParticleOptions::codec, MagniaParticleOptions::streamCodec);
+    public static final Supplier<SimpleParticleType> MAGNIA_BLISTERING = register("magnia_blistering", true);
+    public static final Supplier<ParticleType<MagniaParticleOptions>> MAGNIA_SPROUT = register("magnia_sprout", true, MagniaParticleOptions::codec, MagniaParticleOptions::streamCodec);
+
     public static final Supplier<SimpleParticleType> MIRROR_TELEPORT_IN = register("mirror_teleport_in", true);
     public static final Supplier<SimpleParticleType> MIRROR_TELEPORT_OUT = register("mirror_teleport_out", true);
     public static final Supplier<SimpleParticleType> NEBULITE_ORE = register("nebulite_ore", true);
-    public static final Supplier<SimpleParticleType> REPULSIVE_MAGNIA = register("repulsive_magnia", true);
     public static final Supplier<SimpleParticleType> RUSTLE_SLEEPING_BUBBLE = register("rustle_sleeping_bubble", true);
     public static final Supplier<SimpleParticleType> RUSTLE_SLEEPING_BUBBLE_POP = register("rustle_sleeping_bubble_pop", true);
     public static final Supplier<SimpleParticleType> VEILED_LEAVES = register("veiled_leaves", false);
+
+    public static final Supplier<SimpleParticleType> VOID_FIRE_FLAME = register("void_fire_flame", false);
     public static final Supplier<SimpleParticleType> VOID_POOF = register("void_poof", true);
     public static final Supplier<SimpleParticleType> VOID_STARS = register("void_stars", false);
 

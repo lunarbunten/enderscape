@@ -33,6 +33,7 @@ public class EnderscapeBlockRenderLayerMap {
                 END_VAULT,
                 FLANGER_BERRY_FLOWER,
                 FLANGER_BERRY_VINE,
+                MAGNIA_RADIO,
                 MIRESTONE_NEBULITE_ORE,
                 MURUBLIGHT_CHANTERELLE,
                 MURUBLIGHT_DOOR,
@@ -51,8 +52,16 @@ public class EnderscapeBlockRenderLayerMap {
                 POTTED_VEILED_SAPLING,
                 POTTED_WISP_GROWTH,
                 REPULSIVE_MAGNIA_SPROUT,
+                SHADOLINE_BARS,
+                SHADOLINE_CHAIN,
+                VOID_TORCH,
+                VOID_WALL_TORCH,
+                VOID_CAMPFIRE,
+                VOID_LANTERN,
                 VEILED_DOOR,
                 VEILED_SAPLING,
+                VOID_TORCH,
+                VOID_WALL_TORCH,
                 VEILED_TRAPDOOR,
                 VEILED_VINES,
                 VOID_SHALE,
@@ -62,7 +71,6 @@ public class EnderscapeBlockRenderLayerMap {
         )) {
             ItemBlockRenderTypes.setRenderLayer(blockSupplier.get(), RenderType.cutout());
         }
-
         ItemBlockRenderTypes.setRenderLayer(VEILED_LEAVES.get(), RenderType.cutoutMipped());
         ItemBlockRenderTypes.setRenderLayer(VEILED_LEAF_PILE.get(), RenderType.cutoutMipped());
 

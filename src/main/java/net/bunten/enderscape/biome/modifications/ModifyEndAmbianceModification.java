@@ -17,32 +17,32 @@ import net.neoforged.neoforge.common.world.ModifiableBiomeInfo;
 
 public final class ModifyEndAmbianceModification implements BiomeModifier {
     private ModifyEndAmbianceModification() {}
-    
+
     public static final ModifyEndAmbianceModification INSTANCE = new ModifyEndAmbianceModification();
-    
+
     public static final MapCodec<ModifyEndAmbianceModification> CODEC = MapCodec.unit(INSTANCE);
 
     private static final EnderscapeConfig CONFIG = EnderscapeConfig.getInstance();
-    
+
     @Override
     public void modify(Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.Builder builder) {
-        if (biome.is(EnderscapeBiomeTags.HAS_MODIFIED_END_AMBIENCE)) {
-            if (CONFIG.ambienceUpdateDefaultMusic)
+        if (biome.is(EnderscapeBiomeTags.OVERRIDES_DEFAULT_AMBIENCE)) {
+            if (CONFIG.ambienceUpdateMusicPools)
                 builder.getSpecialEffects().backgroundMusic(new Music(EnderscapeBiomeSounds.DEFAULT_END.music(), 12000, 24000, false));
 
-            if (CONFIG.ambienceUpdateDefaultLoop) builder.getSpecialEffects().ambientLoopSound(EnderscapeBiomeSounds.DEFAULT_END.loop());
-            if (CONFIG.ambienceUpdateDefaultAdditions) builder.getSpecialEffects().ambientAdditionsSound(new AmbientAdditionsSettings(EnderscapeBiomeSounds.DEFAULT_END.additions(), 0.00075));
-            if (CONFIG.ambienceUpdateDefaultMood) builder.getSpecialEffects().ambientMoodSound(new AmbientMoodSettings(EnderscapeBiomeSounds.DEFAULT_END.mood(), 6000, 8, 2));
-            if (CONFIG.ambienceUpdateDefaultParticles) builder.getSpecialEffects().ambientParticle(new AmbientParticleSettings(EnderscapeParticles.VOID_STARS.get(), 0.003F));
+            if (CONFIG.ambienceUpdateLoopSounds) builder.getSpecialEffects().ambientLoopSound(EnderscapeBiomeSounds.DEFAULT_END.loop());
+            if (CONFIG.ambienceUpdateAdditionSounds) builder.getSpecialEffects().ambientAdditionsSound(new AmbientAdditionsSettings(EnderscapeBiomeSounds.DEFAULT_END.additions(), 0.00075));
+            if (CONFIG.ambienceUpdateMoodSounds) builder.getSpecialEffects().ambientMoodSound(new AmbientMoodSettings(EnderscapeBiomeSounds.DEFAULT_END.mood(), 6000, 8, 2));
+            if (CONFIG.ambienceUpdateParticles) builder.getSpecialEffects().ambientParticle(new AmbientParticleSettings(EnderscapeParticles.VOID_STARS.get(), 0.003F));
 
-            if (CONFIG.ambienceUpdateDefaultSkyColor) builder.getSpecialEffects().skyColor(EnderscapeBiomes.DEFAULT_SKY_COLOR);
-            if (CONFIG.ambienceUpdateDefaultFogColor) builder.getSpecialEffects().fogColor(EnderscapeBiomes.DEFAULT_FOG_COLOR);
+            if (CONFIG.ambienceUpdateSkyColors) builder.getSpecialEffects().skyColor(EnderscapeBiomes.DEFAULT_SKY_COLOR);
+            if (CONFIG.ambienceUpdateFogColors) builder.getSpecialEffects().fogColor(EnderscapeBiomes.DEFAULT_FOG_COLOR);
 
-            if (CONFIG.ambienceUpdateDefaultGrassColor) builder.getSpecialEffects().grassColorOverride(EnderscapeBiomes.DEFAULT_GRASS_COLOR);
-            if (CONFIG.ambienceUpdateDefaultFoliageColor) builder.getSpecialEffects().foliageColorOverride(EnderscapeBiomes.DEFAULT_FOLIAGE_COLOR);
+            if (CONFIG.ambienceUpdateGrassColors) builder.getSpecialEffects().grassColorOverride(EnderscapeBiomes.DEFAULT_GRASS_COLOR);
+            if (CONFIG.ambienceUpdateFoliageColors) builder.getSpecialEffects().foliageColorOverride(EnderscapeBiomes.DEFAULT_FOLIAGE_COLOR);
 
-            if (CONFIG.ambienceUpdateDefaultWaterColor) builder.getSpecialEffects().waterColor(EnderscapeBiomes.DEFAULT_WATER_COLOR);
-            if (CONFIG.ambienceUpdateDefaultWaterFogColor) builder.getSpecialEffects().waterFogColor(EnderscapeBiomes.DEFAULT_WATER_FOG_COLOR);
+            if (CONFIG.ambienceUpdateWaterColors) builder.getSpecialEffects().waterColor(EnderscapeBiomes.DEFAULT_WATER_COLOR);
+            if (CONFIG.ambienceUpdateWaterFogColors) builder.getSpecialEffects().waterFogColor(EnderscapeBiomes.DEFAULT_WATER_FOG_COLOR);
         }
     }
 

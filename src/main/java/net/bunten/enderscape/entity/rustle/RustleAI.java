@@ -1,6 +1,5 @@
 package net.bunten.enderscape.entity.rustle;
 
-import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -32,12 +31,11 @@ import net.minecraft.world.item.ItemStack;
 import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
 public class RustleAI {
 
-    public static final Supplier<ImmutableList<MemoryModuleType<? extends Object>>> MEMORY_TYPES = Suppliers.memoize(() -> ImmutableList.of(
+    public static final ImmutableList<MemoryModuleType<? extends Object>> MEMORY_TYPES = ImmutableList.of(
             EnderscapeMemory.AVOID_TARGET,
             EnderscapeMemory.BREED_TARGET,
             EnderscapeMemory.CANT_REACH_WALK_TARGET_SINCE,
@@ -59,9 +57,9 @@ public class RustleAI {
             EnderscapeMemory.TEMPTATION_COOLDOWN_TICKS,
             EnderscapeMemory.TEMPTING_PLAYER,
             EnderscapeMemory.WALK_TARGET
-    ));
+    );
 
-    public static final Supplier<ImmutableList<SensorType<? extends Sensor<? super Rustle>>>> SENSOR_TYPES = Suppliers.memoize(() -> ImmutableList.of(
+    public static final ImmutableList<SensorType<? extends Sensor<? super Rustle>>> SENSOR_TYPES = ImmutableList.of(
             EnderscapeSensors.HURT_BY,
             EnderscapeSensors.IS_IN_WATER,
             EnderscapeSensors.NEAREST_ADULT,
@@ -70,7 +68,7 @@ public class RustleAI {
             EnderscapeSensors.RUSTLE_NEAREST_FOOD.get(),
             EnderscapeSensors.RUSTLE_NEAREST_SLEEPING_SPOT.get(),
             EnderscapeSensors.RUSTLE_TEMPTATIONS.get()
-    ));
+    );
 
     public static final IntProvider HAIR_REGROWTH_COOLDOWN_RANGE_IN_MINUTES = UniformInt.of(4, 8);
     public static final IntProvider SLEEPING_TIME_RANGE_IN_MINUTES = ConstantInt.of(1);
@@ -119,7 +117,7 @@ public class RustleAI {
                 Pair.of(0, new AnimalMakeLove(EnderscapeEntities.RUSTLE.get(), 1.25F, 1)),
                 Pair.of(1, new FollowTemptation(mob -> 1.25F)),
                 Pair.of(2, new RustleEatWhenSheared(1.25F)),
-                Pair.of(3, BabyFollowAdult.create(UniformInt.of(2, 16), 1.25F)),
+                Pair.of(3, BabyFollowAdult.create(UniformInt.of(1, 4), 1.25F)),
                 Pair.of(4, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 1.5F, UniformInt.of(30, 60))),
                 Pair.of(8, new RunOne<>(
                         ImmutableMap.of(EnderscapeMemory.WALK_TARGET, MemoryStatus.VALUE_ABSENT, EnderscapeMemory.HURT_BY_ENTITY, MemoryStatus.VALUE_ABSENT),

@@ -4,11 +4,14 @@ import net.bunten.enderscape.EnderscapeConfig;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.PortalParticle;
 import net.minecraft.client.particle.TextureSheetParticle;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+@OnlyIn(Dist.CLIENT)
 @Mixin(PortalParticle.class)
 public abstract class PortalParticleMixin extends TextureSheetParticle {
 
@@ -18,6 +21,6 @@ public abstract class PortalParticleMixin extends TextureSheetParticle {
 
     @Inject(method = "getLightColor", at = @At("RETURN"), cancellable = true)
     private void setupColor(float f, CallbackInfoReturnable<Integer> cir) {
-        if (EnderscapeConfig.getInstance().portalParticleEmissive) cir.setReturnValue(Math.min(160, cir.getReturnValueI()));
+        if (EnderscapeConfig.getInstance().portalParticleEmissive) cir.setReturnValue(Math.max(160, cir.getReturnValueI()));
     }
 }
