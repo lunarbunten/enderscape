@@ -2,6 +2,7 @@ package net.bunten.enderscape.item;
 
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.EnderscapeConfig;
+import net.bunten.enderscape.item.component.FueledTool;
 import net.bunten.enderscape.item.component.value.LodestoneTeleportationVisuals;
 import net.bunten.enderscape.network.ClientboundTransdimensionalTravelSoundPayload;
 import net.bunten.enderscape.registry.*;
@@ -28,6 +29,7 @@ import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.LodestoneTracker;
 import net.minecraft.world.item.context.UseOnContext;
@@ -49,11 +51,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import static net.bunten.enderscape.item.component.FueledTool.useFuel;
 import static net.bunten.enderscape.registry.EnderscapeDataComponents.DISTANCE_TO_INCREASE;
 import static net.bunten.enderscape.registry.EnderscapeDataComponents.INCREASE_WITH_DISTANCE;
 import static net.minecraft.core.component.DataComponents.LODESTONE_TRACKER;
 
-public class LodestoneTeleporter extends FueledTool {
+public class LodestoneTeleporter extends EnchantableItem {
     static boolean allowsTransdimensionalByDefault;
 
     public LodestoneTeleporter(boolean allow, Properties properties) {
@@ -61,14 +64,26 @@ public class LodestoneTeleporter extends FueledTool {
         allowsTransdimensionalByDefault = allow;
     }
 
-    @Override
-    public boolean displayHudWhen(ItemStackContext context) {
-        return true;
+    public static boolean is(ItemStack stack) {
+        return stack.getItem() instanceof LodestoneTeleporter;
     }
 
-    @Override
-    public int getEnchantmentValue() {
-        return 1;
+    public static int fuelCost(ItemStackContext context) {
+        ItemStack stack = context.stack();
+        LivingEntity user = context.user();
+        LodestoneTrackerContext tracker = LodestoneTrackerContext.of(context);
+
+        if (FueledTool.is(stack) && user != null) {
+            if (tracker.dimension() != tracker.linkedDimension()) {
+                return FueledTool.maxFuel(stack);
+            } else if (stack.get(INCREASE_WITH_DISTANCE) == true) {
+                return 1 + (distanceBetweenPoints(user.blockPosition(), tracker.linkedPos()) / getTotalDistanceForCostIncrease(context));
+            } else {
+                return 1;
+            }
+        } else {
+            return 0;
+        }
     }
 
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
@@ -87,7 +102,7 @@ public class LodestoneTeleporter extends FueledTool {
         return wasLinkedBefore(stack) && stack.get(LODESTONE_TRACKER).target().isPresent();
     }
 
-    public static boolean hideInvalidOutlineWhen1(ItemStackContext context) {
+    public static boolean hideInvalidOutlineWhen(ItemStackContext context) {
         LodestoneTrackerContext tracker = LodestoneTrackerContext.of(context);
 
         boolean isLinked = isLinked(context.stack());
@@ -121,7 +136,7 @@ public class LodestoneTeleporter extends FueledTool {
         BlockState state = level.getBlockState(pos);
         ItemStack stack = context.getItemInHand();
 
-        if (LodestoneTeleporter.is(stack) && state.is(Blocks.LODESTONE)) {
+        if (FueledTool.is(stack) && state.is(Blocks.LODESTONE)) {
             writeData(stack, pos, context.getLevel().dimension());
             level.playSound(null, pos, EnderscapeItemSounds.MIRROR_LINK.value(), SoundSource.PLAYERS, 1, 1);
             return InteractionResult.SUCCESS_NO_ITEM_USED;
@@ -247,7 +262,7 @@ public class LodestoneTeleporter extends FueledTool {
         return DimensionType.getTeleportationScale(registry.get(beginning).get().value(), registry.get(linked).get().value()) == 1;
     }
 
-    static int getTotalDistanceForCostIncrease(ItemStackContext context) {
+    public static int getTotalDistanceForCostIncrease(ItemStackContext context) {
         ItemStack stack = context.stack();
         return (int) getAddedDistanceToIncreaseCost(context.stack(), context.user(), stack.get(DISTANCE_TO_INCREASE));
     }
@@ -271,7 +286,7 @@ public class LodestoneTeleporter extends FueledTool {
 
         LodestoneTrackerContext context = new LodestoneTrackerContext(stack, client.level, client.player);
 
-        if (LodestoneTeleporter.is(stack) && LodestoneTeleporter.isLinked(stack) && config.mirrorTooltipEnabled) {
+        if (FueledTool.is(stack) && LodestoneTeleporter.isLinked(stack) && config.mirrorTooltipEnabled) {
 
             ChatFormatting headerColor = ChatFormatting.GRAY;
             ChatFormatting infoColor = ChatFormatting.DARK_GRAY;
@@ -320,7 +335,7 @@ public class LodestoneTeleporter extends FueledTool {
         return Component.translatable("item." + Enderscape.MOD_ID + ".lodestone_teleportation.desc." + name, objects);
     }
 
-    static int distanceBetweenPoints(BlockPos pos, BlockPos pos2) {
+    public static int distanceBetweenPoints(BlockPos pos, BlockPos pos2) {
         float x = pos.getX() - pos2.getX();
         float z = pos.getZ() - pos2.getZ();
         return (int) Mth.sqrt(x * x + z * z);

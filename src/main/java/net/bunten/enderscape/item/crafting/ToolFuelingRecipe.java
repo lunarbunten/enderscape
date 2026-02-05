@@ -1,6 +1,6 @@
 package net.bunten.enderscape.item.crafting;
 
-import net.bunten.enderscape.item.FueledTool;
+import net.bunten.enderscape.item.component.FueledTool;
 import net.bunten.enderscape.registry.EnderscapeRecipeSerializers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;

@@ -2,9 +2,7 @@ package net.bunten.enderscape.mixin;
 
 import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.entity.magnia.MagniaMoveable;
-import net.bunten.enderscape.entity.magnia.MagniaMovingData;
 import net.bunten.enderscape.item.ItemStackContext;
-import net.bunten.enderscape.item.EntityMagnet;
 import net.bunten.enderscape.item.component.*;
 import net.bunten.enderscape.particle.MagniaParticleOptions;
 import net.bunten.enderscape.registry.EnderscapeCriteria;
@@ -14,8 +12,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -152,23 +152,23 @@ public abstract class PlayerMixin extends LivingEntity {
     @Unique
     private void Enderscape$tickMagniaAttractorItemMovement() {
         if (isAlive() && !isSpectator() && !level().isClientSide()) {
-            ItemStack stack = EntityMagnet.getValidAttractor(getInventory());
+            ItemStack stack = EntityMagnet.getFirstUsableMagnet(getInventory());
 
-            if (!stack.isEmpty() && EntityMagnet.isEnabled(stack)) {
-                int range = EntityMagnet.getEntityPullRange(stack);
+            if (!stack.isEmpty() && Enabled.get(stack)) {
+                EntityMagnet magnet = EntityMagnet.get(stack);
 
-                AABB inflated = getBoundingBox().inflate(range, 4, range);
+                AABB totalRange = getBoundingBox().inflate(magnet.pullRange().x, magnet.pullRange().y, magnet.pullRange().x);
                 ItemStackContext context = new ItemStackContext(stack, level(), (Player) (Object) this);
-                level().getEntitiesOfClass(ItemEntity.class, inflated).stream().filter(item -> !item.hasPickUpDelay()).forEach(entity -> Enderscape$pullEntity(context, entity, 1));
-                level().getEntitiesOfClass(ExperienceOrb.class, inflated).stream().filter(orb -> orb.tickCount >= 20).forEach(entity -> Enderscape$pullEntity(context, entity, 0));
+
+                level().getEntitiesOfClass(Entity.class, totalRange, entity -> EntityMagnet.CAN_PULL_ENTITY.test(entity, magnet)).forEach(entity -> Enderscape$pullEntity(context, entity, magnet, EntityMagnet.abuseCost(entity, magnet)));
 
                 Enderscape$magniaTrackedEntities.entrySet().removeIf(entry -> {
                     Entity item = entry.getKey();
                     int cooldown = entry.getValue();
 
-                    if (position().distanceTo(item.position()) > range) {
+                    if (!totalRange.contains(item.position())) {
                         if (cooldown >= 20) {
-                            MagniaMovingData.setMovedByMagnia(item, false);
+                            MagniaMoveable.setMovedByMagnia(item, false);
                             return true;
                         }
                         entry.setValue(cooldown + 1);
@@ -180,17 +180,17 @@ public abstract class PlayerMixin extends LivingEntity {
                 });
             }
 
-            Enderscape$pullTickCounters.entrySet().removeIf(entry -> !MagniaMovingData.wasMovedByMagnia(entry.getKey()));
+            Enderscape$pullTickCounters.entrySet().removeIf(entry -> !MagniaMoveable.wasMovedByMagnia(entry.getKey()));
         }
     }
 
     @Unique
-    private void Enderscape$pullEntity(ItemStackContext context, Entity entity, int abuseCost) {
+    private void Enderscape$pullEntity(ItemStackContext context, Entity entity, EntityMagnet magnet, int abuseCost) {
         ItemStack stack = context.stack();
 
         if (!Enderscape$magniaTrackedEntities.containsKey(entity)) {
             if (!MagniaMoveable.wasMovedByMagnia(entity)) {
-                level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), EntityMagnet.DEFAULT_PULL_ENTITY_SOUND.value(), entity.getSoundSource(), 1.0F, 1.0F);
+                level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), magnet.pullEntitySound().value(), entity.getSoundSource(), 1.0F, 1.0F);
             }
             Enderscape$magniaTrackedEntities.put(entity, 0);
         }

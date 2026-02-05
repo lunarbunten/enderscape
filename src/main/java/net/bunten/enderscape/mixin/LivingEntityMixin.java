@@ -7,11 +7,8 @@ import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.entity.DashJumpUser;
 import net.bunten.enderscape.entity.EndTrialSpawnable;
 import net.bunten.enderscape.entity.magnia.MagniaMoveable;
-import net.bunten.enderscape.entity.magnia.MagniaMovingData;
 import net.bunten.enderscape.entity.magnia.MagniaProperties;
-import net.bunten.enderscape.item.FueledTool;
-import net.bunten.enderscape.item.ItemStackContext;
-import net.bunten.enderscape.item.EntityMagnet;
+import net.bunten.enderscape.item.component.EntityMagnet;
 import net.bunten.enderscape.particle.DashJumpShockwaveParticleOptions;
 import net.bunten.enderscape.registry.*;
 import net.bunten.enderscape.registry.tag.EnderscapeEntityTags;
@@ -196,15 +193,9 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
 
     @Inject(at = @At("HEAD"), method = "take")
     private void Enderscape$take(Entity entity, int i, CallbackInfo ci) {
-        if (isAlive() && !isSpectator() && MagniaMovingData.wasMovedByMagnia(entity) && mob instanceof Player player) {
-            ItemStack stack = EntityMagnet.getValidAttractor(player.getInventory());
-            if (!stack.isEmpty()) {
-                ItemStackContext context = new ItemStackContext(stack, level(), player);
-                if (stack.getItem() instanceof EntityMagnet && FueledTool.fuelExceedsCost(context)) {
-                    EntityMagnet.incrementEntitiesPulled(stack, 1);
-                    EntityMagnet.tryUseFuel(context, 1 - EntityMagnet.getEntitiesPulledToUseFuel(stack));
-                }
-            }
+        if (isAlive() && !isSpectator() && MagniaMoveable.wasMovedByMagnia(entity) && mob instanceof Player player) {
+            ItemStack stack = EntityMagnet.getFirstUsableMagnet(player.getInventory());
+            if (!stack.isEmpty() && EntityMagnet.is(stack)) stack.hurtAndBreak(1, mob, mob.getEquipmentSlotForItem(stack));
         }
     }
 
@@ -331,21 +322,6 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
     @Unique
     protected boolean Enderscape$hasDriftPhysics() {
         return mob.getItemBySlot(EquipmentSlot.LEGS).is(EnderscapeItems.DRIFT_LEGGINGS.get()) || mob.hasEffect(EnderscapeMobEffects.LOW_GRAVITY);
-    }
-
-    @Inject(
-            method = "updateFallFlying",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/LivingEntity;getItemBySlot(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;",
-                    shift = At.Shift.AFTER
-            )
-    )
-    private void Enderscape$travelShiftAfter(CallbackInfo ci) {
-        ItemStack stack = this.getItemBySlot(EquipmentSlot.CHEST);
-        if (stack.getDamageValue() == stack.getMaxDamage() - 1 && stack.getItem() == Items.ELYTRA) {
-            level().playSound(null, getX(), getY(), getZ(), EnderscapeItemSounds.ELYTRA_BREAK, getSoundSource(), 4.0F, 1.0F);
-        }
     }
 
     @Unique

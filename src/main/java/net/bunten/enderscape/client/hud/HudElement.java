@@ -6,7 +6,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public abstract class HudElement {
 
     public final RenderPhase phase;
@@ -28,6 +31,7 @@ public abstract class HudElement {
         return (Mth.floor(alpha * 255.0) << 24) | (Mth.floor(255.0) << 16) | (Mth.floor(255.0) << 8) | Mth.floor(255.0);
     }
 
+    @OnlyIn(Dist.CLIENT)
     public enum RenderPhase {
         BEFORE_HUD,
         AFTER_HUD

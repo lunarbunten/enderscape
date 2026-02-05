@@ -1,5 +1,6 @@
 package net.bunten.enderscape.item;
 
+import net.bunten.enderscape.item.component.FueledTool;
 import net.bunten.enderscape.registry.EnderscapeItemSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

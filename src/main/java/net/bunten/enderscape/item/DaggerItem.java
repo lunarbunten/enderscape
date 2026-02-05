@@ -1,5 +1,6 @@
 package net.bunten.enderscape.item;
 
+import net.bunten.enderscape.item.component.FueledTool;
 import net.bunten.enderscape.registry.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -8,6 +9,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,17 +17,12 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
+import static net.bunten.enderscape.item.component.FueledTool.useFuel;
 import static net.bunten.enderscape.registry.EnderscapeDataComponents.BACKSTAB_ANGLE;
-import static net.bunten.enderscape.registry.EnderscapeDataComponents.FUEL_PER_USE;
 
-public class DaggerItem extends FueledTool {
+public class DaggerItem extends EnchantableItem {
     public DaggerItem(Properties properties) {
         super(properties);
-    }
-
-    @Override
-    public boolean displayHudWhen(ItemStackContext context) {
-        return false;
     }
 
     @Override
@@ -103,12 +100,8 @@ public class DaggerItem extends FueledTool {
     }
 
     @Override
-    public int getEnchantmentValue() {
-        return 1;
-    }
-
-    @Override
     public boolean isValidRepairItem(ItemStack stack, ItemStack stack2) {
         return super.isValidRepairItem(stack, stack2);
     }
+
 }

@@ -2,7 +2,6 @@ package net.bunten.enderscape.item.component;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.bunten.enderscape.item.FueledTool;
 import net.bunten.enderscape.item.ItemStackContext;
 import net.bunten.enderscape.registry.EnderscapeItemSounds;
 import net.minecraft.core.Holder;

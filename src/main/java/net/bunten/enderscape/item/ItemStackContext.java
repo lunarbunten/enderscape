@@ -18,14 +18,6 @@ public class ItemStackContext {
         this.user = user;
     }
 
-    @Nullable
-    public FueledTool item() {
-        if (stack.getItem() instanceof FueledTool fueledTool) {
-            return fueledTool;
-        }
-        return null;
-    }
-
     public ItemStack stack() {
         return stack;
     }

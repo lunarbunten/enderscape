@@ -24,8 +24,6 @@ public abstract class EnchantmentHelperMixin {
             if (EnderscapeAttributes.isBackstab(stack, attacker.position(), victim) && AttackSounds.is(stack)) {
                 level.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), AttackSounds.get(stack).backstab().value(), attacker.getSoundSource(), 1.0F, 1.0F);
             }
-
-            //if (StunAttack.is(stack)) StunAttack.apply(level, attacker, victim, stack);
         }
     }
 }

@@ -1,11 +1,11 @@
 package net.bunten.enderscape.client.item;
 
-import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.item.FueledTool;
+import net.bunten.enderscape.item.component.FueledTool;
+import net.bunten.enderscape.item.component.value.FuelDisplay;
+import net.bunten.enderscape.item.component.value.FuelTooltip;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
 import net.neoforged.api.distmarker.Dist;
@@ -14,32 +14,22 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class FueledToolTooltip implements ClientTooltipComponent {
 
-    private static final ResourceLocation[] EMPTY_SEGMENTS = {
-            Enderscape.id("nebulite_tool/tooltip/empty_segments/start"),
-            Enderscape.id("nebulite_tool/tooltip/empty_segments/loop"),
-            Enderscape.id("nebulite_tool/tooltip/empty_segments/end")
-    };
-
-    private static final ResourceLocation FUELED_SEGMENT = Enderscape.id("nebulite_tool/tooltip/fueled_segment");
-
     private final ItemStack stack;
+    private final FuelTooltip tooltip;
 
     public FueledToolTooltip(ItemStack stack) {
         this.stack = stack;
-
-        if (!(stack.getItem() instanceof FueledTool)) {
-            throw new IllegalStateException("Item is not an instance of " + FueledTool.class + ", unapplicable for " + FueledToolTooltip.class);
-        }
+        this.tooltip = FueledTool.tooltip(stack);
     }
 
     @Override
     public int getHeight() {
-        return 12;
+        return 12 + (int) tooltip.offset().y;
     }
 
     @Override
     public int getWidth(Font font) {
-        return getBarWidth();
+        return getBarWidth() + (int) tooltip.offset().x;
     }
 
     @Override
@@ -54,6 +44,8 @@ public class FueledToolTooltip implements ClientTooltipComponent {
     private void renderFuelBar(GuiGraphics graphics, int x, int y) {
         int rx = x;
 
+        Vec2 offset = tooltip.offset();
+
         int fuel = FueledTool.currentFuel(stack);
         int maxFuel = FueledTool.maxFuel(stack);
 
@@ -66,10 +58,10 @@ public class FueledToolTooltip implements ClientTooltipComponent {
             int offsetY = (i == 0) ? -2 : 0;
             int spriteHeight = (i == 0) ? 10 : 6;
 
-            graphics.blitSprite(EMPTY_SEGMENTS[index], rx, y + offsetY, width, spriteHeight);
+            graphics.blitSprite(FuelDisplay.segmentOf(tooltip.empty(), index), rx + (int) offset.x, y + offsetY + (int) offset.y, width, spriteHeight);
 
             if (isFueled) {
-                graphics.blitSprite(FUELED_SEGMENT, rx + ((i == 0) ? 9 : 0), y, 11, 6);
+                graphics.blitSprite(tooltip.fueled(), rx + ((i == 0) ? 9 : 0) + (int) offset.x, y + (int) offset.y, 11, 6);
             }
         }
     }

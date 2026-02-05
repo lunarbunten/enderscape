@@ -1,16 +1,29 @@
 package net.bunten.enderscape.mixin;
 
-import net.bunten.enderscape.item.FueledTool;
 import net.bunten.enderscape.item.LodestoneTeleporter;
+import net.bunten.enderscape.item.component.FueledTool;
+import net.bunten.enderscape.item.component.Togglable;
+import net.bunten.enderscape.item.tooltip.FueledToolComponent;
 import net.bunten.enderscape.registry.EnderscapeAttributes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SlotAccess;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.apache.commons.lang3.math.Fraction;
@@ -21,14 +34,39 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mixin(Item.class)
 public class ItemMixin {
 
-    @Inject(method = "getAttackDamageBonus", at = @At("RETURN"), cancellable = true)
+    //@Inject(method = "getAttackDamageBonus", at = @At("RETURN"), cancellable = true)
     public void Enderscape$getAttackDamageBonus(Entity entity, float damage, DamageSource source, CallbackInfoReturnable<Float> info) {
         if (source.getDirectEntity() instanceof LivingEntity mob && EnderscapeAttributes.isBackstab(source.getWeaponItem(), mob.position(), entity)) {
             info.setReturnValue((float) (info.getReturnValue() + EnderscapeAttributes.getBackstabDamage(mob)));
+        }
+    }
+
+    @Inject(method = "use", at = @At("HEAD"), cancellable = true)
+    public void Enderscape$use(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> info) {
+        if (Togglable.is(player.getItemInHand(hand))) info.setReturnValue(Togglable.use(level, player, hand));
+    }
+
+
+    @Inject(method = "overrideOtherStackedOnMe", at = @At("HEAD"), cancellable = true)
+    public void Enderscape$overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access, CallbackInfoReturnable<Boolean> info) {
+        if (FueledTool.tryFuel(stack, other, action, player)) info.setReturnValue(true);
+        else if (Togglable.is(stack) && Togglable.override(stack, other, action, player)) info.setReturnValue(true);
+    }
+
+    @Inject(method = "getBarColor", at = @At("HEAD"), cancellable = true)
+    public void Enderscape$setFueledToolBarColor(ItemStack stack, CallbackInfoReturnable<Integer> info) {
+        if (FueledTool.is(stack)) info.setReturnValue(FueledTool.get(stack).display().barColor());
+    }
+
+    @Inject(method = "getTooltipImage", at = @At("HEAD"), cancellable = true)
+    public void Enderscape$setNebuliteTooltipImage(ItemStack stack, CallbackInfoReturnable<Optional<TooltipComponent>> info) {
+        if (FueledTool.is(stack) && FueledToolComponent.applies(stack)) {
+            info.setReturnValue(Optional.of(new FueledToolComponent(stack)));
         }
     }
 

@@ -1,10 +1,12 @@
 package net.bunten.enderscape.client.hud;
 
 import net.bunten.enderscape.Enderscape;
-import net.bunten.enderscape.item.FueledTool;
 import net.bunten.enderscape.item.ItemStackContext;
 import net.bunten.enderscape.item.LodestoneTeleporter;
 import net.bunten.enderscape.item.LodestoneTrackerContext;
+import net.bunten.enderscape.item.component.FueledTool;
+import net.bunten.enderscape.item.component.value.FuelDisplay;
+import net.bunten.enderscape.item.component.value.FuelHud;
 import net.bunten.enderscape.util.NineSliceBlitUtil;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -23,30 +25,15 @@ import static net.bunten.enderscape.registry.EnderscapeDataComponents.ENABLED;
 public class FueledToolHud extends HudElement {
 
     public FueledToolHud() {
-        super(Enderscape.id("nebulite_tool"), RenderPhase.AFTER_HUD);
+        super(Enderscape.id("fueled_tool"), RenderPhase.AFTER_HUD);
+
     }
 
-    private static final ResourceLocation[] EMPTY_SEGMENTS = {
-            Enderscape.id("nebulite_tool/hud/empty_segments/start"),
-            Enderscape.id("nebulite_tool/hud/empty_segments/loop"),
-            Enderscape.id("nebulite_tool/hud/empty_segments/end")
-    };
-
-    private static final ResourceLocation[] FUELED_SEGMENTS = {
-            Enderscape.id("nebulite_tool/hud/fueled_segments/start"),
-            Enderscape.id("nebulite_tool/hud/fueled_segments/loop"),
-            Enderscape.id("nebulite_tool/hud/fueled_segments/end")
-    };
-
-    private static final ResourceLocation[] INVALID_OVERLAY_SEGMENTS = {
-            Enderscape.id("nebulite_tool/hud/invalid_overlay_segments/start"),
-            Enderscape.id("nebulite_tool/hud/invalid_overlay_segments/loop"),
-            Enderscape.id("nebulite_tool/hud/invalid_overlay_segments/end")
-    };
-
-    private static final ResourceLocation TRANSDIMENSIONAL_OUTLINE = Enderscape.id("nebulite_tool/hud/transdimensional_outline");
-
-    private static final ResourceLocation COST_OVERLAY_SEGMENT = Enderscape.id("nebulite_tool/hud/cost_overlay_segment");
+    private ResourceLocation emptySegments;
+    private ResourceLocation fueledSegments;
+    private ResourceLocation invalidSegments;
+    private ResourceLocation outlineOverlay;
+    private ResourceLocation costOverlay;
 
     private float heightOffset = 0, previousHeightOffset = 0;
     private float totalAlpha = 0, previousTotalAlpha = 0;
@@ -101,13 +88,10 @@ public class FueledToolHud extends HudElement {
             if (i > 0) rx += 11;
             if (isFueled) lastFueled = rx;
 
-            ResourceLocation[] segments = isFueled ? FUELED_SEGMENTS : EMPTY_SEGMENTS;
-
             int index = (i == 0) ? 0 : (i == maxFuel - 1) ? 2 : 1;
             int width = (i == maxFuel - 1) ? 12 : 11;
 
-            TextureAtlasSprite sprite = Minecraft.getInstance().getGuiSprites().getSprite(segments[index]);
-
+            TextureAtlasSprite sprite = Minecraft.getInstance().getGuiSprites().getSprite(FuelDisplay.segmentOf(isFueled ? fueledSegments : emptySegments, index));
             graphics.blit(rx, y, 0, width, 5, sprite, 1.0F, 1.0F, 1.0F, opacity);
         }
 
@@ -115,8 +99,8 @@ public class FueledToolHud extends HudElement {
     }
 
     private void renderTransdimensionalOutline(GuiGraphics graphics, int x, int y, float opacity) {
-        NineSliceBlitUtil nineSliceBlit = new NineSliceBlitUtil(Minecraft.getInstance().getGuiSprites(), graphics, transdimensionalAlpha * opacity);
-        nineSliceBlit.blitSprite(TRANSDIMENSIONAL_OUTLINE, x - 6, y - 6, 0, (maxFuel * 11) + 13, 5 + 12);
+        NineSliceBlitUtil nineSliceBlit = new NineSliceBlitUtil(Minecraft.getInstance().getGuiSprites(), graphics, opacity);
+        nineSliceBlit.blitSprite(outlineOverlay, x - 6, y - 6, 0, (maxFuel * 11) + 13, 5 + 12);
     }
 
     private void renderInvalidOverlay(GuiGraphics graphics, int x, int y, float opacity) {
@@ -128,16 +112,16 @@ public class FueledToolHud extends HudElement {
             int index = (i == 0) ? 0 : (i == maxFuel - 1) ? 2 : 1;
             int width = (i == maxFuel - 1) ? 12 : 11;
 
-            TextureAtlasSprite sprite = Minecraft.getInstance().getGuiSprites().getSprite(INVALID_OVERLAY_SEGMENTS[index]);
-            graphics.blit(rx, y, 0, width, 5, sprite, 1.0F, 1.0F, 1.0F, invalidAlpha * opacity);
+            TextureAtlasSprite sprite = Minecraft.getInstance().getGuiSprites().getSprite(FuelDisplay.segmentOf(invalidSegments, index));
+            graphics.blit(rx, y, 0, width, 5, sprite, 1.0F, 1.0F, 1.0F, opacity);
         }
     }
 
     private void renderCostOverlay(GuiGraphics graphics, int y, float opacity) {
-        if (costAlpha > 0 && costOverlayPosition >= 0 && fuel >= cost) {
+        if (opacity > 0 && costOverlayPosition >= 0 && fuel >= cost) {
             for (int i = 0; i < cost; i++) {
-                TextureAtlasSprite sprite = Minecraft.getInstance().getGuiSprites().getSprite(COST_OVERLAY_SEGMENT);
-                graphics.blit(costOverlayPosition - (i * 11), y, 0, 11, 5, sprite, 1.0F, 1.0F, 1.0F, costAlpha * opacity);
+                TextureAtlasSprite sprite = Minecraft.getInstance().getGuiSprites().getSprite(costOverlay);
+                graphics.blit(costOverlayPosition - (i * 11), y, 0, 11, 5, sprite, 1.0F, 1.0F, 1.0F, opacity);
             }
         }
     }
@@ -155,7 +139,7 @@ public class FueledToolHud extends HudElement {
         ItemStack stack = FueledTool.is(player.getMainHandItem()) ? player.getMainHandItem() : player.getOffhandItem();
         ItemStackContext context = new ItemStackContext(stack, player.level(), player);
 
-        boolean displayUI = FueledTool.is(stack) && context.item().displayHudWhen(context) && !player.isSpectator() && player.getUseItem().isEmpty();
+        boolean displayUI = FueledTool.is(stack) && FueledTool.get(stack).display().hud().visible() && !player.isSpectator() && player.getUseItem().isEmpty();
         boolean displayOutline = false;
         boolean displayTransdimensional = false;
 
@@ -167,11 +151,19 @@ public class FueledToolHud extends HudElement {
             LodestoneTrackerContext tracker = LodestoneTrackerContext.of(context);
 
             displayUI = displayUI && LodestoneTeleporter.isLinked(stack);
-            displayOutline = !LodestoneTeleporter.hideInvalidOutlineWhen1(context);
+            displayOutline = !LodestoneTeleporter.hideInvalidOutlineWhen(context);
             displayTransdimensional = LodestoneTeleporter.isTransdimensionalAllowed(tracker) && !LodestoneTeleporter.isSameDimension(tracker, tracker.linkedDimension()) && !displayOutline;
         }
 
         if (displayUI) {
+            FuelHud hud = FueledTool.hud(stack);
+
+            emptySegments = hud.empty();
+            fueledSegments = hud.fueled();
+            invalidSegments = hud.invalidOverlay();
+            outlineOverlay = hud.outline();
+            costOverlay = hud.costOverlay();
+
             fuel = FueledTool.currentFuel(stack);
             maxFuel = FueledTool.maxFuel(stack);
             cost = FueledTool.fuelCost(context);

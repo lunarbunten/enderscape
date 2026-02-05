@@ -1,7 +1,7 @@
 package net.bunten.enderscape.mixin;
 
-import net.bunten.enderscape.item.FueledTool;
 import net.bunten.enderscape.item.ItemStackContext;
+import net.bunten.enderscape.item.component.FueledTool;
 import net.bunten.enderscape.registry.EnderscapeAttributes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -57,6 +57,14 @@ public abstract class ItemStackMixin {
             );
 
             ci.cancel();
+        }
+    }
+
+    @Inject(method = "hurtAndBreak(ILnet/minecraft/server/level/ServerLevel;Lnet/minecraft/server/level/ServerPlayer;Ljava/util/function/Consumer;)V", at = @At("HEAD"), cancellable = true)
+    public void Enderscape$hurtAndBreak(int i, ServerLevel level, @Nullable ServerPlayer player, Consumer<Item> consumer, CallbackInfo info) {
+        if (FueledTool.is(stack)) {
+            FueledTool.useFuel(new ItemStackContext(stack, level, player));
+            info.cancel();
         }
     }
 }

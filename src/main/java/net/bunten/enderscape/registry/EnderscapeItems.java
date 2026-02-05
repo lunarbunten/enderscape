@@ -4,6 +4,9 @@ import com.google.common.collect.Maps;
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.item.*;
 import net.bunten.enderscape.item.component.*;
+import net.bunten.enderscape.item.component.value.FuelDisplay;
+import net.bunten.enderscape.item.component.value.FuelHud;
+import net.bunten.enderscape.item.component.value.FuelSounds;
 import net.bunten.enderscape.registry.tag.EnderscapeBannerPatternTags;
 import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
 import net.minecraft.Util;
@@ -195,28 +198,36 @@ public class EnderscapeItems {
             )
             .component(EnderscapeDataComponents.THRESHOLD_COUNTER, ThresholdCounter.of(4))
             .component(EnderscapeDataComponents.BACKSTAB_ANGLE, EnderscapeAttributes.DEFAULT_BACKSTAB_ANGLE)
-            .component(EnderscapeDataComponents.MAXIMUM_FUEL, 5)
-            .component(EnderscapeDataComponents.FUEL_PER_USE, 1)
+            .component(
+                    EnderscapeDataComponents.FUELED_TOOL,
+                    FueledTool.Builder.create(5).fuelDisplay(
+                            FuelDisplay.Builder.create().hud(FuelHud.HIDDEN)
+                    ).build()
+            )
     );
 
-    public static final Supplier<Item> MAGNIA_ATTRACTOR = registerItem("magnia_attractor", MagniaAttractorItem::new, new Properties()
+    public static final Supplier<Item> MAGNIA_ATTRACTOR = registerItem("magnia_attractor", EnchantableItem::new, new Properties()
             .stacksTo(1)
             .component(EnderscapeDataComponents.ENABLED, true)
-            .component(EnderscapeDataComponents.ENTITIES_PULLED, 0)
-            .component(EnderscapeDataComponents.ENTITIES_PULLED_TO_USE_FUEL, 200)
-            .component(EnderscapeDataComponents.ENTITY_PULL_RANGE, 10)
-            .component(EnderscapeDataComponents.MAXIMUM_FUEL, 6)
-            .component(EnderscapeDataComponents.FUEL_PER_USE, 1)
+            .component(EnderscapeDataComponents.ENTITY_MAGNET, EntityMagnet.DEFAULT)
+            .component(
+                    EnderscapeDataComponents.FUELED_TOOL,
+                    FueledTool.Builder.create(6)
+                            .fuelDisplay(
+                                    FuelDisplay.Builder.create().hud(FuelHud.HIDDEN)
+                            ).fuelSounds(
+                                    FuelSounds.Builder.create().useFuel(EnderscapeItemSounds.MAGNIA_ATTRACTOR_USE_FUEL)
+                            ).build()
+            )
             .component(EnderscapeDataComponents.THRESHOLD_COUNTER, ThresholdCounter.of(200))
-
+            .component(EnderscapeDataComponents.TOGGLABLE, Togglable.MAGNIA_ATTRACTOR)
     );
 
     public static final Supplier<Item> CRACKED_MIRROR = registerItem("cracked_mirror", CrackedMirrorItem::new, new Properties().rarity(Rarity.RARE).stacksTo(1));
 
     public static final Supplier<Item> MIRROR = registerItem("mirror", MirrorItem::new, new Properties()
             .stacksTo(1)
-            .component(EnderscapeDataComponents.MAXIMUM_FUEL, 5)
-            .component(EnderscapeDataComponents.FUEL_PER_USE, 1)
+            .component(EnderscapeDataComponents.FUELED_TOOL, FueledTool.Builder.create(5).fuelDisplay(FuelDisplay.Builder.create().hud(FuelHud.DEFAULT)).build())
             .component(EnderscapeDataComponents.INCREASE_WITH_DISTANCE, true)
             .component(EnderscapeDataComponents.DISTANCE_TO_INCREASE, 500)
             .rarity(Rarity.RARE)

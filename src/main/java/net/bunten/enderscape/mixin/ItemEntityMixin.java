@@ -2,7 +2,7 @@ package net.bunten.enderscape.mixin;
 
 import net.bunten.enderscape.entity.magnia.MagniaMoveable;
 import net.bunten.enderscape.entity.magnia.MagniaProperties;
-import net.bunten.enderscape.item.EntityMagnet;
+import net.bunten.enderscape.item.component.EntityMagnet;
 import net.bunten.enderscape.registry.EnderscapeStats;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;

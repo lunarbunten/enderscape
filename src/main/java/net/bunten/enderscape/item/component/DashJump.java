@@ -3,7 +3,6 @@ package net.bunten.enderscape.item.component;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.bunten.enderscape.entity.DashJumpUser;
-import net.bunten.enderscape.item.FueledTool;
 import net.bunten.enderscape.item.ItemStackContext;
 import net.bunten.enderscape.item.RubbleShieldItem;
 import net.bunten.enderscape.item.component.value.ContextualValue;

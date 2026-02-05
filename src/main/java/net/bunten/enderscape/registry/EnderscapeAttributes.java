@@ -1,6 +1,7 @@
 package net.bunten.enderscape.registry;
 
 import net.bunten.enderscape.Enderscape;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
