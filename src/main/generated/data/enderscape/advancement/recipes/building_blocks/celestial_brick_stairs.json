@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_celestial_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:celestial_bricks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:celestial_brick_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_celestial_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:celestial_brick_stairs"
+    ]
+  }
+}

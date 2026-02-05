@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": [
+    "minecraft:end_midlands",
+    "minecraft:end_highlands"
+  ],
+  "features": "enderscape:chorus_plants",
+  "step": "vegetal_decoration"
+}

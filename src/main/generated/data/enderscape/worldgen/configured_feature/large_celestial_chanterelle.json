@@ -1,0 +1,15 @@
+{
+  "type": "enderscape:large_celestial_chanterelle",
+  "config": {
+    "cap_droop_percentage": 0.75,
+    "cap_radius_division": 4.0,
+    "excess_vine_discard_chance": 1.0,
+    "height": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 35,
+      "min_inclusive": 10
+    },
+    "tries": 16,
+    "vine_generation_tries": 64
+  }
+}

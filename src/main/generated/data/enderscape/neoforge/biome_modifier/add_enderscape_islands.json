@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "minecraft:small_end_islands",
+  "features": "enderscape:sky_islands",
+  "step": "raw_generation"
+}

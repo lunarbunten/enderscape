@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "enderscape:nebulite_shards"
+    },
+    {
+      "item": "enderscape:nebulite_shards"
+    },
+    {
+      "item": "enderscape:nebulite_shards"
+    },
+    {
+      "item": "enderscape:nebulite_shards"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:nebulite"
+  }
+}

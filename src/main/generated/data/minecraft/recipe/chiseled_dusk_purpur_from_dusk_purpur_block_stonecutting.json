@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "enderscape:dusk_purpur_block"
+  },
+  "result": {
+    "count": 1,
+    "id": "enderscape:chiseled_dusk_purpur"
+  }
+}

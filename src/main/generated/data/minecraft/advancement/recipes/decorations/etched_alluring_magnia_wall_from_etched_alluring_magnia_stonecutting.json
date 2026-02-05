@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_etched_alluring_magnia": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:etched_alluring_magnia"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:etched_alluring_magnia_wall_from_etched_alluring_magnia_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_etched_alluring_magnia"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:etched_alluring_magnia_wall_from_etched_alluring_magnia_stonecutting"
+    ]
+  }
+}

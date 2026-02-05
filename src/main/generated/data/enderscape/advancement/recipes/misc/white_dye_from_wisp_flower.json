@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:white_dye_from_wisp_flower"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wisp_flower": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:wisp_flower"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_wisp_flower"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:white_dye_from_wisp_flower"
+    ]
+  }
+}

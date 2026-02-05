@@ -1,0 +1,176 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/monster_room/garden",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/armory",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/aquarium",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/bedrooms",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 45
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/bedrooms_two_story",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 45
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/bridge_intersection_bottom",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 30
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/bridge_intersection_middle",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 30
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/bridge_intersection_top",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 30
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/lab",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/large_four_way",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 45
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/large_four_way_fountain",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 45
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/large_spiral",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 45
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/large_spiral_bridge",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 45
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/large_three_way",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 60
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/library",
+        "processors": "enderscape:stronghold/library_degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/library_ruin",
+        "processors": "enderscape:stronghold/library_degradation",
+        "projection": "rigid"
+      },
+      "weight": 25
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/prison",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/storage_room",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:stronghold/unique/tall_hall_chest",
+        "processors": "enderscape:stronghold/degradation",
+        "projection": "rigid"
+      },
+      "weight": 90
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

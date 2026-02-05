@@ -1,0 +1,4 @@
+// 1.21.1	2026-02-05T13:23:13.0296972	Tags for minecraft:enchantment mod id enderscape
+b8604bec619d9f0a14fbbe73f76fbc802b74c668 data/minecraft/tags/enchantment/in_enchanting_table.json
+359a1b1a8655cb003a49060fab2b1b25afd4949d data/minecraft/tags/enchantment/tooltip_order.json
+ebddbb13cb7d6dd20fea3172ebf601e0c546b00f data/minecraft/tags/enchantment/treasure.json

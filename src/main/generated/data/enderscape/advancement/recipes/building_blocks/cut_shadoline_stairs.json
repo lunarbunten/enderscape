@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cut_shadoline": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:cut_shadoline"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:cut_shadoline_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cut_shadoline"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:cut_shadoline_stairs"
+    ]
+  }
+}

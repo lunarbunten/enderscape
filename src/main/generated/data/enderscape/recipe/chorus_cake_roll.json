@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:chorus_fruit"
+    },
+    "D": {
+      "item": "enderscape:drift_jelly_bottle"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "SDS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:chorus_cake_roll"
+  }
+}

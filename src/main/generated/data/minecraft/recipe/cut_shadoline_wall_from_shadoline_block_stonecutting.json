@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "enderscape:shadoline_block"
+  },
+  "result": {
+    "count": 4,
+    "id": "enderscape:cut_shadoline_wall"
+  }
+}

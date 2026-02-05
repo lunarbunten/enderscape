@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nebulite_block",
+  "key": {
+    "#": {
+      "item": "enderscape:nebulite"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:nebulite_block"
+  }
+}

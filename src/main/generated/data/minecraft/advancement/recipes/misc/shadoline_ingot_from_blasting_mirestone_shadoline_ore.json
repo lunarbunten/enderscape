@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mirestone_shadoline_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:mirestone_shadoline_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:shadoline_ingot_from_blasting_mirestone_shadoline_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mirestone_shadoline_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:shadoline_ingot_from_blasting_mirestone_shadoline_ore"
+    ]
+  }
+}

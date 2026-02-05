@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rubble_chitin": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:rubble_chitin"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:end_stone_rubble_shield"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rubble_chitin"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:end_stone_rubble_shield"
+    ]
+  }
+}

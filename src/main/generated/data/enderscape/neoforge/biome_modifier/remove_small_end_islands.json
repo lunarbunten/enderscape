@@ -1,0 +1,5 @@
+{
+  "type": "neoforge:remove_features",
+  "biomes": "minecraft:small_end_islands",
+  "features": "minecraft:end_island_decorated"
+}

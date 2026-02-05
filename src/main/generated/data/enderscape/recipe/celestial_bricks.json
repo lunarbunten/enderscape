@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "enderscape:celestial_cap"
+    },
+    "@": {
+      "item": "enderscape:celestial_growth"
+    }
+  },
+  "pattern": [
+    "@#",
+    "#@"
+  ],
+  "result": {
+    "count": 2,
+    "id": "enderscape:celestial_bricks"
+  }
+}

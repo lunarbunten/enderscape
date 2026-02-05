@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "enderscape:celestial_chanterelle",
+            "Properties": {
+              "facing": "up",
+              "stage": "0"
+            }
+          },
+          "weight": 8
+        },
+        {
+          "data": {
+            "Name": "enderscape:bulb_flower",
+            "Properties": {
+              "facing": "up"
+            }
+          },
+          "weight": 1
+        }
+      ]
+    }
+  }
+}

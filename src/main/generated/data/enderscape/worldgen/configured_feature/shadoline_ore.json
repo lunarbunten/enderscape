@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:ore",
+  "config": {
+    "discard_chance_on_air_exposure": 0.0,
+    "size": 10,
+    "targets": [
+      {
+        "state": {
+          "Name": "enderscape:shadoline_ore"
+        },
+        "target": {
+          "block": "minecraft:end_stone",
+          "predicate_type": "minecraft:block_match"
+        }
+      },
+      {
+        "state": {
+          "Name": "enderscape:mirestone_shadoline_ore"
+        },
+        "target": {
+          "block": "enderscape:mirestone",
+          "predicate_type": "minecraft:block_match"
+        }
+      }
+    ]
+  }
+}

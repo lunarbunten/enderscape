@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    "@": {
+      "item": "enderscape:blinklight"
+    }
+  },
+  "pattern": [
+    "#@#",
+    "@@@",
+    "#@#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:blinklamp"
+  }
+}

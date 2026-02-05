@@ -1,0 +1,5 @@
+{
+  "type": "neoforge:remove_features",
+  "biomes": "#minecraft:is_end",
+  "features": "minecraft:end_gateway_return"
+}

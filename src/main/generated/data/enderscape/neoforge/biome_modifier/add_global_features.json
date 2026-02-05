@@ -1,0 +1,29 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": {
+    "type": "neoforge:and",
+    "values": [
+      {
+        "type": "neoforge:or",
+        "values": [
+          "#minecraft:is_end"
+        ]
+      },
+      {
+        "type": "neoforge:not",
+        "value": "#enderscape:excluded_from_global_feature_additions"
+      }
+    ]
+  },
+  "features": [
+    "enderscape:void_shale",
+    "enderscape:void_shale_blobs",
+    "enderscape:veradite",
+    "enderscape:mirestone_blobs",
+    "enderscape:shadoline_ore",
+    "enderscape:scattered_shadoline_ore",
+    "enderscape:nebulite_ore",
+    "enderscape:ceiling_nebulite_ore"
+  ],
+  "step": "underground_ores"
+}

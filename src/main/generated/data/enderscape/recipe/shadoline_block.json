@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "shadoline_block",
+  "key": {
+    "#": {
+      "item": "enderscape:shadoline_ingot"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:shadoline_block"
+  }
+}

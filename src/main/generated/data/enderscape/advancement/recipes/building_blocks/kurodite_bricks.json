@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_polished_kurodite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:polished_kurodite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:kurodite_bricks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_polished_kurodite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:kurodite_bricks"
+    ]
+  }
+}

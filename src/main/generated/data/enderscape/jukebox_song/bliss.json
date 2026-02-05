@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "jukebox_song.enderscape.bliss"
+  },
+  "length_in_seconds": 272.0,
+  "sound_event": "enderscape:music_disc.bliss"
+}

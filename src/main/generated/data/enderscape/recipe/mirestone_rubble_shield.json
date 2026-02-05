@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "rubble_shield",
+  "key": {
+    "#": {
+      "item": "enderscape:mirestone"
+    },
+    "C": {
+      "item": "enderscape:rubble_chitin"
+    },
+    "S": {
+      "item": "enderscape:shadoline_ingot"
+    }
+  },
+  "pattern": [
+    "CSC",
+    "C#C",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:mirestone_rubble_shield"
+  }
+}

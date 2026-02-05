@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "enderscape:murublight_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "enderscape:murublight_brick_stairs"
+  }
+}

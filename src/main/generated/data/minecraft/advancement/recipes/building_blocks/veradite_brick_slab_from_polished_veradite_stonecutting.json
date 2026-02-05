@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_polished_veradite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:polished_veradite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:veradite_brick_slab_from_polished_veradite_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_polished_veradite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:veradite_brick_slab_from_polished_veradite_stonecutting"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "D": {
+      "item": "enderscape:drift_jelly_bottle"
+    },
+    "N": {
+      "item": "enderscape:nebulite"
+    }
+  },
+  "pattern": [
+    "NNN",
+    "D D",
+    "D D"
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:drift_leggings"
+  }
+}

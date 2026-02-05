@@ -1,0 +1,21 @@
+{
+  "values": [
+    "minecraft:arrow",
+    "minecraft:explosion",
+    "minecraft:falling_anvil",
+    "minecraft:falling_block",
+    "minecraft:falling_stalactite",
+    "minecraft:mob_attack",
+    "minecraft:mob_attack_no_aggro",
+    "minecraft:mob_projectile",
+    "minecraft:player_attack",
+    "minecraft:player_explosion",
+    "minecraft:spit",
+    "minecraft:sting",
+    "minecraft:trident",
+    "minecraft:unattributed_fireball",
+    "minecraft:wind_charge",
+    "minecraft:wither_skull",
+    "enderscape:stomp"
+  ]
+}

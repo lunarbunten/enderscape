@@ -1,0 +1,64 @@
+{
+  "values": {
+    "enderscape:blinklight": {
+      "chance": 0.5
+    },
+    "enderscape:bulb_flower": {
+      "chance": 0.65
+    },
+    "enderscape:celestial_cap": {
+      "chance": 0.3
+    },
+    "enderscape:celestial_chanterelle": {
+      "chance": 0.65
+    },
+    "enderscape:celestial_growth": {
+      "chance": 0.3
+    },
+    "enderscape:chorus_sprouts": {
+      "chance": 0.5
+    },
+    "enderscape:corrupt_growth": {
+      "chance": 0.3
+    },
+    "enderscape:dry_end_growth": {
+      "chance": 0.5
+    },
+    "enderscape:flanger_berry": {
+      "chance": 0.5
+    },
+    "enderscape:murublight_bracket": {
+      "chance": 0.5
+    },
+    "enderscape:murublight_cap": {
+      "chance": 0.3
+    },
+    "enderscape:murublight_chanterelle": {
+      "chance": 0.65
+    },
+    "enderscape:ripe_flanger_berry_block": {
+      "chance": 0.65
+    },
+    "enderscape:veiled_leaf_pile": {
+      "chance": 0.1
+    },
+    "enderscape:veiled_leaves": {
+      "chance": 0.3
+    },
+    "enderscape:veiled_sapling": {
+      "chance": 0.5
+    },
+    "enderscape:wisp_flower": {
+      "chance": 0.65
+    },
+    "enderscape:wisp_growth": {
+      "chance": 0.5
+    },
+    "enderscape:wisp_sprouts": {
+      "chance": 0.3
+    },
+    "minecraft:chorus_fruit": {
+      "chance": 0.3
+    }
+  }
+}

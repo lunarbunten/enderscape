@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "enderscape:music_disc_decay"
+    },
+    "N": {
+      "item": "enderscape:nebulite_shards"
+    }
+  },
+  "pattern": [
+    " N ",
+    "NDN",
+    " N "
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:music_disc_bliss"
+  }
+}

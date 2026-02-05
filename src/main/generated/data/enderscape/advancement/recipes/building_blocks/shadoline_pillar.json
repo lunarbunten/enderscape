@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_shadoline_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:shadoline_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:shadoline_pillar"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_shadoline_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:shadoline_pillar"
+    ]
+  }
+}

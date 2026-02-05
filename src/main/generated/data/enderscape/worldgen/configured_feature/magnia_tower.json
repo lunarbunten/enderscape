@@ -1,0 +1,19 @@
+{
+  "type": "enderscape:magnia_tower",
+  "config": {
+    "alluring_magnia_sprout_placement_chance": 0.025,
+    "floor_replacement_radius": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 8.0,
+      "min_inclusive": 6.0
+    },
+    "height": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 18,
+      "min_inclusive": 12
+    },
+    "repulsive_magnia_sprout_placement_chance": 0.05,
+    "ring_radius": 7,
+    "sphere_radius": 3
+  }
+}

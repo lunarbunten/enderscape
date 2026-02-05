@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#enderscape:enderscape/has_barrens_additions",
+  "spawners": {
+    "type": "enderscape:rubblemite",
+    "maxCount": 3,
+    "minCount": 2,
+    "weight": 4
+  }
+}

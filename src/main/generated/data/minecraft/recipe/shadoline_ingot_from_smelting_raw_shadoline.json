@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "shadoline_ingot",
+  "ingredient": {
+    "item": "enderscape:raw_shadoline"
+  },
+  "result": {
+    "count": 1,
+    "id": "enderscape:shadoline_ingot"
+  }
+}

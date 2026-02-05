@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_kurodite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:kurodite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:chiseled_kurodite_from_kurodite_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_kurodite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:chiseled_kurodite_from_kurodite_stonecutting"
+    ]
+  }
+}

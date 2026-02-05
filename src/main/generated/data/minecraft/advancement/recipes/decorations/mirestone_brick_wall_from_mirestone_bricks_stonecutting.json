@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mirestone_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:mirestone_bricks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:mirestone_brick_wall_from_mirestone_bricks_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mirestone_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:mirestone_brick_wall_from_mirestone_bricks_stonecutting"
+    ]
+  }
+}

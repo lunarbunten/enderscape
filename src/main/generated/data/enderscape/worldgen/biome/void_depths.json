@@ -1,0 +1,71 @@
+{
+  "carvers": {},
+  "downfall": 0.5,
+  "effects": {
+    "additions_sound": {
+      "sound": "enderscape:ambient.void_depths.additions",
+      "tick_chance": 6.0E-4
+    },
+    "ambient_sound": "enderscape:ambient.void_depths.loop",
+    "fog_color": 2563640,
+    "foliage_color": 10598275,
+    "grass_color": 10598275,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "enderscape:ambient.void_depths.mood",
+      "tick_delay": 6000
+    },
+    "music": {
+      "max_delay": 24000,
+      "min_delay": 12000,
+      "replace_current_music": false,
+      "sound": "enderscape:music.enderscape.biome.void_depths"
+    },
+    "particle": {
+      "options": {
+        "type": "enderscape:void_stars"
+      },
+      "probability": 0.006
+    },
+    "sky_color": 525835,
+    "water_color": 7961249,
+    "water_fog_color": 3684693
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "enderscape:veradite",
+      "enderscape:mirestone_blobs",
+      "enderscape:shadoline_ore",
+      "enderscape:scattered_shadoline_ore",
+      "enderscape:nebulite_ore",
+      "enderscape:ceiling_nebulite_ore"
+    ],
+    [],
+    [],
+    [
+      "enderscape:uncommon_chorus_plants",
+      "enderscape:uncommon_chorus_sprouts",
+      "enderscape:murublight_bracket"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.5
+}

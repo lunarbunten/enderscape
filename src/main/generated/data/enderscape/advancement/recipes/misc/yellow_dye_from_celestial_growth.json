@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_celestial_growth": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:celestial_growth"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:yellow_dye_from_celestial_growth"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_celestial_growth"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:yellow_dye_from_celestial_growth"
+    ]
+  }
+}

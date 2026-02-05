@@ -1,0 +1,26 @@
+{
+  "anvil_cost": 8,
+  "description": {
+    "translate": "enchantment.enderscape.transdimensional"
+  },
+  "effects": {
+    "enderscape:lodestone_teleportation_enable_transdimensional": {
+      "type": "minecraft:set",
+      "value": 1.0
+    }
+  },
+  "max_cost": {
+    "base": 80,
+    "per_level_above_first": 0
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 30,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "hand"
+  ],
+  "supported_items": "#enderscape:enchantable/mirror",
+  "weight": 1
+}

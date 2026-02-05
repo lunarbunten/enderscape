@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "enderscape:shadoline_ingot",
+  "key": {
+    "#": {
+      "item": "enderscape:shadoline_nugget"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:shadoline_ingot"
+  }
+}
