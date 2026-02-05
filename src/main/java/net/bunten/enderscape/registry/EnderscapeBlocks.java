@@ -269,8 +269,14 @@ public class EnderscapeBlocks {
             .strength(1.0F, 6.0F)
     );
 
-    public static final Supplier<Block> ETCHED_ALLURING_MAGNIA = register(true, "etched_alluring_magnia", Block::new, legacyCopyOf(ALLURING_MAGNIA));
-    public static final Supplier<Block> ETCHED_ALLURING_MAGNIA_STAIRS = registerStair( "etched_alluring_magnia_stairs", ETCHED_ALLURING_MAGNIA);
+    public static final Supplier<Block> ETCHED_ALLURING_MAGNIA = register(true, "etched_alluring_magnia", properties -> new EtchedMagniaBlock(MagniaPolarity.ALLURING, properties), BlockBehaviour.Properties.of()
+            .mapColor(MapColor.METAL)
+            .requiresCorrectToolForDrops()
+            .strength(1.5F, 6.0F)
+            .instrument(NoteBlockInstrument.BASEDRUM)
+            .sound(EnderscapeSoundTypes.ETCHED_MAGNIA)
+    );
+    public static final Supplier<Block> ETCHED_ALLURING_MAGNIA_STAIRS = register(true, "etched_alluring_magnia_stairs", properties -> new EtchedMagniaStairsBlock(MagniaPolarity.ALLURING, ETCHED_ALLURING_MAGNIA.get().defaultBlockState(), properties), fullCopyOf(ETCHED_ALLURING_MAGNIA));
     public static final Supplier<Block> ETCHED_ALLURING_MAGNIA_SLAB = register(true, "etched_alluring_magnia_slab", properties -> new EtchedMagniaSlabBlock(MagniaPolarity.ALLURING, properties), legacyCopyOf(ETCHED_ALLURING_MAGNIA));
     public static final Supplier<Block> ETCHED_ALLURING_MAGNIA_WALL = register(true, "etched_alluring_magnia_wall", properties -> new EtchedMagniaWallBlock(MagniaPolarity.ALLURING, properties), legacyCopyOf(ETCHED_ALLURING_MAGNIA));
 
@@ -293,8 +299,14 @@ public class EnderscapeBlocks {
             .strength(1.0F, 6.0F)
     );
 
-    public static final Supplier<Block> ETCHED_REPULSIVE_MAGNIA = register(true, "etched_repulsive_magnia", Block::new, legacyCopyOf(REPULSIVE_MAGNIA));
-    public static final Supplier<Block> ETCHED_REPULSIVE_MAGNIA_STAIRS = registerStair("etched_repulsive_magnia_stairs", ETCHED_REPULSIVE_MAGNIA);
+    public static final Supplier<Block> ETCHED_REPULSIVE_MAGNIA = register(true, "etched_repulsive_magnia", properties -> new EtchedMagniaBlock(MagniaPolarity.REPULSIVE, properties),BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_GRAY)
+            .requiresCorrectToolForDrops()
+            .strength(1.5F, 6.0F)
+            .instrument(NoteBlockInstrument.BASEDRUM)
+            .sound(EnderscapeSoundTypes.ETCHED_MAGNIA)
+    );
+    public static final Supplier<Block> ETCHED_REPULSIVE_MAGNIA_STAIRS = register(true, "etched_repulsive_magnia_stairs", properties -> new EtchedMagniaStairsBlock(MagniaPolarity.REPULSIVE, ETCHED_REPULSIVE_MAGNIA.get().defaultBlockState(), properties), fullCopyOf(ETCHED_REPULSIVE_MAGNIA));
     public static final Supplier<Block> ETCHED_REPULSIVE_MAGNIA_SLAB = register(true, "etched_repulsive_magnia_slab", properties -> new EtchedMagniaSlabBlock(MagniaPolarity.REPULSIVE, properties), legacyCopyOf(ETCHED_REPULSIVE_MAGNIA));
     public static final Supplier<Block> ETCHED_REPULSIVE_MAGNIA_WALL = register(true, "etched_repulsive_magnia_wall", properties -> new EtchedMagniaWallBlock(MagniaPolarity.REPULSIVE, properties), legacyCopyOf(ETCHED_REPULSIVE_MAGNIA));
 
