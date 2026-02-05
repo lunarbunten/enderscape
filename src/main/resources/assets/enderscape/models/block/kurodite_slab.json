@@ -1,8 +1,0 @@
-{
-    "parent": "minecraft:block/slab",
-    "textures": {
-        "bottom": "enderscape:block/kurodite",
-        "top": "enderscape:block/kurodite",
-        "side": "enderscape:block/kurodite"
-    }
-}

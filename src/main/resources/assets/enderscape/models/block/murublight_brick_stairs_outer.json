@@ -1,8 +1,0 @@
-{
-	"parent": "minecraft:block/outer_stairs",
-	"textures": {
-		"bottom": "enderscape:block/murublight_bricks",
-		"top": "enderscape:block/murublight_bricks",
-		"side": "enderscape:block/murublight_bricks"
-	}
-}

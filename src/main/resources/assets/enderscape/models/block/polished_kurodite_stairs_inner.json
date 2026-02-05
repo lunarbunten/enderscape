@@ -1,8 +1,0 @@
-{
-    "parent": "minecraft:block/inner_stairs",
-    "textures": {
-        "bottom": "enderscape:block/polished_kurodite",
-        "top": "enderscape:block/polished_kurodite",
-        "side": "enderscape:block/polished_kurodite"
-    }
-}

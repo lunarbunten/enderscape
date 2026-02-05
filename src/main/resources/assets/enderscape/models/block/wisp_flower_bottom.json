@@ -1,8 +1,0 @@
-{
-    "parent": "enderscape:block/wisp_flower_template",
-    "textures": {
-		"cross_emissive": "enderscape:block/wisp_flower_bottom_emissive",
-		"cross": "enderscape:block/wisp_flower_bottom",
-        "particle": "#cross"
-    }
-}

@@ -1,6 +1,0 @@
-{
-  "type": "trimmed:trims",
-  "override_textures": "enderscape:trim_material_overrides/drift_leggings",
-  "template": "trimmed:item/two_layer_trim",
-  "textures": "enderscape:trim_overlays/drift_leggings"
-}
