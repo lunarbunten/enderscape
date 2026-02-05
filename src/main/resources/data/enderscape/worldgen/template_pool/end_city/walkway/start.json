@@ -1,0 +1,14 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/walkway/flat_start",
+        "projection": "rigid",
+        "processors": "enderscape:end_city_flower_pots"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "enderscape:end_city/walkway/fallback"
+}

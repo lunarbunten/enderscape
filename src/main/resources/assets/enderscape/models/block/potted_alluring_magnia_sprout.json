@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/flower_pot_cross",
+	"textures": {
+		"plant": "enderscape:block/alluring_magnia_sprout_potted",
+		"dirt": "enderscape:block/alluring_magnia"
+	}
+}

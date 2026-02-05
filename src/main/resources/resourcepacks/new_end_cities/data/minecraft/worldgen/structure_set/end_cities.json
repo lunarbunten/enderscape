@@ -1,0 +1,15 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 10387313,
+    "separation": 14,
+    "spacing": 24,
+    "spread_type": "triangular"
+  },
+  "structures": [
+    {
+      "structure": "enderscape:end_city",
+      "weight": 1
+    }
+  ]
+}

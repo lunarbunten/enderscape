@@ -1,0 +1,120 @@
+{
+	"variants": {
+		"facing=down": [
+			{
+				"model": "enderscape:block/corrupt_overgrowth",
+				"x": 180
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth2",
+				"x": 180
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth3",
+				"x": 180
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth4",
+				"x": 180
+			}
+		],
+		"facing=east": [
+			{
+				"model": "enderscape:block/corrupt_overgrowth",
+				"x": 90,
+				"y": 90
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth2",
+				"x": 90,
+				"y": 90
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth3",
+				"x": 90,
+				"y": 90
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth4",
+				"x": 90,
+				"y": 90
+			}
+		],
+		"facing=north": [
+			{
+				"model": "enderscape:block/corrupt_overgrowth",
+				"x": 90
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth2",
+				"x": 90
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth3",
+				"x": 90
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth4",
+				"x": 90
+			}
+		],
+		"facing=south": [
+			{
+				"model": "enderscape:block/corrupt_overgrowth",
+				"x": 90,
+				"y": 180
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth2",
+				"x": 90,
+				"y": 180
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth3",
+				"x": 90,
+				"y": 180
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth4",
+				"x": 90,
+				"y": 180
+			}
+		],
+		"facing=up": [
+			{
+				"model": "enderscape:block/corrupt_overgrowth"
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth2"
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth3"
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth4"
+			}
+		],
+		"facing=west": [
+			{
+				"model": "enderscape:block/corrupt_overgrowth",
+				"x": 90,
+				"y": 270
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth2",
+				"x": 90,
+				"y": 270
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth3",
+				"x": 90,
+				"y": 270
+			},
+			{
+				"model": "enderscape:block/corrupt_overgrowth4",
+				"x": 90,
+				"y": 270
+			}
+		]
+	}
+}

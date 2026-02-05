@@ -1,0 +1,10 @@
+{
+	"parent": "enderscape:block/void_shale_template",
+	"textures": {
+		"particle": "enderscape:block/void_shale",
+		"side": "enderscape:block/void_shale",
+		"side_emissive": "enderscape:block/void_shale_emissive",
+		"end": "enderscape:block/void_shale_top",
+		"end_emissive": "enderscape:block/void_shale_top_emissive"
+	}
+}

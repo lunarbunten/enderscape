@@ -1,0 +1,10 @@
+{
+  "type": "cache_once",
+  "argument": {
+    "type": "y_clamped_gradient",
+    "from_value": 1.5,
+    "from_y": 288,
+    "to_value": -1.5,
+    "to_y": -160
+  }
+}

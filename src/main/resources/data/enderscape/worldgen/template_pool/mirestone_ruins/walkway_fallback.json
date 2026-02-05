@@ -1,0 +1,32 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/walkway/end1",
+        "projection": "terrain_matching",
+        "processors": "enderscape:ruins_degradation"
+      },
+      "weight": 5
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/walkway/end2",
+        "projection": "terrain_matching",
+        "processors": "enderscape:ruins_degradation"
+      },
+      "weight": 5
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/walkway/fallback",
+        "projection": "rigid",
+        "processors": "enderscape:ruins_degradation"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

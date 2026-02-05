@@ -1,0 +1,10 @@
+{
+  "layers": {
+    "humanoid_leggings": [
+      {
+        "texture": "enderscape:drift_leggings",
+        "use_player_texture": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+	"parent": "enderscape:block/chorus_cake_roll_template",
+	"elements": [
+		{
+			"from": [4, 0, 1],
+			"to": [12, 7, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 4, 9]},
+			"faces": {
+				"north": {"uv": [0, 0, 4, 3.5], "texture": "#0"},
+				"east": {"uv": [8, 0, 15, 3.5], "texture": "#0"},
+				"south": {"uv": [4, 0, 8, 3.5], "texture": "#0"},
+				"west": {"uv": [8, 0, 15, 3.5], "texture": "#0"},
+				"up": {"uv": [0, 3.5, 7, 7.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [8, 3.5, 15, 7.5], "rotation": 90, "texture": "#0", "cullface": "down"}
+			}
+		},
+		{
+			"from": [8, 7, 11],
+			"to": [8, 11, 15],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 9, 13]},
+			"faces": {
+				"east": {"uv": [4, 7.5, 6, 9.5], "texture": "#0"},
+				"west": {"uv": [4, 7.5, 6, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [8, 7, 11],
+			"to": [8, 11, 15],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 9, 13]},
+			"faces": {
+				"east": {"uv": [4, 7.5, 6, 9.5], "texture": "#0"},
+				"west": {"uv": [4, 7.5, 6, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [8, 7, 6],
+			"to": [8, 11, 10],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 9, 8]},
+			"faces": {
+				"east": {"uv": [6, 7.5, 8, 9.5], "texture": "#0"},
+				"west": {"uv": [6, 7.5, 8, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [8, 7, 6],
+			"to": [8, 11, 10],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 9, 8]},
+			"faces": {
+				"east": {"uv": [6, 7.5, 8, 9.5], "texture": "#0"},
+				"west": {"uv": [6, 7.5, 8, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [8, 7, 1],
+			"to": [8, 11, 5],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 9, 3]},
+			"faces": {
+				"east": {"uv": [8, 7.5, 10, 9.5], "texture": "#0"},
+				"west": {"uv": [8, 7.5, 10, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [8, 7, 1],
+			"to": [8, 11, 5],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 9, 3]},
+			"faces": {
+				"east": {"uv": [8, 7.5, 10, 9.5], "texture": "#0"},
+				"west": {"uv": [8, 7.5, 10, 9.5], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		0,
+		{
+			"name": "group",
+			"origin": [8, 10, 3],
+			"color": 0,
+			"children": [1, 2]
+		},
+		{
+			"name": "group",
+			"origin": [8, 10, 3],
+			"color": 0,
+			"children": [3, 4]
+		},
+		{
+			"name": "frosting1",
+			"origin": [8, 10, 3],
+			"color": 0,
+			"children": [5, 6]
+		}
+	]
+}

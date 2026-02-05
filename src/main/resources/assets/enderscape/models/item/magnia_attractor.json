@@ -1,0 +1,14 @@
+{
+	"parent": "enderscape:item/magnia_attractor_template",
+	"textures": {
+		"layer0": "enderscape:item/magnia_attractor"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"enderscape:enabled": 1
+			},
+			"model": "enderscape:item/magnia_attractor_active"
+		}
+	]
+}

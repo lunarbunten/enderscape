@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:add",
+  "argument1": 23.5,
+  "argument2": {
+    "type": "minecraft:old_blended_noise",
+    "smear_scale_multiplier": 8,
+    "xz_factor": 100,
+    "xz_scale": 0.25,
+    "y_factor": 200,
+    "y_scale": 0.4
+  }
+}

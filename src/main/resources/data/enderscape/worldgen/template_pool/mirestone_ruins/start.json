@@ -1,0 +1,14 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:mirestone_ruins/start",
+        "projection": "rigid",
+        "processors": "enderscape:ruins_degradation"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

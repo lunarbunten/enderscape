@@ -1,0 +1,37 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"particle": "enderscape:block/mirestone_nebulite_ore",
+		"cross": "enderscape:block/mirestone_nebulite_ore",
+		"cross_emissive": "enderscape:block/nebulite_ore_emissive"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#cross", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#cross", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#cross", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#cross", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#cross", "cullface": "up"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#cross", "cullface": "down"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"shade": false,
+			"light_emission": 2,
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#cross_emissive", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#cross_emissive", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#cross_emissive", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#cross_emissive", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#cross_emissive", "cullface": "up"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#cross_emissive", "cullface": "down"}
+			}
+		}
+	]
+}

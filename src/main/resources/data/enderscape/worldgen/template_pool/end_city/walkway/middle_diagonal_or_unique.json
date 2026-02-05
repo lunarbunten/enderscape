@@ -1,0 +1,77 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/walkway/gentle_middle",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 6
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/walkway/steep_middle",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 6
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/walkway/unique/arena_archway",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/walkway/unique/arena_corrupt_garden",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/walkway/unique/arena_shrine",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/walkway/unique/arena_simple",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/walkway/unique/drift_jelly_bridge",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/walkway/unique/veiled_tree_trap",
+        "processors": "enderscape:end_city_flower_pots",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "enderscape:end_city/walkway/fallback"
+}

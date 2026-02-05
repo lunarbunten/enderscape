@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:cache_once",
+  "argument": {
+    "type": "minecraft:flat_cache",
+    "argument": {
+      "type": "minecraft:add",
+      "argument1": -0.0,
+      "argument2": {
+        "type": "minecraft:shifted_noise",
+        "noise": "enderscape:spread_noise",
+        "xz_scale": 0.85,
+        "y_scale": 0,
+        "shift_x": 3600,
+        "shift_y": 0,
+        "shift_z": 3600
+      }
+    }
+  }
+}

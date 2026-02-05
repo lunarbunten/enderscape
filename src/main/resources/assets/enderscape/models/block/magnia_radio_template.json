@@ -1,0 +1,42 @@
+{
+	"parent": "minecraft:block/block",
+	"texture_size": [32, 32],
+	"textures": {
+		"particle": "enderscape:block/etched_alluring_magnia"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 3],
+			"to": [16, 12, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 6, 6]},
+			"faces": {
+				"north": {"uv": [0, 5, 8, 11], "texture": "#0"},
+				"east": {"uv": [0, 11, 6, 16], "rotation": 270, "texture": "#0", "cullface": "east"},
+				"south": {"uv": [8, 5, 16, 11], "texture": "#0"},
+				"west": {"uv": [0, 11, 6, 16], "rotation": 270, "texture": "#0", "cullface": "west"},
+				"up": {"uv": [8, 5, 0, 0], "texture": "#0"},
+				"down": {"uv": [16, 0, 8, 5], "texture": "#0", "cullface": "down"}
+			}
+		},
+		{
+			"from": [0, 12, 8],
+			"to": [16, 17, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 14.5, 8]},
+			"faces": {
+				"north": {"uv": [6, 11, 14, 13.5], "texture": "#0"},
+				"south": {"uv": [14, 11, 6, 13.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0, 12, 8],
+			"to": [16, 17, 8],
+			"shade": false,
+			"light_emission": 8,
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 14.5, 8]},
+			"faces": {
+				"north": {"uv": [6, 11, 14, 13.5], "texture": "#1"},
+				"south": {"uv": [14, 11, 6, 13.5], "texture": "#1"}
+			}
+		}
+	]
+}

@@ -1,0 +1,16 @@
+{
+  "fallback": "enderscape:large_center_gateway/walkway_fallback",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:large_center_gateway/walkway_end/ruins",
+        "projection": "rigid",
+        "processors": {
+          "processors": []
+        }
+      }
+    }
+  ]
+}

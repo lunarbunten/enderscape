@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "enderscape:block/veiled_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "enderscape:block/veiled_wood"
+    },
+    "axis=z": {
+      "model": "enderscape:block/veiled_wood",
+      "x": 90
+    }
+  }
+}

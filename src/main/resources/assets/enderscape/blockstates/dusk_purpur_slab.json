@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model":"enderscape:block/dusk_purpur_slab"
+    },
+    "type=double": {
+      "model":"enderscape:block/dusk_purpur_block"
+    },
+    "type=top": {
+      "model":"enderscape:block/dusk_purpur_slab_top"
+    }
+  }
+}

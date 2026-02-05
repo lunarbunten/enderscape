@@ -1,0 +1,8 @@
+{
+  "values": [
+    {
+      "type": "trimmed:any_trim",
+      "model_id_template": "enderscape:item/drift_leggings_${material_suffix}_trim"
+    }
+  ]
+}

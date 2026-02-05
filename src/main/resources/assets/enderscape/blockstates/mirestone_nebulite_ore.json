@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "enderscape:block/mirestone_nebulite_ore"
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "enderscape:block/shadoline_ore"
+      }
+    ]
+  }
+}

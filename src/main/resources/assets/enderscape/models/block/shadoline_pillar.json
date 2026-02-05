@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/cube_column",
+	"textures": {
+		"end": "enderscape:block/shadoline_pillar_top",
+		"side": "enderscape:block/shadoline_pillar"
+	}
+}

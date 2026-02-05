@@ -1,0 +1,47 @@
+
+
+{
+  "type":"add",
+  "argument1":
+  {
+      "type": "add",
+      "argument1": {
+        "type": "add",
+        "argument1": {
+          "type": "add",
+          "argument1": {
+            "type": "minecraft:mul",
+            "argument1": {
+              "type": "minecraft:old_blended_noise",
+              "smear_scale_multiplier": 8,
+              "xz_factor": 100,
+              "xz_scale": 0.25,
+              "y_factor": 200,
+              "y_scale": 0.4
+            },
+            "argument2": {
+              "type": "minecraft:add",
+              "argument1": {
+                "type": "minecraft:y_clamped_gradient",
+                "from_y": 72,
+                "to_y": 71,
+                "from_value": 0,
+                "to_value": 1
+              },
+              "argument2": {
+                "type": "minecraft:y_clamped_gradient",
+                "from_y": 53,
+                "to_y": 54,
+                "from_value": -1,
+                "to_value": 0
+              }
+            }
+          },
+          "argument2": "enderscape:extra_islands/middle_higher/island"
+        },
+        "argument2": "enderscape:extra_islands/middle_lower/island"
+      },
+      "argument2": "enderscape:extra_islands/low/island"
+    },
+    "argument2": "enderscape:extra_islands/high/island"
+  }

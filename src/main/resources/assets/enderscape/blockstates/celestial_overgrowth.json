@@ -1,0 +1,120 @@
+{
+	"variants": {
+		"facing=down": [
+			{
+				"model": "enderscape:block/celestial_overgrowth",
+				"x": 180
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth2",
+				"x": 180
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth3",
+				"x": 180
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth4",
+				"x": 180
+			}
+		],
+		"facing=east": [
+			{
+				"model": "enderscape:block/celestial_overgrowth",
+				"x": 90,
+				"y": 90
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth2",
+				"x": 90,
+				"y": 90
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth3",
+				"x": 90,
+				"y": 90
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth4",
+				"x": 90,
+				"y": 90
+			}
+		],
+		"facing=north": [
+			{
+				"model": "enderscape:block/celestial_overgrowth",
+				"x": 90
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth2",
+				"x": 90
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth3",
+				"x": 90
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth4",
+				"x": 90
+			}
+		],
+		"facing=south": [
+			{
+				"model": "enderscape:block/celestial_overgrowth",
+				"x": 90,
+				"y": 180
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth2",
+				"x": 90,
+				"y": 180
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth3",
+				"x": 90,
+				"y": 180
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth4",
+				"x": 90,
+				"y": 180
+			}
+		],
+		"facing=up": [
+			{
+				"model": "enderscape:block/celestial_overgrowth"
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth2"
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth3"
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth4"
+			}
+		],
+		"facing=west": [
+			{
+				"model": "enderscape:block/celestial_overgrowth",
+				"x": 90,
+				"y": 270
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth2",
+				"x": 90,
+				"y": 270
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth3",
+				"x": 90,
+				"y": 270
+			},
+			{
+				"model": "enderscape:block/celestial_overgrowth4",
+				"x": 90,
+				"y": 270
+			}
+		]
+	}
+}

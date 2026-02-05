@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "enderscape:block/purpur_tile_slab"
+    },
+    "type=double": {
+      "model": "enderscape:block/purpur_tiles"
+    },
+    "type=top": {
+      "model": "enderscape:block/purpur_tile_slab_top"
+    }
+  }
+}

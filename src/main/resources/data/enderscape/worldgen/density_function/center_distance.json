@@ -1,0 +1,48 @@
+{
+    "type":"add",
+    "argument2": "enderscape:outer_cutoff_depth",
+    "argument1": 
+    {
+    "type": "minecraft:spline",
+    "spline": {
+      "coordinate": {
+        "type": "enderscape:distance_from_center_gradient",
+        "min_distance": 0,
+        "max_distance": 1500,
+        "from_value": -2,
+        "to_value": 0
+      },
+      "points": [
+        {
+          "location": -2,
+          "derivative": 0,
+          "value": -2
+        },
+        {
+          "location": -1,
+          "derivative": 0,
+          "value": {
+            "coordinate": "enderscape:generic_noise",
+            "points": [
+              {
+                "derivative": 0,
+                "location": -1,
+                "value": -0.11
+              },
+              {
+                "derivative": 0,
+                "location": 1,
+                "value": -0.01
+              }
+            ]
+          }
+        },
+        {
+          "location": 0,
+          "derivative": 0,
+          "value": 0
+        }
+        
+      ]
+    }
+  }}

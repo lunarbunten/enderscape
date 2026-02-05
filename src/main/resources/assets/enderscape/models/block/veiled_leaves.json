@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "enderscape:block/veiled_leaves"
+  }
+}

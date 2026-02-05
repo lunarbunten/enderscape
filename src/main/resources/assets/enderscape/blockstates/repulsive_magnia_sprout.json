@@ -1,0 +1,88 @@
+{
+	"variants": {
+		"facing=east,powered=false": [
+			{
+				"model": "enderscape:block/repulsive_magnia_sprout",
+				"x": 90,
+				"y": 90
+			}
+		],
+		"facing=north,powered=false": [
+			{
+				"model": "enderscape:block/repulsive_magnia_sprout",
+				"x": 90,
+				"y": 0
+			}
+		],
+		"facing=south,powered=false": [
+			{
+				"model": "enderscape:block/repulsive_magnia_sprout",
+				"x": 90,
+				"y": 180
+			}
+		],
+		"facing=west,powered=false": [
+			{
+				"model": "enderscape:block/repulsive_magnia_sprout",
+				"x": 90,
+				"y": 270
+			}
+		],
+		"facing=down,powered=false": [
+			{
+				"model": "enderscape:block/repulsive_magnia_sprout",
+				"x": 180,
+				"y": 0
+			}
+		],
+		"facing=up,powered=false": [
+			{
+				"model": "enderscape:block/repulsive_magnia_sprout",
+				"x": 0,
+				"y": 0
+			}
+		],
+		"facing=east,powered=true": [
+			{
+				"model": "enderscape:block/repulsive_magnia_sprout_powered",
+				"x": 90,
+				"y": 90
+			}
+		],
+		"facing=north,powered=true": [
+			{
+				"model": "enderscape:block/repulsive_magnia_sprout_powered",
+				"x": 90,
+				"y": 0
+			}
+		],
+		"facing=south,powered=true": [
+			{
+				"model": "enderscape:block/repulsive_magnia_sprout_powered",
+				"x": 90,
+				"y": 180
+			}
+		],
+		"facing=west,powered=true": [
+			{
+				"model": "enderscape:block/repulsive_magnia_sprout_powered",
+				"x": 90,
+				"y": 270
+			}
+		],
+		"facing=down,powered=true": [
+			{
+				"model": "enderscape:block/repulsive_magnia_sprout_powered",
+				"x": 180,
+				"y": 0
+			}
+		],
+		"facing=up,powered=true": [
+			{
+				"model": "enderscape:block/repulsive_magnia_sprout_powered",
+				"x": 0,
+				"y": 0
+			}
+		]
+	}
+}

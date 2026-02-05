@@ -1,0 +1,7 @@
+{
+    "parent": "enderscape:block/tiles_cube",
+    "textures": {
+        "side": "enderscape:block/purpur_tiles",
+        "side_alt": "enderscape:block/purpur_tiles_alt"
+    }
+}

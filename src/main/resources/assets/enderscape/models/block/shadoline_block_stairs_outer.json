@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/outer_stairs",
+	"textures": {
+		"bottom": "enderscape:block/shadoline_block",
+		"top": "enderscape:block/shadoline_block",
+		"side": "enderscape:block/shadoline_block"
+	}
+}

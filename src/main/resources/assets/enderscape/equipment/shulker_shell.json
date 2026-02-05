@@ -1,0 +1,10 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "enderscape:shulker_shell",
+        "use_player_texture": true
+      }
+    ]
+  }
+}
