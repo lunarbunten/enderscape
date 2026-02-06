@@ -6,10 +6,8 @@ import net.bunten.enderscape.item.component.Togglable;
 import net.bunten.enderscape.item.tooltip.FueledToolComponent;
 import net.bunten.enderscape.registry.EnderscapeAttributes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -22,7 +20,6 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -39,7 +36,7 @@ import java.util.Optional;
 @Mixin(Item.class)
 public class ItemMixin {
 
-    //@Inject(method = "getAttackDamageBonus", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getAttackDamageBonus", at = @At("RETURN"), cancellable = true)
     public void Enderscape$getAttackDamageBonus(Entity entity, float damage, DamageSource source, CallbackInfoReturnable<Float> info) {
         if (source.getDirectEntity() instanceof LivingEntity mob && EnderscapeAttributes.isBackstab(source.getWeaponItem(), mob.position(), entity)) {
             info.setReturnValue((float) (info.getReturnValue() + EnderscapeAttributes.getBackstabDamage(mob)));

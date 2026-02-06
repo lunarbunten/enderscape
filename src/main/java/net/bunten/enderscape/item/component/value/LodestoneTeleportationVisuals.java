@@ -11,8 +11,6 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 
-import static net.minecraft.core.particles.ParticleTypes.BUBBLE;
-
 public record LodestoneTeleportationVisuals(
         ParticleOptions teleportOutParticle,
         ParticleOptions teleportInParticle,
