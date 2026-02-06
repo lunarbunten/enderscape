@@ -1,38 +1,26 @@
 package net.bunten.enderscape;
 
 import com.google.common.reflect.Reflection;
-import com.mojang.serialization.MapCodec;
 import net.bunten.enderscape.compat.EnderscapeTerrablender;
 import net.bunten.enderscape.datagen.EnderscapeBiomeModifiers;
 import net.bunten.enderscape.registry.*;
 import net.bunten.enderscape.sound.StructureMusicHandler;
 import net.minecraft.core.Holder;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.level.levelgen.structure.Structure;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.function.Function;
 
 @Mod(Enderscape.MOD_ID)
 public class Enderscape {
@@ -41,8 +29,6 @@ public class Enderscape {
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static final boolean IS_DEBUG = !FMLLoader.isProduction();
-
-    public static final ResourceKey<Structure> END_CITY_RESOURCE_KEY = ResourceKey.create(Registries.STRUCTURE, Enderscape.id("end_city"));
 
     public static ResourceLocation id(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
