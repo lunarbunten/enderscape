@@ -33,6 +33,7 @@ public class EnderscapeDataGen {
 		addProvider(event, EnderscapeDamageTypeTagProvider::new);
 		addProvider(event, EnderscapeEnchantmentTagProvider::new);
 		addProvider(event, EnderscapeEntityTagProvider::new);
+		addProvider(event, EnderscapeSoundEventTagProvider::new);
 		event.addProvider(new EnderscapeItemTagProvider(event, blockTagProvider));
 
 		addProvider(event, EnderscapePaintingVariantTagProvider::new);
