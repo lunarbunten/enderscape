@@ -34,21 +34,22 @@ public class EnderscapeServerNetworking {
         player.connection.send(new ClientboundStareSoundPayload(entityId));
     }
 
+    @SuppressWarnings("Convert2MethodRef")
     @SubscribeEvent
     public static void register(final RegisterPayloadHandlersEvent event) {
         var registrar = event.registrar("1");
-        registrar.playToClient(ClientboundMagniaDataPayload.TYPE, ClientboundMagniaDataPayload.STREAM_CODEC, ClientboundMagniaDataPayload::handle);
-        registrar.playToClient(ClientboundDashJumpDataPayload.TYPE, ClientboundDashJumpDataPayload.STREAM_CODEC, ClientboundDashJumpDataPayload::handle);
-        registrar.playToClient(ClientboundEndTrialSpawnableDataPayload.TYPE, ClientboundEndTrialSpawnableDataPayload.STREAM_CODEC, ClientboundEndTrialSpawnableDataPayload::handle);
+        registrar.playToClient(ClientboundMagniaDataPayload.TYPE, ClientboundMagniaDataPayload.STREAM_CODEC, (payload, ctx) -> ClientboundMagniaDataPayload.handle(payload, ctx));
+        registrar.playToClient(ClientboundDashJumpDataPayload.TYPE, ClientboundDashJumpDataPayload.STREAM_CODEC, (payload, ctx) -> ClientboundDashJumpDataPayload.handle(payload, ctx));
+        registrar.playToClient(ClientboundEndTrialSpawnableDataPayload.TYPE, ClientboundEndTrialSpawnableDataPayload.STREAM_CODEC, (payload, ctx) -> ClientboundEndTrialSpawnableDataPayload.handle(payload, ctx));
 
-        registrar.playToClient(ClientboundDashJumpSoundPayload.TYPE, ClientboundDashJumpSoundPayload.STREAM_CODEC, EnderscapeClientNetworking::receiveDashJumpSoundPayload);
-        registrar.playToClient(ClientboundDashJumpPayload.TYPE, ClientboundDashJumpPayload.STREAM_CODEC, EnderscapeClientNetworking::receiveDashJumpPayload);
-        registrar.playToClient(ClientboundNebuliteOreSoundPayload.TYPE, ClientboundNebuliteOreSoundPayload.STREAM_CODEC, EnderscapeClientNetworking::receiveNebuliteOreSoundPayload);
-        registrar.playToClient(ClientboundLodestoneTeleportationInfoPayload.TYPE, ClientboundLodestoneTeleportationInfoPayload.STREAM_CODEC, EnderscapeClientNetworking::receiveLodestoneTeleportationInfoPayload);
-        registrar.playToClient(ClientboundRubbleShieldCooldownSoundPayload.TYPE, ClientboundRubbleShieldCooldownSoundPayload.STREAM_CODEC, EnderscapeClientNetworking::receiveRubbleShieldCooldownSoundPayload);
-        registrar.playToClient(ClientboundStareOverlayPayload.TYPE, ClientboundStareOverlayPayload.STREAM_CODEC, EnderscapeClientNetworking::receiveStareOverlayPayload);
-        registrar.playToClient(ClientboundStareSoundPayload.TYPE, ClientboundStareSoundPayload.STREAM_CODEC, EnderscapeClientNetworking::receiveStareSoundPayload);
-        registrar.playToClient(ClientboundStructureChangedPayload.TYPE, ClientboundStructureChangedPayload.STREAM_CODEC, EnderscapeClientNetworking::receiveStructureChangedPayload);
-        registrar.playToClient(ClientboundTransdimensionalTravelSoundPayload.TYPE, ClientboundTransdimensionalTravelSoundPayload.STREAM_CODEC, EnderscapeClientNetworking::receiveTransdimensionalTravelSoundPayload);
+        registrar.playToClient(ClientboundDashJumpSoundPayload.TYPE, ClientboundDashJumpSoundPayload.STREAM_CODEC, (payload, ctx) -> EnderscapeClientNetworking.receiveDashJumpSoundPayload(payload, ctx));
+        registrar.playToClient(ClientboundDashJumpPayload.TYPE, ClientboundDashJumpPayload.STREAM_CODEC, (payload, ctx) -> EnderscapeClientNetworking.receiveDashJumpPayload(payload, ctx));
+        registrar.playToClient(ClientboundNebuliteOreSoundPayload.TYPE, ClientboundNebuliteOreSoundPayload.STREAM_CODEC, (payload, ctx) -> EnderscapeClientNetworking.receiveNebuliteOreSoundPayload(payload, ctx));
+        registrar.playToClient(ClientboundLodestoneTeleportationInfoPayload.TYPE, ClientboundLodestoneTeleportationInfoPayload.STREAM_CODEC, (payload, ctx) -> EnderscapeClientNetworking.receiveLodestoneTeleportationInfoPayload(payload, ctx));
+        registrar.playToClient(ClientboundRubbleShieldCooldownSoundPayload.TYPE, ClientboundRubbleShieldCooldownSoundPayload.STREAM_CODEC, (payload, ctx) -> EnderscapeClientNetworking.receiveRubbleShieldCooldownSoundPayload(payload, ctx));
+        registrar.playToClient(ClientboundStareOverlayPayload.TYPE, ClientboundStareOverlayPayload.STREAM_CODEC, (payload, ctx) -> EnderscapeClientNetworking.receiveStareOverlayPayload(payload, ctx));
+        registrar.playToClient(ClientboundStareSoundPayload.TYPE, ClientboundStareSoundPayload.STREAM_CODEC, (payload, ctx) -> EnderscapeClientNetworking.receiveStareSoundPayload(payload, ctx));
+        registrar.playToClient(ClientboundStructureChangedPayload.TYPE, ClientboundStructureChangedPayload.STREAM_CODEC, (payload, ctx) -> EnderscapeClientNetworking.receiveStructureChangedPayload(payload, ctx));
+        registrar.playToClient(ClientboundTransdimensionalTravelSoundPayload.TYPE, ClientboundTransdimensionalTravelSoundPayload.STREAM_CODEC, (payload, ctx) -> EnderscapeClientNetworking.receiveTransdimensionalTravelSoundPayload(payload, ctx));
     }
 }
