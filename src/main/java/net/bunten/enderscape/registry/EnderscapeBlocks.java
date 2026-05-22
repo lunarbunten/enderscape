@@ -38,6 +38,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
+import static net.bunten.enderscape.registry.EnderscapeSoundTypes.DUSK_PURPUR;
 import static net.minecraft.world.level.block.Blocks.*;
 
 @EventBusSubscriber(modid = Enderscape.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
@@ -447,12 +448,12 @@ public class EnderscapeBlocks {
     public static final Supplier<Block> PURPUR_WALL = register(true, "purpur_wall", WallBlock::new, legacyCopyOf(PURPUR_BLOCK));
     public static final Supplier<Block> CHISELED_PURPUR = register(true, "chiseled_purpur", Block::new, legacyCopyOf(PURPUR_BLOCK));
 
-    public static final Supplier<Block> DUSK_PURPUR_BLOCK = register(true, "dusk_purpur_block", Block::new, fullCopyOf(PURPUR_BLOCK, p -> p.mapColor(MapColor.COLOR_BLACK)));
+    public static final Supplier<Block> DUSK_PURPUR_BLOCK = register(true, "dusk_purpur_block", Block::new, fullCopyOf(PURPUR_BLOCK, p -> p.mapColor(MapColor.COLOR_BLACK).sound(DUSK_PURPUR)));
     public static final Supplier<Block> DUSK_PURPUR_STAIRS = registerStair("dusk_purpur_stairs", DUSK_PURPUR_BLOCK);
-    public static final Supplier<Block> DUSK_PURPUR_SLAB = register(true, "dusk_purpur_slab", SlabBlock::new, fullCopyOf(PURPUR_SLAB, p -> p.mapColor(MapColor.COLOR_BLACK)));
-    public static final Supplier<Block> DUSK_PURPUR_WALL = register(true, "dusk_purpur_wall", WallBlock::new, fullCopyOf(PURPUR_WALL, p -> p.mapColor(MapColor.COLOR_BLACK)));
-    public static final Supplier<Block> CHISELED_DUSK_PURPUR = register(true, "chiseled_dusk_purpur", Block::new, fullCopyOf(CHISELED_PURPUR, p -> p.mapColor(MapColor.COLOR_BLACK)));
-    public static final Supplier<Block> DUSK_PURPUR_PILLAR = register(true, "dusk_purpur_pillar", RotatedPillarBlock::new, fullCopyOf(PURPUR_PILLAR, p -> p.mapColor(MapColor.COLOR_BLACK)));
+    public static final Supplier<Block> DUSK_PURPUR_SLAB = register(true, "dusk_purpur_slab", SlabBlock::new, fullCopyOf(PURPUR_SLAB, p -> p.mapColor(MapColor.COLOR_BLACK).sound(DUSK_PURPUR)));
+    public static final Supplier<Block> DUSK_PURPUR_WALL = register(true, "dusk_purpur_wall", WallBlock::new, fullCopyOf(PURPUR_WALL, p -> p.mapColor(MapColor.COLOR_BLACK).sound(DUSK_PURPUR)));
+    public static final Supplier<Block> CHISELED_DUSK_PURPUR = register(true, "chiseled_dusk_purpur", Block::new, fullCopyOf(CHISELED_PURPUR, p -> p.mapColor(MapColor.COLOR_BLACK).sound(DUSK_PURPUR)));
+    public static final Supplier<Block> DUSK_PURPUR_PILLAR = register(true, "dusk_purpur_pillar", RotatedPillarBlock::new, fullCopyOf(PURPUR_PILLAR, p -> p.mapColor(MapColor.COLOR_BLACK).sound(DUSK_PURPUR)));
 
     public static final Supplier<Block> PURPUR_TILES = register(true, "purpur_tiles", Block::new, fullCopyOf(PURPUR_BLOCK));
     public static final Supplier<Block> PURPUR_TILE_STAIRS = registerStair("purpur_tile_stairs", PURPUR_TILES);
