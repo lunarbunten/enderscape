@@ -1,5 +1,8 @@
 package net.bunten.enderscape.item;
 
+import dev.ryanhcode.sable.companion.SableCompanion;
+import dev.ryanhcode.sable.companion.SubLevelAccess;
+import dev.ryanhcode.sable.companion.math.Pose3dc;
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.item.component.FueledTool;
@@ -69,15 +72,26 @@ public class LodestoneTeleporter extends EnchantableItem {
     }
 
     public static int fuelCost(ItemStackContext context) {
+        Level level = context.level();
         ItemStack stack = context.stack();
         LivingEntity user = context.user();
         LodestoneTrackerContext tracker = LodestoneTrackerContext.of(context);
+
+        BlockPos trackerpos = tracker.linkedPos();
+
+        SubLevelAccess subLevelAccess = SableCompanion.INSTANCE.getContaining(level, trackerpos);
+
+        if (subLevelAccess != null) {
+            Pose3dc pose = subLevelAccess.logicalPose();
+
+            trackerpos = BlockPos.containing(pose.transformPosition(trackerpos.getCenter()));
+        }
 
         if (FueledTool.is(stack) && user != null) {
             if (tracker.dimension() != tracker.linkedDimension()) {
                 return FueledTool.maxFuel(stack);
             } else if (stack.get(INCREASE_WITH_DISTANCE) == true) {
-                return 1 + (distanceBetweenPoints(user.blockPosition(), tracker.linkedPos()) / getTotalDistanceForCostIncrease(context));
+                return 1 + (distanceBetweenPoints(user.blockPosition(), trackerpos) / getTotalDistanceForCostIncrease(context));
             } else {
                 return 1;
             }
@@ -166,12 +180,19 @@ public class LodestoneTeleporter extends EnchantableItem {
 
         if (optional.isPresent()) {
             Vec3 position = optional.get();
+            Level level = context.level();
+            SubLevelAccess subLevelAccess = SableCompanion.INSTANCE.getContaining(level, destination.pos());
 
             if (!(context.user() instanceof Player player && player.getAbilities().instabuild && !fromDispenser)) useFuel(context);
 
+            if (subLevelAccess != null) {
+                Pose3dc pose = subLevelAccess.logicalPose();
+                position = pose.transformPosition(destination.pos().getCenter());
+            }
+
             doPreTeleportEffects(context, prior.pos().getCenter(), !sameDimension);
-            teleportToLocation(context, BlockPos.containing(position), !sameDimension);
             awardStatistics(context, prior, destination, fromDispenser);
+            teleportToLocation(context, BlockPos.containing(position), !sameDimension);
 
             return true;
         }
@@ -180,7 +201,7 @@ public class LodestoneTeleporter extends EnchantableItem {
     }
 
     public static Optional<Vec3> getTeleportPosition(LodestoneTrackerContext context) {
-        ServerLevel level = context.linkedLevel();
+        Level level = context.linkedLevel();
         LivingEntity user = context.user();
         EntityDimensions dimensions = user.getDimensions(Pose.STANDING);
 
@@ -228,9 +249,17 @@ public class LodestoneTeleporter extends EnchantableItem {
     private static void teleportToLocation(LodestoneTrackerContext context, BlockPos destination, boolean transdimensional) {
         ServerLevel level = context.linkedLevel();
         Vec3 pos = destination.getBottomCenter();
-
         LivingEntity user = context.user();
-        user.teleportTo(level, pos.x, pos.y, pos.z, Set.of(), 0, 0);
+
+        SubLevelAccess subLevelAccess = SableCompanion.INSTANCE.getContaining(level, context.linkedPos());
+
+        if (subLevelAccess != null) {
+            user.teleportTo(level, pos.x, (pos.y + 1), pos.z, Set.of(), 0, 0);
+        }
+        else {
+            user.teleportTo(level, pos.x, pos.y, pos.z, Set.of(), 0, 0);
+        }
+
         if (user instanceof ServerPlayer player && transdimensional) player.connection.send(new ClientboundTransdimensionalTravelSoundPayload(EnderscapeItemSounds.MIRROR_TRANSDIMENSIONAL_TRAVEL.value().getLocation()));
 
         level.sendParticles(LodestoneTeleportationVisuals.DEFAULT_TELEPORT_IN_PARTICLE, pos.x, pos.y + 0.5, pos.z, 50, 0.5, 1, 0.5, 0.1);
@@ -245,13 +274,23 @@ public class LodestoneTeleporter extends EnchantableItem {
             player.awardStat(Stats.ITEM_USED.get(context.stack().getItem()));
             player.awardStat(EnderscapeStats.MIRROR_TELEPORT);
 
-            double distance = Math.sqrt(Math.pow(destination.pos().getX() - prior.pos().getX(), 2) + Math.pow(destination.pos().getZ() - prior.pos().getZ(), 2));
+            Level level = context.level();
+            SubLevelAccess subLevelAccess = SableCompanion.INSTANCE.getContaining(level, destination.pos());
+
+            double distance = Math.sqrt(SableCompanion.INSTANCE.distanceSquaredWithSubLevels(level, prior.pos().getCenter(), destination.pos().getCenter()));
+
             int centimeterDistance = Math.round((float) distance * 100.0F);
             if (centimeterDistance > 0) {
                 player.awardStat(EnderscapeStats.MIRROR_ONE_CM, centimeterDistance);
             }
 
-            EnderscapeCriteria.LODESTONE_TELEPORTATION.trigger(player, context.stack(), prior, destination);
+            if (subLevelAccess != null) {
+                Pose3dc pose = subLevelAccess.logicalPose();
+                Vec3 position = pose.transformPosition(destination.pos().getCenter());
+                EnderscapeCriteria.LODESTONE_TELEPORTATION.trigger(player, context.stack(), prior, new GlobalPos(context.linkedDimension(), BlockPos.containing(position)));
+            } else {
+                EnderscapeCriteria.LODESTONE_TELEPORTATION.trigger(player, context.stack(), prior, destination);
+            }
         }
     }
 
@@ -300,7 +339,16 @@ public class LodestoneTeleporter extends EnchantableItem {
                 list.add(tooltip("header").withStyle(headerColor));
 
                 if (config.mirrorTooltipDisplayCoordinates) {
-                    MutableComponent position = tooltip("position.coordinates", linkedPos.getX(), linkedPos.getY(), linkedPos.getZ()).withStyle(valueColor);
+                    Level level = context.level();
+                    SubLevelAccess subLevelAccess = SableCompanion.INSTANCE.getContaining(level, linkedPos);
+
+                    BlockPos pos = linkedPos;
+                    if (subLevelAccess != null) {
+                        Pose3dc pose = subLevelAccess.logicalPose();
+                        pos = BlockPos.containing(pose.transformPosition(linkedPos.getCenter()));
+                    }
+
+                    MutableComponent position = tooltip("position.coordinates", pos.getX(), pos.getY(), pos.getZ()).withStyle(valueColor);
                     MutableComponent unknown = tooltip("position.unknown").withStyle(valueColor);
                     MutableComponent component = tooltip("position", isSameDimension(context, linkedDimension) ? position : unknown);
 
@@ -308,8 +356,17 @@ public class LodestoneTeleporter extends EnchantableItem {
                 }
 
                 if (config.mirrorTooltipDisplayDistance) {
+                    Level level = context.user().level();
+                    SubLevelAccess subLevelAccess = SableCompanion.INSTANCE.getContaining(level, linkedPos);
+
                     float step = stack.get(DISTANCE_TO_INCREASE) / 2.0F;
                     int roundedDistance = (int) (Math.round(distanceBetweenPoints(user, linkedPos) / step) * step);
+
+                    if (subLevelAccess != null) {
+                        Pose3dc pose = subLevelAccess.logicalPose();
+                        BlockPos pos = BlockPos.containing(pose.transformPosition(linkedPos.getCenter()));
+                        roundedDistance = (int) (Math.round(distanceBetweenPoints(user, pos) / step) * step);
+                    }
 
                     MutableComponent approximate = tooltip("distance.approximate_value", roundedDistance).withStyle(valueColor);
                     MutableComponent unknown = tooltip("distance.unknown").withStyle(valueColor);
