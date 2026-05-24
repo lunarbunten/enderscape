@@ -23,14 +23,6 @@ repositories {
     }
     exclusiveContent {
         forRepository {
-            maven { url = "https://maven.ryanhcode.dev/releases" }
-        }
-        filter {
-            includeGroup("dev.ryanhcode.sable-companion")
-        }
-    }
-    exclusiveContent {
-        forRepository {
             maven {
                 url = 'https://maven.minecraftforge.net/'
             }
@@ -114,11 +106,6 @@ dependencies {
     }
 
     compileOnly("com.github.glitchfiend:TerraBlender-neoforge:1.21.1-${terrablender_version}")
-    runtimeOnly("maven.modrinth:sable:1.2.2+mc1.21.1-neoforge")
-    // For easier Sable testing
-    runtimeOnly("maven.modrinth:create:6.0.10+mc1.21.1")
-    runtimeOnly("maven.modrinth:create-aeronautics:1.2.1+mc1.21.1")
-    jarJar(api("dev.ryanhcode.sable-companion:sable-companion-common-1.21.1:${sable_companion_version}"))
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
