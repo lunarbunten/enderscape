@@ -24,6 +24,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BundleItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
@@ -44,7 +45,7 @@ public record EntityMagnet(
 ) {
 
     public static final BiPredicate<Entity, EntityMagnet> CAN_PULL_ENTITY = (entity, magnet) -> {
-        if (entity.getType().is(magnet.entitiesToPull())) {
+        if (entity.is(magnet.entitiesToPull())) {
             if (entity instanceof ItemEntity item) return !item.hasPickUpDelay();
             return entity.tickCount >= 20;
         } else {
@@ -108,8 +109,8 @@ public record EntityMagnet(
         for (ItemStack stack : inventory.items) {
             if (stack.getItem() instanceof BundleItem && stack.has(DataComponents.BUNDLE_CONTENTS)) {
                 BundleContents contents = stack.get(DataComponents.BUNDLE_CONTENTS);
-                for (ItemStack bundle : contents.items()) {
-                    if (ItemStack.isSameItemSameComponents(bundle, toAdd)) {
+                for (ItemStackTemplate bundle : contents.items()) {
+                    if (ItemStack.isSameItemSameComponents(bundle.create(), toAdd)) {
                         BundleContents.Mutable mutableContents = new BundleContents.Mutable(contents);
                         if (mutableContents.tryInsert(toAdd) > 0) {
                             stack.set(DataComponents.BUNDLE_CONTENTS, mutableContents.toImmutable());
@@ -136,7 +137,7 @@ public record EntityMagnet(
     }
 
     public static int abuseCost(Entity entity, EntityMagnet entityMagnet) {
-        return entity.getType().is(entityMagnet.exemptFromAbuseCost()) ? 0 : 1;
+        return entity.is(entityMagnet.exemptFromAbuseCost()) ? 0 : 1;
     }
 
     public static boolean canDepositIntoBundles(ItemStack stack, LivingEntity user) {

@@ -16,7 +16,7 @@ public class EnderscapeEnchantmentEffectComponents {
     public static final DataComponentType<EnchantmentValueEffect> LODESTONE_TELEPORTATION_DISTANCE_TO_INCREASE_COST = register("lodestone_teleportation_distance_to_increase_cost", builder -> builder.persistent(EnchantmentValueEffect.CODEC));
     public static final DataComponentType<EnchantmentValueEffect> LODESTONE_TELEPORTATION_ENABLE_TRANSDIMENSIONAL = register("lodestone_teleportation_enable_transdimensional", builder -> builder.persistent(EnchantmentValueEffect.CODEC));
     public static final DataComponentType<EnchantmentValueEffect> MAGNET_ENABLE_DEPOSIT_INTO_BUNDLES = register("magnet_enable_deposit_into_bundles", builder -> builder.persistent(EnchantmentValueEffect.CODEC));
-    public static final DataComponentType<List<ConditionalEffect<EnchantmentValueEffect>>> INTEGER_COUNTER_THRESHOLD = register("integer_counter_threshold", builder -> builder.persistent(ConditionalEffect.codec(EnchantmentValueEffect.CODEC, LootContextParamSets.ENCHANTED_ITEM).listOf()));
+    public static final DataComponentType<List<ConditionalEffect<EnchantmentValueEffect>>> INTEGER_COUNTER_THRESHOLD = register("integer_counter_threshold", builder -> builder.persistent(ConditionalEffect.codec(EnchantmentValueEffect.CODEC).listOf()));
 
     private static <T> DataComponentType<T> register(String name, UnaryOperator<DataComponentType.Builder<T>> operator) {
         return Registry.register(BuiltInRegistries.ENCHANTMENT_EFFECT_COMPONENT_TYPE, Enderscape.id(name), operator.apply(DataComponentType.builder()).build());

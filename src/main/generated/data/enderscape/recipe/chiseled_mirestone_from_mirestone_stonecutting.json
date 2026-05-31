@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "enderscape:mirestone",
   "result": {
-    "count": 1,
     "id": "enderscape:chiseled_mirestone"
   }
 }

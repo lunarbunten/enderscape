@@ -1,12 +1,11 @@
 package net.bunten.enderscape.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -20,9 +19,9 @@ import static net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags.*;
 import static net.minecraft.tags.ItemTags.*;
 import static net.minecraft.world.item.Items.*;
 
-public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider {
+public class EnderscapeItemTagProvider extends FabricTagsProvider.ItemTagsProvider {
 
-    public EnderscapeItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public EnderscapeItemTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture, null);
     }
 
@@ -237,7 +236,7 @@ public class EnderscapeItemTagProvider extends FabricTagProvider.ItemTagProvider
         valueLookupBuilder(MAGNIA_BLOCKS).add(ALLURING_MAGNIA.asItem(), REPULSIVE_MAGNIA.asItem());
         valueLookupBuilder(MAGNIA_SPROUTS).add(ALLURING_MAGNIA_SPROUT.asItem(), REPULSIVE_MAGNIA_SPROUT.asItem());
 
-        valueLookupBuilder(BARS).add(SHADOLINE_BARS.asItem());
+        valueLookupBuilder(ItemTags.BARS).add(SHADOLINE_BARS.asItem());
         valueLookupBuilder(BEACON_PAYMENT_ITEMS).add(NEBULITE);
         valueLookupBuilder(ItemTags.CHAINS).add(SHADOLINE_CHAIN.asItem());
         valueLookupBuilder(CHEST_ARMOR).add(SHADOLINE_CHESTPLATE);

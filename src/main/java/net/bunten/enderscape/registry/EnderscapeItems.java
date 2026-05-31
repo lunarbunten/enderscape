@@ -142,12 +142,12 @@ public class EnderscapeItems {
     public static final Item SHADOLINE_NUGGET = registerItem("shadoline_nugget");
 
     public static final Properties RUBBLE_SHIELD_PROPERTIES = new Properties()
-            .component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+            .delayedComponent(DataComponents.BLOCKS_ATTACKS, provider -> new BlocksAttacks(
                     0.25F,
                     1.0F,
                     List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
                     new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
-                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    provider.get(DamageTypeTags.BYPASSES_SHIELD).map(Function.identity()),
                     Optional.of(EnderscapeItemSounds.RUBBLE_SHIELD_BLOCK),
                     Optional.of(SoundEvents.SHIELD_BREAK)
             ))
@@ -249,7 +249,7 @@ public class EnderscapeItems {
             .rarity(Rarity.RARE)
     );
 
-    public static final Item CRESCENT_BANNER_PATTERN = registerItem("crescent_banner_pattern", new Item.Properties().stacksTo(1).rarity(Rarity.RARE).component(DataComponents.PROVIDES_BANNER_PATTERNS, EnderscapeBannerPatternTags.PATTERN_ITEM_CRESCENT));
+    public static final Item CRESCENT_BANNER_PATTERN = registerItem("crescent_banner_pattern", new Item.Properties().stacksTo(1).rarity(Rarity.RARE).delayedComponent(DataComponents.PROVIDES_BANNER_PATTERNS, initializer -> initializer.getOrThrow(EnderscapeBannerPatternTags.PATTERN_ITEM_CRESCENT)));
 
     public static final Item STASIS_ARMOR_TRIM_SMITHING_TEMPLATE = registerItem("stasis_armor_trim_smithing_template", SmithingTemplateItem::createArmorTrimTemplate, new Properties().rarity(Rarity.EPIC));
 

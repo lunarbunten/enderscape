@@ -26,7 +26,7 @@ public class NearestIntimidatorSensor extends Sensor<Drifter> {
     protected void doTick(ServerLevel level, Drifter mob) {
         Brain<Drifter> brain = mob.getBrain();
         NearestVisibleLivingEntities nearby = brain.getMemory(EnderscapeMemory.NEAREST_VISIBLE_LIVING_ENTITIES).orElse(NearestVisibleLivingEntities.empty());
-        for (LivingEntity next : nearby.findAll((next) -> next.getType().is(EnderscapeEntityTags.DRIFTERS_INTIMIDATED_BY))) {
+        for (LivingEntity next : nearby.findAll((next) -> next.is(EnderscapeEntityTags.DRIFTERS_INTIMIDATED_BY))) {
             brain.setMemory(EnderscapeMemory.NEAREST_INTIMIDATOR, next);
             break;
         }

@@ -1,8 +1,8 @@
 package net.bunten.enderscape.datagen;
 
 import net.bunten.enderscape.registry.EnderscapeMusic;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.tags.TagAppender;
@@ -16,9 +16,9 @@ import static net.bunten.enderscape.registry.tag.EnderscapeSoundEventTags.AMBIEN
 import static net.bunten.enderscape.registry.tag.EnderscapeSoundEventTags.STRUCTURE_MUSIC;
 import static net.minecraft.sounds.SoundEvents.*;
 
-public class EnderscapeSoundEventTagProvider extends FabricTagProvider<SoundEvent> {
+public class EnderscapeSoundEventTagProvider extends FabricTagsProvider<SoundEvent> {
 
-    public EnderscapeSoundEventTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> future) {
+    public EnderscapeSoundEventTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> future) {
         super(output, Registries.SOUND_EVENT, future);
     }
 

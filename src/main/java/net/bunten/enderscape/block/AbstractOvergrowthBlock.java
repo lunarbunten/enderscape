@@ -168,7 +168,7 @@ public abstract class AbstractOvergrowthBlock extends DirectionalBlock implement
         if (isPath) {
             return !relative.isSolid() || relative.getBlock() instanceof FenceGateBlock;
         } else {
-            return LightEngine.getLightBlockInto(state, relative, facing, relative.getLightBlock()) < 15;
+            return LightEngine.getLightBlockInto(state, relative, facing, relative.getLightDampening()) < 15;
         }
     }
 

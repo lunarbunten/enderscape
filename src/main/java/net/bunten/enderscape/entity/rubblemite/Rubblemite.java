@@ -103,13 +103,8 @@ public class Rubblemite extends Monster {
     }
 
     @Override
-    protected Brain.Provider<Rubblemite> brainProvider() {
-        return Brain.provider(RubblemiteAI.MEMORY_TYPES, RubblemiteAI.SENSOR_TYPES);
-    }
-
-    @Override
-    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
-        return RubblemiteAI.makeBrain(brainProvider().makeBrain(dynamic));
+    protected Brain<?> makeBrain(Brain.Packed packed) {
+        return RubblemiteAI.makeBrain(this, packed);
     }
 
     @Override

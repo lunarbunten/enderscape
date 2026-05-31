@@ -19,7 +19,7 @@ public class VoidStarParticle extends RisingParticle {
     private VoidStarParticle(ClientLevel world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, TextureAtlasSprite textureAtlasSprite) {
         super(world, x, y, z, velocityX, velocityY, velocityZ, textureAtlasSprite);
 
-        rCol *= (1 - (world.random.nextFloat() * 0.6F));
+        rCol *= (1 - (world.getRandom().nextFloat() * 0.6F));
 
         alpha = 0.75F;
         lifetime *= 2;
@@ -50,8 +50,8 @@ public class VoidStarParticle extends RisingParticle {
     }
 
     @Override
-    public int getLightColor(float delta) {
-        return Math.max(EnderscapeParticleProviders.scaledLight(0.65F), super.getLightColor(delta));
+    public int getLightCoords(float delta) {
+        return Math.max(EnderscapeParticleProviders.scaledLight(0.65F), super.getLightCoords(delta));
     }
 
     @Environment(EnvType.CLIENT)

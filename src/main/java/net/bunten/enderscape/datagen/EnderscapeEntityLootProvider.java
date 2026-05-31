@@ -4,8 +4,8 @@ import net.bunten.enderscape.entity.rubblemite.RubblemiteVariant;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.registry.EnderscapeEntityLootTables;
 import net.bunten.enderscape.registry.EnderscapeRegistries;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableSubProvider;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceKey;
@@ -32,11 +32,11 @@ import static net.bunten.enderscape.registry.EnderscapeEntities.*;
 import static net.bunten.enderscape.registry.EnderscapeEntityLootTables.*;
 import static net.bunten.enderscape.registry.EnderscapeItems.RUBBLE_CHITIN;
 
-public class EnderscapeEntityLootProvider extends SimpleFabricLootTableProvider {
+public class EnderscapeEntityLootProvider extends SimpleFabricLootTableSubProvider {
 
     private final CompletableFuture<HolderLookup.Provider> lookup;
 
-    public EnderscapeEntityLootProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> lookup) {
+    public EnderscapeEntityLootProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> lookup) {
         super(output, lookup, LootContextParamSets.ENTITY);
         this.lookup = lookup;
     }

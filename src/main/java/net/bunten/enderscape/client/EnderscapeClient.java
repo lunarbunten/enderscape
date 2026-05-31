@@ -2,7 +2,7 @@ package net.bunten.enderscape.client;
 
 import com.google.common.reflect.Reflection;
 import net.bunten.enderscape.client.block.MagniaSproutRenderer;
-import net.bunten.enderscape.client.hud.HudElement;
+import net.bunten.enderscape.client.hud.EnderscapeHudElement;
 import net.bunten.enderscape.client.item.FueledToolTooltip;
 import net.bunten.enderscape.client.registry.*;
 import net.bunten.enderscape.client.renderer.EnderscapeRenderPipelines;
@@ -14,7 +14,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.ClientTooltipComponentCallback;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.Music;
@@ -28,7 +28,7 @@ import java.util.Optional;
 @Environment(EnvType.CLIENT)
 public class EnderscapeClient implements ClientModInitializer {
 
-    public static final List<HudElement> HUD_ELEMENTS = new ArrayList<>();
+    public static final List<EnderscapeHudElement> HUD_ELEMENTS = new ArrayList<>();
 
     public static Optional<Music> structureMusic = Optional.empty();
 
@@ -43,7 +43,7 @@ public class EnderscapeClient implements ClientModInitializer {
     @Nullable public static EndermanStareSoundInstance stareSoundInstance = null;
     @Nullable public static EndermanStaticSoundInstance staticSoundInstance = null;
 
-    public static void register(HudElement element) {
+    public static void register(EnderscapeHudElement element) {
         Objects.requireNonNull(element);
         HUD_ELEMENTS.add(element);
 	}
@@ -58,7 +58,6 @@ public class EnderscapeClient implements ClientModInitializer {
                 EnderscapeParticleProviders.class,
                 EnderscapeModelLayers.class,
                 EnderscapeEntityRenderers.class,
-                EnderscapeBlockRenderLayerMap.class,
                 EnderscapeBlockColorProviders.class,
                 EnderscapeHudElements.class
         );
@@ -68,7 +67,7 @@ public class EnderscapeClient implements ClientModInitializer {
 
         BlockEntityRenderers.register(EnderscapeBlockEntities.MAGNIA_SPROUT, MagniaSproutRenderer::new);
 
-        TooltipComponentCallback.EVENT.register((component) -> component instanceof FueledToolComponent tool ? new FueledToolTooltip(tool.stack()) : null);
+        ClientTooltipComponentCallback.EVENT.register((component) -> component instanceof FueledToolComponent tool ? new FueledToolTooltip(tool.stack()) : null);
     }
 
     private void resetTemporaryData() {

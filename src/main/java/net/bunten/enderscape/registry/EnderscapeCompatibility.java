@@ -8,8 +8,8 @@ import net.fabricmc.fabric.api.event.registry.DynamicRegistryView;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
-import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
+import net.fabricmc.fabric.api.registry.FuelValueEvents;
+import net.fabricmc.fabric.api.registry.LandPathTypeRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -59,7 +59,7 @@ public class EnderscapeCompatibility {
         registerFuelItems();
         registerStrippables();
 
-        LandPathNodeTypesRegistry.register(DRIFT_JELLY_BLOCK, (state, neighbor) -> PathType.DAMAGE_OTHER);
+        LandPathTypeRegistry.register(DRIFT_JELLY_BLOCK, (state, neighbor) -> PathType.DAMAGING);
 
         DefaultItemComponentEvents.MODIFY.register((context) -> {
             context.modify(
@@ -232,7 +232,7 @@ public class EnderscapeCompatibility {
     }
 
     private static void registerFuelItems() {
-        FuelRegistryEvents.BUILD.register(Enderscape.id("add_fuels"), (builder, context) -> {
+        FuelValueEvents.BUILD.register(Enderscape.id("add_fuels"), (builder, context) -> {
             builder.add(VOID_SHALE, context.baseSmeltTime());
         });
     }

@@ -35,7 +35,7 @@ public class VeiledOvergrowthBlock extends AbstractOvergrowthBlock {
 
         for (BlockPos pos : BlockPos.randomInCube(random, 30, origin, range)) {
             if (i >= max) break;
-            BlockState plant = EnderscapeBlocks.VEILED_OVERGROWTH_BONEMEAL_PROVIDER.getState(random, pos);
+            BlockState plant = EnderscapeBlocks.VEILED_OVERGROWTH_BONEMEAL_PROVIDER.getState(level, random, pos);
             if (level.isEmptyBlock(pos) && level.getBlockState(pos.below()).is(this)) {
                 level.setBlock(pos, plant, 2);
                 i++;

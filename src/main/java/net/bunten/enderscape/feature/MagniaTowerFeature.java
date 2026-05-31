@@ -185,7 +185,7 @@ public class MagniaTowerFeature extends Feature<MagniaTowerConfig> {
     private int getPillarHeight(RandomSource random, int x, int z, boolean corner, boolean edge, MagniaTowerConfig config) {
         int height = config.pillar_height().sample(random);
 
-        if (height <= config.pillar_height().getMaxValue() - 2 && random.nextInt(10) == 0) height *= 2;
+        if (height <= config.pillar_height().maxInclusive() - 2 && random.nextInt(10) == 0) height *= 2;
 
         if (corner && edge) {
             height /= Mth.nextInt(random, 4, 6);

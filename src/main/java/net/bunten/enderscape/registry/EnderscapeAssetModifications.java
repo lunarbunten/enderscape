@@ -6,7 +6,10 @@ import com.google.gson.JsonObject;
 import net.bunten.enderscape.Enderscape;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.equipment.ArmorType;
-import net.ramixin.mixson.inline.Mixson;
+import net.ramixin.mixson.Mixson;
+import net.ramixin.mixson.MixsonCodecs;
+import net.ramixin.mixson.enums.ErrorPolicy;
+import net.ramixin.mixson.enums.Lifetime;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,10 +40,13 @@ public final class EnderscapeAssetModifications  {
     }
 
     private static void registerItemModelModification(String armorPieceType, Identifier armorMaterial) {
+        var armorMaterialClientItemId = Identifier.fromNamespaceAndPath(armorMaterial.getNamespace(), "items/" + armorMaterial.getPath() + "_" + armorPieceType);
         Mixson.registerEvent(
                 1,
-                Identifier.fromNamespaceAndPath(armorMaterial.getNamespace(), "items/" + armorMaterial.getPath() + "_" + armorPieceType).toString(),
+                Lifetime.PERSISTENT,
+                ErrorPolicy.IGNORE,
                 Enderscape.id("add_trims_to_" + armorMaterial.getPath() + "_" + armorPieceType).toString(),
+                x -> x.id().equals(armorMaterialClientItemId),
                 (context) -> {
                     JsonObject root = context.getFile().getAsJsonObject();
                     if (root == null || !root.has("model")) return;
@@ -69,10 +75,13 @@ public final class EnderscapeAssetModifications  {
     }
 
     private static void registerTrimPatternTextures() {
+        var armorTrimAtlas = Identifier.withDefaultNamespace("atlases/armor_trims");
         Mixson.registerEvent(
                 1,
-                Identifier.withDefaultNamespace("atlases/armor_trims").toString(),
+                Lifetime.PERSISTENT,
+                ErrorPolicy.IGNORE,
                 Enderscape.id("add_trim_patterns_to_armor_trims_atlas").toString(),
+                x -> x.id().equals(armorTrimAtlas),
                 (context) -> {
                     JsonObject root = context.getFile().getAsJsonObject();
                     if (root == null || !root.has("sources")) return;
@@ -106,10 +115,13 @@ public final class EnderscapeAssetModifications  {
     }
 
     private static void registerTrimMaterialsToAtlas(String atlasName) {
+        var trimMaterialAtlas = Identifier.withDefaultNamespace("atlases/" + atlasName);
         Mixson.registerEvent(
                 1,
-                Identifier.withDefaultNamespace("atlases/" + atlasName).toString(),
+                Lifetime.PERSISTENT,
+                ErrorPolicy.IGNORE,
                 Enderscape.id("add_trim_materials_to_" + atlasName + "_atlas").toString(),
+                x -> x.id().equals(trimMaterialAtlas),
                 (context) -> {
                     JsonObject root = context.getFile().getAsJsonObject();
                     if (root == null || !root.has("sources")) return;

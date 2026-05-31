@@ -1,8 +1,10 @@
 package net.bunten.enderscape.client.hud;
 
 import com.mojang.blaze3d.pipeline.BlendFunction;
+import com.mojang.blaze3d.pipeline.ColorTargetState;
+import com.mojang.blaze3d.pipeline.DepthStencilState;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.platform.DepthTestFunction;
+import com.mojang.blaze3d.platform.CompareOp;
 import com.mojang.blaze3d.platform.DestFactor;
 import com.mojang.blaze3d.platform.SourceFactor;
 import net.bunten.enderscape.Enderscape;
@@ -11,7 +13,7 @@ import net.bunten.enderscape.client.EnderscapeClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
@@ -20,26 +22,25 @@ import static net.bunten.enderscape.client.EnderscapeClient.MAX_STARE_STICKS;
 import static net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED_SNIPPET;
 
 @Environment(EnvType.CLIENT)
-public class StareScreenEffect extends HudElement {
+public class StareScreenEffect extends EnderscapeHudElement {
 
     public static final Identifier STATIC_TEXTURE = Enderscape.id("textures/misc/static.png");
 
     public static final RenderPipeline SCREEN_EFFECT_PIPELINE = RenderPipelines.register(
             RenderPipeline.builder(GUI_TEXTURED_SNIPPET)
                     .withLocation(Enderscape.id("pipeline/stare_screen_effect"))
-                    .withBlend(new BlendFunction(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_CONSTANT_ALPHA))
-                    .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
-                    .withDepthWrite(false)
+                    .withDepthStencilState(new DepthStencilState(CompareOp.ALWAYS_PASS, false))
+                    .withColorTargetState(new ColorTargetState(new BlendFunction(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_CONSTANT_ALPHA)))
                     .build()
     );
 
     public StareScreenEffect() {
-        super(RenderPhase.BEFORE_HUD);
+        super(RenderPhase.BEFORE_HUD, Enderscape.id("state_screen_effect"));
     }
 
     private float alpha = 0, previousAlpha = 0;
 
-    public void render(GuiGraphics graphics, DeltaTracker tracker) {
+    public void extractRenderState(GuiGraphicsExtractor graphics, DeltaTracker tracker) {
         if (client.player == null || client.options.hideGui || !client.options.getCameraType().isFirstPerson() || client.player.isSpectator() || EnderscapeClient.stareTicks <= 0 || !EnderscapeConfig.getInstance().endermanStaticOverlay) {
             return;
         }

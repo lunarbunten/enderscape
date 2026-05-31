@@ -20,7 +20,7 @@ public abstract class PortalParticleMixin extends SingleQuadParticle {
         super(clientLevel, d, e, f, textureAtlasSprite);
     }
 
-    @Inject(method = "getLightColor", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getLightCoords", at = @At("RETURN"), cancellable = true)
     private void setupColor(float f, CallbackInfoReturnable<Integer> cir) {
         if (EnderscapeConfig.getInstance().portalParticleEmissive) cir.setReturnValue(Math.max(EnderscapeParticleProviders.scaledLight(0.6F), cir.getReturnValueI()));
     }

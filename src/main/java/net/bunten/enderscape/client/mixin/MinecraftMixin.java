@@ -43,7 +43,7 @@ public abstract class MinecraftMixin {
         }
     }
 
-    @Inject(method = "pickBlock", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "pickBlockOrEntity", at = @At("HEAD"), cancellable = true)
     private void Enderscape$pickBlock(CallbackInfo info) {
         if (EnderscapeMobEffects.isStunned(player)) {
             info.cancel();

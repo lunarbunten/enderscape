@@ -3,7 +3,7 @@ package net.bunten.enderscape.registry;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import net.bunten.enderscape.Enderscape;
-import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
+import net.fabricmc.fabric.api.object.builder.v1.world.poi.PoiHelper;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
@@ -21,7 +21,7 @@ public class EnderscapePoi {
     }
 
     static {
-        PointOfInterestHelper.register(
+        PoiHelper.register(
                 DRIFTER_HOME.identifier(),
                 4,
                 8,
@@ -35,7 +35,7 @@ public class EnderscapePoi {
                         .collect(ImmutableSet.toImmutableSet())
         );
 
-        PointOfInterestHelper.register(
+        PoiHelper.register(
                 RUSTLE_SLEEPING_SPOT.identifier(),
                 1,
                 8,

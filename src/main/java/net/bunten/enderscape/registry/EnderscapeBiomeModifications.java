@@ -32,7 +32,7 @@ public class EnderscapeBiomeModifications {
 
     private static final EnderscapeConfig CONFIG = EnderscapeConfig.getInstance();
 
-    private static final Predicate<BiomeSelectionContext> IS_END = (selection) -> selection.getBiomeRegistryEntry().is(BiomeTags.IS_END);
+    private static final Predicate<BiomeSelectionContext> IS_END = (selection) -> selection.getBiomeHolder().is(BiomeTags.IS_END);
     private static final BackgroundMusic DEFAULT_END_BGM = new BackgroundMusic(Musics.END);
 
     static {
@@ -70,14 +70,14 @@ public class EnderscapeBiomeModifications {
                 CONFIG.ambienceUpdateGrassColors,
                 "update_end_biome_grass_color_when_default",
                 selection -> selection.getBiome().getSpecialEffects().grassColorOverride().isEmpty(),
-                (selection, modification) -> modification.getEffects().setGrassColor(EnderscapeBiomes.DEFAULT_GRASS_COLOR)
+                (selection, modification) -> modification.getEffects().setGrassColorOverride(EnderscapeBiomes.DEFAULT_GRASS_COLOR)
         );
 
         conditionalAmbienceModification(
                 CONFIG.ambienceUpdateFoliageColors,
                 "update_end_biome_foliage_color_when_default",
                 selection -> selection.getBiome().getSpecialEffects().foliageColorOverride().isEmpty(),
-                (selection, modification) -> modification.getEffects().setFoliageColor(EnderscapeBiomes.DEFAULT_FOLIAGE_COLOR)
+                (selection, modification) -> modification.getEffects().setFoliageColorOverride(EnderscapeBiomes.DEFAULT_FOLIAGE_COLOR)
         );
 
         conditionalAmbienceModification(
@@ -155,7 +155,7 @@ public class EnderscapeBiomeModifications {
 
         BiomeModifications.create(Enderscape.id("add_global_features")).add(
                 ModificationPhase.ADDITIONS,
-                IS_END.and(selection -> !selection.getBiomeRegistryEntry().is(EnderscapeBiomeTags.EXCLUDED_FROM_GLOBAL_FEATURE_ADDITIONS)),
+                IS_END.and(selection -> !selection.getBiomeHolder().is(EnderscapeBiomeTags.EXCLUDED_FROM_GLOBAL_FEATURE_ADDITIONS)),
                 (selection, modification) -> {
                     BiomeModificationContext.GenerationSettingsContext generation = modification.getGenerationSettings();
 
@@ -172,9 +172,9 @@ public class EnderscapeBiomeModifications {
 
         BiomeModifications.create(Enderscape.id("add_new_barrens_content")).add(
                 ModificationPhase.ADDITIONS,
-                IS_END.and(selection -> selection.getBiomeRegistryEntry().is(EnderscapeBiomeTags.HAS_BARRENS_ADDITIONS)),
+                IS_END.and(selection -> selection.getBiomeHolder().is(EnderscapeBiomeTags.HAS_BARRENS_ADDITIONS)),
                 (selection, modification) -> {
-                    modification.getSpawnSettings().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUBBLEMITE, 2, 3), 2);
+                    modification.getMobSpawnSettings().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUBBLEMITE, 2, 3), 2);
 
                     BiomeModificationContext.GenerationSettingsContext generation = modification.getGenerationSettings();
 
@@ -224,6 +224,6 @@ public class EnderscapeBiomeModifications {
 
     private static void conditionalAmbienceModification(boolean condition, String name, Predicate<BiomeSelectionContext> predicate, BiConsumer<BiomeSelectionContext, BiomeModificationContext> consumer) {
         if (!condition) return;
-        BiomeModifications.create(Enderscape.id(name)).add(ModificationPhase.REPLACEMENTS, IS_END.and(predicate.or(selection -> selection.getBiomeRegistryEntry().is(EnderscapeBiomeTags.OVERRIDES_DEFAULT_AMBIENCE))), consumer);
+        BiomeModifications.create(Enderscape.id(name)).add(ModificationPhase.REPLACEMENTS, IS_END.and(predicate.or(selection -> selection.getBiomeHolder().is(EnderscapeBiomeTags.OVERRIDES_DEFAULT_AMBIENCE))), consumer);
     }
 }

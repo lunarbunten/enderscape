@@ -19,6 +19,7 @@ import net.minecraft.world.level.biome.Biome;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.spongepowered.asm.mixin.MixinEnvironment;
 
 public class Enderscape implements ModInitializer {
 
@@ -49,7 +50,7 @@ public class Enderscape implements ModInitializer {
 
     @Override
     public void onInitialize() {
-
+        //MixinEnvironment.getCurrentEnvironment().audit();
         Reflection.initialize(
                 EnderscapeConfig.class,
                 EnderscapeRegistries.class,

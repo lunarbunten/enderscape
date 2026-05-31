@@ -13,6 +13,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
@@ -28,7 +29,7 @@ public class LargeCelestialChanterelleGenerator {
             .add(EnderscapeBlocks.RIPE_FLANGER_BERRY_BLOCK.defaultBlockState(), 1)
     );
 
-    public static boolean tryGenerate(LevelAccessor level, BlockPos origin, RandomSource random, LargeCelestialChanterelleConfig config) {
+    public static boolean tryGenerate(WorldGenLevel level, BlockPos origin, RandomSource random, LargeCelestialChanterelleConfig config) {
         Direction direction = Direction.UP;
         BlockPos attached = origin.relative(direction.getOpposite());
 
@@ -47,7 +48,7 @@ public class LargeCelestialChanterelleGenerator {
         return false;
     }
 
-    public static void generate(LevelAccessor level, BlockPos pos, RandomSource random, LargeCelestialChanterelleConfig config, int height, int radius) {
+    public static void generate(WorldGenLevel level, BlockPos pos, RandomSource random, LargeCelestialChanterelleConfig config, int height, int radius) {
         level.setBlock(pos, Blocks.AIR.defaultBlockState(), 4);
         place(level, pos.below(), Blocks.END_STONE.defaultBlockState());
         generateCap(level, random, pos.above(height), config, radius);
@@ -66,7 +67,7 @@ public class LargeCelestialChanterelleGenerator {
         return true;
     }
 
-    protected static void generateVines(LevelAccessor level, RandomSource random, BlockPos origin, LargeCelestialChanterelleConfig config, int radius) {
+    protected static void generateVines(WorldGenLevel level, RandomSource random, BlockPos origin, LargeCelestialChanterelleConfig config, int radius) {
         int generatedVines = 0;
         int maxTries = config.vine_generation_tries();
         int maxRadius = (int) (radius * 0.8F);
@@ -98,14 +99,14 @@ public class LargeCelestialChanterelleGenerator {
         return level.isEmptyBlock(pos) && level.isEmptyBlock(pos.below()) && level.getBlockState(pos.above()).is(EnderscapeBlockTags.FLANGER_BERRY_VINE_PLANTABLE_ON);
     }
 
-    private static void generateVine(LevelAccessor level, RandomSource random, BlockPos start, int radius) {
+    private static void generateVine(WorldGenLevel level, RandomSource random, BlockPos start, int radius) {
         int length = Mth.nextInt(random, (int) (radius * 0.8F), radius * 2);
         MutableBlockPos mutable = start.mutable();
 
         for (int i = 0; i <= length; i++) {
             if (level.isEmptyBlock(mutable)) {
                 if (i == length || !level.isEmptyBlock(mutable.below())) {
-                    replace(level, mutable, FLANGER_BERRIES.getState(random, mutable));
+                    replace(level, mutable, FLANGER_BERRIES.getState(level, random, mutable));
                     break;
                 } else {
                     replace(level, mutable, EnderscapeBlocks.FLANGER_BERRY_VINE.defaultBlockState().setValue(StateProperties.ATTACHED, true).setValue(AbstractVineBlock.AGE, AbstractVineBlock.MAX_AGE));
@@ -116,7 +117,7 @@ public class LargeCelestialChanterelleGenerator {
         }
     }
 
-    protected static void generateCap(LevelAccessor level, RandomSource random, BlockPos pos, LargeCelestialChanterelleConfig config, int radius) {
+    protected static void generateCap(WorldGenLevel level, RandomSource random, BlockPos pos, LargeCelestialChanterelleConfig config, int radius) {
         for (int x = -radius + 1; x < radius; x++) {
             for (int z = -radius + 1; z < radius; z++) {
                 double distance = Math.sqrt(x * x + z * z);

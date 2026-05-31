@@ -54,7 +54,7 @@ public record LodestoneTeleportationCheck(@Nullable Component failureComponent, 
         user.level().playSound(null, user.getX(), user.getY(), user.getZ(), LodestoneTeleportation.get(stack).sounds().teleportFailure(), user.getSoundSource(), 0.65F, Mth.nextFloat(user.getRandom(), 0.9F, 1.1F));
 
         if (user instanceof Player player) {
-            player.displayClientMessage(failureComponent, true);
+            player.sendOverlayMessage(failureComponent);
             player.getCooldowns().addCooldown(stack, 20);
         }
 

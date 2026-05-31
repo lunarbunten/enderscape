@@ -4,7 +4,7 @@ import net.bunten.enderscape.network.ClientboundStructureChangedPayload;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLevelEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
@@ -71,13 +71,13 @@ public class StructureMusicHandler {
     }
 
     static {
-        ServerWorldEvents.UNLOAD.register((server, level) -> {
+        ServerLevelEvents.UNLOAD.register((server, level) -> {
             for (ServerPlayer player : level.players()) {
                 removeFromAll(player);
             }
         });
 
-        ServerTickEvents.START_WORLD_TICK.register((level) -> {
+        ServerTickEvents.START_LEVEL_TICK.register((level) -> {
             if (!playerTimers.isEmpty()) {
                 Iterator<Map.Entry<ServerPlayer, Integer>> iterator = playerTimers.entrySet().iterator();
 

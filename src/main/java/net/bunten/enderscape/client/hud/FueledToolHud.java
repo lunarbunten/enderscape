@@ -1,5 +1,6 @@
 package net.bunten.enderscape.client.hud;
 
+import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.item.ItemStackContext;
 import net.bunten.enderscape.item.LodestoneTrackerContext;
 import net.bunten.enderscape.item.component.FueledTool;
@@ -9,7 +10,7 @@ import net.bunten.enderscape.item.component.value.FuelHud;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
@@ -19,10 +20,10 @@ import net.minecraft.world.item.ItemStack;
 import static net.bunten.enderscape.registry.EnderscapeDataComponents.ENABLED;
 
 @Environment(EnvType.CLIENT)
-public class FueledToolHud extends HudElement {
+public class FueledToolHud extends EnderscapeHudElement {
 
     public FueledToolHud() {
-        super(RenderPhase.AFTER_HUD);
+        super(RenderPhase.AFTER_HUD, Enderscape.id("fueled_tool_hud"));
     }
 
     private Identifier emptySegments;
@@ -45,7 +46,7 @@ public class FueledToolHud extends HudElement {
     private int maxFuel;
     private int cost;
 
-    public void render(GuiGraphics graphics, DeltaTracker tracker) {
+    public void extractRenderState(GuiGraphicsExtractor graphics, DeltaTracker tracker) {
         if (!config.nebuliteToolHudEnabled || client.player == null || client.options.hideGui || !client.options.getCameraType().isFirstPerson() || client.player.isSpectator()) {
             return;
         }
@@ -74,7 +75,7 @@ public class FueledToolHud extends HudElement {
         graphics.pose().popMatrix();
     }
 
-    private void renderFuelBar(GuiGraphics graphics, int x, int y, float opacity) {
+    private void renderFuelBar(GuiGraphicsExtractor graphics, int x, int y, float opacity) {
         int lastFueled = -1;
         int rx = x;
 
@@ -93,11 +94,11 @@ public class FueledToolHud extends HudElement {
         costOverlayPosition = lastFueled;
     }
 
-    private void renderTransdimensionalOutline(GuiGraphics graphics, int x, int y, float opacity) {
+    private void renderTransdimensionalOutline(GuiGraphicsExtractor graphics, int x, int y, float opacity) {
         graphics.blitSprite(RenderPipelines.GUI_TEXTURED, outlineOverlay, x - 6, y - 6, (maxFuel * 11) + 13, 5 + 12, white(opacity));
     }
 
-    private void renderInvalidOverlay(GuiGraphics graphics, int x, int y, float opacity) {
+    private void renderInvalidOverlay(GuiGraphicsExtractor graphics, int x, int y, float opacity) {
         int rx = x;
 
         for (int i = 0; i < maxFuel; i++) {
@@ -110,7 +111,7 @@ public class FueledToolHud extends HudElement {
         }
     }
 
-    private void renderCostOverlay(GuiGraphics graphics, int y, float opacity) {
+    private void renderCostOverlay(GuiGraphicsExtractor graphics, int y, float opacity) {
         if (opacity > 0 && costOverlayPosition >= 0 && fuel >= cost) {
             for (int i = 0; i < cost; i++) {
                 graphics.blitSprite(RenderPipelines.GUI_TEXTURED, costOverlay, costOverlayPosition - (i * 11), y, 11, 5, white(opacity));

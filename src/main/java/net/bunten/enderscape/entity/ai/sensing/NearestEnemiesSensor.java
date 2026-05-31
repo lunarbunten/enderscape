@@ -28,7 +28,7 @@ public class NearestEnemiesSensor extends Sensor<LivingEntity> {
     }
 
     protected boolean isEnemy(LivingEntity mob, LivingEntity next) {
-        return next.getType().is(enemies) && EntitySelector.NO_SPECTATORS.test(next) && mob.closerThan(next, 16);
+        return next.is(enemies) && EntitySelector.NO_SPECTATORS.test(next) && mob.closerThan(next, 16);
     }
 
     @Override

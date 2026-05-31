@@ -71,7 +71,7 @@ public class EnderscapeConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> VERADITE = registerKey("veradite");
     public static final ResourceKey<ConfiguredFeature<?, ?>> VOID_SHALE = registerKey("void_shale");
     public static final ResourceKey<ConfiguredFeature<?, ?>> VOID_SHALE_BLOB = registerKey("void_shale_blob");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> WISP_FLOWER_PATCH = registerKey("wisp_flower_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> WISP_FLOWER = registerKey("wisp_flower");
 
     private static final List<OreConfiguration.TargetBlockState> KURODITE_TARGETS = List.of(
             OreConfiguration.target(new TagMatchTest(EnderscapeBlockTags.ORE_REPLACEABLE), EnderscapeBlocks.KURODITE.defaultBlockState())
@@ -138,9 +138,7 @@ public class EnderscapeConfiguredFeatures {
                 )
         ));
 
-        register(context, WISP_FLOWER_PATCH, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(
-                Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(EnderscapeBlocks.WISP_FLOWER)), List.of(), 16)
-        );
+        register(context, WISP_FLOWER, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(EnderscapeBlocks.WISP_FLOWER)));
 
         register(context, VEILED_TREE, EnderscapeFeatures.VEILED_TREE, new VeiledTreeConfig(
                 UniformInt.of(1, 2),

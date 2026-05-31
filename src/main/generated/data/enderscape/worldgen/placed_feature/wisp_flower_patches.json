@@ -1,5 +1,5 @@
 {
-  "feature": "enderscape:wisp_flower_patch",
+  "feature": "enderscape:wisp_flower",
   "placement": [
     {
       "type": "minecraft:height_range",
@@ -20,8 +20,8 @@
     {
       "type": "minecraft:environment_scan",
       "allowed_search_condition": {
-        "type": "minecraft:matching_blocks",
-        "blocks": "minecraft:air"
+        "type": "minecraft:matching_block_tag",
+        "tag": "minecraft:air"
       },
       "direction_of_search": "down",
       "max_steps": 12,
@@ -37,6 +37,32 @@
     },
     {
       "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:count",
+      "count": 96
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:trapezoid",
+        "max": 7,
+        "min": -7,
+        "plateau": 0
+      },
+      "y_spread": {
+        "type": "minecraft:trapezoid",
+        "max": 3,
+        "min": -3,
+        "plateau": 0
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_block_tag",
+        "tag": "minecraft:air"
+      }
     }
   ]
 }

@@ -6,31 +6,27 @@ import net.bunten.enderscape.client.renderer.LightingStyle;
 import net.bunten.enderscape.registry.EnderscapeEnvironmentAttributes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.Lightmap;
 import net.minecraft.world.level.Level;
 import org.joml.Vector3f;
 import org.joml.Vector3fc;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
-@Mixin(LightTexture.class)
+@Mixin(Lightmap.class)
 public class LightTextureMixin {
 
     @Unique
     public final EnderscapeConfig Enderscape$config = EnderscapeConfig.getInstance();
 
-    @Shadow
-    @Final
-    private Minecraft minecraft;
-
-    @ModifyArg(method = "updateLightTexture", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/buffers/Std140Builder;putVec3(Lorg/joml/Vector3fc;)Lcom/mojang/blaze3d/buffers/Std140Builder;", ordinal = 1))
+    @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/buffers/Std140Builder;putVec3(Lorg/joml/Vector3fc;)Lcom/mojang/blaze3d/buffers/Std140Builder;", ordinal = 1))
     private Vector3fc Enderscape$changeAmbientLightColor(Vector3fc value) {
+        Minecraft minecraft = Minecraft.getInstance();
+
         Vector3f base = new Vector3f(value);
 
         ClientLevel level = minecraft.level;
@@ -48,9 +44,9 @@ public class LightTextureMixin {
         return base.mul(scaledAmbientLight);
     }
 
-    @ModifyArgs(method = "updateLightTexture", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderPass;setPipeline(Lcom/mojang/blaze3d/pipeline/RenderPipeline;)V"))
+    @ModifyArgs(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderPass;setPipeline(Lcom/mojang/blaze3d/pipeline/RenderPipeline;)V"))
     private void Enderscape$changeEndLightmap(Args args) {
-        ClientLevel level = minecraft.level;
+        ClientLevel level = Minecraft.getInstance().level;
         if (level != null && level.dimension().equals(Level.END) && Enderscape$config.lightingStyle != LightingStyle.VANILLA) {
             switch (Enderscape$config.lightingStyle) {
                 case IMPROVED -> args.set(0, EnderscapeRenderPipelines.IMPROVED_LIGHTMAP);

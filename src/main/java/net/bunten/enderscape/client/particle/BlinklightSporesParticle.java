@@ -40,7 +40,7 @@ public class BlinklightSporesParticle extends SingleQuadParticle {
     }
 
     @Override
-    public int getLightColor(float delta) {
+    public int getLightCoords(float delta) {
         return EnderscapeParticleProviders.scaledLight(1.0F);
     }
 

@@ -1,7 +1,8 @@
 package net.bunten.enderscape.client.renderer;
 
+import com.mojang.blaze3d.pipeline.DepthStencilState;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.platform.DepthTestFunction;
+import com.mojang.blaze3d.platform.CompareOp;
 import com.mojang.blaze3d.shaders.UniformType;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
@@ -17,8 +18,7 @@ public class EnderscapeRenderPipelines {
                     .withFragmentShader(Enderscape.id("enderscape/improved_lightmap"))
                     .withUniform("LightmapInfo", UniformType.UNIFORM_BUFFER)
                     .withVertexFormat(DefaultVertexFormat.EMPTY, VertexFormat.Mode.TRIANGLES)
-                    .withDepthWrite(false)
-                    .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
+                    .withDepthStencilState(new DepthStencilState(CompareOp.ALWAYS_PASS, false))
                     .build()
     );
 
@@ -29,8 +29,7 @@ public class EnderscapeRenderPipelines {
                     .withFragmentShader(Enderscape.id("enderscape/midnight_lightmap"))
                     .withUniform("LightmapInfo", UniformType.UNIFORM_BUFFER)
                     .withVertexFormat(DefaultVertexFormat.EMPTY, VertexFormat.Mode.TRIANGLES)
-                    .withDepthWrite(false)
-                    .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
+                    .withDepthStencilState(new DepthStencilState(CompareOp.ALWAYS_PASS, false))
                     .build()
     );
 }

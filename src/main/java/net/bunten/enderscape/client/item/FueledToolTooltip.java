@@ -6,7 +6,7 @@ import net.bunten.enderscape.item.component.value.FuelTooltip;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
@@ -44,11 +44,11 @@ public class FueledToolTooltip implements ClientTooltipComponent {
     }
 
     @Override
-    public void renderImage(Font font, int x, int y, int k, int l, GuiGraphics graphics) {
+    public void extractImage(Font font, int x, int y, int w, int h, GuiGraphicsExtractor graphics) {
         renderFuelBar(graphics, x, y + 1);
     }
 
-    private void renderFuelBar(GuiGraphics graphics, int x, int y) {
+    private void renderFuelBar(GuiGraphicsExtractor graphics, int x, int y) {
         int rx = x;
 
         Vec2 offset = tooltip.offset();

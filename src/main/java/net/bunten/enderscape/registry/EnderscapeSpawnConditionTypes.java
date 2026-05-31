@@ -21,7 +21,7 @@ public class EnderscapeSpawnConditionTypes {
         public static final KeyDispatchDataCodec<FloorCheck> CODEC = KeyDispatchDataCodec.of(DATA_CODEC);
 
         public boolean test(SpawnContext context) {
-            return requiredBlocks.contains(context.level().getBlockState(context.pos().below()).getBlockHolder());
+            return requiredBlocks.contains(context.level().getBlockState(context.pos().below()).typeHolder());
         }
 
         @Override

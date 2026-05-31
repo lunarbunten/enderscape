@@ -1,8 +1,8 @@
 package net.bunten.enderscape.datagen;
 
 import net.bunten.enderscape.structure.EnderscapeStructures;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.tags.TagAppender;
@@ -13,9 +13,9 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 
 import java.util.concurrent.CompletableFuture;
 
-public class EnderscapeStructureTagProvider extends FabricTagProvider<Structure> {
+public class EnderscapeStructureTagProvider extends FabricTagsProvider<Structure> {
 
-    public EnderscapeStructureTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> future) {
+    public EnderscapeStructureTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> future) {
         super(output, Registries.STRUCTURE, future);
     }
 

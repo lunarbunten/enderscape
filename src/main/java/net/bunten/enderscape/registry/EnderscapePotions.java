@@ -1,7 +1,7 @@
 package net.bunten.enderscape.registry;
 
 import net.bunten.enderscape.Enderscape;
-import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
+import net.fabricmc.fabric.api.registry.FabricPotionBrewingBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -23,7 +23,7 @@ public class EnderscapePotions {
     }
 
     static {
-        FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
+        FabricPotionBrewingBuilder.BUILD.register(builder -> {
             builder.registerPotionRecipe(
                     Potions.AWKWARD,
                     Ingredient.of(DRIFT_JELLY_BOTTLE),

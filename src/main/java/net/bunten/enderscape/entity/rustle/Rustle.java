@@ -1,5 +1,6 @@
 package net.bunten.enderscape.entity.rustle;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
 import net.bunten.enderscape.entity.ai.EnderscapeMemory;
 import net.bunten.enderscape.registry.*;
@@ -29,6 +30,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.ActivityData;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -54,6 +56,8 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class Rustle extends Animal implements Bucketable, Shearable {
 
@@ -139,13 +143,8 @@ public class Rustle extends Animal implements Bucketable, Shearable {
     }
 
     @Override
-    protected Brain.Provider<Rustle> brainProvider() {
-        return Brain.provider(RustleAI.MEMORY_TYPES, RustleAI.SENSOR_TYPES);
-    }
-
-    @Override
-    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
-        return RustleAI.makeBrain(brainProvider().makeBrain(dynamic));
+    protected Brain<? extends LivingEntity> makeBrain(Brain.Packed packedBrain) {
+        return RustleAI.makeBrain(this, packedBrain);
     }
 
     @Override

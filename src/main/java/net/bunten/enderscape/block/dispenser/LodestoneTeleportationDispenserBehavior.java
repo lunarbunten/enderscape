@@ -25,7 +25,7 @@ public class LodestoneTeleportationDispenserBehavior extends OptionalDispenseIte
 
         if (!level.isClientSide()) {
             BlockPos pos = source.pos().relative(source.state().getValue(DispenserBlock.FACING));
-            for (LivingEntity mob : level.getEntitiesOfClass(LivingEntity.class, new AABB(pos), EntitySelector.NO_SPECTATORS.and(entity -> !entity.getType().is(BLACKLISTED_FROM_MIRROR_IN_DISPENSER_TELEPORTATION)))) {
+            for (LivingEntity mob : level.getEntitiesOfClass(LivingEntity.class, new AABB(pos), EntitySelector.NO_SPECTATORS.and(entity -> !entity.is(BLACKLISTED_FROM_MIRROR_IN_DISPENSER_TELEPORTATION)))) {
                 setSuccess(tryTeleport(stack, mob, level));
                 break;
             }

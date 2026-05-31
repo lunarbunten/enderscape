@@ -47,9 +47,9 @@ public class NebuliteOreParticle extends SimpleAnimatedParticle {
     }
 
     @Override
-    public int getLightColor(float tint) {
+    public int getLightCoords(float tint) {
         BlockPos pos = BlockPos.containing(x, y, z);
-        int color = level.hasChunkAt(pos) ? LevelRenderer.getLightColor(level, pos) : 0;
+        int color = level.hasChunkAt(pos) ? LevelRenderer.getLightCoords(level, pos) : 0;
         return Math.max(EnderscapeParticleProviders.scaledLight(0.6F), color);
     }
 

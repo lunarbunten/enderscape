@@ -2,8 +2,8 @@ package net.bunten.enderscape.datagen;
 
 import net.bunten.enderscape.block.VeiledLeafPileBlock;
 import net.bunten.enderscape.block.VoidShaleBlock;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -37,9 +37,9 @@ import static net.bunten.enderscape.registry.EnderscapeBlocks.*;
 import static net.bunten.enderscape.registry.EnderscapeItems.*;
 import static net.minecraft.world.item.Items.END_STONE;
 
-public class EnderscapeBlockLootProvider extends FabricBlockLootTableProvider {
+public class EnderscapeBlockLootProvider extends FabricBlockLootSubProvider {
 
-    protected EnderscapeBlockLootProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> lookup) {
+    protected EnderscapeBlockLootProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> lookup) {
         super(output, lookup);
     }
 

@@ -36,8 +36,8 @@ public class EntityAffectedByMagniaParticle extends SimpleAnimatedParticle {
     }
 
     @Override
-    public int getLightColor(float delta) {
-        return Math.max(EnderscapeParticleProviders.scaledLight(0.6F), super.getLightColor(delta));
+    public int getLightCoords(float delta) {
+        return Math.max(EnderscapeParticleProviders.scaledLight(0.6F), super.getLightCoords(delta));
     }
 
     @Environment(EnvType.CLIENT)

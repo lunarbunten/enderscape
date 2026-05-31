@@ -2,7 +2,7 @@ package net.bunten.enderscape.datagen;
 
 import net.bunten.enderscape.sound.MagniaRadioSong;
 import net.bunten.enderscape.registry.EnderscapeRegistries;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceKey;
@@ -13,7 +13,7 @@ import static net.bunten.enderscape.registry.EnderscapeMagniaRadioSongs.MAGNIA_R
 
 public class EnderscapeMagniaRadioSongProvider extends FabricDynamicRegistryProvider {
 
-    public EnderscapeMagniaRadioSongProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> future) {
+    public EnderscapeMagniaRadioSongProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> future) {
         super(output, future);
     }
 

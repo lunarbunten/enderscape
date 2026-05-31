@@ -1,7 +1,7 @@
 package net.bunten.enderscape.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.tags.TagAppender;
@@ -14,9 +14,9 @@ import java.util.concurrent.CompletableFuture;
 import static net.bunten.enderscape.registry.EnderscapeEnchantments.*;
 import static net.minecraft.tags.EnchantmentTags.*;
 
-public class EnderscapeEnchantmentTagProvider extends FabricTagProvider<Enchantment> {
+public class EnderscapeEnchantmentTagProvider extends FabricTagsProvider<Enchantment> {
 
-    public EnderscapeEnchantmentTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> future) {
+    public EnderscapeEnchantmentTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> future) {
         super(output, Registries.ENCHANTMENT, future);
     }
 

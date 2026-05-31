@@ -256,13 +256,8 @@ public class Drifter extends Animal {
     }
 
     @Override
-    protected Brain.Provider<Drifter> brainProvider() {
-        return Brain.provider(DrifterAI.MEMORY_TYPES, DrifterAI.SENSOR_TYPES);
-    }
-
-    @Override
-    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
-        return DrifterAI.makeBrain(brainProvider().makeBrain(dynamic));
+    protected Brain<? extends LivingEntity> makeBrain(Brain.Packed packedBrain) {
+        return DrifterAI.makeBrain(this, packedBrain);
     }
 
     @Override

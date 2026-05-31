@@ -106,7 +106,7 @@ public class MagniaSpikeFeature extends Feature<MagniaSpikeConfig> {
     private int getPillarHeight(RandomSource random, int x, int z, boolean corner, boolean edge, MagniaSpikeConfig config) {
         int height = config.height().sample(random);
 
-        if (height <= config.height().getMaxValue() - 2 && random.nextInt(10) == 0) height *= 2;
+        if (height <= config.height().maxInclusive() - 2 && random.nextInt(10) == 0) height *= 2;
 
         if (corner && edge) {
             height /= Mth.nextInt(random, 4, 6);

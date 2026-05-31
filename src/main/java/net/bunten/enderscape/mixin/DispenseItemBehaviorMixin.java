@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-@Mixin(targets = "net/minecraft/core/dispenser/DispenseItemBehavior$11")
+@Mixin(targets = "net/minecraft/core/dispenser/DispenseItemBehavior$10")
 public abstract class DispenseItemBehaviorMixin extends OptionalDispenseItemBehavior {
 
     @Shadow

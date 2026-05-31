@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.*;
@@ -254,12 +255,15 @@ public class EnderscapePlacedFeatures {
                 BiomeFilter.biome()
         );
 
-        PlacementUtils.register(context, WISP_FLOWER_PATCHES, get(context, EnderscapeConfiguredFeatures.WISP_FLOWER_PATCH),
+        PlacementUtils.register(context, WISP_FLOWER_PATCHES, get(context, EnderscapeConfiguredFeatures.WISP_FLOWER),
                 FULL_RANGE,
                 CountOnEveryLayerPlacement.of(2),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, matchesBlocks(VEILED_END_STONE), ONLY_IN_AIR_PREDICATE, 12),
                 RandomOffsetPlacement.vertical(ConstantInt.of(1)),
-                BiomeFilter.biome()
+                BiomeFilter.biome(),
+                CountPlacement.of(96),
+                RandomOffsetPlacement.ofTriangle(7, 3),
+                BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
         );
 
         PlacementUtils.register(context, VEILED_TREES, get(context, EnderscapeConfiguredFeatures.VEILED_TREE),

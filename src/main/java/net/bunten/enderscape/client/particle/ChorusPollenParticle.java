@@ -33,8 +33,8 @@ public class ChorusPollenParticle extends SingleQuadParticle {
         return Layer.TRANSLUCENT;
     }
 
-    public int getLightColor(float tint) {
-        return Math.max(EnderscapeParticleProviders.scaledLight(0.25F), super.getLightColor(tint));
+    public int getLightCoords(float tint) {
+        return Math.max(EnderscapeParticleProviders.scaledLight(0.25F), super.getLightCoords(tint));
     }
 
     @Override

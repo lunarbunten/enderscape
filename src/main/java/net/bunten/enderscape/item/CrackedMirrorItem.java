@@ -22,7 +22,7 @@ public class CrackedMirrorItem extends Item {
     @Override
     public InteractionResult use(Level world, Player player, InteractionHand hand) {
         player.playSound(EnderscapeItemSounds.CRACKED_MIRROR_TRY_TELEPORT, 1, 1);
-        player.displayClientMessage(Component.translatable("item.enderscape.cracked_mirror.message.try_use").withStyle(ChatFormatting.RED), true);
+        player.sendSystemMessage(Component.translatable("item.enderscape.cracked_mirror.message.try_use").withStyle(ChatFormatting.RED));
         player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
         return InteractionResult.SUCCESS;
     }
@@ -36,7 +36,7 @@ public class CrackedMirrorItem extends Item {
         if (state.is(Blocks.LODESTONE)) {
             Player player = context.getPlayer();
             player.playSound(EnderscapeItemSounds.CRACKED_MIRROR_TRY_LINK, 1, 1);
-            player.displayClientMessage(Component.translatable("item.enderscape.cracked_mirror.message.try_link").withStyle(ChatFormatting.RED), true);
+            player.sendSystemMessage(Component.translatable("item.enderscape.cracked_mirror.message.try_link").withStyle(ChatFormatting.RED));
             player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
             return InteractionResult.SUCCESS;
         }

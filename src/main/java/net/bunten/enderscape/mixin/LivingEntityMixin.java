@@ -67,8 +67,8 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
     public MagniaProperties createMagniaProperties() {
         return new MagniaProperties(
                 entity -> true,
-                entity -> entity.getType().is(EnderscapeEntityTags.AFFECTED_BY_MAGNIA) ? 0.05F : 0.01F * MagniaMoveable.getMagnetismFactor(entity),
-                entity -> entity.getType().is(EnderscapeEntityTags.AFFECTED_BY_MAGNIA) ? 0.05F : 0.02F * MagniaMoveable.getMagnetismFactor(entity),
+                entity -> entity.is(EnderscapeEntityTags.AFFECTED_BY_MAGNIA) ? 0.05F : 0.01F * MagniaMoveable.getMagnetismFactor(entity),
+                entity -> entity.is(EnderscapeEntityTags.AFFECTED_BY_MAGNIA) ? 0.05F : 0.02F * MagniaMoveable.getMagnetismFactor(entity),
                 DEFAULT_MAGNIA_PREDICATE,
                 entity -> {
                     if (entity instanceof LivingEntity living && !(entity instanceof Player)) {
@@ -252,7 +252,7 @@ public abstract class LivingEntityMixin extends Entity implements MagniaMoveable
 
     @Inject(at = @At("HEAD"), method = "makePoofParticles", cancellable = true)
     public void Enderscape$makePoofParticles(CallbackInfo info) {
-        if (EnderscapeConfig.getInstance().voidPoofParticlesUponDeath && mob.getType().is(EnderscapeEntityTags.CREATES_VOID_PARTICLES_UPON_DEATH)) {
+        if (EnderscapeConfig.getInstance().voidPoofParticlesUponDeath && mob.is(EnderscapeEntityTags.CREATES_VOID_PARTICLES_UPON_DEATH)) {
             info.cancel();
 
             for (int i = 0; i < 20; i++) {

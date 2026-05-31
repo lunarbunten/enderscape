@@ -1,7 +1,7 @@
 package net.bunten.enderscape.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.tags.TagAppender;
@@ -17,9 +17,9 @@ import static net.minecraft.tags.DamageTypeTags.DAMAGES_HELMET;
 import static net.minecraft.tags.DamageTypeTags.NO_KNOCKBACK;
 import static net.minecraft.world.damagesource.DamageTypes.*;
 
-public class EnderscapeDamageTypeTagProvider extends FabricTagProvider<DamageType> {
+public class EnderscapeDamageTypeTagProvider extends FabricTagsProvider<DamageType> {
 
-    public EnderscapeDamageTypeTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> future) {
+    public EnderscapeDamageTypeTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> future) {
         super(output, Registries.DAMAGE_TYPE, future);
     }
 

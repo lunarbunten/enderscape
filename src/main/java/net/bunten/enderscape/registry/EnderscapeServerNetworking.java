@@ -31,14 +31,14 @@ public class EnderscapeServerNetworking {
     }
 
     static {
-        PayloadTypeRegistry.playS2C().register(ClientboundDashJumpSoundPayload.TYPE, ClientboundDashJumpSoundPayload.STREAM_CODEC);
-        PayloadTypeRegistry.playS2C().register(ClientboundDashJumpPayload.TYPE, ClientboundDashJumpPayload.STREAM_CODEC);
-        PayloadTypeRegistry.playS2C().register(ClientboundLodestoneTeleportationInfoPayload.TYPE, ClientboundLodestoneTeleportationInfoPayload.STREAM_CODEC);
-        PayloadTypeRegistry.playS2C().register(ClientboundNebuliteOreSoundPayload.TYPE, ClientboundNebuliteOreSoundPayload.STREAM_CODEC);
-        PayloadTypeRegistry.playS2C().register(ClientboundRubbleShieldCooldownSoundPayload.TYPE, ClientboundRubbleShieldCooldownSoundPayload.STREAM_CODEC);
-        PayloadTypeRegistry.playS2C().register(ClientboundStareOverlayPayload.TYPE, ClientboundStareOverlayPayload.STREAM_CODEC);
-        PayloadTypeRegistry.playS2C().register(ClientboundStareSoundPayload.TYPE, ClientboundStareSoundPayload.STREAM_CODEC);
-        PayloadTypeRegistry.playS2C().register(ClientboundStructureChangedPayload.TYPE, ClientboundStructureChangedPayload.STREAM_CODEC);
-        PayloadTypeRegistry.playS2C().register(ClientboundTransdimensionalTravelSoundPayload.TYPE, ClientboundTransdimensionalTravelSoundPayload.STREAM_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(ClientboundDashJumpSoundPayload.TYPE, ClientboundDashJumpSoundPayload.STREAM_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(ClientboundDashJumpPayload.TYPE, ClientboundDashJumpPayload.STREAM_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(ClientboundLodestoneTeleportationInfoPayload.TYPE, ClientboundLodestoneTeleportationInfoPayload.STREAM_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(ClientboundNebuliteOreSoundPayload.TYPE, ClientboundNebuliteOreSoundPayload.STREAM_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(ClientboundRubbleShieldCooldownSoundPayload.TYPE, ClientboundRubbleShieldCooldownSoundPayload.STREAM_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(ClientboundStareOverlayPayload.TYPE, ClientboundStareOverlayPayload.STREAM_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(ClientboundStareSoundPayload.TYPE, ClientboundStareSoundPayload.STREAM_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(ClientboundStructureChangedPayload.TYPE, ClientboundStructureChangedPayload.STREAM_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(ClientboundTransdimensionalTravelSoundPayload.TYPE, ClientboundTransdimensionalTravelSoundPayload.STREAM_CODEC);
     }
 }

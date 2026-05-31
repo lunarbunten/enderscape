@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 
 public class DrifterJellyLayer extends RenderLayer<DrifterRenderState, DrifterModel> {
-    private static final RenderType JELLY_OVERLAY = RenderTypes.entityCutoutNoCull(Enderscape.id("textures/entity/drifter/jelly.png"));
+    private static final RenderType JELLY_OVERLAY = RenderTypes.entityCutout(Enderscape.id("textures/entity/drifter/jelly.png"));
 
     public DrifterJellyLayer(RenderLayerParent<DrifterRenderState, DrifterModel> parent) {
         super(parent);

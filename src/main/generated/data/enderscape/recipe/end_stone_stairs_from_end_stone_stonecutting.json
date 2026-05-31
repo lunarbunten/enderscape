@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "minecraft:end_stone",
   "result": {
-    "count": 1,
     "id": "enderscape:end_stone_stairs"
   }
 }

@@ -51,7 +51,7 @@ public abstract class VaultBlockEntityClientMixin {
                 for (UUID uUID : set) {
                     Player player = level.getPlayerByUUID(uUID);
                     if (player != null && isWithinConnectionRange(pos, vaultSharedData, player)) {
-                        RandomSource randomSource = level.random;
+                        RandomSource randomSource = level.getRandom();
                         Vec3 vec32 = vec3.vectorTo(player.position().add(0.0, player.getBbHeight() / 2.0F, 0.0));
                         int i = Mth.nextInt(randomSource, 2, 5);
 

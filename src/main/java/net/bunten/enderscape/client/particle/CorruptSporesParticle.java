@@ -10,7 +10,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.particle.SpriteSet;
-import net.minecraft.client.renderer.state.QuadParticleRenderState;
+import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
@@ -50,7 +50,7 @@ public class CorruptSporesParticle extends SingleQuadParticle {
         super.tick();
     }
 
-    public int getLightColor(float tint) {
+    public int getLightCoords(float tint) {
         return EnderscapeParticleProviders.scaledLight(1.0F);
     }
 

@@ -35,7 +35,7 @@ public class CorruptOvergrowthBlock extends AbstractOvergrowthBlock {
 
         for (BlockPos pos : BlockPos.randomInCube(random, 5, origin, range)) {
             if (i >= max) break;
-            BlockState plant = EnderscapeBlocks.CORRUPT_OVERGROWTH_BONEMEAL_PROVIDER.getState(random, pos);
+            BlockState plant = EnderscapeBlocks.CORRUPT_OVERGROWTH_BONEMEAL_PROVIDER.getState(level, random, pos);
             if (level.isEmptyBlock(pos) && plant.canSurvive(level, pos)) {
                 level.setBlock(pos, plant, 2);
                 i++;

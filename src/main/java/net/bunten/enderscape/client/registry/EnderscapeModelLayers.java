@@ -5,7 +5,7 @@ import net.bunten.enderscape.client.entity.drifter.DrifterModel;
 import net.bunten.enderscape.client.entity.rubblemite.RubblemiteModel;
 import net.bunten.enderscape.client.entity.rustle.BabyRustleModel;
 import net.bunten.enderscape.client.entity.rustle.RustleModel;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 
 public class EnderscapeModelLayers {
@@ -19,13 +19,13 @@ public class EnderscapeModelLayers {
     public static final ModelLayerLocation BABY_RUSTLE = registerModelLayer("baby_rustle");
 
     static {
-        EntityModelLayerRegistry.registerModelLayer(RUBBLEMITE, RubblemiteModel::createLayer);
+        ModelLayerRegistry.registerModelLayer(RUBBLEMITE, RubblemiteModel::createLayer);
 
-        EntityModelLayerRegistry.registerModelLayer(DRIFTER, DrifterModel::createDrifterLayer);
-        EntityModelLayerRegistry.registerModelLayer(DRIFTLET, DrifterModel::createDriftletLayer);
+        ModelLayerRegistry.registerModelLayer(DRIFTER, DrifterModel::createDrifterLayer);
+        ModelLayerRegistry.registerModelLayer(DRIFTLET, DrifterModel::createDriftletLayer);
 
-        EntityModelLayerRegistry.registerModelLayer(RUSTLE, RustleModel::createLayer);
-        EntityModelLayerRegistry.registerModelLayer(BABY_RUSTLE, BabyRustleModel::createLayer);
+        ModelLayerRegistry.registerModelLayer(RUSTLE, RustleModel::createLayer);
+        ModelLayerRegistry.registerModelLayer(BABY_RUSTLE, BabyRustleModel::createLayer);
     }
 
     private static ModelLayerLocation registerModelLayer(String name) {

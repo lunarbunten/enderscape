@@ -76,7 +76,7 @@ public class VeiledLeafPileBlock extends Block {
     }
 
     @Override
-    protected int getLightBlock(BlockState blockState) {
+    protected int getLightDampening(BlockState blockState) {
         return 1;
     }
 

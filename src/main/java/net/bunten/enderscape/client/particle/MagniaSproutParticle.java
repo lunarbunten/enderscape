@@ -80,7 +80,7 @@ public class MagniaSproutParticle extends SingleQuadParticle {
     }
 
     @Override
-    public int getLightColor(float f) {
+    public int getLightCoords(float f) {
         return EnderscapeParticleProviders.scaledLight(1.0F);
     }
 

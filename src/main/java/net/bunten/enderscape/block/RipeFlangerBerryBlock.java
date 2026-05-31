@@ -58,7 +58,7 @@ public class RipeFlangerBerryBlock extends Block {
 
     @Override
     public void onProjectileHit(Level world, BlockState state, BlockHitResult hit, Projectile projectile) {
-        if (projectile.getType().is(EntityTypeTags.IMPACT_PROJECTILES)) {
+        if (projectile.is(EntityTypeTags.IMPACT_PROJECTILES)) {
             world.destroyBlock(hit.getBlockPos(), true, projectile);
         }
     }

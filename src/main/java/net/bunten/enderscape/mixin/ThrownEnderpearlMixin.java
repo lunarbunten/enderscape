@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
 import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEnderpearl;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,7 +34,7 @@ public abstract class ThrownEnderpearlMixin extends ThrowableItemProjectile {
     @Inject(at = @At("TAIL"), method = "playSound")
     public void Enderscape$playSound(CallbackInfo info) {
         if (EnderscapeConfig.getInstance().enderPearlBreakParticles && level() instanceof ServerLevel server) {
-            server.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, getItem()), getX(), getY(), getZ(), 12, 0, 0, 0, 0.1);
+            server.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, ItemStackTemplate.fromNonEmptyStack(getItem())), getX(), getY(), getZ(), 12, 0, 0, 0, 0.1);
         }
     }
 

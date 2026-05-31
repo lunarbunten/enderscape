@@ -1,7 +1,7 @@
 package net.bunten.enderscape.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -16,9 +16,9 @@ import static net.bunten.enderscape.registry.EnderscapeEntities.RUBBLEMITE;
 import static net.bunten.enderscape.registry.tag.EnderscapeEntityTags.*;
 import static net.minecraft.world.entity.EntityType.*;
 
-public class EnderscapeEntityTagProvider extends FabricTagProvider.EntityTypeTagProvider {
+public class EnderscapeEntityTagProvider extends FabricTagsProvider.EntityTypeTagsProvider {
 
-    public EnderscapeEntityTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public EnderscapeEntityTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

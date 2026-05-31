@@ -51,8 +51,8 @@ public class EndPortalStarParticle extends RisingParticle {
     }
 
     @Override
-    public int getLightColor(float delta) {
-        return Math.max(EnderscapeParticleProviders.scaledLight(0.65F), super.getLightColor(delta));
+    public int getLightCoords(float delta) {
+        return Math.max(EnderscapeParticleProviders.scaledLight(0.65F), super.getLightCoords(delta));
     }
 
     @Environment(EnvType.CLIENT)

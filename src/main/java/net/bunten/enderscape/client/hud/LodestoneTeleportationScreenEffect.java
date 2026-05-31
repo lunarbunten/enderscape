@@ -1,15 +1,17 @@
 package net.bunten.enderscape.client.hud;
 
 import com.mojang.blaze3d.pipeline.BlendFunction;
+import com.mojang.blaze3d.pipeline.ColorTargetState;
+import com.mojang.blaze3d.pipeline.DepthStencilState;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
-import com.mojang.blaze3d.platform.DepthTestFunction;
+import com.mojang.blaze3d.platform.CompareOp;
 import com.mojang.blaze3d.platform.DestFactor;
 import com.mojang.blaze3d.platform.SourceFactor;
 import net.bunten.enderscape.Enderscape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.LightLayer;
@@ -18,25 +20,24 @@ import static net.bunten.enderscape.client.EnderscapeClient.*;
 import static net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED_SNIPPET;
 
 @Environment(EnvType.CLIENT)
-public class LodestoneTeleportationScreenEffect extends HudElement {
+public class LodestoneTeleportationScreenEffect extends EnderscapeHudElement {
 
     public static final RenderPipeline SCREEN_EFFECT_PIPELINE = RenderPipelines.register(
             RenderPipeline.builder(GUI_TEXTURED_SNIPPET)
                     .withLocation(Enderscape.id("pipeline/lodestone_teleportation_screen_effect"))
-                    .withBlend(new BlendFunction(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_CONSTANT_ALPHA))
-                    .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
-                    .withDepthWrite(false)
+                    .withDepthStencilState(new DepthStencilState(CompareOp.ALWAYS_PASS, false))
+                    .withColorTargetState(new ColorTargetState(new BlendFunction(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_CONSTANT_ALPHA)))
                     .build()
     );
 
     public LodestoneTeleportationScreenEffect() {
-        super(RenderPhase.BEFORE_HUD);
+        super(RenderPhase.BEFORE_HUD, Enderscape.id("lodestone_teleportation_effect"));
     }
 
     private float overlayAlpha = 0, previousOverlayAlpha = 0;
     private float vignetteAlpha = 0, previousVignetteAlpha = 0;
 
-    public void render(GuiGraphics graphics, DeltaTracker tracker) {
+    public void extractRenderState(GuiGraphicsExtractor graphics, DeltaTracker tracker) {
         if (client.player == null || client.options.hideGui || !client.options.getCameraType().isFirstPerson() || client.player.isSpectator() || lodestoneTeleportationTicks <= 0 || !config.mirrorScreenEffectEnabled) {
             return;
         }

@@ -1,7 +1,7 @@
 package net.bunten.enderscape.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableSubProvider;
 import net.minecraft.advancements.criterion.LocationPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -38,11 +38,11 @@ import static net.bunten.enderscape.registry.EnderscapeLootTables.END_CITY_VAULT
 import static net.minecraft.world.item.Items.*;
 import static net.minecraft.world.item.enchantment.Enchantments.*;
 
-public class EnderscapeVaultLootProvider extends SimpleFabricLootTableProvider {
+public class EnderscapeVaultLootProvider extends SimpleFabricLootTableSubProvider {
 
     private final CompletableFuture<HolderLookup.Provider> lookup;
 
-    public EnderscapeVaultLootProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> lookup) {
+    public EnderscapeVaultLootProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> lookup) {
         super(output, lookup, LootContextParamSets.VAULT);
         this.lookup = lookup;
     }

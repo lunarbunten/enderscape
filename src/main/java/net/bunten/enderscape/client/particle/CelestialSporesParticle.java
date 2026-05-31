@@ -45,8 +45,8 @@ public class CelestialSporesParticle extends SingleQuadParticle {
         return Layer.TRANSLUCENT;
     }
 
-    public int getLightColor(float tint) {
-        return Math.max(EnderscapeParticleProviders.scaledLight(0.1F), super.getLightColor(tint));
+    public int getLightCoords(float tint) {
+        return Math.max(EnderscapeParticleProviders.scaledLight(0.1F), super.getLightCoords(tint));
     }
 
     @Environment(EnvType.CLIENT)

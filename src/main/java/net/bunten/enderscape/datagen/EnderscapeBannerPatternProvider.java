@@ -1,6 +1,6 @@
 package net.bunten.enderscape.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -12,7 +12,7 @@ import java.util.concurrent.CompletableFuture;
 import static net.bunten.enderscape.registry.EnderscapeBannerPatterns.BANNER_PATTERNS;
 
 public class EnderscapeBannerPatternProvider extends FabricDynamicRegistryProvider {
-    public EnderscapeBannerPatternProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> future) {
+    public EnderscapeBannerPatternProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> future) {
         super(output, future);
     }
 

@@ -1,7 +1,7 @@
 package net.bunten.enderscape.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.tags.TagAppender;
@@ -14,9 +14,9 @@ import java.util.concurrent.CompletableFuture;
 
 import static net.bunten.enderscape.registry.EnderscapePaintingVariants.GRAPE_STATIC;
 
-public class EnderscapePaintingVariantTagProvider extends FabricTagProvider<PaintingVariant> {
+public class EnderscapePaintingVariantTagProvider extends FabricTagsProvider<PaintingVariant> {
 
-    public EnderscapePaintingVariantTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> future) {
+    public EnderscapePaintingVariantTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> future) {
         super(output, Registries.PAINTING_VARIANT, future);
     }
 

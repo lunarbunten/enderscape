@@ -10,7 +10,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.particle.SpriteSet;
-import net.minecraft.client.renderer.state.QuadParticleRenderState;
+import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -90,8 +90,8 @@ public class DashJumpShockwaveParticle extends SingleQuadParticle {
     }
 
     @Override
-    protected int getLightColor(float tint) {
-        return Math.max(EnderscapeParticleProviders.scaledLight(0.2F), super.getLightColor(tint));
+    protected int getLightCoords(float tint) {
+        return Math.max(EnderscapeParticleProviders.scaledLight(0.2F), super.getLightCoords(tint));
     }
 
     @Environment(EnvType.CLIENT)

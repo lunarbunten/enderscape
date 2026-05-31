@@ -1,15 +1,16 @@
 #version 330
 
 layout(std140) uniform LightmapInfo {
-    float AmbientLightFactor;
     float SkyFactor;
     float BlockFactor;
     float NightVisionFactor;
     float DarknessScale;
-    float DarkenWorldFactor;
+    float BossOverlayWorldDarkeningFactor;
     float BrightnessFactor;
+    vec3 BlockLightTint;
     vec3 SkyLightColor;
     vec3 AmbientColor;
+    vec3 NightVisionColor;
 } lightmapInfo;
 
 in vec2 texCoord;

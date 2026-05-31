@@ -8,7 +8,7 @@ import net.bunten.enderscape.entity.drifter.Drifter;
 import net.bunten.enderscape.entity.rubblemite.Rubblemite;
 import net.bunten.enderscape.entity.rustle.Rustle;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricTrackedDataRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityDataRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -60,7 +60,7 @@ public class EnderscapeEntities {
         FabricDefaultAttributeRegistry.register(RUBBLEMITE, Rubblemite.createAttributes());
         FabricDefaultAttributeRegistry.register(RUSTLE, Rustle.createAttributes());
 
-        FabricTrackedDataRegistry.register(Enderscape.id("rubblemite_state"), RUBBLEMITE_STATE);
+        FabricEntityDataRegistry.register(Enderscape.id("rubblemite_state"), RUBBLEMITE_STATE);
     }
 
     private static <T extends Entity> EntityType<T> register(String name, EntityType.Builder<T> builder) {

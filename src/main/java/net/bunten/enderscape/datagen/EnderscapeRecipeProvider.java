@@ -5,7 +5,7 @@ import com.mojang.datafixers.util.Pair;
 import net.bunten.enderscape.item.crafting.ToolFuelingRecipe;
 import net.bunten.enderscape.registry.EnderscapeTrimPatterns;
 import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -17,6 +17,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.equipment.trim.TrimPattern;
@@ -36,7 +37,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
     private static final ImmutableList<ItemLike> NEBULITE_SMELTABLES = ImmutableList.of(NEBULITE_ORE, MIRESTONE_NEBULITE_ORE);
     private static final ImmutableList<ItemLike> SHADOLINE_SMELTABLES = ImmutableList.of(SHADOLINE_ORE, MIRESTONE_SHADOLINE_ORE, RAW_SHADOLINE);
 
-    public EnderscapeRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> future) {
+    public EnderscapeRecipeProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> future) {
         super(output, future);
     }
 
@@ -148,6 +149,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                                         SHADOLINE_BOOTS
                                 ),
                                 RecipeCategory.MISC,
+                                CookingBookCategory.MISC,
                                 SHADOLINE_NUGGET,
                                 0.1F,
                                 200
@@ -166,6 +168,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                                         SHADOLINE_BOOTS
                                 ),
                                 RecipeCategory.MISC,
+                                CookingBookCategory.MISC,
                                 SHADOLINE_NUGGET,
                                 0.1F,
                                 100
@@ -372,8 +375,8 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 stonecutterResultFromBase(RecipeCategory.DECORATIONS, ETCHED_REPULSIVE_MAGNIA_SLAB, ETCHED_REPULSIVE_MAGNIA);
                 stonecutterResultFromBase(RecipeCategory.DECORATIONS, ETCHED_REPULSIVE_MAGNIA_WALL, ETCHED_REPULSIVE_MAGNIA);
 
-                oreSmelting(SHADOLINE_SMELTABLES, RecipeCategory.MISC, SHADOLINE_INGOT, 0.7F, 200, "shadoline_ingot");
-                oreBlasting(SHADOLINE_SMELTABLES, RecipeCategory.MISC, SHADOLINE_INGOT, 0.7F, 100, "shadoline_ingot");
+                oreSmelting(SHADOLINE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, SHADOLINE_INGOT, 0.7F, 200, "shadoline_ingot");
+                oreBlasting(SHADOLINE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, SHADOLINE_INGOT, 0.7F, 100, "shadoline_ingot");
 
                 nineBlockStorageRecipesWithCustomPacking(RecipeCategory.MISC, SHADOLINE_NUGGET, RecipeCategory.MISC, SHADOLINE_INGOT, "enderscape:shadoline_ingot_from_nuggets", "enderscape:shadoline_ingot");
 
@@ -433,8 +436,8 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                         .group("nebulite")
                         .save(output, "enderscape:nebulite_from_shards");
 
-                oreSmelting(NEBULITE_SMELTABLES, RecipeCategory.MISC, NEBULITE, 1.0F, 200, "nebulite");
-                oreBlasting(NEBULITE_SMELTABLES, RecipeCategory.MISC, NEBULITE, 1.0F, 100, "nebulite");
+                oreSmelting(NEBULITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, NEBULITE, 1.0F, 200, "nebulite");
+                oreBlasting(NEBULITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, NEBULITE, 1.0F, 100, "nebulite");
 
                 shapeless(RecipeCategory.MISC, NEBULITE, 9)
                         .requires(NEBULITE_BLOCK)

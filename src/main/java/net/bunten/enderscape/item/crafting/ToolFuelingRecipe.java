@@ -1,5 +1,7 @@
 package net.bunten.enderscape.item.crafting;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.bunten.enderscape.item.component.FueledTool;
 import net.bunten.enderscape.registry.EnderscapeRecipeSerializers;
 import net.minecraft.core.HolderLookup;
@@ -11,9 +13,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
 public class ToolFuelingRecipe extends CustomRecipe {
-    public ToolFuelingRecipe(CraftingBookCategory category) {
-        super(category);
-    }
+    public static final MapCodec<ToolFuelingRecipe> CODEC = MapCodec.unit(ToolFuelingRecipe::new);
+    public ToolFuelingRecipe() {}
 
     public boolean matches(CraftingInput input, Level level) {
         int toolIndex = -1;
@@ -56,7 +57,7 @@ public class ToolFuelingRecipe extends CustomRecipe {
         }
     }
 
-    public ItemStack assemble(CraftingInput input, HolderLookup.Provider provider) {
+    public ItemStack assemble(CraftingInput input) {
         int toolIndex = -1;
         int fuel = 0;
 

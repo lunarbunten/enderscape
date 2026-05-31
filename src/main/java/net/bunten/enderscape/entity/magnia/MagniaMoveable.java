@@ -23,7 +23,7 @@ import java.util.function.Predicate;
 
 public interface MagniaMoveable {
 
-    Predicate<Entity> DEFAULT_MAGNIA_PREDICATE = (entity) -> (entity.getType().is(EnderscapeEntityTags.AFFECTED_BY_MAGNIA) || getMagnetismFactor(entity) > 0) && EntitySelector.NO_SPECTATORS.test(entity);
+    Predicate<Entity> DEFAULT_MAGNIA_PREDICATE = (entity) -> (entity.is(EnderscapeEntityTags.AFFECTED_BY_MAGNIA) || getMagnetismFactor(entity) > 0) && EntitySelector.NO_SPECTATORS.test(entity);
     AttributeModifier MAGNIA_GRAVITY_MODIFIER = new AttributeModifier(Enderscape.id("magnia_gravity"), 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
     static void sendEntityEffectParticles(ServerLevel level, Entity entity, MagniaParticleOptions options, float chance) {
@@ -31,7 +31,7 @@ public interface MagniaMoveable {
             AABB box = entity.getBoundingBox();
             Vec3 pos = entity.position().add(0, box.getYsize() / (entity instanceof ItemEntity ? 0.5F : 2), 0);
 
-            if (level.random.nextFloat() <= chance) level.sendParticles(options, pos.x, pos.y, pos.z, 1, box.getXsize() * 0.6, box.getYsize() * 0.6, box.getZsize() * 0.6, 1);
+            if (level.getRandom().nextFloat() <= chance) level.sendParticles(options, pos.x, pos.y, pos.z, 1, box.getXsize() * 0.6, box.getYsize() * 0.6, box.getZsize() * 0.6, 1);
         }
     }
 
