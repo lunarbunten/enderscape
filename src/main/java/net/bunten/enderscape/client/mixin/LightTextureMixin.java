@@ -38,7 +38,7 @@ public class LightTextureMixin {
         }
 
         float gamma = minecraft.options.gamma().get().floatValue();
-        float ambientLightFactor = minecraft.gameRenderer.getMainCamera().attributeProbe().getValue(EnderscapeEnvironmentAttributes.AMBIENT_LIGHT_FACTOR, 1.0F);
+        float ambientLightFactor = minecraft.gameRenderer.mainCamera().attributeProbe().getValue(EnderscapeEnvironmentAttributes.AMBIENT_LIGHT_FACTOR, 1.0F);
         float scaledAmbientLight = ambientLightFactor * (1.0F - 1.0F * gamma * (1.0F - ambientLightFactor));
 
         return base.mul(scaledAmbientLight);

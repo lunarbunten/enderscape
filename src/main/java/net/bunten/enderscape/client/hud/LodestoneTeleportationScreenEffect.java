@@ -4,9 +4,8 @@ import com.mojang.blaze3d.pipeline.BlendFunction;
 import com.mojang.blaze3d.pipeline.ColorTargetState;
 import com.mojang.blaze3d.pipeline.DepthStencilState;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.blaze3d.platform.BlendFactor;
 import com.mojang.blaze3d.platform.CompareOp;
-import com.mojang.blaze3d.platform.DestFactor;
-import com.mojang.blaze3d.platform.SourceFactor;
 import net.bunten.enderscape.Enderscape;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -26,7 +25,7 @@ public class LodestoneTeleportationScreenEffect extends EnderscapeHudElement {
             RenderPipeline.builder(GUI_TEXTURED_SNIPPET)
                     .withLocation(Enderscape.id("pipeline/lodestone_teleportation_screen_effect"))
                     .withDepthStencilState(new DepthStencilState(CompareOp.ALWAYS_PASS, false))
-                    .withColorTargetState(new ColorTargetState(new BlendFunction(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_CONSTANT_ALPHA)))
+                    .withColorTargetState(new ColorTargetState(new BlendFunction(BlendFactor.SRC_ALPHA, BlendFactor.ONE_MINUS_CONSTANT_ALPHA)))
                     .build()
     );
 
@@ -38,7 +37,7 @@ public class LodestoneTeleportationScreenEffect extends EnderscapeHudElement {
     private float vignetteAlpha = 0, previousVignetteAlpha = 0;
 
     public void extractRenderState(GuiGraphicsExtractor graphics, DeltaTracker tracker) {
-        if (client.player == null || client.options.hideGui || !client.options.getCameraType().isFirstPerson() || client.player.isSpectator() || lodestoneTeleportationTicks <= 0 || !config.mirrorScreenEffectEnabled) {
+        if (client.player == null || client.gui.hud.isHidden() || !client.options.getCameraType().isFirstPerson() || client.player.isSpectator() || lodestoneTeleportationTicks <= 0 || !config.mirrorScreenEffectEnabled) {
             return;
         }
         

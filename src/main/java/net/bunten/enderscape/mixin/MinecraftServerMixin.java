@@ -28,7 +28,7 @@ public abstract class MinecraftServerMixin {
                 NoiseGeneratorSettings settings = generator.generatorSettings().value();
                 NoiseGeneratorSettingsAccessor accessor = (NoiseGeneratorSettingsAccessor) (Object) settings;
 
-                accessor.setSurfaceRule(SurfaceRules.sequence(EnderscapeSurfaceRuleData.makeRules(), settings.surfaceRule()));
+                accessor.setSurfaceRule(SurfaceRules.sequence(EnderscapeSurfaceRuleData.makeRules(registryAccess().lookupOrThrow(Registries.BIOME)), settings.surfaceRule()));
             }
         });
     }

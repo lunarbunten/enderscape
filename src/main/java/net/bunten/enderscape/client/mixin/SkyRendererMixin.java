@@ -37,7 +37,7 @@ public abstract class SkyRendererMixin {
     @Inject(method = "renderEndSky", at = @At("HEAD"), cancellable = true)
     public void renderEndSky(CallbackInfo ci) {
         if (EnderscapeConfig.getInstance().skyboxUpdateEnabled && client.level != null)  {
-            EnderscapeSkybox.render(new PoseStack(), client.level, client.gameRenderer.getMainCamera(), client.getDeltaTracker());
+            EnderscapeSkybox.render(new PoseStack(), client.level, client.gameRenderer.mainCamera(), client.getDeltaTracker());
             ci.cancel();
         }
     }

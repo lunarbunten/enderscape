@@ -47,7 +47,7 @@ public class FueledToolHud extends EnderscapeHudElement {
     private int cost;
 
     public void extractRenderState(GuiGraphicsExtractor graphics, DeltaTracker tracker) {
-        if (!config.nebuliteToolHudEnabled || client.player == null || client.options.hideGui || !client.options.getCameraType().isFirstPerson() || client.player.isSpectator()) {
+        if (!config.nebuliteToolHudEnabled || client.player == null || client.gui.hud.isHidden() || !client.options.getCameraType().isFirstPerson() || client.player.isSpectator()) {
             return;
         }
 

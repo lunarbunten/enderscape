@@ -9,6 +9,7 @@ import net.minecraft.util.ARGB;
 import net.minecraft.world.attribute.*;
 import net.minecraft.world.attribute.modifier.FloatModifier;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -29,9 +30,9 @@ public class CorruptBarrensBiome {
         HolderGetter<ConfiguredWorldCarver<?>> carvers = context.lookup(Registries.CONFIGURED_CARVER);
 
         MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder()
-                .addSpawn(MobCategory.MONSTER, 4, new MobSpawnSettings.SpawnerData(EntityType.ENDERMITE, 1, 1))
+                .addSpawn(MobCategory.MONSTER, 4, new MobSpawnSettings.SpawnerData(EntityTypes.ENDERMITE, 1, 1))
                 .addSpawn(MobCategory.MONSTER, 1, new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUBBLEMITE, 1, 1))
-                .addMobCharge(EntityType.ENDERMITE, 0.3, 0.1)
+                .addMobCharge(EntityTypes.ENDERMITE, 0.3, 0.1)
                 .addMobCharge(EnderscapeEntities.RUBBLEMITE, 0.6, 0.1);
 
         BiomeGenerationSettings.Builder builder = new BiomeGenerationSettings.Builder(features, carvers)

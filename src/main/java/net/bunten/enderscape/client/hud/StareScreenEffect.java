@@ -5,8 +5,7 @@ import com.mojang.blaze3d.pipeline.ColorTargetState;
 import com.mojang.blaze3d.pipeline.DepthStencilState;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.platform.CompareOp;
-import com.mojang.blaze3d.platform.DestFactor;
-import com.mojang.blaze3d.platform.SourceFactor;
+import com.mojang.blaze3d.platform.BlendFactor;
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.client.EnderscapeClient;
@@ -30,7 +29,7 @@ public class StareScreenEffect extends EnderscapeHudElement {
             RenderPipeline.builder(GUI_TEXTURED_SNIPPET)
                     .withLocation(Enderscape.id("pipeline/stare_screen_effect"))
                     .withDepthStencilState(new DepthStencilState(CompareOp.ALWAYS_PASS, false))
-                    .withColorTargetState(new ColorTargetState(new BlendFunction(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_CONSTANT_ALPHA)))
+                    .withColorTargetState(new ColorTargetState(new BlendFunction(BlendFactor.SRC_ALPHA, BlendFactor.ONE_MINUS_CONSTANT_ALPHA)))
                     .build()
     );
 
@@ -41,7 +40,7 @@ public class StareScreenEffect extends EnderscapeHudElement {
     private float alpha = 0, previousAlpha = 0;
 
     public void extractRenderState(GuiGraphicsExtractor graphics, DeltaTracker tracker) {
-        if (client.player == null || client.options.hideGui || !client.options.getCameraType().isFirstPerson() || client.player.isSpectator() || EnderscapeClient.stareTicks <= 0 || !EnderscapeConfig.getInstance().endermanStaticOverlay) {
+        if (client.player == null || client.gui.hud.isHidden() || !client.options.getCameraType().isFirstPerson() || client.player.isSpectator() || EnderscapeClient.stareTicks <= 0 || !EnderscapeConfig.getInstance().endermanStaticOverlay) {
             return;
         }
 

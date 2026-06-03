@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -96,7 +97,7 @@ public class MagniaRadioBlockEntity extends BlockEntity {
                     Optional<ResourceKey<MagniaRadioSong>> optional = holder.unwrapKey();
                     optional.ifPresent(key -> {
                         level.players().stream()
-                                .filter(player -> player.level().dimensionType() == level.dimensionType() && player.distanceToSqr(pos.getCenter()) < 32)
+                                .filter(player -> player.level().dimensionType() == level.dimensionType() && player.distanceToSqr(Vec3.atCenterOf(pos)) < 32)
                                 .filter(ServerPlayer.class::isInstance)
                                 .map(ServerPlayer.class::cast)
                                 .forEach(player -> EnderscapeCriteria.HEAR_MAGNIA_RADIO_SONG.trigger(

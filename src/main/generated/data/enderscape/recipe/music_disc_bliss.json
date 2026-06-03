@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "D": "enderscape:music_disc_decay",
     "N": "enderscape:nebulite_shards"

@@ -11,6 +11,7 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 
@@ -49,7 +50,7 @@ public class NebuliteOreParticle extends SimpleAnimatedParticle {
     @Override
     public int getLightCoords(float tint) {
         BlockPos pos = BlockPos.containing(x, y, z);
-        int color = level.hasChunkAt(pos) ? LevelRenderer.getLightCoords(level, pos) : 0;
+        int color = level.hasChunkAt(pos) ? LightCoordsUtil.getLightCoords(level, pos) : 0;
         return Math.max(EnderscapeParticleProviders.scaledLight(0.6F), color);
     }
 

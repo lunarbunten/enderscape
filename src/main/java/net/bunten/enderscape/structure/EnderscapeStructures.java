@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
@@ -42,12 +43,12 @@ public class EnderscapeStructures {
     public static final StructureSpawnOverride BLANK_SPAWN_OVERRIDE = new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.STRUCTURE, WeightedList.of());
 
     public static final StructureSpawnOverride STRONGHOLD_MONSTER_SPAWN_OVERRIDE = new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.STRUCTURE, WeightedList.<MobSpawnSettings.SpawnerData>builder()
-            .add(new MobSpawnSettings.SpawnerData(EntityType.SPIDER, 4, 6), 120)
-            .add(new MobSpawnSettings.SpawnerData(EntityType.ZOMBIE, 4, 4), 100)
-            .add(new MobSpawnSettings.SpawnerData(EntityType.ZOMBIE_VILLAGER, 1, 1), 25)
-            .add(new MobSpawnSettings.SpawnerData(EntityType.SKELETON, 4, 4), 100)
-            .add(new MobSpawnSettings.SpawnerData(EntityType.ENDERMAN, 1, 4), 40)
-            .add(new MobSpawnSettings.SpawnerData(EntityType.SILVERFISH, 4, 6), 80)
+            .add(new MobSpawnSettings.SpawnerData(EntityTypes.SPIDER, 4, 6), 120)
+            .add(new MobSpawnSettings.SpawnerData(EntityTypes.ZOMBIE, 4, 4), 100)
+            .add(new MobSpawnSettings.SpawnerData(EntityTypes.ZOMBIE_VILLAGER, 1, 1), 25)
+            .add(new MobSpawnSettings.SpawnerData(EntityTypes.SKELETON, 4, 4), 100)
+            .add(new MobSpawnSettings.SpawnerData(EntityTypes.ENDERMAN, 1, 4), 40)
+            .add(new MobSpawnSettings.SpawnerData(EntityTypes.SILVERFISH, 4, 6), 80)
             .build());
 
     public static void bootstrap(BootstrapContext<Structure> context) {

@@ -2,13 +2,18 @@ package net.bunten.enderscape.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.bunten.enderscape.EnderscapeConfig;
+import net.bunten.enderscape.block.DriftJellyBlock;
 import net.bunten.enderscape.entity.rubblemite.Rubblemite;
 import net.bunten.enderscape.registry.EnderscapeAttributes;
 import net.bunten.enderscape.registry.EnderscapeMobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.monster.Silverfish;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,6 +24,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Entity.class)
 public class EntityMixin {
 
+    @Shadow
+    public int invulnerableTime;
+    @Shadow
+    private Level level;
     @Unique
     private final Entity self = (Entity) (Object) this;
 
@@ -62,5 +71,12 @@ public class EntityMixin {
     @ModifyArg(method = "playMuffledStepSound", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;playSound(Lnet/minecraft/sounds/SoundEvent;FF)V"), index = 1)
     public float Enderscape$adjustMuffledStepSoundVolume(float original) {
         return Math.max(0, original * (float) EnderscapeAttributes.getStealthMultiplier(self));
+    }
+
+    @Inject(method = "restituteMovementAfterCollisions", at = @At("TAIL"))
+    private void handleLegacyBounce(BlockState effectState, boolean xCollision, boolean zCollision, Vec3 movement, CallbackInfo ci) {
+        if (effectState.getBlock() instanceof DriftJellyBlock block) {
+            block.updateEntityMovementAfterFallOn(this.level, (Entity) (Object) this, movement);
+        }
     }
 }

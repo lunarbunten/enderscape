@@ -5,8 +5,6 @@ import net.bunten.enderscape.registry.EnderscapeGameEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -43,11 +41,9 @@ public class DriftJellyBlock extends HalfTransparentBlock {
         return new Vec3(x, height, z);
     }
 
-    @Override
-    public void updateEntityMovementAfterFallOn(BlockGetter level, Entity entity) {
-        if (entity.isSuppressingBounce() || entity.getDeltaMovement().y() > -0.1) {
-            super.updateEntityMovementAfterFallOn(level, entity);
-        } else {
+
+    public void updateEntityMovementAfterFallOn(BlockGetter level, Entity entity, Vec3 movement) {
+        if (!entity.isSuppressingBounce() && !(movement.y() > -0.02)) {
             entity.setDeltaMovement(getBounceVelocity(entity));
             entity.gameEvent(EnderscapeGameEvents.BOUNCE);
         }
@@ -59,7 +55,7 @@ public class DriftJellyBlock extends HalfTransparentBlock {
         }
 
         if (level.isClientSide()) {
-            Vec3 vec3 = pos.getCenter().add(0, 0.75, 0);
+            Vec3 vec3 = Vec3.atCenterOf(pos).add(0, 0.75, 0);
             BlockParticleOption option = new BlockParticleOption(ParticleTypes.DUST_PILLAR, level.getBlockState(pos));
 
             for (int i = 0; i < 20; i++) {

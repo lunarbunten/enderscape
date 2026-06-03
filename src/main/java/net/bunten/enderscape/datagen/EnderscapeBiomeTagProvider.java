@@ -23,7 +23,7 @@ public class EnderscapeBiomeTagProvider extends FabricTagsProvider<Biome> {
         super(output, Registries.BIOME, future);
     }
 
-    protected TagAppender<ResourceKey<Biome>, Biome> tag(TagKey<Biome> key) {
+    protected TagAppender<Biome> tag(TagKey<Biome> key) {
         return TagAppender.forBuilder(getOrCreateRawBuilder(key));
     }
 

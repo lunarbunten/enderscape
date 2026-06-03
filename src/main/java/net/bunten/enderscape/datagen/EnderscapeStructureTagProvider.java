@@ -19,7 +19,7 @@ public class EnderscapeStructureTagProvider extends FabricTagsProvider<Structure
         super(output, Registries.STRUCTURE, future);
     }
 
-    protected TagAppender<ResourceKey<Structure>, Structure> tag(TagKey<Structure> key) {
+    protected TagAppender<Structure> tag(TagKey<Structure> key) {
         return TagAppender.forBuilder(getOrCreateRawBuilder(key));
     }
 

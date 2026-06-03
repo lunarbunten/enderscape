@@ -96,7 +96,7 @@ public class VoidShaleBlock extends Block {
         if (sound != SoundEvents.EMPTY) level.playSound(null, pos, sound, SoundSource.BLOCKS, 1, 1);
 
         if (level instanceof ServerLevel server) {
-            Vec3 top = pos.getCenter().add(0, 0.5125, 0);
+            Vec3 top = Vec3.atCenterOf(pos).add(0, 0.5125, 0);
             server.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), top.x(), top.y(), top.z(), 6, 0.1F, 0.1F, 0.1F, 0);
         }
     }

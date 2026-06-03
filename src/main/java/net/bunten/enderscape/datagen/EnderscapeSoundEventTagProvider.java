@@ -22,7 +22,7 @@ public class EnderscapeSoundEventTagProvider extends FabricTagsProvider<SoundEve
         super(output, Registries.SOUND_EVENT, future);
     }
 
-    protected TagAppender<ResourceKey<SoundEvent>, SoundEvent> tag(TagKey<SoundEvent> key) {
+    protected TagAppender<SoundEvent> tag(TagKey<SoundEvent> key) {
         return TagAppender.forBuilder(getOrCreateRawBuilder(key));
     }
 

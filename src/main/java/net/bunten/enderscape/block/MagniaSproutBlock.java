@@ -251,7 +251,7 @@ public class MagniaSproutBlock extends DirectionalPlantBlock implements HasMagni
         if (shouldBlisterMagnia(state, level, relative) && random.nextInt(3) == 0) {
             level.setBlockAndUpdate(relative, EnderscapeBlocks.BLISTERED_MAGNIA.defaultBlockState().setValue(StateProperties.OPTIONAL_MAGNIA_POLARITY, BlisteredMagniaBlock.selectPolarity(level, relative)));
 
-            Vec3 center = relative.getCenter();
+            Vec3 center = Vec3.atCenterOf(relative);
             level.sendParticles(EnderscapeParticles.MAGNIA_BLISTERING, center.x(), center.y(), center.z(), 12, 0.7F, 0.7F, 0.7F, 0);
         }
     }

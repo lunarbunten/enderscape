@@ -20,7 +20,7 @@ public class EnderscapeBannerPatternTagProvider extends FabricTagsProvider<Banne
         super(output, Registries.BANNER_PATTERN, future);
     }
 
-    protected TagAppender<ResourceKey<BannerPattern>, BannerPattern> tag(TagKey<BannerPattern> key) {
+    protected TagAppender<BannerPattern> tag(TagKey<BannerPattern> key) {
         return TagAppender.forBuilder(getOrCreateRawBuilder(key));
     }
 

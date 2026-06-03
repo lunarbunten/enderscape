@@ -20,7 +20,7 @@ public class EnderscapeEnchantmentTagProvider extends FabricTagsProvider<Enchant
         super(output, Registries.ENCHANTMENT, future);
     }
 
-    protected TagAppender<ResourceKey<Enchantment>, Enchantment> tag(TagKey<Enchantment> key) {
+    protected TagAppender<Enchantment> tag(TagKey<Enchantment> key) {
         return TagAppender.forBuilder(getOrCreateRawBuilder(key));
     }
 

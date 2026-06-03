@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.SpawnData;
 import net.minecraft.world.level.block.entity.trialspawner.TrialSpawnerConfig;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -43,7 +44,7 @@ public class EnderscapeTrialSpawnerConfigs {
                         )
                         .spawnPotentialsDefinition(
                                 WeightedList.<SpawnData>builder()
-                                        .add(spawnData(EntityType.ENDERMITE), 4)
+                                        .add(spawnData(EntityTypes.ENDERMITE), 4)
                                         .add(spawnData(EnderscapeEntities.RUBBLEMITE), 1)
                                         .build()
                         )
@@ -59,7 +60,7 @@ public class EnderscapeTrialSpawnerConfigs {
                         .lootTablesToEject(WeightedList.of(EnderscapeLootTables.END_CITY_SPAWNER_KEY))
                         .spawnPotentialsDefinition(
                                 WeightedList.<SpawnData>builder()
-                                        .add(spawnData(EntityType.ENDERMITE), 2)
+                                        .add(spawnData(EntityTypes.ENDERMITE), 2)
                                         .add(spawnData(EnderscapeEntities.RUBBLEMITE), 1)
                                         .build()
                         )

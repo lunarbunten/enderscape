@@ -2,7 +2,6 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "bonus_rolls": 0.0,
       "conditions": [
         {
           "condition": "minecraft:entity_properties",
@@ -27,7 +26,6 @@
               ],
               "functions": [
                 {
-                  "add": false,
                   "count": 1.0,
                   "function": "minecraft:set_count"
                 }
@@ -47,7 +45,6 @@
               ],
               "functions": [
                 {
-                  "add": false,
                   "count": 2.0,
                   "function": "minecraft:set_count"
                 }
@@ -67,7 +64,6 @@
               ],
               "functions": [
                 {
-                  "add": false,
                   "count": 3.0,
                   "function": "minecraft:set_count"
                 }
@@ -87,7 +83,6 @@
               ],
               "functions": [
                 {
-                  "add": false,
                   "count": 4.0,
                   "function": "minecraft:set_count"
                 }
@@ -107,7 +102,6 @@
               ],
               "functions": [
                 {
-                  "add": false,
                   "count": 5.0,
                   "function": "minecraft:set_count"
                 }
@@ -127,7 +121,6 @@
               ],
               "functions": [
                 {
-                  "add": false,
                   "count": 6.0,
                   "function": "minecraft:set_count"
                 }
@@ -147,7 +140,6 @@
               ],
               "functions": [
                 {
-                  "add": false,
                   "count": 7.0,
                   "function": "minecraft:set_count"
                 }

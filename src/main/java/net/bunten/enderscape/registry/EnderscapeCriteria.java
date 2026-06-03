@@ -2,7 +2,7 @@ package net.bunten.enderscape.registry;
 
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.criteria.*;
-import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 

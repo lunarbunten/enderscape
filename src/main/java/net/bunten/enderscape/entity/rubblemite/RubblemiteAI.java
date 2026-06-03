@@ -11,6 +11,7 @@ import net.bunten.enderscape.entity.ai.behavior.*;
 import net.bunten.enderscape.entity.drifter.Drifter;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.ai.ActivityData;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
@@ -69,7 +70,7 @@ public class RubblemiteAI {
             )),
             ActivityData.create(Activity.IDLE, ImmutableList.of(
                     Pair.of(1, StartAttacking.create(EnderscapeAI::getAttackTarget)),
-                    Pair.of(4, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(30, 60))),
+                    Pair.of(4, SetEntityLookTargetSometimes.create(EntityTypes.PLAYER, 6.0f, UniformInt.of(30, 60))),
                     Pair.of(8, new RunOne<>(
                                     ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
                                     ImmutableList.of(

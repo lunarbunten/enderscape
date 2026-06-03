@@ -13,12 +13,12 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "flags": {
+              "minecraft:flags": {
                 "is_flying": false,
                 "is_on_ground": true,
                 "is_swimming": false
               },
-              "stepping_on": {
+              "minecraft:stepping_on": {
                 "block": {
                   "blocks": "#enderscape:chanterelle_cap_blocks"
                 }

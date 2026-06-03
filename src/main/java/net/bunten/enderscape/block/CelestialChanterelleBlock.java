@@ -86,7 +86,7 @@ public class CelestialChanterelleBlock extends DirectionalPlantBlock implements 
         if (relative.is(EnderscapeBlockTags.CELESTIAL_CORRUPTS_ON) && random.nextInt(8) == 0) {
             corrupt(level, pos);
 
-            Vec3 center = pos.getCenter();
+            Vec3 center = Vec3.atCenterOf(pos);
             level.sendParticles(EnderscapeParticles.VOID_POOF, center.x(), center.y(), center.z(), 6, 0.5F, 0.5F, 0.5F, 0);
         }
     }

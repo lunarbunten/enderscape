@@ -43,10 +43,7 @@ import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BannerPattern;
-import net.minecraft.world.level.block.entity.BannerPatternLayers;
-import net.minecraft.world.level.block.entity.BannerPatterns;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -56,7 +53,6 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static net.bunten.enderscape.registry.EnderscapeBlocks.END_VAULT;
-import static net.minecraft.world.item.Items.MAGENTA_BANNER;
 import static net.minecraft.world.item.equipment.EquipmentAssets.ROOT_ID;
 
 public class EnderscapeItems {
@@ -328,13 +324,13 @@ public class EnderscapeItems {
         blockEntityData.putString("id", "minecraft:vault");
         blockEntityData.put("config", configTag);
 
-        stack.set(DataComponents.BLOCK_ENTITY_DATA, TypedEntityData.of(BlockEntityType.VAULT, blockEntityData));
+        stack.set(DataComponents.BLOCK_ENTITY_DATA, TypedEntityData.of(BlockEntityTypes.VAULT, blockEntityData));
 
         return stack;
     }
 
     public static ItemStack getEndCityBannerInstance(HolderGetter<BannerPattern> getter) {
-        ItemStack stack = new ItemStack(MAGENTA_BANNER);
+        ItemStack stack = new ItemStack(Items.BANNER.magenta());
         stack.set(DataComponents.BANNER_PATTERNS, new BannerPatternLayers.Builder()
                 .addIfRegistered(getter, BannerPatterns.STRIPE_SMALL, DyeColor.BLACK)
                 .addIfRegistered(getter, BannerPatterns.STRIPE_TOP, DyeColor.MAGENTA)

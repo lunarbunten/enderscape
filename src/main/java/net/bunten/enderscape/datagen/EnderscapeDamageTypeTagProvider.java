@@ -23,7 +23,7 @@ public class EnderscapeDamageTypeTagProvider extends FabricTagsProvider<DamageTy
         super(output, Registries.DAMAGE_TYPE, future);
     }
 
-    protected TagAppender<ResourceKey<DamageType>, DamageType> tag(TagKey<DamageType> key) {
+    protected TagAppender<DamageType> tag(TagKey<DamageType> key) {
         return TagAppender.forBuilder(getOrCreateRawBuilder(key));
     }
 

@@ -37,7 +37,7 @@ public abstract class GameRendererMixin {
         ),
         slice = @Slice(
             from = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/platform/Lighting;setupFor(Lcom/mojang/blaze3d/platform/Lighting$Entry;)V"),
-            to = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/render/GuiRenderer;render(Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V")
+            to = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/render/GuiRenderer;render()V")
         )
     )
     public void render(DeltaTracker tracker, boolean bl, CallbackInfo ci) {

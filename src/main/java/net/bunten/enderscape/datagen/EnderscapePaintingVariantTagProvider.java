@@ -20,7 +20,7 @@ public class EnderscapePaintingVariantTagProvider extends FabricTagsProvider<Pai
         super(output, Registries.PAINTING_VARIANT, future);
     }
 
-    protected TagAppender<ResourceKey<PaintingVariant>, PaintingVariant> tag(TagKey<PaintingVariant> key) {
+    protected TagAppender<PaintingVariant> tag(TagKey<PaintingVariant> key) {
         return TagAppender.forBuilder(getOrCreateRawBuilder(key));
     }
 

@@ -10,8 +10,6 @@
     "enderscape:veiled_sign",
     "enderscape:veiled_slab",
     "enderscape:veiled_stairs",
-    "enderscape:veiled_trapdoor",
-    "enderscape:veiled_hanging_sign",
-    "enderscape:veiled_sign"
+    "enderscape:veiled_trapdoor"
   ]
 }

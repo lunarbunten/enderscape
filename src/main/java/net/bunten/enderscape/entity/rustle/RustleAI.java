@@ -16,6 +16,7 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.ai.ActivityData;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
@@ -80,7 +81,7 @@ public class RustleAI {
                             Pair.of(1, new FollowTemptation(mob -> 1.25F)),
                             Pair.of(2, new RustleEatWhenSheared(1.25F)),
                             Pair.of(3, BabyFollowAdult.create(UniformInt.of(1, 4), 1.25F)),
-                            Pair.of(4, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 1.5F, UniformInt.of(30, 60))),
+                            Pair.of(4, SetEntityLookTargetSometimes.create(EntityTypes.PLAYER, 1.5F, UniformInt.of(30, 60))),
                             Pair.of(8, new RunOne<>(
                                     ImmutableMap.of(EnderscapeMemory.WALK_TARGET, MemoryStatus.VALUE_ABSENT, EnderscapeMemory.HURT_BY_ENTITY, MemoryStatus.VALUE_ABSENT),
                                     ImmutableList.of(

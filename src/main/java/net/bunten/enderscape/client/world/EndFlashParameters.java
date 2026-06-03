@@ -27,7 +27,7 @@ public class EndFlashParameters {
     }
 
     public static Vector3f getSkyLightColor(Minecraft minecraft) {
-        Camera camera = minecraft.gameRenderer.getMainCamera();
+        Camera camera = minecraft.gameRenderer.mainCamera();
         DeltaTracker tracker = minecraft.getDeltaTracker();
         int color = camera.attributeProbe().getValue(EnvironmentAttributes.SKY_LIGHT_COLOR, tracker.getGameTimeDeltaPartialTick(false));
 

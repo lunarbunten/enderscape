@@ -4,7 +4,7 @@
     "pulled_item": {
       "conditions": {
         "pulled_entity": {
-          "type": "minecraft:item"
+          "minecraft:entity_type": "minecraft:item"
         }
       },
       "trigger": "enderscape:pull_entity"
