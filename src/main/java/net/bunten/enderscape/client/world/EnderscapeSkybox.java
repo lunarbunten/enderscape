@@ -16,13 +16,13 @@ import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.EnderscapeConfig;
+import net.bunten.enderscape.client.renderer.EnderscapeRenderPipelines;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.BindGroupLayouts;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -39,7 +39,6 @@ import org.joml.*;
 import java.lang.Math;
 import java.util.Optional;
 import java.util.OptionalDouble;
-import java.util.OptionalInt;
 
 import static net.bunten.enderscape.registry.EnderscapeEnvironmentAttributes.*;
 
@@ -54,20 +53,6 @@ public class EnderscapeSkybox {
 
     private record NebulaData(GpuBufferSlice buffer, int indexCount) {
     }
-
-    public static final RenderPipeline NEBULAE_PIPELINE = RenderPipelines.register(
-            RenderPipeline.builder()
-                    .withLocation(Enderscape.id("pipeline/nebulae"))
-                    .withVertexShader("core/position_tex")
-                    .withFragmentShader("core/position_tex")
-                    .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))
-                    .withDepthStencilState(new DepthStencilState(CompareOp.ALWAYS_PASS, false))
-                    .withBindGroupLayout(BindGroupLayouts.MATRICES_PROJECTION)
-                    .withBindGroupLayout(BindGroupLayouts.SAMPLER0)
-                    .withVertexBinding(0, DefaultVertexFormat.POSITION_TEX)
-                    .withPrimitiveTopology(PrimitiveTopology.QUADS)
-                    .build()
-    );
 
     private static final RenderSystem.AutoStorageIndexBuffer starIndices = RenderSystem.getSequentialBuffer(PrimitiveTopology.QUADS);
     private static int starIndexCount;
@@ -269,7 +254,8 @@ public class EnderscapeSkybox {
         IndexType type = buffer.type();
 
         try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "End sky nebulae", colorView, Optional.empty(), depthView, OptionalDouble.empty())) {
-            pass.setPipeline(NEBULAE_PIPELINE);
+            pass.setPipeline(EnderscapeRenderPipelines.NEBULAE_PIPELINE);
+            RenderSystem.bindDefaultUniforms(pass);
             pass.setUniform("DynamicTransforms", slice);
             pass.bindTexture("Sampler0", texture.getTextureView(), texture.getSampler());
             pass.setVertexBuffer(0, data.buffer());

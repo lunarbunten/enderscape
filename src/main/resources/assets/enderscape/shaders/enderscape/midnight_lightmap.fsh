@@ -13,7 +13,6 @@ layout(std140) uniform LightmapInfo {
     vec3 NightVisionColor;
 } lightmapInfo;
 
-
 in vec2 texCoord;
 
 out vec4 fragColor;
