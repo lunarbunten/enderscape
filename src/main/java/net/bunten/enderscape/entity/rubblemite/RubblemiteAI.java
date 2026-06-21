@@ -73,7 +73,7 @@ public class RubblemiteAI {
                 )),
                 ActivityData.create(Activity.IDLE, ImmutableList.of(
                         Pair.of(1, StartAttacking.create(EnderscapeAI::getAttackTarget)),
-                        Pair.of(4, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(30, 60))),
+                        Pair.of(4, SetEntityLookTargetSometimes.create(EntityTypes.PLAYER, 6.0f, UniformInt.of(30, 60))),
                         Pair.of(8, new RunOne<>(
                                         ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
                                         ImmutableList.of(
