@@ -10,7 +10,6 @@ import net.bunten.enderscape.entity.ai.behavior.CalmDownFromAttacker;
 import net.bunten.enderscape.entity.ai.behavior.CalmDownFromIntimidator;
 import net.bunten.enderscape.entity.ai.behavior.DrifterRefreshHomePosition;
 import net.bunten.enderscape.entity.ai.behavior.DrifterStartOrStopLeakingJelly;
-import net.bunten.enderscape.entity.rustle.Rustle;
 import net.bunten.enderscape.registry.EnderscapeEntities;
 import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -23,6 +22,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.ItemStack;
 
@@ -63,44 +63,9 @@ public class DrifterAI {
             EnderscapeSensors.NEAREST_PLAYERS
     );
 
-    public static final ImmutableList<ActivityData<Drifter>> ACTIVITY_DATA = ImmutableList.of(
-            ActivityData.create(Activity.CORE, 0, ImmutableList.of(
-                    new CalmDownFromAttacker(24),
-                    new CalmDownFromIntimidator(24),
-
-                    new CountDownCooldownTicks(EnderscapeMemory.DRIFTER_FIND_HOME_COOLDOWN),
-                    new CountDownCooldownTicks(EnderscapeMemory.DRIFTER_JELLY_CHANGE_COOLDOWN),
-                    new CountDownCooldownTicks(EnderscapeMemory.TEMPTATION_COOLDOWN_TICKS),
-
-                    new DrifterStartOrStopLeakingJelly(),
-                    new LookAtTargetSink(45, 90),
-                    new MoveToTargetSink(),
-                    new DrifterRefreshHomePosition(),
-                    new Swim<>(0.8f),
-
-                    SetWalkTargetAwayFrom.entity(EnderscapeMemory.HURT_BY_ENTITY, 2, 12, true),
-                    SetWalkTargetAwayFrom.entity(EnderscapeMemory.NEAREST_INTIMIDATOR, 2, 8, true)
-            )),
-            ActivityData.create(Activity.IDLE, ImmutableList.of(
-                    Pair.of(0, new AnimalMakeLove(EnderscapeEntities.DRIFTER)),
-                    Pair.of(1, new FollowTemptation(mob -> 1.25F)),
-                    Pair.of(2, BabyFollowAdult.create(UniformInt.of(4, 16), 2)),
-                    Pair.of(3, SetWalkTargetAwayFrom.entity(EnderscapeMemory.NEAREST_INTIMIDATOR, 1, 12, true)),
-                    Pair.of(4, SetEntityLookTargetSometimes.create(EntityTypes.PLAYER, 6.0f, UniformInt.of(30, 60))),
-                    Pair.of(8, new RunOne<>(
-                                    ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
-                                    ImmutableList.of(
-                                            Pair.of(RandomStroll.fly(1.0F), 3),
-                                            Pair.of(new DoNothing(30, 60), 3)
-                                    )
-                            )
-                    )
-            ))
-    );
-
     public static final int HOME_RADIUS = 64;
 
-    private static final Brain.Provider<Drifter> BRAIN_PROVIDER = Brain.provider(MEMORY_TYPES, SENSOR_TYPES, entity -> ACTIVITY_DATA);
+    private static final Brain.Provider<Drifter> BRAIN_PROVIDER = Brain.provider(MEMORY_TYPES, SENSOR_TYPES, entity -> createActivityData());
 
     public static Brain<?> makeBrain(Drifter drifter, Brain.Packed packed) {
         var brain = BRAIN_PROVIDER.makeBrain(drifter, packed);
@@ -110,6 +75,43 @@ public class DrifterAI {
         brain.useDefaultActivity();
 
         return brain;
+    }
+
+    public static ImmutableList<ActivityData<Drifter>> createActivityData() {
+        return ImmutableList.of(
+                ActivityData.create(Activity.CORE, 0, ImmutableList.of(
+                        new CalmDownFromAttacker(24),
+                        new CalmDownFromIntimidator(24),
+
+                        new CountDownCooldownTicks(EnderscapeMemory.DRIFTER_FIND_HOME_COOLDOWN),
+                        new CountDownCooldownTicks(EnderscapeMemory.DRIFTER_JELLY_CHANGE_COOLDOWN),
+                        new CountDownCooldownTicks(EnderscapeMemory.TEMPTATION_COOLDOWN_TICKS),
+
+                        new DrifterStartOrStopLeakingJelly(),
+                        new LookAtTargetSink(45, 90),
+                        new MoveToTargetSink(),
+                        new DrifterRefreshHomePosition(),
+                        new Swim<>(0.8f),
+
+                        SetWalkTargetAwayFrom.entity(EnderscapeMemory.HURT_BY_ENTITY, 2, 12, true),
+                        SetWalkTargetAwayFrom.entity(EnderscapeMemory.NEAREST_INTIMIDATOR, 2, 8, true)
+                )),
+                ActivityData.create(Activity.IDLE, ImmutableList.of(
+                        Pair.of(0, new AnimalMakeLove(EnderscapeEntities.DRIFTER)),
+                        Pair.of(1, new FollowTemptation(mob -> 1.25F)),
+                        Pair.of(2, BabyFollowAdult.create(UniformInt.of(4, 16), 2)),
+                        Pair.of(3, SetWalkTargetAwayFrom.entity(EnderscapeMemory.NEAREST_INTIMIDATOR, 1, 12, true)),
+                        Pair.of(4, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(30, 60))),
+                        Pair.of(8, new RunOne<>(
+                                        ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
+                                        ImmutableList.of(
+                                                Pair.of(RandomStroll.fly(1.0F), 3),
+                                                Pair.of(new DoNothing(30, 60), 3)
+                                        )
+                                )
+                        )
+                ))
+        );
     }
 
     public static void updateActivity(Drifter entity) {

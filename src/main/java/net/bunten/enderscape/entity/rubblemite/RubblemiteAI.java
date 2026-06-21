@@ -59,37 +59,39 @@ public class RubblemiteAI {
             EnderscapeSensors.RUBBLEMITE_NEAREST_ENEMIES
     );
 
-    public static final ImmutableList<ActivityData<Rubblemite>> ACTIVITY_DATA = ImmutableList.of(
-            ActivityData.create(Activity.CORE, 0, ImmutableList.of(
-                    new MoveToTargetSink(),
-                    new CountDownCooldownTicks(EnderscapeMemory.RUBBLEMITE_PREPARING_DASH_TIME),
-                    new ConditionalLookAtTargetSink<>(rubblemite -> rubblemite.isDashing() || rubblemite.isInsideShell(), 45, 90),
-                    new RubblemiteShellCooldown(),
-                    new RubblemiteManageState(),
-                    StopBeingAngryIfTargetDead.create()
-            )),
-            ActivityData.create(Activity.IDLE, ImmutableList.of(
-                    Pair.of(1, StartAttacking.create(EnderscapeAI::getAttackTarget)),
-                    Pair.of(4, SetEntityLookTargetSometimes.create(EntityTypes.PLAYER, 6.0f, UniformInt.of(30, 60))),
-                    Pair.of(8, new RunOne<>(
-                                    ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
-                                    ImmutableList.of(
-                                            Pair.of(RandomStroll.stroll(1), 3),
-                                            Pair.of(new DoNothing(30, 60), 3)
-                                    )
-                            )
-                    )
-            )),
-            ActivityData.create(Activity.FIGHT, 10, ImmutableList.of(
-                    new RubblemiteDashAfterPreparing(),
-                    new RubblemitePrepareDashDuringCombat(),
-                    SetWalkTargetFromAttackTargetIfTargetOutOfReach.create(1),
-                    BehaviorBuilder.triggerIf(mob -> mob.getState() == Rubblemite.State.IDLING, MeleeAttack.create(15)),
-                    StopAttackingIfTargetInvalid.create()
-            ), EnderscapeMemory.ATTACK_TARGET)
-    );
+    private static final Brain.Provider<Rubblemite> BRAIN_PROVIDER = Brain.provider(MEMORY_TYPES, SENSOR_TYPES, entity -> createActivityData());
 
-    private static final Brain.Provider<Rubblemite> BRAIN_PROVIDER = Brain.provider(MEMORY_TYPES, SENSOR_TYPES, entity -> ACTIVITY_DATA);
+    public static ImmutableList<ActivityData<Rubblemite>> createActivityData() {
+        return ImmutableList.of(
+                ActivityData.create(Activity.CORE, 0, ImmutableList.of(
+                        new MoveToTargetSink(),
+                        new CountDownCooldownTicks(EnderscapeMemory.RUBBLEMITE_PREPARING_DASH_TIME),
+                        new ConditionalLookAtTargetSink<>(rubblemite -> rubblemite.isDashing() || rubblemite.isInsideShell(), 45, 90),
+                        new RubblemiteShellCooldown(),
+                        new RubblemiteManageState(),
+                        StopBeingAngryIfTargetDead.create()
+                )),
+                ActivityData.create(Activity.IDLE, ImmutableList.of(
+                        Pair.of(1, StartAttacking.create(EnderscapeAI::getAttackTarget)),
+                        Pair.of(4, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(30, 60))),
+                        Pair.of(8, new RunOne<>(
+                                        ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
+                                        ImmutableList.of(
+                                                Pair.of(RandomStroll.stroll(1), 3),
+                                                Pair.of(new DoNothing(30, 60), 3)
+                                        )
+                                )
+                        )
+                )),
+                ActivityData.create(Activity.FIGHT, 10, ImmutableList.of(
+                        new RubblemiteDashAfterPreparing(),
+                        new RubblemitePrepareDashDuringCombat(),
+                        SetWalkTargetFromAttackTargetIfTargetOutOfReach.create(1),
+                        BehaviorBuilder.triggerIf(mob -> mob.getState() == Rubblemite.State.IDLING, MeleeAttack.create(15)),
+                        StopAttackingIfTargetInvalid.create()
+                ), EnderscapeMemory.ATTACK_TARGET)
+        );
+    }
 
     public static boolean isShellCoolingDown(Rubblemite mob) {
         Brain<Rubblemite> brain = mob.getBrain();
