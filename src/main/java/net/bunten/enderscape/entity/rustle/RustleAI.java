@@ -58,50 +58,6 @@ public class RustleAI {
             EnderscapeMemory.WALK_TARGET
     );
 
-    public static final ImmutableList<ActivityData<Rustle>> ACTIVITY_DATA = ImmutableList.of(
-            ActivityData.create(Activity.CORE, 0, ImmutableList.of(
-                    new CalmDownFromAttacker(16),
-
-                    new CountDownCooldownTicks(EnderscapeMemory.RUSTLE_HAIR_REGROWTH_COOLDOWN),
-                    new CountDownCooldownTicks(EnderscapeMemory.RUSTLE_SLEEP_TICKS),
-                    new CountDownCooldownTicks(EnderscapeMemory.TEMPTATION_COOLDOWN_TICKS),
-
-                    new RustleRegrowHairNaturally(),
-
-                    new ConditionalLookAtTargetSink<>(Rustle::isSleeping, 45, 90),
-                    new MoveToTargetSink(),
-                    new Swim<>(0.8f),
-
-                    SetWalkTargetAwayFrom.entity(EnderscapeMemory.HURT_BY_ENTITY, 1.25F, 12, true)
-            )),
-            ActivityData.create(Activity.IDLE,
-                    ImmutableList.of(
-                            Pair.of(0, new AnimalMakeLove(EnderscapeEntities.RUSTLE, 1.25F, 1)),
-                            Pair.of(1, new FollowTemptation(mob -> 1.25F)),
-                            Pair.of(2, new RustleEatWhenSheared(1.25F)),
-                            Pair.of(3, BabyFollowAdult.create(UniformInt.of(1, 4), 1.25F)),
-                            Pair.of(4, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 1.5F, UniformInt.of(30, 60))),
-                            Pair.of(8, new RunOne<>(
-                                    ImmutableMap.of(EnderscapeMemory.WALK_TARGET, MemoryStatus.VALUE_ABSENT, EnderscapeMemory.HURT_BY_ENTITY, MemoryStatus.VALUE_ABSENT),
-                                    ImmutableList.of(
-                                            Pair.of(RandomStroll.stroll(1), 5),
-                                            Pair.of(new DoNothing(30, 60), 5),
-                                            Pair.of(new RustleGoToSleep(1.0F), 1)
-                                    ))
-                            )),
-                    ImmutableSet.of(Pair.of(EnderscapeMemory.RUSTLE_SLEEP_TICKS, MemoryStatus.VALUE_ABSENT))
-            ),
-            ActivityData.create(Activity.REST, ImmutableList.of(
-                            Pair.of(8, new DoNothing(30, 60))),
-                    Set.of(
-                            Pair.of(EnderscapeMemory.RUSTLE_SLEEPING_ON_COOLDOWN, MemoryStatus.VALUE_ABSENT),
-                            Pair.of(EnderscapeMemory.IS_PANICKING, MemoryStatus.VALUE_ABSENT),
-                            Pair.of(EnderscapeMemory.RUSTLE_SLEEP_TICKS, MemoryStatus.VALUE_PRESENT),
-                            Pair.of(EnderscapeMemory.WALK_TARGET, MemoryStatus.VALUE_ABSENT)
-                    )
-            )
-    );
-
     public static final ImmutableList<SensorType<? extends Sensor<? super Rustle>>> SENSOR_TYPES = ImmutableList.of(
             EnderscapeSensors.HURT_BY,
             EnderscapeSensors.IS_IN_WATER,
@@ -114,7 +70,7 @@ public class RustleAI {
     );
 
 
-    private static final Brain.Provider<Rustle> BRAIN_PROVIDER = Brain.provider(MEMORY_TYPES, RustleAI.SENSOR_TYPES, entity -> RustleAI.ACTIVITY_DATA);
+    private static final Brain.Provider<Rustle> BRAIN_PROVIDER = Brain.provider(MEMORY_TYPES, RustleAI.SENSOR_TYPES, entity -> createActivityData());
 
     public static final IntProvider HAIR_REGROWTH_COOLDOWN_RANGE_IN_MINUTES = UniformInt.of(4, 8);
     public static final IntProvider SLEEPING_TIME_RANGE_IN_MINUTES = ConstantInt.of(1);
@@ -128,6 +84,52 @@ public class RustleAI {
         brain.useDefaultActivity();
 
         return brain;
+    }
+
+    public static ImmutableList<ActivityData<Rustle>> createActivityData() {
+        return ImmutableList.of(
+                ActivityData.create(Activity.CORE, 0, ImmutableList.of(
+                        new CalmDownFromAttacker(16),
+
+                        new CountDownCooldownTicks(EnderscapeMemory.RUSTLE_HAIR_REGROWTH_COOLDOWN),
+                        new CountDownCooldownTicks(EnderscapeMemory.RUSTLE_SLEEP_TICKS),
+                        new CountDownCooldownTicks(EnderscapeMemory.TEMPTATION_COOLDOWN_TICKS),
+
+                        new RustleRegrowHairNaturally(),
+
+                        new ConditionalLookAtTargetSink<>(Rustle::isSleeping, 45, 90),
+                        new MoveToTargetSink(),
+                        new Swim<>(0.8f),
+
+                        SetWalkTargetAwayFrom.entity(EnderscapeMemory.HURT_BY_ENTITY, 1.25F, 12, true)
+                )),
+                ActivityData.create(Activity.IDLE,
+                        ImmutableList.of(
+                                Pair.of(0, new AnimalMakeLove(EnderscapeEntities.RUSTLE, 1.25F, 1)),
+                                Pair.of(1, new FollowTemptation(mob -> 1.25F)),
+                                Pair.of(2, new RustleEatWhenSheared(1.25F)),
+                                Pair.of(3, BabyFollowAdult.create(UniformInt.of(1, 4), 1.25F)),
+                                Pair.of(4, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 1.5F, UniformInt.of(30, 60))),
+                                Pair.of(8, new RunOne<>(
+                                        ImmutableMap.of(EnderscapeMemory.WALK_TARGET, MemoryStatus.VALUE_ABSENT, EnderscapeMemory.HURT_BY_ENTITY, MemoryStatus.VALUE_ABSENT),
+                                        ImmutableList.of(
+                                                Pair.of(RandomStroll.stroll(1), 5),
+                                                Pair.of(new DoNothing(30, 60), 5),
+                                                Pair.of(new RustleGoToSleep(1.0F), 1)
+                                        ))
+                                )),
+                        ImmutableSet.of(Pair.of(EnderscapeMemory.RUSTLE_SLEEP_TICKS, MemoryStatus.VALUE_ABSENT))
+                ),
+                ActivityData.create(Activity.REST, ImmutableList.of(
+                                Pair.of(8, new DoNothing(30, 60))),
+                        Set.of(
+                                Pair.of(EnderscapeMemory.RUSTLE_SLEEPING_ON_COOLDOWN, MemoryStatus.VALUE_ABSENT),
+                                Pair.of(EnderscapeMemory.IS_PANICKING, MemoryStatus.VALUE_ABSENT),
+                                Pair.of(EnderscapeMemory.RUSTLE_SLEEP_TICKS, MemoryStatus.VALUE_PRESENT),
+                                Pair.of(EnderscapeMemory.WALK_TARGET, MemoryStatus.VALUE_ABSENT)
+                        )
+                )
+        );
     }
 
     public static void updateActivity(Rustle mob) {
