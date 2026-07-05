@@ -522,9 +522,6 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 woodFromLogs(STRIPPED_VEILED_WOOD, STRIPPED_VEILED_LOG);
                 planksFromLogs(VEILED_PLANKS, EnderscapeItemTags.VEILED_LOGS, 4);
 
-                hangingSignBuilder(VEILED_HANGING_SIGN_ITEM, Ingredient.of(STRIPPED_VEILED_LOG))
-                        .unlockedBy("has_stripped_logs", this.has(STRIPPED_VEILED_LOG))
-                        .save(output);
                 shelf(VEILED_SHELF_ITEM, STRIPPED_VEILED_LOG);
 
                 shapeless(RecipeCategory.MISC, DYE.yellow())
@@ -564,9 +561,6 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 woodFromLogs(STRIPPED_CELESTIAL_HYPHAE, STRIPPED_CELESTIAL_STEM);
                 planksFromLogs(CELESTIAL_PLANKS, EnderscapeItemTags.CELESTIAL_STEMS, 4);
 
-                hangingSignBuilder(CELESTIAL_HANGING_SIGN_ITEM, Ingredient.of(STRIPPED_CELESTIAL_STEM))
-                        .unlockedBy("has_stripped_logs", this.has(STRIPPED_CELESTIAL_STEM))
-                        .save(output);;
                 shelf(CELESTIAL_SHELF_ITEM, STRIPPED_CELESTIAL_STEM);
 
                 shapeless(RecipeCategory.MISC, DYE.purple())
@@ -600,9 +594,6 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 woodFromLogs(STRIPPED_MURUBLIGHT_HYPHAE, STRIPPED_MURUBLIGHT_STEM);
                 planksFromLogs(MURUBLIGHT_PLANKS, EnderscapeItemTags.MURUBLIGHT_STEMS, 4);
 
-                hangingSignBuilder(MURUBLIGHT_HANGING_SIGN_ITEM, Ingredient.of(STRIPPED_MURUBLIGHT_STEM))
-                        .unlockedBy("has_stripped_logs", this.has(STRIPPED_MURUBLIGHT_STEM))
-                        .save(output);
                 shelf(MURUBLIGHT_SHELF_ITEM, STRIPPED_MURUBLIGHT_STEM);
             }
 

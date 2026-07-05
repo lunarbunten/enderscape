@@ -50,6 +50,9 @@ public class EnderscapeDataGen implements DataGeneratorEntrypoint {
 		pack.addProvider(EnderscapeTrimMaterialProvider::new);
 		pack.addProvider(EnderscapeTrimPatternProvider::new);
 		pack.addProvider(EnderscapeVaultLootProvider::new);
+
+		// Client
+		pack.addProvider(EnderscapeBlockModelProvider::new);
 	}
 
 	@Override
