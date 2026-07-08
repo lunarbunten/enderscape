@@ -2,32 +2,34 @@ package net.bunten.enderscape.mixin;
 
 import net.bunten.enderscape.EnderscapeConfig;
 import net.bunten.enderscape.entity.magnia.MagniaMoveable;
-import net.bunten.enderscape.entity.magnia.MagniaMovingData;
-import net.bunten.enderscape.item.MagniaAttractorItem;
-import net.bunten.enderscape.item.NebuliteToolContext;
-import net.bunten.enderscape.item.RubbleShieldItem;
+import net.bunten.enderscape.item.ItemStackContext;
+import net.bunten.enderscape.item.component.*;
+import net.bunten.enderscape.particle.MagniaParticleOptions;
 import net.bunten.enderscape.registry.EnderscapeCriteria;
 import net.bunten.enderscape.registry.EnderscapeDataComponents;
 import net.bunten.enderscape.registry.EnderscapeItemSounds;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.stats.Stats;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -39,21 +41,13 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Shadow public abstract Inventory getInventory();
 
+    @Shadow public abstract @NotNull ItemStack getWeaponItem();
+
     @Unique
     private int Enderscape$airTicks = 0;
 
-    @Unique
-    private final Player player = (Player) (Object) this;
-
     protected PlayerMixin(EntityType<? extends LivingEntity> type, Level world) {
         super(type, world);
-    }
-
-    @Inject(at = @At("HEAD"), method = "jumpFromGround")
-    public void Enderscape$jumpFromGround(CallbackInfo info) {
-        if (level() instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer &&  isUsingItem() && getUseItem().has(EnderscapeDataComponents.DASH_JUMP)) {
-            getUseItem().get(EnderscapeDataComponents.DASH_JUMP).apply(serverLevel, serverPlayer, player.getUseItem(), player.getUseItem().get(EnderscapeDataComponents.DASH_JUMP));
-        }
     }
 
     @Inject(at = @At("HEAD"), method = "tick")
@@ -71,26 +65,110 @@ public abstract class PlayerMixin extends LivingEntity {
     @Unique
     private final Map<Entity, Integer> Enderscape$pullTickCounters = new HashMap<>();
 
+    @ModifyArg(
+            method = "attack",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V",
+                    ordinal = 0
+            ),
+            index = 4
+    )
+    public SoundEvent Enderscape$changeKnockbackSound(SoundEvent original) {
+        ItemStack stack = getWeaponItem();
+        return (!stack.isEmpty() && AttackSounds.is(stack)) ? AttackSounds.get(stack).knockback().value() : original;
+    }
+
+    @ModifyArg(
+            method = "attack",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V",
+                    ordinal = 1
+            ),
+            index = 4
+    )
+    public SoundEvent Enderscape$changeSweepSound(SoundEvent original) {
+        ItemStack stack = getWeaponItem();
+        return (!stack.isEmpty() && AttackSounds.is(stack)) ? AttackSounds.get(stack).sweep().value() : original;
+    }
+
+    @ModifyArg(
+            method = "attack",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V",
+                    ordinal = 2
+            ),
+            index = 4
+    )
+    public SoundEvent Enderscape$changeCritSound(SoundEvent original) {
+        ItemStack stack = getWeaponItem();
+        return (!stack.isEmpty() && AttackSounds.is(stack)) ? AttackSounds.get(stack).crit().value() : original;
+    }
+
+    @ModifyArg(
+            method = "attack",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V",
+                    ordinal = 3
+            ),
+            index = 4
+    )
+    public SoundEvent Enderscape$changeStrongSound(SoundEvent original) {
+        ItemStack stack = getWeaponItem();
+        return (!stack.isEmpty() && AttackSounds.is(stack)) ? AttackSounds.get(stack).strong().value() : original;
+    }
+
+    @ModifyArg(
+            method = "attack",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V",
+                    ordinal = 4
+            ),
+            index = 4
+    )
+    public SoundEvent Enderscape$changeWeakSound(SoundEvent original) {
+        ItemStack stack = getWeaponItem();
+        return (!stack.isEmpty() && AttackSounds.is(stack)) ? AttackSounds.get(stack).weak().value() : original;
+    }
+
+    @ModifyArg(
+            method = "attack",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V",
+                    ordinal = 5
+            ),
+            index = 4
+    )
+    public SoundEvent Enderscape$changeNoDamageSound(SoundEvent original) {
+        ItemStack stack = getWeaponItem();
+        return (!stack.isEmpty() && AttackSounds.is(stack)) ? AttackSounds.get(stack).noDamage().value() : original;
+    }
+
     @Unique
     private void Enderscape$tickMagniaAttractorItemMovement() {
         if (isAlive() && !isSpectator() && !level().isClientSide()) {
-            ItemStack stack = MagniaAttractorItem.getValidAttractor(getInventory());
+            ItemStack stack = EntityMagnet.getFirstUsableMagnet(getInventory());
 
-            if (!stack.isEmpty() && MagniaAttractorItem.isEnabled(stack)) {
-                int range = MagniaAttractorItem.getEntityPullRange(stack);
+            if (!stack.isEmpty() && Enabled.get(stack)) {
+                EntityMagnet magnet = EntityMagnet.get(stack);
 
-                AABB inflated = getBoundingBox().inflate(range, 4, range);
-                NebuliteToolContext context = new NebuliteToolContext(stack, level(), (Player) (Object) this);
-                level().getEntitiesOfClass(ItemEntity.class, inflated).stream().filter(item -> !item.hasPickUpDelay()).forEach(entity -> Enderscape$pullEntity(context, entity, 1));
-                level().getEntitiesOfClass(ExperienceOrb.class, inflated).stream().filter(orb -> orb.tickCount >= 20).forEach(entity -> Enderscape$pullEntity(context, entity, 0));
+                AABB totalRange = getBoundingBox().inflate(magnet.pullRange().x, magnet.pullRange().y, magnet.pullRange().x);
+                ItemStackContext context = new ItemStackContext(stack, level(), (Player) (Object) this);
+
+                level().getEntitiesOfClass(Entity.class, totalRange, entity -> EntityMagnet.CAN_PULL_ENTITY.test(entity, magnet)).forEach(entity -> Enderscape$pullEntity(context, entity, magnet, EntityMagnet.abuseCost(entity, magnet)));
 
                 Enderscape$magniaTrackedEntities.entrySet().removeIf(entry -> {
                     Entity item = entry.getKey();
                     int cooldown = entry.getValue();
 
-                    if (position().distanceTo(item.position()) > range) {
+                    if (!totalRange.contains(item.position())) {
                         if (cooldown >= 20) {
-                            MagniaMovingData.setMovedByMagnia(item, false);
+                            MagniaMoveable.setMovedByMagnia(item, false);
                             return true;
                         }
                         entry.setValue(cooldown + 1);
@@ -102,32 +180,32 @@ public abstract class PlayerMixin extends LivingEntity {
                 });
             }
 
-            Enderscape$pullTickCounters.entrySet().removeIf(entry -> !MagniaMovingData.wasMovedByMagnia(entry.getKey()));
+            Enderscape$pullTickCounters.entrySet().removeIf(entry -> !MagniaMoveable.wasMovedByMagnia(entry.getKey()));
         }
     }
 
     @Unique
-    private void Enderscape$pullEntity(NebuliteToolContext context, Entity entity, int abuseCost) {
+    private void Enderscape$pullEntity(ItemStackContext context, Entity entity, EntityMagnet magnet, int abuseCost) {
         ItemStack stack = context.stack();
 
         if (!Enderscape$magniaTrackedEntities.containsKey(entity)) {
-            if (!MagniaMovingData.wasMovedByMagnia(entity)) {
-                level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), EnderscapeItemSounds.MAGNIA_ATTRACTOR_MOVE.get(), entity.getSoundSource(), 1.0F, 1.0F);
+            if (!MagniaMoveable.wasMovedByMagnia(entity)) {
+                level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), magnet.pullEntitySound().value(), entity.getSoundSource(), 1.0F, 1.0F);
             }
             Enderscape$magniaTrackedEntities.put(entity, 0);
         }
 
         Vec3 speed = position().subtract(entity.position()).normalize().scale(entity.isUnderWater() ? 0.04 : 0.2);
         entity.setDeltaMovement(entity.getDeltaMovement().add(speed));
-        MagniaMovingData.setMovedByMagnia(entity, true);
+        MagniaMoveable.setMovedByMagnia(entity, true);
+        if (level() instanceof ServerLevel server) MagniaMoveable.sendEntityEffectParticles(server, entity, MagniaParticleOptions.MAGNIA_ATTRACTOR, 0.25F);
 
         if (abuseCost > 0) {
-            if (MagniaMovingData.wasMovedByMagnia(entity)) {
+            if (MagniaMoveable.wasMovedByMagnia(entity)) {
                 int ticks = Enderscape$pullTickCounters.getOrDefault(entity, 0) + 1;
 
                 if (ticks >= 40) {
-                    MagniaAttractorItem.incrementEntitiesPulled(stack, abuseCost);
-                    MagniaAttractorItem.tryUseFuel(context, abuseCost - MagniaAttractorItem.getEntitiesPulledToUseFuel(stack));
+                    stack.hurtAndBreak(1, this, getEquipmentSlotForItem(stack));
                     ticks = 0;
                 }
 
@@ -145,39 +223,22 @@ public abstract class PlayerMixin extends LivingEntity {
         if (Enderscape$airTicks < 1) cir.setReturnValue(false);
     }
 
-    @Inject(at = @At("HEAD"), method = "startFallFlying")
+    @Inject(at = @At("TAIL"), method = "startFallFlying")
     public void Enderscape$startFallFlying(CallbackInfo info) {
-        if (EnderscapeConfig.getInstance().elytraAddOpenCloseSounds) playSound(EnderscapeItemSounds.ELYTRA_START_GLIDING.get(), 1, Mth.nextFloat(getRandom(), 0.8F, 1.2F));
+        if (EnderscapeConfig.getInstance().elytraAddOpenCloseSounds && level().isClientSide() && getItemBySlot(EquipmentSlot.CHEST).is(Items.ELYTRA)) playSound(EnderscapeItemSounds.ELYTRA_START_GLIDING, 1, Mth.nextFloat(getRandom(), 0.8F, 1.2F));
         level().broadcastEntityEvent(this, (byte) -68);
     }
 
-    @Inject(at = @At("HEAD"), method = "stopFallFlying")
+    @Inject(at = @At("TAIL"), method = "stopFallFlying")
     public void Enderscape$stopFallFlying(CallbackInfo info) {
-        if (EnderscapeConfig.getInstance().elytraAddOpenCloseSounds) playSound(EnderscapeItemSounds.ELYTRA_STOP_GLIDING.get(), 1, Mth.nextFloat(getRandom(), 0.8F, 1.2F));
+        if (EnderscapeConfig.getInstance().elytraAddOpenCloseSounds && getItemBySlot(EquipmentSlot.CHEST).is(Items.ELYTRA)) playSound(EnderscapeItemSounds.ELYTRA_STOP_GLIDING, 1, Mth.nextFloat(getRandom(), 0.8F, 1.2F));
     }
 
-    @Inject(at = @At("HEAD"), method = "hurtCurrentlyUsedShield")
-    private void Enderscape$redirectShieldCheck(float f, CallbackInfo info) {
-        if (useItem.getItem() instanceof RubbleShieldItem) {
-            if (!level().isClientSide) {
-                player.awardStat(Stats.ITEM_USED.get(this.useItem.getItem()));
-            }
-
-            if (f >= 3.0F) {
-                int i = 1 + Mth.floor(f);
-                InteractionHand hand = this.getUsedItemHand();
-                useItem.hurtAndBreak(i, this, getSlotForHand(hand));
-                if (useItem.isEmpty()) {
-                    if (hand == InteractionHand.MAIN_HAND) {
-                        setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
-                    } else {
-                        setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
-                    }
-
-                    useItem = ItemStack.EMPTY;
-                    playSound(SoundEvents.SHIELD_BREAK, 0.8F, 0.8F + level().random.nextFloat() * 0.4F);
-                }
-            }
+    @Inject(at = @At("HEAD"), method = "jumpFromGround")
+    public void Enderscape$jumpFromGround(CallbackInfo info) {
+        ItemStack stack = getUseItem();
+        if (level() instanceof ServerLevel level && ((Player) (Object) this) instanceof ServerPlayer player && isUsingItem() && stack.has(EnderscapeDataComponents.DASH_JUMP)) {
+            DashJump.apply(level, player, stack);
         }
     }
 }

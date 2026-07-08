@@ -7,7 +7,7 @@
       "tick_chance": 0.0015
     },
     "ambient_sound": "enderscape:ambient.celestial_grove.loop",
-    "fog_color": 1182996,
+    "fog_color": 7820933,
     "foliage_color": 11983714,
     "grass_color": 11983713,
     "mood_sound": {
@@ -20,7 +20,7 @@
       "max_delay": 24000,
       "min_delay": 12000,
       "replace_current_music": false,
-      "sound": "enderscape:music.the_end.biome.celestial_grove"
+      "sound": "enderscape:music.enderscape.biome.celestial_grove"
     },
     "particle": {
       "options": {
@@ -61,7 +61,7 @@
       "enderscape:celestial_grove_vegetation",
       "enderscape:bulb_flower_patches",
       "enderscape:common_dry_end_growth",
-      "enderscape:uncommon_murublight_shelf"
+      "enderscape:uncommon_murublight_bracket"
     ]
   ],
   "has_precipitation": false,
@@ -75,12 +75,6 @@
         "maxCount": 6,
         "minCount": 3,
         "weight": 6
-      },
-      {
-        "type": "enderscape:driftlet",
-        "maxCount": 3,
-        "minCount": 2,
-        "weight": 2
       }
     ],
     "misc": [],

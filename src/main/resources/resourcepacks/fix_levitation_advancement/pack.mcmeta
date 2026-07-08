@@ -3,9 +3,9 @@
         "description": {
             "translate": "pack.enderscape.fix_levitation_advancement.description"
         },
-        "pack_format": 48,
+        "pack_format": 46,
         "supported_formats": {
-          "min_inclusive": 48,
+          "min_inclusive": 46,
           "max_inclusive": 9999
         }
     }

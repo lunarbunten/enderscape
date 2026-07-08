@@ -7,11 +7,19 @@ import net.bunten.enderscape.entity.rubblemite.RubblemiteVariant;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class RubblemiteRenderer extends MobRenderer<Rubblemite, RubblemiteModel> {
     public RubblemiteRenderer(Context context) {
         super(context, new RubblemiteModel(context.bakeLayer(EnderscapeEntityRenderData.RUBBLEMITE)), 0.4F);
         addLayer(new RubblemiteEyesLayer(this));
+    }
+
+    @Override
+    protected float getFlipDegrees(Rubblemite mob) {
+        return 180.0F;
     }
 
     @Override

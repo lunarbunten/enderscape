@@ -7,14 +7,19 @@ import net.minecraft.client.particle.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class CorruptSporesParticle extends TextureSheetParticle {
+
+    private static final float MINIMUM_OPACITY = 0.125F;
 
     protected CorruptSporesParticle(ClientLevel level, double x, double y, double z, double xd, double yd, double zd, SpriteSet sprites) {
         super(level, x, y, z, xd, yd, zd);
         setSpriteFromAge(sprites);
 
-        alpha = 0;
+        alpha = MINIMUM_OPACITY;
 
         hasPhysics = true;
         gravity = -0.005F;
@@ -27,13 +32,13 @@ public class CorruptSporesParticle extends TextureSheetParticle {
         xd += Mth.sin(age * 0.4F) * 0.01F;
         zd += Mth.sin(age * 0.4F + Mth.PI) * 0.01F;
 
-        float newAlpha = 0;
+        float newAlpha = MINIMUM_OPACITY;
         BlockPos pos = BlockPos.containing(x, y, z);
         if (level.getChunk(pos) != null) {
             newAlpha = level.getChunkSource().getLightEngine().getRawBrightness(pos, 0) / 15.0F;
         }
 
-        alpha = Mth.lerp(0.15F, alpha, newAlpha);
+        alpha = Mth.lerp(0.15F, alpha, Math.max(MINIMUM_OPACITY, newAlpha));
 
         super.tick();
     }
@@ -53,7 +58,8 @@ public class CorruptSporesParticle extends TextureSheetParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-        public static class Provider implements ParticleProvider<SimpleParticleType> {
+    @OnlyIn(Dist.CLIENT)
+    public static class Provider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprites;
 
         public Provider(SpriteSet sprites) {

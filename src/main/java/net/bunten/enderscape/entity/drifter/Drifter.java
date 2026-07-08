@@ -1,7 +1,10 @@
 package net.bunten.enderscape.entity.drifter;
 
+import com.mojang.serialization.Dynamic;
 import net.bunten.enderscape.entity.ai.behavior.DrifterStartOrStopLeakingJelly;
 import net.bunten.enderscape.registry.*;
+import net.bunten.enderscape.registry.tag.EnderscapeItemTags;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -13,15 +16,19 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -30,30 +37,49 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public class Drifter extends AbstractDrifter {
+import static net.bunten.enderscape.registry.EnderscapeEntitySounds.*;
+
+public class Drifter extends Animal {
 
     private static final String DRIPPING_JELLY_KEY = "DrippingJelly";
     private static final EntityDataAccessor<Boolean> DRIPPING_JELLY = SynchedEntityData.defineId(Drifter.class, EntityDataSerializers.BOOLEAN);
 
     public Drifter(EntityType<? extends Drifter> type, Level world) {
         super(type, world);
-        
+
+        moveControl = new FlyingMoveControl(this, 20, true);
+
+        setPathfindingMalus(PathType.WATER, -1);
+        setPathfindingMalus(PathType.WATER_BORDER, 16);
         DrifterStartOrStopLeakingJelly.refreshCooldown(this);
     }
-    
+
     public static AttributeSupplier.Builder createAttributes() {
-        return createBaseDrifterAttributes().add(Attributes.MAX_HEALTH, 16).add(Attributes.FLYING_SPEED, 0.4);
+        return createMobAttributes()
+                .add(Attributes.MOVEMENT_SPEED, 0.1)
+                .add(Attributes.FOLLOW_RANGE, 24)
+                .add(Attributes.GRAVITY, 0.005)
+                .add(Attributes.JUMP_STRENGTH, 0.1)
+                .add(Attributes.MAX_HEALTH, 16)
+                .add(Attributes.FLYING_SPEED, 0.4);
+    }
+
+    public static boolean canSpawn(EntityType<?> type, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return true;
     }
 
     public boolean isDrippingJelly() {
-        return entityData.get(DRIPPING_JELLY);
+        return !isBaby() && entityData.get(DRIPPING_JELLY);
     }
 
     public void setDrippingJelly(boolean value) {
@@ -89,11 +115,6 @@ public class Drifter extends AbstractDrifter {
         setDrippingJelly(tag.getBoolean(DRIPPING_JELLY_KEY));
     }
 
-    @Override
-    public SoundEvent getJumpSound() {
-        return EnderscapeEntitySounds.DRIFTER_JUMP.get();
-    }
-
     private boolean hasFeatherFalling(LivingEntity mob) {
         try {
             HolderLookup.RegistryLookup<Enchantment> registry = level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
@@ -108,28 +129,40 @@ public class Drifter extends AbstractDrifter {
     public void aiStep() {
         super.aiStep();
 
-        if (isAlive() && !level().isClientSide()) {
-            level().getEntities(this, getBounceHitbox()).forEach((entity) -> {
-                if (entity instanceof LivingEntity mob && mob.isAlive() && !mob.isSpectator() && !(mob instanceof AbstractDrifter)) collide(mob, getBounceHitbox());
-            });
-        }
+        if (onGround()) jumpFromGround();
+        if (isInLiquid()) setDeltaMovement(getDeltaMovement().add(0, 0.025, 0));
 
-        if (level() instanceof ServerLevel server) {
-            if (isInLove() && !isDrippingJelly() && random.nextInt(8) == 0) {
-                Vec3 pos = position();
-                server.sendParticles(EnderscapeParticles.DRIFT_JELLY_DRIPPING.get(), pos.x, pos.y + 0.5, pos.z, 1, 0.4F, 1, 0.4F, 0.1);
+        if (!isBaby()) {
+            if (isAlive() && !level().isClientSide()) {
+                level().getEntities(this, getBounceHitbox()).forEach((entity) -> {
+                    if (entity instanceof LivingEntity mob && mob.isAlive() && !mob.isSpectator() && !(mob instanceof Drifter)) collide(mob, getBounceHitbox());
+                });
             }
 
-            if (isDrippingJelly() && random.nextBoolean()) {
-                Vec3 pos = position();
-                server.sendParticles(EnderscapeParticles.DRIFT_JELLY_DRIPPING.get(), pos.x, pos.y + 0.5, pos.z, 1, 0.4F, 1, 0.4F, 0.1);
+            if (level() instanceof ServerLevel server) {
+                if (isInLove() && !isDrippingJelly() && random.nextInt(8) == 0) {
+                    Vec3 pos = position();
+                    server.sendParticles(EnderscapeParticles.DRIFT_JELLY_DRIPPING.get(), pos.x, pos.y + 0.5, pos.z, 1, 0.4F, 1, 0.4F, 0.1);
+                }
+
+                if (isDrippingJelly() && random.nextBoolean()) {
+                    Vec3 pos = position();
+                    server.sendParticles(EnderscapeParticles.DRIFT_JELLY_DRIPPING.get(), pos.x, pos.y + 0.5, pos.z, 1, 0.4F, 1, 0.4F, 0.1);
+                }
             }
         }
     }
 
-    @NotNull
     public AABB getBounceHitbox() {
-        return getBoundingBox().inflate(0.25, 0, 0.25).deflate(0, 0.85, 0).move(0, 1, 0);
+        AABB inflated = getBoundingBox().inflate(0.25, 0, 0.25);
+        return new AABB(
+                inflated.minX,
+                inflated.maxY - getBbHeight() * 0.3,
+                inflated.minZ,
+                inflated.maxX,
+                inflated.maxY,
+                inflated.maxZ
+        );
     }
 
     private void collide(LivingEntity mob, AABB bounceHitbox) {
@@ -139,7 +172,7 @@ public class Drifter extends AbstractDrifter {
             setDeltaMovement(velocity);
 
             mob.setDeltaMovement(getEntityBounceVelocity(mob));
-            gameEvent(GameEvent.STEP, mob);
+            gameEvent(EnderscapeGameEvents.BOUNCE, mob);
 
             if (mob instanceof ServerPlayer player) {
                 EnderscapeCriteria.BOUNCE_ON_DRIFTER.trigger(player, this);
@@ -148,7 +181,7 @@ public class Drifter extends AbstractDrifter {
             }
 
             mob.fallDistance = 0;
-            playSound(EnderscapeEntitySounds.DRIFTER_BOUNCE.get(), 1, 1);
+            playSound(DRIFTER_BOUNCE.get(), 1, 1);
             hurt(level().damageSources().source(EnderscapeDamageTypes.STOMP, mob), hasFeatherFalling(mob) ? 0 : 1);
         }
     }
@@ -156,6 +189,7 @@ public class Drifter extends AbstractDrifter {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
+
         if (stack.is(Items.GLASS_BOTTLE) && isDrippingJelly()) {
             if (!level().isClientSide()) {
                 stack.consume(1, player);
@@ -164,7 +198,7 @@ public class Drifter extends AbstractDrifter {
                 if (!player.getInventory().add(jelly)) player.drop(jelly, false);
 
                 gameEvent(GameEvent.ENTITY_INTERACT, player);
-                playSound(EnderscapeEntitySounds.DRIFTER_MILK.get(), 0.5F, 1);
+                playSound(DRIFTER_MILK.get(), 0.5F, 1);
                 setDrippingJelly(false);
 
                 DrifterStartOrStopLeakingJelly.refreshCooldown(this);
@@ -178,6 +212,30 @@ public class Drifter extends AbstractDrifter {
     }
 
     @Override
+    protected SoundEvent getAmbientSound() {
+        return isBaby() ? DRIFTLET_AMBIENT.get() : DRIFTER_AMBIENT.get();
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        if (source.is(EnderscapeDamageTypes.STOMP) && source.getEntity() instanceof LivingEntity mob && hasFeatherFalling(mob)) return DRIFTER_HURT_SILENT.get();
+        return isBaby() ? DRIFTLET_HURT.get() : DRIFTER_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return isBaby() ? DRIFTLET_DEATH.get() : DRIFTER_DEATH.get();
+    }
+
+    private SoundEvent getEatingSound() {
+        return isBaby() ? DRIFTLET_EAT.get() : DRIFTER_EAT.get();
+    }
+
+    public SoundEvent getJumpSound() {
+        return isBaby() ? DRIFTLET_JUMP.get() : DRIFTER_JUMP.get();
+    }
+
+    @Override
     public void spawnChildFromBreeding(ServerLevel world, Animal other) {
         super.spawnChildFromBreeding(world, other);
         if (!world.isClientSide()) {
@@ -187,28 +245,98 @@ public class Drifter extends AbstractDrifter {
     }
 
     @Override
-    protected SoundEvent getAmbientSound() {
-        return EnderscapeEntitySounds.DRIFTER_AMBIENT.get();
+    protected Brain.Provider<Drifter> brainProvider() {
+        return Brain.provider(DrifterAI.MEMORY_TYPES, DrifterAI.SENSOR_TYPES);
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource source) {
-        if (source.is(EnderscapeDamageTypes.STOMP) && source.getEntity() instanceof LivingEntity mob && hasFeatherFalling(mob)) return EnderscapeEntitySounds.DRIFTER_HURT_SILENT.get();
-        return EnderscapeEntitySounds.DRIFTER_HURT.get();
+    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
+        return DrifterAI.makeBrain(brainProvider().makeBrain(dynamic));
     }
 
     @Override
-    protected SoundEvent getDeathSound() {
-        return EnderscapeEntitySounds.DRIFTER_DEATH.get();
+    @SuppressWarnings("unchecked")
+    public Brain<Drifter> getBrain() {
+        return (Brain<Drifter>) super.getBrain();
+    }
+
+    @Override
+    protected void customServerAiStep() {
+        if (level() instanceof ServerLevel server) {
+            ProfilerFiller profiler = server.getProfiler();
+
+            profiler.push("drifterBrain");
+            getBrain().tick(server, this);
+            profiler.pop();
+
+            profiler.push("drifterActivityUpdate");
+            DrifterAI.updateActivity(this);
+            profiler.pop();
+        }
+
+        super.customServerAiStep();
+    }
+
+    @Override
+    public void jumpFromGround() {
+        super.jumpFromGround();
+        if (isAlive()) playSound(getJumpSound(), 1.0F, 1.0F);
+    }
+
+    @Override
+    protected void usePlayerItem(Player player, InteractionHand hand, ItemStack stack) {
+        super.usePlayerItem(player, hand, stack);
+        if (isFood(stack)) playEatingSound();
+    }
+
+    protected void playEatingSound() {
+        level().playSound(null, this, getEatingSound(), getSoundSource(), getSoundVolume(), getVoicePitch());
+    }
+
+    @Override
+    protected PathNavigation createNavigation(Level level) {
+        FlyingPathNavigation navigation = new FlyingPathNavigation(this, level);
+        navigation.setCanOpenDoors(false);
+        navigation.setCanFloat(false);
+        return navigation;
+    }
+
+    @Override
+    public float getWalkTargetValue(BlockPos pos, LevelReader world) {
+        return world.getBlockState(pos).isAir() ? 10 : 0;
+    }
+
+    @Override
+    protected float getSoundVolume() {
+        return 0.4F;
+    }
+
+    @Override
+    public float getVoicePitch() {
+        return Mth.nextFloat(random, 0.8F, 1.2F);
+    }
+
+    @Override
+    protected void checkFallDamage(double d, boolean bl, BlockState blockState, BlockPos blockPos) {
+    }
+
+    @Override
+    public boolean onClimbable() {
+        return false;
     }
 
     @Override
     public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
-        return EnderscapeEntities.DRIFTLET.get().create(world);
+        return EnderscapeEntities.DRIFTER.get().create(world);
     }
 
     @Override
-    public void setBaby(boolean baby) {
+    public Vec3 getLeashOffset() {
+        return isBaby() ? new Vec3(0, getEyeHeight() + 0.26F, getBbWidth() * 0.05F) : new Vec3(0, getEyeHeight() + 0.38F, 0);
     }
 
+    @Override
+    public boolean isFood(ItemStack stack) {
+        return stack.is(EnderscapeItemTags.DRIFTER_FOOD);
+    }
 }

@@ -4,10 +4,14 @@
     {
       "weight": 1,
       "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "enderscape:end_city/ship",
-        "projection": "rigid",
-        "processors": "enderscape:end_city_flower_pots"
+        "element_type": "lithostitched:guaranteed",
+        "delegate": {
+          "element_type": "minecraft:single_pool_element",
+          "location": "enderscape:end_city/ship",
+          "projection": "rigid",
+          "processors": "enderscape:end_city_flower_pots"
+        },
+        "count": 1
       }
     }
   ]

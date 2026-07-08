@@ -4,9 +4,7 @@ import com.google.common.reflect.Reflection;
 import net.bunten.enderscape.Enderscape;
 import net.bunten.enderscape.entity.ai.EnderscapeMemory;
 import net.bunten.enderscape.entity.ai.EnderscapeSensors;
-import net.bunten.enderscape.entity.drifter.AbstractDrifter;
 import net.bunten.enderscape.entity.drifter.Drifter;
-import net.bunten.enderscape.entity.drifter.Driftlet;
 import net.bunten.enderscape.entity.rubblemite.Rubblemite;
 import net.bunten.enderscape.entity.rustle.Rustle;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -29,14 +27,6 @@ public class EnderscapeEntities {
             .sized(1.9F, 2.9F)
             .eyeHeight(1.08F)
             .passengerAttachments(3.0F)
-            .ridingOffset(0.1F)
-            .clientTrackingRange(8)
-    );
-
-    public static final DeferredHolder<EntityType<?>, EntityType<Driftlet>> DRIFTLET = register("driftlet", () -> EntityType.Builder.of(Driftlet::new, MobCategory.CREATURE)
-            .sized(1.15F, 1.3F)
-            .eyeHeight(0.5F)
-            .passengerAttachments(2.5F)
             .ridingOffset(0.1F)
             .clientTrackingRange(8)
     );
@@ -64,19 +54,17 @@ public class EnderscapeEntities {
     private static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> register(ResourceKey<EntityType<?>> resourceKey, Supplier<EntityType.Builder<T>> builder) {
         return RegistryHelper.registerForHolder(BuiltInRegistries.ENTITY_TYPE, resourceKey, () -> builder.get().build(resourceKey.location().toString()));
     }
-    
+
     @SubscribeEvent
     public static void entityAttributeCreationListener(EntityAttributeCreationEvent event) {
         event.put(DRIFTER.get(), Drifter.createAttributes().build());
-        event.put(DRIFTLET.get(), Driftlet.createAttributes().build());
         event.put(RUBBLEMITE.get(), Rubblemite.createAttributes().build());
         event.put(RUSTLE.get(), Rustle.createAttributes().build());
     }
-    
+
     @SubscribeEvent
     public static void spawnPlacementsListener(RegisterSpawnPlacementsEvent event) {
-        event.register(DRIFTER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDrifter::canSpawn, RegisterSpawnPlacementsEvent.Operation.REPLACE);
-        event.register(DRIFTLET.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDrifter::canSpawn, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(DRIFTER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Drifter::canSpawn, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(RUBBLEMITE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Rubblemite::canSpawn, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(RUSTLE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Rustle::canSpawn, RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }

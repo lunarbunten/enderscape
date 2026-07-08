@@ -8,12 +8,15 @@
     "BlockEntityTypeMixin",
     "BlockMixin",
     "BoneMealItemMixin",
+    "BrainMixin",
     "ChorusFlowerBlockMixin",
     "ChorusPlantBlockMixin",
     "ChorusPlantFeatureMixin",
+    "CreeperMixin",
     "DispenseItemBehaviorMixin",
     "ElytraItemMixin",
-    "EndCrystalItemMixin",
+    "EnchantmentHelperMixin",
+    "EnchantmentMixin",
     "EnderManMixin",
     "EndermiteMixin",
     "EnderpearlItemMixin",
@@ -22,8 +25,12 @@
     "EntityMixin",
     "ExperienceOrbMixin",
     "FungusBlockMixin",
+    "GameEventDispatcherMixin",
+    "IAttributeExtensionMixin",
     "ItemEntityMixin",
+    "ItemMixin",
     "ItemsMixin",
+    "ItemStackMixin",
     "LivingEntityMixin",
     "MinecraftServerMixin",
     "MobMixin",
@@ -39,6 +46,8 @@
     "ShulkerAttackGoalMixin",
     "ShulkerBulletMixin",
     "ShulkerMixin",
+    "SilverfishMergeWithStoneGoalMixin",
+    "SilverfishMixin",
     "TemptingSensorMixin",
     "ThrownEnderpearlMixin",
     "ThrownTridentMixin",
@@ -55,5 +64,5 @@
   "server": [],
   "injectors": {
     "defaultRequire": 1
-  }
+	}
 }

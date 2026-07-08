@@ -37,14 +37,14 @@ public class EnderscapeDataMapProvider extends DataMapProvider {
         registerCompostableItem(compost, 0.5F, DRY_END_GROWTH);
         registerCompostableItem(compost, 0.5F, WISP_GROWTH);
         registerCompostableItem(compost, 0.5F, FLANGER_BERRY);
-        registerCompostableItem(compost, 0.5F, MURUBLIGHT_SHELF);
+        registerCompostableItem(compost, 0.5F, MURUBLIGHT_BRACKET);
         registerCompostableItem(compost, 0.5F, VEILED_SAPLING);
         registerCompostableItem(compost, 0.65F, BULB_FLOWER);
         registerCompostableItem(compost, 0.65F, CELESTIAL_CHANTERELLE);
         registerCompostableItem(compost, 0.65F, MURUBLIGHT_CHANTERELLE);
         registerCompostableItem(compost, 0.65F, RIPE_FLANGER_BERRY_BLOCK);
         registerCompostableItem(compost, 0.65F, WISP_FLOWER);
-        
+
         var fuel = builder(NeoForgeDataMaps.FURNACE_FUELS);
         fuel.add(BuiltInRegistries.ITEM.getKey(VOID_SHALE.get().asItem()), new FurnaceFuel(200), false);
     }

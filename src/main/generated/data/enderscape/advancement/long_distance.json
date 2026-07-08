@@ -8,9 +8,12 @@
           "horizontal": {
             "min": 2000.0
           }
+        },
+        "item": {
+          "items": "enderscape:mirror"
         }
       },
-      "trigger": "enderscape:mirror_teleport"
+      "trigger": "enderscape:lodestone_teleportation"
     }
   },
   "display": {

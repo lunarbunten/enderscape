@@ -7,7 +7,7 @@
       "tick_chance": 6.0E-4
     },
     "ambient_sound": "enderscape:ambient.veiled_woodlands.loop",
-    "fog_color": 1052695,
+    "fog_color": 6974105,
     "foliage_color": 10597016,
     "grass_color": 10597016,
     "mood_sound": {
@@ -20,7 +20,7 @@
       "max_delay": 24000,
       "min_delay": 12000,
       "replace_current_music": false,
-      "sound": "enderscape:music.the_end.biome.veiled_woodlands"
+      "sound": "enderscape:music.enderscape.biome.veiled_woodlands"
     },
     "particle": {
       "options": {
@@ -60,7 +60,7 @@
       "enderscape:veiled_trees",
       "enderscape:veiled_woodlands_vegetation",
       "enderscape:wisp_flower_patches",
-      "enderscape:murublight_shelf"
+      "enderscape:murublight_bracket"
     ]
   ],
   "has_precipitation": false,
@@ -82,7 +82,7 @@
         "type": "enderscape:rubblemite",
         "maxCount": 3,
         "minCount": 2,
-        "weight": 4
+        "weight": 2
       },
       {
         "type": "minecraft:enderman",

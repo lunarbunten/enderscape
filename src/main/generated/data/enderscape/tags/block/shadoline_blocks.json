@@ -1,7 +1,6 @@
 {
   "values": [
     "enderscape:chiseled_shadoline",
-    "enderscape:shadoline_pillar",
     "enderscape:cut_shadoline",
     "enderscape:cut_shadoline_slab",
     "enderscape:cut_shadoline_stairs",
@@ -9,6 +8,9 @@
     "enderscape:shadoline_block",
     "enderscape:shadoline_block_slab",
     "enderscape:shadoline_block_stairs",
-    "enderscape:shadoline_block_wall"
+    "enderscape:shadoline_block_wall",
+    "enderscape:shadoline_pillar",
+    "enderscape:shadoline_bars",
+    "enderscape:shadoline_chain"
   ]
 }

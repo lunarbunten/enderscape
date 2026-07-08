@@ -18,8 +18,8 @@ public class EnderscapeHudElements {
 
     static {
         EnderscapeHudElements.register(new DebugHud());
-        EnderscapeHudElements.register(new MirrorScreenEffect());
-        EnderscapeHudElements.register(new NebuliteToolHud());
+        EnderscapeHudElements.register(new LodestoneTeleportationScreenEffect());
+        EnderscapeHudElements.register(new FueledToolHud());
         EnderscapeHudElements.register(new StareScreenEffect());
     }
 }

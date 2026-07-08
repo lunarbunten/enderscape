@@ -1,0 +1,9 @@
+// 1.21.1	2026-02-05T13:23:13.0068501	Tags for minecraft:worldgen/biome mod id enderscape
+91b0eb2c9a1bca9eaa7aeb065cf6566cc9ef4ef6 data/enderscape/tags/worldgen/biome/enderscape/has_barrens_additions.json
+0feb162ab903da5277fc542ac0c9da88656f33eb data/enderscape/tags/worldgen/biome/enderscape/overrides_default_ambience.json
+ac0ea29b3722f2e9cf74c93c3bd777b911e6c077 data/enderscape/tags/worldgen/biome/enderscape_biomes.json
+7f8c11ad51860a71daad126bcfb6dcb571dec32a data/enderscape/tags/worldgen/biome/excluded_from_global_feature_additions.json
+491e12a3d2e8c045f357cc5c86e09e2969b0757d data/enderscape/tags/worldgen/biome/has_structure/gateways.json
+9af3378fa1089971eebfd3ff6ba1f991d314c585 data/enderscape/tags/worldgen/biome/has_structure/mirestone_ruins.json
+a81cd6830d091a0f66f7413426f27338fc87f277 data/minecraft/tags/worldgen/biome/has_structure/end_city.json
+4b6223a8cb66c68bce7e800b022e85c7715d617a data/minecraft/tags/worldgen/biome/is_end.json

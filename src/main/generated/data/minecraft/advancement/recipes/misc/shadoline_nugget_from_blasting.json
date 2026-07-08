@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_shadoline_boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:shadoline_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_shadoline_chestplate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:shadoline_chestplate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_shadoline_helmet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:shadoline_helmet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_shadoline_leggings": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:shadoline_leggings"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:shadoline_nugget_from_blasting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_shadoline_helmet",
+      "has_shadoline_chestplate",
+      "has_shadoline_leggings",
+      "has_shadoline_boots"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:shadoline_nugget_from_blasting"
+    ]
+  }
+}

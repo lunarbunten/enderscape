@@ -11,13 +11,16 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 public class NebuliteOreBlock extends DropExperienceBlock {
     public NebuliteOreBlock(Properties settings) {
         super(UniformInt.of(6, 12), settings);
     }
 
-        public static void makeParticles(int amount, int range, Level world, BlockPos pos, RandomSource random) {
+    @OnlyIn(Dist.CLIENT)
+    public static void makeParticles(int amount, int range, Level world, BlockPos pos, RandomSource random) {
         for (int i = 0; i < amount; i++) {
             BlockPos pos2 = BlockUtil.random(pos, random, range, range, range);
             if (world.getBlockState(pos2).isCollisionShapeFullBlock(world, pos2)) return;
@@ -33,7 +36,8 @@ public class NebuliteOreBlock extends DropExperienceBlock {
         EnderscapeServerNetworking.sendNebuliteOreSoundPayload(world, pos);
     }
 
-        public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
+    @OnlyIn(Dist.CLIENT)
+    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         makeParticles(Mth.nextInt(random, 1, 2), Mth.nextInt(random, 8, 12), world, pos, random);
     }
 }

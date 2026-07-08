@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_murublight_stems": {
+    "has_logs": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_murublight_stems"
+      "has_logs"
     ]
   ],
   "rewards": {

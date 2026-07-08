@@ -5,10 +5,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.monster.Shulker;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -17,6 +14,7 @@ import java.util.List;
 
 @Mixin(targets = "net.minecraft.world.entity.monster.Shulker$ShulkerAttackGoal")
 public abstract class ShulkerAttackGoalMixin extends Goal {
+    @Mutable
     @Unique @Final Shulker enderscape$capturedShulker;
 
     @Inject(
@@ -26,7 +24,7 @@ public abstract class ShulkerAttackGoalMixin extends Goal {
     private void revamped_phantoms_init(Shulker captured, CallbackInfo ci) {
         enderscape$capturedShulker = captured;
     }
-    
+
     @Shadow private int attackTime;
 
     @Inject(method = "tick", at = @At(value = "HEAD"), cancellable = true)

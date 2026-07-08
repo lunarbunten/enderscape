@@ -18,7 +18,7 @@
             }
           ],
           "name": "minecraft:bread",
-          "weight": 32
+          "weight": 12
         },
         {
           "type": "minecraft:item",
@@ -34,7 +34,7 @@
             }
           ],
           "name": "minecraft:golden_carrot",
-          "weight": 16
+          "weight": 4
         },
         {
           "type": "minecraft:item",
@@ -49,8 +49,17 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:golden_apple",
-          "weight": 4
+          "name": "minecraft:golden_apple"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
@@ -64,8 +73,7 @@
               "function": "minecraft:set_components"
             }
           ],
-          "name": "minecraft:splash_potion",
-          "weight": 4
+          "name": "minecraft:lingering_potion"
         },
         {
           "type": "minecraft:item",
@@ -73,21 +81,16 @@
             {
               "components": {
                 "minecraft:potion_contents": {
-                  "potion": "minecraft:long_slowness"
+                  "potion": "minecraft:slow_falling"
                 }
               },
               "function": "minecraft:set_components"
             }
           ],
-          "name": "minecraft:lingering_potion",
-          "weight": 4
+          "name": "minecraft:lingering_potion"
         }
       ],
-      "rolls": {
-        "type": "minecraft:uniform",
-        "max": 3.0,
-        "min": 1.0
-      }
+      "rolls": 1.0
     }
   ],
   "random_sequence": "enderscape:end_city/spawner/basic"

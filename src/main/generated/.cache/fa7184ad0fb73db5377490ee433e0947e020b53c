@@ -1,0 +1,4 @@
+// 1.21.1	2026-02-05T13:23:13.0277101	Tags for minecraft:damage_type mod id enderscape
+96c12264cc999fcacf22b362cafae495be162700 data/enderscape/tags/damage_type/rubblemites_can_block.json
+b3287f2deb1ce53d14466adc2e8bd7f3a9a61338 data/minecraft/tags/damage_type/damages_helmet.json
+b3287f2deb1ce53d14466adc2e8bd7f3a9a61338 data/minecraft/tags/damage_type/no_knockback.json

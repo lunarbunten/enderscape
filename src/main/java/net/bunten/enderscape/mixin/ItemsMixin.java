@@ -17,7 +17,7 @@ public abstract class ItemsMixin {
   //  private static void Enderscape$registerItem(Args args) {
    //     ResourceKey<Item> key = args.get(0);
    //     if (key.location().equals(ResourceLocation.withDefaultNamespace("shulker_shell"))) {
-   //         args.set(2, EnderscapeItems.SHULKER_SHELL_PROPERTIES.get());
+   //         args.set(2, EnderscapeItems.SHULKER_SHELL_PROPERTIES);
   //      }
    // }
 }

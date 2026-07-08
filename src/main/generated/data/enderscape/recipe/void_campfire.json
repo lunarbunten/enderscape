@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "V": {
+      "item": "enderscape:void_shale"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SVS",
+    "LLL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "enderscape:void_campfire"
+  }
+}

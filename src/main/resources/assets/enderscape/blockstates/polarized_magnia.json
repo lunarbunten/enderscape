@@ -1,0 +1,16 @@
+{
+	"variants": {
+		"polarity=alluring,powered=false": {
+			"model": "enderscape:block/polarized_magnia_alluring"
+		},
+		"polarity=alluring,powered=true": {
+			"model": "enderscape:block/polarized_magnia_alluring_powered"
+		},
+		"polarity=repulsive,powered=false": {
+			"model": "enderscape:block/polarized_magnia_repulsive"
+		},
+		"polarity=repulsive,powered=true": {
+			"model": "enderscape:block/polarized_magnia_repulsive_powered"
+		}
+	}
+}

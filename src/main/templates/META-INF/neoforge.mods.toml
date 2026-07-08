@@ -41,15 +41,22 @@ ordering="NONE"
 side="BOTH"
 
 [[dependencies.${mod_id}]]
-modId = "yet_another_config_lib_v3"
+modId="yet_another_config_lib_v3"
 type="required"
 versionRange="[${yacl_version},)"
-ordering = "NONE"
-side = "CLIENT"
+ordering="NONE"
+side="CLIENT"
+
+[[dependencies.${mod_id}]]
+modId="lithostitched"
+type="required"
+versionRange="[${lithostitched_version},)"
+ordering="NONE"
+side="BOTH"
 
 [[dependencies.${mod_id}]]
 modId="terrablender"
 type="optional"
 versionRange="[${terrablender_version},)"
-ordering="NONE"
+ordering="AFTER"
 side="BOTH"

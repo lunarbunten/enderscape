@@ -1,7 +1,7 @@
 package net.bunten.enderscape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.bunten.enderscape.block.properties.DirectionProperties;
+import net.bunten.enderscape.block.properties.DirectionSet;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
@@ -10,7 +10,7 @@ public class CorruptPathBlock extends AbstractOvergrowthBlock {
     public static final MapCodec<CorruptPathBlock> CODEC = simpleCodec(CorruptPathBlock::new);
 
     public CorruptPathBlock(BlockBehaviour.Properties settings) {
-        super(true, EnderscapeBlocks.MIRESTONE.get(), DirectionProperties.create().all(), settings);
+        super(true, EnderscapeBlocks.MIRESTONE.get(), DirectionSet.create().all(), settings);
     }
 
     @Override

@@ -20,12 +20,11 @@ public class EnderscapePotions {
 
     public static final Holder<Potion> LOW_GRAVITY = register("low_gravity", () -> new Potion("low_gravity", new MobEffectInstance(EnderscapeMobEffects.LOW_GRAVITY, 1200)));
     public static final Holder<Potion> LONG_LOW_GRAVITY = register("long_low_gravity", () -> new Potion("low_gravity", new MobEffectInstance(EnderscapeMobEffects.LOW_GRAVITY, 2400)));
-    public static final Holder<Potion> STRONG_LOW_GRAVITY = register("strong_low_gravity", () -> new Potion("low_gravity", new MobEffectInstance(EnderscapeMobEffects.LOW_GRAVITY, 200, 1)));
 
     private static Holder<Potion> register(String name, Supplier<Potion> potion) {
         return RegistryHelper.registerForHolder(BuiltInRegistries.POTION, Enderscape.id(name), potion);
     }
-    
+
     @SubscribeEvent
     public static void registerRecipes(RegisterBrewingRecipesEvent event) {
         var builder = event.getBuilder();
@@ -39,12 +38,6 @@ public class EnderscapePotions {
                 LOW_GRAVITY,
                 Items.REDSTONE,
                 LONG_LOW_GRAVITY
-        );
-
-        builder.addMix(
-                LOW_GRAVITY,
-                Items.GLOWSTONE_DUST,
-                STRONG_LOW_GRAVITY
         );
     }
 }

@@ -1,8 +1,8 @@
 package net.bunten.enderscape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.bunten.enderscape.block.properties.DirectionProperties;
-import net.bunten.enderscape.block.properties.StateProperties;
+import net.bunten.enderscape.block.properties.DirectionSet;
+import net.bunten.enderscape.block.state.StateProperties;
 import net.bunten.enderscape.registry.EnderscapeBlocks;
 import net.bunten.enderscape.util.BlockUtil;
 import net.minecraft.core.BlockPos;
@@ -28,7 +28,7 @@ public class MurublightShelfBlock extends DirectionalPlantBlock implements Bonem
     public static final MapCodec<MurublightShelfBlock> CODEC = simpleCodec(MurublightShelfBlock::new);
     
     public MurublightShelfBlock(Properties settings) {
-        super(DirectionProperties.create().horizontal(), settings);
+        super(DirectionSet.create().horizontal(), settings);
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AGE, 0));
     }
 
@@ -78,7 +78,7 @@ public class MurublightShelfBlock extends DirectionalPlantBlock implements Bonem
     }
 
     private static BlockState stateForGeneration(Direction direction) {
-        return EnderscapeBlocks.MURUBLIGHT_SHELF.get().defaultBlockState().setValue(MurublightShelfBlock.FACING, direction).setValue(MurublightShelfBlock.AGE, MurublightShelfBlock.MAX_AGE);
+        return EnderscapeBlocks.MURUBLIGHT_BRACKET.get().defaultBlockState().setValue(MurublightShelfBlock.FACING, direction).setValue(MurublightShelfBlock.AGE, MurublightShelfBlock.MAX_AGE);
     }
 
     public static boolean canGenerate(LevelAccessor world, BlockPos pos, Direction direction) {

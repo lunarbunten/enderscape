@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_shadoline": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:raw_shadoline"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:shadoline_ingot_from_smelting_raw_shadoline"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_shadoline"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:shadoline_ingot_from_smelting_raw_shadoline"
+    ]
+  }
+}

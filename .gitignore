@@ -40,3 +40,4 @@ logs/
 
 # bunten
 *.py
+/src/

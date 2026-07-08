@@ -9,7 +9,10 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.monster.Endermite;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class EndermiteEyesLayer extends RenderLayer<Endermite, EndermiteModel<Endermite>> {
 
     public EndermiteEyesLayer(RenderLayerParent<Endermite, EndermiteModel<Endermite>> renderLayerParent) {

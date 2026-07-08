@@ -34,7 +34,7 @@ public class EnderscapeBiomeModifiers {
     }
 
     public static final List<ResourceKey<BiomeModifier>> BIOME_MODIFIERS = new ArrayList<>();
-    
+
     public static final ResourceKey<BiomeModifier> MODIFY_END_AMBIENCE = registerKey("modify_end_ambience");
     public static final ResourceKey<BiomeModifier> ADD_GLOBAL_FEATURES = registerKey("add_global_features");
     public static final ResourceKey<BiomeModifier> ADD_NEW_BARENS_SPAWNS = registerKey("add_new_barens_spawns");
@@ -55,15 +55,15 @@ public class EnderscapeBiomeModifiers {
     private static <T extends BiomeModifier> Supplier<MapCodec<T>> register(String name, MapCodec<T> entry) {
         return RegistryHelper.register(NeoForgeRegistries.BIOME_MODIFIER_SERIALIZERS, Enderscape.id(name), () -> entry);
     }
-    
+
     static {
         register("modify_end_ambience", ModifyEndAmbianceModification.CODEC);
     }
-    
+
     public void bootstrap(BootstrapContext<BiomeModifier> context) {
         var biomeLookup = context.lookup(Registries.BIOME);
         var placedFeatureLookup = context.lookup(Registries.PLACED_FEATURE);
-        
+
         context.register(MODIFY_END_AMBIENCE, ModifyEndAmbianceModification.INSTANCE);
         context.register(ADD_GLOBAL_FEATURES, new BiomeModifiers.AddFeaturesBiomeModifier(
                 new AndHolderSet<>(
@@ -87,16 +87,16 @@ public class EnderscapeBiomeModifiers {
                 GenerationStep.Decoration.UNDERGROUND_ORES
         ));
         context.register(ADD_NEW_BARENS_SPAWNS, new BiomeModifiers.AddSpawnsBiomeModifier(
-                biomeLookup.getOrThrow(EnderscapeBiomeTags.INCLUDES_NEW_BARRENS_CONTENT),
+                biomeLookup.getOrThrow(EnderscapeBiomeTags.HAS_BARRENS_ADDITIONS),
                 List.of(
                         new MobSpawnSettings.SpawnerData(EnderscapeEntities.RUBBLEMITE.get(), 4, 2, 3)
                 )
         ));
         context.register(ADD_NEW_BARENS_FEATURES, new BiomeModifiers.AddFeaturesBiomeModifier(
-                biomeLookup.getOrThrow(EnderscapeBiomeTags.INCLUDES_NEW_BARRENS_CONTENT),
+                biomeLookup.getOrThrow(EnderscapeBiomeTags.HAS_BARRENS_ADDITIONS),
                 HolderSet.direct(
                         placedFeatureLookup.getOrThrow(EnderscapePlacedFeatures.DRY_END_GROWTH),
-                        placedFeatureLookup.getOrThrow(EnderscapePlacedFeatures.MURUBLIGHT_SHELF)
+                        placedFeatureLookup.getOrThrow(EnderscapePlacedFeatures.MURUBLIGHT_BRACKET)
                 ),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));
@@ -117,7 +117,7 @@ public class EnderscapeBiomeModifiers {
                 ),
                 Arrays.stream(GenerationStep.Decoration.values()).collect(Collectors.toSet())
         ));
-        
+
         context.register(ADD_ENDERSCAPE_ISLANDS, new BiomeModifiers.AddFeaturesBiomeModifier(
                 HolderSet.direct(biomeLookup.getOrThrow(Biomes.SMALL_END_ISLANDS)),
                 HolderSet.direct(

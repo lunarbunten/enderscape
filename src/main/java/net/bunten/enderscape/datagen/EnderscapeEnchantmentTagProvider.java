@@ -6,8 +6,7 @@ import net.minecraft.data.tags.EnchantmentTagsProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import static net.bunten.enderscape.registry.EnderscapeEnchantments.*;
-import static net.minecraft.tags.EnchantmentTags.IN_ENCHANTING_TABLE;
-import static net.minecraft.tags.EnchantmentTags.TREASURE;
+import static net.minecraft.tags.EnchantmentTags.*;
 
 public class EnderscapeEnchantmentTagProvider extends EnchantmentTagsProvider {
 
@@ -17,7 +16,11 @@ public class EnderscapeEnchantmentTagProvider extends EnchantmentTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider lookup) {
-        tag(IN_ENCHANTING_TABLE).add(REBOUND);
-        tag(TREASURE).add(LIGHTSPEED, TRANSDIMENSIONAL);
+        tag(TOOLTIP_ORDER).add(
+                TRANSDIMENSIONAL,
+                RESONANCE
+        );
+        tag(IN_ENCHANTING_TABLE).add(RESONANCE);
+        tag(TREASURE).add(REBOUND, TRANSDIMENSIONAL);
     }
 }

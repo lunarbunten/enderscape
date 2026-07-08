@@ -27,14 +27,14 @@
     "enderscape:flanger_berry": {
       "chance": 0.5
     },
+    "enderscape:murublight_bracket": {
+      "chance": 0.5
+    },
     "enderscape:murublight_cap": {
       "chance": 0.3
     },
     "enderscape:murublight_chanterelle": {
       "chance": 0.65
-    },
-    "enderscape:murublight_shelf": {
-      "chance": 0.5
     },
     "enderscape:ripe_flanger_berry_block": {
       "chance": 0.65

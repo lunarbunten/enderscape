@@ -1,0 +1,57 @@
+package net.bunten.enderscape.criteria;
+
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
+import java.util.Optional;
+
+public class StunAttackCriterion extends SimpleCriterionTrigger<StunAttackCriterion.Conditions> {
+
+    public void trigger(ServerPlayer player, ItemStack stack, LivingEntity victim, List<Entity> affectedEntities, boolean backstab) {
+        trigger(player, instance -> instance.matches(player, stack, victim, affectedEntities, backstab));
+    }
+
+    @Override
+    public Codec<Conditions> codec() {
+        return Conditions.CODEC;
+    }
+
+    public record Conditions(
+            Optional<ContextAwarePredicate> player,
+            Optional<ItemPredicate> item,
+            Optional<EntityPredicate> victim,
+            Optional<List<EntityPredicate>> affectedEntities,
+            Optional<Boolean> backstab
+    ) implements SimpleInstance {
+
+        public static final Codec<StunAttackCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(StunAttackCriterion.Conditions::player),
+                ItemPredicate.CODEC.optionalFieldOf("item").forGetter(StunAttackCriterion.Conditions::item),
+                EntityPredicate.CODEC.optionalFieldOf("victim").forGetter(StunAttackCriterion.Conditions::victim),
+                EntityPredicate.CODEC.listOf().optionalFieldOf("affected_entities").forGetter(StunAttackCriterion.Conditions::affectedEntities),
+                Codec.BOOL.optionalFieldOf("backstab").forGetter(StunAttackCriterion.Conditions::backstab)
+        ).apply(instance, StunAttackCriterion.Conditions::new));
+
+        public boolean matches(ServerPlayer player, ItemStack stack, LivingEntity victim, List<Entity> affectedEntities, boolean backstab) {
+            if (item().isPresent() && !item().get().test(stack)) return false;
+            if (victim().isPresent() && !victim().get().matches(player, victim)) return false;
+            if (affectedEntities().isPresent()) {
+                for (EntityPredicate predicate : affectedEntities().get()) {
+                    boolean matched = affectedEntities.stream().anyMatch(e -> predicate.matches(player, e));
+                    if (!matched) return false;
+                }
+            }
+            if (backstab().isPresent() && !backstab().get().equals(backstab)) return false;
+            return true;
+        }
+    }
+}

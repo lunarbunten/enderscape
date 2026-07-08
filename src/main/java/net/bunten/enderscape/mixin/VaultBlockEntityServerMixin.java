@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(VaultBlockEntity.Server.class)
 public abstract class VaultBlockEntityServerMixin {
 
-    @Inject(at = @At("HEAD"), method = "playInsertFailSound", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "playInsertFailSound")
     private static void getStateWithConnections(ServerLevel level, VaultServerData data, BlockPos pos, SoundEvent sound, CallbackInfo info) {
         if (level.getBlockState(pos).is(EnderscapeBlocks.END_VAULT.get())) {
             if (sound == SoundEvents.VAULT_INSERT_ITEM_FAIL) {
