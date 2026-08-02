@@ -80,7 +80,7 @@ public class EndHavenProcessorLists extends EnderscapeProcessorLists {
     }
 
     private static BlockState magentaCandleState(boolean lit, int candles) {
-        return Blocks.MAGENTA_CANDLE.defaultBlockState().setValue(CandleBlock.LIT, lit).setValue(CandleBlock.CANDLES, candles);
+        return DYED_CANDLE.magenta().defaultBlockState().setValue(CandleBlock.LIT, lit).setValue(CandleBlock.CANDLES, candles);
     }
 
     private static @NonNull ProcessorRule endStoneRubble(Block block, float probability) {

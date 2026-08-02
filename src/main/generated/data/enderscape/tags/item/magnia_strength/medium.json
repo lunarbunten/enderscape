@@ -1,10 +1,12 @@
 {
   "values": [
-    "minecraft:iron_helmet",
-    "minecraft:iron_chestplate",
-    "minecraft:iron_leggings",
     "minecraft:iron_boots",
+    "minecraft:iron_chestplate",
+    "minecraft:iron_helmet",
     "minecraft:iron_horse_armor",
-    "minecraft:iron_nautilus_armor"
+    "minecraft:iron_leggings",
+    "minecraft:iron_nautilus_armor",
+    "minecraft:raw_iron_block",
+    "minecraft:netherite_block"
   ]
 }

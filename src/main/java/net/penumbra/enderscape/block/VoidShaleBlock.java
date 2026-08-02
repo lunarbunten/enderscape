@@ -97,7 +97,7 @@ public class VoidShaleBlock extends Block {
     private static void progressShattering(ServerLevel level, BlockState state, BlockPos pos) {
         level.playSound(null, pos, SHATTER_SOUNDS[getStress(state)], SoundSource.BLOCKS, 1, 1);
 
-        Vec3 top = pos.getCenter().add(0, 0.5125, 0);
+        Vec3 top = Vec3.atCenterOf(pos).add(0, 0.5125, 0);
         level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), top.x(), top.y(), top.z(), 6, 0.1F, 0.1F, 0.1F, 0);
 
         BlockState updated = state.cycle(STRESS).setValue(ITERATION, 0);

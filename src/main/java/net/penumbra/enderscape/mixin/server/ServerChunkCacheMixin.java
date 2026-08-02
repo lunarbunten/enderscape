@@ -62,11 +62,11 @@ public abstract class ServerChunkCacheMixin {
             method = "tickChunks(Lnet/minecraft/util/profiling/ProfilerFiller;J)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/NaturalSpawner;getFilteredSpawningCategories(Lnet/minecraft/world/level/NaturalSpawner$SpawnState;ZZZ)Ljava/util/List;"
+                    target = "Lnet/minecraft/world/level/NaturalSpawner;getFilteredSpawningCategories(Lnet/minecraft/world/level/NaturalSpawner$SpawnState;ZZ)Ljava/util/List;"
             )
     )
-    private List<MobCategory> Enderscape$useEnderscapeMobCap(NaturalSpawner.SpawnState state, boolean spawnFriendlies, boolean spawnEnemies, boolean spawnPersistent, Operation<List<MobCategory>> original) {
-        List<MobCategory> categories = original.call(state, spawnFriendlies, spawnEnemies, spawnPersistent);
+    private List<MobCategory> Enderscape$useEnderscapeMobCap(NaturalSpawner.SpawnState state, boolean spawnEnemies, boolean spawnPersistent, Operation<List<MobCategory>> original) {
+        List<MobCategory> categories = original.call(state, spawnEnemies, spawnPersistent);
 
         if (EnderscapeMobCapCalculator.isEnd(level) && spawnEnemies && !categories.contains(MobCategory.MONSTER) && EnderscapeMobCapCalculator.shouldSpawnMoreMonsters(level, state)) {
             List<MobCategory> raised = new ArrayList<>(categories);

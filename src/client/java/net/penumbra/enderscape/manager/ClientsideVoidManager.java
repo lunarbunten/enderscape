@@ -114,7 +114,7 @@ public class ClientsideVoidManager {
         if (minecraft.level == null) {
             return false;
         } else {
-            Camera camera = minecraft.gameRenderer.getMainCamera();
+            Camera camera = minecraft.gameRenderer.mainCamera();
             Camera.NearPlane plane = camera.getNearPlane(minecraft.options.fov().get());
 
             for (Vec3 point : Arrays.asList(plane.forward, plane.getTopLeft(), plane.getTopRight(), plane.getBottomLeft(), plane.getBottomRight())) {

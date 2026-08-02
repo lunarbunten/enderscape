@@ -1,19 +1,22 @@
 package net.penumbra.enderscape.mixin.client.renderer;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.SubmitNodeCollection;
-import net.minecraft.client.renderer.SubmitNodeStorage;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.client.renderer.feature.ItemFeatureRenderer;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.penumbra.enderscape.manager.ClientsideEntityManager;
 import net.penumbra.enderscape.renderer.ItemEntityTint;
 import org.jspecify.annotations.Nullable;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -25,10 +28,6 @@ import java.util.List;
 
 @Mixin(SubmitNodeCollection.class)
 public abstract class SubmitNodeCollectionMixin implements ItemEntityTint {
-
-    @Shadow
-    @Final
-    private List<SubmitNodeStorage.ItemSubmit> itemSubmits;
 
     @Unique
     private int Enderscape$itemTintColor = ItemEntityTint.NONE;
@@ -64,24 +63,26 @@ public abstract class SubmitNodeCollectionMixin implements ItemEntityTint {
         this.type = renderType;
     }
 
-    @Inject(method = "submitItem", at = @At("RETURN"))
-    private void Enderscape$stampItemTint(CallbackInfo info) {
-        if (Enderscape$itemTintColor != ItemEntityTint.NONE) {
-            ItemEntityTint tint = (ItemEntityTint) (Object) itemSubmits.getLast();
-            tint.setColor(Enderscape$itemTintColor);
-        }
+    @WrapOperation(method = "submitItem", at = @At(value = "NEW", target = "(Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/world/item/ItemDisplayContext;III[ILjava/util/List;Lnet/minecraft/client/renderer/item/ItemStackRenderState$FoilType;)Lnet/minecraft/client/renderer/feature/ItemFeatureRenderer$Submit;"))
+    private ItemFeatureRenderer.Submit Enderscape$stampItemTint(PoseStack.Pose pose, ItemDisplayContext context, int light, int overlay, int outline, int[] layers, List<BakedQuad> quads, ItemStackRenderState.FoilType foil, Operation<ItemFeatureRenderer.Submit> original) {
+        ItemFeatureRenderer.Submit submit = original.call(pose, context, light, overlay, outline, layers, quads, foil);
+
+        ItemEntityTint tint = (ItemEntityTint) (Object) submit;
+        tint.setColor(Enderscape$itemTintColor);
+
+        return submit;
     }
 
     @ModifyArgs(
             method = "submitModel(Lnet/minecraft/client/model/Model;Ljava/lang/Object;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/rendertype/RenderType;IIILnet/minecraft/client/renderer/texture/TextureAtlasSprite;ILnet/minecraft/client/renderer/feature/ModelFeatureRenderer$CrumblingOverlay;)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/renderer/SubmitNodeStorage$ModelSubmit;<init>(Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/client/model/Model;Ljava/lang/Object;IIILnet/minecraft/client/renderer/texture/TextureAtlasSprite;ILnet/minecraft/client/renderer/feature/ModelFeatureRenderer$CrumblingOverlay;)V")
+                    target = "Lnet/minecraft/client/renderer/feature/ModelFeatureRenderer$Submit;<init>(Lnet/minecraft/client/renderer/rendertype/RenderType;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/client/model/Model;Ljava/lang/Object;IIILnet/minecraft/client/renderer/texture/TextureAtlasSprite;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;)V")
     )
     private void Enderscape$changeModelTint(Args args) {
         if (!IGNORED_RENDER_TYPES.contains(type.name)) {
-            if (args.get(2) instanceof EntityRenderState state) {
-                args.set(5, ClientsideEntityManager.getTintColor(state, args.get(5)));
+            if (args.get(3) instanceof EntityRenderState state) {
+                args.set(6, ClientsideEntityManager.getTintColor(state, args.get(6)));
             }
         }
     }

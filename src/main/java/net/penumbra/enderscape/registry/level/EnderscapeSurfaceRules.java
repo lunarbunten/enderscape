@@ -1,6 +1,8 @@
 package net.penumbra.enderscape.registry.level;
 
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
@@ -33,16 +35,16 @@ public class EnderscapeSurfaceRules {
     public static final int MAGNIA_DEPTH = 2;
     public static final int MIRESTONE_DEPTH = 4;
 
-    public static RuleSource create() {
+    public static RuleSource create(HolderGetter<Biome> biomeGetter) {
         return sequence(
                 sequence(
-                        magniaCrags(),
-                        corruptBarrens(),
+                        magniaCrags(biomeGetter),
+                        corruptBarrens(biomeGetter),
                         mirestoneUndersides()
                 ),
-                veiledWoodlands(),
-                celestialGrove(),
-                voidDepths()
+                veiledWoodlands(biomeGetter),
+                celestialGrove(biomeGetter),
+                voidDepths(biomeGetter)
         );
     }
 
@@ -55,13 +57,13 @@ public class EnderscapeSurfaceRules {
     }
 
     @NotNull
-    private static RuleSource veiledWoodlands() {
+    private static RuleSource veiledWoodlands(HolderGetter<Biome> biomeGetter) {
         return ifTrue(
-                SurfaceRules.isBiome(EnderscapeBiomes.VEILED_WOODLANDS),
+                SurfaceRules.isBiome(biomeGetter, EnderscapeBiomes.VEILED_WOODLANDS),
                 ifTrue(
                         ON_FLOOR,
                         ifTrue(
-                                noiseCondition(EnderscapeNoiseParameters.VEILED_SURFACE, -0.5, 0.5),
+                                noiseCondition2d(EnderscapeNoiseParameters.VEILED_SURFACE, -0.5, 0.5),
                                 VEILED_END_STONE
                         )
                 )
@@ -69,19 +71,19 @@ public class EnderscapeSurfaceRules {
     }
 
     @NotNull
-    private static RuleSource magniaCrags() {
+    private static RuleSource magniaCrags(HolderGetter<Biome> biomeGetter) {
         return ifTrue(
-                isBiome(EnderscapeBiomes.MAGNIA_FIELDS),
+                isBiome(biomeGetter, EnderscapeBiomes.MAGNIA_FIELDS),
                 sequence(
                         ifTrue(
                                 stoneDepthCheck(0, true, MAGNIA_DEPTH, CaveSurface.FLOOR),
                                 sequence(
                                         ifTrue(
-                                                noiseCondition(Noises.SURFACE, -WIDE_MAGNIA_SURFACE_NOISE_MAXIMUM, WIDE_MAGNIA_SURFACE_NOISE_MAXIMUM),
+                                                noiseCondition2d(Noises.SURFACE, -WIDE_MAGNIA_SURFACE_NOISE_MAXIMUM, WIDE_MAGNIA_SURFACE_NOISE_MAXIMUM),
                                                 ALLURING_MAGNIA
                                         ),
                                         ifTrue(
-                                                noiseCondition(Noises.CALCITE, -THIN_MAGNIA_SURFACE_NOISE_MAXIMUM, THIN_MAGNIA_SURFACE_NOISE_MAXIMUM),
+                                                noiseCondition2d(Noises.CALCITE, -THIN_MAGNIA_SURFACE_NOISE_MAXIMUM, THIN_MAGNIA_SURFACE_NOISE_MAXIMUM),
                                                 ALLURING_MAGNIA
                                         )
                                 )
@@ -90,11 +92,11 @@ public class EnderscapeSurfaceRules {
                                 stoneDepthCheck(0, true, MAGNIA_DEPTH, CaveSurface.CEILING),
                                 sequence(
                                         ifTrue(
-                                                noiseCondition(Noises.SURFACE, -WIDE_MAGNIA_SURFACE_NOISE_MAXIMUM, WIDE_MAGNIA_SURFACE_NOISE_MAXIMUM),
+                                                noiseCondition2d(Noises.SURFACE, -WIDE_MAGNIA_SURFACE_NOISE_MAXIMUM, WIDE_MAGNIA_SURFACE_NOISE_MAXIMUM),
                                                 REPULSIVE_MAGNIA
                                         ),
                                         ifTrue(
-                                                noiseCondition(Noises.CALCITE, -THIN_MAGNIA_SURFACE_NOISE_MAXIMUM, THIN_MAGNIA_SURFACE_NOISE_MAXIMUM),
+                                                noiseCondition2d(Noises.CALCITE, -THIN_MAGNIA_SURFACE_NOISE_MAXIMUM, THIN_MAGNIA_SURFACE_NOISE_MAXIMUM),
                                                 REPULSIVE_MAGNIA
                                         )
                                 )
@@ -104,13 +106,13 @@ public class EnderscapeSurfaceRules {
     }
 
     @NotNull
-    private static RuleSource celestialGrove() {
+    private static RuleSource celestialGrove(HolderGetter<Biome> biomeGetter) {
         return ifTrue(
-                isBiome(EnderscapeBiomes.CELESTIAL_GROVE),
+                isBiome(biomeGetter, EnderscapeBiomes.CELESTIAL_GROVE),
                 ifTrue(
                         ON_FLOOR,
                         ifTrue(
-                                noiseCondition(EnderscapeNoiseParameters.CELESTIAL_SURFACE, -0.7, 0),
+                                noiseCondition2d(EnderscapeNoiseParameters.CELESTIAL_SURFACE, -0.7, 0),
                                 CELESTIAL_OVERGROWTH
                         )
                 )
@@ -118,21 +120,21 @@ public class EnderscapeSurfaceRules {
     }
 
     @NotNull
-    private static RuleSource corruptBarrens() {
+    private static RuleSource corruptBarrens(HolderGetter<Biome> biomeGetter) {
         return ifTrue(
-                isBiome(EnderscapeBiomes.CORRUPT_BARRENS),
+                isBiome(biomeGetter, EnderscapeBiomes.CORRUPT_BARRENS),
                 sequence(
                         ifTrue(
                                 ON_FLOOR,
                                 ifTrue(
-                                        noiseCondition(EnderscapeNoiseParameters.CORRUPTION_CEILING, -0.6D, 0.0D),
+                                        noiseCondition2d(EnderscapeNoiseParameters.CORRUPTION_CEILING, -0.6D, 0.0D),
                                         CORRUPT_OVERGROWTH_FACING_UP
                                 )
                         ),
                         ifTrue(
                                 ON_CEILING,
                                 ifTrue(
-                                        noiseCondition(EnderscapeNoiseParameters.CORRUPTION_CEILING, -1.0D, 0.0D),
+                                        noiseCondition2d(EnderscapeNoiseParameters.CORRUPTION_CEILING, -1.0D, 0.0D),
                                         CORRUPT_OVERGROWTH_FACING_DOWN
                                 )
                         ),
@@ -144,13 +146,13 @@ public class EnderscapeSurfaceRules {
 
 
     @NotNull
-    private static RuleSource voidDepths() {
+    private static RuleSource voidDepths(HolderGetter<Biome> biomeGetter) {
         return ifTrue(
-                isBiome(EnderscapeBiomes.VOID_DEPTHS),
+                isBiome(biomeGetter, EnderscapeBiomes.VOID_DEPTHS),
                 ifTrue(
                         ON_FLOOR,
                         ifTrue(
-                                noiseCondition(EnderscapeNoiseParameters.CORRUPTION_CEILING, -0.6D, 0.0D),
+                                noiseCondition2d(EnderscapeNoiseParameters.CORRUPTION_CEILING, -0.6D, 0.0D),
                                 MIRESTONE
                         )
                 )

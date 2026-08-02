@@ -1,11 +1,16 @@
 package net.penumbra.enderscape.mixin.entity;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.monster.Silverfish;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import net.penumbra.enderscape.block.DriftJellyBlock;
 import net.penumbra.enderscape.config.EnderscapeConfig;
 import net.penumbra.enderscape.entity.magnia.MagniaAffected;
 import net.penumbra.enderscape.entity.rubblemite.Rubblemite;
@@ -23,6 +28,9 @@ public abstract class EntityMixin {
 
     @Shadow
     public abstract boolean isSpectator();
+
+    @Shadow
+    public abstract boolean canSimulateMovement();
 
     @Unique
     private final Entity self = (Entity) (Object) this;
@@ -78,5 +86,14 @@ public abstract class EntityMixin {
     @ModifyArg(method = "playMuffledStepSound", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;playSound(Lnet/minecraft/sounds/SoundEvent;FF)V"), index = 1)
     public float Enderscape$adjustMuffledStepSoundVolume(float original) {
         return Math.max(0, original * (float) EnderscapeAttributes.getStealthMultiplier(self));
+    }
+
+    @WrapWithCondition(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;restituteMovementAfterCollisions(Lnet/minecraft/world/level/block/state/BlockState;ZZLnet/minecraft/world/phys/Vec3;)V"))
+    private boolean Enderscape$handleLegacyBounce(Entity instance, BlockState effectState, boolean xCollision, boolean zCollision, Vec3 movement) {
+        if (effectState.getBlock() instanceof DriftJellyBlock block) {
+            block.updateEntityMovementAfterFallOn((Entity) (Object) this);
+            return false;
+        }
+        return true;
     }
 }

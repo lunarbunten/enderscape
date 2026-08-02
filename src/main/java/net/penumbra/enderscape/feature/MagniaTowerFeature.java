@@ -14,9 +14,9 @@ import net.minecraft.util.valueproviders.IntProviders;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.DripstoneUtils;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.SpeleothemUtils;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.penumbra.enderscape.block.BlisteredMagniaBlock;
 import net.penumbra.enderscape.block.HasMagniaPolarity;
@@ -86,7 +86,7 @@ public class MagniaTowerFeature extends Feature<MagniaTowerFeature.Config> {
                 for (int y = 0; y < height; y++) {
                     BlockPos currentPos = origin.offset(x, y, z);
 
-                    if (level.isStateAtPosition(currentPos, DripstoneUtils::isEmptyOrWater)) {
+                    if (level.isStateAtPosition(currentPos, SpeleothemUtils::isEmptyOrWater)) {
                         level.setBlock(currentPos, EnderscapeBlocks.REPULSIVE_MAGNIA.defaultBlockState(), 2);
                         placedBlocks.add(currentPos);
                     }
@@ -130,7 +130,7 @@ public class MagniaTowerFeature extends Feature<MagniaTowerFeature.Config> {
 
                 if (x * x + z * z > radius * radius || x * x + z * z < (radius * radius) / thickness) continue;
 
-                if (level.isStateAtPosition(offset, DripstoneUtils::isEmptyOrWater)) {
+                if (level.isStateAtPosition(offset, SpeleothemUtils::isEmptyOrWater)) {
                     level.setBlock(offset, EnderscapeBlocks.ALLURING_MAGNIA.defaultBlockState(), 2);
                     placedBlocks.add(offset);
                 }

@@ -118,7 +118,7 @@ public class EnderscapeWorldgenModifiers {
                 true
         ));
 
-        context.register(SURFACE_RULES_END, WorldgenModifier.builder().addSurfaceRule(Level.END, InjectionType.PREPEND, EnderscapeSurfaceRules.create()));
+        context.register(SURFACE_RULES_END, WorldgenModifier.builder().addSurfaceRule(Level.END, InjectionType.PREPEND, EnderscapeSurfaceRules.create(context.lookup(Registries.BIOME))));
     }
 
     private static ResourceKey<WorldgenModifier> register(String name) {

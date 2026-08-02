@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "raw_shadoline",
   "ingredients": [
     "enderscape:raw_shadoline_block"

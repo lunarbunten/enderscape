@@ -11,6 +11,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.references.BlockItemId;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
@@ -32,10 +33,7 @@ import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BannerPattern;
-import net.minecraft.world.level.block.entity.BannerPatternLayers;
-import net.minecraft.world.level.block.entity.BannerPatterns;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.*;
 import net.penumbra.enderscape.Enderscape;
 import net.penumbra.enderscape.item.HealingItem;
 import net.penumbra.enderscape.item.RustleBucketItem;
@@ -44,7 +42,6 @@ import net.penumbra.enderscape.item.component.*;
 import net.penumbra.enderscape.item.component.value.FuelDisplay;
 import net.penumbra.enderscape.item.component.value.FuelHud;
 import net.penumbra.enderscape.item.component.value.FuelSounds;
-import net.penumbra.enderscape.references.BlockItemId;
 import net.penumbra.enderscape.references.EnderscapeBlockItemIds;
 import net.penumbra.enderscape.references.EnderscapeItemIds;
 import net.penumbra.enderscape.registry.block.EnderscapeBannerPatterns;
@@ -67,7 +64,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static net.minecraft.world.item.Items.BUCKET;
-import static net.minecraft.world.item.Items.MAGENTA_BANNER;
+import static net.minecraft.world.item.Items.BANNER;
 import static net.penumbra.enderscape.registry.block.EnderscapeBlocks.END_VAULT;
 
 public class EnderscapeItems {
@@ -407,7 +404,7 @@ public class EnderscapeItems {
         blockEntityData.putString("id", "minecraft:vault");
         blockEntityData.put("config", configTag);
 
-        stack.set(DataComponents.BLOCK_ENTITY_DATA, TypedEntityData.of(BlockEntityType.VAULT, blockEntityData));
+        stack.set(DataComponents.BLOCK_ENTITY_DATA, TypedEntityData.of(BlockEntityTypes.VAULT, blockEntityData));
 
         return stack;
     }
@@ -417,7 +414,7 @@ public class EnderscapeItems {
     }
 
     public static ItemStackTemplate getEndCityBannerTemplate(final HolderGetter<BannerPattern> getter) {
-        return new ItemStackTemplate(MAGENTA_BANNER, getEndCityBannerComponentPatch(getter));
+        return new ItemStackTemplate(BANNER.magenta(), getEndCityBannerComponentPatch(getter));
     }
 
     public static DataComponentPatch getEndCityBannerComponentPatch(final HolderGetter<BannerPattern> getter) {

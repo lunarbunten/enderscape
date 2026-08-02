@@ -2,6 +2,7 @@ package net.penumbra.enderscape.util;
 
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.level.LevelAccessor;
 
@@ -12,11 +13,11 @@ public class ClientsideLightUtil {
     }
 
     public static int lightCoordsAt(LevelAccessor level, BlockPos pos) {
-        return effectiveLightCoords(LevelRenderer.getLightCoords(level, pos), level.environmentAttributes().getValue(EnvironmentAttributes.SKY_LIGHT_FACTOR, pos));
+        return effectiveLightCoords(LightCoordsUtil.getLightCoords(level, pos), level.environmentAttributes().getValue(EnvironmentAttributes.SKY_LIGHT_FACTOR, pos));
     }
 
     public static float lightBrightnessAt(LevelAccessor level, BlockPos pos) {
-        return lightBrightness(LevelRenderer.getLightCoords(level, pos), level.environmentAttributes().getValue(EnvironmentAttributes.SKY_LIGHT_FACTOR, pos));
+        return lightBrightness(LightCoordsUtil.getLightCoords(level, pos), level.environmentAttributes().getValue(EnvironmentAttributes.SKY_LIGHT_FACTOR, pos));
     }
 
     public static float lightBrightness(int lightCoords, float skyLightFactor) {

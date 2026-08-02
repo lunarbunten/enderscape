@@ -34,22 +34,22 @@ public class TrialSpawnerStateMixin {
             RandomSource random = level.getRandom();
 
             if (particleEmission == TrialSpawnerState.ParticleEmission.SMALL_FLAMES) {
-                if (random.nextInt(2) == 0) addParticle(ParticleTypes.PORTAL, pos.getCenter().offsetRandom(random, 0.9F), level);
+                if (random.nextInt(2) == 0) addParticle(ParticleTypes.PORTAL, Vec3.atCenterOf(pos).offsetRandom(random, 0.9F), level);
             }
 
             if (particleEmission == TrialSpawnerState.ParticleEmission.FLAMES_AND_SMOKE) {
-                Vec3 vec3 = pos.getCenter().offsetRandom(random, 1.0F);
+                Vec3 vec3 = Vec3.atCenterOf(pos).offsetRandom(random, 1.0F);
                 addParticle(EnderscapeParticles.VOID_STARS, vec3, level);
                 addParticle(ParticleTypes.PORTAL, vec3, level);
             }
 
             if (particleEmission == TrialSpawnerState.ParticleEmission.SMOKE_INSIDE_AND_TOP_FACE) {
-                Vec3 vec3 = pos.getCenter().offsetRandom(random, 0.9F);
+                Vec3 vec3 = Vec3.atCenterOf(pos).offsetRandom(random, 0.9F);
                 if (random.nextInt(3) == 0) addParticle(EnderscapeParticles.VOID_STARS, vec3, level);
 
                 if (level.getGameTime() % 40L == 0L) {
                    for (int j = 0; j < level.getRandom().nextInt(4) + 20; ++j) {
-                       Vec3 center = pos.getCenter();
+                       Vec3 center = Vec3.atCenterOf(pos);
                        double horizontalRadius = 0.01;
                        level.addParticle(EnderscapeParticles.END_TRIAL_SPAWNER_EXHALE, center.x, center.y + 0.5, center.z, Mth.nextDouble(random, -horizontalRadius, horizontalRadius), Mth.nextDouble(random, 0.02, 0.04), Mth.nextDouble(random, -horizontalRadius, horizontalRadius));
                    }

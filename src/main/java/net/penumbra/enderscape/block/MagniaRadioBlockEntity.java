@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.Vec3;
 import net.penumbra.enderscape.registry.EnderscapeRegistries;
 import net.penumbra.enderscape.registry.block.EnderscapeBlockEntities;
 import net.penumbra.enderscape.registry.server.EnderscapeCriteria;
@@ -218,7 +219,7 @@ public class MagniaRadioBlockEntity extends BlockEntity {
 
     private static void triggerHearMagniaRadioCriterion(Level level, BlockPos pos, Optional<Holder<MagniaRadioSong>> song) {
         song.flatMap(Holder::unwrapKey).ifPresent(key -> level.players().stream()
-                .filter(player -> player.level().dimensionType().equals(level.dimensionType()) && Math.sqrt(player.distanceToSqr(pos.getCenter())) < 32)
+                .filter(player -> player.level().dimensionType().equals(level.dimensionType()) && Math.sqrt(player.distanceToSqr(Vec3.atCenterOf(pos))) < 32)
                 .filter(ServerPlayer.class::isInstance)
                 .map(ServerPlayer.class::cast)
                 .forEach(player -> EnderscapeCriteria.HEAR_MAGNIA_RADIO_SONG.trigger(

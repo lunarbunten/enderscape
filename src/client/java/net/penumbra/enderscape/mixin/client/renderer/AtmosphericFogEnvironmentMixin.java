@@ -21,8 +21,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class AtmosphericFogEnvironmentMixin {
 
     @Inject(method = "setupFog", at = @At("TAIL"))
-    public void Enderscape$updateFogDensity(FogData data, Camera camera, ClientLevel level, float f, DeltaTracker tracker, CallbackInfo info) {
-        if (EnderscapeConfig.getInstance().fogDensityUpdated && level.dimension() == Level.END && !Minecraft.getInstance().gui.getBossOverlay().shouldCreateWorldFog()) {
+    public void Enderscape$getBrightnessDependentFogColor(FogData data, Camera camera, ClientLevel level, float f, DeltaTracker tracker, CallbackInfo info) {
+        if (EnderscapeConfig.getInstance().fogDensityUpdated && level.dimension() == Level.END && !Minecraft.getInstance().gui.hud.getBossOverlay().shouldCreateWorldFog()) {
             data.environmentalEnd = Math.max(96.0F, Math.min(data.environmentalEnd, f * camera.attributeProbe().getValue(EnderscapeEnvironmentAttributes.FOG_END_DENSITY, tracker.getGameTimeDeltaPartialTick(false))));
         }
     }

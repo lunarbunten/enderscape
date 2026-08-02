@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
-      "model": "enderscape:block/veiled_hanging_sign"
+    "facing=east": {
+      "model": "enderscape:block/veiled_wall_hanging_sign",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "enderscape:block/veiled_wall_hanging_sign",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "enderscape:block/veiled_wall_hanging_sign"
+    },
+    "facing=west": {
+      "model": "enderscape:block/veiled_wall_hanging_sign",
+      "y": 90
     }
   }
 }

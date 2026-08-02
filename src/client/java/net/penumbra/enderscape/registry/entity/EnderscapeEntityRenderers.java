@@ -2,6 +2,7 @@ package net.penumbra.enderscape.registry.entity;
 
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.penumbra.enderscape.config.EnderscapeConfig;
 import net.penumbra.enderscape.renderer.entity.drifter.DrifterRenderer;
 import net.penumbra.enderscape.renderer.entity.enderman.ImprovedEndermanRenderer;
@@ -16,7 +17,7 @@ public class EnderscapeEntityRenderers {
         EntityRenderers.register(EnderscapeEntities.RUSTLE, RustleRenderer::new);
 
         if (EnderscapeConfig.getInstance().endermanUpdateRenderer) {
-            EntityRenderers.register(EntityType.ENDERMAN, ImprovedEndermanRenderer::new);
+            EntityRenderers.register(EntityTypes.ENDERMAN, ImprovedEndermanRenderer::new);
         }
     }
 }

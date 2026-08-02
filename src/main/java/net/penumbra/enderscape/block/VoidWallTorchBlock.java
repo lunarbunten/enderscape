@@ -100,7 +100,7 @@ public class VoidWallTorchBlock extends VoidTorchBlock {
             Direction direction = state.getValue(FACING);
             Direction opposite = direction.getOpposite();
 
-            Vec3 particlePos = pos.getCenter().add(
+            Vec3 particlePos = Vec3.atCenterOf(pos).add(
                     0.27 * opposite.getStepX(),
                     0.42,
                     0.27 * opposite.getStepX()

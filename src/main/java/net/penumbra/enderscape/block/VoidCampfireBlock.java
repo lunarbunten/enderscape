@@ -50,7 +50,7 @@ public class VoidCampfireBlock extends CampfireBlock {
             }
 
             for (int i = 0; i < 2; i++) {
-                Vec3 center = pos.getCenter();
+                Vec3 center = Vec3.atCenterOf(pos);
 
                 double xx = center.x() + Mth.nextDouble(random, -0.3, 0.3);
                 double yy = center.y() + Mth.nextDouble(random, -0.15, 0.15);

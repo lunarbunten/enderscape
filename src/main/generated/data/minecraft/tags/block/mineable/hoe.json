@@ -1,10 +1,10 @@
 {
   "values": [
-    "#enderscape:chanterelle_cap_blocks",
     "enderscape:veiled_leaf_pile",
     "enderscape:ripe_puruberry_block",
     "enderscape:unripe_puruberry_block",
     "enderscape:puruberry_flower",
-    "enderscape:veiled_leaves"
+    "enderscape:veiled_leaves",
+    "#enderscape:chanterelle_cap_blocks"
   ]
 }

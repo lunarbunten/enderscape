@@ -1,6 +1,6 @@
 package net.penumbra.enderscape.registry.server;
 
-import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.penumbra.enderscape.Enderscape;

@@ -19,10 +19,6 @@ public class EnderscapePoiTagProvider extends FabricTagsProvider<PoiType> {
         super(output, Registries.POINT_OF_INTEREST_TYPE, future);
     }
 
-    protected TagAppender<ResourceKey<PoiType>, PoiType> tag(TagKey<PoiType> key) {
-        return TagAppender.forBuilder(getOrCreateRawBuilder(key));
-    }
-
     @Override
     protected void addTags(HolderLookup.Provider lookup) {
         tag(EnderscapePoiTags.DRIFTER_HOME).add(EnderscapePoi.DRIFTER_HOME);

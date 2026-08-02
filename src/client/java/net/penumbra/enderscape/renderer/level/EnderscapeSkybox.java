@@ -1,5 +1,7 @@
 package net.penumbra.enderscape.renderer.level;
 
+import com.mojang.blaze3d.IndexType;
+import com.mojang.blaze3d.PrimitiveTopology;
 import com.mojang.blaze3d.buffers.GpuBuffer;
 import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.systems.RenderPass;
@@ -33,8 +35,8 @@ import net.penumbra.enderscape.renderer.value.EndFlashParameters;
 import org.joml.*;
 
 import java.lang.Math;
+import java.util.Optional;
 import java.util.OptionalDouble;
-import java.util.OptionalInt;
 
 import static net.minecraft.world.attribute.EnvironmentAttributes.STAR_BRIGHTNESS;
 import static net.penumbra.enderscape.registry.level.EnderscapeEnvironmentAttributes.*;
@@ -80,7 +82,7 @@ public class EnderscapeSkybox {
         // Skybox alpha decreases with Night Vision intensity, as the noise background looks pretty awful when bright.
 
         if (camera.entity() instanceof LivingEntity mob && mob.hasEffect(MobEffects.NIGHT_VISION) && !mob.hasEffect(MobEffects.DARKNESS)) {
-            alpha -= GameRenderer.getNightVisionScale(mob, partialTicks);
+            alpha -= GameRenderer.nightVisionScale(mob, partialTicks);
         }
 
         skyColor = scaleWithoutOverflow(skyColor, gammaFactor());
@@ -153,7 +155,7 @@ public class EnderscapeSkybox {
 
     private static float getNightVisionScale(Camera camera, float partialTicks) {
         if (camera.entity() instanceof LivingEntity mob && mob.hasEffect(MobEffects.NIGHT_VISION) && !mob.hasEffect(MobEffects.DARKNESS)) {
-            return GameRenderer.getNightVisionScale(mob, partialTicks);
+            return GameRenderer.nightVisionScale(mob, partialTicks);
         }
         return 0.0F;
     }
@@ -161,7 +163,7 @@ public class EnderscapeSkybox {
     private static BufferData createSkyBuffer() {
         GpuBuffer buffer;
         try (ByteBufferBuilder byteBufferBuilder = new ByteBufferBuilder(24 * DefaultVertexFormat.POSITION_TEX_COLOR.getVertexSize())) {
-            BufferBuilder bufferBuilder = new BufferBuilder(byteBufferBuilder, VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
+            BufferBuilder bufferBuilder = new BufferBuilder(byteBufferBuilder, PrimitiveTopology.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
 
             for (int i = 0; i < 6; i++) {
                 Matrix4f matrix4f = new Matrix4f();
@@ -202,23 +204,23 @@ public class EnderscapeSkybox {
         matrix.mul(pose.last().pose());
         matrix.mul(new Matrix4f().rotation(SKY_ROTATION_AXIS.rotation(angle)));
 
-        RenderSystem.AutoStorageIndexBuffer buffer = RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS);
+        RenderSystem.AutoStorageIndexBuffer buffer = RenderSystem.getSequentialBuffer(PrimitiveTopology.QUADS);
 
-        GpuTextureView colorView = Minecraft.getInstance().getMainRenderTarget().getColorTextureView();
-        GpuTextureView textureView = Minecraft.getInstance().getMainRenderTarget().getDepthTextureView();
-        GpuBufferSlice slice = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewMatrix(), color, new Vector3f(), new Matrix4f());
+        GpuTextureView colorView = Minecraft.getInstance().gameRenderer.mainRenderTarget().getColorTextureView();
+        GpuTextureView textureView = Minecraft.getInstance().gameRenderer.mainRenderTarget().getDepthTextureView();
+        GpuBufferSlice slice = RenderSystem.getDynamicUniforms().writeTransform(RenderSystem.getModelViewStack(), color, new Vector3f(), new Matrix4f());
 
         GpuBuffer skyBuffer = buffer.getBuffer(buffers.sky().indexCount());
-        VertexFormat.IndexType type = buffer.type();
+        IndexType type = buffer.type();
 
-        try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "End sky box", colorView, OptionalInt.empty(), textureView, OptionalDouble.empty())) {
+        try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "End sky box", colorView, Optional.empty(),textureView, OptionalDouble.empty())) {
             pass.setPipeline(RenderPipelines.END_SKY);
             RenderSystem.bindDefaultUniforms(pass);
             pass.setUniform("DynamicTransforms", slice);
             pass.bindTexture("Sampler0", skyTexture.getTextureView(), skyTexture.getSampler());
-            pass.setVertexBuffer(0, buffers.sky().buffer());
+            pass.setVertexBuffer(0, buffers.sky().buffer().slice());
             pass.setIndexBuffer(skyBuffer, type);
-            pass.drawIndexed(0, 0, buffers.sky().indexCount(), 1);
+            pass.drawIndexed(buffers.sky().indexCount(), 1, 0, 0, 0);
         }
 
         matrix.popMatrix();
@@ -229,7 +231,7 @@ public class EnderscapeSkybox {
 
         GpuBuffer buffer;
         try (ByteBufferBuilder byteBufferBuilder = new ByteBufferBuilder(DefaultVertexFormat.POSITION_TEX.getVertexSize() * count * 4)) {
-            BufferBuilder builder = new BufferBuilder(byteBufferBuilder, VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+            BufferBuilder builder = new BufferBuilder(byteBufferBuilder, PrimitiveTopology.QUADS, DefaultVertexFormat.POSITION_TEX);
 
             for (int i = 0; i < count; ++i) {
                 double posX = random.nextDouble() * 2.0 - 1.0;
@@ -299,23 +301,23 @@ public class EnderscapeSkybox {
     private void drawIndividualNebulae(BufferData data, Vector4f color, AbstractTexture texture) {
         Matrix4fStack matrix = RenderSystem.getModelViewStack();
 
-        GpuTextureView colorView = Minecraft.getInstance().getMainRenderTarget().getColorTextureView();
-        GpuTextureView depthView = Minecraft.getInstance().getMainRenderTarget().getDepthTextureView();
+        GpuTextureView colorView = Minecraft.getInstance().gameRenderer.mainRenderTarget().getColorTextureView();
+        GpuTextureView depthView = Minecraft.getInstance().gameRenderer.mainRenderTarget().getDepthTextureView();
 
         GpuBufferSlice slice = RenderSystem.getDynamicUniforms().writeTransform(matrix, color, new Vector3f(), new Matrix4f());
 
-        RenderSystem.AutoStorageIndexBuffer buffer = RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS);
+        RenderSystem.AutoStorageIndexBuffer buffer = RenderSystem.getSequentialBuffer(PrimitiveTopology.QUADS);
         GpuBuffer nebulaeBuffer = buffer.getBuffer(data.indexCount());
-        VertexFormat.IndexType type = buffer.type();
+        IndexType type = buffer.type();
 
-        try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "End sky nebulae", colorView, OptionalInt.empty(), depthView, OptionalDouble.empty())) {
+        try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "End sky nebulae", colorView, Optional.empty(), depthView, OptionalDouble.empty())) {
             pass.setPipeline(EnderscapeRenderPipelines.NEBULAE_PIPELINE);
             RenderSystem.bindDefaultUniforms(pass);
             pass.setUniform("DynamicTransforms", slice);
             pass.bindTexture("Sampler0", texture.getTextureView(), texture.getSampler());
-            pass.setVertexBuffer(0, data.buffer());
+            pass.setVertexBuffer(0, data.buffer().slice());
             pass.setIndexBuffer(nebulaeBuffer, type);
-            pass.drawIndexed(0, 0, data.indexCount(), 1);
+            pass.drawIndexed(data.indexCount(), 1, 0, 0, 0);
         }
     }
 
@@ -325,7 +327,7 @@ public class EnderscapeSkybox {
 
         GpuBuffer buffer;
         try (ByteBufferBuilder builder = ByteBufferBuilder.exactlySized(DefaultVertexFormat.POSITION.getVertexSize() * count * 4)) {
-            BufferBuilder buf = new BufferBuilder(builder, VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
+            BufferBuilder buf = new BufferBuilder(builder, PrimitiveTopology.QUADS, DefaultVertexFormat.POSITION);
 
             for (int i = 0; i < count; i++) {
                 float x = random.nextFloat() * 2.0F - 1.0F;
@@ -361,21 +363,21 @@ public class EnderscapeSkybox {
         matrix.mul(pose.last().pose());
         matrix.mul(new Matrix4f().rotation(SKY_ROTATION_AXIS.rotation(angle)));
 
-        GpuTextureView colorView = Minecraft.getInstance().getMainRenderTarget().getColorTextureView();
-        GpuTextureView depthView = Minecraft.getInstance().getMainRenderTarget().getDepthTextureView();
+        GpuTextureView colorView = Minecraft.getInstance().gameRenderer.mainRenderTarget().getColorTextureView();
+        GpuTextureView depthView = Minecraft.getInstance().gameRenderer.mainRenderTarget().getDepthTextureView();
         GpuBufferSlice slice = RenderSystem.getDynamicUniforms().writeTransform(matrix, color, new Vector3f(), new Matrix4f());
 
-        RenderSystem.AutoStorageIndexBuffer buffer = RenderSystem.getSequentialBuffer(VertexFormat.Mode.QUADS);
+        RenderSystem.AutoStorageIndexBuffer buffer = RenderSystem.getSequentialBuffer(PrimitiveTopology.QUADS);
         GpuBuffer starBuffer = buffer.getBuffer(buffers.stars().indexCount());
-        VertexFormat.IndexType type = buffer.type();
+        IndexType type = buffer.type();
 
-        try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "End sky stars", colorView, OptionalInt.empty(), depthView, OptionalDouble.empty())) {
+        try (RenderPass pass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "End sky stars", colorView, Optional.empty(), depthView, OptionalDouble.empty())) {
             pass.setPipeline(RenderPipelines.STARS);
             RenderSystem.bindDefaultUniforms(pass);
             pass.setUniform("DynamicTransforms", slice);
-            pass.setVertexBuffer(0, buffers.stars().buffer());
+            pass.setVertexBuffer(0, buffers.stars().buffer().slice());
             pass.setIndexBuffer(starBuffer, type);
-            pass.drawIndexed(0, 0, buffers.stars().indexCount(), 1);
+            pass.drawIndexed(buffers.stars().indexCount(), 1, 0, 0, 0);
         }
 
         matrix.popMatrix();

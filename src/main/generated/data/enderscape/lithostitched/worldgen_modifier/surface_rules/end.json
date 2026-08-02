@@ -14,9 +14,7 @@
             "type": "minecraft:condition",
             "if_true": {
               "type": "minecraft:biome",
-              "biome_is": [
-                "enderscape:magnia_fields"
-              ]
+              "biome_is": "enderscape:magnia_fields"
             },
             "then_run": {
               "type": "minecraft:sequence",
@@ -130,9 +128,7 @@
             "type": "minecraft:condition",
             "if_true": {
               "type": "minecraft:biome",
-              "biome_is": [
-                "enderscape:corrupt_barrens"
-              ]
+              "biome_is": "enderscape:corrupt_barrens"
             },
             "then_run": {
               "type": "minecraft:sequence",
@@ -224,9 +220,7 @@
         "type": "minecraft:condition",
         "if_true": {
           "type": "minecraft:biome",
-          "biome_is": [
-            "enderscape:veiled_woodlands"
-          ]
+          "biome_is": "enderscape:veiled_woodlands"
         },
         "then_run": {
           "type": "minecraft:condition",
@@ -261,9 +255,7 @@
         "type": "minecraft:condition",
         "if_true": {
           "type": "minecraft:biome",
-          "biome_is": [
-            "enderscape:celestial_grove"
-          ]
+          "biome_is": "enderscape:celestial_grove"
         },
         "then_run": {
           "type": "minecraft:condition",
@@ -298,9 +290,7 @@
         "type": "minecraft:condition",
         "if_true": {
           "type": "minecraft:biome",
-          "biome_is": [
-            "enderscape:void_depths"
-          ]
+          "biome_is": "enderscape:void_depths"
         },
         "then_run": {
           "type": "minecraft:condition",

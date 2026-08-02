@@ -22,10 +22,6 @@ public class EnderscapeSoundEventTagProvider extends FabricTagsProvider<SoundEve
         super(output, Registries.SOUND_EVENT, future);
     }
 
-    protected TagAppender<ResourceKey<SoundEvent>, SoundEvent> tag(TagKey<SoundEvent> key) {
-        return TagAppender.forBuilder(getOrCreateRawBuilder(key));
-    }
-
     @Override
     protected void addTags(HolderLookup.Provider lookup) {
         tag(AMBIENCE_REPLACEABLE_BY_ENDERSCAPE).add(

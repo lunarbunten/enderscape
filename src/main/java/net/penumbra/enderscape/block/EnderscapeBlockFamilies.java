@@ -14,11 +14,14 @@ public class EnderscapeBlockFamilies {
     private static final Map<Block, BlockFamily> MAP = Maps.newHashMap();
 
     public static final BlockFamily VEILED_PLANKS = build(EnderscapeBlocks.VEILED_PLANKS)
+            .log(EnderscapeBlocks.VEILED_LOG)
+            .strippedLog(EnderscapeBlocks.STRIPPED_VEILED_LOG)
             .button(EnderscapeBlocks.VEILED_BUTTON)
             .fence(EnderscapeBlocks.VEILED_FENCE)
             .fenceGate(EnderscapeBlocks.VEILED_FENCE_GATE)
             .pressurePlate(EnderscapeBlocks.VEILED_PRESSURE_PLATE)
             .sign(EnderscapeBlocks.VEILED_SIGN, EnderscapeBlocks.VEILED_WALL_SIGN)
+            .hangingSign(EnderscapeBlocks.VEILED_HANGING_SIGN, EnderscapeBlocks.VEILED_WALL_HANGING_SIGN)
             .slab(EnderscapeBlocks.VEILED_SLAB)
             .stairs(EnderscapeBlocks.VEILED_STAIRS)
             .door(EnderscapeBlocks.VEILED_DOOR)
@@ -28,11 +31,14 @@ public class EnderscapeBlockFamilies {
             .getFamily();
 
     public static final BlockFamily CELESTIAL_PLANKS = build(EnderscapeBlocks.CELESTIAL_PLANKS)
+            .log(EnderscapeBlocks.CELESTIAL_STEM)
+            .strippedLog(EnderscapeBlocks.STRIPPED_CELESTIAL_STEM)
             .button(EnderscapeBlocks.CELESTIAL_BUTTON)
             .fence(EnderscapeBlocks.CELESTIAL_FENCE)
             .fenceGate(EnderscapeBlocks.CELESTIAL_FENCE_GATE)
             .pressurePlate(EnderscapeBlocks.CELESTIAL_PRESSURE_PLATE)
             .sign(EnderscapeBlocks.CELESTIAL_SIGN, EnderscapeBlocks.CELESTIAL_WALL_SIGN)
+            .hangingSign(EnderscapeBlocks.CELESTIAL_HANGING_SIGN, EnderscapeBlocks.CELESTIAL_WALL_HANGING_SIGN)
             .slab(EnderscapeBlocks.CELESTIAL_SLAB)
             .stairs(EnderscapeBlocks.CELESTIAL_STAIRS)
             .door(EnderscapeBlocks.CELESTIAL_DOOR)
@@ -42,11 +48,14 @@ public class EnderscapeBlockFamilies {
             .getFamily();
 
     public static final BlockFamily MURUBLIGHT_PLANKS = build(EnderscapeBlocks.MURUBLIGHT_PLANKS)
+            .log(EnderscapeBlocks.MURUBLIGHT_STEM)
+            .strippedLog(EnderscapeBlocks.STRIPPED_MURUBLIGHT_STEM)
             .button(EnderscapeBlocks.MURUBLIGHT_BUTTON)
             .fence(EnderscapeBlocks.MURUBLIGHT_FENCE)
             .fenceGate(EnderscapeBlocks.MURUBLIGHT_FENCE_GATE)
             .pressurePlate(EnderscapeBlocks.MURUBLIGHT_PRESSURE_PLATE)
             .sign(EnderscapeBlocks.MURUBLIGHT_SIGN, EnderscapeBlocks.MURUBLIGHT_WALL_SIGN)
+            .hangingSign(EnderscapeBlocks.MURUBLIGHT_HANGING_SIGN, EnderscapeBlocks.MURUBLIGHT_WALL_HANGING_SIGN)
             .slab(EnderscapeBlocks.MURUBLIGHT_SLAB)
             .stairs(EnderscapeBlocks.MURUBLIGHT_STAIRS)
             .door(EnderscapeBlocks.MURUBLIGHT_DOOR)

@@ -25,7 +25,7 @@ public class VoidTorchBlock extends BaseTorchBlock implements HasMagniaPowerSign
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (random.nextInt(2) == 0) {
-            Vec3 particlePos = pos.getCenter().add(0, 0.2, 0);
+            Vec3 particlePos = Vec3.atCenterOf(pos).add(0, 0.2, 0);
 
             level.addParticle(
                     EnderscapeParticles.VOID_STARS,

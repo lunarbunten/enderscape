@@ -2,13 +2,13 @@ package net.penumbra.enderscape.mixin.client.renderer;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.renderer.SubmitNodeStorage;
+import net.minecraft.client.renderer.feature.ItemFeatureRenderer;
 import net.penumbra.enderscape.renderer.ItemEntityTint;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
 @Environment(EnvType.CLIENT)
-@Mixin(SubmitNodeStorage.ItemSubmit.class)
+@Mixin(ItemFeatureRenderer.Submit.class)
 public class ItemSubmitMixin implements ItemEntityTint {
 
     @Unique

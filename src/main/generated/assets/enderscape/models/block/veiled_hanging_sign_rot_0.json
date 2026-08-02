@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_hanging_sign_rot_0",
+  "textures": {
+    "all": "enderscape:block/veiled_hanging_sign",
+    "particle": "enderscape:block/stripped_veiled_log"
+  }
+}

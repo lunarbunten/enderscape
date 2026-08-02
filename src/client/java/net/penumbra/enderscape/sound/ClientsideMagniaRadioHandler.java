@@ -38,7 +38,7 @@ public class ClientsideMagniaRadioHandler {
     public void playAmbientSound(BlockPos pos) {
         stopAllInstances(pos);
 
-        Vec3 center = pos.getCenter();
+        Vec3 center = Vec3.atCenterOf(pos);
 
         SimpleSoundInstance instance = SimpleSoundInstance.forAmbientMood(
                 EnderscapeBlockSounds.MAGNIA_RADIO_AMBIENT,
@@ -61,7 +61,7 @@ public class ClientsideMagniaRadioHandler {
         SoundInstance instance = SimpleSoundInstance.forJukeboxSong(song.soundEvent().value(), Vec3.atCenterOf(pos));
         activeMusicInstances.put(pos, instance);
         client.getSoundManager().play(instance);
-        client.gui.setNowPlaying(song.description());
+        client.gui.hud.setNowPlaying(song.description());
 
         notifyNearbyEntities(client.level, pos, true);
     }

@@ -44,10 +44,9 @@ public class DriftJellyBlock extends HalfTransparentBlock {
         return new Vec3(x, height, z);
     }
 
-    @Override
-    public void updateEntityMovementAfterFallOn(BlockGetter level, Entity entity) {
+    public void updateEntityMovementAfterFallOn(Entity entity) {
         if (entity.isSuppressingBounce() || entity.getDeltaMovement().y() > -0.1) {
-            super.updateEntityMovementAfterFallOn(level, entity);
+            entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.0, 1.0));
         } else {
             entity.setDeltaMovement(getBounceVelocity(entity));
             entity.gameEvent(EnderscapeGameEvents.BOUNCE);
@@ -60,7 +59,7 @@ public class DriftJellyBlock extends HalfTransparentBlock {
         }
 
         if (level.isClientSide()) {
-            Vec3 vec3 = pos.getCenter().add(0, 0.75, 0);
+            Vec3 vec3 = Vec3.atCenterOf(pos).add(0, 0.75, 0);
             BlockParticleOption option = new BlockParticleOption(ParticleTypes.DUST_PILLAR, level.getBlockState(pos));
 
             for (int i = 0; i < 20; i++) {

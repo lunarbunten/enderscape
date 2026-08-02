@@ -6,7 +6,9 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.criterion.*;
+import net.minecraft.advancements.triggers.*;
+import net.minecraft.advancements.predicates.*;
+import net.minecraft.advancements.predicates.entity.*;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
@@ -17,6 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStackTemplate;
@@ -41,7 +44,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
-import static net.minecraft.advancements.CriteriaTriggers.FALL_FROM_HEIGHT;
+import static net.minecraft.advancements.triggers.CriteriaTriggers.FALL_FROM_HEIGHT;
 import static net.minecraft.world.item.Items.BUCKET;
 import static net.minecraft.world.item.Items.FIREWORK_ROCKET;
 import static net.penumbra.enderscape.registry.block.EnderscapeBlocks.*;
@@ -341,7 +344,7 @@ public class EnderscapeAdvancementProvider extends FabricAdvancementProvider {
                 )
                 .addCriterion("pulled_item", PULL_ENTITY.createCriterion(new PullEntityCriterion.Conditions(
                         Optional.empty(),
-                        Optional.of(EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(entities, EntityType.ITEM)).build()),
+                        Optional.of(EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(entities, EntityTypes.ITEM)).build()),
                         Optional.empty()
                 )))
                 .save(consumer, Enderscape.id("pull_item_with_attractor").toString());

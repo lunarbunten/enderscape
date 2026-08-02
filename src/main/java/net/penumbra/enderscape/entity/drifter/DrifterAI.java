@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.ai.ActivityData;
 import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -100,7 +101,7 @@ public class DrifterAI {
             Pair.of(1, new FollowTemptation(mob -> 1.25F)),
             Pair.of(2, BabyFollowAdult.create(UniformInt.of(4, 16), 2)),
             Pair.of(3, SetWalkTargetAwayFrom.entity(EnderscapeMemory.NEAREST_INTIMIDATOR, 1, 12, true)),
-            Pair.of(4, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0f, UniformInt.of(30, 60))),
+            Pair.of(4, SetEntityLookTargetSometimes.create(EntityTypes.PLAYER, 6.0f, UniformInt.of(30, 60))),
             Pair.of(8, new RunOne<>(
                     ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
                     ImmutableList.of(

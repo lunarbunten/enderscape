@@ -2,7 +2,7 @@ package net.penumbra.enderscape.datagen.loot;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableSubProvider;
-import net.minecraft.advancements.criterion.LocationPredicate;
+import net.minecraft.advancements.predicates.LocationPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;

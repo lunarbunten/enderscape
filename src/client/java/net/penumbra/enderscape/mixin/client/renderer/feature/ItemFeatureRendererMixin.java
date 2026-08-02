@@ -4,7 +4,6 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.renderer.SubmitNodeStorage;
 import net.minecraft.client.renderer.feature.ItemFeatureRenderer;
 import net.minecraft.util.ARGB;
 import net.penumbra.enderscape.renderer.ItemEntityTint;
@@ -15,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(ItemFeatureRenderer.class)
 public class ItemFeatureRendererMixin {
 
-    @ModifyExpressionValue(method = "renderItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/feature/ItemFeatureRenderer;getLayerColorSafe([ILnet/minecraft/client/resources/model/geometry/BakedQuad$MaterialInfo;)I"))
-    private int Enderscape$tintItemQuad(int color, @Local(argsOnly = true) SubmitNodeStorage.ItemSubmit submit) {
+    @ModifyExpressionValue(method = "prepareMainSubmit", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/feature/ItemFeatureRenderer;getLayerColorSafe([ILnet/minecraft/client/resources/model/geometry/BakedQuad$MaterialInfo;)I"))
+    private int Enderscape$tintItemQuad(int color, @Local(argsOnly = true) ItemFeatureRenderer.Submit submit) {
         int tint = ((ItemEntityTint) (Object) submit).color();
 
         if (tint == ItemEntityTint.NONE) {

@@ -1,10 +1,10 @@
 {
   "values": [
-    "#enderscape:base_stone_end",
-    "#enderscape:overgrowth_blocks",
-    "#enderscape:magnia_blocks",
     "enderscape:veiled_end_stone",
     "enderscape:blistered_magnia",
-    "enderscape:void_shale"
+    "enderscape:void_shale",
+    "#enderscape:base_stone_end",
+    "#enderscape:overgrowth_blocks",
+    "#enderscape:magnia_blocks"
   ]
 }

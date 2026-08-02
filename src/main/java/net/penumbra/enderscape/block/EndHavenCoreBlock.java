@@ -169,7 +169,7 @@ public class EndHavenCoreBlock extends BaseEntityBlock {
         boolean anyWaterNeighbors = Direction.Plane.HORIZONTAL.stream().map(pos::relative).anyMatch(neighborPos -> isWaterThatWouldFlow(neighborPos, level));
         final boolean inWater = anyWaterNeighbors || level.getFluidState(pos.above()).is(FluidTags.WATER);
 
-        Vec3 center = pos.getCenter();
+        Vec3 center = Vec3.atCenterOf(pos);
         level.explode(null, level.damageSources().badRespawnPointExplosion(center), explosionDamageCalculator(pos, inWater), center, 5.0F, true, Level.ExplosionInteraction.BLOCK);
     }
 

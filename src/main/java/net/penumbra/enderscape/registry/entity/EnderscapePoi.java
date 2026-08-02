@@ -8,6 +8,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.penumbra.enderscape.Enderscape;
 
+import java.util.stream.Stream;
+
 import static net.minecraft.world.level.block.Blocks.*;
 import static net.penumbra.enderscape.registry.block.EnderscapeBlocks.*;
 
@@ -35,32 +37,17 @@ public class EnderscapePoi {
                         .collect(ImmutableSet.toImmutableSet())
         );
 
+
+
         PoiHelper.register(
                 RUSTLE_SLEEPING_SPOT.identifier(),
                 1,
                 8,
-                ImmutableList.of(
+                Stream.concat(Stream.of(
                                 VEILED_LEAF_PILE,
-                                BLACK_CARPET,
-                                BLUE_CARPET,
-                                BROWN_CARPET,
-                                CYAN_CARPET,
-                                GRAY_CARPET,
-                                GREEN_CARPET,
-                                LIGHT_BLUE_CARPET,
-                                LIGHT_GRAY_CARPET,
-                                LIME_CARPET,
-                                MAGENTA_CARPET,
-                                ORANGE_CARPET,
-                                PINK_CARPET,
-                                PURPLE_CARPET,
-                                RED_CARPET,
-                                WHITE_CARPET,
-                                YELLOW_CARPET,
                                 MOSS_CARPET,
                                 PALE_MOSS_CARPET
-                        )
-                        .stream()
+                        ), CARPET.asList().stream())
                         .flatMap(block -> block.getStateDefinition().getPossibleStates().stream())
                         .collect(ImmutableSet.toImmutableSet())
         );

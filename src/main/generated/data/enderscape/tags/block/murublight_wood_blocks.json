@@ -1,6 +1,5 @@
 {
   "values": [
-    "#enderscape:murublight_stems",
     "enderscape:murublight_button",
     "enderscape:murublight_door",
     "enderscape:murublight_fence",
@@ -14,6 +13,7 @@
     "enderscape:murublight_stairs",
     "enderscape:murublight_trapdoor",
     "enderscape:murublight_wall_hanging_sign",
-    "enderscape:murublight_wall_sign"
+    "enderscape:murublight_wall_sign",
+    "#enderscape:murublight_stems"
   ]
 }

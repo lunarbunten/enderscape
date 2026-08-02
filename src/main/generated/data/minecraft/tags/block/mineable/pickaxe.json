@@ -1,5 +1,18 @@
 {
   "values": [
+    "enderscape:blinklamp",
+    "enderscape:blistered_magnia",
+    "enderscape:polarized_magnia",
+    "enderscape:bulb_lantern",
+    "enderscape:celestial_path",
+    "enderscape:corrupt_path",
+    "enderscape:end_lamp",
+    "enderscape:magnia_radio",
+    "enderscape:nebulite_block",
+    "enderscape:raw_shadoline_block",
+    "enderscape:veiled_end_stone",
+    "enderscape:void_shale",
+    "enderscape:void_lantern",
     "#enderscape:all_etched_magnia_blocks",
     "#enderscape:chanterelle_brick_blocks",
     "#enderscape:dusk_purpur_blocks",
@@ -13,19 +26,6 @@
     "#enderscape:overgrowth_blocks",
     "#enderscape:purpur_tile_blocks",
     "#enderscape:shadoline_blocks",
-    "#enderscape:veradite_blocks",
-    "enderscape:blinklamp",
-    "enderscape:blistered_magnia",
-    "enderscape:polarized_magnia",
-    "enderscape:bulb_lantern",
-    "enderscape:celestial_path",
-    "enderscape:corrupt_path",
-    "enderscape:end_lamp",
-    "enderscape:magnia_radio",
-    "enderscape:nebulite_block",
-    "enderscape:raw_shadoline_block",
-    "enderscape:veiled_end_stone",
-    "enderscape:void_shale",
-    "enderscape:void_lantern"
+    "#enderscape:veradite_blocks"
   ]
 }

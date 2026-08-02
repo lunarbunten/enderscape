@@ -19,7 +19,7 @@ public class OuterVoidWarningScreenEffect extends EnderscapeHudElement {
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, DeltaTracker tracker) {
-        if (minecraft.player == null || minecraft.options.hideGui || minecraft.player.isSpectator() || alpha <= 0.0F) {
+        if (minecraft.player == null || minecraft.gui.hud.isHidden() || minecraft.player.isSpectator() || alpha <= 0.0F) {
             return;
         }
         

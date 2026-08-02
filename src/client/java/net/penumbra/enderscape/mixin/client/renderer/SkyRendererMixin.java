@@ -1,6 +1,8 @@
 package net.penumbra.enderscape.mixin.client.renderer;
 
 import com.mojang.blaze3d.buffers.GpuBuffer;
+import com.mojang.blaze3d.buffers.GpuBufferSlice;
+import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -16,6 +18,7 @@ import net.penumbra.enderscape.config.EnderscapeConfig;
 import net.penumbra.enderscape.renderer.level.EnderscapeSkybox;
 import net.penumbra.enderscape.renderer.value.EndFlashParameters;
 import org.joml.Vector3f;
+import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -40,7 +43,7 @@ public abstract class SkyRendererMixin {
     }
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void Enderscape$init(final TextureManager textureManager, final AtlasManager atlasManager, CallbackInfo info) {
+    private void Enderscape$init(TextureManager textureManager, AtlasManager atlasManager, RenderTarget renderTarget, CallbackInfo ci) {
         enderscape$flashBuffer = buildCelestialQuad("Enderscape flash quad", atlasManager.getAtlasOrThrow(AtlasIds.CELESTIALS).getSprite(ENDERSCAPE_END_FLASH));
         enderscape$skybox = new EnderscapeSkybox();
     }
@@ -50,7 +53,7 @@ public abstract class SkyRendererMixin {
         Minecraft minecraft = Minecraft.getInstance();
 
         if (EnderscapeConfig.getInstance().skyboxUpdateEnabled && minecraft.level != null)  {
-            enderscape$skybox.render(new PoseStack(), minecraft.level, minecraft.gameRenderer.getMainCamera(), minecraft.getDeltaTracker());
+            enderscape$skybox.render(new PoseStack(), minecraft.level, minecraft.gameRenderer.mainCamera(), minecraft.getDeltaTracker());
             info.cancel();
         }
     }
@@ -67,9 +70,9 @@ public abstract class SkyRendererMixin {
         }
     }
 
-    @ModifyArg(method = "renderEndFlash", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderPass;setVertexBuffer(ILcom/mojang/blaze3d/buffers/GpuBuffer;)V"), index = 1)
-    private GpuBuffer Enderscape$changeEndFlashBuffer(GpuBuffer original) {
-        return EndFlashParameters.improved() ? enderscape$flashBuffer : original;
+    @ModifyArg(method = "renderEndFlash", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderPass;setVertexBuffer(ILcom/mojang/blaze3d/buffers/GpuBufferSlice;)V"), index = 1)
+    private @Nullable GpuBufferSlice Enderscape$changeEndFlashBuffer(@Nullable GpuBufferSlice original) {
+        return EndFlashParameters.improved() ? enderscape$flashBuffer.slice() : original;
     }
 
     @Inject(method = "close", at = @At("TAIL"))

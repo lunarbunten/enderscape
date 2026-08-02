@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ShapeRenderer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -54,22 +53,7 @@ public class MagniaSproutRenderer implements BlockEntityRenderer<MagniaSproutBlo
         if (minecraft.debugEntries.isCurrentlyEnabled(MAGNIA_SPROUT_RANGE)) {
             if (state.range == null) return;
 
-            double x = camera.pos.x;
-            double y = camera.pos.y;
-            double z = camera.pos.z;
-
-            collector.submitCustomGeometry(pose, RenderTypes.lines(), (pose1, consumer) -> {
-                ShapeRenderer.renderShape(
-                        pose,
-                        consumer,
-                        Shapes.create(state.range),
-                        state.blockPos.getX() - x,
-                        state.blockPos.getY() - y,
-                        state.blockPos.getZ() - z,
-                        state.color,
-                        minecraft.getWindow().getAppropriateLineWidth()
-                );
-            });
+            collector.submitShapeOutline(pose, Shapes.create(state.range), RenderTypes.lines(), state.color, minecraft.getWindow().getAppropriateLineWidth(), false);
         }
     }
 }

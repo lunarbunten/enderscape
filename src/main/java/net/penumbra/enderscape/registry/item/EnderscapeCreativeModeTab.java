@@ -585,7 +585,7 @@ public class EnderscapeCreativeModeTab {
             output.insertBefore(ANVIL, VOID_CAMPFIRE);
             output.insertBefore(LECTERN, VEILED_SHELF_ITEM, CELESTIAL_SHELF_ITEM, MURUBLIGHT_SHELF_ITEM);
             output.insertBefore(CHEST, VEILED_SIGN_ITEM, VEILED_HANGING_SIGN_ITEM, CELESTIAL_SIGN_ITEM, CELESTIAL_HANGING_SIGN_ITEM, MURUBLIGHT_SIGN_ITEM, MURUBLIGHT_HANGING_SIGN_ITEM);
-            output.insertBefore(WHITE_BED, END_HAVEN_CORE);
+            output.insertBefore(BED.white(), END_HAVEN_CORE);
             output.insertBefore(ENDER_EYE, getEndVaultInstance());
             output.insertBefore(SKELETON_SKULL, getEndCityBannerInstance(output.getContext().holders().lookupOrThrow(Registries.BANNER_PATTERN)));
         });

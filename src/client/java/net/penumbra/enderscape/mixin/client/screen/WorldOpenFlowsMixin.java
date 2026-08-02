@@ -48,7 +48,7 @@ public abstract class WorldOpenFlowsMixin {
         if (EnderscapeConfig.getInstance().vanillaWorldWarning && EnderscapeLevelDataPacksScreen.getDataPacks(level).isEmpty()) {
             Runnable proceedCallback = () -> openWorldLoadBundledResourcePack(level, stem, packRepository, onCancel);
 
-            minecraft.setScreen(new BackupConfirmScreen(
+            minecraft.gui.setScreen(new BackupConfirmScreen(
                     () -> {
                             stem.close();
                             level.safeClose();

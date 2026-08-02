@@ -12,6 +12,7 @@ import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
 import net.minecraft.world.level.CollisionGetter;
@@ -96,7 +97,7 @@ public class EndHavenManager {
         BlockPos pos = config.respawnData().pos();
 
         if (level.getBlockState(pos).getBlock() instanceof EndHavenCoreBlock && endHavenWorksAndEndHavenActive(level, Optional.of(config))) {
-            return findRespawnPosition(EntityType.PLAYER, level, pos).map(safe -> ServerPlayer.RespawnPosAngle.of(safe, pos, 0.0F));
+            return findRespawnPosition(EntityTypes.PLAYER, level, pos).map(safe -> ServerPlayer.RespawnPosAngle.of(safe, pos, 0.0F));
         } else {
             return Optional.empty();
         }

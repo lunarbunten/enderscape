@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_wall_sign",
+  "textures": {
+    "all": "enderscape:block/veiled_sign",
+    "particle": "enderscape:block/veiled_planks"
+  }
+}

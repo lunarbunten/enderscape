@@ -4,7 +4,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.penumbra.enderscape.registry.server.EnderscapeCommands;
 
@@ -21,7 +21,7 @@ public final class KillEnderDragonCommand {
     private static int execute(CommandSourceStack source) {
         ServerLevel level = source.getLevel();
 
-        List<? extends EnderDragon> dragons = level.getEntities(EntityType.ENDER_DRAGON, EnderDragon::isAlive);
+        List<? extends EnderDragon> dragons = level.getEntities(EntityTypes.ENDER_DRAGON, EnderDragon::isAlive);
 
         if (dragons.isEmpty()) {
             return EnderscapeCommands.failure(source, NAME, "none");

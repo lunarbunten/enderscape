@@ -75,7 +75,7 @@ public class EnderscapeClient implements ClientModInitializer {
         ClientTickEvents.START_CLIENT_TICK.register(minecraft -> {
             LocalPlayer player = minecraft.player;
 
-            if (EnderscapeMobEffects.isStunned(player) && minecraft.screen instanceof AbstractContainerScreen<?>) {
+            if (EnderscapeMobEffects.isStunned(player) && minecraft.gui.screen() instanceof AbstractContainerScreen<?>) {
                 player.closeContainer();
             }
         });

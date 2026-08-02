@@ -21,10 +21,6 @@ public class EnderscapeMobEffectTagProvider extends FabricTagsProvider<MobEffect
         super(output, Registries.MOB_EFFECT, future);
     }
 
-    protected TagAppender<ResourceKey<MobEffect>, MobEffect> tag(TagKey<MobEffect> key) {
-        return TagAppender.forBuilder(getOrCreateRawBuilder(key));
-    }
-
     @Override
     protected void addTags(HolderLookup.Provider lookup) {
         tag(UNSUPPORTED_WITH_VOIDED_HEALTH).add(keyFor(ABSORPTION));

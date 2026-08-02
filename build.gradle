@@ -111,10 +111,10 @@ dependencies {
 	implementation "maven.modrinth:lithostitched:${project.lithostitched_version}"
 	implementation "maven.modrinth:trim-patcher:${project.trim_patcher_version}"
 
-	compileOnly("mezz.jei:jei-26.1.2-common-api:${jei_version}") {
+	compileOnly("mezz.jei:jei-26.2-common-api:${jei_version}") {
 		transitive = false
 	}
-	compileOnly("mezz.jei:jei-26.1.2-fabric-api:${jei_version}") {
+	compileOnly("mezz.jei:jei-26.2-fabric-api:${jei_version}") {
 		transitive = false
 	}
 
@@ -124,7 +124,7 @@ dependencies {
 
 	switch (project.recipe_viewer) {
 		case "rrv" -> runtimeOnly("cc.cassian.rrv:reliable-recipe-viewer-fabric:${rrv_version}")
-		case "jei" -> runtimeOnly("mezz.jei:jei-26.1.2-fabric:${jei_version}")
+		case "jei" -> runtimeOnly("mezz.jei:jei-26.2-fabric:${jei_version}")
 	}
 }
 

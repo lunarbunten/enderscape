@@ -202,7 +202,7 @@ public record StunAttack(
         );
 
         randomPositions.forEach(pos -> {
-            if (getDistanceInEllipsoid(pos.getCenter(), stunArea.getCenter(), radius) <= 1.0F) {
+            if (getDistanceInEllipsoid(Vec3.atCenterOf(pos), stunArea.getCenter(), radius) <= 1.0F) {
                 level.sendParticles(attack.particle(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 2, 1, 1, 1, 0.1);
             }
         });

@@ -220,7 +220,7 @@ public record LodestoneTeleportation(
                 FueledTool.useFuelOrDamage(context, 1, user.getEquipmentSlotForItem(context.stack()));
             }
 
-            doPreTeleportEffects(context, prior.pos().getCenter(), !sameDimension);
+            doPreTeleportEffects(context, Vec3.atCenterOf(prior.pos()), !sameDimension);
             teleportToLocation(context, BlockPos.containing(position), sameDimension ? TeleportTransition.DO_NOTHING : entity -> {
                 if (entity instanceof ServerPlayer player) {
                     LodestoneTeleportation teleportation = LodestoneTeleportation.get(context.stack());
@@ -240,7 +240,7 @@ public record LodestoneTeleportation(
         LivingEntity user = context.user();
         EntityDimensions dimensions = user.getDimensions(Pose.STANDING);
 
-        Vec3 offsetPos = context.linkedPos().above().getBottomCenter().add(0.0, dimensions.height() / 2.0, 0.0);
+        Vec3 offsetPos = Vec3.atBottomCenterOf(context.linkedPos().above()).add(0.0, dimensions.height() / 2.0, 0.0);
 
         VoxelShape shape = Shapes.create(AABB.ofSize(offsetPos, dimensions.width() + 1, dimensions.height() + 1, dimensions.width() + 1).inflate(1.0E-6));
         Optional<Vec3> freePos = level.findFreePosition(user, shape, offsetPos, dimensions.width(), dimensions.height(), dimensions.width());
@@ -328,7 +328,7 @@ public record LodestoneTeleportation(
     private static void teleportToLocation(LodestoneTrackerContext context, BlockPos destination, TeleportTransition.PostTeleportTransition transition) {
         LodestoneTeleportation teleportation = LodestoneTeleportation.get(context.stack());
         ServerLevel level = context.linkedLevel();
-        Vec3 pos = destination.getBottomCenter();
+        Vec3 pos = Vec3.atBottomCenterOf(destination);
 
         LivingEntity user = context.user();
         user.teleport(new TeleportTransition(level, pos, Vec3.ZERO, 0, 0, Relative.union(Relative.ROTATION, Relative.DELTA), transition));

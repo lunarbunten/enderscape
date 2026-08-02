@@ -5,12 +5,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.references.BlockItemId;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -27,7 +26,6 @@ import net.penumbra.enderscape.Enderscape;
 import net.penumbra.enderscape.block.*;
 import net.penumbra.enderscape.block.properties.MagniaPolarity;
 import net.penumbra.enderscape.block.state.StateProperties;
-import net.penumbra.enderscape.references.BlockItemId;
 import net.penumbra.enderscape.references.EnderscapeBlockIds;
 import net.penumbra.enderscape.references.EnderscapeBlockItemIds;
 import net.penumbra.enderscape.registry.item.EnderscapeItems;
@@ -1041,6 +1039,10 @@ public class EnderscapeBlocks {
 
         Registry.register(BuiltInRegistries.BLOCK, key, block);
         return block;
+    }
+
+    private static boolean always(BlockState state) {
+        return true;
     }
 
     private static boolean always(BlockState state, BlockGetter world, BlockPos pos) {

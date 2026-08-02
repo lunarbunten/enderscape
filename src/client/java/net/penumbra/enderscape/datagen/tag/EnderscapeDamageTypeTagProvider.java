@@ -22,10 +22,6 @@ public class EnderscapeDamageTypeTagProvider extends FabricTagsProvider<DamageTy
         super(output, Registries.DAMAGE_TYPE, future);
     }
 
-    protected TagAppender<ResourceKey<DamageType>, DamageType> tag(TagKey<DamageType> key) {
-        return TagAppender.forBuilder(getOrCreateRawBuilder(key));
-    }
-
     @Override
     protected void addTags(HolderLookup.Provider lookup) {
         tag(RUBBLEMITES_CAN_BLOCK).add(

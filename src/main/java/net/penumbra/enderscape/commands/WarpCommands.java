@@ -119,7 +119,7 @@ public final class WarpCommands {
         private static TeleportTransition teleportTransition(ServerPlayer player, ServerLevel level) {
             return new TeleportTransition(
                     level,
-                    teleportPosition(player, level).getBottomCenter(),
+                    Vec3.atBottomCenterOf(teleportPosition(player, level)),
                     Vec3.ZERO,
                     0,
                     0,

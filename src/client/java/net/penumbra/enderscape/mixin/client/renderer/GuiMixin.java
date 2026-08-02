@@ -7,7 +7,8 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.contextualbar.ContextualBarRenderer;
+import net.minecraft.client.gui.Hud;
+import net.minecraft.client.gui.contextualbar.ContextualBar;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.world.entity.LivingEntity;
@@ -31,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Environment(EnvType.CLIENT)
-@Mixin(Gui.class)
+@Mixin(Hud.class)
 public abstract class GuiMixin {
 
     @Shadow @Final private static Identifier HEART_VEHICLE_CONTAINER_SPRITE;
@@ -52,8 +53,8 @@ public abstract class GuiMixin {
     }
 
     @Inject(method = "extractHeart", at = @At("TAIL"))
-    public void Enderscape$copyPlayerHeartPoints(final GuiGraphicsExtractor graphics, final Gui.HeartType type, final int xo, final int yo, final boolean isHardcore, final boolean blinks, final boolean half, CallbackInfo info) {
-        if (type.equals(Gui.HeartType.CONTAINER)) {
+    public void Enderscape$copyPlayerHeartPoints(final GuiGraphicsExtractor graphics, final Hud.HeartType type, final int xo, final int yo, final boolean isHardcore, final boolean blinks, final boolean half, CallbackInfo info) {
+        if (type.equals(Hud.HeartType.CONTAINER)) {
             variables.playerHearts.add(new Vector2i(xo, yo));
         }
     }
@@ -74,7 +75,7 @@ public abstract class GuiMixin {
             method = "extractPlayerHealth",
             at = @At(
                     value = "FIELD",
-                    target = "Lnet/minecraft/client/gui/Gui;lastHealth:I",
+                    target = "Lnet/minecraft/client/gui/Hud;lastHealth:I",
                     opcode = Opcodes.PUTFIELD
             )
     )
@@ -131,10 +132,10 @@ public abstract class GuiMixin {
             method = "extractHotbarAndDecorations",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/contextualbar/ContextualBarRenderer;extractBackground(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V"
+                    target = "Lnet/minecraft/client/gui/contextualbar/ContextualBar;extractBackground(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V"
             )
     )
-    public void Enderscape$stopRenderingBarBackground(ContextualBarRenderer instance, GuiGraphicsExtractor graphics, DeltaTracker tracker, Operation<Void> original) {
+    public void Enderscape$stopRenderingBarBackground(ContextualBar instance, GuiGraphicsExtractor graphics, DeltaTracker tracker, Operation<Void> original) {
         if (ClientsideDashJumpManager.skipRenderingDashJumpBar()) {
             original.call(instance, graphics, tracker);
         } else {
@@ -146,10 +147,10 @@ public abstract class GuiMixin {
             method = "extractHotbarAndDecorations",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/contextualbar/ContextualBarRenderer;extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V"
+                    target = "Lnet/minecraft/client/gui/contextualbar/ContextualBar;extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V"
             )
     )
-    public void Enderscape$stopRenderingBar(ContextualBarRenderer instance, GuiGraphicsExtractor graphics, DeltaTracker tracker, Operation<Void> original) {
+    public void Enderscape$stopRenderingBar(ContextualBar instance, GuiGraphicsExtractor graphics, DeltaTracker tracker, Operation<Void> original) {
         if (ClientsideDashJumpManager.skipRenderingDashJumpBar()) {
             original.call(instance, graphics, tracker);
         }

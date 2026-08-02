@@ -11,6 +11,7 @@ import net.minecraft.world.attribute.*;
 import net.minecraft.world.attribute.modifier.ColorModifier;
 import net.minecraft.world.attribute.modifier.FloatModifier;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -147,7 +148,7 @@ public class EnderscapeBiomes {
                         MobCategory.MONSTER,
                         RUBBLEMITE_DEFAULT_WEIGHT * 2,
                         new MobSpawnSettings.SpawnerData(
-                                EntityType.ENDERMITE,
+                                EntityTypes.ENDERMITE,
                                 1,
                                 1
                         )
@@ -162,7 +163,7 @@ public class EnderscapeBiomes {
                         )
                 )
                 .addMobCharge(
-                        EntityType.ENDERMITE,
+                        EntityTypes.ENDERMITE,
                         1, 2
                 )
                 .addMobCharge(

@@ -58,7 +58,7 @@ public abstract class MinecraftMixin {
         }
     }
 
-    @Inject(method = "setScreen", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "setScreenAndShow", at = @At("HEAD"), cancellable = true)
     private void Enderscape$cancelSetScreen(Screen screen, CallbackInfo info) {
         if (screen instanceof AbstractContainerScreen<?> && EnderscapeMobEffects.isStunned(player)) {
             info.cancel();

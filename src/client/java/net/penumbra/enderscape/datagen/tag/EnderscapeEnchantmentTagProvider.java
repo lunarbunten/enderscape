@@ -22,10 +22,6 @@ public class EnderscapeEnchantmentTagProvider extends FabricTagsProvider<Enchant
         super(output, Registries.ENCHANTMENT, future);
     }
 
-    protected TagAppender<ResourceKey<Enchantment>, Enchantment> tag(TagKey<Enchantment> key) {
-        return TagAppender.forBuilder(getOrCreateRawBuilder(key));
-    }
-
     @Override
     protected void addTags(HolderLookup.Provider lookup) {
         tag(PREVENTS_DRIFTER_STOMP_DAMAGE).add(FEATHER_FALLING);

@@ -30,7 +30,6 @@
         "renderer.SkyRendererMixin",
         "renderer.SubmitNodeCollectionMixin",
         "renderer.SubmitNodeStorageMixin",
-        "renderer.WeatherEffectRendererMixin",
         "renderer.entity.EndermanRendererMixin",
         "renderer.entity.EndermanRenderStateMixin",
         "renderer.entity.EndermiteRendererMixin",

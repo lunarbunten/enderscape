@@ -1,6 +1,5 @@
 package net.penumbra.enderscape.registry.entity;
 
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -10,6 +9,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.golem.IronGolem;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.cubemob.SulfurCube;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
@@ -33,6 +33,7 @@ public class EnderscapeMagniaInteractionBehaviors {
         MagniaInteractionBehavior.registerOverride(ItemEntity.class, itemBehavior());
         MagniaInteractionBehavior.registerOverride(LivingEntity.class, livingEntityBehavior());
         MagniaInteractionBehavior.registerOverride(Player.class, playerBehavior());
+        MagniaInteractionBehavior.registerOverride(SulfurCube.class, sulfurCubeBehavior());
     }
 
     public static MagniaInteractionBehavior<ItemEntity> itemBehavior() {
@@ -105,6 +106,14 @@ public class EnderscapeMagniaInteractionBehaviors {
                 .build();
     }
 
+    public static MagniaInteractionBehavior<SulfurCube> sulfurCubeBehavior() {
+        return new MagniaInteractionBehavior.Builder<SulfurCube>()
+                .copy(livingEntityBuilder())
+                .attractStrength(0.075F)
+                .repelStrength(0.075F)
+                .build();
+    }
+
     private static <T extends LivingEntity> Predicate<T> baseLivingEntityPredicate() {
         return entity -> entity.isAlive() && getMagnetismFactor(entity) > 0.0;
     }
@@ -114,11 +123,9 @@ public class EnderscapeMagniaInteractionBehaviors {
 
         for (EquipmentSlot slot : EquipmentSlot.VALUES.stream().filter(EquipmentSlot::isArmor).toList()) {
             ItemStack stack = entity.getItemBySlot(slot);
-            if (stack.has(DataComponents.EQUIPPABLE)) {
-                if (stack.is(EnderscapeItemTags.WEAK_MAGNIA_STRENGTH)) weak++;
-                else if (stack.is(EnderscapeItemTags.AVERAGE_MAGNIA_STRENGTH)) average++;
-                else if (stack.is(EnderscapeItemTags.STRONG_MAGNIA_STRENGTH)) strong++;
-            }
+            if (stack.is(EnderscapeItemTags.WEAK_MAGNIA_STRENGTH)) weak++;
+            else if (stack.is(EnderscapeItemTags.AVERAGE_MAGNIA_STRENGTH)) average++;
+            else if (stack.is(EnderscapeItemTags.STRONG_MAGNIA_STRENGTH)) strong++;
         }
 
         return weak * 0.5F + average + strong * 1.5F;

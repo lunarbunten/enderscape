@@ -97,7 +97,7 @@ public class BlockUtil extends net.minecraft.util.BlockUtil {
         BlockState state = level.getBlockState(pos);
         BlockState relative = level.getBlockState(pos.relative(direction));
 
-        return LightEngine.getLightBlockInto(state, relative, direction, relative.getLightDampening()) < 15;
+        return LightEngine.getLightDampeningInto(state, relative, direction, relative.getLightDampening()) < 15;
     }
 
     public static void replaceSpherically(Level level, BlockPos pos, BlockState state, int radius, Direction direction, Predicate<BlockState> replaceable) {

@@ -168,10 +168,6 @@ public class EnderscapeModelProvider extends FabricModelProvider {
         generators.woodProvider(STRIPPED_CELESTIAL_STEM).log(STRIPPED_CELESTIAL_STEM).wood(STRIPPED_CELESTIAL_HYPHAE);
         generators.woodProvider(STRIPPED_MURUBLIGHT_STEM).log(STRIPPED_MURUBLIGHT_STEM).wood(STRIPPED_MURUBLIGHT_HYPHAE);
 
-        generators.createHangingSign(STRIPPED_VEILED_LOG, VEILED_HANGING_SIGN, VEILED_WALL_HANGING_SIGN);
-        generators.createHangingSign(STRIPPED_CELESTIAL_STEM, CELESTIAL_HANGING_SIGN, CELESTIAL_WALL_HANGING_SIGN);
-        generators.createHangingSign(STRIPPED_MURUBLIGHT_STEM, MURUBLIGHT_HANGING_SIGN, MURUBLIGHT_WALL_HANGING_SIGN);
-
         generators.createShelf(VEILED_SHELF, STRIPPED_VEILED_LOG);
         generators.createShelf(CELESTIAL_SHELF, STRIPPED_CELESTIAL_STEM);
         generators.createShelf(MURUBLIGHT_SHELF, STRIPPED_MURUBLIGHT_STEM);

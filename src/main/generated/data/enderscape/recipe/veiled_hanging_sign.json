@@ -1,7 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "group": "hanging_sign",
+  "group": "wooden_hanging_sign",
   "key": {
     "#": "enderscape:stripped_veiled_log",
     "X": "minecraft:iron_chain"

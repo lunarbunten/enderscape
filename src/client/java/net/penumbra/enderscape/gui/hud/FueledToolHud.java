@@ -44,7 +44,7 @@ public class FueledToolHud extends EnderscapeHudElement {
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, DeltaTracker tracker) {
-        if (!config.nebuliteToolHudEnabled || minecraft.player == null || minecraft.options.hideGui || !minecraft.options.getCameraType().isFirstPerson() || minecraft.player.isSpectator()) {
+        if (!config.nebuliteToolHudEnabled || minecraft.player == null || minecraft.gui.hud.isHidden() || !minecraft.options.getCameraType().isFirstPerson() || minecraft.player.isSpectator()) {
             return;
         }
 

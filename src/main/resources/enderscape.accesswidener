@@ -1,6 +1,6 @@
 classTweaker v1 official
-accessible class net/minecraft/client/gui/Gui$ContextualInfo
-accessible class net/minecraft/client/gui/Gui$HeartType
+accessible class net/minecraft/client/gui/Hud$ContextualInfo
+accessible class net/minecraft/client/gui/Hud$HeartType
 accessible class net/minecraft/client/gui/screens/worldselection/SwitchGrid
 accessible class net/minecraft/client/particle/DripParticle$CoolingDripHangParticle
 accessible class net/minecraft/client/particle/DripParticle$DripLandParticle

@@ -8,10 +8,10 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "flags": {
+              "minecraft:flags": {
                 "is_flying": true
               },
-              "movement": {
+              "minecraft:movement": {
                 "speed": {
                   "min": 40.0
                 }

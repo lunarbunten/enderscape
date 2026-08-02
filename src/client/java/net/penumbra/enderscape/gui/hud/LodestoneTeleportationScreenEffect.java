@@ -18,7 +18,7 @@ public class LodestoneTeleportationScreenEffect extends EnderscapeHudElement {
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, DeltaTracker tracker) {
-        if (minecraft.player == null || minecraft.options.hideGui || minecraft.player.isSpectator() || variables.lodestoneTeleportationTicks <= 0 || config.mirrorScreenEffectIntensity <= 0) {
+        if (minecraft.player == null || minecraft.gui.hud.isHidden() || minecraft.player.isSpectator() || variables.lodestoneTeleportationTicks <= 0 || config.mirrorScreenEffectIntensity <= 0) {
             return;
         }
         

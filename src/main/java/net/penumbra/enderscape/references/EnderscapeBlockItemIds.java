@@ -1,6 +1,7 @@
 package net.penumbra.enderscape.references;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.references.BlockItemId;
 import net.minecraft.resources.ResourceKey;
 import net.penumbra.enderscape.Enderscape;
 

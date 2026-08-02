@@ -1,6 +1,5 @@
 {
   "values": [
-    "#enderscape:veiled_logs",
     "enderscape:veiled_button",
     "enderscape:veiled_door",
     "enderscape:veiled_fence",
@@ -14,6 +13,7 @@
     "enderscape:veiled_stairs",
     "enderscape:veiled_trapdoor",
     "enderscape:veiled_wall_hanging_sign",
-    "enderscape:veiled_wall_sign"
+    "enderscape:veiled_wall_sign",
+    "#enderscape:veiled_logs"
   ]
 }

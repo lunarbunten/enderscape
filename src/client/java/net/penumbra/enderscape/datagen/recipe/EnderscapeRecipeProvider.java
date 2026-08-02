@@ -535,7 +535,7 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_veiled_leaves", has(VEILED_LEAVES))
                         .save(output);
 
-                shapeless(RecipeCategory.MISC, WHITE_DYE)
+                shapeless(RecipeCategory.MISC, DYE.white())
                         .group("white_dye")
                         .requires(WISP_FLOWER, 1)
                         .unlockedBy("has_wisp_flower", has(WISP_FLOWER))
@@ -545,16 +545,15 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 woodFromLogs(STRIPPED_VEILED_WOOD, STRIPPED_VEILED_LOG);
                 planksFromLogs(VEILED_PLANKS, EnderscapeItemTags.VEILED_LOGS, 4);
 
-                hangingSign(VEILED_HANGING_SIGN_ITEM, STRIPPED_VEILED_LOG);
                 shelf(VEILED_SHELF_ITEM, STRIPPED_VEILED_LOG);
 
-                shapeless(RecipeCategory.MISC, YELLOW_DYE)
+                shapeless(RecipeCategory.MISC, DYE.yellow())
                         .group("yellow_dye")
                         .requires(CELESTIAL_GROWTH, 1)
                         .unlockedBy("has_celestial_growth", has(CELESTIAL_GROWTH))
                         .save(output, "enderscape:yellow_dye_from_celestial_growth");
 
-                shapeless(RecipeCategory.MISC, CYAN_DYE)
+                shapeless(RecipeCategory.MISC, DYE.cyan())
                         .group("cyan_dye")
                         .requires(BULB_FLOWER, 1)
                         .unlockedBy("has_bulb_flower", has(BULB_FLOWER))
@@ -585,10 +584,9 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 woodFromLogs(STRIPPED_CELESTIAL_HYPHAE, STRIPPED_CELESTIAL_STEM);
                 planksFromLogs(CELESTIAL_PLANKS, EnderscapeItemTags.CELESTIAL_STEMS, 4);
 
-                hangingSign(CELESTIAL_HANGING_SIGN_ITEM, STRIPPED_CELESTIAL_STEM);
                 shelf(CELESTIAL_SHELF_ITEM, STRIPPED_CELESTIAL_STEM);
 
-                shapeless(RecipeCategory.MISC, PURPLE_DYE)
+                shapeless(RecipeCategory.MISC, DYE.purple())
                         .group("purple_dye")
                         .requires(CORRUPT_GROWTH, 1)
                         .unlockedBy("has_corrupt_growth", has(CORRUPT_GROWTH))
@@ -619,7 +617,6 @@ public class EnderscapeRecipeProvider extends FabricRecipeProvider {
                 woodFromLogs(STRIPPED_MURUBLIGHT_HYPHAE, STRIPPED_MURUBLIGHT_STEM);
                 planksFromLogs(MURUBLIGHT_PLANKS, EnderscapeItemTags.MURUBLIGHT_STEMS, 4);
 
-                hangingSign(MURUBLIGHT_HANGING_SIGN_ITEM, STRIPPED_MURUBLIGHT_STEM);
                 shelf(MURUBLIGHT_SHELF_ITEM, STRIPPED_MURUBLIGHT_STEM);
 
                 simpleFamilyCorruption(EnderscapeBlockFamilies.VERADITE, EnderscapeBlockFamilies.KURODITE);

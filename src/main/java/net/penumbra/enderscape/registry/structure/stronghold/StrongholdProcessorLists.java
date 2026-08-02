@@ -141,7 +141,7 @@ public class StrongholdProcessorLists extends EnderscapeProcessorLists {
 
     @NotNull
     private static BlockState blackCandleState(boolean lit, int candles) {
-        return Blocks.BLACK_CANDLE.defaultBlockState().setValue(CandleBlock.LIT, lit).setValue(CandleBlock.CANDLES, candles);
+        return Blocks.DYED_CANDLE.black().defaultBlockState().setValue(CandleBlock.LIT, lit).setValue(CandleBlock.CANDLES, candles);
     }
 
     private static ResourceKey<StructureProcessorList> localized(String name) {

@@ -2,7 +2,7 @@ package net.penumbra.enderscape.datagen.loot;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableSubProvider;
-import net.minecraft.advancements.criterion.LocationPredicate;
+import net.minecraft.advancements.predicates.LocationPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
@@ -204,7 +204,7 @@ public class EnderscapeChestLootProvider extends SimpleFabricLootTableSubProvide
                 .setRolls(rolls)
 
                 .add(createItem(ARROW, 14).apply(countBetween(4, 10)))
-                .add(createItem(BLACK_DYE, 14).apply(countBetween(1, 3)))
+                .add(createItem(DYE.black(), 14).apply(countBetween(1, 3)))
 
                 .add(createItem(BOOK, 11).apply(countBetween(1, 3)))
                 .add(createItem(BREAD, 11).apply(countBetween(1, 6)))
@@ -377,8 +377,8 @@ public class EnderscapeChestLootProvider extends SimpleFabricLootTableSubProvide
 
                                         .add(createEnchantedItem(BOW, 5, 15, 3).apply(toolDamage))
 
-                                        .add(createItem(MAGENTA_DYE, 1).apply(countBetween(3, 6)))
-                                        .add(createItem(BLACK_DYE, 1).apply(countBetween(3, 6)))
+                                        .add(createItem(DYE.magenta(), 1).apply(countBetween(3, 6)))
+                                        .add(createItem(DYE.black(), 1).apply(countBetween(3, 6)))
 
                                         .add(createItem(POTION, 1).apply(potionEffect(Potions.SLOW_FALLING)))
                                         .add(createItem(LINGERING_POTION, 1).apply(potionEffect(Potions.SLOWNESS)))
@@ -457,8 +457,8 @@ public class EnderscapeChestLootProvider extends SimpleFabricLootTableSubProvide
 
                                         .add(createEnchantedItem(BOW, 5, 15, 3).apply(toolDamage))
 
-                                        .add(createItem(MAGENTA_DYE, 1).apply(countBetween(3, 6)))
-                                        .add(createItem(BLACK_DYE, 1).apply(countBetween(3, 6)))
+                                        .add(createItem(DYE.magenta(), 1).apply(countBetween(3, 6)))
+                                        .add(createItem(DYE.black(), 1).apply(countBetween(3, 6)))
 
                                         .add(createItem(POTION, 1).apply(potionEffect(Potions.SLOW_FALLING)))
                                         .add(createItem(LINGERING_POTION, 1).apply(potionEffect(Potions.SLOWNESS)))
@@ -517,7 +517,7 @@ public class EnderscapeChestLootProvider extends SimpleFabricLootTableSubProvide
                                         .add(createItem(SUGAR, 6).apply(countBetween(3, 6)))
 
                                         .add(createItem(PURUBERRY, 3).apply(countBetween(2, 8)))
-                                        .add(createItem(BLACK_DYE, 3).apply(countBetween(1, 6)))
+                                        .add(createItem(DYE.black(), 3).apply(countBetween(1, 6)))
                         ).withPool(
                                 LootPool.lootPool()
                                         .setRolls(ConstantValue.exactly(1))

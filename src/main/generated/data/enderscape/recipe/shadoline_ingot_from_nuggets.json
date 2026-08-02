@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "enderscape:shadoline_ingot",
   "key": {
     "#": "enderscape:shadoline_nugget"

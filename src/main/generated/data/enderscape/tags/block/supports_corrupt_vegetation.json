@@ -1,9 +1,9 @@
 {
   "values": [
-    "#enderscape:overgrowth_blocks",
-    "#minecraft:supports_vegetation",
     "minecraft:end_stone",
     "enderscape:mirestone",
-    "enderscape:veiled_end_stone"
+    "enderscape:veiled_end_stone",
+    "#enderscape:overgrowth_blocks",
+    "#minecraft:supports_vegetation"
   ]
 }

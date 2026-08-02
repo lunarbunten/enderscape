@@ -19,10 +19,6 @@ public class EnderscapeStructureTagProvider extends FabricTagsProvider<Structure
         super(output, Registries.STRUCTURE, future);
     }
 
-    protected TagAppender<ResourceKey<Structure>, Structure> tag(TagKey<Structure> key) {
-        return TagAppender.forBuilder(getOrCreateRawBuilder(key));
-    }
-
     @Override
     protected void addTags(HolderLookup.Provider lookup) {
         tag(StructureTags.EYE_OF_ENDER_LOCATED).add(EnderscapeStructures.STRONGHOLD);
