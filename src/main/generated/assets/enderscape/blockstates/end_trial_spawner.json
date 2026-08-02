@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "trial_spawner_state=active": {
+      "model": "enderscape:block/end_trial_spawner_active"
+    },
+    "trial_spawner_state=cooldown": {
+      "model": "enderscape:block/end_trial_spawner"
+    },
+    "trial_spawner_state=ejecting_reward": {
+      "model": "enderscape:block/end_trial_spawner_ejecting_reward"
+    },
+    "trial_spawner_state=inactive": {
+      "model": "enderscape:block/end_trial_spawner"
+    },
+    "trial_spawner_state=waiting_for_players": {
+      "model": "enderscape:block/end_trial_spawner_active"
+    },
+    "trial_spawner_state=waiting_for_reward_ejection": {
+      "model": "enderscape:block/end_trial_spawner_active"
+    }
+  }
+}

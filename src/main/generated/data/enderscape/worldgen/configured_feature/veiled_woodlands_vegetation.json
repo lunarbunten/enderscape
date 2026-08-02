@@ -6,19 +6,13 @@
       "entries": [
         {
           "data": {
-            "Name": "enderscape:wisp_sprouts",
-            "Properties": {
-              "facing": "up"
-            }
+            "Name": "enderscape:wisp_sprouts"
           },
           "weight": 4
         },
         {
           "data": {
-            "Name": "enderscape:wisp_growth",
-            "Properties": {
-              "facing": "up"
-            }
+            "Name": "enderscape:wisp_growth"
           },
           "weight": 1
         }

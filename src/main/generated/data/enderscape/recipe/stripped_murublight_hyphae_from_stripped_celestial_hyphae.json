@@ -1,0 +1,8 @@
+{
+  "type": "enderscape:void_lachryma",
+  "average_chance_per_second": 0.25,
+  "input": "enderscape:stripped_celestial_hyphae",
+  "result": {
+    "id": "enderscape:stripped_murublight_hyphae"
+  }
+}

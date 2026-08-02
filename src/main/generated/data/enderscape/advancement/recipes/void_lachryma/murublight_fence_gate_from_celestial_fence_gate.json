@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_celestial_fence_gate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:celestial_fence_gate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:murublight_fence_gate_from_celestial_fence_gate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_celestial_fence_gate"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:murublight_fence_gate_from_celestial_fence_gate"
+    ]
+  }
+}

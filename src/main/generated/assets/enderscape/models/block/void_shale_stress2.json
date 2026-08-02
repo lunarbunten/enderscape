@@ -1,0 +1,9 @@
+{
+  "parent": "enderscape:block/template_void_shale",
+  "textures": {
+    "end": "enderscape:block/void_shale_end_stress2",
+    "end_emissive": "enderscape:block/void_shale_end_stress2_emissive",
+    "side": "enderscape:block/void_shale_side_stress2",
+    "side_emissive": "enderscape:block/void_shale_side_stress2_emissive"
+  }
+}

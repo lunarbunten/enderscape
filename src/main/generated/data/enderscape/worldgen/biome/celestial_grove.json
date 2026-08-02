@@ -1,15 +1,11 @@
 {
   "attributes": {
     "enderscape:visual/enderscape/fog_end_density": 0.85,
-    "enderscape:visual/enderscape/nebula_alpha": {
+    "enderscape:visual/enderscape/nebula_brightness": {
       "argument": 1.15,
       "modifier": "multiply"
     },
     "enderscape:visual/enderscape/nebula_color": "#875643",
-    "enderscape:visual/enderscape/star_alpha": {
-      "argument": 1.4,
-      "modifier": "multiply"
-    },
     "enderscape:visual/enderscape/star_color": "#ffa589",
     "minecraft:audio/ambient_sounds": {
       "additions": {
@@ -42,6 +38,10 @@
     "minecraft:visual/cloud_color": "#00000000",
     "minecraft:visual/fog_color": "#120d14",
     "minecraft:visual/sky_light_color": "#6b3d4d",
+    "minecraft:visual/star_brightness": {
+      "argument": 1.4,
+      "modifier": "multiply"
+    },
     "minecraft:visual/water_fog_color": "#3d7363"
   },
   "carvers": [],
@@ -53,7 +53,9 @@
   },
   "features": [
     [],
-    [],
+    [
+      "enderscape:uncommon_void_lakes"
+    ],
     [],
     [],
     [
@@ -91,8 +93,8 @@
     "creature": [
       {
         "type": "enderscape:drifter",
-        "maxCount": 6,
-        "minCount": 3,
+        "maxCount": 3,
+        "minCount": 2,
         "weight": 6
       }
     ],

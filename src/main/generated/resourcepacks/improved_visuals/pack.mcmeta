@@ -1,0 +1,9 @@
+{
+  "pack": {
+    "description": {
+      "translate": "pack.enderscape.improved_visuals.description"
+    },
+    "max_format": 84,
+    "min_format": 84
+  }
+}

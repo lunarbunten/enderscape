@@ -1,0 +1,6 @@
+{
+  "parent": "enderscape:block/template_bracket_1",
+  "textures": {
+    "all": "enderscape:block/murublight_bracket"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "description": {
+    "translate": "magnia_radio_song.enderscape.fallback"
+  },
+  "length_in_seconds": 32.0,
+  "sound_event": "enderscape:magnia_radio.fallback"
+}

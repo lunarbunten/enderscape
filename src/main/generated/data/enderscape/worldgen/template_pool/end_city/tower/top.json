@@ -1,0 +1,14 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/tower/top",
+        "processors": "enderscape:end_city/potted_plants",
+        "projection": "rigid"
+      },
+      "weight": 10
+    }
+  ],
+  "fallback": "enderscape:end_city/tower/fallback"
+}

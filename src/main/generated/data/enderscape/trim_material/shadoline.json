@@ -3,5 +3,8 @@
   "description": {
     "color": "#315B4D",
     "translate": "trim_material.enderscape.shadoline"
+  },
+  "override_armor_assets": {
+    "enderscape:shadoline": "shadoline_lighter"
   }
 }

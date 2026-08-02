@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "attached=false": {
+      "model": "enderscape:block/puruberry_vine"
+    },
+    "attached=true": {
+      "model": "enderscape:block/puruberry_vine_attached"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_celestial_brick_stairs": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:celestial_brick_stairs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:murublight_brick_stairs_from_celestial_brick_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_celestial_brick_stairs"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:murublight_brick_stairs_from_celestial_brick_stairs"
+    ]
+  }
+}

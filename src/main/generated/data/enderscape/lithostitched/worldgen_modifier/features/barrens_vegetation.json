@@ -1,0 +1,11 @@
+{
+  "type": "lithostitched:add_features",
+  "biomes": "#enderscape:enderscape/has_barrens_additions",
+  "features": [
+    "enderscape:chorus_sprouts",
+    "enderscape:dry_end_growth",
+    "enderscape:murublight_bracket",
+    "enderscape:void_fire_on_void_shale"
+  ],
+  "step": "vegetal_decoration"
+}

@@ -38,7 +38,8 @@ logs/
 # vye
 *.asd
 
-# bunten
+# lunarbunten
 *.py
 run
 run_server
+*.bbmodel

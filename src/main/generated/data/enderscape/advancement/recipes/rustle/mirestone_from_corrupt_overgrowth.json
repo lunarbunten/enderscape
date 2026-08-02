@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_corrupt_overgrowth": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:corrupt_overgrowth"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:mirestone_from_corrupt_overgrowth"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_corrupt_overgrowth"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:mirestone_from_corrupt_overgrowth"
+    ]
+  }
+}

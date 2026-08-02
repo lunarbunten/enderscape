@@ -1,14 +1,10 @@
 {
   "attributes": {
-    "enderscape:visual/enderscape/nebula_alpha": {
+    "enderscape:visual/enderscape/nebula_brightness": {
       "argument": 0.5,
       "modifier": "multiply"
     },
     "enderscape:visual/enderscape/nebula_color": "#96ad9e",
-    "enderscape:visual/enderscape/star_alpha": {
-      "argument": 0.85,
-      "modifier": "multiply"
-    },
     "enderscape:visual/enderscape/star_color": "#89ffd5",
     "minecraft:audio/ambient_sounds": {
       "additions": {
@@ -42,6 +38,10 @@
     "minecraft:visual/fog_color": "#0f1010",
     "minecraft:visual/sky_color": "#151616",
     "minecraft:visual/sky_light_color": "#374745",
+    "minecraft:visual/star_brightness": {
+      "argument": 0.85,
+      "modifier": "multiply"
+    },
     "minecraft:visual/water_fog_color": "#5e656e"
   },
   "carvers": [],
@@ -53,7 +53,9 @@
   },
   "features": [
     [],
-    [],
+    [
+      "enderscape:void_lakes"
+    ],
     [],
     [
       "enderscape:magnia_arches"
@@ -83,11 +85,17 @@
       "enderscape:uncommon_chorus_plants",
       "enderscape:uncommon_chorus_sprouts",
       "enderscape:common_dry_end_growth",
-      "enderscape:murublight_bracket"
+      "enderscape:murublight_bracket",
+      "enderscape:void_fire_on_void_shale"
     ]
   ],
   "has_precipitation": false,
-  "spawn_costs": {},
+  "spawn_costs": {
+    "enderscape:rubblemite": {
+      "charge": 0.2,
+      "energy_budget": 0.6
+    }
+  },
   "spawners": {
     "ambient": [],
     "axolotls": [],

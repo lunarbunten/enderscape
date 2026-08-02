@@ -14,10 +14,10 @@
     "minecraft:player_explosion",
     "minecraft:spit",
     "minecraft:sting",
+    "enderscape:stomp",
     "minecraft:trident",
     "minecraft:unattributed_fireball",
     "minecraft:wind_charge",
-    "minecraft:wither_skull",
-    "enderscape:stomp"
+    "minecraft:wither_skull"
   ]
 }

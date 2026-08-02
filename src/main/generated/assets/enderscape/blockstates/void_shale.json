@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "stress=0": {
+      "model": "enderscape:block/void_shale_stress0"
+    },
+    "stress=1": {
+      "model": "enderscape:block/void_shale_stress1"
+    },
+    "stress=2": {
+      "model": "enderscape:block/void_shale_stress2"
+    },
+    "stress=3": {
+      "model": "enderscape:block/void_shale_stress3"
+    }
+  }
+}

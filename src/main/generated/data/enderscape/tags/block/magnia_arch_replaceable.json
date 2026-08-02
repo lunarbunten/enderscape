@@ -1,7 +1,6 @@
 {
   "values": [
-    "minecraft:end_stone",
-    "enderscape:mirestone",
+    "#enderscape:base_stone_end",
     "enderscape:alluring_magnia"
   ]
 }

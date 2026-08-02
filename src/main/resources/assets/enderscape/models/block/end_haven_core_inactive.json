@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/cube_column",
+	"textures": {
+		"particle": "enderscape:block/dusk_purpur_block",
+		"side": "enderscape:block/end_haven_core_inactive",
+		"end": "enderscape:block/end_haven_core_end"
+	}
+}

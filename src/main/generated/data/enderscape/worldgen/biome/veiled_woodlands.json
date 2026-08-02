@@ -1,7 +1,7 @@
 {
   "attributes": {
     "enderscape:visual/enderscape/fog_end_density": 0.75,
-    "enderscape:visual/enderscape/nebula_alpha": {
+    "enderscape:visual/enderscape/nebula_brightness": {
       "argument": 0.75,
       "modifier": "multiply"
     },
@@ -50,7 +50,9 @@
   },
   "features": [
     [],
-    [],
+    [
+      "enderscape:common_void_lakes"
+    ],
     [],
     [],
     [
@@ -75,12 +77,18 @@
       "enderscape:common_dry_end_growth",
       "enderscape:veiled_trees",
       "enderscape:veiled_woodlands_vegetation",
-      "enderscape:wisp_flower_patches",
-      "enderscape:murublight_bracket"
+      "enderscape:wisp_flowers",
+      "enderscape:murublight_bracket",
+      "enderscape:void_fire_on_void_shale"
     ]
   ],
   "has_precipitation": false,
-  "spawn_costs": {},
+  "spawn_costs": {
+    "enderscape:rubblemite": {
+      "charge": 0.2,
+      "energy_budget": 0.6
+    }
+  },
   "spawners": {
     "ambient": [],
     "axolotls": [],

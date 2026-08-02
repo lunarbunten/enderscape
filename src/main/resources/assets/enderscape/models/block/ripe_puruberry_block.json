@@ -1,0 +1,12 @@
+{
+	"parent": "minecraft:block/cube",
+	"textures": {
+		"down": "enderscape:block/puruberry_block_bottom",
+		"east": "enderscape:block/puruberry_block",
+		"north": "enderscape:block/puruberry_block",
+		"particle": "enderscape:block/puruberry_block_particle",
+		"south": "enderscape:block/puruberry_block",
+		"up": "enderscape:block/puruberry_block_top",
+		"west": "enderscape:block/puruberry_block"
+	}
+}

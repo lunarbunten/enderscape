@@ -1,20 +1,13 @@
 {
   "attributes": {
-    "enderscape:visual/enderscape/ambient_light_factor": 0.75,
     "enderscape:visual/enderscape/fog_end_density": {
       "argument": 0.5,
       "modifier": "multiply"
     },
-    "enderscape:visual/enderscape/nebula_alpha": {
-      "argument": 0.8,
+    "enderscape:visual/enderscape/nebula_brightness": {
+      "argument": 0.9,
       "modifier": "multiply"
     },
-    "enderscape:visual/enderscape/nebula_color": "#555189",
-    "enderscape:visual/enderscape/star_alpha": {
-      "argument": 0.7,
-      "modifier": "multiply"
-    },
-    "enderscape:visual/enderscape/star_color": "#9f89ff",
     "minecraft:audio/ambient_sounds": {
       "additions": {
         "sound": "enderscape:ambient.corrupt_barrens.additions",
@@ -35,19 +28,30 @@
         "sound": "enderscape:music.enderscape.biome.corrupt_barrens"
       }
     },
+    "minecraft:visual/ambient_light_color": {
+      "argument": "#b28cbf",
+      "modifier": "multiply"
+    },
     "minecraft:visual/ambient_particles": [
       {
         "particle": {
-          "type": "enderscape:corrupt_spores"
+          "type": "enderscape:void_stars"
         },
-        "probability": 0.03
+        "probability": 0.0045
       }
     ],
     "minecraft:visual/cloud_color": "#00000000",
-    "minecraft:visual/fog_color": "#0b090f",
-    "minecraft:visual/fog_start_distance": -40.0,
-    "minecraft:visual/sky_color": "#0f0c15",
+    "minecraft:visual/fog_color": "#07040b",
+    "minecraft:visual/fog_start_distance": -20.0,
+    "minecraft:visual/sky_color": {
+      "argument": "#664c7f",
+      "modifier": "multiply"
+    },
     "minecraft:visual/sky_light_color": "#242035",
+    "minecraft:visual/star_brightness": {
+      "argument": 1.2,
+      "modifier": "multiply"
+    },
     "minecraft:visual/water_fog_color": "#544f63"
   },
   "carvers": [],
@@ -59,7 +63,9 @@
   },
   "features": [
     [],
-    [],
+    [
+      "enderscape:very_common_void_lakes"
+    ],
     [],
     [],
     [
@@ -86,18 +92,20 @@
       "enderscape:upward_corrupt_growth",
       "enderscape:upward_tall_corrupt_growth",
       "enderscape:corrupt_barrens_vegetation",
-      "enderscape:murublight_bracket"
+      "enderscape:murublight_bracket",
+      "enderscape:common_void_fire_on_void_shale",
+      "enderscape:void_fire_on_kurodite"
     ]
   ],
   "has_precipitation": false,
   "spawn_costs": {
     "enderscape:rubblemite": {
-      "charge": 0.6,
-      "energy_budget": 0.1
+      "charge": 1.0,
+      "energy_budget": 1.0
     },
     "minecraft:endermite": {
-      "charge": 0.3,
-      "energy_budget": 0.1
+      "charge": 1.0,
+      "energy_budget": 2.0
     }
   },
   "spawners": {
@@ -116,7 +124,7 @@
         "type": "enderscape:rubblemite",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 1
+        "weight": 2
       }
     ],
     "underground_water_creature": [],

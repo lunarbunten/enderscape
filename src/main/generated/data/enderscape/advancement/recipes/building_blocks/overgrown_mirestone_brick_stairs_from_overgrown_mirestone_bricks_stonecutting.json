@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_overgrown_mirestone_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:overgrown_mirestone_bricks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:overgrown_mirestone_brick_stairs_from_overgrown_mirestone_bricks_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_overgrown_mirestone_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:overgrown_mirestone_brick_stairs_from_overgrown_mirestone_bricks_stonecutting"
+    ]
+  }
+}

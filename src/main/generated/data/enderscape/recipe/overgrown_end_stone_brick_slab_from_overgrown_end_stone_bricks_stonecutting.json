@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "enderscape:overgrown_end_stone_bricks",
+  "result": {
+    "count": 2,
+    "id": "enderscape:overgrown_end_stone_brick_slab"
+  }
+}

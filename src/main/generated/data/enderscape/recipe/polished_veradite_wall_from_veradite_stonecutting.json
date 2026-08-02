@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "enderscape:veradite",
   "result": {
-    "count": 1,
     "id": "enderscape:polished_veradite_wall"
   }
 }

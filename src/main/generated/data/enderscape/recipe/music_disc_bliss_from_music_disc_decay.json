@@ -1,0 +1,13 @@
+{
+  "type": "enderscape:rustle",
+  "effects": {
+    "spit_sound": "enderscape:entity.rustle.spit.music_disc_bliss",
+    "swell_duration": 60,
+    "swell_sound": "enderscape:entity.rustle.swell_long"
+  },
+  "experience": 50.0,
+  "input": "enderscape:music_disc_decay",
+  "result": {
+    "id": "enderscape:music_disc_bliss"
+  }
+}

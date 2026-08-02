@@ -1,0 +1,38 @@
+package net.penumbra.enderscape.registry.sound;
+
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.Music;
+import net.minecraft.world.attribute.BackgroundMusic;
+import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
+import net.penumbra.enderscape.Enderscape;
+import net.penumbra.enderscape.registry.EnderscapeRegistries;
+import net.penumbra.enderscape.registry.structure.EnderscapeStructures;
+import net.penumbra.enderscape.sound.StructureMusic;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class EnderscapeStructureMusic {
+    public static final List<ResourceKey<StructureMusic>> STRUCTURE_MUSIC = new ArrayList<>();
+
+    public static final ResourceKey<StructureMusic> END_CITY = register("end_city");
+    public static final ResourceKey<StructureMusic> STRONGHOLD = register("stronghold");
+
+    public static void bootstrap(BootstrapContext<StructureMusic> context) {
+        register(context, END_CITY, EnderscapeMusic.STRUCTURE_END_CITY, BuiltinStructures.END_CITY.identifier(), Enderscape.id("end_city"));
+        register(context, STRONGHOLD, EnderscapeMusic.STRUCTURE_STRONGHOLD, BuiltinStructures.STRONGHOLD.identifier(), EnderscapeStructures.STRONGHOLD.identifier());
+    }
+
+    private static void register(BootstrapContext<StructureMusic> context, ResourceKey<StructureMusic> key, Music music, Identifier... locations) {
+        context.register(key, new StructureMusic(new BackgroundMusic(music), Arrays.stream(locations).toList()));
+    }
+
+    private static ResourceKey<StructureMusic> register(String name) {
+        ResourceKey<StructureMusic> key = ResourceKey.create(EnderscapeRegistries.STRUCTURE_MUSIC, Enderscape.id(name));
+        STRUCTURE_MUSIC.add(key);
+        return key;
+    }
+}

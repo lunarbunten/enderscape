@@ -6,7 +6,6 @@
         "state": {
           "Name": "enderscape:void_shale",
           "Properties": {
-            "cooldown": "false",
             "iteration": "0",
             "natural": "true",
             "stress": "0"

@@ -1,7 +1,7 @@
 {
   "values": [
-    "enderscape:shadoline_block",
-    "enderscape:nebulite_block",
-    "enderscape:drift_jelly_block"
+    "#c:storage_blocks/nebulite",
+    "#c:storage_blocks/raw_shadoline",
+    "#c:storage_blocks/shadoline"
   ]
 }

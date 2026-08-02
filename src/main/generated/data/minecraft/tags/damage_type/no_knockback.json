@@ -1,5 +1,11 @@
 {
   "values": [
-    "enderscape:stomp"
+    "enderscape:in_void_fire",
+    "enderscape:outer_void",
+    "enderscape:stomp",
+    "enderscape:void",
+    "enderscape:void_campfire",
+    "enderscape:void_lachryma",
+    "enderscape:void_purification"
   ]
 }

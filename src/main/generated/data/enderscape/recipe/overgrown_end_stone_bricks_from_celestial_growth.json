@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "minecraft:end_stone_bricks",
+    "enderscape:celestial_growth"
+  ],
+  "result": {
+    "id": "enderscape:overgrown_end_stone_bricks"
+  }
+}

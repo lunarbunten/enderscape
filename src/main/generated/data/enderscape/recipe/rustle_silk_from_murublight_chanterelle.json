@@ -1,0 +1,10 @@
+{
+  "type": "enderscape:rustle",
+  "effects": {},
+  "experience": 4.0,
+  "input": "enderscape:murublight_chanterelle",
+  "result": {
+    "count": 2,
+    "id": "enderscape:rustle_silk"
+  }
+}

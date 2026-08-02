@@ -1,0 +1,8 @@
+{
+  "type": "lithostitched:set_dimension_attributes",
+  "append": true,
+  "attributes": {
+    "enderscape:gameplay/enderscape/purifies_voided_health": true
+  },
+  "dimension_types": "minecraft:overworld"
+}

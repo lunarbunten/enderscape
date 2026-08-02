@@ -1,0 +1,49 @@
+{
+  "type": "lithostitched:set_dimension_attributes",
+  "append": true,
+  "attributes": {
+    "enderscape:gameplay/enderscape/end_haven_core_works": true,
+    "enderscape:gameplay/enderscape/monster_spawn_cap": 200,
+    "enderscape:visual/enderscape/fog_end_density": {
+      "argument": 0.9,
+      "modifier": "multiply"
+    },
+    "minecraft:audio/ambient_sounds": {
+      "additions": {
+        "sound": "enderscape:ambient.default_end.additions",
+        "tick_chance": 7.5E-4
+      },
+      "loop": "enderscape:ambient.default_end.loop",
+      "mood": {
+        "block_search_extent": 8,
+        "offset": 2.0,
+        "sound": "enderscape:ambient.default_end.mood",
+        "tick_delay": 6000
+      }
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "max_delay": 24000,
+        "min_delay": 12000,
+        "sound": "enderscape:music.enderscape.biome.default_end"
+      }
+    },
+    "minecraft:visual/ambient_light_color": "#1a1e1a",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "enderscape:void_stars"
+        },
+        "probability": 0.003
+      }
+    ],
+    "minecraft:visual/block_light_tint": "#ffa69e",
+    "minecraft:visual/cloud_color": "#00000000",
+    "minecraft:visual/fog_color": "#110d18",
+    "minecraft:visual/fog_start_distance": -20.0,
+    "minecraft:visual/sky_color": "#181321",
+    "minecraft:visual/sky_light_color": "#654b82",
+    "minecraft:visual/star_brightness": 0.12
+  },
+  "dimension_types": "minecraft:the_end"
+}

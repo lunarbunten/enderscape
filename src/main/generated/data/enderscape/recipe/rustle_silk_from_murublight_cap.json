@@ -1,0 +1,10 @@
+{
+  "type": "enderscape:rustle",
+  "effects": {},
+  "experience": 8.0,
+  "input": "enderscape:murublight_cap",
+  "result": {
+    "count": 4,
+    "id": "enderscape:rustle_silk"
+  }
+}

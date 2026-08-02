@@ -27,6 +27,13 @@
         "type": "minecraft:all_of",
         "predicates": [
           {
+            "type": "minecraft:not",
+            "predicate": {
+              "type": "lithostitched:in_structure",
+              "search_range": 24
+            }
+          },
+          {
             "type": "minecraft:matching_blocks",
             "blocks": "minecraft:air",
             "offset": [
@@ -364,18 +371,22 @@
     {
       "type": "minecraft:environment_scan",
       "allowed_search_condition": {
-        "type": "minecraft:matching_blocks",
-        "blocks": "minecraft:air"
+        "type": "minecraft:matching_block_tag",
+        "tag": "minecraft:air"
       },
       "direction_of_search": "down",
       "max_steps": 12,
       "target_condition": {
-        "type": "minecraft:matching_blocks",
-        "blocks": [
-          "minecraft:end_stone",
-          "enderscape:mirestone",
-          "enderscape:alluring_magnia",
-          "enderscape:repulsive_magnia"
+        "type": "minecraft:any_of",
+        "predicates": [
+          {
+            "type": "minecraft:matching_block_tag",
+            "tag": "enderscape:base_stone_end"
+          },
+          {
+            "type": "minecraft:matching_block_tag",
+            "tag": "enderscape:magnia_blocks"
+          }
         ]
       }
     },

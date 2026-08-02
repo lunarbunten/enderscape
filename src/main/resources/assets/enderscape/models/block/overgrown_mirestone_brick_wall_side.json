@@ -1,0 +1,7 @@
+{
+  "parent": "enderscape:block/template_emissive_overgrown_wall_side",
+  "textures": {
+    "wall": "enderscape:block/overgrown_mirestone_bricks",
+    "wall_emissive": "enderscape:block/overgrown_mirestone_bricks_emissive"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "enderscape:block/template_magnia_radio",
+  "textures": {
+    "all": "enderscape:block/magnia_radio_disabled",
+    "all_emissive": "enderscape:block/magnia_radio_disabled_emissive"
+  }
+}

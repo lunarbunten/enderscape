@@ -1,8 +1,0 @@
-{
-	"parent": "minecraft:block/outer_stairs",
-	"textures": {
-		"bottom": "enderscape:block/mirestone",
-		"top": "enderscape:block/mirestone",
-		"side": "enderscape:block/mirestone"
-	}
-}

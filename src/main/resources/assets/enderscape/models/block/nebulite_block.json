@@ -1,8 +1,8 @@
 {
 	"parent": "block/block",
 	"textures": {
-		"0": "enderscape:block/nebulite_block",
-		"particle": "enderscape:block/nebulite_block"
+		"all_emissive": "enderscape:block/nebulite_block",
+		"particle": "#all_emissive"
 	},
 	"elements": [
 		{
@@ -10,12 +10,12 @@
 			"to": [16, 16, 16],
 			"light_emission": 6,
 			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#0", "cullface": "north"},
-				"east": {"uv": [0, 0, 16, 16], "texture": "#0", "cullface": "east"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "#0", "cullface": "south"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "#0", "cullface": "west"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#0", "cullface": "up"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#0", "cullface": "down"}
+				"north": {"uv": [0, 0, 16, 16], "texture": "#all_emissive", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#all_emissive", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#all_emissive", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#all_emissive", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#all_emissive", "cullface": "up"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#all_emissive", "cullface": "down"}
 			}
 		}
 	]

@@ -1,0 +1,11 @@
+{
+  "parent": "enderscape:block/template_emissive_overgrown_slab_top",
+  "textures": {
+    "bottom": "enderscape:block/overgrown_end_stone_bricks",
+    "side": "enderscape:block/overgrown_end_stone_bricks",
+    "top": "enderscape:block/overgrown_end_stone_bricks",
+    "bottom_emissive": "enderscape:block/overgrown_end_stone_bricks_emissive",
+    "side_emissive": "enderscape:block/overgrown_end_stone_bricks_emissive",
+    "top_emissive": "enderscape:block/overgrown_end_stone_bricks_emissive"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "enderscape:block/etched_repulsive_magnia",
+    "side": "enderscape:block/etched_repulsive_magnia",
+    "top": "enderscape:block/etched_repulsive_magnia"
+  }
+}

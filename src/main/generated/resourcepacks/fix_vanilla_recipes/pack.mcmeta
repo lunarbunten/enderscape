@@ -1,0 +1,20 @@
+{
+  "filter": {
+    "block": [
+      {
+        "namespace": "minecraft",
+        "path": "recipe/end_stone_bricks\\.json"
+      }
+    ]
+  },
+  "pack": {
+    "description": {
+      "translate": "pack.enderscape.fix_vanilla_recipes.description"
+    },
+    "max_format": 101,
+    "min_format": [
+      101,
+      1
+    ]
+  }
+}

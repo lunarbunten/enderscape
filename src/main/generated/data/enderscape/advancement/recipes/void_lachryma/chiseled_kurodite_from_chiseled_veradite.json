@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chiseled_veradite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:chiseled_veradite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:chiseled_kurodite_from_chiseled_veradite"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_chiseled_veradite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:chiseled_kurodite_from_chiseled_veradite"
+    ]
+  }
+}

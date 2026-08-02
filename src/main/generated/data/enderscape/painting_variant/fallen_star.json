@@ -1,0 +1,13 @@
+{
+  "asset_id": "enderscape:fallen_star",
+  "author": {
+    "color": "gray",
+    "translate": "painting.enderscape.fallen_star.author"
+  },
+  "height": 2,
+  "title": {
+    "color": "yellow",
+    "translate": "painting.enderscape.fallen_star.title"
+  },
+  "width": 2
+}

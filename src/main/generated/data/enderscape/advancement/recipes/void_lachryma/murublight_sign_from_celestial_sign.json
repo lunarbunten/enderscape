@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_celestial_sign": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:celestial_sign"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:murublight_sign_from_celestial_sign"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_celestial_sign"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:murublight_sign_from_celestial_sign"
+    ]
+  }
+}

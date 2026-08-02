@@ -1,0 +1,20 @@
+{
+  "type": "lithostitched:set_timeline_tracks",
+  "append": true,
+  "timelines": "minecraft:day",
+  "tracks": {
+    "enderscape:gameplay/enderscape/purifies_voided_health": {
+      "keyframes": [
+        {
+          "ticks": 12542,
+          "value": false
+        },
+        {
+          "ticks": 23460,
+          "value": true
+        }
+      ],
+      "modifier": "and"
+    }
+  }
+}

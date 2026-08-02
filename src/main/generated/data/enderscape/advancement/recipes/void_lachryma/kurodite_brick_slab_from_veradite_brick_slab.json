@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:kurodite_brick_slab_from_veradite_brick_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_veradite_brick_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:veradite_brick_slab"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_veradite_brick_slab"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:kurodite_brick_slab_from_veradite_brick_slab"
+    ]
+  }
+}

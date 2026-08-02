@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/template_fire_floor",
+    "textures": {
+        "fire": "enderscape:block/void_fire_1"
+    }
+}

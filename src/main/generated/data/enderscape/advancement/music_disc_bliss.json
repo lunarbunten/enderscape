@@ -1,0 +1,33 @@
+{
+  "parent": "enderscape:rustle_bucket",
+  "criteria": {
+    "obtained": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:music_disc_bliss"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.enderscape.music_disc_bliss.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "enderscape:music_disc_bliss"
+    },
+    "title": {
+      "translate": "advancement.enderscape.music_disc_bliss"
+    }
+  },
+  "requirements": [
+    [
+      "obtained"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

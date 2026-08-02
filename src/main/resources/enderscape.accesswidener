@@ -1,13 +1,36 @@
-accessWidener v1 named
+classTweaker v1 official
+accessible class net/minecraft/client/gui/Gui$ContextualInfo
+accessible class net/minecraft/client/gui/Gui$HeartType
+accessible class net/minecraft/client/gui/screens/worldselection/SwitchGrid
+accessible class net/minecraft/client/particle/DripParticle$CoolingDripHangParticle
+accessible class net/minecraft/client/particle/DripParticle$DripLandParticle
+accessible class net/minecraft/client/particle/DripParticle$FallAndLandParticle
+accessible class net/minecraft/server/level/ServerPlayer$RespawnPosAngle
+accessible class net/minecraft/world/entity/EntityFluidInteraction$Tracker
 accessible class net/minecraft/world/item/enchantment/EnchantmentHelper$EnchantmentVisitor
+accessible class net/minecraft/world/item/ItemCooldowns$CooldownInstance
 accessible class net/minecraft/world/level/block/entity/trialspawner/TrialSpawnerState$ParticleEmission
 accessible class net/minecraft/world/level/block/state/properties/NoteBlockInstrument$Type
 accessible class net/minecraft/world/level/levelgen/SurfaceRules$Condition
+accessible field net/minecraft/client/Camera$NearPlane forward Lnet/minecraft/world/phys/Vec3;
+accessible field net/minecraft/client/renderer/rendertype/RenderType name Ljava/lang/String;
+accessible field net/minecraft/world/entity/Entity firstTick Z
 accessible field net/minecraft/world/entity/player/Inventory items Lnet/minecraft/core/NonNullList;
 accessible field net/minecraft/world/level/block/entity/trialspawner/TrialSpawnerStateData detectedPlayers Ljava/util/Set;
 accessible field net/minecraft/world/level/block/entity/vault/VaultConfig CODEC Lcom/mojang/serialization/Codec;
 accessible field net/minecraft/world/level/levelgen/SurfaceRules$Context blockX I
 accessible field net/minecraft/world/level/levelgen/SurfaceRules$Context blockZ I
+accessible method net/minecraft/client/data/models/model/TextureSlot <init> (Ljava/lang/String;Lnet/minecraft/client/data/models/model/TextureSlot;)V
+accessible method net/minecraft/client/particle/DripParticle getType ()Lnet/minecraft/world/level/material/Fluid;
+accessible method net/minecraft/client/particle/DripParticle$CoolingDripHangParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;)V
+accessible method net/minecraft/client/particle/DripParticle$DripLandParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;)V
+accessible method net/minecraft/client/particle/DripParticle$FallAndLandParticle <init> (Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;)V
+accessible method net/minecraft/core/cauldron/CauldronInteractions newDispatcher (Ljava/lang/String;)Lnet/minecraft/core/cauldron/CauldronInteraction$Dispatcher;
+accessible method net/minecraft/core/cauldron/CauldronInteraction$Dispatcher put (Lnet/minecraft/world/item/Item;Lnet/minecraft/core/cauldron/CauldronInteraction;)V
+accessible method net/minecraft/data/recipes/ShapedRecipeBuilder <init> (Lnet/minecraft/core/HolderGetter;Lnet/minecraft/data/recipes/RecipeCategory;Lnet/minecraft/world/item/ItemStackTemplate;)V
+accessible method net/minecraft/util/IdentifierPattern <init> (Ljava/util/Optional;Ljava/util/Optional;)V
+accessible method net/minecraft/world/entity/EntityFluidInteraction$Tracker <init> ()V
+accessible method net/minecraft/world/entity/LivingEntity jumpOutOfFluid (D)V
 accessible method net/minecraft/world/item/enchantment/EnchantmentHelper runIterationOnItem (Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/EquipmentSlot;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/enchantment/EnchantmentHelper$EnchantmentInSlotVisitor;)V
 accessible method net/minecraft/world/item/enchantment/EnchantmentHelper runIterationOnItem (Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/enchantment/EnchantmentHelper$EnchantmentVisitor;)V
 accessible method net/minecraft/world/level/block/entity/trialspawner/TrialSpawnerStateData$Packed detectedPlayers ()Ljava/util/Set;

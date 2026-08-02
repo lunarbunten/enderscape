@@ -3,7 +3,9 @@
   "criteria": {
     "stun_attack": {
       "conditions": {
-        "backstab": true
+        "affected_entities": [
+          {}
+        ]
       },
       "trigger": "enderscape:stun_attack"
     }
@@ -16,7 +18,6 @@
       "components": {
         "enderscape:current_fuel": 1
       },
-      "count": 1,
       "id": "enderscape:dagger"
     },
     "title": {

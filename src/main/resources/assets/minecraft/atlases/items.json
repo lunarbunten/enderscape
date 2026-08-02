@@ -1,0 +1,19 @@
+{
+    "sources": [
+        {
+            "type": "minecraft:directory",
+            "prefix": "item/",
+            "source": "item"
+        },
+        {
+            "type": "minecraft:paletted_permutations",
+            "palette_key": "minecraft:trims/color_palettes/trim_palette",
+            "permutations": {
+                "nebulite": "enderscape:trims/color_palettes/nebulite",
+                "shadoline": "enderscape:trims/color_palettes/shadoline",
+                "shadoline_lighter": "enderscape:trims/color_palettes/shadoline_lighter"
+            },
+            "textures": []
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "enderscape:rustle",
+  "effects": {
+    "swell_duration": 10,
+    "swell_sound": "enderscape:entity.rustle.swell_fast"
+  },
+  "experience": 2.0,
+  "input": "enderscape:overgrown_mirestone_brick_wall",
+  "result": {
+    "id": "enderscape:mirestone_brick_wall"
+  }
+}

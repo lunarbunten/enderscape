@@ -1,7 +1,0 @@
-{
-    "parent": "minecraft:block/template_shelf_inventory",
-    "textures": {
-        "all": "enderscape:block/celestial_shelf",
-        "particle": "enderscape:block/stripped_celestial_stem"
-    }
-}

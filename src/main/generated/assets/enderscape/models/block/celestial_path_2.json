@@ -1,0 +1,8 @@
+{
+  "parent": "enderscape:block/template_path_3",
+  "textures": {
+    "bottom": "minecraft:block/end_stone",
+    "side": "enderscape:block/celestial_path_side",
+    "top": "enderscape:block/celestial_path_top"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "enderscape:block/overgrown_mirestone_brick_slab"
+    },
+    "type=double": {
+      "model": "enderscape:block/overgrown_mirestone_bricks"
+    },
+    "type=top": {
+      "model": "enderscape:block/overgrown_mirestone_brick_slab_top"
+    }
+  }
+}

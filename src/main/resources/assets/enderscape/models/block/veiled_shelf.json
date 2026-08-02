@@ -1,7 +1,0 @@
-{
-    "parent": "minecraft:block/template_shelf_body",
-    "textures": {
-        "all": "enderscape:block/veiled_shelf",
-        "particle": "enderscape:block/stripped_veiled_log"
-    }
-}

@@ -1,0 +1,41 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/tower/terminal/two_walkways_diagonal_1",
+        "processors": "enderscape:end_city/potted_plants",
+        "projection": "rigid"
+      },
+      "weight": 4
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/tower/terminal/two_walkways_diagonal_2",
+        "processors": "enderscape:end_city/potted_plants",
+        "projection": "rigid"
+      },
+      "weight": 4
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/tower/terminal/three_walkways",
+        "processors": "enderscape:end_city/potted_plants",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "enderscape:end_city/tower/terminal/three_walkways_flipped",
+        "processors": "enderscape:end_city/potted_plants",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "enderscape:end_city/tower/fallback"
+}

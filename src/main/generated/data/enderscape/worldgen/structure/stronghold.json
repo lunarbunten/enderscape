@@ -2,7 +2,6 @@
   "type": "minecraft:jigsaw",
   "biomes": "#minecraft:has_structure/stronghold",
   "dimension_padding": 20,
-  "liquid_settings": "ignore_waterlogging",
   "max_distance_from_center": 90,
   "size": 18,
   "spawn_overrides": {
@@ -86,7 +85,7 @@
     }
   },
   "start_pool": "enderscape:stronghold/start",
-  "step": "underground_structures",
+  "step": "strongholds",
   "terrain_adaptation": "encapsulate",
   "use_expansion_hack": false
 }

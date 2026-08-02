@@ -1,0 +1,6 @@
+{
+  "parent": "enderscape:item/template_rubble_shield_using",
+  "textures": {
+    "layer0": "enderscape:item/rubble_shield_mirestone"
+  }
+}

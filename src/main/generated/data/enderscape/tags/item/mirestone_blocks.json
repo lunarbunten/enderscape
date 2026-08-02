@@ -1,11 +1,16 @@
 {
   "values": [
     "enderscape:chiseled_mirestone",
+    "enderscape:cracked_mirestone_bricks",
     "enderscape:mirestone",
     "enderscape:mirestone_bricks",
     "enderscape:mirestone_brick_slab",
     "enderscape:mirestone_brick_stairs",
     "enderscape:mirestone_brick_wall",
+    "enderscape:overgrown_mirestone_bricks",
+    "enderscape:overgrown_mirestone_brick_slab",
+    "enderscape:overgrown_mirestone_brick_stairs",
+    "enderscape:overgrown_mirestone_brick_wall",
     "enderscape:mirestone_slab",
     "enderscape:mirestone_stairs",
     "enderscape:mirestone_wall",

@@ -1,0 +1,4 @@
+{
+	"parent": "minecraft:block/cross",
+	"ambientocclusion": true
+}

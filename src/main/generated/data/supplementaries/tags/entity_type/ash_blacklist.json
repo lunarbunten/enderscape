@@ -1,10 +1,7 @@
 {
   "values": [
-    "minecraft:enderman",
-    "minecraft:endermite",
-    "minecraft:ender_dragon",
+    "#enderscape:void",
     "minecraft:shulker",
-    "enderscape:rubblemite",
     "enderscape:drifter"
   ]
 }

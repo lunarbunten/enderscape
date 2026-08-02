@@ -1,0 +1,112 @@
+{
+  "processors": [
+    {
+      "processor_type": "minecraft:rule",
+      "rules": [
+        {
+          "input_predicate": {
+            "block": "minecraft:end_stone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "enderscape:mirestone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "enderscape:mirestone"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:end_stone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "enderscape:veiled_end_stone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "enderscape:veiled_end_stone",
+            "Properties": {
+              "facing": "up"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:end_stone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "enderscape:celestial_overgrowth",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "enderscape:celestial_overgrowth",
+            "Properties": {
+              "facing": "up"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:end_stone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "enderscape:veradite",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "enderscape:veradite"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:end_stone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "enderscape:kurodite",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "enderscape:kurodite"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:end_stone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "enderscape:alluring_magnia",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "enderscape:alluring_magnia",
+            "Properties": {
+              "power": "0"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:end_stone",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "block": "enderscape:repulsive_magnia",
+            "predicate_type": "minecraft:block_match"
+          },
+          "output_state": {
+            "Name": "enderscape:repulsive_magnia",
+            "Properties": {
+              "power": "0"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

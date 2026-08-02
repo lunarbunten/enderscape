@@ -3,6 +3,20 @@
   "description": {
     "translate": "enchantment.enderscape.rebound"
   },
+  "effects": {
+    "minecraft:attributes": [
+      {
+        "amount": {
+          "type": "minecraft:linear",
+          "base": 0.45,
+          "per_level_above_first": 0.45
+        },
+        "attribute": "enderscape:bounce_strength",
+        "id": "enderscape:enchantment.rebound",
+        "operation": "add_value"
+      }
+    ]
+  },
   "max_cost": {
     "base": 80,
     "per_level_above_first": 0

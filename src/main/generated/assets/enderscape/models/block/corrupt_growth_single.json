@@ -1,0 +1,7 @@
+{
+  "parent": "enderscape:block/template_emissive_growth",
+  "textures": {
+    "cross": "enderscape:block/corrupt_growth_single",
+    "cross_emissive": "enderscape:block/corrupt_growth_single_emissive"
+  }
+}

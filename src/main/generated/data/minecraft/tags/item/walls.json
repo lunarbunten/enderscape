@@ -1,16 +1,25 @@
 {
   "values": [
+    "enderscape:celestial_brick_wall",
+    "enderscape:cut_shadoline_wall",
+    "enderscape:dusk_purpur_wall",
+    "enderscape:end_stone_wall",
     "enderscape:etched_alluring_magnia_wall",
     "enderscape:etched_repulsive_magnia_wall",
-    "enderscape:veradite_wall",
-    "enderscape:polished_veradite_wall",
-    "enderscape:veradite_brick_wall",
-    "enderscape:shadoline_block_wall",
-    "enderscape:kurodite_wall",
-    "enderscape:polished_kurodite_wall",
     "enderscape:kurodite_brick_wall",
-    "enderscape:cut_shadoline_wall",
-    "enderscape:celestial_brick_wall",
-    "enderscape:murublight_brick_wall"
+    "enderscape:kurodite_wall",
+    "enderscape:mirestone_brick_wall",
+    "enderscape:mirestone_wall",
+    "enderscape:murublight_brick_wall",
+    "enderscape:overgrown_end_stone_brick_wall",
+    "enderscape:overgrown_mirestone_brick_wall",
+    "enderscape:polished_end_stone_wall",
+    "enderscape:polished_kurodite_wall",
+    "enderscape:polished_mirestone_wall",
+    "enderscape:polished_veradite_wall",
+    "enderscape:purpur_wall",
+    "enderscape:shadoline_block_wall",
+    "enderscape:veradite_brick_wall",
+    "enderscape:veradite_wall"
   ]
 }

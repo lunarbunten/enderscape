@@ -1,0 +1,6 @@
+{
+  "parent": "enderscape:block/template_veiled_vines",
+  "textures": {
+    "cross": "enderscape:block/veiled_vines_bottom"
+  }
+}

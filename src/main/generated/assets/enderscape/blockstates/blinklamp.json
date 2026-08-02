@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "luminance=0": {
+      "model": "enderscape:block/blinklamp_luminance0"
+    },
+    "luminance=1": {
+      "model": "enderscape:block/blinklamp_luminance1"
+    },
+    "luminance=2": {
+      "model": "enderscape:block/blinklamp_luminance1"
+    },
+    "luminance=3": {
+      "model": "enderscape:block/blinklamp_luminance2"
+    },
+    "luminance=4": {
+      "model": "enderscape:block/blinklamp_luminance2"
+    },
+    "luminance=5": {
+      "model": "enderscape:block/blinklamp_luminance3"
+    },
+    "luminance=6": {
+      "model": "enderscape:block/blinklamp_luminance3"
+    },
+    "luminance=7": {
+      "model": "enderscape:block/blinklamp_luminance4"
+    }
+  }
+}

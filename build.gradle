@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version "${loom_version}"
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
 	id 'maven-publish'
 }
 
@@ -36,6 +36,21 @@ repositories {
 			includeGroup "maven.modrinth"
 		}
 	}
+	// JEI
+	maven {
+		name = "Jared's maven"
+		url = "https://maven.blamejared.com/"
+	}
+	maven {
+		name = "ModMaven"
+		url = "https://modmaven.dev"
+	}
+
+	// RRV
+	maven {
+		name = "Cassian's Maven"
+		url = uri("https://maven.cassian.cc")
+	}
 }
 
 def dateFormat = new Date().format("yy.MM.dd")
@@ -49,7 +64,7 @@ tasks.register("buildDated") {
 gradle.taskGraph.whenReady { graph ->
 	def dated = graph.hasTask(tasks.buildDated)
 
-	tasks.matching { it.name in ["jar", "sourcesJar", "remapSourcesJar", "remapJar"] }.configureEach {
+	tasks.matching { it.name in ["jar", "sourcesJar"] }.configureEach {
 		def prefix = dated ? "${dateFormat}-" : ""
 		archiveBaseName.set("${prefix}${archives_base_name}")
 		archiveVersion.set("${mod_version}+mc${minecraft_version}")
@@ -67,45 +82,74 @@ loom {
 			runDir "run_server"
 		}
 	}
+
+	splitEnvironmentSourceSets()
+
+	mods {
+		enderscape {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
 }
 
 fabricApi {
-	configureDataGeneration()
+	configureDataGeneration {
+		client = true
+	}
 }
 
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings loom.officialMojangMappings();
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-	modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
-	modImplementation "com.github.ramixin:mixson-fabric:${project.mixson_version}"
-	modImplementation "maven.modrinth:lithostitched:${project.lithostitched_version}"
-	include "com.github.ramixin:mixson-fabric:${project.mixson_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+	implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+	implementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
+
+	implementation "maven.modrinth:lithostitched:${project.lithostitched_version}"
+	implementation "maven.modrinth:trim-patcher:${project.trim_patcher_version}"
+
+	compileOnly("mezz.jei:jei-26.1.2-common-api:${jei_version}") {
+		transitive = false
+	}
+	compileOnly("mezz.jei:jei-26.1.2-fabric-api:${jei_version}") {
+		transitive = false
+	}
+
+	compileOnly("cc.cassian.rrv:reliable-recipe-viewer-fabric:${rrv_version}") {
+		transitive = false
+	}
+
+	switch (project.recipe_viewer) {
+		case "rrv" -> runtimeOnly("cc.cassian.rrv:reliable-recipe-viewer-fabric:${rrv_version}")
+		case "jei" -> runtimeOnly("mezz.jei:jei-26.1.2-fabric:${jei_version}")
+	}
 }
 
 processResources {
 	inputs.property "version", project.version
 
 	filesMatching("fabric.mod.json") {
-		expand "version": project.version
+		expand "version": inputs.properties.version
 	}
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 21
+	it.options.release = 25
 }
 
 java {
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
 }
 
 jar {
+	inputs.property "archivesName", project.base.archivesName
+
 	from("LICENSE.md") {
 		rename { "LICENSE_enderscape" }
 	}

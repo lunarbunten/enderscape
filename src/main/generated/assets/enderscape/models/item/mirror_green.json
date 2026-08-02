@@ -1,0 +1,7 @@
+{
+  "parent": "enderscape:item/template_mirror",
+  "textures": {
+    "layer0": "enderscape:item/mirror",
+    "layer1": "enderscape:item/mirror_overlay_green"
+  }
+}

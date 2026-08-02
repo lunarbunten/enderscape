@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_celestial_door": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:celestial_door"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:murublight_door_from_celestial_door"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_celestial_door"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:murublight_door_from_celestial_door"
+    ]
+  }
+}

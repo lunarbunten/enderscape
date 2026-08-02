@@ -1,9 +1,19 @@
 {
   "attributes": {
-    "enderscape:visual/enderscape/ambient_light_factor": 0.5,
+    "enderscape:gameplay/enderscape/ambient_entity_voiding_rate": 1.0,
     "enderscape:visual/enderscape/fog_end_density": 0.3,
-    "enderscape:visual/enderscape/nebula_color": "#2b1f37",
-    "enderscape:visual/enderscape/star_color": "#512f59",
+    "enderscape:visual/enderscape/nebula_brightness": {
+      "argument": 0.9,
+      "modifier": "multiply"
+    },
+    "enderscape:visual/enderscape/nebula_color": {
+      "argument": "#593f72",
+      "modifier": "multiply"
+    },
+    "enderscape:visual/enderscape/star_color": {
+      "argument": "#593f72",
+      "modifier": "multiply"
+    },
     "minecraft:audio/ambient_sounds": {
       "additions": {
         "sound": "enderscape:ambient.void_skies.additions",
@@ -17,12 +27,11 @@
         "tick_delay": 6000
       }
     },
-    "minecraft:audio/background_music": {
-      "default": {
-        "max_delay": 24000,
-        "min_delay": 12000,
-        "sound": "enderscape:music.enderscape.biome.void_skies"
-      }
+    "minecraft:audio/background_music": {},
+    "minecraft:audio/music_volume": 0.0,
+    "minecraft:visual/ambient_light_color": {
+      "argument": "#593f72",
+      "modifier": "multiply"
     },
     "minecraft:visual/ambient_particles": [
       {
@@ -33,10 +42,20 @@
       }
     ],
     "minecraft:visual/cloud_color": "#00000000",
-    "minecraft:visual/fog_color": "#050408",
+    "minecraft:visual/fog_color": {
+      "argument": "#593f72",
+      "modifier": "multiply"
+    },
     "minecraft:visual/fog_start_distance": -40.0,
-    "minecraft:visual/sky_color": "#08060b",
-    "minecraft:visual/sky_light_color": "#000000"
+    "minecraft:visual/sky_color": {
+      "argument": "#593f72",
+      "modifier": "multiply"
+    },
+    "minecraft:visual/sky_light_color": "#000000",
+    "minecraft:visual/star_brightness": {
+      "argument": 1.2,
+      "modifier": "multiply"
+    }
   },
   "carvers": [],
   "downfall": 0.5,

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "phase=active": {
+      "model": "enderscape:block/bulb_flower_active"
+    },
+    "phase=charging": {
+      "model": "enderscape:block/bulb_flower_charging"
+    },
+    "phase=cooldown": {
+      "model": "enderscape:block/bulb_flower"
+    },
+    "phase=inactive": {
+      "model": "enderscape:block/bulb_flower"
+    },
+    "phase=powerless": {
+      "model": "enderscape:block/bulb_flower"
+    }
+  }
+}

@@ -1,11 +1,11 @@
 {
   "values": [
-    "enderscape:veiled_woodlands",
-    "enderscape:magnia_fields",
     "enderscape:celestial_grove",
     "enderscape:corrupt_barrens",
+    "enderscape:magnia_fields",
+    "enderscape:veiled_woodlands",
+    "enderscape:void_depths",
     "enderscape:void_skies",
-    "enderscape:void_sky_islands",
-    "enderscape:void_depths"
+    "enderscape:void_sky_islands"
   ]
 }

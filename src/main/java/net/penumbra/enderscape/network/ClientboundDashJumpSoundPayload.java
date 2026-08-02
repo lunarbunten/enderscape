@@ -1,0 +1,26 @@
+package net.penumbra.enderscape.network;
+
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.Identifier;
+import net.penumbra.enderscape.Enderscape;
+
+public record ClientboundDashJumpSoundPayload(int entityId, Identifier soundEvent) implements CustomPacketPayload {
+    public static final Type<ClientboundDashJumpSoundPayload> TYPE = new Type<>(Enderscape.id("clientbound_dash_jump_sound"));
+    public static final StreamCodec<FriendlyByteBuf, ClientboundDashJumpSoundPayload> STREAM_CODEC = CustomPacketPayload.codec(ClientboundDashJumpSoundPayload::write, ClientboundDashJumpSoundPayload::new);
+
+    private ClientboundDashJumpSoundPayload(FriendlyByteBuf buf) {
+        this(buf.readInt(), buf.readIdentifier());
+    }
+
+    public void write(FriendlyByteBuf buf) {
+        buf.writeInt(entityId);
+        buf.writeIdentifier(soundEvent);
+    }
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
+    }
+}

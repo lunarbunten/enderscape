@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "state=active": {
+      "model": "enderscape:block/end_haven_core_active"
+    },
+    "state=inactive": {
+      "model": "enderscape:block/end_haven_core_inactive"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "enderscape:block/template_nebulite_ore",
+  "textures": {
+    "all": "enderscape:block/nebulite_ore",
+    "all_emissive": "enderscape:block/nebulite_ore_emissive"
+  }
+}

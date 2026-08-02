@@ -6,7 +6,7 @@
       "state": {
         "Name": "enderscape:bulb_flower",
         "Properties": {
-          "facing": "up"
+          "phase": "inactive"
         }
       }
     }

@@ -1,0 +1,6 @@
+{
+  "type": "lithostitched:add_features",
+  "biomes": "#enderscape:enderscape/has_barrens_additions",
+  "features": "enderscape:void_lakes",
+  "step": "lakes"
+}

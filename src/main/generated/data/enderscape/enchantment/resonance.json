@@ -38,12 +38,12 @@
         }
       }
     ],
-    "enderscape:lodestone_teleportation_distance_to_increase_cost": {
+    "enderscape:lodestone_teleportation_maximum_range": {
       "type": "minecraft:add",
       "value": {
         "type": "minecraft:linear",
-        "base": 250.0,
-        "per_level_above_first": 250.0
+        "base": 1250.0,
+        "per_level_above_first": 1250.0
       }
     }
   },

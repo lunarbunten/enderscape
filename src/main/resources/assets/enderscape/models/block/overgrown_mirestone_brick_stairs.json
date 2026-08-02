@@ -1,0 +1,11 @@
+{
+  "parent": "enderscape:block/template_emissive_overgrown_stairs",
+  "textures": {
+    "bottom": "enderscape:block/overgrown_mirestone_bricks",
+    "side": "enderscape:block/overgrown_mirestone_bricks",
+    "top": "enderscape:block/overgrown_mirestone_bricks",
+    "bottom_emissive": "enderscape:block/overgrown_mirestone_bricks_emissive",
+    "side_emissive": "enderscape:block/overgrown_mirestone_bricks_emissive",
+    "top_emissive": "enderscape:block/overgrown_mirestone_bricks_emissive"
+  }
+}

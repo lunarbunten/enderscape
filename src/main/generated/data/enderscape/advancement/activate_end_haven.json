@@ -1,0 +1,44 @@
+{
+  "parent": "enderscape:craft_nebulite",
+  "criteria": {
+    "activate_end_haven": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "enderscape:end_haven_core",
+                "state": {
+                  "state": "active"
+                }
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {}
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.enderscape.activate_end_haven.description"
+    },
+    "icon": {
+      "id": "enderscape:dusk_purpur_block"
+    },
+    "title": {
+      "translate": "advancement.enderscape.activate_end_haven"
+    }
+  },
+  "requirements": [
+    [
+      "activate_end_haven"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

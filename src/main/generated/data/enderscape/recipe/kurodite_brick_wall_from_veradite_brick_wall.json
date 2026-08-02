@@ -1,0 +1,8 @@
+{
+  "type": "enderscape:void_lachryma",
+  "average_chance_per_second": 0.25,
+  "input": "enderscape:veradite_brick_wall",
+  "result": {
+    "id": "enderscape:kurodite_brick_wall"
+  }
+}

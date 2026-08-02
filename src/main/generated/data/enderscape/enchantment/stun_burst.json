@@ -1,0 +1,51 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.enderscape.stun_burst"
+  },
+  "effects": {
+    "enderscape:area_of_effect_stun_attack_radius": [
+      [
+        4.0,
+        2.0
+      ],
+      [
+        8.0,
+        4.0
+      ]
+    ],
+    "enderscape:stun_attack_cooldown_time": {
+      "type": "minecraft:multiply",
+      "factor": {
+        "type": "minecraft:linear",
+        "base": 1.5,
+        "per_level_above_first": 1.5
+      }
+    },
+    "enderscape:stun_attack_effect_duration": {
+      "type": "minecraft:multiply",
+      "factor": {
+        "type": "minecraft:linear",
+        "base": 0.5,
+        "per_level_above_first": 0.5
+      }
+    },
+    "enderscape:stun_attack_sound": [
+      "enderscape:item.dagger.stun_burst"
+    ]
+  },
+  "max_cost": {
+    "base": 20,
+    "per_level_above_first": 40
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 15
+  },
+  "slots": [
+    "hand"
+  ],
+  "supported_items": "#enderscape:enchantable/dagger",
+  "weight": 2
+}

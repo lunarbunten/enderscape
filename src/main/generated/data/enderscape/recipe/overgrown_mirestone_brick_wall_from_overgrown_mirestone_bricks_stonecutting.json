@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "enderscape:overgrown_mirestone_bricks",
+  "result": {
+    "id": "enderscape:overgrown_mirestone_brick_wall"
+  }
+}

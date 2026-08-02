@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom":"enderscape:block/dusk_purpur_block",
-    "side":"enderscape:block/dusk_purpur_block",
-    "top":"enderscape:block/dusk_purpur_block"
-  }
-}

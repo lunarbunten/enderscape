@@ -4,10 +4,7 @@
     "translate": "enchantment.enderscape.bundling"
   },
   "effects": {
-    "enderscape:magnet_enable_deposit_into_bundles": {
-      "type": "minecraft:set",
-      "value": 1.0
-    }
+    "enderscape:magnet_enable_deposit_into_bundles": {}
   },
   "max_cost": {
     "base": 50,

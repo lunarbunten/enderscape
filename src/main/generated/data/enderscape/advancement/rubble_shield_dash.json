@@ -4,7 +4,7 @@
     "rubble_shield_dash": {
       "conditions": {
         "item": {
-          "items": "#enderscape:rubble_shields"
+          "items": "enderscape:rubble_shield"
         }
       },
       "trigger": "enderscape:dash_jump"
@@ -15,8 +15,7 @@
       "translate": "advancement.enderscape.rubble_shield_dash.description"
     },
     "icon": {
-      "count": 1,
-      "id": "enderscape:end_stone_rubble_shield"
+      "id": "enderscape:rubble_shield"
     },
     "title": {
       "translate": "advancement.enderscape.rubble_shield_dash"

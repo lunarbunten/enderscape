@@ -4,10 +4,7 @@
     "translate": "enchantment.enderscape.transdimensional"
   },
   "effects": {
-    "enderscape:lodestone_teleportation_enable_transdimensional": {
-      "type": "minecraft:set",
-      "value": 1.0
-    }
+    "enderscape:lodestone_teleportation_enable_transdimensional": {}
   },
   "max_cost": {
     "base": 80,

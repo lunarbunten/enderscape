@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "enderscape:shadoline_block",
   "result": {
-    "count": 1,
     "id": "enderscape:shadoline_block_stairs"
   }
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_celestial_chanterelle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enderscape:celestial_chanterelle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enderscape:murublight_chanterelle_from_celestial_chanterelle"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_celestial_chanterelle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enderscape:murublight_chanterelle_from_celestial_chanterelle"
+    ]
+  }
+}

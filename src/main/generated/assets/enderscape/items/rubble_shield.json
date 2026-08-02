@@ -1,0 +1,80 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:condition",
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "enderscape:item/rubble_shield_end_stone"
+          },
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "enderscape:item/rubble_shield_end_stone_using"
+          },
+          "property": "minecraft:using_item"
+        },
+        "when": "enderscape:end_stone"
+      },
+      {
+        "model": {
+          "type": "minecraft:condition",
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "enderscape:item/rubble_shield_mirestone"
+          },
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "enderscape:item/rubble_shield_mirestone_using"
+          },
+          "property": "minecraft:using_item"
+        },
+        "when": "enderscape:mirestone"
+      },
+      {
+        "model": {
+          "type": "minecraft:condition",
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "enderscape:item/rubble_shield_veradite"
+          },
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "enderscape:item/rubble_shield_veradite_using"
+          },
+          "property": "minecraft:using_item"
+        },
+        "when": "enderscape:veradite"
+      },
+      {
+        "model": {
+          "type": "minecraft:condition",
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "enderscape:item/rubble_shield_kurodite"
+          },
+          "on_true": {
+            "type": "minecraft:model",
+            "model": "enderscape:item/rubble_shield_kurodite_using"
+          },
+          "property": "minecraft:using_item"
+        },
+        "when": "enderscape:kurodite"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:condition",
+      "on_false": {
+        "type": "minecraft:model",
+        "model": "enderscape:item/rubble_shield_end_stone"
+      },
+      "on_true": {
+        "type": "minecraft:model",
+        "model": "enderscape:item/rubble_shield_end_stone_using"
+      },
+      "property": "minecraft:using_item"
+    },
+    "property": "enderscape:rubble_shield_variant"
+  }
+}

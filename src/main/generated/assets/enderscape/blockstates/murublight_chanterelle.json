@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "enderscape:block/murublight_chanterelle",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "enderscape:block/murublight_chanterelle",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "enderscape:block/murublight_chanterelle",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "enderscape:block/murublight_chanterelle",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "enderscape:block/murublight_chanterelle"
+    },
+    "facing=west": {
+      "model": "enderscape:block/murublight_chanterelle",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

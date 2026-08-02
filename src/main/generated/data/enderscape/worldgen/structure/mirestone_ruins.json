@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:jigsaw",
+  "biomes": "#enderscape:has_structure/mirestone_ruins",
+  "dimension_padding": {
+    "bottom": 56
+  },
+  "liquid_settings": "ignore_waterlogging",
+  "max_distance_from_center": 96,
+  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "size": 10,
+  "spawn_overrides": {},
+  "start_height": {
+    "absolute": 0
+  },
+  "start_pool": "enderscape:mirestone_ruins/start",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_box",
+  "use_expansion_hack": false
+}

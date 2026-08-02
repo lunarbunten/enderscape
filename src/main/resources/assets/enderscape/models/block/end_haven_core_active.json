@@ -1,0 +1,53 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"interior": "enderscape:block/end_haven_core_interior",
+		"side": "enderscape:block/end_haven_core_active",
+		"end": "enderscape:block/end_haven_core_end",
+		"side_emissive": "enderscape:block/end_haven_core_active_emissive",
+		"particle": "enderscape:block/dusk_purpur_block"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#end", "cullface": "up"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#end", "cullface": "down"}
+			}
+		},
+		{
+			"name": "emissive",
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"shade": false,
+			"light_emission": 12,
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#side_emissive", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#side_emissive", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#side_emissive", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#side_emissive", "cullface": "west"}
+			}
+		},
+		{
+			"name": "interior",
+			"from": [15.7, 15.7, 15.7],
+			"to": [0.3, 0.3, 0.3],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [0.6, 0.6, 16, 16], "texture": "#interior"},
+				"east": {"uv": [0.6, 0.6, 16, 16], "texture": "#interior"},
+				"south": {"uv": [0, 0.6, 15.4, 16], "texture": "#interior"},
+				"west": {"uv": [0, 0.6, 15.4, 16], "texture": "#interior"},
+				"up": {"uv": [0, 0, 15.4, 15.4], "texture": "#interior"},
+				"down": {"uv": [0, 0.6, 15.4, 16], "texture": "#interior"}
+			}
+		}
+	]
+}

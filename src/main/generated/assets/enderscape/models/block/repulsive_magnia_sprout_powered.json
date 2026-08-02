@@ -1,0 +1,7 @@
+{
+  "parent": "enderscape:block/template_magnia_sprout_powered",
+  "textures": {
+    "cross": "enderscape:block/repulsive_magnia_sprout_powered",
+    "cross_emissive": "enderscape:block/repulsive_magnia_sprout_powered_emissive"
+  }
+}
