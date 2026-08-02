@@ -61,7 +61,7 @@ public class ItemMixin {
         if (player.level() instanceof ServerLevel level) {
             if (StunAttack.apply(level, stack, player, target)) info.setReturnValue(InteractionResult.SUCCESS_SERVER);
         } else if (StunAttack.isMeleeStun(stack)) {
-            boolean stuns = StunAttack.canUse(player.level(), stack, player) && StunAttack.canStunVictim(player, target);
+            boolean stuns = StunAttack.canUseStun(player.level(), stack, player) && StunAttack.canStunVictim(player, target);
             info.setReturnValue(stuns ? InteractionResult.SUCCESS : InteractionResult.CONSUME);
         }
     }

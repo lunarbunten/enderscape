@@ -221,6 +221,7 @@ public class Rustle extends Animal implements Bucketable, Shearable, InventoryCa
 
         CustomData.update(DataComponents.BUCKET_ENTITY_DATA, stack, (tag) -> {
             tag.putInt("Age", getAge());
+            tag.putBoolean("AgeLocked", isAgeLocked());
 
             if (isSheared()) tag.putBoolean("Sheared", isSheared());
             if (getBrain().hasMemoryValue(EnderscapeMemory.RUSTLE_HAIR_REGROWTH_COOLDOWN)) tag.putInt("HairRegrowthCooldownTicks", getBrain().getMemory(EnderscapeMemory.RUSTLE_HAIR_REGROWTH_COOLDOWN).get());
@@ -232,6 +233,8 @@ public class Rustle extends Animal implements Bucketable, Shearable, InventoryCa
         Bucketable.loadDefaultDataFromBucketTag(this, tag);
 
         tag.getInt("Age").ifPresent(this::setAge);
+        setAgeLocked(tag.getBooleanOr("AgeLocked", false));
+
         tag.getBoolean("Sheared").ifPresent(this::setSheared);
         tag.getInt("HairRegrowthCooldownTicks").ifPresent(ticks -> getBrain().setMemory(EnderscapeMemory.RUSTLE_HAIR_REGROWTH_COOLDOWN, ticks));
     }
