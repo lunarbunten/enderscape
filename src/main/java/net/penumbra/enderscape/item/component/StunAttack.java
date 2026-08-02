@@ -104,7 +104,7 @@ public record StunAttack(
         StunAttack attack = StunAttack.get(stack);
         Vec2 radius = areaOfEffectStunRadius(stack);
 
-        if (radius != Vec2.ZERO) {
+        if (canUseStun(level, stack, player) && radius != Vec2.ZERO) {
             ItemStackContext context = new ItemStackContext(stack, level, player);
             List<Entity> affectedEntities = new ArrayList<>();
 
@@ -121,7 +121,7 @@ public record StunAttack(
     public static boolean apply(ServerLevel level, ItemStack stack, Player player, LivingEntity victim) {
         ItemStackContext context = new ItemStackContext(stack, level, player);
 
-        if (canUse(level, stack, player) && isMeleeStun(stack) && canStunVictim(player, victim)) {
+        if (canUseStun(level, stack, player) && isMeleeStun(stack) && canStunVictim(player, victim)) {
             StunAttack attack = StunAttack.get(stack);
 
             doMeleeStun(context, victim);
@@ -281,7 +281,7 @@ public record StunAttack(
         return attacker != victim && victim.canBeSeenAsEnemy() && !attacker.isAlliedTo(victim);
     }
 
-    public static boolean canUse(Level level, ItemStack stack, Player player) {
+    public static boolean canUseStun(Level level, ItemStack stack, Player player) {
         return !player.getCooldowns().isOnCooldown(stack) && FueledTool.fuelExceedsCost(new ItemStackContext(stack, level, player));
     }
 
