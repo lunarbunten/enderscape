@@ -103,12 +103,13 @@ public class EnderscapeItemTagProvider extends FabricTagsProvider.ItemTagsProvid
                 SHADOLINE_INGOT,
                 SHADOLINE_LEGGINGS,
                 SHADOLINE_NUGGET,
+                SHULKER_SHELL,
                 STASIS_ARMOR_TRIM_SMITHING_TEMPLATE,
                 VOID_CAMPFIRE.asItem(),
                 VOID_LANTERN.asItem(),
                 VOID_SHALE.asItem(),
                 VOID_TORCH.asItem()
-        ).forceAddTag(SHADOLINE_BLOCKS).forceAddTag(DUSK_PURPUR_BLOCKS).forceAddTag(KURODITE_BLOCKS).forceAddTag(MURUBLIGHT_BRICK_BLOCKS).forceAddTag(MURUBLIGHT_STEMS).forceAddTag(MURUBLIGHT_WOOD_ITEMS);
+        ).forceAddTag(ItemTags.SHULKER_BOXES).forceAddTag(SHADOLINE_BLOCKS).forceAddTag(DUSK_PURPUR_BLOCKS).forceAddTag(KURODITE_BLOCKS).forceAddTag(MURUBLIGHT_BRICK_BLOCKS).forceAddTag(MURUBLIGHT_STEMS).forceAddTag(MURUBLIGHT_WOOD_ITEMS);
 
         valueLookupBuilder(DUSK_PURPUR_BLOCKS).add(DUSK_PURPUR_BLOCK.asItem(), DUSK_PURPUR_PILLAR.asItem(), DUSK_PURPUR_STAIRS.asItem(), DUSK_PURPUR_SLAB.asItem(), DUSK_PURPUR_WALL.asItem(), CHISELED_DUSK_PURPUR.asItem());
         valueLookupBuilder(END_ORE_BLOCKS).add(NEBULITE_ORE.asItem(), SHADOLINE_ORE.asItem(), MIRESTONE_NEBULITE_ORE.asItem(), MIRESTONE_SHADOLINE_ORE.asItem());
