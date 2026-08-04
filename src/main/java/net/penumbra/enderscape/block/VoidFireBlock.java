@@ -53,7 +53,8 @@ public class VoidFireBlock extends BaseFireBlock {
 
     @Override
     protected boolean canSurvive(final BlockState state, final LevelReader level, final BlockPos pos) {
-        return canSurviveOnBlock(level.getBlockState(pos.below()));
+        BlockState below = level.getBlockState(pos.below());
+        return canSurviveOnBlock(below) && below.isFaceSturdy(level, pos.below(), Direction.UP);
     }
 
     public static boolean canSurviveOnBlock(final BlockState state) {
