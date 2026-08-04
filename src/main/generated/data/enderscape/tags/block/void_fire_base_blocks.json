@@ -3,6 +3,10 @@
     "enderscape:void_shale",
     "enderscape:nebulite_block",
     "enderscape:corrupt_overgrowth",
-    "#enderscape:kurodite_blocks"
+    "enderscape:murublight_cap",
+    "#enderscape:kurodite_blocks",
+    "#enderscape:murublight_brick_blocks",
+    "#enderscape:murublight_stems",
+    "#enderscape:murublight_wood_blocks"
   ]
 }

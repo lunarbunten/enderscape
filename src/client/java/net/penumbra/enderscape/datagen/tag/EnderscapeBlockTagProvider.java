@@ -75,7 +75,12 @@ public class EnderscapeBlockTagProvider extends FabricTagsProvider.BlockTagsProv
         valueLookupBuilder(SUPPORTS_WISP_FLOWER).forceAddTag(SUPPORTS_VEILED_VEGETATION);
         valueLookupBuilder(SUPPORTS_WISP_GROWTH).forceAddTag(SUPPORTS_VEILED_VEGETATION);
         valueLookupBuilder(SUPPORTS_WISP_SPROUTS).forceAddTag(SUPPORTS_VEILED_VEGETATION);
-        valueLookupBuilder(VOID_FIRE_BASE_BLOCKS).add(VOID_SHALE, NEBULITE_BLOCK, CORRUPT_OVERGROWTH).forceAddTag(KURODITE_BLOCKS);
+        valueLookupBuilder(VOID_FIRE_BASE_BLOCKS)
+                .add(VOID_SHALE, NEBULITE_BLOCK, CORRUPT_OVERGROWTH, MURUBLIGHT_CAP)
+                .forceAddTag(KURODITE_BLOCKS)
+                .forceAddTag(MURUBLIGHT_BRICK_BLOCKS)
+                .forceAddTag(MURUBLIGHT_STEMS)
+                .forceAddTag(MURUBLIGHT_WOOD_BLOCKS);
         valueLookupBuilder(VOID_LACHRYMA_TURNS_TO_VOID_SHALE).forceAddTag(BASE_STONE_END);
 
         valueLookupBuilder(KURODITE_BLOCKS).add(
