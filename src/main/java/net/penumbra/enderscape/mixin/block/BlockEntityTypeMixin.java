@@ -3,7 +3,6 @@ package net.penumbra.enderscape.mixin.block;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import net.minecraft.world.level.block.state.BlockState;
 import net.penumbra.enderscape.Enderscape;
 import org.spongepowered.asm.mixin.Mixin;
@@ -37,10 +36,10 @@ public abstract class BlockEntityTypeMixin {
     private void isValid(BlockState state, CallbackInfoReturnable<Boolean> info) {
         BlockEntityType<?> self = (BlockEntityType<?>)(Object) this;
 
-        if (self == BlockEntityTypes.CAMPFIRE && state.getBlock() instanceof CampfireBlock && state.getBlock().equals(VOID_CAMPFIRE)) info.setReturnValue(true);
-        if (self == BlockEntityTypes.SHELF && state.getBlock() instanceof ShelfBlock && VALID_SHELVES.contains(state.getBlock().builtInRegistryHolder().key().identifier())) info.setReturnValue(true);
-        if (self == BlockEntityTypes.SIGN && state.getBlock() instanceof SignBlock sign && VALID_WOOD_TYPES.contains(Identifier.tryParse(sign.type().name()))) info.setReturnValue(true);
-        if (self == BlockEntityTypes.TRIAL_SPAWNER && state.getBlock() instanceof TrialSpawnerBlock && state.is(END_TRIAL_SPAWNER)) info.setReturnValue(true);
-        if (self == BlockEntityTypes.VAULT && state.getBlock() instanceof VaultBlock && state.is(END_VAULT)) info.setReturnValue(true);
+        if (self == BlockEntityType.CAMPFIRE && state.getBlock() instanceof CampfireBlock && state.getBlock().equals(VOID_CAMPFIRE)) info.setReturnValue(true);
+        if (self == BlockEntityType.SHELF && state.getBlock() instanceof ShelfBlock && VALID_SHELVES.contains(state.getBlock().builtInRegistryHolder().key().identifier())) info.setReturnValue(true);
+        if (self == BlockEntityType.SIGN && state.getBlock() instanceof SignBlock sign && VALID_WOOD_TYPES.contains(Identifier.tryParse(sign.type().name()))) info.setReturnValue(true);
+        if (self == BlockEntityType.TRIAL_SPAWNER && state.getBlock() instanceof TrialSpawnerBlock && state.is(END_TRIAL_SPAWNER)) info.setReturnValue(true);
+        if (self == BlockEntityType.VAULT && state.getBlock() instanceof VaultBlock && state.is(END_VAULT)) info.setReturnValue(true);
     }
 }
