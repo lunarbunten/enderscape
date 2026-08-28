@@ -270,7 +270,7 @@ public record LodestoneTeleportation(
     public static boolean isWithinRange(LodestoneTrackerContext context) {
         ItemStack stack = context.stack();
 
-        if (FueledTool.is(stack)) {
+        if (FueledTool.is(stack) && isSameDimension(context, context.linkedDimension())) {
             boolean withinMaxFuel = FueledTool.fuelCost(context) <= FueledTool.maxFuel(stack);
             boolean withinRange = distanceFromLodestone(context) <= getMaximumRange(context);
             return withinMaxFuel && withinRange;
