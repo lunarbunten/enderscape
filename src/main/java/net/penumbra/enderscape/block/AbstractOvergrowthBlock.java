@@ -80,7 +80,7 @@ public abstract class AbstractOvergrowthBlock extends DirectionalBlock implement
 
         BlockState state = defaultBlockState().setValue(FACING, direction);
 
-        if (isPath && !hasAir(context.getLevel(), context.getClickedPos())) {
+        if (isPath && !hasAir(state, context.getLevel(), context.getClickedPos())) {
             return Block.pushEntitiesUp(state, baseBlock.defaultBlockState(), context.getLevel(), context.getClickedPos());
         }
 
@@ -104,7 +104,7 @@ public abstract class AbstractOvergrowthBlock extends DirectionalBlock implement
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (needsAir && !hasAir(level, pos)) {
+        if (needsAir && !hasAir(state, level, pos)) {
             BlockState state2 = pushEntitiesUp(state, baseBlock.defaultBlockState(), level, pos);
             level.setBlockAndUpdate(pos, state2);
             level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(null, state2));
@@ -148,14 +148,13 @@ public abstract class AbstractOvergrowthBlock extends DirectionalBlock implement
         return PATH_VOXEL_SHAPES.get(state.getValue(FACING));
     }
 
-    protected boolean hasAir(LevelReader level, BlockPos pos) {
-        BlockState state = level.getBlockState(pos);
+    protected boolean hasAir(BlockState state, LevelReader level, BlockPos pos) {
         Direction direction = state.getValue(FACING);
 
         if (isPath) {
             return BlockUtil.hasAirForPath(level, pos, direction);
         } else {
-            return BlockUtil.hasAirAbove(level, pos, state.getValue(FACING));
+            return BlockUtil.hasAirAbove(level, pos, direction);
         }
     }
 
@@ -165,7 +164,7 @@ public abstract class AbstractOvergrowthBlock extends DirectionalBlock implement
     }
 
     protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess access, BlockPos pos, Direction direction, BlockPos pos2, BlockState state2, RandomSource random) {
-        if (direction == state.getValue(FACING) && !hasAir(level, pos) && isPath && needsAir) access.scheduleTick(pos, this, 1);
+        if (direction == state.getValue(FACING) && !hasAir(state, level, pos) && isPath && needsAir) access.scheduleTick(pos, this, 1);
         return super.updateShape(state, level, access, pos, direction, pos2, state2, random);
     }
 
