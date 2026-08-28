@@ -13,7 +13,10 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -35,7 +38,7 @@ public class CelestialChanterelleBlock extends VegetationBlock implements Boneme
 
     public static final IntegerProperty STAGE = StateProperties.STAGE;
     private static final VoxelShape SHAPE = box(3, 0, 3, 13, 11, 13);
-    
+
     private final ResourceKey<ConfiguredFeature<?, ?>> feature;
 
     public CelestialChanterelleBlock(ResourceKey<ConfiguredFeature<?, ?>> feature, BlockBehaviour.Properties properties) {
@@ -90,7 +93,7 @@ public class CelestialChanterelleBlock extends VegetationBlock implements Boneme
     @Override
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
         BlockState floor = level.getBlockState(pos.below());
-        if (floor.getBlock() instanceof DirectionalBlock && !floor.getValue(StateProperties.FACING).equals(Direction.UP)) return false;
+        if (floor.hasProperty(StateProperties.FACING) && !floor.getValue(StateProperties.FACING).equals(Direction.UP)) return false;
         return floor.is(EnderscapeBlockTags.CELESTIAL_CHANTERELLE_GROWS_ON) || floor.is(EnderscapeBlockTags.CELESTIAL_CORRUPTS_ON);
     }
 

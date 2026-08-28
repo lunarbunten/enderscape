@@ -15,7 +15,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -80,7 +79,7 @@ public class MurublightChanterelleBlock extends DirectionalVegetationBlock imple
     @Override
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
         BlockState relative = level.getBlockState(pos.relative(getFacing(state).getOpposite()));
-        if (relative.getBlock() instanceof DirectionalBlock && getFacing(relative) != getFacing(state)) return false;
+        if (relative.hasProperty(FACING) && getFacing(relative) != getFacing(state)) return false;
         return relative.is(EnderscapeBlockTags.MURUBLIGHT_CHANTERELLE_GROWS_ON) || relative.is(EnderscapeBlockTags.CORRUPTION_PURIFIES_ON);
     }
 
